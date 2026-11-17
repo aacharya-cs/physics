@@ -1,0 +1,16 @@
+% thermo_engine: energy-flow diagram of a heat engine (Vol II Ch 4, fig:thermo-engine)
+% Per cycle the working substance takes heat Q_h from the hot reservoir (T_h), delivers
+% work W and rejects heat Q_c to the cold reservoir (T_c); all three are magnitudes.
+% Delta U = 0 per cycle, so W = Q_h - Q_c (first law); Q_c > 0 (Kelvin-Planck).
+% Energy-flow colours used in all schematics of this chapter: heat accent, work plum;
+% reservoirs amber (hot) and pale blue cEarth (cold), as in the thermal chapter.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[cSteel,thin line,fill=cAmber!55] (-2.2,1.9) rectangle (2.2,2.7);
+  \node at (0,2.3) {hot reservoir, $T_h$};
+  \draw[cSteel,thin line,fill=cEarth] (-2.2,-2.7) rectangle (2.2,-1.9);
+  \node at (0,-2.3) {cold reservoir, $T_c$};
+  \node[body,rounded corners=3pt,minimum width=2.3cm,minimum height=1.1cm] at (0,0) {engine};
+  \draw[vector,cAcc] (0,1.9) -- (0,0.55) node[midway,anchor=west,xshift=2pt] {$Q_h$};
+  \draw[vector,cAcc] (0,-0.55) -- (0,-1.9) node[midway,anchor=west,xshift=2pt] {$Q_c$};
+  \draw[vector,cPlum] (1.15,0) -- (2.7,0) node[anchor=west] {$W=Q_h-Q_c$};
+\end{tikzpicture}

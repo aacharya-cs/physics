@@ -1,0 +1,30 @@
+% fluids_drop: excess pressure inside a drop (Vol II Ch 2, fig:fluids-drop)
+% Cut a spherical drop of radius R through its centre and look at the right half.
+% The liquid of the left half pushes on its flat face, area pi R^2, with the inside
+% pressure; the outside air pushes back on the curved face with a net P_out pi R^2
+% (the projected area).  Net push to the right: Delta P pi R^2.
+% The skin of the left half pulls the rim, length 2 pi R, to the left with S per unit
+% length.  Balance: Delta P pi R^2 = 2 pi R S, so Delta P = 2S/R.
+% Colours: pressure pushes crimson (forces), surface-tension pulls accent (an
+% applied pull, told apart from the pressure force).
+\begin{tikzpicture}[x=1cm,y=1cm,
+    liquid/.style={fill=cPrim!12,draw=cPrim,thin line}]
+  \def\R{1.2}
+  % left half, drawn faded and pulled back to open the cut
+  \begin{scope}[ghost]
+    \draw[liquid] (-1.35,\R) arc[start angle=90,end angle=270,radius=\R] -- cycle;
+  \end{scope}
+  % right half, the body under study
+  \draw[liquid] (0,\R) arc[start angle=90,end angle=-90,radius=\R] -- cycle;
+  \draw[dim] (0,0) -- (40:\R) node[midway,anchor=south east,cSteel,inner sep=1pt] {$R$};
+  \node[point mass] at (0,0) {};
+  % pressure pushes on the flat face
+  \foreach \y in {-0.8,-0.27,0.27,0.8}
+    \draw[force] (-0.78,\y) -- (-0.03,\y);
+  % surface tension on the rim (top and bottom of the circle in this view)
+  \draw[applied] (0,\R) -- (-0.8,\R) node[anchor=east,cAcc] {$S$};
+  \draw[applied] (0,-\R) -- (-0.8,-\R) node[anchor=east,cAcc] {$S$};
+  % labels
+  \node[anchor=west,align=left,cCrim] at (1.45,0.35) {push of excess pressure:\\ $\Delta P\times\pi R^2$};
+  \node[anchor=west,align=left,cAcc] at (1.45,-0.65) {pull of the rim:\\ $S\times 2\pi R$};
+\end{tikzpicture}

@@ -1,0 +1,30 @@
+% fluids_viscosity: viscous flow between plates (Vol II Ch 2, fig:fluids-viscosity)
+% A liquid of thickness y0 between a fixed plate and a top plate of area A dragged
+% at speed v0 by a force F.  The liquid sticks to both plates (no slip), and each
+% layer slides over the one below; in steady flow the speed grows linearly with
+% height, v(y) = v0 y/y0, so the velocity gradient dv/dy = v0/y0 is the same everywhere.
+% Newton's law of viscosity: F/A = eta dv/dy.  Arrow lengths: 2.2 y/y0 cm;
+% the thin line through their tips reaches v0 at the plate.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    liquid/.style={fill=cPrim!10,draw=none}]
+  \def\H{2.1}
+  \fill[liquid] (0,0) rectangle (5.2,\H);
+  % fixed plate
+  \fill[ground strip] (-0.2,-0.2) rectangle (5.4,0);
+  \path[ground,draw=none] (-0.2,-0.2) rectangle (5.4,0);
+  \draw[outline] (-0.2,0) -- (5.4,0);
+  % moving plate
+  \draw[body] (0.4,\H) rectangle (4.4,\H+0.22);
+  \draw[applied] (4.45,\H+0.11) -- (5.5,\H+0.11) node[anchor=west,cAcc] {$F$};
+  % layers and their velocities
+  \foreach \k in {1,...,4}{
+    \pgfmathsetmacro{\y}{\k*\H/5}
+    \draw[guide] (0,\y) -- (5.2,\y);
+    \draw[velocity] (0.9,\y) -- ({0.9+2.2*\k/5},\y);
+  }
+  \draw[cFor,hair line] (0.9,0) -- (3.1,\H);
+  \node[anchor=south,font=\footnotesize] at (2.4,\H+0.22) {plate of area $A$, moving at speed $v_0$};
+  \node[anchor=north,cFor] at (0.9,-0.22) {$v=0$};
+  % a layer of thickness dy and its extra speed dv
+  \draw[dim] (4.75,{2*\H/5}) -- (4.75,{3*\H/5}) node[midway,anchor=west,cSteel] {$dy$};
+\end{tikzpicture}

@@ -1,0 +1,26 @@
+% react_moderation: neutron energy after n head-on elastic collisions (Vol III Ch 4, fig:react-moderation)
+% Head-on elastic collision of a neutron (mass m) with a nucleus of mass Am at
+% rest keeps the fraction phi = ((A-1)/(A+1))^2 of the neutron's kinetic energy,
+% so K_n / K_0 = phi^n: a straight line on a logarithmic axis.
+%   deuterium A = 2:   phi = 1/9      = 0.1111   (9 collisions to thermal)
+%   carbon    A = 12:  phi = (11/13)^2 = 0.7160  (55 collisions)
+%   uranium   A = 238: phi = (237/239)^2 = 0.9833 (about 1080 collisions)
+% Thermal level: 0.025 eV / 2.0 MeV = 1.25e-8 (dashed).
+% Points are drawn only at whole n; colours distinguish the three moderators.
+\begin{tikzpicture}
+\begin{axis}[bookplot, width=10cm, height=6cm,
+    ymode=log, xmin=0, xmax=62, ymin=3e-10, ymax=3,
+    xtick={0,10,20,30,40,50,60}, ytick={1,1e-2,1e-4,1e-6,1e-8},
+    xlabel={number of head-on collisions $n$},
+    ylabel={$K_n/K_0$},
+    every axis plot/.append style={thin line}]
+  \addplot[cPrim,mark=*,mark size=1.2pt,domain=0:10,samples=11] {(1/9)^x};
+  \addplot[cTeal,mark=*,mark size=1.0pt,domain=0:60,samples=61] {(11/13)^(2*x)};
+  \addplot[cSteel,mark=*,mark size=1.0pt,domain=0:60,samples=61] {(237/239)^(2*x)};
+  \addplot[guide,domain=0:60,samples=2] {1.25e-8};
+  \node[anchor=south west] at (axis cs:12,1.25e-8) {thermal, $\SI{0.025}{eV}$};
+  \node[cPrim,anchor=west] at (axis cs:10.5,1.2e-9) {deuterium, $\phi=1/9$};
+  \node[cTeal,anchor=south west] at (axis cs:31,1e-4) {carbon, $\phi=0.716$};
+  \node[cSteel,anchor=north east] at (axis cs:60,0.25) {uranium-238, $\phi=0.983$};
+\end{axis}
+\end{tikzpicture}

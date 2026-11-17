@@ -1,0 +1,46 @@
+% thermal_bimetal: a bimetallic strip before and after heating (Vol II Ch 3, fig:bimetal-strip)
+% Two bonded layers of equal length l at the start.  On heating by dT the layer
+% with the larger coefficient (alpha_2) would grow more; bonded, the pair bends
+% into an arc with that layer on the OUTSIDE (convex side).  If the mid-planes of
+% the layers are a distance d apart and each keeps (approximately) its free
+% length, then (R + d)/R = (1 + alpha_2 dT)/(1 + alpha_1 dT), so
+%   R ~ d / ((alpha_2 - alpha_1) dT).
+% Thickness is exaggerated about 20 times and the curvature is drawn far
+% tighter than the real R (about 0.7 m in the challenge problem) so that both show.
+\begin{tikzpicture}
+  \def\t{0.22}
+  % ---- cold: straight ----
+  \begin{scope}
+    \fill[cBlock] (0,0) rectangle (4.2,\t);
+    \fill[cAmber!70] (0,\t) rectangle (4.2,2*\t);
+    \draw[outline] (0,0) rectangle (4.2,2*\t);
+    \draw[thin line,cInk] (0,\t) -- (4.2,\t);
+    \fill[cRock] (-0.35,-0.45) rectangle (0,0.9);
+    \draw[outline] (-0.35,-0.45) rectangle (0,0.9);
+    \node[anchor=south] at (2.1,2*\t+0.1) {cold: straight};
+    \node[anchor=west,font=\footnotesize] at (4.3,1.5*\t) {metal 2, $\alpha_2$ (larger)};
+    \node[anchor=west,font=\footnotesize] at (4.3,0.5*\t-0.06) {metal 1, $\alpha_1$};
+  \end{scope}
+  % ---- hot: curved, centre of curvature below ----
+  \begin{scope}[xshift=8.6cm]
+    \def\R{3.6}
+    \coordinate (O) at (0,-\R);
+    % the two layers as annular sectors from 90 down to 90-55 degrees
+    \fill[cBlock] ($(O)+(90:\R)$) arc[start angle=90,end angle=23,radius=\R]
+       -- ($(O)+(23:\R+\t)$) arc[start angle=23,end angle=90,radius=\R+\t] -- cycle;
+    \fill[cAmber!70] ($(O)+(90:\R+\t)$) arc[start angle=90,end angle=23,radius=\R+\t]
+       -- ($(O)+(23:\R+2*\t)$) arc[start angle=23,end angle=90,radius=\R+2*\t] -- cycle;
+    \draw[outline] ($(O)+(90:\R)$) arc[start angle=90,end angle=23,radius=\R]
+       -- ($(O)+(23:\R+2*\t)$) arc[start angle=23,end angle=90,radius=\R+2*\t] -- cycle;
+    \draw[thin line,cInk] ($(O)+(90:\R+\t)$) arc[start angle=90,end angle=23,radius=\R+\t];
+    \fill[cRock] (-0.35,-0.45) rectangle (0,0.9);
+    \draw[outline] (-0.35,-0.45) rectangle (0,0.9);
+    \node[anchor=south] at (1.4,0.75) {heated: curls};
+    % radius to the inner mid-plane
+    \draw[dim] (O) -- ($(O)+(55:\R+0.5*\t)$);
+    \node[cSteel,anchor=east] at ($(O)+(55:0.55*\R)$) {$R$};
+    \node[dot,cSteel] at (O) {};
+    \node[cSteel,anchor=north] at (O) {centre of curvature};
+    \node[anchor=west,font=\footnotesize,align=left] at ($(O)+(23:\R+2*\t)+(0.1,0.15)$) {larger $\alpha$\\ on the outside};
+  \end{scope}
+\end{tikzpicture}

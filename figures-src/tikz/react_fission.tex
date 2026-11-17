@@ -1,0 +1,43 @@
+% react_fission: neutron-induced fission in the liquid-drop picture (Vol III Ch 4, fig:react-fission)
+% Four stages, left to right: a slow neutron meets uranium-235; the compound
+% nucleus uranium-236* is excited and oscillates; it stretches into a dumbbell
+% whose neck the short-range nuclear attraction can no longer hold against the
+% long-range Coulomb repulsion of the two lobes; two fragments (here 141Ba and
+% 92Kr, mass ratio 1.53, radii in ratio 1.53^(1/3) = 1.15) fly apart back to
+% back with about 170 MeV of kinetic energy, plus two or three neutrons.
+% Equal and opposite fragment momenta: the lighter fragment is faster
+% (speed ratio 1.53), so its velocity arrow is drawn 1.53 times longer.
+% Nuclei are shaded amber; free neutrons follow the Volume III nucleon
+% convention (steel rim, pale fill), as in nuc_massbalance.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    sneut/.style={circle,neutron,minimum size=2.6mm,inner sep=0pt}]
+  \def\yc{1.0}
+  % stage 1: slow neutron and uranium-235
+  \node[sneut] (n0) at (-0.15,\yc) {};
+  \draw[velocity,thin line] (-1.15,\yc) -- (-0.32,\yc);
+  \node[anchor=south] at (-0.75,\yc+0.08) {slow $n$};
+  \shade[ball color=cAmber] (0.75,\yc) circle[radius=0.62];
+  \node[align=center] at (0.75,-0.25) {$\iso{235}{U}$ absorbs\\the neutron};
+  \draw[-smallhead,thin line,cGrey] (1.6,\yc) -- (2.4,\yc);
+  % stage 2: excited compound nucleus
+  \shade[ball color=cAmber] (3.45,\yc) ellipse[x radius=0.8,y radius=0.5];
+  \draw[guide] (3.45,\yc) ellipse[x radius=0.64,y radius=0.64];
+  \node[align=center] at (3.45,-0.25) {excited $\iso{236}{U}^{*}$\\oscillates};
+  \draw[-smallhead,thin line,cGrey] (4.5,\yc) -- (5.3,\yc);
+  % stage 3: dumbbell with a neck
+  \fill[cAmber!80!cInk] (6.15,\yc-0.09) rectangle (6.45,\yc+0.09);
+  \shade[ball color=cAmber] (5.85,\yc) circle[radius=0.45];
+  \shade[ball color=cAmber] (6.8,\yc) circle[radius=0.4];
+  \node[align=center] at (6.3,-0.25) {a neck forms;\\repulsion wins};
+  \draw[-smallhead,thin line,cGrey] (7.45,\yc) -- (8.25,\yc);
+  % stage 4: fragments and neutrons
+  \shade[ball color=cAmber] (9.25,\yc+0.05) circle[radius=0.42];
+  \shade[ball color=cAmber] (10.75,\yc-0.05) circle[radius=0.365];
+  \node at (9.25,\yc+0.05) {Ba};
+  \node at (10.75,\yc-0.05) {Kr};
+  \draw[velocity] (8.83,\yc+0.05) -- ++(-0.55,0);
+  \draw[velocity] (11.115,\yc-0.05) -- ++(0.84,0);
+  \foreach \a/\r in {75/0.75,110/0.8,-80/0.6}{
+    \node[sneut] at ($(10.0,\yc)+(\a:\r)$) {};}
+  \node[align=center] at (10.0,-0.25) {two fragments ($\approx\SI{170}{MeV}$)\\plus 2 or 3 neutrons};
+\end{tikzpicture}

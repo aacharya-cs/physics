@@ -1,0 +1,40 @@
+% fluids_archimedes: why a submerged body is pushed up (Vol II Ch 2, fig:fluids-archimedes)
+% A block of face area A and height l, top face at depth h below the free surface.
+% Pressure P = P0 + rho g h grows linearly with depth, so the push on the bottom
+% face, (P0 + rho g (h+l)) A, exceeds the push on the top face, (P0 + rho g h) A.
+% Arrow lengths are drawn proportional to the gauge pressure rho g (depth),
+% with h = 0.8 and l = 1.4 (cm in the figure): top arrows 0.8 u, bottom arrows 2.2 u.
+% Side pushes at equal depths are equal and opposite and cancel.
+% The difference is F_B = rho g l A = rho g V, the weight of the displaced fluid.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    water/.style={fill=cPrim!10,draw=none}]
+  \def\u{0.36}      % cm of arrow per cm of depth
+  \def\h{0.8}\def\l{1.4}
+  % liquid and free surface (y = 0)
+  \fill[water] (-3.2,-3.4) rectangle (3.2,0);
+  \draw[cPrim,thin line] (-3.2,0) -- (3.2,0);
+  \node[anchor=south east,cPrim] at (3.2,0) {free surface, pressure $P_0$};
+  % block
+  \draw[body] (-1,-\h-\l) rectangle (1,-\h);
+  \node at (0.48,-\h-0.72*\l) {area $A$};
+  % pressure pushes on the top face (down) and bottom face (up)
+  \foreach \x in {-0.75,-0.25,0.25,0.75}{
+    \draw[force] (\x,-\h+\u*\h) -- (\x,-\h);
+    \draw[force] (\x,-\h-\l-\u*\h-\u*\l) -- (\x,-\h-\l);
+  }
+  % side pushes, growing with depth, cancelling in pairs
+  \foreach \d in {1.05,1.75}{
+    \draw[force,construction] ({-1-\u*\d},-\d) -- (-1,-\d);
+    \draw[force,construction] ({1+\u*\d},-\d) -- (1,-\d);
+  }
+  \node[cCrim,anchor=south west] at (1.05,{-\h+0.02}) {$P_{\text{top}}A$};
+  \node[cCrim,anchor=north west] at (1.05,{-\h-\l-0.1}) {$P_{\text{bot}}A$};
+  % net upward force, drawn from the centre of the block
+  \draw[force,curve] (-0.3,-\h-0.5*\l-0.4) -- (-0.3,-\h-0.5*\l+0.4)
+    node[anchor=west,xshift=1pt,yshift=-3pt] {$F_B$};
+  % dimensions h and l on the left
+  \draw[dimtick] (-2.9,-\h) -- (-1,-\h);
+  \draw[dimtick] (-2.9,-\h-\l) -- (-1,-\h-\l);
+  \draw[dim] (-2.7,0) -- (-2.7,-\h) node[midway,anchor=west,cSteel] {$h$};
+  \draw[dim] (-2.7,-\h) -- (-2.7,-\h-\l) node[midway,anchor=west,cSteel] {$\ell$};
+\end{tikzpicture}

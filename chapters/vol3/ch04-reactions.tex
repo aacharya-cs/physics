@@ -1,0 +1,925 @@
+\partdivider{B}{Nuclear Energy and Its Uses}{The binding-energy curve has a summit near iron, so heavy nuclei release energy by splitting and light ones by merging; that energy, a million times deeper than chemistry, runs reactors and stars, and the radioactive nuclei it leaves behind become clocks, tracers and medicines.}{\chref{ch:reactions} Nuclear Reactions: Fission and Fusion\\[1.2mm]\chref{ch:nucapps} Applications of Radioactivity}
+
+\ncertchapter{4}{Nuclear Reactions: Fission and Fusion}\chlabel{ch:reactions}
+
+So far nuclei have changed on their own. In \chref{ch:decay} an unstable nucleus emitted an $\alpha$
+particle, an electron or a positron, or a gamma ray, whenever chance decided, and \chref{ch:decaylaw}
+turned that chance into the exponential law. Nothing we did could hurry a decay or prevent one. This
+chapter takes the active step: nuclei can also be made to change by striking them with other particles.
+Once that is possible, the binding-energy curve of \chref{ch:nucleus} (Figure~\ref{fig:nuc-bea}) stops being a description and
+becomes a promise. Its summit lies near iron, at about \SI{8.8}{\MeV} per nucleon, so a heavy nucleus
+that splits into two middle-sized ones, or two light nuclei that merge into a heavier one, ends up more
+tightly bound, and the difference in binding energy is released.
+
+The chapter first sets up the general bookkeeping of such \emph{nuclear reactions}: what is conserved,
+how much energy is released or absorbed, and how much kinetic energy a projectile must bring when energy
+is absorbed. That last question is a problem in momentum conservation, and it is solved exactly as the
+perfectly inelastic collisions of \chref{ch:collisions} were. The bookkeeping is then applied to the two
+reactions that matter most: fission, which powers reactors, and fusion, which powers the stars. Along the
+way two more pieces of Volume~I mechanics reappear: elastic collisions explain why water and graphite slow
+neutrons, and the centre-of-mass frame explains why a light projectile on a heavy target wastes little
+energy.
+
+The limits deserve stating at the outset. Every energy in this chapter is computed from measured masses,
+and those numbers are exact to the precision quoted. But two of the chapter's central facts, that slow
+neutrons are captured far more readily than fast ones and that nuclei in the Sun fuse although they lack
+the energy to touch, rest on quantum mechanics, which this book does not develop. Where that happens the
+result is quoted, with a reason, and the classical estimate is shown alongside so that the size of the
+gap is clear.
+
+\section{Nuclear Reactions and Their \texorpdfstring{$Q$}{Q}-Values}\label{sec:react-q}
+
+In 1919 Rutherford found that $\alpha$ particles passing through nitrogen gas knocked out protons, and
+that the nitrogen was turned into oxygen. It was the first artificial transmutation of one element into
+another:
+\[
+\nuc{4}{2}{He}+\nuc{14}{7}{N}\;\to\;\nuc{17}{8}{O}+\nuc{1}{1}{H}.
+\]
+Rutherford had no accelerator; his projectiles were the $\alpha$ particles of a radioactive source, with
+kinetic energies of a few MeV. To describe such events we need a compact notation and the reaction's
+energy balance. The balance is the one already used for decays in \chref{ch:decay}; the only new feature
+is that there are now two particles at the start.
+
+\begin{defbox}{Nuclear reaction and its \texorpdfstring{$Q$}{Q}-value}
+In a \textbf{nuclear reaction} $\mathrm{X}(a,b)\mathrm{Y}$ a projectile $a$ strikes a target nucleus
+X, usually at rest, and a light particle $b$ and a residual nucleus Y emerge:
+$a+\mathrm{X}\to b+\mathrm{Y}$. Rutherford's reaction is written $\iso{14}{N}(\alpha,p)\iso{17}{O}$.
+The total nucleon number $A$ and the total charge (atomic number $Z$) are the same before and after. The
+\textbf{$Q$-value} is the rest energy that disappears, which equals the kinetic energy that appears:
+\[
+Q=\big[(m_a+m_{\mathrm X})-(m_b+m_{\mathrm Y})\big]c^2=K_b+K_{\mathrm Y}-K_a ,
+\]
+where the $m$ are masses and the $K$ kinetic energies (the target starts at rest). With masses in
+atomic mass units, $1\,\si{\amu}\,c^2=\SI{931.494}{\MeV}$, so $Q$ in MeV is the mass difference in
+\si{\amu} times $931.494$. Atomic masses may be used throughout, because total $Z$ is conserved and the
+electron masses cancel. A reaction with $Q>0$ is \textbf{exoergic}: it releases energy. One with $Q<0$
+is \textbf{endoergic}: the projectile must bring the missing energy in as kinetic energy.
+\end{defbox}
+
+For Rutherford's reaction, with the atomic masses $M(\iso{14}{N})=\SI{14.003074}{\amu}$,
+$M(\iso{17}{O})=\SI{16.999132}{\amu}$, $M(\iso{4}{He})=\SI{4.002603}{\amu}$ and
+$M(\iso{1}{H})=\SI{1.007825}{\amu}$,
+\[
+Q=\big[\num{14.003074}+\num{4.002603}-\num{16.999132}-\num{1.007825}\big]\times\SI{931.494}{\MeV}
+=-\SI{1.19}{\MeV}.
+\]
+The reaction is endoergic: the products have more rest energy than the reactants. An exoergic reaction,
+by contrast, can go even with a slow projectile, provided the projectile can reach the nucleus at all
+(for a charged projectile the Coulomb repulsion of \chref{ch:nucleus}, Eq.~\eqref{eq:nuc-closest}, still stands in the way; we return
+to this in Section~\ref{sec:react-fusion}).
+
+\subsection{The threshold energy}
+
+How much kinetic energy must the $\alpha$ particle bring for the endoergic reaction to go? The tempting
+answer, exactly $|Q|=\SI{1.19}{\MeV}$, is wrong, and the reason is momentum. The incoming projectile
+carries momentum, and no internal force can destroy it, so the products cannot be left at rest. Part of
+the projectile's kinetic energy is locked into the motion of the system as a whole and can never be
+turned into rest energy. \chref{ch:com} gave the tool for separating the two parts: the kinetic energy
+of any system is the kinetic energy of its centre of mass (CM) plus the kinetic energy measured in the
+CM frame, and only the second part can be changed by internal forces (Section~\ref{sec:cmframe}).
+
+\begin{derivbox}{Threshold energy of an endoergic reaction}
+A projectile of mass $m_a$ and kinetic energy $K_a$ strikes a target of mass $m_{\mathrm X}$ at rest.
+Its momentum is $p$, with $K_a=p^2/2m_a$; the speeds are small compared with $c$, as they are whenever
+$K_a$ is a few MeV and the masses are at least a nucleon's ($\approx\SI{939}{\MeV}/c^2$).
+\stepn{1} \textbf{Momentum fixes the CM motion.} The total momentum $p$ is conserved, so the CM moves
+at $v_{\text{cm}}=p/(m_a+m_{\mathrm X})$ before and after the reaction, and the kinetic energy of that
+motion,
+\[
+K_{\text{cm}}=\tfrac12(m_a+m_{\mathrm X})v_{\text{cm}}^2=\frac{p^2}{2(m_a+m_{\mathrm X})}
+=K_a\,\frac{m_a}{m_a+m_{\mathrm X}},
+\]
+is unavailable. (After the reaction the moving mass is $m_b+m_{\mathrm Y}$, which differs from
+$m_a+m_{\mathrm X}$ by $|Q|/c^2$, about one part in $10^4$ here; we neglect it.)
+\stepn{2} \textbf{Only the CM-frame energy can pay for $Q$.} What remains is the kinetic energy in the
+CM frame,
+\[
+K'=K_a-K_{\text{cm}}=K_a\,\frac{m_{\mathrm X}}{m_a+m_{\mathrm X}} .
+\]
+The reaction can go only if $K'\ge|Q|$.
+\stepn{3} \textbf{Threshold.} At threshold $K'=|Q|$ exactly, and the products are left at rest in the CM
+frame, that is, moving off together at $v_{\text{cm}}$ in the laboratory. This is the perfectly
+inelastic collision of \chref{ch:collisions} (Section~\ref{sec:inelastic12}), in which the energy lost to the bodies' relative
+motion was also the fraction $m_{\mathrm X}/(m_a+m_{\mathrm X})$ of the projectile's kinetic energy; here
+that energy becomes rest energy instead of heat. Setting $K'=|Q|$,
+\begin{equation}\label{eq:react-threshold}
+\boxed{K_{\text{th}}=|Q|\left(1+\frac{m_a}{m_{\mathrm X}}\right).}
+\end{equation}
+\stepn{4} \textbf{Check the limits.} A very heavy target ($m_{\mathrm X}\gg m_a$) barely moves, so
+$K_{\text{th}}\to|Q|$: almost nothing is wasted. A projectile as heavy as the target wastes half its
+energy on CM motion, and $K_{\text{th}}=2|Q|$.
+\end{derivbox}
+
+For Rutherford's reaction,
+$K_{\text{th}}=1.19\,(1+\num{4.003}/\num{14.003})=\SI{1.53}{\MeV}$: about $22\%$ of the $\alpha$
+particle's kinetic energy is unavoidably spent moving the whole system. The non-relativistic formula is
+accurate here; the exact relativistic threshold differs from Eq.~\eqref{eq:react-threshold} by a fraction
+of order $|Q|/(m_{\mathrm X}c^2)$, about $10^{-4}$.
+
+\begin{keybox}{Threshold energy}
+For an endoergic reaction ($Q<0$) on a target at rest, the projectile needs at least
+$K_{\text{th}}=|Q|\,(1+m_a/m_{\mathrm X})$. A heavy target wastes little energy; a heavy projectile on a
+light target wastes a great deal.
+\end{keybox}
+
+\begin{trapbox}{the threshold is not $|Q|$}
+Setting $K_a=|Q|$ ignores momentum conservation: it would leave the products at rest, with zero total
+momentum, although the projectile brought in momentum $p$. Nor does it matter only for exotic cases:
+firing nitrogen ions at a stationary helium target, the same reaction with the roles reversed, needs
+$1.19\,(1+14.003/4.003)=\SI{5.36}{\MeV}$, more than three times as much as firing $\alpha$ particles at
+nitrogen.
+\end{trapbox}
+
+When $Q>0$ and the projectile is slow, the opposite question arises: how is the released energy shared?
+The total momentum is then nearly zero, so the two products fly apart back to back with equal and opposite
+momenta, and their kinetic energies are in inverse ratio of their masses, exactly as for the $\alpha$
+particle and daughter nucleus of an $\alpha$ decay in \chref{ch:decay}. Product $b$ receives
+$K_b=Q\,m_{\mathrm Y}/(m_b+m_{\mathrm Y})$.
+
+\begin{exbox}{The first accelerator reaction}\label{ex:react-cockcroft}
+In 1932 Cockcroft and Walton split lithium with protons from a high-voltage accelerator,
+$\iso{7}{Li}(p,\alpha)\alpha$, that is, $p+\iso{7}{Li}\to2\,\iso{4}{He}$. Using
+$M(\iso{7}{Li})=\SI{7.016003}{\amu}$, find $Q$ and the kinetic energy of each $\alpha$ particle when the
+proton is very slow.
+\stepn{1} \textbf{$Q$ from atomic masses.}
+$Q=[\num{7.016003}+\num{1.007825}-2(\num{4.002603})]\times\SI{931.494}{\MeV}=\SI{17.3}{\MeV}$, exoergic.
+\stepn{2} \textbf{Sharing.} With negligible initial momentum the two $\alpha$ particles fly apart back to
+back. They have equal masses, so they share equally: \SI{8.7}{\MeV} each.
+\stepn{3} \textbf{Meaning.} The protons were accelerated through only a few hundred kilovolts, yet each
+reaction released \SI{17.3}{\MeV}. Cockcroft and Walton measured the $\alpha$ energies and found them in
+agreement with the mass difference: the first direct laboratory check of $E=mc^2$.
+\ans{$Q=\SI{17.3}{\MeV}$; \SI{8.7}{\MeV} each}
+\end{exbox}
+
+Reactions are also how radioactive isotopes are manufactured. \textbf{Neutron capture},
+$\mathrm X(n,\gamma)\mathrm Y$, is the workhorse in a reactor: the neutron feels no Coulomb barrier, and
+the binding energy it gains on joining the nucleus (several MeV) leaves as a gamma ray. Cobalt-60, made
+from ordinary cobalt-59 in this way, was the example of production at a constant rate in
+\chref{ch:decaylaw} (Section~\ref{sec:decaylaw-activation}), and most medical isotopes of \chref{ch:nucapps} are made by neutron capture or by
+reactions in accelerators. Reactions also revealed the neutron itself: in 1932 Chadwick identified the
+penetrating radiation from $\iso{9}{Be}(\alpha,n)\iso{12}{C}$ as uncharged particles of almost the
+proton's mass. The most important reactions of all, however, are those in which a nucleus splits or two
+nuclei merge, and the binding-energy curve says which way each must go.
+
+\section{Splitting the Nucleus: Fission}\label{sec:react-fission}
+
+In December 1938 Otto Hahn and Fritz Strassmann bombarded uranium with neutrons and found barium among
+the products, a nucleus about half as heavy. Lise Meitner and Otto Frisch explained it within weeks using
+the liquid-drop picture of \chref{ch:nucleus}. The absorbed neutron leaves the uranium ``drop'' excited
+and oscillating. If it stretches into a dumbbell, the short-range nuclear attraction, which acts only
+between neighbouring nucleons, can no longer hold the two lobes, while the long-range Coulomb repulsion
+between all the protons of one lobe and all those of the other keeps pushing, and the drop splits
+(Figure~\ref{fig:react-fission}). They called it \textbf{fission}, after the division of a living cell.
+
+\begin{figure}[htbp]\centering
+\tikzfig{react_fission}
+\figcaption{fig:react-fission}{Fission in the liquid-drop picture. Absorbing a slow neutron leaves
+uranium-236 excited and oscillating; once it stretches enough to form a neck, the short-range nuclear
+attraction can no longer hold the two halves against their long-range electric repulsion. The fragments
+fly apart back to back with equal and opposite momenta, so the lighter (krypton) is the faster, along
+with two or three neutrons.}
+\end{figure}
+
+A typical outcome is
+\[
+\nuc{1}{0}{n}+\nuc{235}{92}{U}\;\to\;\nuc{236}{92}{U}^{*}\;\to\;\nuc{141}{56}{Ba}+\nuc{92}{36}{Kr}+3\,\nuc{1}{0}{n},
+\]
+where the asterisk marks an excited nucleus. Check the bookkeeping: $1+235=141+92+3=236$ nucleons and
+$92=56+36$ protons. The split is not unique; uranium-236 breaks in dozens of ways, most often into one
+fragment near $A\approx95$ and one near $A\approx140$, with two or three neutrons on average.
+
+Why are \emph{neutrons} the trigger, rather than protons or $\alpha$ particles? A charged projectile must
+first climb the Coulomb barrier of a $Z=92$ nucleus. With $R=R_0A^{1/3}$ and $R_0=\SI{1.2}{\fm}$ for both
+partners and $e^2/4\pi\varepsilon_0=\SI{1.44}{\MeV\fm}$ (both from \chref{ch:nucleus}), a proton
+touching uranium-235 has potential energy $92(1.44)/[1.2(1+235^{1/3})]\approx\SI{15}{\MeV}$, and an
+$\alpha$ particle about \SI{28}{\MeV}. A neutron carries no charge, feels no repulsion, and can drift in
+at any speed, however slow. That is why Chadwick's discovery of the neutron in 1932 opened the way to
+fission six years later.
+
+\subsection{The energy released}
+
+With the atomic masses $M(\iso{235}{U})=\SI{235.043930}{\amu}$, $M(\iso{141}{Ba})=\SI{140.914403}{\amu}$,
+$M(\iso{92}{Kr})=\SI{91.926173}{\amu}$ and the neutron mass $m_n=\SI{1.008665}{\amu}$,
+\[
+Q=\big[\num{235.043930}+\num{1.008665}-\num{140.914403}-\num{91.926173}-3(\num{1.008665})\big]\times\SI{931.494}{\MeV}
+=\SI{173}{\MeV}.
+\]
+The binding-energy curve says the same thing without a mass table, and says \emph{why}. Since every
+nucleus is lighter than its separated nucleons by its binding energy $\Eb$, the rest energy that
+disappears in a reaction is the binding energy gained: $Q$ equals the total binding energy of the
+products minus that of the reactants (free neutrons have none), which is Eq.~\eqref{eq:nuc-qb} of \chref{ch:nucleus}. Example~\ref{ex:nuc-fission} there made the
+estimate: a uranium nucleus has $\Eb/A\approx\SI{7.6}{\MeV}$, nuclei near $A\approx120$ have about
+\SI{8.5}{\MeV}, and raising about $236$ nucleons from the first value to the second releases about
+$236\times\SI{0.9}{\MeV}\approx\SI{200}{\MeV}$.
+
+\begin{keybox}{Fission and fusion on the binding-energy curve}
+By Eq.~\eqref{eq:nuc-qb}, $Q$ is the total binding energy gained, so moving nucleons up the
+binding-energy curve releases energy. Heavy nuclei move up by splitting (about
+\SI{0.9}{\MeV} per nucleon for uranium); light nuclei move up, much more steeply, by merging.
+\end{keybox}
+
+The fragments are themselves very neutron-rich. Heavy stable nuclei have a neutron-to-proton ratio
+$(A-Z)/Z\approx1.55$, middle-mass stable nuclei only about $1.3$, so fragments born with uranium's
+proportions lie well above the valley of stability of \chref{ch:decay}. Each undergoes a chain of
+$\beta^-$ decays towards the valley, and these decays (with their gamma rays) bring the total release per
+fission to about \SI{200}{\MeV}.
+
+\begin{trapbox}{one split's \SI{173}{\MeV} is not the \SI{200}{\MeV} average}
+The $Q$-value of one particular split (here \SI{173}{\MeV}) counts only the prompt step. The figure of
+about \SI{200}{\MeV} is an average over the many possible splits, \emph{including} the later $\beta$ and
+$\gamma$ decays of the fragments. Use masses when a specific reaction is given, and \SI{200}{\MeV} for
+reactor and fuel estimates, unless the problem states otherwise.
+\end{trapbox}
+
+Where does the energy go? Table~\ref{tab:react-fission-energy} gives the average shares. Almost all of it appears
+first as kinetic energy of the two fragments, driven apart by their Coulomb repulsion, and is turned into
+heat as they plough through the surrounding fuel within a fraction of a millimetre.
+
+\begin{tablebox}{Where the energy of a uranium-235 fission goes (average, approximate)}
+\centering
+\begin{tabular}{@{}lr@{}}\toprule
+Carrier & Energy (MeV)\\\midrule
+kinetic energy of the two fragments & $170$\\
+kinetic energy of the prompt neutrons & $5$\\
+prompt gamma rays & $7$\\
+later $\beta$ and $\gamma$ decays of the fragments & $13$\\
+antineutrinos from those $\beta$ decays (escape) & $10$\\\midrule
+total & $\approx205$\\\bottomrule
+\end{tabular}\label{tab:react-fission-energy}
+\par\raggedright
+The antineutrinos pass through the reactor and the Earth and are lost. In a reactor this loss is roughly
+made up by gamma rays emitted when the surplus neutrons are captured in the fuel and structure, so the heat
+deposited is close to \SI{200}{\MeV} per fission, the round figure used for all estimates.
+\end{tablebox}
+
+\begin{remarkbox}{Why uranium-235 and not uranium-238?}
+Absorbing a neutron releases its binding energy in the new nucleus as internal excitation. Nucleons are
+more tightly bound in pairs (the pairing term of the liquid-drop formula in \chref{ch:nucleus}). A neutron
+that completes a pair, turning uranium-235 (odd neutron number $A-Z=143$) into uranium-236 (even, $144$),
+releases about \SI{6.5}{\MeV}, more than the roughly \SI{6}{\MeV} needed to deform the nucleus to the
+point of splitting (the \emph{fission barrier}): even a nearly stationary neutron triggers fission. A
+neutron absorbed by uranium-238 (even, $146$) is left unpaired in uranium-239 and releases only about
+\SI{4.8}{\MeV}, too little. Uranium-238 therefore fissions only with fast neutrons, above about
+\SI{1}{\MeV}, whose kinetic energy makes up the difference. Natural uranium is $99.3\%$ uranium-238 and
+only $0.72\%$ uranium-235, which is the root of the engineering problems of the next two sections.
+\end{remarkbox}
+
+To appreciate \SI{200}{\MeV}, compare it with chemistry: burning one molecule of methane releases about
+\SI{9}{eV}. The ratio per reaction is twenty million. Per kilogram of fuel the comparison is just as
+striking.
+
+\begin{exbox}{Energy per kilogram}\label{ex:react-perkg}
+Taking \SI{200}{\MeV} per fission, find the energy released by complete fission of \SI{1.00}{kg} of
+uranium-235, and compare with coal, whose heat of combustion is about \SI{30}{MJ/kg}.
+\stepn{1} \textbf{Count nuclei.} One mole is \SI{235.0}{g}, so
+$N=(1000/235.0)(\num{6.022e23})=\num{2.56e24}$ nuclei.
+\stepn{2} \textbf{Energy.} $E=\num{2.56e24}\times200\times\SI{1.602e-13}{J}=\SI{8.2e13}{J}$.
+\stepn{3} \textbf{Compare.} $\num{8.2e13}/\num{3.0e7}=\num{2.7e6}$: a kilogram of uranium-235 does the
+work of about $2700$ tonnes of coal.
+\ans{\SI{8.2e13}{J}, about $2.7$ million times coal}
+\end{exbox}
+
+\section{The Chain Reaction}\label{sec:react-chain}
+
+A single fission is a laboratory curiosity; what makes fission an energy source is that each one releases
+two or three neutrons (2.4 on average for uranium-235), and each of those can cause another fission. The
+process can feed itself. Whether it grows, holds steady or dies out depends on a single number.
+
+\begin{defbox}{Multiplication factor}
+The \textbf{multiplication factor} $k$ is the average number of neutrons from one fission that go on to
+cause another fission. (In this volume $k$ always means this; in Volume~I it was a spring constant.) It is
+smaller than the $2.4$ neutrons released, because some neutrons leak out of the fuel and some are captured
+without causing fission. If one generation contains $n_0$ fissions, generation $n$ contains $n_0k^n$:
+\begin{itemize}[itemsep=1pt]
+\item $k<1$: \textbf{subcritical}, the chain dies out;
+\item $k=1$: \textbf{critical}, a steady chain (a reactor at constant power);
+\item $k>1$: \textbf{supercritical}, exponential growth (a reactor raising its power, or a bomb).
+\end{itemize}
+\end{defbox}
+
+Figure~\ref{fig:react-chain} shows the growth for $k=3$, an idealisation with no losses. The growth is
+geometric, generation by generation, and it is fast: with $k=2$, eighty generations multiply the
+population by $2^{80}\approx10^{24}$.
+
+\begin{figure}[htbp]\centering
+\tikzfig{react_chain}
+\figcaption{fig:react-chain}{A chain reaction with $k=3$: each fission's neutrons cause three more
+fissions, so the generations hold $1$, $3$, $9$, \dots, $3^n$ fissions. In practice some neutrons escape
+(dashed) or are absorbed without fission, and a reactor is held precisely at $k=1$.}
+\end{figure}
+
+A subcritical assembly fed by an external neutron source is also instructive. One source neutron
+causes on average $k$ neutrons in the next generation, $k^2$ in the one after, and so on, so the total
+number of neutrons it gives rise to, counting itself, is the geometric series
+\[
+1+k+k^2+\dots=\frac{1}{1-k}\qquad(k<1),
+\]
+which follows from multiplying the sum $S$ by $k$: $S-kS=1$. With $k=0.9$ each source neutron is
+multiplied tenfold. As $k\to1$ the sum diverges: the chain no longer needs the source. This is how a
+reactor approaching criticality is watched; the count from a neutron detector grows as $1/(1-k)$ and
+warns long before $k=1$ is reached.
+
+\begin{keybox}{Critical mass: surface against volume}
+Neutrons are produced throughout the volume of the fuel ($\propto R^3$ for a sphere of radius $R$) but
+escape through its surface ($\propto R^2$), so the fraction that escapes falls roughly as $1/R$. Below a
+certain size too many neutrons leak out and $k<1$, however pure the fuel. The smallest mass that can
+sustain the chain is the \textbf{critical mass}, about \SI{50}{kg} for a bare sphere of pure
+uranium-235. A neutron-reflecting shell around the fuel, or compressing it, reduces the critical mass.
+Fissile material is safe when divided into pieces each well below critical.
+\end{keybox}
+
+\section{Taming the Chain: The Reactor}\label{sec:react-reactor}
+
+A bomb lets $k$ exceed $1$ by as much as possible; a reactor holds $k=1$ to within a fraction of a
+percent, for years, and extracts the heat. Figure~\ref{fig:react-reactor} shows the most common design,
+the pressurised-water reactor. Its parts each answer one physical problem.
+
+\begin{figure}[htbp]\centering
+\tikzfig{react_reactor}
+\figcaption{fig:react-reactor}{Schematic pressurised-water reactor (not to scale). The water in the
+vessel is both moderator and coolant; the control rods set $k$; the hot water (orange) heats a separate
+loop in the steam generator and returns cool (blue), and the steam drives a turbine and generator. Only
+about a third of the heat becomes electricity.}
+\end{figure}
+
+\begin{itemize}
+\item \textbf{Fuel.} Uranium oxide pellets sealed in metal rods. Natural uranium is only $0.72\%$
+uranium-235. The rest, uranium-238, captures many neutrons without fissioning, so most reactors use
+\emph{enriched} uranium, in which the uranium-235 fraction has been raised to $3$--$5\%$ by physically
+separating the isotopes. (Gas centrifuges spin uranium hexafluoride, and the slightly lighter
+uranium-235 molecules concentrate near the axis.) Heavy-water reactors can run on natural uranium; weapons
+require about $90\%$.
+\item \textbf{Moderator.} Fission neutrons are fast, about \SI{2}{\MeV}, but uranium-235 is hundreds of
+times more likely to absorb a slow \emph{thermal} neutron, one whose kinetic energy is about
+\SI{0.025}{eV}, the energy of thermal motion at room temperature. The moderator, a material of light
+nuclei, slows the neutrons by elastic collisions: ordinary water, heavy water ($\mathrm{D_2O}$) or
+graphite.
+\item \textbf{Control rods.} Cadmium or boron absorbs neutrons strongly. Inserting the rods lowers $k$;
+withdrawing them raises it.
+\item \textbf{Coolant.} Carries the heat to a steam generator, where steam is raised to drive a turbine.
+In a pressurised-water reactor the moderator water is also the coolant.
+\item \textbf{Shielding.} Thick concrete and steel absorb the neutrons and gamma rays.
+\end{itemize}
+
+Why should a slow neutron be captured more readily than a fast one? A rough classical picture is that a
+slow neutron lingers. A thermal neutron moves at $v=\sqrt{2K/m_n}\approx\SI{2200}{m/s}$, while a
+\SI{2}{\MeV} neutron moves at about \SI{2.0e7}{m/s}, roughly $9000$ times faster; the slow one spends
+$9000$ times longer near each nucleus it passes. The proper explanation is quantum mechanical and is
+quoted here rather than derived: every particle also behaves as a wave of \emph{de~Broglie wavelength}
+$h/p$, with $h$ Planck's constant and $p$ the momentum, and the slow neutron's wavelength is about $9000$
+times longer, so it interacts with a nucleus over a far larger effective area. The measured fission
+probability of uranium-235 is indeed about $500$ times larger for thermal neutrons than for
+\SI{2}{\MeV} ones.
+
+\subsection{Moderation by elastic collisions}
+
+The moderator must remove almost all of a neutron's kinetic energy, from \SI{2}{\MeV} to
+\SI{0.025}{eV}, a factor of nearly $10^8$, without absorbing the neutron. Collisions at these energies
+leave both nuclei in their ground states, so kinetic energy is conserved: they are elastic collisions, and
+\chref{ch:collisions} already solved them.
+
+\begin{derivbox}{Why light nuclei make good moderators}
+A neutron of mass $m$ and velocity $v_0$ hits a stationary nucleus of mass $Am$ head-on and elastically.
+(The nucleus's mass is very nearly $A$ neutron masses, close enough here.) Let the neutron's velocity
+afterwards be $v_1$ and the nucleus's $V$, all along one line, signed positive in the direction of $v_0$.
+\stepn{1} \textbf{The two conservation laws.}
+\begin{align*}
+\text{momentum:}&\quad mv_0=mv_1+AmV &&\Rightarrow\quad v_0-v_1=AV,\\
+\text{kinetic energy:}&\quad \tfrac12mv_0^2=\tfrac12mv_1^2+\tfrac12AmV^2 &&\Rightarrow\quad (v_0-v_1)(v_0+v_1)=AV^2 .
+\end{align*}
+\stepn{2} \textbf{Divide.} Dividing the energy equation by the momentum equation gives $v_0+v_1=V$: the
+relative velocity is reversed, as for every elastic collision in \chref{ch:collisions}.
+\stepn{3} \textbf{Solve.} Substituting this $V$ into $v_0-v_1=AV$,
+\[
+v_0-v_1=A(v_0+v_1)\quad\Longrightarrow\quad v_1=-\frac{A-1}{A+1}\,v_0 ,
+\]
+which is Volume~I's $v_1=\frac{m_1-m_2}{m_1+m_2}u_1$ with $m_1=m$, $m_2=Am$. The minus sign means the
+neutron bounces back if $A>1$.
+\stepn{4} \textbf{Energy kept.} The fraction $\phi$ of its kinetic energy that the neutron \emph{keeps}
+is $v_1^2/v_0^2$:
+\begin{equation}\label{eq:react-phi}
+\boxed{\phi=\frac{K_1}{K_0}=\left(\frac{A-1}{A+1}\right)^2 .}
+\end{equation}
+\stepn{5} \textbf{Limits.} For hydrogen ($A=1$), $\phi=0$: a head-on collision stops the neutron dead,
+the equal-mass exchange of Volume~I's Newton's cradle. For carbon ($A=12$) the neutron keeps
+$(11/13)^2=71.6\%$. For uranium ($A=238$) it keeps $(237/239)^2=98.3\%$ and barely slows, like a
+ping-pong ball bouncing off a bowling ball.
+\end{derivbox}
+
+\begin{keybox}{Energy kept per head-on elastic collision}
+A neutron striking a nucleus of mass number $A$ at rest, head-on and elastically, keeps the fraction
+$\phi=\big((A-1)/(A+1)\big)^2$ of its kinetic energy. After $n$ such collisions $K_n=K_0\phi^n$, so the
+number needed to go from $K_0$ to $K_n$ is $n=\ln(K_n/K_0)/\ln\phi$, rounded up.
+\end{keybox}
+
+Because $K_n/K_0=\phi^n$, the logarithm of the energy falls by the same step at every collision, and on a
+logarithmic scale each moderator traces a straight line (Figure~\ref{fig:react-moderation}). The slopes
+make the ranking plain: the lighter the nucleus, the steeper the fall. Solving
+$\phi^n=K_n/K_0$ for $n$ takes one logarithm (see \chref{ch:toolkit}, Section~\ref{sec:explog}).
+
+\begin{figure}[htbp]\centering
+\tikzfig{react_moderation}
+\figcaption{fig:react-moderation}{Kinetic energy of a neutron after $n$ head-on elastic collisions,
+on a logarithmic scale, for three moderating nuclei (colours distinguish the materials). Each collision
+multiplies the energy by the same $\phi$, so each line is straight. Deuterium reaches the thermal level
+in $9$ collisions and carbon in $55$; uranium-238 would need about $1100$.}
+\end{figure}
+
+\begin{exbox}{Graphite as a moderator}\label{ex:react-graphite}
+How many head-on collisions with carbon-12 nuclei slow a \SI{2.0}{\MeV} neutron to \SI{0.025}{eV}?
+\stepn{1} \textbf{Energy kept per collision.} $\phi=(11/13)^2=0.716$.
+\stepn{2} \textbf{Number of collisions.}
+$n=\dfrac{\ln(0.025/\num{2.0e6})}{\ln 0.716}=\dfrac{-18.2}{-0.334}=54.5$, so $55$ collisions.
+\stepn{3} \textbf{Reality check.} Real collisions are mostly glancing, as the next remark explains, and
+about $115$ are needed in graphite. The head-on count is a lower bound.
+\ans{$55$ (head-on); about $115$ in practice}
+\end{exbox}
+
+\begin{remarkbox}{Glancing collisions}
+A head-on collision is the most effective one; a glancing collision deflects the neutron and takes less
+energy. Averaging over all directions of scattering (which needs the two-dimensional collisions of
+\chref{ch:collisions} and a result about the distribution of directions that we state without proof)
+gives the average loss of $\ln K$ per collision, $\xi=1+\dfrac{\phi\ln\phi}{1-\phi}$, with $\xi=1$ for
+hydrogen. The number of collisions to thermalise a \SI{2}{\MeV} neutron is then
+$\ln(\num{2e6}/0.025)/\xi$: about $18$ in hydrogen, $25$ in deuterium and $115$ in carbon. The ranking is
+the head-on ranking; only the counts grow.
+\end{remarkbox}
+
+Ordinary hydrogen is the best slower, but it is not the best moderator, because it also captures
+neutrons: $n+p\to\iso{2}{H}+\gamma$. A good moderator must slow neutrons \emph{and} leave them alive.
+
+\begin{remarkbox}{Heavy water and India's three-stage programme}
+Deuterium slows neutrons almost as well as hydrogen and hardly absorbs them, so heavy-water reactors can
+run on \emph{natural} uranium, while light-water reactors need enriched fuel. India's pressurised
+heavy-water reactors are the first stage of a three-stage plan designed around the country's modest
+uranium and very large thorium reserves. Stage one burns natural uranium and breeds plutonium-239 from
+uranium-238 by neutron capture. Stage two uses that plutonium in fast breeder reactors. Stage three
+breeds fissile uranium-233 from thorium-232:
+\[
+\iso{232}{Th}+n\to\iso{233}{Th}\xrightarrow{\ \beta^-\ }\iso{233}{Pa}\xrightarrow{\ \beta^-\ }\iso{233}{U}.
+\]
+\end{remarkbox}
+
+\subsection{Delayed neutrons and control}
+
+There is a puzzle in holding $k=1$. In a thermal reactor the time from one fission to the next, the
+\emph{generation time}, is only about \SI{e-4}{s}. If $k$ drifted to $1.001$, the power would grow by
+$0.1\%$ every \SI{e-4}{s}, a factor of $e$ in a tenth of a second; no mechanical control rod could keep up.
+Reactors are controllable for a reason that is easy to overlook.
+
+\begin{keybox}{Delayed neutrons make reactors controllable}
+About $0.65\%$ of uranium-235 fission neutrons are emitted not at once but seconds later (about
+\SI{13}{s} on average), by certain $\beta$-decaying fragments. Averaged over all neutrons, the generation
+time becomes about $(0.9935)(\SI{e-4}{s})+(0.0065)(\SI{13}{s})\approx\SI{0.1}{s}$. A reactor that is
+critical only with the help of its delayed neutrons therefore changes power over tens of seconds instead
+of milliseconds, slowly enough for control rods to respond.
+\end{keybox}
+
+\begin{exbox}{A reactor slightly supercritical}\label{ex:react-supercritical}
+A reactor is made slightly supercritical, with $k=1.001$. How many generations does it take for the power
+to rise $100$-fold? How long is that with prompt neutrons alone (generation time \SI{e-4}{s}), and with
+the delayed neutrons included (effective generation time \SI{0.1}{s})?
+\stepn{1} \textbf{Generations.} $k^n=100$ gives $n=\ln100/\ln1.001=4607$, about $4600$ generations.
+\stepn{2} \textbf{Times.} Prompt only: $4600\times\SI{e-4}{s}=\SI{0.46}{s}$. With delayed neutrons:
+$4600\times\SI{0.1}{s}=\SI{460}{s}$, nearly eight minutes.
+\stepn{3} \textbf{Meaning.} Half a second is an uncontrollable excursion; eight minutes is routine work
+for the control system.
+\ans{$4600$ generations; \SI{0.46}{s} or about \SI{8}{min}}
+\end{exbox}
+
+\begin{trapbox}{delayed neutrons help only while $k-1$ is smaller than $0.0065$}
+The delayed neutrons slow the growth only if the chain \emph{needs} them. If $k$ exceeds $1$ by more than
+the delayed fraction, the prompt neutrons alone give a multiplication $k(1-0.0065)>1$ and the power grows
+on the prompt time scale whatever the delayed neutrons do. For $k=1.01$, for instance,
+$k(1-0.0065)=1.0034$. This condition, \emph{prompt criticality}, is what every reactor design must exclude;
+the Chernobyl reactor reached it in 1986 and its power rose many times over within seconds.
+\end{trapbox}
+
+Finally, how much fuel does a reactor burn? Because each fission releases so much, astonishingly little.
+
+\begin{exbox}{Fuel consumption of a power reactor}\label{ex:react-fuel}
+A reactor produces \SI{1000}{MW} of thermal power. Taking \SI{200}{\MeV} per fission, find the fission
+rate and the mass of uranium-235 consumed per day.
+\stepn{1} \textbf{Energy per fission.} $200\times\SI{1.602e-13}{J}=\SI{3.20e-11}{J}$.
+\stepn{2} \textbf{Fission rate.} $\num{1.000e9}/\num{3.20e-11}=\SI{3.12e19}{s^{-1}}$.
+\stepn{3} \textbf{Mass per day.} In \SI{86400}{s}, $\num{3.12e19}\times\num{86400}=\num{2.70e24}$ nuclei,
+that is, $(\num{2.70e24}/\num{6.022e23})\times\SI{235.0}{g}=\SI{1.05}{kg}$.
+\ans{\SI{3.12e19}{s^{-1}}; \SI{1.05}{kg} per day}
+\end{exbox}
+
+A thousand megawatts of heat is not a thousand megawatts of electricity. The heat is turned into work by a
+steam turbine, a heat engine, and \chref{ch:thermo} showed that no heat engine working between a hot and a
+cold reservoir can convert all its heat into work. With steam at about \SI{600}{K} and cooling water near
+\SI{300}{K}, the Carnot limit is $1-300/600=50\%$; real plants achieve about one third. The rest of the
+heat leaves through the cooling towers, as it does from a coal-fired plant.
+
+\section{Joining Nuclei: Fusion}\label{sec:react-fusion}
+
+On the light side of the binding-energy curve (Figure~\ref{fig:nuc-bea} and Section~\ref{sec:nuc-curve}), combining nuclei releases energy, and
+per nucleon far more than fission does. Deuterium--tritium fusion releases \SI{17.6}{\MeV} among $5$
+nucleons, about \SI{3.5}{\MeV} per nucleon, against $200/236\approx\SI{0.85}{\MeV}$ per nucleon for
+uranium fission. The curve rises much more steeply on the light side than it falls on the heavy side. The
+obstacle is electrical: two nuclei must approach within the range of the strong force, a few
+femtometres, against their Coulomb repulsion (Figure~\ref{fig:react-barrier}).
+
+\begin{figure}[htbp]\centering
+\tikzfig{react_barrier}
+\figcaption{fig:react-barrier}{Potential energy of two nuclei against the separation of their centres
+(schematic, not to scale). Outside contact the Coulomb repulsion rises as $1/r$ to the barrier height
+$U_B$ at $r=R_1+R_2$; inside, the strong force takes over. A nucleus with the thermal energy shown would
+be turned back classically at the turning point. In the Sun's core the typical thermal energy is several
+hundred times below $U_B$, and fusion proceeds by quantum tunnelling through the barrier.}
+\end{figure}
+
+\begin{derivbox}{The Coulomb barrier and the temperature it seems to require}
+\stepn{1} \textbf{Barrier height.} Two protons touching at a centre-to-centre distance $r\approx\SI{2}{\fm}$
+have electric potential energy
+\[
+U_B=\frac{e^2}{4\pi\varepsilon_0\,r}=\frac{\SI{1.44}{\MeV\fm}}{\SI{2}{\fm}}=\SI{0.72}{\MeV}.
+\]
+For nuclei of charges $Z_1e$ and $Z_2e$ and radii $R_1$, $R_2$, $U_B=Z_1Z_2e^2/[4\pi\varepsilon_0(R_1+R_2)]$.
+\stepn{2} \textbf{Temperature.} In a gas at absolute temperature $T$ the average translational kinetic
+energy of a particle is $\tfrac32k_BT$ (\chref{ch:kinetic}; $k_B=\SI{1.381e-23}{J/K}$ is Boltzmann's
+constant). If this average had to equal the barrier,
+\[
+T=\frac{2U_B}{3k_B}=\frac{2(0.72\times\SI{1.602e-13}{J})}{3(\SI{1.381e-23}{J/K})}\approx\SI{5.6e9}{K}.
+\]
+\stepn{3} \textbf{Compare with the Sun.} The Sun's core is at only \SI{1.5e7}{K}, about $370$ times
+colder, where $k_BT\approx\SI{1.3}{\keV}$, some $560$ times below the barrier.
+\end{derivbox}
+
+Yet the Sun shines. Two effects close the gap, and the second is beyond classical physics. (i) Particle
+speeds in a gas are spread out (the Maxwell distribution of \chref{ch:kinetic}), and a small fraction of
+the protons in its high-energy tail move several times faster than average. (ii) Quantum mechanics lets a
+particle pass through a barrier it cannot climb, a process called \textbf{tunnelling}, with a probability
+that falls off exponentially with the barrier's height and width and with the particle's mass. We quote
+tunnelling rather than derive it, because the derivation needs the wave mechanics of a later course; all
+that is needed here is that it exists and that it is very improbable for a single encounter. The
+product of the two small factors is tiny, which is exactly why the Sun burns slowly and steadily for ten
+billion years instead of exploding.
+
+\begin{trapbox}{fusion does not need $\tfrac32k_BT=U_B$}
+The estimate $T=2U_B/3k_B$ is the temperature at which an \emph{average} nucleus could climb the barrier
+classically. Real fusion runs hundreds of times colder, on the rare fast nuclei of the Maxwell tail and on
+tunnelling. Quote the classical estimate only as an upper bound that shows why fusion is hard.
+\end{trapbox}
+
+\begin{exbox}{The deuterium--tritium barrier}\label{ex:react-dtbarrier}
+Estimate the Coulomb barrier between a deuteron and a triton, taking their radii from
+$R=R_0A^{1/3}$ with $R_0=\SI{1.2}{\fm}$, and the temperature at which $\tfrac32k_BT$ equals it.
+\stepn{1} \textbf{Contact distance.} $r=1.2(2^{1/3}+3^{1/3})=1.2(1.260+1.442)=\SI{3.24}{\fm}$.
+\stepn{2} \textbf{Barrier.} Both charges are $+e$: $U_B=1.44/3.24=\SI{0.444}{\MeV}$.
+\stepn{3} \textbf{Classical temperature.} $T=2U_B/3k_B=\SI{3.4e9}{K}$. Practical D--T plasmas work at
+about \SI{e8}{K}, thirty times colder, relying on the fast tail and on tunnelling.
+\ans{$U_B\approx\SI{0.44}{\MeV}$; $T\approx\SI{3.4e9}{K}$}
+\end{exbox}
+
+\section{How the Sun Shines: The Proton--Proton Chain}\label{sec:react-sun}
+
+The Sun is about three-quarters hydrogen by mass, and in its core hydrogen is fused into helium by a sequence of
+reactions called the proton--proton chain (Figure~\ref{fig:react-ppchain}). Its main branch runs
+\begin{align*}
+&\textbf{1}\quad p+p\to\iso{2}{H}+e^++\nu_e &&\text{(weak interaction; extremely slow)}\\
+&\textbf{2}\quad \iso{2}{H}+p\to\iso{3}{He}+\gamma\\
+&\textbf{3}\quad \iso{3}{He}+\iso{3}{He}\to\iso{4}{He}+2p
+\end{align*}
+with steps 1 and 2 occurring twice for each helium nucleus made. Here $e^+$ is the positron and $\nu_e$ the
+neutrino of the $\beta^+$ decays of \chref{ch:decay}. The net result is
+\[
+4p\;\to\;\iso{4}{He}+2e^++2\nu_e .
+\]
+
+\begin{figure}[htbp]\centering
+\tikzfig{react_ppchain}
+\figcaption{fig:react-ppchain}{The main branch of the proton--proton chain. Steps 1 and 2 occur twice for
+each helium-4 made, and step 3 returns two of the six protons. Step 1 needs a proton to turn into a neutron
+by the weak interaction during a brief encounter; a given proton in the Sun's core waits on average about
+ten billion years for this, which is what makes the Sun's fuel last.}
+\end{figure}
+
+Using atomic masses for the net reaction,
+\[
+Q=\big[4M(\iso{1}{H})-M(\iso{4}{He})\big]c^2=\big[4(\num{1.007825})-\num{4.002603}\big]\times\SI{931.494}{\MeV}=\SI{26.7}{\MeV}.
+\]
+The electron bookkeeping deserves a moment, because here, unlike in fission, the charge changes hands. The
+four hydrogen atoms on the left include four electrons; the helium atom on the right has two. The two
+``extra'' electrons annihilate with the two positrons, and that annihilation energy ($4m_ec^2$) is
+automatically counted when atomic masses are used, as it was for $\beta^+$ decay in \chref{ch:decay}.
+About \SI{0.5}{\MeV} of the \SI{26.7}{\MeV} is carried off by the two neutrinos, which escape the Sun
+unhindered; the rest heats the core.
+
+\begin{remarkbox}{The Sun loses four million tonnes a second}
+The Sun radiates a power $P_\odot=\SI{3.83e26}{W}$. By $E=mc^2$ it loses mass at
+$P_\odot/c^2=\SI{4.3e9}{kg/s}$, over four million tonnes every second. Since \SI{26.7}{\MeV} is released per
+four hydrogen atoms, it converts about $\SI{6.0e11}{kg}$ of hydrogen into helium every second. Even so,
+over its $4.6$ billion years it has used only about $6\%$ of its hydrogen at today's rate (less in fact,
+since the young Sun was fainter): its mass is \SI{2.0e30}{kg}, about $71\%$ of it hydrogen.
+\end{remarkbox}
+
+\subsection{Fusion on Earth}
+
+A reactor on Earth cannot wait billions of years for the weak interaction, nor can it use a star's
+enormous mass to hold its fuel together. Terrestrial fusion aims at the easiest reaction,
+deuterium--tritium:
+\[
+\iso{2}{H}+\iso{3}{H}\to\iso{4}{He}+n,\qquad Q=\SI{17.6}{\MeV}.
+\]
+It is the easiest for three reasons. Both nuclei have charge $+e$ only, giving the lowest possible Coulomb
+barrier. It needs no weak interaction. And it releases a great deal of energy because it forms
+tightly bound helium-4. Even so it needs plasma temperatures of about \SI{e8}{K}, hotter than the Sun's
+core. A useful power output requires three things at once: high temperature, high density and long
+confinement time; their product must exceed a threshold called the \emph{Lawson criterion}. Magnetic
+confinement devices, the tokamaks such as the international ITER project in which India is a partner,
+hold the plasma away from the walls with magnetic fields. Inertial confinement crushes fuel pellets with
+lasers; in December 2022 the US National Ignition Facility for the first time obtained more fusion energy
+from a pellet than the laser energy delivered to it, although far less than the electricity used to run
+the lasers. A power station is still decades away.
+
+\begin{exbox}{Deuterium--tritium energetics}\label{ex:react-dt}
+Using $M(\iso{2}{H})=\SI{2.014102}{\amu}$, $M(\iso{3}{H})=\SI{3.016049}{\amu}$,
+$M(\iso{4}{He})=\SI{4.002603}{\amu}$ and $m_n=\SI{1.008665}{\amu}$, find $Q$ for
+$\iso{2}{H}+\iso{3}{H}\to\iso{4}{He}+n$, and the kinetic energy of the neutron when the reacting nuclei
+are slow.
+\stepn{1} \textbf{$Q$.} $Q=[\num{2.014102}+\num{3.016049}-\num{4.002603}-\num{1.008665}]\times\SI{931.494}{\MeV}=\SI{17.6}{\MeV}$.
+\stepn{2} \textbf{Sharing.} With nearly zero total momentum the products recoil back to back, and the
+neutron, about a quarter of the helium's mass, takes the larger share:
+$K_n=Q\,\dfrac{M_{\mathrm{He}}}{M_{\mathrm{He}}+m_n}=17.6\times\dfrac{4.003}{5.011}=\SI{14.1}{\MeV}$.
+\stepn{3} \textbf{Meaning.} About four-fifths of the energy leaves with uncharged neutrons, which no
+magnetic field can hold. They carry the energy out of a fusion reactor to a surrounding blanket, where it
+becomes heat, and they make the reactor walls radioactive.
+\ans{$Q=\SI{17.6}{\MeV}$; $K_n=\SI{14.1}{\MeV}$}
+\end{exbox}
+
+\section{Summary}\label{sec:react-summary}
+A nuclear reaction is bookkept like a decay with two particles at the start: $A$ and $Z$ balance, and the
+$Q$-value is the rest energy that disappears. The binding-energy curve decides the sign: nucleons moving
+towards its summit near iron release energy, which is why heavy nuclei release energy by splitting and
+light ones by merging.
+
+\begin{itemize}
+\item $\mathrm X(a,b)\mathrm Y$: $Q=[(m_a+m_{\mathrm X})-(m_b+m_{\mathrm Y})]c^2$ with atomic masses;
+      $Q>0$ exoergic, $Q<0$ endoergic. Equivalently $Q$ is the binding energy gained.
+\item Momentum conservation locks the CM kinetic energy away: the threshold of an endoergic reaction on a
+      target at rest is $K_{\text{th}}=|Q|(1+m_a/m_{\mathrm X})$. For $Q>0$ with slow reactants, two
+      products share $Q$ in inverse ratio of their masses.
+\item Fission of uranium-235 is triggered by a slow neutron (no Coulomb barrier); one split such as
+      Ba\,+\,Kr\,+\,3$n$ has $Q=\SI{173}{\MeV}$, and the average total per fission, including the
+      fragments' later $\beta$ decays, is about \SI{200}{\MeV}, mostly fragment kinetic energy.
+\item Multiplication factor $k$: subcritical $k<1$, critical $k=1$, supercritical $k>1$; growth $k^n$ per
+      $n$ generations; a source in a subcritical assembly is multiplied by $1/(1-k)$. Leakage through the
+      surface sets a critical mass.
+\item A reactor holds $k=1$ with enriched fuel, a moderator, control rods and coolant. A head-on elastic
+      collision leaves a neutron the fraction $\phi=((A-1)/(A+1))^2$ of its energy, so light nuclei
+      moderate best; hydrogen also absorbs neutrons, so heavy water allows natural uranium.
+\item Delayed neutrons ($0.65\%$) stretch the generation time from about \SI{e-4}{s} to about \SI{0.1}{s},
+      provided $k-1$ stays below the delayed fraction (no prompt criticality).
+\item Fusion releases about \SI{3.5}{\MeV} per nucleon (D--T) against \SI{0.85}{\MeV} for fission. The
+      Coulomb barrier, $U_B=Z_1Z_2e^2/4\pi\varepsilon_0(R_1+R_2)$, is a fraction of an MeV; the classical
+      temperature $2U_B/3k_B$ is billions of kelvin, but stars fuse at about \SI{1.5e7}{K} through the
+      Maxwell tail and tunnelling (quoted, not derived).
+\item The Sun's proton--proton chain turns $4p$ into $\iso{4}{He}$ with $Q=\SI{26.7}{\MeV}$; the Sun loses
+      $P_\odot/c^2\approx\SI{4.3e9}{kg/s}$. Terrestrial fusion uses D--T ($Q=\SI{17.6}{\MeV}$, neutron
+      \SI{14.1}{\MeV}) at about \SI{e8}{K}.
+\end{itemize}
+
+\section{Problem Types}\label{sec:react-types}
+Seven types cover what examiners ask about reactions, fission and fusion. Nearly all reduce to two
+skills: an energy balance from masses, and a momentum argument for how energy is shared or locked away.
+
+\archq{Reaction \texorpdfstring{$Q$}{Q}-values and threshold energies}
+{A reaction $\mathrm X(a,b)\mathrm Y$ or a written equation with masses; asked whether it is exoergic or
+endoergic, how much energy it releases, or the minimum projectile energy.}
+{Balance $A$ and $Z$ to identify any unknown particle. $Q=[(m_a+m_{\mathrm X})-(m_b+m_{\mathrm Y})]\times
+\SI{931.5}{\MeV}$ per \si{\amu}, with atomic masses. If $Q<0$, $K_{\text{th}}=|Q|(1+m_a/m_{\mathrm X})$,
+Eq.~\eqref{eq:react-threshold}, where $m_a$ is the \emph{moving} particle. If $Q>0$ and the projectile
+is slow, the products share $Q$ in inverse ratio of their masses.}
+{Taking the threshold to be $|Q|$, or putting the target's mass where the projectile's belongs.}
+{The reaction $\iso{7}{Li}(p,n)\iso{7}{Be}$ has $Q=-\SI{1.645}{\MeV}$. Taking
+$m_p/m_{\mathrm{Li}}=1.008/7.016$, the minimum kinetic energy of protons fired at stationary lithium-7 for
+the reaction to occur is:}
+{\SI{1.65}{\MeV}}
+{\SI{1.44}{\MeV}}
+{\SI{13.1}{\MeV}}
+{\SI{1.88}{\MeV}\archans{D}{$K_{\text{th}}=1.645\,(1+1.008/7.016)=1.645\times1.144=\SI{1.88}{\MeV}$.
+(A) ignores momentum conservation; (B) multiplies $|Q|$ by $m_{\mathrm X}/(m_a+m_{\mathrm X})$ instead of
+dividing by it; (C) uses $1+m_{\mathrm X}/m_a$, the threshold for
+lithium ions fired at stationary protons.}}
+
+\archq{Fission energy from masses or binding energies}
+{A specific fission equation with masses, or binding energies per nucleon of the parent and fragments;
+energy per fission, per mole or per kilogram; comparisons with chemical fuel.}
+{Balance the neutrons. Either $Q=[\sum M_{\text{in}}-\sum M_{\text{out}}]\times\SI{931.5}{\MeV}$ per
+\si{\amu} (atomic masses), or $Q=\sum\Eb(\text{products})-\sum\Eb(\text{reactants})$ with
+$\Eb=A\times(\Eb/A)$. Energy per kilogram $=(1000/M_{\text{molar}})\,N_A\times E_{\text{fission}}$, with
+$M_{\text{molar}}$ in grams per mole.}
+{Multiplying only one side's binding energy, or using the difference in $\Eb/A$ without multiplying by the
+number of nucleons.}
+{The excited compound nucleus $\iso{236}{U}^*$ ($\Eb/A=\SI{7.6}{\MeV}$) splits into $\iso{140}{Xe}$
+($\Eb/A=\SI{8.4}{\MeV}$), $\iso{94}{Sr}$ ($\Eb/A=\SI{8.6}{\MeV}$) and two free neutrons. The energy
+released is about:}
+{\SI{191}{\MeV}}
+{\SI{0.9}{\MeV}}
+{\SI{1984}{\MeV}}
+{\SI{212}{\MeV}\archans{A}{$Q=140(8.4)+94(8.6)-236(7.6)=1176+808.4-1793.6=\SI{191}{\MeV}$; the two free
+neutrons have no binding energy. (B) is a typical gain per nucleon only; (C) is the products' total
+binding energy, forgetting the parent's; (D) is $236\times\SI{0.9}{\MeV}$, which wrongly lets all $236$
+nucleons, the free neutrons included, gain \SI{0.9}{\MeV} each.}}
+
+\archq{Reactor power and fuel consumption}
+{Power output (thermal or electrical) and fuel burnt per second, day or year.}
+{Thermal power $=$ electrical power $/$ efficiency. Fissions per second $=P_{\text{th}}/E_{\text{fission}}$
+with $E_{\text{fission}}$ in joules. Mass per second $=(\text{fissions per second})\times M_{\text{molar}}/N_A$.}
+{Using the electrical power directly, or multiplying by the efficiency instead of dividing.}
+{A reactor delivers \SI{300}{MW} of electrical power at $25\%$ efficiency. With \SI{200}{\MeV} per
+fission, the number of fissions per second is about:}
+{\num{9.4e18}}
+{\num{3.7e19}}
+{\num{2.3e18}}
+{\num{3.7e25}\archans{B}{$P_{\text{th}}=300/0.25=\SI{1200}{MW}$, and
+$\num{1.2e9}/(200\times\num{1.602e-13})=\SI{3.7e19}{s^{-1}}$. (A) uses the electrical power; (C)
+multiplies by the efficiency; (D) converts MeV to joules with $\num{1.602e-19}$, the factor for eV.}}
+
+\archq{Moderation by elastic collisions}
+{Energy lost by neutrons striking moderator nuclei; number of collisions to thermalise.}
+{Head-on elastic collision: energy kept $\phi=((A-1)/(A+1))^2$, energy transferred $1-\phi$. After $n$
+collisions $K_n=K_0\phi^n$, so $n=\ln(K_n/K_0)/\ln\phi$; round up.}
+{Forgetting to square: $(A-1)/(A+1)$ is the \emph{velocity} ratio; the energy ratio is its square.}
+{A neutron collides head-on and elastically with a stationary deuteron (mass number $2$). The fraction
+of the neutron's kinetic energy transferred to the deuteron is:}
+{$1/9$}
+{$1/3$}
+{$8/9$}
+{$2/3$\archans{C}{The neutron keeps $\phi=(1/3)^2=1/9$ and transfers $1-1/9=8/9$. (A) is the fraction
+kept; (B) and (D) use the velocity ratio $1/3$ without squaring.}}
+
+\archq{Growth of a chain reaction}
+{Multiplication factor $k$, generations, generation time, power growth or decay.}
+{After $n$ generations the population is $k^n$ times larger, so $n=\ln(\text{factor})/\ln k$; time
+$=n\times$ generation time. For $k<1$ with a source, each source neutron gives $1/(1-k)$ neutrons in all.}
+{Taking logarithms in the wrong base: $k^n=10^{24}$ needs $n=\log_k 10^{24}=\ln10^{24}/\ln k$, not
+$\ln10^{24}$ or $24$.}
+{In a fission assembly $k=1.5$ and the generation time is \SI{10}{ns}. Starting from one fission, the time
+until a single generation contains about $10^{24}$ fissions is about:}
+{\SI{0.24}{\micro s}}
+{\SI{0.55}{\micro s}}
+{\SI{0.80}{\micro s}}
+{\SI{1.36}{\micro s}\archans{D}{$n=\ln10^{24}/\ln1.5=55.3/0.405=136$ generations, and
+$136\times\SI{10}{ns}=\SI{1.36}{\micro s}$. (A) takes $n=24$ (base $10$); (B) takes $n=\ln10^{24}=55$
+(base $e$); (C) takes $n=\log_210^{24}=80$, as if each fission led to two more.}}
+
+\archq{Coulomb barrier and ignition temperature}
+{Minimum energy for two nuclei to touch; temperature to supply it thermally.}
+{Contact distance $r=R_1+R_2$ with $R=R_0A^{1/3}$, $R_0=\SI{1.2}{\fm}$ (or as given). $U_B=Z_1Z_2
+(\SI{1.44}{\MeV\fm})/r$. Set $\tfrac32k_BT=U_B$ for the classical temperature, then note that tunnelling and
+the Maxwell tail allow fusion far below it.}
+{Forgetting the charge product $Z_1Z_2$, or using one radius instead of the sum of two.}
+{Taking $R=1.2A^{1/3}\,\si{\fm}$, the Coulomb barrier for two $\alpha$ particles to touch is about:}
+{\SI{0.38}{\MeV}}
+{\SI{3.02}{\MeV}}
+{\SI{1.51}{\MeV}}
+{\SI{0.76}{\MeV}\archans{C}{$r=2(1.2)(4^{1/3})=\SI{3.81}{\fm}$ and $U_B=(2)(2)(1.44)/3.81=\SI{1.51}{\MeV}$.
+(A) forgets the charge product $4$; (B) uses one radius, $\SI{1.91}{\fm}$; (D) uses $Z_1Z_2=2$.}}
+
+\archq{Fusion energetics and stellar power}
+{$Q$ of a fusion reaction from masses; sharing of the energy between two products; stellar mass loss and
+fuel consumption.}
+{$Q$ from atomic masses. Two products from nearly zero momentum share in inverse ratio of mass, exactly as
+in $\alpha$ decay: $K_1=Q\,m_2/(m_1+m_2)$. Stellar mass loss $=P/c^2$; fuel rate $=(P/Q)\times$ fuel mass
+per reaction.}
+{Giving the larger share to the heavier product: equal momenta mean the \emph{lighter} product is faster
+and carries more energy.}
+{Two slow deuterons fuse: $\iso{2}{H}+\iso{2}{H}\to\iso{3}{He}+n$, with $Q=\SI{3.27}{\MeV}$. Taking the
+helium-3 mass as three times the neutron's, the kinetic energy of the neutron is about:}
+{\SI{2.45}{\MeV}}
+{\SI{0.82}{\MeV}}
+{\SI{1.64}{\MeV}}
+{\SI{3.27}{\MeV}\archans{A}{$K_n=Q\times\frac{3}{3+1}=\frac34(3.27)=\SI{2.45}{\MeV}$. (B) is the
+helium-3 share; (C) splits equally; (D) gives everything to the neutron, ignoring the recoil that momentum
+conservation forces.}}
+
+\section{Practice Problems}\label{sec:react-practice}
+
+The problems below are of standard examination difficulty and are meant to be worked without looking back
+at the chapter. Answers, with brief working, follow the list. Use these data throughout:
+\begin{center}\small
+\begin{tabular}{@{}lll@{}}
+$1\,\si{\amu}\,c^2=\SI{931.494}{\MeV}$ & $m_n=\SI{1.008665}{\amu}$ & $M(\iso{1}{H})=\SI{1.007825}{\amu}$\\
+$M(\iso{2}{H})=\SI{2.014102}{\amu}$ & $M(\iso{3}{H})=\SI{3.016049}{\amu}$ & $M(\iso{3}{He})=\SI{3.016029}{\amu}$\\
+$M(\iso{4}{He})=\SI{4.002603}{\amu}$ & $M(\iso{235}{U})=\SI{235.043930}{\amu}$ & $N_A=\SI{6.022e23}{mol^{-1}}$\\
+$k_B=\SI{1.381e-23}{J/K}$ & $c=\SI{2.998e8}{m/s}$ & $\SI{1}{\MeV}=\SI{1.602e-13}{J}$
+\end{tabular}
+\end{center}
+
+
+\begin{enumerate}[itemsep=3pt]
+\item Find $Q$ for Chadwick's reaction $\iso{9}{Be}(\alpha,n)\iso{12}{C}$. The atomic masses are
+      \SI{9.012183}{\amu} for beryllium-9 and \SI{12.000000}{\amu} for carbon-12. Is the reaction
+      exoergic or endoergic?
+\item Cobalt-60 is made by neutron capture, $\iso{59}{Co}(n,\gamma)\iso{60}{Co}$. The atomic masses
+      are \SI{58.933194}{\amu} for cobalt-59 and \SI{59.933816}{\amu} for cobalt-60. Find the energy
+      carried by the gamma radiation (neglect the recoil of the nucleus).
+\item Rutherford's reaction $\iso{14}{N}(\alpha,p)\iso{17}{O}$ has $Q=-\SI{1.19}{\MeV}$. Explain why an
+      $\alpha$ particle of exactly \SI{1.19}{\MeV} cannot make it go, and find the true threshold (take
+      the masses as $4.003$ and $14.003\,\si{\amu}$). Would the threshold be higher or lower if, instead,
+      nitrogen ions were fired at a stationary helium target?
+\item Another fission channel is $n+\iso{235}{U}\to\iso{140}{Xe}+\iso{94}{Sr}+2n$. Given
+      $M(\iso{140}{Xe})=\SI{139.921646}{\amu}$ and $M(\iso{94}{Sr})=\SI{93.915356}{\amu}$, find $Q$.
+\item The Hiroshima bomb released energy equivalent to about $15$ kilotonnes of TNT
+      ($1$~kilotonne $=\SI{4.184e12}{J}$). Taking \SI{200}{\MeV} per fission, estimate the mass of
+      uranium-235 that actually fissioned.
+\item The fragments $\iso{141}{Ba}$ ($Z=56$) and $\iso{92}{Kr}$ ($Z=36$) are produced in fission. The
+      heaviest stable barium isotope is $\iso{138}{Ba}$ and the heaviest stable krypton isotope is
+      $\iso{86}{Kr}$. Compare the neutron numbers $A-Z$ and state what kind of decays follow.
+\item A plant delivers \SI{1000}{MW} of \emph{electrical} power at $33.3\%$ efficiency. How much
+      uranium-235 does it fission per day and per year (\SI{200}{\MeV} per fission)?
+\item A coal-fired plant producing \SI{1000}{MW} of \emph{thermal} power burns coal of heat value
+      \SI{30}{MJ/kg}. How many kilograms of coal does it need per day? Compare with the \SI{1.05}{kg} of
+      uranium-235 per day that a reactor of the same thermal power fissions.
+\item Beryllium-9 is used as a moderator and reflector. How many head-on elastic collisions with
+      beryllium-9 nuclei slow a \SI{2.0}{\MeV} neutron to \SI{0.025}{eV}?
+\item In a single head-on collision with a proton, a neutron stops. Why, then, is ordinary water a less
+      economical moderator than heavy water?
+\item Derive Eq.~\eqref{eq:react-phi} from conservation of momentum and kinetic energy.
+\item In a fission weapon $k\approx2$ and the generation time is about \SI{10}{ns}. Starting from one
+      fission, how many fissions occur in the 80th generation alone, how long does it take to reach that
+      generation, and what energy (in kilotonnes of TNT) do those fissions release at \SI{200}{\MeV} each?
+      Roughly how much do all eighty generations release together?
+\item A subcritical assembly with $k=0.90$ contains a neutron source. Counting the source neutron itself,
+      how many neutrons in total does each source neutron eventually give rise to? What happens to this
+      number as $k\to1$?
+\item\label{prob:react-pcbar} In stars heavier than the Sun, hydrogen also burns by proton capture on
+      carbon-12 (the CNO cycle). Taking $R=R_0A^{1/3}$ for both nuclei, estimate the Coulomb barrier
+      between a proton and a carbon-12 nucleus, and the temperature at which $\tfrac32k_BT$ equals it.
+\item At the Sun's centre (\SI{1.5e7}{K}), $k_BT=\SI{1.29}{\keV}$. By what factor is it below the
+      proton--carbon barrier of Problem~\ref{prob:react-pcbar}, and below the proton--proton barrier of
+      Section~\ref{sec:react-fusion}? Which reaction would you expect to need the hotter star?
+\item Why must stars reach about \SI{e8}{K} before helium can fuse, much hotter than hydrogen burning
+      requires?
+\item Two deuterons can fuse by either of two branches: $\iso{2}{H}+\iso{2}{H}\to\iso{3}{He}+n$ or
+      $\iso{2}{H}+\iso{2}{H}\to\iso{3}{H}+p$. Find $Q$ for each.
+\item The Sun loses mass at \SI{4.3e9}{kg/s} and converts \SI{6.0e11}{kg} of hydrogen into helium
+      every second (Section~\ref{sec:react-sun}). (a) What fraction of its mass (\SI{2.0e30}{kg}) has it
+      lost in its $4.6$ billion years? (b) Only the core, roughly $10\%$ of the Sun's hydrogen, is hot
+      enough to burn. Taking the Sun's mass to be $71\%$ hydrogen, estimate its hydrogen-burning
+      lifetime at today's rate.
+\item Compare the energy released per kilogram of deuterium--tritium fuel ($Q=\SI{17.6}{\MeV}$) with that
+      per kilogram of uranium-235 (\SI{200}{\MeV} per fission).
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item $Q=[\num{9.012183}+\num{4.002603}-\num{12.000000}-\num{1.008665}]\times\SI{931.494}{\MeV}=+\SI{5.70}{\MeV}$:
+      exoergic.
+\item $Q=[\num{58.933194}+\num{1.008665}-\num{59.933816}]\times\SI{931.494}{\MeV}=\SI{7.49}{\MeV}$, emitted
+      as gamma rays: it is the binding energy of the captured neutron in cobalt-60.
+\item At exactly \SI{1.19}{\MeV} the products would have to be at rest, with zero momentum, but the
+      $\alpha$ particle brought in momentum; part of its energy must stay as CM motion.
+      $K_{\text{th}}=1.19(1+4.003/14.003)=\SI{1.53}{\MeV}$. Firing nitrogen at helium makes the projectile
+      the heavy partner: $K_{\text{th}}=1.19(1+14.003/4.003)=\SI{5.36}{\MeV}$, much higher, because now
+      most of the projectile's energy is locked in the motion of the CM.
+\item $Q=[\num{235.043930}+\num{1.008665}-\num{139.921646}-\num{93.915356}-2(\num{1.008665})]\times\SI{931.494}{\MeV}=\SI{185}{\MeV}$.
+\item $E=15\times\num{4.184e12}=\SI{6.3e13}{J}$; at \SI{8.2e13}{J} per kilogram (Example~\ref{ex:react-perkg}),
+      $m=\num{6.3e13}/\num{8.2e13}\approx\SI{0.76}{kg}$, out of about \SI{64}{kg} of uranium in the weapon.
+\item Barium-141 has $A-Z=85$ against $82$ for the heaviest stable barium; krypton-92 has $A-Z=56$ against
+      $50$ for the heaviest stable krypton. Both fragments have too many neutrons (they lie above the
+      valley of stability), so each undergoes a chain of $\beta^-$ decays towards it, for example
+      $\iso{141}{Ba}\to\iso{141}{La}\to\iso{141}{Ce}\to\iso{141}{Pr}$ (stable).
+\item Thermal power $1000/0.333=\SI{3000}{MW}$, three times Example~\ref{ex:react-fuel}: $3\times1.05=\SI{3.16}{kg}$
+      per day, about \SI{1150}{kg} per year.
+\item $\num{1e9}\times\num{86400}/\num{30e6}=\SI{2.9e6}{kg}$ (about $2900$ tonnes) per day, some $2.7$
+      million times the \SI{1.05}{kg} of uranium-235.
+\item $\phi=(8/10)^2=0.64$; $n=\ln(\num{1.25e-8})/\ln0.64=(-18.2)/(-0.446)=40.8$, so $41$ collisions,
+      between deuterium's $9$ and carbon's $55$.
+\item Hydrogen nuclei also absorb neutrons ($n+p\to\iso{2}{H}+\gamma$), wasting them. Light-water
+      reactors must compensate with enriched fuel; heavy water absorbs far fewer neutrons and allows
+      natural uranium.
+\item Momentum gives $v_0-v_1=AV$; energy gives $(v_0-v_1)(v_0+v_1)=AV^2$; dividing, $v_0+v_1=V$. Then
+      $v_0-v_1=A(v_0+v_1)$, so $v_1=-v_0(A-1)/(A+1)$ and $\phi=v_1^2/v_0^2=((A-1)/(A+1))^2$.
+\item $2^{80}=\num{1.2e24}$ fissions in the 80th generation, reached after $80\times\SI{10}{ns}=\SI{0.8}{\micro s}$;
+      $E=\num{1.2e24}\times\SI{3.2e-11}{J}=\SI{3.9e13}{J}$, about \SI{9}{kt}. All eighty generations
+      together hold $1+2+\dots+2^{80}=2^{81}-1$, twice as many, so about \SI{18}{kt}. (A real weapon blows
+      itself apart after about this many generations, which is why only a kilogram or so of its uranium
+      fissions.)
+\item $1+k+k^2+\dots=1/(1-k)=10$ neutrons. As $k\to1$ the total diverges: the assembly becomes
+      self-sustaining.
+\item $r=1.2(1+12^{1/3})=\SI{3.95}{\fm}$; $U_B=6(1.44)/3.95=\SI{2.19}{\MeV}$;
+      $T=2U_B/3k_B=\SI{1.7e10}{K}$, three times the proton--proton estimate.
+\item $2190/1.29\approx1700$ for proton--carbon, against $720/1.29\approx560$ for proton--proton. The
+      higher, wider barrier makes tunnelling far less likely, so the CNO cycle needs a hotter core; it
+      dominates only in stars somewhat heavier than the Sun.
+\item The barrier $Z_1Z_2e^2/4\pi\varepsilon_0r$ grows with the charge product, $2\times2=4$ for two
+      $\alpha$ particles against $1$ for two protons; even allowing for the larger radii, the barrier is
+      about twice as high (\SI{1.5}{\MeV} against \SI{0.7}{\MeV}). Tunnelling falls off exponentially with
+      the charge product and with the mass of the tunnelling particles, so the heavier, doubly charged
+      $\alpha$ particles fuse at a useful rate only at a far higher temperature.
+\item $Q_1=[2(\num{2.014102})-\num{3.016029}-\num{1.008665}]\times\SI{931.494}{\MeV}=\SI{3.27}{\MeV}$;
+      $Q_2=[2(\num{2.014102})-\num{3.016049}-\num{1.007825}]\times\SI{931.494}{\MeV}=\SI{4.03}{\MeV}$.
+\item (a) $\num{4.3e9}\times4.6\times10^{9}\times\num{3.156e7}=\SI{6.2e26}{kg}$, only $\num{3e-4}$ of its
+      mass. (b) Available hydrogen $0.10\times0.71\times\num{2.0e30}=\SI{1.4e29}{kg}$; at
+      \SI{6.0e11}{kg/s} it lasts $\SI{2.4e17}{s}\approx\SI{7.5e9}{\year}$, the right order for the Sun's
+      ten-billion-year life.
+\item $\SI{17.6}{\MeV}$ per $\SI{5.03}{\amu}$ of fuel gives $\SI{3.4e14}{J/kg}$, about $4.1$ times
+      uranium-235's \SI{8.2e13}{J/kg}.
+\end{enumerate}
+}

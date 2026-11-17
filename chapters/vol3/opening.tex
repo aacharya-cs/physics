@@ -1,0 +1,206 @@
+% Volume III opening, written from the radioactivity source (sec0)
+\volumeopening{About This Volume}
+
+A gram of radium sitting on a bench is never quite still. Every second, about \num{3.7e10} of its nuclei
+break apart, each one firing out a helium nucleus at about five percent of the speed of light. The
+sample stays measurably warmer than its surroundings, year after year, with no fuel and no wire. In
+1903, when Pierre Curie and Albert Laborde first measured that heat, it looked like a violation of the
+conservation of energy, the principle on which the whole of Volume~I rests. It turned out to be the
+first glimpse of an energy store about a million times deeper than chemistry: the binding of the
+nucleus.
+
+This volume follows that store from its foundation to its uses. It first establishes what a nucleus is
+made of, how big it is, and why its mass is \emph{less} than the mass of its parts. It then asks what
+happens when a nucleus is unstable: which particles come out, how much energy they carry, and what rule
+governs \emph{when} a given nucleus decays. The answer to the last question is that nothing does; only
+the statistics of many nuclei are lawful, and that one fact produces the exponential law of decay. The
+same curve of binding energy then explains both the fission reactor and the Sun. The volume ends with
+dating rocks and bones, imaging the body, protecting it from radiation, and simulating decay from pure
+randomness.
+
+\section*{The Map of the Volume}
+
+The five chapters fall into two parts. Part~A builds the nucleus and its decay; Part~B spends the
+energy that Part~A uncovers.
+
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.64\textwidth}@{}}\toprule
+\textbf{Chapter} & \textbf{What it does}\\\midrule
+\multicolumn{2}{@{}l}{\emph{Part A\quad The Nucleus and Its Decay}}\\[1pt]
+\chref{ch:nucleus}\quad The Nucleus & size from Rutherford scattering; mass and energy; mass defect,
+binding energy and the curve of binding energy per nucleon; the nuclear force\\[2pt]
+\chref{ch:decay}\quad Radioactive Decay & $\alpha$, $\beta^-$, $\beta^+$, electron capture and $\gamma$
+decay; $Q$-values and how the energy is shared; the valley of stability; decay series\\[2pt]
+\chref{ch:decaylaw}\quad The Law of Radioactive Decay & $dN/dt=-\lambda N$ from randomness; half-life,
+mean life and activity; branching; decay chains and equilibrium; production at a constant rate\\[3pt]
+\multicolumn{2}{@{}l}{\emph{Part B\quad Nuclear Energy and Its Uses}}\\[1pt]
+\chref{ch:reactions}\quad Nuclear Reactions: Fission and Fusion & reaction $Q$-values and threshold
+energies; fission and the chain reaction; reactors; fusion, the Coulomb barrier and the Sun\\[2pt]
+\chref{ch:nucapps}\quad Applications of Radioactivity & radioactive dating; tracers and medical
+isotopes; radiation dose and shielding; simulating decay with random numbers\\\bottomrule
+\end{tabular}
+\end{center}
+
+Two threads tie the chapters together. The binding-energy curve of \chref{ch:nucleus} supplies the
+energetics of every decay in \chref{ch:decay} and of every reaction in \chref{ch:reactions}. The decay
+law of \chref{ch:decaylaw} underlies every application in \chref{ch:nucapps}, from carbon dating to the
+dose received from a medical scan. The chapters can be read in order; a reader short of time can go
+from \chref{ch:nucleus} straight to \chref{ch:reactions} for nuclear energy, or from \chref{ch:decay}
+straight to \chref{ch:decaylaw} for the decay law, at the cost of a few back-references.
+
+\section*{What This Volume Builds On}
+
+Almost nothing in this volume needs new mechanics. It needs the conservation laws of Volume~I, applied
+to particles too small to see.
+\begin{itemize}
+\item \textbf{Energy} (\chref{ch:energy}): kinetic and potential energy, and the conservation of their
+sum. Every $Q$-value is an energy balance, and the distance of closest approach in Rutherford scattering is
+a turning point on a potential-energy curve.
+\item \textbf{Momentum} (\chref{ch:collisions}): conservation of momentum in collisions and explosions.
+It fixes how the energy of a decay is shared between the daughter nucleus and the emitted particle, and
+how fast neutrons lose energy in a reactor moderator.
+\item \textbf{Angular momentum and inverse-square orbits} (\chref{ch:rotation}, \chref{ch:gravitation},
+\chref{ch:kepler}): a charged particle passing a nucleus feels a repulsive inverse-square force, the
+mirror image of gravity, so its path is a conic and its angular momentum about the nucleus is conserved.
+\item \textbf{Thermal energy} (\chref{ch:kinetic}): the typical kinetic energy of a particle in a gas at
+temperature $T$ is of order $k_BT$, which decides whether nuclei in the core of the Sun can approach one
+another.
+\item \textbf{Exponentials and probability} (\chref{ch:toolkit}): the exponential function, logarithms and
+first-order equations of growth and decay (Section~\ref{sec:explog}), and averages over a distribution
+(Section~\ref{sec:averages}). The decay law is exactly the equation $dy/dt=-ky$ met there.
+\end{itemize}
+
+Some knowledge from Class~12 physics is assumed, and is used without being re-derived.
+\begin{itemize}
+\item \textbf{Electrostatics:} Coulomb's law; the electric potential energy $q_1q_2/(4\pi\varepsilon_0r)$
+of two point charges a distance $r$ apart, where $\varepsilon_0$ is the permittivity of free space; and
+the electron-volt as a unit of energy.
+\item \textbf{Magnetic force:} a charge $q$ moving with velocity $\vv$ in a magnetic field $\B$ feels the
+force $q\vv\times\B$, which bends positive and negative particles in opposite directions.
+\item \textbf{Photons:} light of frequency $f$ and wavelength $\lambda_{\text{ph}}$ comes in quanta of
+energy $E=hf=hc/\lambda_{\text{ph}}$ and momentum $E/c$, where $h$ is Planck's constant.
+\end{itemize}
+Three ideas are genuinely new, and each is flagged where it enters. The equivalence of mass and energy,
+$E=mc^2$, comes from special relativity and is used as an experimentally established fact
+(\chref{ch:nucleus}). The neutrino, a neutral and nearly massless particle, is introduced to save the
+conservation of energy and momentum in $\beta$ decay (\chref{ch:decay}). And quantum tunnelling, by which
+a particle crosses an energy barrier it classically could not climb, is described but not derived
+(\chref{ch:decay} and \chref{ch:reactions}).
+
+\section*{Where This Volume Sits in the Examinations}
+
+The national syllabi have been trimmed in recent cycles, and the table below records what each
+examination currently lists. A thorough understanding of every chapter is still recommended: the decay
+law is also the first-order rate law of chemical kinetics, and JEE Advanced and the Physics Olympiad
+continue to examine it directly.
+
+\begin{center}\small
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.52\textwidth}ccc@{}}\toprule
+\textbf{Topic} & \textbf{JEE Main} & \textbf{NEET} & \textbf{JEE Advanced}\\\midrule
+Nuclear size, mass defect, binding energy, the $\Eb/A$ curve & yes & yes & yes\\
+Fission and fusion (energy release) & yes & yes & yes\\
+Reactions $\mathrm{X}(a,b)\mathrm{Y}$, $Q$-value, threshold energy & no & no & problem source\\
+$\alpha$, $\beta$, $\gamma$ radiation; decay law; half-life, mean life & removed & removed & yes\\
+Successive decay, equilibrium, activation & no & no & problem source\\
+First-order kinetics (Chemistry) & yes & yes & yes\\
+Dating, medical isotopes, dosimetry & enrichment & enrichment & enrichment\\\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{Learning Outcomes}
+
+After working through this volume, a reader should be able to:
+\begin{enumerate}[label=\arabic*.]
+\item compute nuclear radii, densities, mass defects and binding energies from tables of atomic masses,
+keeping the electron masses correctly accounted for (\chref{ch:nucleus});
+\item write balanced equations for $\alpha$, $\beta^-$, $\beta^+$, electron-capture and $\gamma$ decay, and
+compute their $Q$-values and the energy shared between the products (\chref{ch:decay});
+\item derive and apply $N(t)=N_0e^{-\lambda t}$, the half-life and mean life, activity, branching,
+successive decay and production at a constant rate (\chref{ch:decaylaw});
+\item compute $Q$-values and threshold energies of nuclear reactions; explain from the $\Eb/A$ curve why
+fission and fusion release energy; and estimate reactor fuel use, moderator collisions and stellar power
+(\chref{ch:reactions});
+\item date samples from parent and daughter amounts, and solve problems on medical dose and shielding
+(\chref{ch:nucapps});
+\item simulate radioactive decay with random numbers and explain why the exponential law emerges
+(\chref{ch:decaylaw} and \chref{ch:nucapps}).
+\end{enumerate}
+
+\section*{Units and Data Used Throughout}
+
+Nuclear physics uses a few units chosen to keep the numbers small. Every one is defined here.
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\textwidth}>{\raggedright\arraybackslash}p{0.69\textwidth}@{}}\toprule
+\textbf{Unit or constant} & \textbf{Meaning}\\\midrule
+electron-volt, \si{\electronvolt} & the kinetic energy an electron gains when accelerated through a
+potential difference of \SI{1}{V}: $\SI{1}{\electronvolt}=\SI{1.602e-19}{J}$. Chemical bonds are a few
+\si{\electronvolt}.\\
+\si{\keV}, \si{\MeV} & \num{e3} and \SI{e6}{\electronvolt}; $\SI{1}{\MeV}=\SI{1.602e-13}{J}$. Nuclear
+energies are typically a few \si{\MeV}.\\
+femtometre, \si{\fm} & \SI{e-15}{m}, also called a \emph{fermi}. Nuclei are a few femtometres
+across.\\
+atomic mass unit, \si{\amu} & one-twelfth of the mass of a neutral carbon-12 atom:
+$\SI{1}{\amu}=\SI{1.66054e-27}{kg}$, whose rest energy is \SI{931.494}{\MeV}.\\
+\si{\MeV}$/c^2$ & a unit of mass: the mass whose rest energy $mc^2$ is \SI{1}{\MeV} (the electron's
+mass is $\SI{0.511}{\MeV}/c^2$).\\
+becquerel, \si{\becquerel}; curie, \si{\curie} & activity: \SI{1}{\becquerel} is one decay per second;
+$\SI{1}{\curie}=\SI{3.7e10}{\becquerel}$, close to the activity of a gram of radium-226
+(\chref{ch:decaylaw}).\\
+gray, \si{\gray}; sievert, \si{\sievert} & radiation dose: \SI{1}{\gray} is \SI{1}{J} absorbed per
+kilogram; the sievert adds a weighting for biological effect (\chref{ch:nucapps}).\\
+$h$, $\hbar$ & Planck's constant $h=\SI{6.626e-34}{J.s}$, and $\hbar=h/2\pi$; convenient combinations are
+$\hbar c=\SI{197.3}{\MeV.\fm}$ and $hc=\SI{1240}{\electronvolt.\nano\metre}$.\\
+$e^2/4\pi\varepsilon_0$ & \SI{1.44}{\MeV.\fm}, so two elementary charges $r$ femtometres apart
+have electric potential energy $1.44/r$ in \si{\MeV}.\\\bottomrule
+\end{tabular}
+\end{center}
+
+The data used throughout are these. The hydrogen \emph{atom} has mass $M(\iso{1}{H})=\SI{1.007825}{\amu}$,
+the bare proton $m_p=\SI{1.007276}{\amu}$, the neutron $m_n=\SI{1.008665}{\amu}$ and the electron $m_e=\SI{0.000549}{\amu}$, that is,
+$\SI{0.511}{\MeV}/c^2$. Avogadro's number is $N_A=\SI{6.022e23}{mol^{-1}}$, the speed of light
+$c=\SI{2.998e8}{m.s^{-1}}$, one year is \SI{3.156e7}{s}, and $R_0=\SI{1.2}{\fm}$.
+Atomic masses quoted in the text are from the 2020 Atomic Mass Evaluation, rounded. A glossary of
+every technical term appears at the end of the volume.
+
+\section*{Notation Used in This Volume}
+
+Each symbol below has one meaning throughout Volume~III. Two choices differ from many other books and
+are worth knowing in advance. The neutron number of a nucleus is always written $A-Z$, never $N$,
+because $N$ (or $N(t)$) is reserved for the number of undecayed nuclei in a sample, the central quantity
+of \chref{ch:decaylaw}. And $\lambda$, which is the mean free path in Volume~II, is here the decay
+constant; a photon's wavelength, where it is needed, is written $\lambda_{\text{ph}}$. A quantity that
+returns from an earlier volume keeps its earlier symbol (kinetic energy $K$, Boltzmann's constant $k_B$).
+
+\begin{center}\small
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.14\textwidth}>{\raggedright\arraybackslash}p{0.31\textwidth}>{\raggedright\arraybackslash}p{0.16\textwidth}>{\raggedright\arraybackslash}p{0.30\textwidth}@{}}\toprule
+\textbf{Symbol} & \textbf{Meaning} & \textbf{Symbol} & \textbf{Meaning}\\\midrule
+$A$, $Z$ & mass number, atomic (proton) number & $N$, $N(t)$, $N_0$ & undecayed nuclei; at time $t$; at $t=0$\\
+$A-Z$ & neutron number & $\lambda$, $\lambda_i$ & decay constant; partial decay constant of channel $i$\\
+$\nuc{A}{Z}{X}$, $\iso{A}{X}$ & nuclide notation & $\Thalf$, $T_i$ & half-life; partial half-life of channel $i$\\
+$M$, $m$ & atomic mass; particle or nuclear mass & $\tau$ & mean life, $1/\lambda$\\
+$m_p$, $m_n$, $m_e$ & proton, neutron and electron masses & $\Act$ & activity (decays per second)\\
+$\si{\amu}$ & atomic mass unit (upright) & $\Prod$ & constant production rate\\
+$\Delta m$, $\Eb$ & mass defect; binding energy & $f_i$ & branching fraction of channel $i$\\
+$S_n$, $S_p$ & neutron, proton separation energy & $\mathrm{X}\to\mathrm{Y}$ & parent to daughter; $N_X$, $\lambda_X$, \dots\\
+$Q$ & energy released in a reaction or decay & 1, 2 (subscripts) & two \emph{independent} isotopes in a mixture\\
+$K$ & kinetic energy & $T_{\text{phys}}$, $T_{\text{bio}}$, $T_{\text{eff}}$ & physical, biological, effective half-life\\
+$R$, $R_0$ & nuclear radius; \SI{1.2}{\fm} & $k$ & neutron multiplication factor\\
+$d$, $b$ & distance of closest approach; impact parameter & $\phi$ & fraction of its energy a neutron keeps per collision\\
+$U_B$ & Coulomb barrier height & $\mu$, $x_{1/2}$ & attenuation coefficient; half-value layer\\
+$\varepsilon_0$ & permittivity of free space & $\Omega$, $\varepsilon$ & detector solid angle; intrinsic efficiency\\
+$k_B$, $h$, $\hbar$ & Boltzmann's and Planck's constants; $h/2\pi$ & $D$, $H$, $w_R$ & absorbed dose (\si{\gray}); equivalent dose (\si{\sievert}); weighting factor\\
+$\B$, $L_e$ & magnetic field; electron lepton number & $N_A$ & Avogadro's number\\
+$p$ & momentum; $p$ also labels the proton & $p$ (simulation) & decay probability per time step in \chref{ch:nucapps}\\\bottomrule
+\end{tabular}
+\end{center}
+
+Three letters need a word of warning. Lepton number (\chref{ch:decay}) is written $L_e$, with its
+subscript, because plain $L$ is angular momentum in Volume~I; where angular momentum appears in this
+volume (Rutherford scattering in \chref{ch:nucleus}) it is written out in full as $mvb$. And $k$, the spring constant in
+Volume~I, is here only the neutron multiplication factor of a reactor (\chref{ch:reactions}). The letter
+$p$ is a momentum, and in reactions such as $(\alpha,p)$ it names the proton; in the simulation of
+\chref{ch:nucapps}, where no momentum appears, it is the probability that a nucleus decays in one time
+step.

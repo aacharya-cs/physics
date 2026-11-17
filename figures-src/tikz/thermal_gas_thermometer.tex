@@ -1,0 +1,32 @@
+% thermal_gas_thermometer: constant-volume gas thermometers (Vol II Ch 3, fig:gas-thermometer)
+% At fixed volume a dilute gas has P proportional to absolute temperature:
+%   P = P_ref (t_C + 273.15)/373.15,
+% with a different P_ref for each gas sample (different amount of gas in the bulb).
+% Measurements are only possible while the gas stays a gas (solid, about -60 to
+% 120 C here); below that the lines are extrapolations (dashed).  Every line
+% reaches P = 0 at t_C = -273.15 C.  Colours only tell the three samples apart.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=11.4cm, height=5.4cm,
+    xmin=-300, xmax=150, ymin=0, ymax=1.30,
+    xtick={-273.15,-100,0,100},
+    xticklabels={$-273.15$,$-100$,$0$,$100$},
+    xlabel={Celsius temperature $t_C$ (\si{\celsius})},
+    ylabel={pressure $P$ at fixed $V$},
+    ylabel style={at={(axis description cs:0,1)},anchor=south west,rotate=-90,xshift=-4pt}]
+  \foreach \k/\c in {1.00/cPrim,0.70/cAcc,0.42/cTeal}{
+    \edef\temp{\noexpand\addplot[guide,\c,domain=-273.15:-60,samples=2] {\k*(x+273.15)/373.15};}\temp
+    \edef\temp{\noexpand\addplot[\c,domain=-60:120,samples=2] {\k*(x+273.15)/373.15};}\temp
+  }
+  \node[cPrim,anchor=west] at (axis cs:122,{1.00*395.15/373.15}) {gas 1};
+  \node[cAcc,anchor=west]  at (axis cs:122,{0.70*395.15/373.15}) {gas 2};
+  \node[cTeal,anchor=west] at (axis cs:122,{0.42*395.15/373.15}) {gas 3};
+  \node[dot,cCrim] at (axis cs:-273.15,0) {};
+  \node[anchor=south west,align=left,inner sep=1pt] (meet) at (axis cs:-270,0.45) {all lines meet\\ at $P=0$};
+  \draw[leader] (meet.south west) -- (axis cs:-272,0.03);
+  \node[anchor=south,cSteel,font=\footnotesize] at (axis cs:-125,0.62) {extrapolated};
+  \draw[leader,cSteel] (axis cs:-125,0.62) -- (axis cs:-105,{1.0*168.15/373.15});
+  \node[anchor=south,cSteel,font=\footnotesize] at (axis cs:10,1.10) {measured};
+  \draw[leader,cSteel] (axis cs:10,1.10) -- (axis cs:25,{1.0*298.15/373.15});
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,899 @@
+\ncertchapter{6}{Circular Kinematics}\chlabel{ch:circkin}
+
+Circular motion is where the vector nature of velocity stops being a formality and starts to matter. A
+body can travel round a circle at perfectly constant speed and still be accelerating, and accelerating
+hard, because its velocity, which is a vector, is continuously changing direction. That claim sounds
+paradoxical until the definition of acceleration is taken seriously, and this chapter exists to take it
+seriously.
+
+The central result is that the acceleration of any body moving on a curve has exactly two parts. One,
+along the velocity, changes the speed. The other, perpendicular to the velocity and pointing towards the
+centre of the circle, changes the direction and has magnitude $v^2/r$, where $v$ is the speed and $r$ the radius of the circle. The chapter derives that result
+carefully, from the product rule applied to a velocity written as speed times a unit vector, and then
+explains why the second part is always perpendicular to the first. A great deal rests on it: every
+problem in the dynamics of circular motion in \chref{ch:circdyn} begins from the radial acceleration found here.
+
+Two further points are made along the way and are worth flagging. Angular velocity is a vector, but it
+points along the axis of rotation rather than round the circle, and the reason is not arbitrary. And the
+$v^2/r$ result is not special to circles: it applies at every point of \emph{any} curved path, with $r$
+replaced by the local radius of curvature.
+
+\section{The Problem Circular Motion Creates}
+
+Everything so far has been handled by reducing motion to straight lines: even the projectile was split
+into two fixed perpendicular directions, along each of which ``how fast'' told you nearly everything. On a
+circle that strategy is awkward, because the direction of motion never stays fixed. A car going round a roundabout at a steady \SI{30}{km/h} has a
+speedometer reading that never flickers, yet the passengers find themselves pressed against the doors,
+the tyres are working hard, and something is happening that a straight-line description cannot capture.
+
+\begin{motivbox}{The one sentence this chapter exists to unpack}
+Velocity is a \textbf{vector}. A vector has two attributes, a \emph{size} and a \emph{direction},
+and \emph{either} of them changing counts as a change in velocity. Acceleration is the rate of change of
+velocity, so acceleration must be able to report on \textbf{both}. On a straight road only the size can
+change, so one number suffices. On a circle the direction changes \emph{continuously and unavoidably},
+and that second kind of change needs its own accounting. That accounting is the whole of this chapter.
+\end{motivbox}
+
+We build the vocabulary first (\S\ref{sec:angular}), then prove the central result
+(\S\ref{sec:twoparts}), then classify what can happen, generalise it to any curved path, and treat
+constant angular acceleration (\S\S\ref{sec:angleav}--\ref{sec:constalpha}).
+
+\section{Angular Position, Velocity and Acceleration}\label{sec:angular}
+A body moving on a circle is most naturally described by the angle it has turned through rather than by its
+coordinates. This section defines the three angular quantities and connects each to its linear partner; it
+begins by fixing the meaning of the three different lengths that appear in circular-motion problems.
+
+\begin{remarkbox}{Notation used here and in the dynamics of circular motion}
+Three different lengths appear in circular-motion problems and they must not be confused.
+\begin{itemize}
+\item $r$ is the radius of the \textbf{actual circular path} the particle travels. It is the length in
+      the relations $v=r\omega$ and $v^{2}/r$ derived below, always measured perpendicularly from the \emph{axis of rotation}
+      to the particle.
+\item $R$ marks two special contexts, each stated where it arises: the \textbf{radius of curvature} of
+      a general non-circular path in \S\ref{sec:curvature}, and the radius of the \textbf{vertical circle} in
+      \chref{ch:circdyn}. In both it is still a path radius; the separate letter only flags the context.
+      (In \chref{ch:projectiles} $R$ denoted the range; the context always makes clear which is meant.)
+\item $\ell$ is the \textbf{length of a string or rod}, which is \emph{not} in general the radius of the
+      circle. For a conical pendulum $r=\ell\sin\theta$. For a vertical circle the two happen to coincide,
+      which is why that case is written with one symbol.
+\end{itemize}
+For angles, $\theta$ is the general position or inclination angle, $\phi$ the angle the total
+acceleration makes with the tangent, and, in later chapters, $\lambda$ the angle of friction and
+$\beta$ the angle at which a force is applied. The symbol $\alpha$ is reserved \emph{throughout} for \textbf{angular acceleration}
+and is never used for an angle.
+\end{remarkbox}
+
+A particle on a circle of fixed radius has only \emph{one} degree of freedom: once you know the angle,
+you know where it is. So it is wasteful to track $x$ and $y$ separately; one angle does the job.
+
+\begin{defbox}{The three angular quantities}
+\begin{itemize}
+\item \textbf{Angular position} $\theta$: the angle between the radius to the particle and a chosen
+      reference direction, measured in \textbf{radians} and, by convention, positive anticlockwise.
+\item \textbf{Angular velocity} $\omega=\dfrac{d\theta}{dt}$ (\si{rad/s}): how fast the radius sweeps,
+      positive for anticlockwise turning. It is treated here as a signed scalar; its vector form
+      comes later in this section.
+\item \textbf{Angular acceleration} $\alpha=\dfrac{d\omega}{dt}=\dfrac{d^{2}\theta}{dt^{2}}$
+      (\si{rad/s^2}): how fast the sweeping rate itself changes.
+\end{itemize}
+\end{defbox}
+
+\why{\textbf{Why radians, and not degrees?} Because the radian is \emph{defined} by $\theta=s/r$, with $s$ the length of arc swept out (\chref{ch:toolkit}), so it
+converts an angle into a length the instant you multiply by $r$: $s=r\theta$. Degrees carry an arbitrary
+factor of $\pi/180$ that would then appear in every formula. Above all,
+$\dfrac{d}{d\theta}\sin\theta=\cos\theta$ holds only when $\theta$ is in radians (\chref{ch:toolkit}), so every formula below that contains $\theta$, $\omega$ or $\alpha$ requires
+radians. Degrees remain fine for \emph{naming} an angle, as in $\sin90^\circ$.}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cm_angular}
+\figcaption{fig:cmang}{The three angular quantities and their linear partners. Each bridge is the one above it, differentiated once: $s=r\theta$ gives $v=r\omega$, which gives $a_t=r\alpha$.}
+\end{figure}
+
+\begin{derivbox}{The three bridges to linear quantities}
+Each bridge is one differentiation of the one above it; Figure~\ref{fig:cmang} marks each angular
+quantity on the circle beside its linear partner.
+
+\stepn{1} \textbf{Position.} By the definition of the radian, arc $=$ radius $\times$ angle:
+\[ s=r\theta. \]
+
+\stepn{2} \textbf{Velocity.} Differentiate with $r$ held constant (the particle stays on the circle):
+\[
+\frac{ds}{dt}=r\frac{d\theta}{dt}
+\qquad\Longrightarrow\qquad
+\boxed{\;v=r\omega\;}
+\]
+
+\stepn{3} \textbf{Acceleration (the tangential part).} Differentiate once more:
+\[
+\frac{dv}{dt}=r\frac{d\omega}{dt}
+\qquad\Longrightarrow\qquad
+\boxed{\;a_t=r\alpha\;}
+\]
+\textbf{Read this carefully:} $a_t$ is the rate of change of \emph{speed}, the rate at which your
+speedometer reading changes. It is \emph{not} the whole acceleration, and \S\ref{sec:twoparts} explains what is missing.
+\end{derivbox}
+
+Every point of a rigid wheel turns through the same angle in the same time, so all of them share one
+$\omega$; but $v=r\omega$ grows with distance from the axle. The rim of a spinning wheel moves faster
+than the hub, while every spoke sweeps at the same angular rate. That is why $\omega$, not $v$, is the
+natural label for a rotation as a whole.
+
+When the motion repeats at a steady rate, it is often described by how long one turn takes or how many
+turns occur per second. One revolution is $2\pi$ radians, which gives the following relations.
+
+\begin{keybox}{Period and frequency: the small relations that get forgotten}
+For uniform circular motion, with $T$ the \textbf{period} (time for one revolution, in seconds; not
+the time of flight that $T$ denoted in \chref{ch:projectiles}),
+\[
+T=\frac{2\pi}{\omega}=\frac{1}{\nu},
+\qquad
+\omega=2\pi\nu,
+\qquad
+T=\frac{2\pi r}{v},
+\]
+where $\nu$ is the frequency in hertz (revolutions per second); the middle relation follows because one
+revolution, $2\pi$ radians, takes time $T$. For a rate quoted as $N$ revolutions per minute (\textbf{rpm}),
+divide by $60$ first: $\nu=\dfrac{N}{60}$ and $\omega=\dfrac{2\pi N}{60}$.
+\end{keybox}
+
+\subsection{Angular velocity is a vector, and it points the strange way}
+
+Here is a puzzle. Angular velocity has a magnitude and a sense (clockwise or anticlockwise), so it
+ought to be a vector. But which way does the arrow point? Not along the motion: the particle's
+direction changes every instant, so any arrow following it would be useless as a label for the
+\emph{whole} rotation.
+
+For rotation about a fixed axis, the only direction that is \emph{the same for every particle of the
+rotating body, and constant in time}, is the one perpendicular to the plane of rotation: the
+\textbf{axis}. So that is where we point the arrow. The sense along the axis is fixed by the right-hand
+rule of Figure~\ref{fig:omegavec}, a convention chosen so that $\vv=\vomega\ex\vr$ comes out right, where $\vomega$ is the angular velocity vector (magnitude $\omega$, in \si{rad/s}) and $\vr$ is the position vector of the particle (in metres) measured from a point on the axis. The cross product is the one of \chref{ch:vectors}.
+
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cm_omegavec}
+\figcaption{fig:omegavec}{Curl the fingers of the right hand in the sense of rotation; the thumb gives
+$\vomega$. Drawn on the page, it is either into the page ($\otimes$, clockwise) or out of it ($\odot$,
+anticlockwise). Quantities lying \emph{in} the plane are $\vv$, $\va$ and the two components of $\va$ found in \S\ref{sec:twoparts};
+those perpendicular to it are $\vomega$ and $\vc{\alpha}$.}
+\end{figure}
+
+\begin{keybox}{The vector relation}
+\[
+\boxed{\;\vv=\vomega\ex\vr\;}
+\]
+Check that it works, with the origin at the centre of the circle:
+$|\vv|=\omega r\sin90^\circ=\omega r$ \checkmark, and the cross product is
+automatically perpendicular to $\vr$; that is, tangential \checkmark. The vector form also gives the
+\emph{sense} of the motion, which the scalar $v=\omega r$ cannot.
+
+\medskip
+$\vc{\alpha}$ likewise points along the axis. If the body is \textbf{speeding up}, $\vc{\alpha}$ is
+\emph{parallel} to $\vomega$; if \textbf{slowing down}, $\vc{\alpha}$ is \emph{antiparallel}. There is no
+other option: for rotation about a fixed axis both must lie along that axis.
+\end{keybox}
+
+\section{Why the Acceleration Must Have Exactly Two Parts}\label{sec:twoparts}
+
+The bridge $a_t=r\alpha$ accounts only for changes in \emph{speed}. Yet the car on the roundabout
+has a steady speed and its velocity still changes, because its direction does. Something is missing
+from the acceleration, and this section finds it. This is the heart of the chapter; what follows it
+applies the result.
+
+Write the velocity as \emph{size times direction}:
+\[
+\vv \;=\; \underbrace{v}_{\text{how fast}}\;\times\;\underbrace{\uhat{t}}_{\text{which way}}
+\]
+where $\uhat{t}$ is a unit vector pointing along the motion. A vector in a plane is completely
+specified by those two numbers, a size and a direction (an angle), and by nothing else. So when we ask
+how the velocity can change, there are exactly two answers available.
+
+\smallskip
+\textbf{A familiar version of the same statement.} A driver has two kinds of control that alter the
+car's velocity. The accelerator and brake change \emph{how fast} you are going. The steering
+wheel changes \emph{which way} you are going. They are independent: you may use either alone, or both
+together, and between them they exhaust what you can do to the car's velocity. The two components of
+acceleration are nothing more than the physicist's names for those two controls.
+
+
+\begin{motivbox}{Why the two changes are perpendicular: watch the tip of the arrow}
+Draw the velocity as an arrow and follow its \emph{tip} over a short interval (Figure~\ref{fig:twoways}).
+
+\smallskip
+\textbf{If only the size changes}, the arrow grows or shrinks but keeps its line, so the tip slides
+\emph{along} the arrow's own direction.
+
+\smallskip
+\textbf{If only the direction changes}, the length is fixed, so the tip is confined to a circle of
+radius $v$ centred on the arrow's tail. A point moving on a circle moves along the tangent to that
+circle, and the tangent to a circle is perpendicular to its radius. The radius here \emph{is} the
+arrow. So the tip moves \emph{across} the arrow.
+
+\smallskip
+One motion along, one across. They are perpendicular not by assumption or by convenient choice, but
+because that is the only way the tip of a vector can move. Add them and you have the general case, in
+which the acceleration has a component that changes the speed and a component that bends the path.
+\end{motivbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cm_twoways}
+\figcaption{fig:twoways}{The whole argument in one picture. A change in size moves the tip along the
+arrow; a change in direction moves it across; a general change does both. Because the second motion is
+confined to a circle of fixed radius, it is always perpendicular to the first.}
+\end{figure}
+
+The picture shows \emph{that} there are two perpendicular parts; it does not say how big the sideways
+part is. The product rule settles both questions at once.
+
+\begin{derivbox}{The two components, from the product rule}
+\stepn{1} \textbf{Differentiate the product.} With $\vv=v\,\uhat{t}$,
+\[
+\va=\frac{d\vv}{dt}=\underbrace{\frac{dv}{dt}\,\uhat{t}}_{\text{size changing}}
+\;+\;\underbrace{v\,\frac{d\uhat{t}}{dt}}_{\text{direction changing}}.
+\]
+Two terms, because a product of two things can change in two ways. Nothing has been assumed about
+circles yet; this holds for \emph{any} path.
+
+\stepn{2} \textbf{Prove the second term is perpendicular to the first.} Because $\uhat{t}$ is a unit
+vector, $\uhat{t}\cdot\uhat{t}=1$ at all times. Differentiate both sides:
+\[
+2\,\uhat{t}\cdot\frac{d\uhat{t}}{dt}=0
+\qquad\Longrightarrow\qquad
+\frac{d\uhat{t}}{dt}\perp\uhat{t}.
+\]
+This short result carries much of the argument: it says the change of direction \emph{must} be
+sideways. It is the formal version of ``a fixed-length arrow can only swing''.
+
+\stepn{3} \textbf{Evaluate how fast the direction turns.} Two things must be established here, and
+neither is obvious: \emph{through what angle} $\uhat{t}$ turns, and \emph{how far its tip moves} as a
+result.
+
+\smallskip
+\textbf{(3a) The tangent turns through the same angle as the radius.} The tangent to a circle is
+perpendicular to the radius at the point of contact, and it stays perpendicular as the particle moves.
+So the radius and the tangent form a rigid right angle that is carried around the circle together, as
+in Figure~\ref{fig:dthat}(a). If
+the radius swings through $d\theta$, a line locked at $90^\circ$ to it has no choice but to swing
+through $d\theta$ as well. Hence $\uhat{t}$ turns through exactly $d\theta$, the same angle that
+appears in $\omega=d\theta/dt$.
+
+\smallskip
+\textbf{(3b) How far the tip of a unit vector moves when it turns.} Draw $\uhat{t}(t)$ and
+$\uhat{t}(t+dt)$ \emph{from a common tail}, as in Figure~\ref{fig:dthat}(b). Both have length exactly $1$, because they are unit
+vectors, and the angle between them is $d\theta$ by part (3a). They therefore form an
+\textbf{isosceles triangle} with two unit sides and apex angle $d\theta$, and the third side of that
+triangle is precisely the change $d\uhat{t}$. Dropping a perpendicular from the apex bisects both the
+angle and the base, giving
+\[
+\left|d\uhat{t}\right| = 2\,(1)\sin\frac{d\theta}{2}.
+\]
+For an infinitesimal angle $\sin(d\theta/2)\to d\theta/2$ (the small-angle approximation of
+\chref{ch:toolkit}), so
+\[
+\left|d\uhat{t}\right| = d\theta.
+\]
+\emph{An equivalent one-line argument:} the tip of a unit vector is confined to a circle of radius $1$,
+and when the vector turns by $d\theta$ the tip travels an arc of length $1\times d\theta$; for a small
+angle the chord equals the arc.
+
+\smallskip
+\textbf{(3c) Therefore the rate.} Dividing by $dt$,
+\[
+\left|\frac{d\uhat{t}}{dt}\right|=\frac{d\theta}{dt}=\omega.
+\]
+
+\smallskip
+\textbf{(3d) And its direction.} In the isosceles triangle the base is perpendicular to the bisector of
+the apex angle. As $d\theta\to0$ that bisector becomes $\uhat{t}$ itself, so $d\uhat{t}$ ends up
+perpendicular to $\uhat{t}$, confirming Step 2 geometrically. Of the two perpendicular directions it
+leans towards the \emph{inside} of the turn, because that is the side the vector is swinging towards.
+Writing $\uhat{n}$ for the inward (centre-pointing) unit vector,
+\[
+\frac{d\uhat{t}}{dt}=\omega\,\uhat{n}.
+\]
+Here, and wherever $\omega$ multiplies the speed below, $\omega$ means the angular \emph{speed}
+$|d\theta/dt|$, so the coefficient is never negative.
+
+\Needspace*{27\baselineskip}
+\begin{figbox}
+\centering
+\tikzfig{cm_dthat}
+\end{figbox}
+\figcaption{fig:dthat}{The two halves of Step 3. \textbf{(a)} The tangent is locked at $90^\circ$ to the
+radius, so it turns through the same $d\theta$. \textbf{(b)} Placing the two unit tangents tail to tail
+gives an isosceles triangle whose equal sides are $1$ and whose apex angle is $d\theta$; its base is
+$d\uhat{t}$, of length $2\sin(d\theta/2)\approx d\theta$.}
+
+\stepn{4} \textbf{Assemble.}
+\[
+\boxed{\;\va=\underbrace{\frac{dv}{dt}}_{a_t}\uhat{t}\;+\;\underbrace{v\omega}_{a_r}\uhat{n}\;}
+\]
+and using $\omega=v/r$ the second coefficient becomes the familiar
+\[
+a_r=v\omega=\frac{v^{2}}{r}=\omega^{2}r.
+\]
+\end{derivbox}
+
+\begin{tablebox}{What each component is \emph{for}}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+& \textbf{Tangential} $a_t$ & \textbf{Radial (centripetal)} $a_r$\\
+\midrule
+Changes & the \emph{speed} & the \emph{direction}\\
+Direction & along $\vv$ (or against it) & always towards the centre\\
+Formula & $\dfrac{dv}{dt}=r\alpha$ & $\dfrac{v^{2}}{r}=\omega^{2}r$\\
+Can it be zero? & \textbf{Yes}, whenever the speed is steady & \textbf{Only} at an instant when $v=0$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{tablebox}
+
+\begin{trapbox}{$\alpha$ does \emph{not} have two components}
+It is easy to slide from ``the acceleration has two components'' into ``the angular acceleration has
+two components''. It does not, and keeping the two words apart matters.
+\begin{itemize}
+\item \textbf{Linear acceleration $\va$} is a vector lying \emph{in} the plane of the circle. It has
+      two components, $a_t$ and $a_r$, because a planar vector has two degrees of freedom.
+\item \textbf{Angular acceleration $\vc{\alpha}$} is a single axial quantity, pointing \emph{along the
+      rotation axis}, parallel or antiparallel to $\vomega$. For rotation about a fixed axis there is
+      no second direction available to it, so it has nothing to split into.
+\end{itemize}
+The relationship between them is one-way: $\alpha$ feeds the tangential component only, through
+$a_t=r\alpha$. The radial component $a_r=v^{2}/r$ is present even when $\alpha=0$, which is precisely
+the case of uniform circular motion: no angular acceleration at all, yet a perfectly real linear
+acceleration pointing at the centre.
+\end{trapbox}
+
+\why{\textbf{Why a moving body on a curve cannot have $a_r=0$.} Since $a_r=v\,|d\uhat{t}/dt|$, while the
+body is moving ($v\neq0$) a zero $a_r$ would require $d\uhat{t}/dt=\vc0$: the direction of travel would be
+frozen, and the body would be moving in a \emph{straight line}. A body on a circle, by definition, is not. So the moment a path curves at all, there
+\emph{must} be an inward acceleration, and the sharper the curve (smaller $r$) or the faster the
+travel (larger $v$), the larger it must be. This is why $a_r=v^{2}/r$ grows with $v^{2}$ and with $1/r$:
+you are asking the velocity vector to swing round faster on both counts.
+
+Turned round, this becomes the most useful sentence in the dynamics of circular motion
+(\chref{ch:circdyn}): \emph{curving is not something that happens to a body; it is something that must
+be continuously caused.}}
+
+\begin{exbox}{The car on the roundabout}
+The car from the start of the chapter, at a steady \SI{30}{km/h}, goes round a roundabout of
+radius \SI{20}{m}. Find its acceleration.
+
+\stepn{1} \textbf{Convert to SI.} $v=30/3.6\approx\SI{8.33}{m/s}$.
+
+\stepn{2} \textbf{Radial part.} The speed is steady, so $a_t=0$ and the whole acceleration is
+$a_r=v^2/r=69.4/20\approx\SI{3.5}{m/s^2}$, directed towards the centre of the roundabout.
+
+That is about a third of $g$, with the speedometer never moving. Doubling the speed would quadruple it.
+\ans{$a\approx\SI{3.5}{m/s^2}$, towards the centre}
+\end{exbox}
+
+\begin{trapbox}{there is no outward acceleration}
+``Centripetal'' means \emph{centre-seeking}; it names the direction of $a_r$, not a new kind of
+acceleration. The passengers on the roundabout feel pressed \emph{outwards} against the door, but
+nothing is accelerating them outwards. Left to themselves they would carry on in a straight line
+(\chref{ch:newton}); the car turns underneath them, and the door, pushing \emph{inwards}, is what makes
+them follow the curve. Measured from the ground, the acceleration of every part of the car and its
+contents points towards the centre. The outward ``centrifugal'' effect appears only when the motion is
+described from inside the turning car, a description \chref{ch:circdyn} handles with care.
+\end{trapbox}
+
+\begin{keybox}{Total acceleration}
+The two components are perpendicular, so they combine by Pythagoras:
+\[
+\boxed{\;a=\sqrt{a_t^{2}+a_r^{2}}=\sqrt{\left(\frac{dv}{dt}\right)^{2}+\left(\frac{v^{2}}{r}\right)^{2}}\;}
+\qquad
+\tan\phi=\frac{a_r}{a_t}
+\]
+where $\phi$ is measured from the direction of motion, so that $\phi$ is the angle between $\va$ and
+$\vv$ ($0\le\phi\le180^\circ$), with $a_t=a\cos\phi$ and $a_r=a\sin\phi$.
+\end{keybox}
+
+\section{\texorpdfstring{Reading the Angle Between $\va$ and $\vv$}{Reading the Angle Between a and v}}\label{sec:angleav}
+
+The previous section split the acceleration into two perpendicular parts and gave their sizes. The
+angle between the total acceleration and the velocity therefore encodes how the two parts compare, and
+reading it is a quick way to classify a motion. You can diagnose any circular motion from a single picture, without a formula, by looking at where the
+acceleration arrow points relative to the velocity arrow, as in the three panels of
+Figure~\ref{fig:threetypes}. Since $a_t=a\cos\phi$:
+\begin{itemize}
+\item $\phi<90^\circ$ (acute): $\cos\phi>0$, so $a_t>0$: the acceleration has a forward part.
+      \textbf{Speeding up.}
+\item $\phi=90^\circ$: $\cos\phi=0$, so $a_t=0$: no forward or backward part at all.
+      \textbf{Constant speed.}
+\item $\phi>90^\circ$ (obtuse): $\cos\phi<0$, so $a_t<0$: the acceleration has a backward part.
+      \textbf{Slowing down.}
+\end{itemize}
+Notice the middle case: the acceleration is entirely perpendicular to the motion, which is exactly the
+condition for the speed to be unchanged. \chref{ch:energy} will meet the same fact in another form: a
+force perpendicular to the motion does no work.
+
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cm_threetypes}
+\figcaption{fig:threetypes}{The three kinds of circular motion, told apart by the angle between $\va$ and
+$\vv$. In every case the radial component is present and points to the centre; what changes is whether a
+tangential component accompanies it, and which way it faces.}
+\end{figure}
+
+\begin{keybox}{The three types, in full}
+\begin{enumerate}
+\item \textbf{Uniform.} $v$ and $\omega$ constant $\Rightarrow a_t=0$, $\alpha=0$. The acceleration is
+      purely radial, $a=a_r=v^{2}/r$, perpendicular to $\vv$ at all times.
+\item \textbf{Accelerated.} $v$ and $\omega$ increasing. $a_t$ points along $\vv$; $\vc{\alpha}$ is
+      \emph{parallel} to $\vomega$; the angle between $\va$ and $\vv$ is acute.
+\item \textbf{Retarded.} $v$ and $\omega$ decreasing. $a_t$ points against $\vv$; $\vc{\alpha}$ is
+      \emph{antiparallel} to $\vomega$; the angle is obtuse.
+\end{enumerate}
+In cases 2 and 3 the motion is \emph{non-uniform} circular motion, and $a=\sqrt{a_t^{2}+a_r^{2}}$ must
+be used; quoting $v^{2}/r$ alone is then an incomplete answer.
+\end{keybox}
+
+\section{Any Curved Path: The Radius of Curvature}\label{sec:curvature}
+
+Look back at the derivation: Steps 1 and 2 used only that $\vv=v\uhat{t}$ with $\uhat{t}$ a unit vector.
+That is true for \emph{any} motion whatsoever: a projectile, a roller-coaster, a swerving car. So
+every curved path has a tangential acceleration and a component perpendicular to the motion. On a
+general path there is no fixed centre, so this second component is called the \textbf{normal}
+acceleration $a_n$ rather than the radial one. The formula $a_n=v^{2}/R$ survives intact, provided we
+ask: \emph{what is $R$ for a path that is not a circle?}
+
+The answer is the natural one. At each point, a curve is locally indistinguishable from \emph{some}
+circle: the one that hugs it most closely there, drawn in Figure~\ref{fig:curvi} with its centre marked. That circle's radius is the \textbf{radius of
+curvature} $R$ at that point. A gentle bend has large $R$; a hairpin has small $R$; a straight line has
+$R=\infty$, which correctly gives $a_n=0$.
+
+To see that $a_n=v^{2}/R$ really does hold, repeat Step~3 of the derivation on that best-fitting circle.
+Let $\psi$ be the angle the tangent makes with a fixed direction. As the body moves a distance $ds$ along
+the path, the tangent turns through $d\psi=ds/R$; this relation is in fact the precise definition of
+$R$, namely $R=ds/d\psi$. Then $|d\uhat{t}/dt|=d\psi/dt=(ds/dt)/R=v/R$, and the second term of Step~1 has
+magnitude $v\cdot v/R=v^{2}/R$.
+
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cm_curvilinear}
+\figcaption{fig:curvi}{On any curved path, resolve $\va$ along and across $\vv$. The along-part changes
+the speed; the across-part bends the path and equals $v^{2}/R$, where $R$ is the radius of the circle
+that best fits the curve at that point. Its centre lies on the concave side.}
+\end{figure}
+
+\begin{methodbox}{Working backwards to find $R$}
+Given the acceleration and velocity at an instant, the radius of curvature follows without any geometry.
+The dot product picks out the part of $\va$ along $\vv$; Pythagoras gives the rest; and $a_n=v^2/R$
+is turned round:
+\[
+a_t=\frac{\va\cdot\vv}{v},\qquad
+a_n=\sqrt{a^{2}-a_t^{2}},\qquad
+\boxed{\;R=\frac{v^{2}}{a_n}\;}
+\]
+\textbf{Worked instance: a projectile at its apex.} There $\vv$ is horizontal, with $v=v_0\cos\theta$, and
+the acceleration is the free-fall acceleration $g$ of \chref{ch:projectiles}, vertically downward, so they are perpendicular: $a_t=0$ and $a_n=g$. Hence
+\[
+R=\frac{v^{2}}{g}=\frac{v_0^{2}\cos^{2}\theta}{g},
+\]
+the radius of the circle that best fits the parabola at the top of its flight. A projectile is
+\emph{not} in circular motion, yet the method applies without change.
+\end{methodbox}
+
+\section{Equations for Constant Angular Acceleration}\label{sec:constalpha}
+
+So far $\alpha$ has appeared only as the source of $a_t$. Many problems instead ask how a wheel or fan
+gets from one angular velocity to another: how long it takes, and how many turns it makes on the way.
+That needs $\omega$ and $\theta$ as functions of time. When the angular acceleration is constant, the angular quantities obey equations of exactly the same form as
+the kinematic equations of \chref{ch:straightline}, and under the same strict condition.
+
+\begin{keybox}{The constant-$\alpha$ equations, and when they are legal}
+When $\alpha$ is \textbf{constant}, and only then, the angular equations are exact copies of the linear ones
+(the derivations are identical, with $\theta,\omega,\alpha$ in place of $s,v,a$):
+\[
+\omega=\omega_0+\alpha t,\qquad
+\Delta\theta=\omega_0t+\tfrac12\alpha t^{2},\qquad
+\omega^{2}=\omega_0^{2}+2\alpha\,\Delta\theta,
+\]
+where $\omega_0$ and $\theta_0$ are the values at $t=0$ and $\Delta\theta=\theta-\theta_0$ is the angle
+turned (in radians).
+\end{keybox}
+
+\begin{methodbox}{When $\alpha$ is not constant, go back to the definitions}
+The formulas above are then invalid, and you integrate instead:
+\[
+\omega=\frac{d\theta}{dt},\qquad
+\alpha=\frac{d\omega}{dt},\qquad
+\text{so}\qquad
+\int d\theta=\int\omega\,dt,\qquad \int d\omega=\int\alpha\,dt.
+\]
+If $\alpha$ is given as a function of \emph{angle} rather than time, use the chain-rule form
+\[
+\boxed{\;\alpha=\frac{d\omega}{dt}=\frac{d\omega}{d\theta}\cdot\frac{d\theta}{dt}=\omega\frac{d\omega}{d\theta}\;}
+\qquad\Longrightarrow\qquad
+\int\omega\,d\omega=\int\alpha\,d\theta,
+\]
+the exact rotational twin of the $v\,dv/dx$ trick from \chref{ch:straightline}.
+\end{methodbox}
+
+\begin{exbox}{An angular acceleration that grows with time}
+A wheel starts from rest with $\alpha=6t$ (\si{rad/s^2}, $t$ in seconds). Find $\omega$ and the angle
+turned at $t=\SI{2}{s}$.
+
+\stepn{1} \textbf{Integrate $\alpha$.} $\omega=\int_0^t 6t\,dt=3t^2$, so $\omega=\SI{12}{rad/s}$ at
+$t=\SI{2}{s}$.
+
+\stepn{2} \textbf{Integrate $\omega$.} $\Delta\theta=\int_0^t 3t^2\,dt=t^3=\SI{8}{rad}$, about $1.3$
+revolutions.
+
+The constant-$\alpha$ formula $\tfrac12\alpha t^2$, with the final $\alpha=\SI{12}{rad/s^2}$, would give
+\SI{24}{rad}, three times too large.
+\ans{$\omega=\SI{12}{rad/s}$; $\Delta\theta=\SI{8}{rad}$}
+\end{exbox}
+
+\begin{exbox}{A speeding-up particle}
+A particle moves on a circle of radius \SI{0.5}{m}, its speed rising uniformly from \SI{2.0}{m/s} to
+\SI{4.0}{m/s} in \SI{4.0}{s}. Find the angular acceleration, and the total acceleration at the moment the
+speed is \SI{4.0}{m/s}.
+
+\stepn{1} \textbf{Tangential acceleration}: the rate of change of speed:
+\[
+a_t=\frac{\Delta v}{\Delta t}=\frac{4.0-2.0}{4.0}=\SI{0.5}{m/s^2}.
+\]
+
+\stepn{2} \textbf{Angular acceleration} from $a_t=r\alpha$:
+\[
+\alpha=\frac{a_t}{r}=\frac{0.5}{0.5}=\SI{1}{rad/s^2}.
+\]
+
+\stepn{3} \textbf{Radial acceleration} at $v=\SI{4.0}{m/s}$:
+\[
+a_r=\frac{v^{2}}{r}=\frac{16}{0.5}=\SI{32}{m/s^2}.
+\]
+
+\stepn{4} \textbf{Total.} The two are perpendicular:
+\[
+a=\sqrt{a_t^{2}+a_r^{2}}=\sqrt{0.25+1024}\approx\SI{32.0}{m/s^2}.
+\]
+\textbf{Notice how lopsided this is:} the radial part is $64$ times the tangential part. On a tight
+curve, \emph{bending the path can cost far more acceleration than changing the speed}; quoting $a_t$
+alone would miss almost all of it.
+\ans{$\alpha=\SI{1}{rad/s^2}$; $a\approx\SI{32}{m/s^2}$}
+\end{exbox}
+
+\begin{exbox}{When the speed is given as a function of time}
+A particle moves on a circle of radius \SI{2}{m} with $v=t^{2}$ (SI units). Find the radial, tangential
+and net accelerations at $t=\SI{2}{s}$.
+
+\stepn{1} \textbf{Speed at that instant:} $v=(2)^{2}=\SI{4}{m/s}$.
+
+\stepn{2} \textbf{Radial:} $a_r=\dfrac{v^{2}}{r}=\dfrac{16}{2}=\SI{8}{m/s^2}$.
+
+\stepn{3} \textbf{Tangential:} differentiate the \emph{speed}, not the position:
+$a_t=\dfrac{dv}{dt}=2t=\SI{4}{m/s^2}$ at $t=2$.
+
+\stepn{4} \textbf{Net:} $a=\sqrt{8^{2}+4^{2}}=\sqrt{80}\approx\SI{8.94}{m/s^2}$, making an angle
+$\tan^{-1}(8/4)\approx63.4^\circ$ with the tangent: an \emph{acute} angle with $\vv$, confirming that
+the particle is speeding up. \ans{$a_r=\SI{8}{m/s^2}$, $a_t=\SI{4}{m/s^2}$, $a=\sqrt{80}\approx\SI{8.94}{m/s^2}$}
+\end{exbox}
+
+\begin{trapbox}{$a_t$ is the derivative of the \emph{speed}, not of the velocity}
+$\dfrac{d|\vv|}{dt}$ and $\left|\dfrac{d\vv}{dt}\right|$ are different quantities. The first is $a_t$
+alone; the second is the \emph{whole} acceleration $a$. In uniform circular motion the first is zero
+while the second is $v^{2}/r$. Confusing the two is the usual source of the belief that uniform
+circular motion is unaccelerated.
+\end{trapbox}
+
+\medskip
+\subsection{A conceptual test: which products can be negative?}
+
+Nothing here needs a calculator, yet it checks whether you have absorbed \emph{which vectors lie in the
+plane of the circle and which stand perpendicular to it}; Figure~\ref{fig:signs} draws the vectors in
+each product. Students who can compute $v^{2}/r$ fluently
+often cannot answer it, a sign that the geometry has not yet been understood.
+
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cm_signs}
+\figcaption{fig:signs}{The three dot products. The answer in each case follows from one fact: $\vv$,
+$\va$, $a_t$ and $a_r$ lie \emph{in} the plane of the circle, while $\vomega$ and $\vc{\alpha}$ stand
+\emph{perpendicular} to it, along the axis.}
+\end{figure}
+
+\begin{exbox}{Signs of $\vomega\cdot\vv$, $\vv\cdot\va$ and $\vomega\cdot\vc{\alpha}$}
+For a particle in circular motion, state whether each product can be positive, negative or zero.
+
+\stepn{1} \textbf{$\vomega\cdot\vv$, always zero.} $\vomega$ points along the axis, perpendicular to
+the plane of the circle; $\vv$ is tangential and therefore lies \emph{in} that plane. Two perpendicular
+vectors have zero dot product, and this holds at every instant, in every kind of circular motion.
+\[
+\boxed{\vomega\cdot\vv=0\ \text{always}}
+\]
+
+\stepn{2} \textbf{$\vv\cdot\va$, can be any of the three.} Both lie in the plane, so the angle
+between them is unconstrained. From \S\ref{sec:angleav}:
+\begin{itemize}
+\item \emph{positive} when the angle is acute: the particle is speeding up;
+\item \emph{zero} when it is $90^\circ$ (uniform circular motion), or at an instant when $v=0$;
+\item \emph{negative} when it is obtuse: the particle is slowing down.
+\end{itemize}
+Indeed $\vv\cdot\va=v\,a_t$, so its sign is the sign of the tangential acceleration.
+
+\stepn{3} \textbf{$\vomega\cdot\vc{\alpha}$, can be any of the three.} Both are axial, so they are either
+parallel or antiparallel; there is no third option for rotation about a fixed axis.
+\begin{itemize}
+\item \emph{positive} when $\vc{\alpha}\parallel\vomega$: the spin is speeding up;
+\item \emph{negative} when antiparallel: the spin is slowing;
+\item \emph{zero} when $\vc{\alpha}=\vc0$ (uniform circular motion), or at an instant when
+      $\vomega=\vc0$, such as the moment of starting from rest.
+\end{itemize}
+\ans{$\vomega\cdot\vv=0$ always; the other two may be $+$, $-$ or $0$}
+\end{exbox}
+
+\begin{exbox}{When centripetal and tangential accelerations are equal}
+A particle starts from rest and moves on a circle with constant angular acceleration
+$\alpha=\SI{4}{rad/s^2}$. At what time are its centripetal and tangential accelerations equal in
+magnitude?
+
+\stepn{1} \textbf{Write both in terms of $t$.} Starting from rest, $\omega=\alpha t$. Then
+\[
+a_r=\omega^{2}r=(\alpha t)^{2}r=\alpha^{2}t^{2}r,
+\qquad
+a_t=\alpha r.
+\]
+
+\stepn{2} \textbf{Set them equal.} The radius cancels: a good sign, since the question never gave
+one:
+\[
+\alpha^{2}t^{2}r=\alpha r
+\qquad\Longrightarrow\qquad
+t^{2}=\frac{1}{\alpha}
+\qquad\Longrightarrow\qquad
+t=\frac{1}{\sqrt\alpha}=\frac{1}{\sqrt4}=\SI{0.5}{s}.
+\]
+
+\stepn{3} \textbf{Interpretation.} Before $t=\SI{0.5}{s}$ the \emph{tangential} part dominates (the
+particle is mostly gaining speed); after it, the \emph{centripetal} part takes over and grows without
+limit as $t^{2}$. Under constant $\alpha$ the radial part always overtakes the tangential part
+eventually. \ans{$t=\SI{0.5}{s}$}
+\end{exbox}
+
+\begin{exbox}{Reading the angle between $\vv$ and $\va$}
+A particle moves on a circle of radius \SI{54}{m} with speed $v=4t^{2}$ (SI). Find the angle between its
+velocity and its total acceleration at $t=\SI{3}{s}$.
+
+\stepn{1} \textbf{Speed:} $v=4(3)^{2}=\SI{36}{m/s}$.
+
+\stepn{2} \textbf{Tangential:} $a_t=\dfrac{dv}{dt}=8t=\SI{24}{m/s^2}$.
+
+\stepn{3} \textbf{Radial:} $a_r=\dfrac{v^{2}}{r}=\dfrac{36^{2}}{54}=\dfrac{1296}{54}=\SI{24}{m/s^2}$.
+
+\stepn{4} \textbf{Angle.} The angle $\phi$ between $\va$ and $\vv$ satisfies
+$\tan\phi=\dfrac{a_r}{a_t}=\dfrac{24}{24}=1$, so
+\[
+\phi=45^\circ.
+\]
+It is acute, confirming that the particle is speeding up, as the increasing speed $v=4t^{2}$ requires.
+\ans{$45^\circ$}
+\end{exbox}
+
+\begin{exbox}{Working backwards from the total acceleration}
+A particle moves on a circle of radius \SI{2.5}{m}; at one instant its total acceleration
+$a=\SI{25}{m/s^2}$ makes $30^\circ$ with the \emph{radius}. Find (a) the radial acceleration, (b) the
+speed, (c) the tangential acceleration.
+
+\stepn{1} \textbf{Resolve the given acceleration.} The angle is measured from the radius, so the radial
+part takes the cosine and the tangential part the sine:
+\[
+a_r=a\cos30^\circ=25(0.866)=\SI{21.65}{m/s^2},
+\qquad
+a_t=a\sin30^\circ=25(0.5)=\SI{12.5}{m/s^2}.
+\]
+
+\stepn{2} \textbf{Speed from the radial part.} Since $a_r=v^{2}/r$,
+\[
+v=\sqrt{a_r r}=\sqrt{21.65\times2.5}=\sqrt{54.1}\approx\SI{7.36}{m/s}.
+\]
+\ans{$a_r\approx\SI{21.7}{m/s^2}$; $v\approx\SI{7.36}{m/s}$; $a_t=\SI{12.5}{m/s^2}$}
+
+\smallskip
+\textbf{Read the angle before you resolve.} Had the $30^\circ$ been measured from the \emph{tangent}
+instead, the sine and cosine would swap and every answer would change. Always check which line the
+angle is drawn from: this is the commonest error in this type of problem.
+\end{exbox}
+
+\begin{exbox}{Average velocity versus instantaneous speed}
+A particle moves at constant speed on a circle. Find the ratio of the magnitude of its \emph{average
+velocity} to its \emph{instantaneous speed} while it turns through $\theta=\tfrac{\pi}{2}$.
+
+\stepn{1} \textbf{Average velocity needs the displacement}, which is the \emph{chord}, not the arc. For
+a quarter circle the chord joining the ends is the hypotenuse of a right isosceles triangle of legs
+$r$:
+\[
+|\Delta\vr|=r\sqrt2.
+\]
+
+\stepn{2} \textbf{The time taken} to sweep $\theta$ at angular speed $\omega$ is $t=\theta/\omega$.
+
+\stepn{3} \textbf{Form the ratio.} With instantaneous speed $v=\omega r$,
+\[
+\frac{|\vv_{\text{avg}}|}{v}
+=\frac{r\sqrt2\big/(\theta/\omega)}{\omega r}
+=\frac{\sqrt2}{\theta}
+=\frac{\sqrt2}{\pi/2}
+=\boxed{\frac{2\sqrt2}{\pi}\approx0.90}
+\]
+
+\stepn{4} \textbf{Why it must be less than 1.} The chord is always shorter than the arc, so the average
+velocity can never match the (constant) speed. Over a \emph{full} circle the displacement is zero and
+the ratio falls to $0$, even though the speed never changed: a sharp reminder that average velocity and
+average speed are different quantities. \ans{$2\sqrt2/\pi\approx0.90$}
+\end{exbox}
+
+\section{Summary}\label{sec:summary6}
+Velocity is a vector, so it can change in two ways: in magnitude and in direction. Writing $\vv=v\,\uhat{t}$ and differentiating with the product rule separates the two at once:
+$\dfrac{dv}{dt}\,\uhat{t}$ changes the speed, and $v\,\dfrac{d\uhat{t}}{dt}$ changes the direction. Because a unit vector can only rotate,
+its rate of change is perpendicular to it, so the two components are automatically perpendicular and
+combine by Pythagoras. The table below collects the working relations.
+
+\medskip
+{\small\renewcommand{\arraystretch}{1.45}
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Quantity & Formula & Note\\
+\midrule
+Arc / angle        & $s=r\theta$                                   & $\theta$ in radians, always\\
+Linear speed       & $v=r\omega$, \; $\vv=\vomega\ex\vr$           & $\vomega$ along the axis\\
+Tangential accel.  & $a_t=\dfrac{dv}{dt}=r\alpha$                  & changes the \emph{speed}; may be $0$\\
+Radial accel.      & $a_r=\dfrac{v^{2}}{r}=\omega^{2}r$            & changes the \emph{direction}; $0$ only if $v=0$\\
+Total              & $a=\sqrt{a_t^{2}+a_r^{2}}$, \; $\tan\phi=\dfrac{a_r}{a_t}$ & $\phi$ from the tangent\\
+Radius of curvature& $R=\dfrac{v^{2}}{a_n}$                        & works on \emph{any} curved path\\
+Period / frequency & $T=\dfrac{2\pi}{\omega}=\dfrac1\nu$, \; $\omega=\dfrac{2\pi N}{60}$ & $N$ in rpm\\
+Constant $\alpha$  & $\omega=\omega_0+\alpha t$,\; $\Delta\theta=\omega_0t+\tfrac12\alpha t^{2}$ & only if $\alpha$ is constant\\
+                   & $\omega^{2}=\omega_0^{2}+2\alpha\,\Delta\theta$ & \\
+Varying $\alpha$   & $\displaystyle\int\omega\,d\omega=\int\alpha\,d\theta$ & the $v\,dv/dx$ twin\\
+\bottomrule
+\end{tabular}
+\end{center}
+}
+
+\medskip
+\textbf{Diagnosing a motion from one angle.} With $\phi$ the angle between $\va$ and $\vv$:
+acute $\Rightarrow$ speeding up; $90^\circ$ $\Rightarrow$ uniform; obtuse $\Rightarrow$ slowing.
+Equivalently $\vv\cdot\va=v\,a_t$ carries the sign.
+
+\medskip
+\textbf{In the plane:} $\vv$, $\va$, $a_t\uhat{t}$, $a_r\uhat{n}$. \quad
+\textbf{Along the axis:} $\vomega$, $\vc{\alpha}$. \quad
+Hence $\vomega\cdot\vv=0$ always.
+
+\section{Problem Types}\label{sec:types6}
+Circular kinematics produces five recurring question types, ranging from a direct calculation of the
+centripetal acceleration to the total acceleration of a body that is speeding up as it turns. In every
+case, convert any rate given in revolutions per minute to radians per second before doing anything else,
+and keep the tangential and radial components separate until the very last step.
+
+\archq{Find the centripetal acceleration}
+{``A particle moves in a circle of radius $r$ at constant speed $v$ (or period $T$, or frequency
+$\nu$); find its acceleration.''}
+{Convert whatever is given into $v$ or $\omega$ first ($v=\omega r$, $\omega=2\pi/T=2\pi\nu$), then
+$a_r=\dfrac{v^2}{r}=\omega^2 r$, directed \emph{towards the centre}.}
+{Saying the acceleration is zero because the speed is constant. The speed is constant, but the
+\emph{velocity} is not, because its direction turns; there is an acceleration, perpendicular to $\vv$.}
+{A particle moves on a circle of radius \SI{2}{m} at a constant \SI{4}{m/s}. Its acceleration is:}
+{zero}{\SI{2}{m/s^2}}{\SI{16}{m/s^2}}{\SI{8}{m/s^2}\archans{D}{$a_r=v^2/r=16/2=\SI{8}{m/s^2}$, directed
+to the centre. Option (A) is the classic error of confusing constant \emph{speed} with constant
+velocity.}}
+
+\archq{Convert rpm to angular and linear speed}
+{``A wheel or fan rotates at $N$ revolutions per minute; find $\omega$, $v$ or $a_r$.''}
+{Convert first: $\omega=\dfrac{2\pi N}{60}$~\si{rad/s}. Then $v=\omega r$ and $a_r=\omega^2r=v^2/r$. One
+revolution is $2\pi$ radians, never $360$ in a formula.}
+{Leaving $N$ in rpm, or using degrees. Every rotational formula assumes radians per second.}
+{A wheel rotates at \SI{60}{rpm}. Its angular speed is:}
+{$2\pi$~\si{rad/s}}{$\pi$~\si{rad/s}}{\SI{60}{rad/s}}{$120\pi$~\si{rad/s}\archans{A}{$\omega=\dfrac{2\pi(60)}{60}=2\pi$~\si{rad/s}, that is, one revolution per second.}}
+
+\archq{How $a_r$ scales with $v$, $r$, $T$}
+{``If the speed is doubled (or the radius halved), what happens to the centripetal acceleration?''}
+{Pick the form that matches what is held fixed: $a_r=\dfrac{v^2}{r}$ when $v$ is given,
+$a_r=\omega^2r$ when $\omega$ is given, $a_r=\dfrac{4\pi^2r}{T^2}$ when the period is. These scale
+\emph{differently}: at constant $v$, $a_r\propto1/r$; at constant $\omega$, $a_r\propto r$.}
+{Using the wrong form, then getting the direction of the dependence on $r$ backwards.}
+{Two particles move in circles with the \emph{same speed}, one on a radius twice the other's. The ratio
+of their centripetal accelerations, larger circle to smaller, is:}
+{$2:1$}{$4:1$}{$1:4$}{$1:2$\archans{D}{At constant $v$, $a_r=v^2/r\propto1/r$. Doubling $r$
+\emph{halves} $a_r$, so the ratio is $1:2$.}}
+
+\archq{Angular kinematics with constant $\alpha$}
+{``A wheel accelerates from rest to $\omega$ in $t$ seconds; find $\alpha$, the angle turned, or the
+number of revolutions.''}
+{Use the constant-$\alpha$ equations: $\omega=\omega_0+\alpha t$, $\Delta\theta=\omega_0t+\tfrac12\alpha t^2$,
+$\omega^2=\omega_0^2+2\alpha\,\Delta\theta$. To convert an angle to revolutions, divide by $2\pi$.}
+{Reporting $\theta$ in radians when revolutions were asked (or vice versa).}
+{A wheel starts from rest with $\alpha=\SI{2}{rad/s^2}$. The angle turned in \SI{3}{s} is:}
+{\SI{6}{rad}}{\SI{9}{rad}}{\SI{18}{rad}}{\SI{36}{rad}\archans{B}{$\Delta\theta=\tfrac12\alpha t^2
+=\tfrac12(2)(9)=\SI{9}{rad}$. Option (A) is $\omega=\alpha t$, an angular \emph{velocity}.}}
+
+\archq{Total acceleration when the speed also changes}
+{``A particle speeds up while moving on a circle; find its total acceleration.'' The tell is that the
+speed is \emph{not} constant.}
+{There are now two perpendicular components: tangential $a_t=r\alpha$ (changing the speed) and
+centripetal $a_r=v^2/r$ (changing the direction). The total is
+$a=\sqrt{a_t^2+a_r^2}$.}
+{Reporting only $a_r$. That is complete only in \emph{uniform} circular motion, where $a_t=0$.}
+{A particle on a circle has $a_r=\SI{3}{m/s^2}$ and $a_t=\SI{4}{m/s^2}$. Its total acceleration is:}
+{\SI{5}{m/s^2}}{\SI{1}{m/s^2}}{\SI{3.5}{m/s^2}}{\SI{7}{m/s^2}\archans{A}{The components are
+perpendicular, so $a=\sqrt{3^2+4^2}=\SI{5}{m/s^2}$.}}
+
+\section{Practice Problems}\label{sec:practice6}
+
+The problems below are of standard examination difficulty and are meant to be worked without looking back at the chapter. Answers, with brief working, follow the list.
+
+\begin{enumerate}[itemsep=3pt]
+\item Is the acceleration of a particle in \emph{uniform} circular motion constant or variable? Explain
+      in one line.
+\item A particle moves on a circle. Which of these may stay constant: (i) velocity,
+      (ii) speed, (iii) acceleration, (iv) magnitude of acceleration?
+\item A particle moves on a circle of radius \SI{1.0}{cm} with $v=2t$ (cm/s, s). At $t=\SI{1}{s}$ find
+      (a) the radial acceleration, (b) the tangential acceleration, (c) the net acceleration.
+\item A wheel turns at \SI{300}{rpm}. Find its angular speed in \si{rad/s}.
+\item A fan slows uniformly from \SI{900}{rpm} to \SI{300}{rpm} in \SI{5.0}{s}. Find (a) the angular
+      acceleration and (b) the number of revolutions made in that time.
+\item A particle in circular motion has $a_t=\SI{3}{m/s^2}$ and $a_r=\SI{4}{m/s^2}$. Find the magnitude
+      of the net acceleration and the angle it makes with the velocity.
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item \emph{Variable}: its magnitude $v^2/r$ is fixed but its direction continuously turns to
+stay pointed at the centre, and a vector of changing direction is not constant.
+\item (ii) speed and (iv) magnitude of acceleration (both constant in uniform circular motion).
+Velocity cannot (its direction turns), and neither can acceleration as a vector, because its radial
+part always points at the centre and so turns with the particle. (On a general curved path the
+acceleration vector \emph{can} be constant: a projectile is the example.)
+\item $v=\SI{2}{cm/s}$, so (a) $a_r=v^2/r=\SI{4.0}{cm/s^2}$; (b) $a_t=dv/dt=\SI{2.0}{cm/s^2}$;
+(c) $a=\sqrt{16+4}=2\sqrt5\approx\SI{4.5}{cm/s^2}$.
+\item $\omega=\dfrac{2\pi(300)}{60}=10\pi\approx\SI{31.4}{rad/s}$.
+\item $\omega_1=30\pi$, $\omega_2=10\pi$~\si{rad/s}. (a) $\alpha=\dfrac{10\pi-30\pi}{5}=-4\pi
+\approx\SI{-12.6}{rad/s^2}$. (b) $\theta=\bar\omega t=\dfrac{30\pi+10\pi}{2}(5)=100\pi$~\si{rad}
+$=\mathbf{50}$ revolutions.
+\item $a=\sqrt{3^2+4^2}=\SI{5}{m/s^2}$, at $\tan^{-1}(4/3)=53^\circ$ to the velocity (acute, so
+the particle is speeding up).
+\end{enumerate}
+}
+
+
+\section*{Looking Back on Part A}
+\addcontentsline{toc}{section}{Looking Back on Part A}
+
+Part A built the language in which the rest of mechanics is written, and it is worth seeing that
+language as a single thing rather than a sequence of chapters. Its grammar is the vector, a quantity with
+size and direction that adds by the triangle law. Its central technique is resolution: break a vector
+into perpendicular components, treat each component as a one-dimensional problem, and recombine. With
+that technique the kinematics of a straight line, developed in \chref{ch:straightline}, extends without
+change to projectiles in \chref{ch:projectiles} and to relative motion in \chref{ch:relative}.
+
+\begin{itemize}
+\item \textbf{Mathematical toolkit (\chref{ch:toolkit}).} The derivative measures a rate, the integral a
+      total; dot and cross products, the small-angle approximation and the quadratic formula recur
+      throughout.
+\item \textbf{Measurement (\chref{ch:measurement}).} Every quantity carries a unit and an uncertainty. Dimensions check a
+      formula and can find its shape; relative errors add for products and quotients.
+\item \textbf{Straight-line motion (\chref{ch:straightline}).} Velocity and acceleration are rates, slopes on a graph; their
+      accumulations are areas. The three kinematic equations hold only for constant acceleration.
+\item \textbf{Vectors (\chref{ch:vectors}).} Resolution into components is the master technique of mechanics.
+\item \textbf{Projectiles (\chref{ch:projectiles}).} Horizontal and vertical motions are independent and
+      share only the clock; the level-ground formulas fail for a launch from a height.
+\item \textbf{Relative motion (\chref{ch:relative}).} $\vv_{AB}=\vv_A-\vv_B$, drawn as a triangle;
+      minimum time and minimum drift are different goals.
+\item \textbf{Circular kinematics (\chref{ch:circkin}).} A changing direction is an acceleration. On any curve the
+      acceleration has a tangential part that changes the speed and a radial part, $v^2/r$, that changes the
+      direction.
+\end{itemize}
+
+\noindent\textbf{The thread into Part B.} Everything so far has described motion without asking what causes
+it. \chref{ch:circkin} in particular established that a body moving in a circle \emph{must} have an inward
+acceleration. Part B supplies the cause: forces, and the law that connects them to acceleration.

@@ -1,0 +1,34 @@
+% decay_momentum: why two-body and three-body decays differ
+% (Vol III Ch 2, fig:decay-momentum)
+% Parent at rest, so the product momenta must sum to zero.
+% Two bodies: p_alpha = -p_Y, one magnitude, so each kinetic energy is fixed.
+% Three bodies: any closed triangle of momenta is allowed.  The two examples are
+% drawn to sum exactly to zero:
+%   large electron share:  p_e=(1.3,0.55), p_nu=(0.3,-0.9),  p_Y=(-1.6,0.35)
+%   small electron share:  p_e=(0.35,0.3), p_nu=(1.4,-0.7), p_Y=(-1.75,0.4)
+% All arrows are momenta, so all use the book's momentum style (teal); they are
+% told apart by their labels (alpha, daughter Y, electron, antineutrino), with the
+% antineutrino dashed as in the other figures of the chapter.
+\begin{tikzpicture}
+\tikzset{numom/.style={momentum,dash pattern=on 4pt off 2pt}}
+\node[note] at (1.5,2.35) {two bodies ($\alpha$ decay)};
+\node[point mass] at (1.5,1.0) {};
+\draw[momentum] (1.5,1.0) -- (3.3,1.0) node[right] {$\vp_\alpha$};
+\draw[momentum] (1.5,1.0) -- (-0.3,1.0) node[left] {$\vp_Y$};
+\node[small label,align=center] at (1.5,0.05) {equal and opposite:\\only one way to share $Q$};
+\begin{scope}[xshift=6.6cm]
+\node[note] at (2.0,2.35) {three bodies ($\beta^-$ decay): many ways};
+\node[point mass] at (0,1.0) {};
+\draw[momentum] (0,1.0) -- ++(1.3,0.55) node[above] {$\vp_e$};
+\draw[numom] (0,1.0) -- ++(0.3,-0.9) node[below] {$\vp_{\bar\nu}$};
+\draw[momentum] (0,1.0) -- ++(-1.6,0.35) node[left] {$\vp_Y$};
+\node[small label] at (0,-0.65) {large electron share};
+\begin{scope}[xshift=4.1cm]
+\node[point mass] at (0,1.0) {};
+\draw[momentum] (0,1.0) -- ++(0.35,0.3) node[above] {$\vp_e$};
+\draw[numom] (0,1.0) -- ++(1.4,-0.7) node[below] {$\vp_{\bar\nu}$};
+\draw[momentum] (0,1.0) -- ++(-1.75,0.4) node[left] {$\vp_Y$};
+\node[small label] at (0,-0.65) {small electron share};
+\end{scope}
+\end{scope}
+\end{tikzpicture}

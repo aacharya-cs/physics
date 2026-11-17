@@ -1,0 +1,1281 @@
+\ncertchapter{5}{Kinetic Theory}\chlabel{ch:kinetic}
+% ================================================================
+
+Part~A of this volume treated matter in bulk: solids that stretch and fluids that push, described by
+moduli, pressure and viscosity, with no mention of atoms. Part~B introduced temperature and heat, and
+\chref{ch:thermo} turned them into laws. Throughout, a gas was a black box obeying $PV=nRT$, with an
+internal energy that depended on temperature alone; heat went in, work came out, and nobody asked what
+the gas is \emph{made of}. This chapter opens the box.
+
+The idea is simple to state and was bitterly resisted for most of the nineteenth century: a gas is an
+enormous crowd of tiny molecules flying about at random, colliding with each other and with the walls,
+and obeying the ordinary mechanics of \chsref{ch:newton}{ch:collisions}. From that picture alone we shall
+derive the pressure of a gas, discover what temperature \emph{is}, explain the gas laws that
+\chref{ch:thermo} took as given, predict the heat capacities of gases from the shapes of their molecules,
+and estimate how far a molecule travels before it hits another. Each derivation uses only tools already
+built: momentum and impulse from Volume~I, and averages over a distribution from \chref{ch:toolkit}.
+
+The limits deserve stating at the outset. Kinetic theory as developed here is a theory of the
+\emph{ideal} gas: point-like molecules that interact only when they collide. It fails, and says that it
+will fail, when a gas is dense or cold enough for the size of its molecules and the forces between them
+to matter. And at one decisive point, the heat capacities at low temperature, classical mechanics itself
+gives the wrong answer, which was one of the first signs that quantum physics was needed.
+
+\begin{motivbox}{Why kinetic theory matters}
+Kinetic theory connects the two halves of this volume: it \emph{derives} the gas laws and the meaning of
+temperature from nothing but molecules moving under Newton's laws.
+\begin{itemize}
+\item \textbf{It explains what temperature actually is.} The temperature of a gas turns out to measure
+the average kinetic energy of its molecules, $\tfrac32 k_BT$ per molecule. This is why gases exert
+pressure (molecules drumming on the walls), why a hot gas pushes harder, and why absolute zero is a floor.
+\item \textbf{It predicts the gas laws and specific heats from first principles.} Boyle's law, Charles's
+law and $PV=nRT$ all follow from counting molecular impacts; the equipartition of energy then predicts
+the specific heats of gases, and its failure at low temperature gave the first hints of quantum mechanics.
+\item \textbf{It underlies real technology.} The mean free path decides how a vacuum pump, a thermos
+flask or a semiconductor deposition chamber behaves; molecular speeds explain why light gases (hydrogen,
+helium) escape a planet's atmosphere while heavier ones stay, and how uranium isotopes are separated by
+effusion.
+\end{itemize}
+\end{motivbox}
+
+% ================================================================
+\section{The Molecular Picture and the Gas Laws}\label{sec:ktpicture}
+
+Before any derivation, the model must be stated precisely, because every later result inherits its
+assumptions and, with them, its limits.
+
+\subsection{The postulates, stated honestly}
+
+Kinetic theory rebuilds the gas laws from one radical premise: that a gas is a vast number of tiny
+molecules in ceaseless random motion. Two counts are used side by side. The \textbf{number of molecules} is $N$, a pure
+number; the \textbf{amount of substance} is $n$ moles, as in \chref{ch:thermal} (Section~\ref{sec:gaslaw}), where the mole was introduced. Recall that they are linked by Avogadro's number $N_A$, the number of molecules in one mole: $N=nN_A$. Each molecule has mass $m$ (in
+kilograms), and a mole of them has the \textbf{molar mass} $M=N_Am$ (in \si{kg/mol}).
+
+\begin{defbox}{Assumptions of kinetic theory (the ideal gas)}
+\begin{enumerate}[label=\textbf{(\roman*)}]
+\item A gas consists of a very large number $N$ of identical molecules in random motion.
+\item The volume of the molecules themselves is negligible compared with the volume of the container
+      (about $10^{-3}$ of it for air at room conditions; see below).
+\item There are no forces between molecules except during collisions; between collisions each molecule
+      moves in a straight line at constant speed (gravity is neglected).
+\item Collisions, with each other and with the walls, are perfectly \emph{elastic} and of negligible
+      duration.
+\item The number $N$ is so large (about $10^{23}$) that averages are meaningful and fluctuations about
+      them are far too small to observe.
+\end{enumerate}
+\end{defbox}
+
+\why{Each assumption earns its keep, and each tells you where the theory will fail. Assumptions (ii) and
+(iii) break down at high pressure or low temperature, when molecules are crowded together and move slowly
+enough for their mutual attraction to matter. That is precisely when real gases stop obeying $PV=nRT$ and
+begin to liquefy. A theory that predicts the conditions of its own breakdown is a good theory.}
+
+How empty is a gas? Air at \SI{0}{\celsius} and atmospheric pressure holds about
+$n_V=\SI{2.7e25}{}$ molecules per cubic metre (the \textbf{number density} $n_V=N/V$, in \si{m^{-3}};
+we derive this value shortly). Each molecule therefore has a little cube of volume $1/n_V$ to itself, of
+side $n_V^{-1/3}\approx\SI{3.3}{nm}$. A nitrogen or oxygen molecule is about $d\approx\SI{0.37}{nm}$
+across, so the molecules are spaced about nine diameters apart, and they fill only
+$n_V\cdot\tfrac{\pi}{6}d^3\approx7\times10^{-4}$ of the space. Assumption (ii) is good to a fraction of a
+per cent for air at room conditions; it is the liquid, a thousand times denser, where it fails.
+
+\subsection{The ideal-gas law, counted per molecule}
+
+\chref{ch:thermal} (Section~\ref{sec:gaslaw}) wrote the ideal-gas law per mole, and \chref{ch:thermo} used it in that form throughout. Kinetic theory prefers to count molecules.
+
+\begin{keybox}{The ideal-gas law, per mole and per molecule}
+With $N=nN_A$,
+\[
+PV = nRT = Nk_BT, \qquad k_B = \frac{R}{N_A} = \SI{1.38e-23}{J/K}.
+\]
+Here $P$ is the pressure (\si{Pa}), $V$ the volume (\si{m^3}) and $T$ the absolute temperature (\si{K}).
+$R=\SI{8.314}{J.mol^{-1}.K^{-1}}$ is the gas constant \emph{per mole}; $k_B$, Boltzmann's constant, is
+the same constant \emph{per molecule}. Dividing by $V$ gives the most useful form for this chapter,
+\[
+P = n_Vk_BT, \qquad n_V=\frac{N}{V}.
+\]
+\end{keybox}
+
+So far this is an experimental fact, summarising the gas laws of Boyle and Charles. The task of the next
+two sections is to \emph{derive} it: after Section~\ref{sec:kttemperature} it becomes a theorem about
+molecules, with temperature given a mechanical meaning. As a first use, the number density quoted above
+follows at once: at $P=\SI{1.013e5}{Pa}$ and $T=\SI{273}{K}$,
+$n_V=P/k_BT=\SI{2.69e25}{m^{-3}}$.
+
+\why{Avogadro's number $N_A$ is the exchange rate between the two worlds this chapter connects. The
+laboratory measures $P$, $V$, $T$ and $R$, all \emph{bulk} quantities. Kinetic theory speaks of single
+molecules: their mass $m=M/N_A$, their energy, their count $N=nN_A$. Every time we cross from one
+description to the other we multiply or divide by $N_A$, and the relation $k_B=R/N_A$ is that crossing
+written once and for all: the per-molecule constant is the per-mole constant shared out among Avogadro's
+number of molecules. Why the same $N_A$ works for every gas, and how it was measured, is taken up in
+Section~\ref{sec:kttemperature}, once temperature has its kinetic meaning.}
+
+% ================================================================
+\section{Pressure from Molecular Impacts}\label{sec:ktpressure}
+
+The central derivation of the chapter shows that pressure is nothing but the steady drumbeat of molecular
+collisions on the walls. It needs two results from Volume~I. First, force is the rate of change of
+momentum, $\vF=d\vp/dt$, so a force acting for a short time delivers an impulse equal to the change in
+momentum it produces (\chref{ch:newton}). Second, when a ball bounces elastically off a smooth, massive
+wall, the component of its velocity normal to the wall is reversed and the component along the wall is
+unchanged (\chref{ch:collisions}): the wall is so heavy that it takes up momentum without taking up any
+appreciable kinetic energy. Figure~\ref{fig:ktwall} sets up the calculation.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{kinetic_wall}
+\figcaption{fig:ktwall}{Left: one molecule in a cube of side $\ell$. Only its $x$-component of velocity carries it towards the shaded wall of area $\ell^2$, and it returns to that wall after a round trip of $2\ell$, so it hits at a steady rate. Right: one elastic hit seen from above. The component normal to the wall reverses, $v_x\to-v_x$, while $v_y$ is untouched, so each hit hands the wall momentum $2mv_x$.}
+\end{figure}
+
+\begin{derivbox}{The pressure of an ideal gas}
+Take a cube of side $\ell$ containing $N$ molecules, each of mass $m$, and fix attention on the wall
+perpendicular to the $x$-axis at $x=\ell$ (Figure~\ref{fig:ktwall}).
+
+\stepn{1} \textbf{One molecule, one hit.} A molecule with velocity component $v_x>0$ hits the wall and
+rebounds elastically, $v_x\to-v_x$. Its momentum changes by $\Delta p_x=-2mv_x$, so by the third law it
+delivers $+2mv_x$ to the wall.
+
+\stepn{2} \textbf{How often?} Between successive hits on the \emph{same} wall the molecule must cross to the
+far wall and back, a distance $2\ell$ in the $x$-direction at speed $|v_x|$. That takes a time $2\ell/|v_x|$,
+so it strikes the wall $|v_x|/2\ell$ times per second.
+
+\stepn{3} \textbf{Average force from one molecule} $=$ momentum delivered per second:
+\[
+F_1 = 2m|v_x| \times \frac{|v_x|}{2\ell} = \frac{m v_x^2}{\ell}.
+\]
+The absolute values merge into a plain square, so the sign of $v_x$ no longer matters.
+
+\stepn{4} \textbf{All $N$ molecules.} Add the contributions and write the sum as $N$ times the
+\emph{average} of $v_x^2$ (a bar denotes the average over all the molecules):
+\[
+F = \frac{m}{\ell}\sum_{i=1}^{N} v_{x,i}^2 = \frac{mN\overline{v_x^2}}{\ell}.
+\]
+A real molecule also moves along $y$ and $z$, but only its $x$-motion carries momentum to \emph{this}
+wall, and its $y$- and $z$-motion neither speed up nor slow down its return in $x$; so the count in
+Step~2 stands.
+
+\stepn{5} \textbf{Isotropy.} No direction is special, so
+$\overline{v_x^2} = \overline{v_y^2} = \overline{v_z^2}$. Since $v^2 = v_x^2+v_y^2+v_z^2$ for every
+molecule, the averages obey $\overline{v^2}=\overline{v_x^2}+\overline{v_y^2}+\overline{v_z^2}$, and so
+\[
+\overline{v_x^2} = \tfrac13\overline{v^2}.
+\]
+
+\stepn{6} \textbf{Pressure.} Divide the force by the wall's area $\ell^2$, and write $V=\ell^3$ and
+$\rho = Nm/V$ for the density of the gas:
+\[
+P = \frac{F}{\ell^2} = \frac{mN\overline{v^2}}{3\ell^3}
+\quad\Longrightarrow\quad
+\boxed{\;P = \frac{1}{3}\,\frac{Nm}{V}\,\overline{v^2} = \frac{1}{3}\rho\,\overline{v^2}\;}
+\]
+
+\stepn{7} \textbf{What was set aside.} Collisions between molecules were ignored. They do not change the
+result: momentum and kinetic energy are conserved in every collision, and in equilibrium the gas as a
+whole keeps the same distribution of velocities, so the stream of molecules arriving at the wall has the
+same mean value of $v_x^2$ as before. Nor does the shape of the container matter: the pressure is a local
+property, and any wall can be cut into small flat patches, each of which sees the same molecular rain.
+\end{derivbox}
+
+\inwords{Pressure is a rain of impacts. It grows with the number of molecules per unit volume (more
+drummers), with the molecular mass (heavier drumsticks), and with the mean-square speed: a faster molecule
+hits both harder \emph{and} more often, which is why speed enters squared.}
+
+Two rewritings of the result are worth having. Since the mean translational kinetic energy of a molecule
+is $\overline K=\tfrac12m\overline{v^2}$ (we write $K$ for kinetic energy, as in Volume~I),
+\[
+P=\tfrac23\,n_V\,\overline K ,
+\]
+so pressure is two-thirds of the translational kinetic energy per unit volume: a pressure in pascals is
+also an energy density in joules per cubic metre. And because each species of molecule in a mixture
+drums on the wall independently of the others, the pressures they would exert alone simply add:
+\[
+P = P_1 + P_2 + \cdots, \qquad P_i = n_{V,i}\,k_BT .
+\]
+This is \textbf{Dalton's law of partial pressures}, which here costs nothing: it is the sum in Step~4
+split by species.
+
+\begin{exbox}{How fast are the molecules of air?}\label{ex:ktairspeed}
+The pressure formula can be run backwards. Air at sea level and \SI{0}{\celsius} has
+$P=\SI{1.013e5}{Pa}$ and density $\rho=\SI{1.29}{kg/m^3}$. From $P=\tfrac13\rho\overline{v^2}$,
+\[
+\sqrt{\overline{v^2}}=\sqrt{\frac{3P}{\rho}}=\sqrt{\frac{3(1.013\times10^5)}{1.29}}\approx\SI{485}{m/s}.
+\]
+Two measurable bulk quantities give a molecular speed, about \SI{1750}{km/h}, without knowing the mass or
+the number of molecules. The square root of the mean square speed is called the rms speed; it is
+studied properly in the next section. \ans{about \SI{485}{m/s}}
+\end{exbox}
+
+% ================================================================
+\section{Temperature and Molecular Speeds}\label{sec:kttemperature}
+
+The pressure derivation gave $PV = \tfrac13 Nm\overline{v^2}$, a purely mechanical statement about
+molecular speeds, with no mention of temperature. But experiment also gives $PV = Nk_BT$. Setting the
+two expressions for the same $PV$ equal must reveal what temperature is in molecular terms. This is the
+moment the molecular picture pays off.
+
+\subsection{The kinetic interpretation of temperature}
+
+\begin{derivbox}{What temperature measures}
+\stepn{1} Rewrite the pressure result in terms of the mean translational kinetic energy per molecule:
+\[
+PV = \tfrac13 Nm\overline{v^2} = \tfrac23 N\cdot\underbrace{\tfrac12 m\overline{v^2}}_{\overline K}.
+\]
+
+\stepn{2} Compare with the experimental ideal-gas law $PV = Nk_BT$:
+\[
+\tfrac23 N\overline K = Nk_BT
+\quad\Longrightarrow\quad
+\boxed{\;\overline K = \tfrac12 m\overline{v^2} = \tfrac32 k_B T\;}
+\]
+
+\stepn{3} \textbf{Read it.} The average translational kinetic energy of a molecule is $\tfrac32k_BT$. It
+depends on \emph{temperature alone}: not on pressure, not on volume, and, most strikingly, \textbf{not on
+which gas}. At the same $T$, a heavy xenon atom and a light helium atom carry the same average kinetic
+energy; the xenon simply moves more slowly.
+\end{derivbox}
+
+\why{Temperature is the average translational kinetic energy of the molecules, expressed in different
+units: $T=\tfrac{2}{3k_B}\overline K$. At room temperature $\overline K=\tfrac32k_B(\SI{300}{K})
+=\SI{6.2e-21}{J}$, about \SI{0.04}{eV}. Absolute zero is the temperature at which this classical
+translational energy would vanish. And the claim that \chref{ch:thermo} had to take on trust, that the
+internal energy of an ideal gas depends on its temperature alone, becomes a theorem: for a monatomic gas,
+whose molecules have no energy other than translational kinetic energy, $U = N\overline K = \tfrac32 Nk_BT
+= \tfrac32nRT$, with no $P$ or $V$ in sight.}
+
+\begin{trapbox}{temperature belongs to the crowd, not to one molecule}
+A single molecule has a kinetic energy, but not a temperature. Temperature is a property of the
+\emph{average} over a great many molecules in equilibrium, and the molecules in a gas at one temperature
+have a wide spread of energies (Section~\ref{sec:ktmaxwell}). Equally, the kinetic energy that
+temperature measures is that of the random motion: a gas in a moving car is no hotter than the same gas
+at rest, because the bulk motion of its centre of mass (CM) is not random and is not counted.
+\end{trapbox}
+
+The relation also shows why absolute zero cannot be passed and why classical kinetic theory cannot be the
+last word there. Quantum mechanics shows that molecules keep a small residual motion even at $T=0$, so
+``all motion stops'' is the classical idealisation, not the full truth. At the temperatures of this
+book's gases, hundreds of kelvin, the classical picture is excellent.
+
+\subsection{Avogadro's hypothesis, and where the number came from}
+
+The kinetic meaning of temperature explains one of the oldest clues that matter is made of molecules.
+
+\begin{defbox}{Avogadro's hypothesis (1811)}
+\textbf{Equal volumes of all gases, at the same temperature and pressure, contain equal numbers of
+molecules.} Avogadro proposed this with no idea \emph{how many} molecules there are, only that the
+count is the same for every gas, light or heavy.
+\end{defbox}
+
+\begin{derivbox}{Why the count is the same for every gas}
+\stepn{1} \textbf{Same temperature, same energy.} The average translational kinetic energy of a molecule,
+$\tfrac12 m\overline{v^2} = \tfrac32 k_BT$, depends on $T$ \emph{alone}. Heavy molecules move slowly and
+light ones fast, but at a common temperature every gas carries the same average energy per molecule.
+
+\stepn{2} \textbf{Same pressure, same energy density.} From $P=\tfrac23 n_V\overline K$, two gases at the
+same pressure and with the same $\overline K$ must have the same number density $n_V$.
+
+\stepn{3} \textbf{Solve for the count.} Equivalently, $N = PV/k_BT$, and the right-hand side contains only
+$P$, $V$, $T$ and the universal $k_B$, \emph{nothing about the particular gas}. Fixing $P$, $V$ and $T$
+fixes $N$. Avogadro's hypothesis is now a theorem.
+\end{derivbox}
+
+\inwords{At a given temperature all gases share the same energy budget per molecule. A gas does not push
+harder because its molecules are heavier: the heavier molecules move more slowly, and the two effects
+cancel exactly in the pressure, leaving the molecule \emph{count} as the only thing a given $P$, $V$ and
+$T$ can pin down.}
+
+\begin{remarkbox}{How Avogadro's number was measured}
+Avogadro never knew the value; it was pinned down almost a century later. Because $k_B = R/N_A$ and $R$
+was already known from gas experiments, \emph{any} independent measurement of $k_B$ delivers
+\[
+N_A = \frac{R}{k_B} \approx \SI{6.022e23}{mol^{-1}}.
+\]
+The decisive measurement was \textbf{Brownian motion}, the random jitter of pollen-sized particles
+suspended in water. Einstein (1905) predicted how far such a particle should wander as invisible
+molecules kick it, with $k_B$ (and so $N_A$) in the formula; Perrin (1908) measured the wandering under a
+microscope and read off $N_A$. Independent routes (electrolysis with the electron's charge, X-ray
+crystallography, black-body radiation) converged on the same number, which finally convinced the last
+doubters that atoms are real. Perrin received the 1926 Nobel Prize for this work.
+
+Since 2019 (as \chref{ch:thermal} noted for the kelvin) neither constant is measured any more: the SI \emph{defines}
+$N_A=\SI{6.02214076e23}{mol^{-1}}$ and $k_B=\SI{1.380649e-23}{J/K}$ exactly, and the mole and the kelvin
+are built on them. Like the speed of light, they have been promoted from quantities we measure to
+constants we fix. The value $k_B=\SI{1.38e-23}{J/K}$ used in this chapter is the exact value rounded.
+\end{remarkbox}
+
+\subsection{The root-mean-square speed}
+
+The pressure and temperature results both involve $\overline{v^2}$, the average of the \emph{squared}
+speed. Its square root is a natural measure of a typical molecular speed, the \textbf{root-mean-square
+speed} $v_{\text{rms}}$; read the name backwards: \emph{square} each speed, take the \emph{mean} of the
+squares, then take the \emph{root}. Squares are used because energy and pressure depend on $v^2$, and
+because averaging a velocity component without squaring gives zero, the plus and minus values cancelling.
+
+\begin{keybox}{The rms speed}
+From $\tfrac12 m\overline{v^2} = \tfrac32k_BT$, using $M = N_A m$ and $R = N_A k_B$:
+\[
+\boxed{\;v_{\text{rms}} = \sqrt{\overline{v^2}} = \sqrt{\frac{3k_BT}{m}} = \sqrt{\frac{3RT}{M}}
+= \sqrt{\frac{3P}{\rho}}\;}
+\]
+So $v_{\text{rms}} \propto \sqrt{T}$ and $v_{\text{rms}}\propto 1/\sqrt{M}$: hot means fast, light means
+fast. Pair $m$ (kilograms per molecule) with $k_B$, or $M$ (kilograms per mole) with $R$; never mix them.
+\end{keybox}
+
+\begin{exbox}{The speeds of nitrogen and hydrogen}\label{ex:ktrms}
+Find $v_{\text{rms}}$ for nitrogen ($M = \SI{28}{g/mol}$) and hydrogen ($M=\SI{2}{g/mol}$) at
+\SI{300}{K}.
+
+\stepn{1} Nitrogen, with $M$ converted to \si{kg/mol}:
+$v_{\text{rms}} = \sqrt{\dfrac{3(8.314)(300)}{0.028}} = \sqrt{2.67\times10^5} \approx \SI{517}{m/s}$.
+
+\stepn{2} Hydrogen: the same formula with $M=\SI{0.002}{kg/mol}$, or by scaling,
+$v_{\text{rms}} = 517\sqrt{28/2} = 517\sqrt{14} \approx \SI{1934}{m/s}$.
+
+\stepn{3} \textbf{Check against sound.} Half a kilometre per second is comparable to the speed of sound in
+air at \SI{300}{K}, \SI{347}{m/s}, and it should be: sound is carried by these very molecules, so it
+cannot outrun them. (The ratio is worked out as a problem type at the end of the chapter.)
+
+\stepn{4} \textbf{Hydrogen and the atmosphere.} Even \SI{1.9}{km/s} is far below Earth's escape speed of
+\SI{11.2}{km/s} (\chref{ch:gravitation}, Section~\ref{sec:escape}), so why has Earth lost its free
+hydrogen? Two refinements are needed. Escape happens from the top of the atmosphere, where the gas is
+about \SI{1000}{K} and hydrogen is mostly atomic ($M=\SI{1}{g/mol}$), giving
+$v_{\text{rms}}=\sqrt{3(8.314)(1000)/0.001}\approx\SI{5.0}{km/s}$. And the speeds are spread out
+(Section~\ref{sec:ktmaxwell}): a small fraction of atoms in the fast tail exceed \SI{11.2}{km/s} at any
+moment, and over geological time that steady leak empties the atmosphere of hydrogen and helium. Nitrogen
+at \SI{1000}{K} has $v_{\text{rms}}\approx\SI{0.94}{km/s}$, twelve times below escape, and its tail is far
+too thin to leak. A widely used rule of thumb, stated here without proof, is that a planet keeps a gas
+for billions of years only if the gas's $v_{\text{rms}}$ is below about one-sixth of the escape speed.
+\ans{\SI{517}{m/s}; \SI{1934}{m/s}}
+\end{exbox}
+
+\begin{trapbox}{rms is not the mean, and neither is ``the'' speed}
+Molecular speeds are spread over a broad distribution (Figure~\ref{fig:ktmaxwell}), so no single number
+tells the whole story. Three summaries are in use, the most probable speed $v_p$, the mean speed $\bar v$
+and $v_{\text{rms}}$, and they are \emph{not} equal. Pressure and energy involve $\overline{v^2}$, so
+$v_{\text{rms}}$ appears in those formulas; but do not call it the average speed, because
+$v_{\text{rms}} > \bar v > v_p$. The next section makes the distinction precise.
+\end{trapbox}
+
+% ================================================================
+\section{The Maxwell--Boltzmann Distribution}\label{sec:ktmaxwell}
+
+Not every molecule moves at $v_{\text{rms}}$. At any instant the molecules in a gas share out a wide range
+of speeds, some nearly at rest, a few very fast, and collisions constantly reshuffle which molecule has
+which speed. Yet the \emph{fraction} of molecules in each range of speed stays fixed, set by the
+temperature. Maxwell found that fraction in 1860, and Boltzmann later showed why it takes the form it
+does. To use it we need the language of distributions from \chref{ch:toolkit},
+Section~\ref{sec:averages}: a distribution function $\phi(v)$ is defined so that $\phi(v)\,dv$ is the
+fraction of molecules with speeds between $v$ and $v+dv$, the fractions add up to one,
+$\int_0^\infty\phi(v)\,dv=1$, and the average of any quantity $q(v)$ is $\overline{q}=\int_0^\infty q(v)\,\phi(v)\,dv$. (The Foundations wrote a general distribution as $f(v)$ and an average as $\langle q\rangle$; in this chapter $f$ counts degrees of freedom, so the speed distribution is $\phi(v)$, and an average is marked by a bar.)
+
+\begin{keybox}{The Maxwell--Boltzmann speed distribution}
+In a gas of molecules of mass $m$ at temperature $T$, the fraction of molecules with speeds between $v$
+and $v+dv$ is $\phi(v)\,dv$, with
+\[
+\boxed{\;\phi(v) = 4\pi\left(\frac{m}{2\pi k_BT}\right)^{\!3/2} v^2\,
+\exp\!\left(-\frac{mv^2}{2k_BT}\right)\;}
+\]
+The \emph{number} of molecules in that range is $N\phi(v)\,dv$. The function $\phi$ has units of
+inverse speed (\si{s/m}), so that $\phi\,dv$ is a pure number. Two factors compete over its shape:
+\begin{itemize}
+\item the $v^2$ factor \emph{grows} with speed: there are more ways to move fast than slowly (more
+      directions, in the sense made precise below), so the curve rises from zero;
+\item the \textbf{Boltzmann factor} $\exp(-mv^2/2k_BT)=\exp(-K/k_BT)$ \emph{decays} with speed: fast
+      molecules carry more energy and are exponentially rarer, so the curve eventually falls.
+\end{itemize}
+Their product peaks at a single most probable speed and trails off in a long high-speed tail.
+\end{keybox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{kinetic_maxwell}
+\figcaption{fig:ktmaxwell}{The Maxwell--Boltzmann distribution for nitrogen, computed from the formula. At \SI{300}{K} the three summary speeds sit in the fixed order $v_p<\bar v<v_{\text{rms}}$, because the curve is lopsided: it starts at zero speed and has a long tail to the right. At \SI{900}{K} the peak moves to higher speed (by $\sqrt3$) and drops, keeping the area equal to one, and the fast tail beyond \SI{1000}{m/s} (shaded) grows from about one molecule in a hundred to nearly one in three.}
+\end{figure}
+
+\inwords{The rising $v^2$ is geometry (many directions in which to move quickly); the falling exponential
+is energy economics (fast states are costly). Their product is where most molecules live. Heating the gas
+weakens the exponential's grip, so the peak slides to higher speed and the tail fattens
+(Figure~\ref{fig:ktmaxwell}).}
+
+\subsection{Where the formula comes from}
+
+\scopebox{The examinations require the shape of the distribution and the three characteristic speeds, not
+the derivation of $\phi(v)$. The argument below shows where the formula comes from; one step in it is
+stated without proof.}
+
+\begin{derivbox}{Maxwell's argument}
+\stepn{1} \textbf{One component.} Let $g(v_x)\,dv_x$ be the fraction of molecules whose $x$-component of
+velocity lies between $v_x$ and $v_x+dv_x$. Boltzmann's result, which belongs to statistical mechanics
+and is \emph{stated here without proof}, is that in equilibrium the probability of a state of energy $E$
+is proportional to $e^{-E/k_BT}$. For the $x$-motion, $E=\tfrac12mv_x^2$, so
+\[
+g(v_x) = \sqrt{\frac{m}{2\pi k_BT}}\;\exp\!\left(-\frac{m v_x^2}{2k_BT}\right),
+\]
+a bell-shaped (Gaussian) curve centred on $v_x=0$. The prefactor makes $\int_{-\infty}^{\infty}
+g\,dv_x=1$, using the Gaussian integral $\int_{-\infty}^{\infty}e^{-\alpha u^2}du=\sqrt{\pi/\alpha}$
+with $\alpha=m/2k_BT$. (Maxwell's own route assumed instead that the three components are independent and
+that the distribution depends only on the speed; only an exponential of $v_x^2$ satisfies both.)
+
+\stepn{2} \textbf{Three components.} The components are independent, so the fraction with velocity in a
+small box $dv_x\,dv_y\,dv_z$ is the product
+$g(v_x)g(v_y)g(v_z)\,dv_x\,dv_y\,dv_z
+=\bigl(\tfrac{m}{2\pi k_BT}\bigr)^{3/2}e^{-mv^2/2k_BT}\,dv_x\,dv_y\,dv_z$,
+which depends only on the speed $v$.
+
+\stepn{3} \textbf{From velocity to speed.} Picture each velocity as a point in a space whose axes are
+$v_x$, $v_y$, $v_z$. All velocities with speed between $v$ and $v+dv$ fill a thin spherical shell of
+radius $v$ and thickness $dv$, of volume $4\pi v^2\,dv$. Multiplying the density of Step~2 by this volume
+gives $\phi(v)\,dv$, and the formula in the box follows. The $4\pi v^2$ is the ``more ways to move fast''
+factor: a larger shell holds more velocity directions.
+\end{derivbox}
+
+\subsection{The three characteristic speeds}
+
+Each characteristic speed is a different question asked of the same distribution. The integrals needed are
+the standard Gaussian moments of \chref{ch:toolkit}, Section~\ref{sec:averages}: with $a>0$,
+\[
+\int_0^\infty v^2e^{-av^2}dv=\frac{\sqrt\pi}{4}a^{-3/2},\qquad
+\int_0^\infty v^3e^{-av^2}dv=\frac{1}{2a^2},\qquad
+\int_0^\infty v^4e^{-av^2}dv=\frac{3\sqrt\pi}{8}a^{-5/2}.
+\]
+
+\begin{derivbox}{The three speeds from $\phi(v)$}
+Write $a=m/2k_BT$, so that $\phi(v)=4\pi(a/\pi)^{3/2}v^2e^{-av^2}$. (The first integral above confirms
+that $\int_0^\infty\phi\,dv=4\pi(a/\pi)^{3/2}\cdot\frac{\sqrt\pi}{4}a^{-3/2}=1$.)
+
+\stepn{1} \textbf{Most probable speed} $v_p$: where is the peak? Set $d\phi/dv=0$. Only $v^2e^{-av^2}$
+varies, and its derivative is $(2v-2av^3)e^{-av^2}$, which vanishes when $v^2=1/a$:
+\[ v_p = \sqrt{\frac{2k_BT}{m}} = \sqrt{\frac{2RT}{M}}. \]
+
+\stepn{2} \textbf{Mean speed} $\bar v$: what is the ordinary average?
+\[
+\bar v = \int_0^\infty v\,\phi(v)\,dv = 4\pi\Bigl(\frac{a}{\pi}\Bigr)^{3/2}\frac{1}{2a^2}
+=\frac{2}{\sqrt{\pi a}}
+=\sqrt{\frac{8k_BT}{\pi m}} = \sqrt{\frac{8RT}{\pi M}}.
+\]
+
+\stepn{3} \textbf{Root-mean-square speed} $v_{\text{rms}}$: what is $\sqrt{\overline{v^2}}$?
+\[
+\overline{v^2} = \int_0^\infty v^2 \phi(v)\,dv = 4\pi\Bigl(\frac{a}{\pi}\Bigr)^{3/2}\frac{3\sqrt\pi}{8}a^{-5/2}
+=\frac{3}{2a}=\frac{3k_BT}{m},
+\]
+the same $\overline{v^2}$ that the pressure derivation and the kinetic meaning of temperature required.
+So $v_{\text{rms}} = \sqrt{3k_BT/m} = \sqrt{3RT/M}$, and the distribution is consistent with
+Section~\ref{sec:kttemperature}. Three questions (the peak, the average, the square root of the average
+square) give three different numbers.
+\end{derivbox}
+
+\begin{keybox}{The three characteristic speeds}
+All three scale as $\sqrt{RT/M}$ and differ only by a numerical factor:
+\[
+v_p = \sqrt{\frac{2RT}{M}}, \qquad
+\bar v = \sqrt{\frac{8RT}{\pi M}}, \qquad
+v_{\text{rms}} = \sqrt{\frac{3RT}{M}},
+\]
+in the ratio $\sqrt2 : \sqrt{8/\pi} : \sqrt3 = 1 : 1.128 : 1.225$, the same for every gas at every
+temperature. Always $v_p < \bar v < v_{\text{rms}}$.
+\begin{itemize}
+\item $v_p$, the \textbf{most probable} speed: the peak of the curve, the commonest speed.
+\item $\bar v$, the \textbf{mean} speed: the ordinary average, used for collision rates, effusion and the
+      mean free path.
+\item $v_{\text{rms}}$: the speed for energy and pressure, since those depend on $\overline{v^2}$.
+\end{itemize}
+\end{keybox}
+
+\inwords{The curve is lopsided because speed cannot be negative (it is bounded below by zero) but has no
+ceiling, so the tail can only stretch to the right. That asymmetry is exactly why the three averages
+differ: for a symmetric bell curve the peak and the mean would coincide.}
+
+\why{The fast tail, small as it is, runs much of the world. Only molecules in the high-speed tail have
+enough energy to react, so raising the temperature, which stretches the tail dramatically, speeds up
+chemical reactions and cooking. The same tail lets the fastest water molecules escape a puddle far below
+boiling point (evaporation, which is why it cools what it leaves behind), and lets the fastest atmospheric
+molecules exceed escape speed. Figure~\ref{fig:ktmaxwell} shows the scale of the effect: tripling the
+temperature of nitrogen multiplies the fraction faster than \SI{1000}{m/s} by nearly thirty.}
+
+\subsection{Effusion: leaking through a pinhole}
+
+A gas leaking through a hole much smaller than the mean free path (Section~\ref{sec:ktmfp}) does not flow
+as a fluid; molecules simply pass through one at a time when their random motion carries them into the
+hole. This is \textbf{effusion}. The number of molecules crossing unit area of the hole per second is
+\[
+\Phi = \tfrac14\,n_V\,\bar v ,
+\]
+stated here without proof: the factor $\tfrac14$ comes from averaging over the directions of approach,
+which needs an integral over angles beyond this chapter's scope. Its consequence is easy to read: at the
+same temperature and pressure (so the same $n_V$), the effusion rate is proportional to $\bar v$, that is,
+to $1/\sqrt{M}$. This is \textbf{Graham's law},
+\[
+\frac{\text{rate}_A}{\text{rate}_B}=\sqrt{\frac{M_B}{M_A}} ,
+\]
+found experimentally by Graham in 1846 and explained by kinetic theory. The lighter gas escapes faster,
+which is how the isotopes of uranium were first separated on an industrial scale (a challenge problem at
+the end of the chapter works out the numbers).
+
+% ================================================================
+\section{Equipartition and Specific Heats}\label{sec:ktequipartition}
+
+So far every molecule has been treated as a structureless point that can only fly in straight lines.
+For a monatomic gas such as helium that is the whole story, giving an average energy
+$\overline K = \tfrac32 k_BT$ per molecule and $U=\tfrac32nRT$ per sample. But a nitrogen molecule is a dumbbell: it can also \emph{tumble}, and tumbling stores
+energy too. To predict the heat capacities of real gases we must count \emph{all} the ways a molecule can
+hold energy, not just its three directions of motion, and find how energy is shared among them.
+
+\subsection{Degrees of freedom}
+
+\begin{defbox}{Degrees of freedom $f$}
+For equipartition, the number of \textbf{degrees of freedom} $f$ of a molecule is the number of
+independent \emph{squared} terms in its energy. Each direction of translation contributes a
+$\tfrac12mv_x^2$-type term; each axis of rotation contributes a $\tfrac12I\omega^2$-type term, where $I$
+is the moment of inertia about that axis and $\omega$ the angular speed about it (\chref{ch:rotation}).
+\begin{itemize}
+\item \textbf{Monatomic} (He, Ar): three translations only: $f = 3$.
+\item \textbf{Diatomic, rigid} (N$_2$, O$_2$ at ordinary temperatures): 3 translations $+$ 2 rotations
+      about the two axes perpendicular to the bond: $f = 5$.
+\item \textbf{Linear polyatomic, rigid} (CO$_2$): also $f=5$, for the same reason.
+\item \textbf{Non-linear polyatomic, rigid} (CH$_4$, H$_2$O vapour): 3 translations $+$ 3 rotations:
+      $f = 6$.
+\end{itemize}
+A \textbf{vibration} (the atoms oscillating along a bond like masses on a spring) contributes
+\emph{two} squared terms, a kinetic $\tfrac12\mu\dot x^2$ and a potential $\tfrac12kx^2$ (with $\mu$ an
+effective mass, $x$ the stretch of the bond and $k$ the bond's spring constant, not to be confused with
+$k_B$). A diatomic molecule that vibrates therefore has $f=7$.
+\end{defbox}
+
+\begin{trapbox}{why some motions do not count}
+The usual explanation for leaving out rotation about the bond axis of N$_2$, that its moment of inertia is
+almost zero, is incomplete. Classically, the average energy in a squared term does not depend on the size
+of $I$ at all (the derivation below shows $m$ or $I$ cancelling), so a tiny $I$ would still earn its share.
+The real reason is quantum mechanical: rotational and vibrational energy can only be taken up in steps,
+and when the smallest step is much larger than $k_BT$ the motion cannot be excited and is ``frozen out''.
+For rotation about the bond the step is enormous because $I$ is tiny; for the vibration of N$_2$ the step
+corresponds to a temperature of about \SI{3400}{K}. So $f$ is not a fixed property of a molecule: it
+depends on the temperature.
+\end{trapbox}
+
+\subsection{The law of equipartition of energy}
+
+We found that the translational energy of a molecule is $\tfrac32 k_BT$. By isotropy it is split equally,
+$\tfrac12 k_BT$ along each of $x$, $y$ and $z$. The law of equipartition says this even-handedness is
+universal: \emph{every} squared term gets the same $\tfrac12 k_BT$ on average. Here is why one
+translational direction gets exactly that amount, by an argument that applies unchanged to rotation and
+vibration.
+
+\begin{derivbox}{Why one degree of freedom carries $\tfrac12 k_BT$}
+\stepn{1} \textbf{The distribution of one velocity component} is the Gaussian $g(v_x)$ of Maxwell's
+argument (Section~\ref{sec:ktmaxwell}), whose exponent is minus the kinetic energy in $x$ divided by
+$k_BT$.
+
+\stepn{2} \textbf{The average $x$-kinetic energy} is that energy weighted by how often each $v_x$
+occurs:
+\[
+\overline{\tfrac12 m v_x^2}
+= \int_{-\infty}^{\infty} \tfrac12 m v_x^2\; g(v_x)\,dv_x .
+\]
+
+\stepn{3} \textbf{Evaluate the Gaussian integral.} With
+$\int_{-\infty}^{\infty} u^2\,e^{-\alpha u^2}\,du = \tfrac12\sqrt{\pi}\,\alpha^{-3/2}$ and
+$\alpha = m/2k_BT$,
+\[
+\overline{\tfrac12 m v_x^2}=\tfrac12 m\sqrt{\frac{\alpha}{\pi}}\cdot\tfrac12\sqrt\pi\,\alpha^{-3/2}
+=\frac{m}{4\alpha}=
+\boxed{\;\tfrac12 k_BT\;}
+\]
+The mass has cancelled: heavy and light molecules carry the \emph{same} average energy per direction,
+which is the result of Section~\ref{sec:kttemperature}, now seen to hold one axis at a time.
+
+\stepn{4} \textbf{Generalise.} Nothing in Steps 1--3 used the fact that the energy was
+\emph{translational}. Any energy that is \textbf{quadratic} in its variable (a rotational $\tfrac12
+I\omega^2$, or a vibrational $\tfrac12 k x^2$) carries the same Gaussian Boltzmann factor and therefore
+the same average, $\tfrac12 k_BT$, with $I$ or $k$ cancelling as $m$ did. That is the law of
+equipartition.
+\end{derivbox}
+
+\begin{keybox}{The law of equipartition of energy}
+In thermal equilibrium at temperature $T$, each independent \textbf{quadratic} term in a molecule's
+energy carries, on average,
+\[
+\boxed{\;\tfrac12 k_BT \text{ per molecule}\quad\bigl(=\tfrac12 RT \text{ per mole}\bigr)\;}
+\]
+So a molecule with $f$ degrees of freedom has average energy $\tfrac{f}{2}k_BT$. Check: a monatomic gas
+has $f=3$ and $\tfrac32 k_BT$, the result of Section~\ref{sec:kttemperature}. The law is classical: it
+holds only for motions whose quantum steps are small compared with $k_BT$.
+\end{keybox}
+
+\why{Equipartition is why the heat capacity of a gas betrays its molecular shape. A monatomic gas can only
+\emph{move}; a diatomic one can also \emph{tumble}; each new way to store energy adds another $\tfrac12 R$
+per mole to the heat capacity. So measuring how much heat a gas needs to warm by one kelvin tells you how
+many atoms are in each molecule and roughly how they are arranged: thermodynamics reading out the
+invisible architecture of matter.}
+
+\subsection{Predicting the specific heats}
+
+\begin{derivbox}{$C_v$, $C_p$ and $\gamma$ from molecular structure}
+\stepn{1} The internal energy of one mole with $f$ degrees of freedom (an ideal gas has no potential
+energy between molecules, assumption (iii)) is
+\[
+U = N_A \cdot f\cdot\tfrac12 k_BT = \tfrac{f}{2}RT .
+\]
+
+\stepn{2} The molar heat capacity at constant volume is $C_v = dU/dT$ (\chref{ch:thermo}: at constant
+volume no work is done, so all the heat goes into $U$):
+\[
+C_v = \frac{f}{2}R .
+\]
+
+\stepn{3} Mayer's relation $C_p=C_v+R$ (\chref{ch:thermo}) then fixes the rest, with $\gamma=C_p/C_v$
+the ratio of the molar heat capacities:
+\[
+C_p = \left(\frac{f}{2}+1\right)R,
+\qquad
+\gamma = \frac{C_p}{C_v} = 1 + \frac{2}{f}.
+\]
+\end{derivbox}
+
+\begin{tablebox}{Predicted and measured molar heat capacities (\si{J.mol^{-1}.K^{-1}})}
+\centering
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+ & $f$ & $C_v$ predicted & $C_p$ predicted & $\gamma$ predicted & $C_v$ measured (near \SI{300}{K})\\
+\midrule
+Monatomic & 3 & $\tfrac32R = 12.5$ & $\tfrac52R=20.8$ & $5/3 \approx 1.67$ & He 12.5, Ar 12.5\\
+Diatomic (rigid) & 5 & $\tfrac52R = 20.8$ & $\tfrac72R=29.1$ & $7/5 = 1.40$ & N$_2$ 20.8, O$_2$ 21.1, H$_2$ 20.5\\
+Non-linear (rigid) & 6 & $3R=24.9$ & $4R=33.3$ & $4/3 \approx 1.33$ & H$_2$O vapour about 25\\
+Linear CO$_2$ (rigid) & 5 & $\tfrac52R = 20.8$ & $\tfrac72R=29.1$ & $1.40$ & CO$_2$ 28.8\\
+\bottomrule
+\end{tabular}
+
+\smallskip\raggedright
+The monatomic and simple diatomic gases agree to within about \SI{2}{\percent}. Carbon dioxide does not:
+its bending vibrations need only a small quantum step and are already partly excited at room temperature,
+so it stores more energy per kelvin than the rigid model allows.
+\end{tablebox}
+
+\inwords{More degrees of freedom means more ``pockets'' into which heat can be tucked without raising the
+translational energy that a thermometer responds to. So complex molecules need more heat per kelvin, and
+their $\gamma$ lies closer to 1.}
+
+\begin{remarkbox}{Hydrogen's heat capacity changes with temperature}
+The measured $C_v$ of hydrogen gas is only about $\tfrac32R$ at a few tens of kelvin, rises to $\tfrac52R$ near
+room temperature, and climbs towards $\tfrac72R$ at a few thousand kelvin. Rotation switches on as $k_BT$
+reaches the rotational step, vibration only at far higher temperature. Classical equipartition, which
+gives one fixed $f$, cannot explain the steps at all; Maxwell called this the greatest difficulty facing
+the molecular theory. Quantum mechanics explained it in the twentieth century.
+\end{remarkbox}
+
+\subsection{From molar heat capacity to specific heat}
+
+The derivation gives \emph{molar} heat capacities, in joules per \emph{mole} per kelvin. But engineers
+usually work with mass, and want the \textbf{specific heat capacity} $s$ of \chref{ch:thermal}: heat per
+\emph{kilogram} per kelvin. The two are one short step apart.
+
+\begin{keybox}{Molar heat capacity $C$ and specific heat $s$}
+A mole has mass $M$ (in \si{kg/mol}), so heating one mole is the same as heating $M$ kilograms:
+\[
+\boxed{\;C = M s \qquad\Longleftrightarrow\qquad s = \frac{C}{M}\;}
+\]
+Because $C$ is nearly the same for all gases of a given molecular shape, the \emph{specific} heat
+$s = C/M$ is large for light gases and small for heavy ones: hydrogen stores far more heat per kilogram
+than argon.
+\end{keybox}
+
+\begin{exbox}{The specific heat of air}\label{ex:ktair}
+Predict the specific heat of air at constant pressure. Treat air as a rigid diatomic gas ($f=5$) with
+average molar mass $M = \SI{28.8}{g/mol}$.
+
+\stepn{1} Molar heat capacity: $C_p = \tfrac72 R = 3.5(8.314) = \SI{29.1}{J.mol^{-1}.K^{-1}}$.
+
+\stepn{2} Divide by the molar mass to get the value per kilogram:
+\[
+s_p = \frac{C_p}{M} = \frac{29.1}{0.0288} \approx \SI{1010}{J.kg^{-1}.K^{-1}}.
+\]
+
+\stepn{3} The measured value is about \SI{1005}{J.kg^{-1}.K^{-1}}, agreement to about half a per cent from
+nothing but counting a diatomic molecule's five degrees of freedom. It is a quarter of water's
+\SI{4186}{J.kg^{-1}.K^{-1}}, and air is about 800 times less dense than water, so a cubic metre of air
+stores some three thousand times less heat per kelvin than a cubic metre of water. That is why heating a
+room's air is cheap, and why it is the sea, not the air, that moderates a coastal climate.
+\ans{$s_p \approx \SI{1010}{J.kg^{-1}.K^{-1}}$}
+\end{exbox}
+
+\begin{remarkbox}{Solids and the law of Dulong and Petit}
+The same counting works for a solid. An atom in a crystal oscillates about its lattice site, held by its
+neighbours as if by springs (\chref{ch:solids}): three kinetic and three potential squared terms, so
+$f=6$ and $U = 3RT$ per mole. That gives $C \approx 3R \approx \SI{25}{J.mol^{-1}.K^{-1}}$ for
+\emph{nearly every} elemental solid at room temperature, the empirical law of Dulong and Petit (1819), and
+explains the specific heats tabulated in \chref{ch:thermal}: for copper ($M=\SI{63.5}{g/mol}$),
+$s=24.9/0.0635\approx\SI{392}{J.kg^{-1}.K^{-1}}$, against a measured \SI{385}{J.kg^{-1}.K^{-1}}. The law
+fails at low temperatures, and for light, stiff solids even at room temperature (diamond has
+$C\approx\SI{6}{J.mol^{-1}.K^{-1}}$), for the quantum reason given above. That failure was one of the
+first experimental cracks through which quantum theory entered physics.
+\end{remarkbox}
+
+% ================================================================
+\section{Mean Free Path}\label{sec:ktmfp}
+
+If molecules fly at \SI{500}{m/s}, why does a smell take so long to cross a still room? Because no
+molecule flies far in a straight line: it collides, changes direction, and staggers along a random path.
+The \textbf{mean free path} $\lambda$ is the average distance a molecule travels between successive
+collisions. Estimating it needs one more property of a molecule: its size. Model each molecule as a hard
+sphere of diameter $d$.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{kinetic_cylinder}
+\figcaption{fig:ktcylinder}{The collision cylinder. Two spheres of diameter $d$ touch when their centres are $d$ apart, so the moving molecule hits every molecule whose \emph{centre} lies within $d$ of its path: a cylinder of radius $d$ and cross-section $\pi d^2$, four times the molecule's own cross-section. Counting the centres inside the cylinder counts the collisions.}
+\end{figure}
+
+\begin{derivbox}{The mean free path}
+\stepn{1} \textbf{The target area.} A molecule hits any other whose centre comes within a distance $d$ of
+its own centre (Figure~\ref{fig:ktcylinder}). So it sweeps out a cylinder of radius $d$, whose cross-section $\pi d^2$ is called the \textbf{collision cross-section}.
+
+\stepn{2} \textbf{First estimate: targets at rest.} Moving at speed $\bar v$ for a time $t$, the molecule
+sweeps a cylinder of volume $\pi d^2\bar v t$. With $n_V$ molecules per unit volume, it meets
+$n_V\pi d^2\bar v t$ of them. (After each collision it changes direction, so the cylinder is really
+bent at each hit, but its volume is the same.) The distance travelled per collision is
+\[
+\lambda \approx \frac{\bar v t}{n_V\pi d^2 \bar v t} = \frac{1}{\pi d^2 n_V}.
+\]
+
+\stepn{3} \textbf{The targets move too.} How often collisions happen depends on how fast molecules
+approach each other, the \emph{relative} speed $|\vv_1-\vv_2|$. Its square is
+$v_1^2+v_2^2-2\vv_1\cdot\vv_2$, and because the directions are random, $\vv_1\cdot\vv_2$ averages to zero.
+So the mean-square relative speed is $2\overline{v^2}$, and the typical relative speed is $\sqrt2$ times
+the typical speed. For the Maxwell distribution the mean relative speed is exactly $\sqrt2\,\bar v$
+(stated without proof: the relative velocity of two molecules is itself Maxwell-distributed, with half
+the mass). The number of collisions in time $t$ is therefore $n_V\pi d^2(\sqrt2\,\bar v)t$, while the
+distance actually travelled is still $\bar vt$:
+\[
+\boxed{\;\lambda = \frac{1}{\sqrt{2}\,\pi d^2 n_V}\;}
+\]
+This book always uses this form, with the $\sqrt2$. Some books quote $1/\pi d^2n_V$, which is the estimate
+with targets at rest; it is about \SI{40}{\percent} too large.
+\end{derivbox}
+
+\inwords{$\lambda$ falls as the gas gets denser ($\propto 1/n_V$) and as the molecules get bigger
+($\propto 1/d^2$). At a fixed temperature $n_V \propto P$, so halving the pressure doubles the free path.
+That is why vacuum equipment works: pump the pressure down far enough and molecules fly from wall to wall
+without meeting each other at all.}
+
+\begin{keybox}{The mean free path in terms of pressure, and the collision frequency}
+The number density is awkward to measure directly, but $P$ and $T$ are not. Substituting
+$n_V = P/k_BT$ turns the free path into laboratory variables:
+\[
+\boxed{\;\lambda = \frac{k_BT}{\sqrt2\,\pi d^2 P}\;}
+\]
+so $\lambda \propto T$ at fixed pressure and $\lambda \propto 1/P$ at fixed temperature. The
+\textbf{collision frequency} $z$, the number of collisions each molecule suffers per second, is the
+distance travelled per second divided by the distance per collision:
+\[
+\boxed{\;z = \frac{\bar v}{\lambda} = \sqrt2\,\pi d^2 n_V\bar v\;}
+\]
+\end{keybox}
+
+\begin{trapbox}{the mean free path does not depend on speed}
+$\lambda=1/\sqrt2\pi d^2n_V$ contains no $\bar v$: a faster molecule meets molecules more often, but
+covers ground faster in exact proportion. Heating a \emph{sealed} rigid container (fixed $n_V$) leaves
+$\lambda$ unchanged; the molecules simply run their unchanged free paths more quickly, so $z$ rises as
+$\sqrt T$. Only at fixed \emph{pressure}, when heating also thins the gas, does $\lambda$ grow with $T$.
+\end{trapbox}
+
+\begin{exbox}{Free path and collision rate in air}\label{ex:ktmfp}
+Estimate $\lambda$ and $z$ for air at \SI{0}{\celsius} and atmospheric pressure, taking
+$d = \SI{3.7e-10}{m}$ (a value found from the viscosity of air), $n_V = \SI{2.69e25}{m^{-3}}$, and
+$M=\SI{29}{g/mol}$.
+
+\stepn{1} Cross-section: $\pi d^2 = \pi(3.7\times10^{-10})^2 = \SI{4.30e-19}{m^2}$.
+
+\stepn{2} Mean free path:
+\[
+\lambda = \frac{1}{\sqrt2 \times (4.30\times10^{-19}) \times (2.69\times10^{25})}
+= \frac{1}{1.63\times10^{7}} \approx \SI{6.1e-8}{m} = \SI{61}{nm}.
+\]
+
+\stepn{3} Mean speed: $\bar v=\sqrt{8RT/\pi M}=\sqrt{8(8.314)(273)/(\pi\times0.029)}\approx\SI{447}{m/s}$, so
+$z=\bar v/\lambda\approx 447/(6.1\times10^{-8})\approx\SI{7e9}{s^{-1}}$.
+
+\stepn{4} \textbf{Perspective.} A molecule travels about $\lambda/d\approx165$ of its own diameters between
+hits, passing some twenty neighbours (spaced \SI{3.3}{nm} apart) before striking one, and it collides
+about seven billion times a second. That collision rate is why a gas settles into equilibrium, and into
+the Maxwell distribution, almost instantly.
+\ans{$\lambda\approx\SI{61}{nm}$; $z\approx\SI{7e9}{s^{-1}}$}
+\end{exbox}
+
+\begin{remarkbox}{Why a hot gas is more viscous}
+\chref{ch:fluids} noted that a gas, unlike a liquid, grows \emph{more} viscous when heated. The mean free
+path explains it. Viscosity is the drag of one layer of fluid on its neighbour. In a gas the layers do not
+pull on each other; instead molecules fly across from one layer to the next, about a free path $\lambda$
+at a time, carrying the flow velocity of the layer they left. A rough version of that count (stated here
+without the full calculation) gives a coefficient of viscosity of about
+$\tfrac13\rho\bar v\lambda$, where $\rho$ is the gas's density; a careful treatment of hard spheres raises
+the $\tfrac13$ to about $\tfrac12$. Two predictions follow at once. Since $\rho\propto n_V$ and
+$\lambda\propto1/n_V$, their product does not depend on the density, so the viscosity of a gas is
+\emph{independent of its pressure}, a result so surprising that Maxwell checked it experimentally himself.
+And since $\bar v\propto\sqrt T$, the viscosity rises with temperature, the opposite of a liquid, whose
+viscosity comes from molecules held by their neighbours' attraction. For air at \SI{0}{\celsius},
+$\tfrac12\rho\bar v\lambda=\tfrac12(1.29)(447)(\num{6.1e-8})\approx\SI{1.8e-5}{Pa.s}$, close to the measured \SI{1.7e-5}{Pa.s}; run backwards, this is how the molecular diameter in Example~\ref{ex:ktmfp} was found.
+\end{remarkbox}
+
+\begin{remarkbox}{Why smells cross a room by draughts, not by diffusion}
+A molecule that takes random steps of length $\lambda$ in random directions does not get far. After $N$
+steps its typical distance from the start grows only as $\lambda\sqrt N$, not $N\lambda$ (stated without
+proof; it is the random-walk result). In a time $t$ it takes $N=z t$ steps, so it wanders a distance of
+about $\lambda\sqrt{zt}=\sqrt{\lambda\bar v\,t}$. For air,
+$\sqrt{(6.1\times10^{-8})(447)(\SI{1}{s})}\approx\SI{5}{mm}$ in the first second, and crossing a
+\SI{5}{m} room this way would take $t\approx(\SI{5}{m})^2/\lambda\bar v\approx 9\times10^5$~s, about ten
+days (an order-of-magnitude estimate). A smell actually crosses a room in a minute or so because the air
+itself moves, in draughts and convection currents. Diffusion matters on small scales: across a cell, or
+through the thin layer of still air at a leaf's surface.
+\end{remarkbox}
+
+% ================================================================
+\section{Summary}\label{sec:ktsummary}
+Kinetic theory explains the gas laws as Newtonian mechanics applied to a vast number of molecules.
+Pressure is momentum delivered to the walls per unit time and area; comparing it with the ideal-gas law
+shows that temperature measures the average translational kinetic energy of a molecule; equipartition
+shares energy equally among the squared terms of a molecule's energy, which predicts the heat capacities;
+and the size of the molecules sets how far they fly between collisions.
+
+\begin{itemize}
+\item Ideal gas: $PV=nRT=Nk_BT$, $P=n_Vk_BT$, with $k_B=R/N_A=\SI{1.38e-23}{J/K}$ and
+      $n_V=N/V$.
+\item Pressure from impacts: $P=\tfrac13\rho\overline{v^2}=\tfrac23n_V\overline K$; in a mixture the
+      partial pressures add (Dalton).
+\item Temperature: $\overline K=\tfrac12m\overline{v^2}=\tfrac32k_BT$, the same for every gas at the same
+      $T$; so equal volumes at equal $P$ and $T$ hold equal numbers of molecules (Avogadro).
+\item Maxwell--Boltzmann distribution $\phi(v)\propto v^2e^{-mv^2/2k_BT}$, with
+      $v_p=\sqrt{2RT/M}<\bar v=\sqrt{8RT/\pi M}<v_{\text{rms}}=\sqrt{3RT/M}$, in the ratio
+      $1:1.128:1.225$.
+\item Effusion rate $\propto\bar v\propto1/\sqrt M$ at fixed $T$ and $P$ (Graham).
+\item Equipartition: $\tfrac12k_BT$ per squared term; $U=\tfrac f2nRT$, $C_v=\tfrac f2R$,
+      $C_p=C_v+R$, $\gamma=1+\tfrac2f$, with $f=3$, 5, 6 for monatomic, rigid linear and rigid non-linear
+      molecules (each active vibration adds 2). Specific heat $s=C/M$; solids $C\approx3R$.
+\item Mean free path $\lambda=\dfrac{1}{\sqrt2\pi d^2n_V}=\dfrac{k_BT}{\sqrt2\pi d^2P}$; collision
+      frequency $z=\bar v/\lambda$.
+\item Limits: dense or cold gases (finite molecular size, intermolecular forces), and low temperatures,
+      where quantum steps freeze out rotation and vibration and equipartition fails.
+\end{itemize}
+
+% ================================================================
+\section{Problem Types}\label{sec:kttypes}
+The kinetic-theory questions examiners set fall into eleven types, six of them on molecular speeds. Almost
+all reduce to a single proportionality, so the most efficient approach is to take ratios and let the
+constants cancel. Because this chapter closes the volume, the habits that decide problems throughout
+Volume~II are collected first.
+
+\begin{methodbox}{Four habits for every problem in this volume}
+\begin{enumerate}
+\item \textbf{Convert to kelvin} whenever a temperature enters a ratio or a product: rms speeds, gas
+      laws, Carnot efficiencies and the $T^4$ of radiation all demand absolute temperature. Only a
+      temperature \emph{difference} may stay in degrees Celsius.
+\item \textbf{Decide what is held fixed}: which variable ($P$, $V$ or $T$), which phase, which process
+      (isothermal or adiabatic, sealed or open). That one choice selects the formula.
+\item \textbf{Use state functions as shortcuts}: $\Delta U$ depends only on the end states, so compute it
+      on the easiest path; around a closed cycle it is zero, and the net work is the enclosed area.
+\item \textbf{Watch for deliberate distractors}: an irrelevant pressure in an rms-speed question, an
+      irrelevant length in a stress question, a mass ratio in an average-kinetic-energy question.
+\end{enumerate}
+Recognising the type from the first line of a problem tells you which habit to use, which is why naming
+the pattern is half the solution. Practise by covering the Method line of each type below and
+reconstructing it from the Tell alone.
+\end{methodbox}
+
+\archq{rms speed scaling}
+{``A gas has rms speed $v$ at $T_1$; find it at $T_2$,'' often with a \emph{pressure change} added.}
+{$v_{\text{rms}}=\sqrt{3RT/M}$, so for the same gas $v_2=v_1\sqrt{T_2/T_1}$. Different gases at the same
+$T$: $v_{\text{rms}}\propto1/\sqrt M$.}
+{The pressure is a distractor: the rms speed depends only on $T$ and $M$. Temperatures must be in kelvin.}
+{The rms speed of the molecules of a gas is \SI{200}{m/s} at \SI{27}{\celsius}. The gas is heated to
+\SI{127}{\celsius} while its pressure is also changed. The new rms speed is:}
+{\SI{173}{m/s}}
+{\SI{267}{m/s}}
+{\SI{231}{m/s}}
+{\SI{434}{m/s}\archans{C}{$v_2=200\sqrt{400/300}=200\sqrt{4/3}\approx\SI{231}{m/s}$; the pressure change
+is irrelevant. (A) inverts the temperature ratio; (B) takes $v\propto T$ instead of $\sqrt T$; (D) uses
+the Celsius temperatures, $200\sqrt{127/27}$.}}
+
+\archq{Average kinetic energy at the same temperature}
+{``Two different gases at the same temperature: compare the average kinetic energy per molecule,'' often
+with a mass ratio given.}
+{The average translational kinetic energy per molecule is $\tfrac32 k_BT$, temperature alone. At the same
+$T$, every gas has the same value.}
+{The mass ratio is a pure distractor for kinetic energy per \emph{molecule}. (The \emph{total} energy per
+molecule, including rotation, does depend on the atomicity.)}
+{A vessel contains a monatomic gas and a diatomic gas in the mass ratio $4:1$ at \SI{300}{K}. The ratio of
+the average translational kinetic energy \emph{per molecule} of the two gases is:}
+{$1:1$}
+{$4:1$}
+{$3:5$}
+{$1:4$\archans{A}{The average translational kinetic energy per molecule is $\tfrac32 k_BT$ for every
+gas, so at the same $T$ the ratio is $1:1$. (B) and (D) use the mass ratio; (C) compares the total
+energies $\tfrac32k_BT$ and $\tfrac52k_BT$, which is not what was asked.}}
+
+\archq{The escape-speed temperature}
+{``At what temperature would a molecule's rms speed equal the escape speed of a planet?''}
+{Set $v_{\text{rms}}=v_{\text{esc}}$: $\tfrac12mv_{\text{esc}}^2=\tfrac32k_BT$, so
+$T=\dfrac{m\,v_{\text{esc}}^2}{3k_B}$.}
+{Pair the molecular mass $m$ with $k_B$, or the molar mass $M$ with $R$; never mix them. Use $3k_B$, from
+$\tfrac32k_BT$, not $k_B$ or $2k_B$.}
+{At what temperature would the rms speed of oxygen molecules (mass \SI{5.31e-26}{kg}) equal the escape
+speed from Earth, \SI{11.2}{km/s}? (Take $k_B=\SI{1.38e-23}{J/K}$.)}
+{\SI{8.0e4}{K}}
+{\SI{2.4e5}{K}}
+{\SI{4.8e5}{K}}
+{\SI{1.6e5}{K}\archans{D}{$T=\dfrac{m\,v_{\text{esc}}^2}{3k_B}=\dfrac{(5.31\times10^{-26})(11200)^2}
+{3(1.38\times10^{-23})}\approx\SI{1.6e5}{K}$. (A) uses $6k_B$, as if $\tfrac12mv^2$ were $3k_BT$; (B) uses $2k_B$, which
+sets the \emph{most probable} speed equal to $v_{\text{esc}}$; (C) drops the factor 3. No planetary
+atmosphere is this hot; oxygen is held because escape needs only a thin tail of the distribution, and for
+oxygen even that tail is negligible.}}
+
+\archq{Pressure when mass or speed is rescaled}
+{``The molecular mass is halved and the speeds doubled; find the new pressure.''}
+{From $P=\tfrac13n_Vm\overline{v^2}$, track each factor: $P\propto n_Vm\overline{v^2}$.}
+{Speed enters \emph{squared}: doubling every speed multiplies $\overline{v^2}$ by four, not two.}
+{A gas exerts pressure $P_0$ on its container. If the mass of each molecule is halved and the speed of each
+is doubled, the number of molecules and the volume being unchanged, the new pressure is:}
+{$P_0$}
+{$4P_0$}
+{$P_0/2$}
+{$2P_0$\archans{D}{$P\propto m\overline{v^2}$, so the factor is $\tfrac12\times4=2$. (A) forgets that speed
+enters squared ($\tfrac12\times2$); (B) ignores the halved mass; (C) applies only the mass change.}}
+
+\archq{Effusion and Graham's law}
+{``Two gases escape through a pinhole: compare their rates,'' or ``find an unknown molar mass from its
+effusion rate.''}
+{At the same $T$ and $P$, rate $\propto\bar v\propto1/\sqrt M$, so
+$\dfrac{\text{rate}_A}{\text{rate}_B}=\sqrt{\dfrac{M_B}{M_A}}$.}
+{The lighter gas is \emph{faster}: do not invert the ratio, and remember the square root.}
+{An unknown gas effuses through a pinhole at \SI{2}{mL/min}, while hydrogen ($M=\SI{2}{g/mol}$) effuses
+through the same hole at \SI{11}{mL/min} under identical conditions. The molar mass of the unknown gas is
+about:}
+{\SI{11}{g/mol}}
+{\SI{60.5}{g/mol}}
+{\SI{121}{g/mol}}
+{\SI{0.066}{g/mol}\archans{B}{$\dfrac{2}{11}=\sqrt{\dfrac{2}{M}}$, so
+$M=2\left(\dfrac{11}{2}\right)^2=\SI{60.5}{g/mol}$. (A) drops the square root (rate $\propto1/M$); (C)
+takes hydrogen's molar mass as 4; (D) inverts the ratio, making the slower gas the lighter.}}
+
+\archq{The speed of sound and the rms speed}
+{``Relate the speed of sound in a gas to the rms speed of its molecules.''}
+{The speed of sound in a gas is $\sqrt{\gamma P/\rho}=\sqrt{\gamma RT/M}$ (quoted here: waves are not
+treated in this volume; the $\gamma$ appears because the compressions of a sound wave are too quick for
+heat to flow, so they are adiabatic). With $v_{\text{rms}}=\sqrt{3RT/M}$,
+$\dfrac{v_{\text{sound}}}{v_{\text{rms}}}=\sqrt{\dfrac{\gamma}{3}}$, depending on neither $T$ nor $P$.}
+{Use the adiabatic $\gamma P$, not the isothermal $P$ (Newton's historical error).}
+{For air ($\gamma=1.4$), the ratio of the speed of sound to the rms speed of the molecules is closest to:}
+{$0.68$}
+{$0.58$}
+{$1.00$}
+{$1.46$\archans{A}{$\sqrt{\gamma/3}=\sqrt{1.4/3}\approx0.68$, so sound is somewhat slower than the rms
+molecular speed, as it must be, since the molecules carry it. (B) is Newton's isothermal value
+$\sqrt{1/3}$; (C) assumes the two are equal; (D) is the ratio inverted.}}
+
+\archq{The three speeds of the Maxwell distribution}
+{``Given one of $v_p$, $\bar v$, $v_{\text{rms}}$, find another,'' or ``put them in order.''}
+{All three are $\sqrt{RT/M}$ times $\sqrt2$, $\sqrt{8/\pi}$ and $\sqrt3$, in the ratio
+$1:1.128:1.225$, so convert by ratios and never compute $RT/M$.}
+{Mixing up which is largest: the order is always $v_p<\bar v<v_{\text{rms}}$.}
+{The rms speed of the molecules of a gas is \SI{500}{m/s}. Their most probable speed is:}
+{\SI{500}{m/s}}
+{\SI{461}{m/s}}
+{\SI{408}{m/s}}
+{\SI{612}{m/s}\archans{C}{$v_p=v_{\text{rms}}\sqrt{2/3}=500\times0.816\approx\SI{408}{m/s}$. (B) is the
+mean speed, $500\sqrt{8/3\pi}$; (D) multiplies by $\sqrt{3/2}$ instead of dividing; (A) treats the three
+speeds as equal.}}
+
+\archq{Internal energy of a gas mixture}
+{``A mixture of $n_1$ moles of one gas and $n_2$ of another (different atomicities) at $T$; find the
+total internal energy.''}
+{Each gas contributes $n_i\dfrac{f_i}{2}RT$; add them. Monatomic $f=3$, rigid diatomic $f=5$.}
+{Use each gas's \emph{own} degrees of freedom; do not average them first. ``Neglect vibration'' means the
+diatomic molecules are rigid ($f=5$).}
+{\SI{2}{mol} of oxygen (diatomic) is mixed with \SI{4}{mol} of argon (monatomic) at temperature $T$.
+Neglecting vibration, the internal energy of the mixture is:}
+{$9RT$}
+{$12RT$}
+{$11RT$}
+{$13RT$\archans{C}{$U=2\left(\tfrac52 RT\right)+4\left(\tfrac32 RT\right)=5RT+6RT=11RT$. (A) counts only
+translation for both; (B) averages $f$ to 4 before multiplying by 6 moles; (D) swaps the two values of
+$f$.}}
+
+\archq{$C_v$ and $\gamma$ of a mixture}
+{``Mix $n_1$ moles of one gas with $n_2$ of another; find $C_v$, $C_p$ or $\gamma$ of the mixture.''}
+{Heat capacities add: $C_v^{\text{mix}}=\dfrac{n_1C_{v1}+n_2C_{v2}}{n_1+n_2}$, then
+$C_p^{\text{mix}}=C_v^{\text{mix}}+R$ and $\gamma=C_p^{\text{mix}}/C_v^{\text{mix}}$.}
+{Do \emph{not} average the $\gamma$ values: average the heat capacities, then form $\gamma$.}
+{One mole of a monatomic gas ($C_v=\tfrac32 R$) is mixed with one mole of a rigid diatomic gas
+($C_v=\tfrac52 R$). The ratio $\gamma$ of the mixture is:}
+{$1.53$}
+{$1.50$}
+{$1.40$}
+{$1.67$\archans{B}{$C_v^{\text{mix}}=\tfrac12\left(\tfrac32R+\tfrac52R\right)=2R$ and
+$C_p^{\text{mix}}=3R$, so $\gamma=1.5$. (A) averages $\tfrac53$ and $\tfrac75$ directly; (C) and (D) are
+the values for the pure diatomic and pure monatomic gases.}}
+
+\archq{Degrees of freedom from a heat capacity}
+{``A gas has $C_p$ (or $C_v$, or $\gamma$) equal to a given value; what kind of molecule is it?''}
+{Invert $C_v=\tfrac f2R$, $C_p=(\tfrac f2+1)R$ or $\gamma=1+\tfrac2f$ for $f$, then match $f$ to a shape:
+3 monatomic, 5 rigid linear, 6 rigid non-linear, and 2 more for each active vibration.}
+{Confusing $C_p$ with $C_v$: they differ by $R$, which shifts $f$ by 2.}
+{The molar heat capacity of an ideal gas at constant \emph{pressure} is $4R$. Its molecules are most likely:}
+{monatomic}
+{rigid and non-linear polyatomic}
+{rigid diatomic}
+{diatomic and vibrating\archans{B}{$(\tfrac f2+1)R=4R$ gives $f=6$: three translations and three rotations,
+a rigid non-linear molecule such as water vapour. (C) treats $4R$ as close to $C_p=\tfrac72R$; (D) reads
+$4R$ as $C_v$, giving $f=8$ and guessing the nearest case ($f=7$); a monatomic gas, (A), has
+$C_p=\tfrac52R$.}}
+
+\archq{Mean free path under changed conditions}
+{``The mean free path is $\lambda$ under some conditions; find it when temperature or pressure changes.''}
+{$\lambda=\dfrac{k_BT}{\sqrt2\,\pi d^2 P}=\dfrac{1}{\sqrt2\,\pi d^2n_V}$: $\lambda\propto T$ at fixed $P$,
+$\lambda\propto1/P$ at fixed $T$, and unchanged at fixed $n_V$ (a sealed rigid vessel).}
+{Decide first what is held fixed. Heating a sealed rigid box does \emph{not} change $\lambda$; heating at
+constant pressure does.}
+{At \SI{273}{K} a gas has a mean free path of $1500d$, where $d$ is the molecular diameter. If the pressure
+is held constant and the temperature is raised to \SI{373}{K}, the new mean free path is about:}
+{$1500d$}
+{$1098d$}
+{$1753d$}
+{$2049d$\archans{D}{At constant pressure $\lambda\propto T$, so $\lambda'=1500d\times\dfrac{373}{273}
+\approx2049d$. (A) treats the vessel as sealed; (B) inverts the ratio; (C) takes $\lambda\propto\sqrt T$,
+the scaling of the speed rather than of the free path.}}
+
+% ================================================================
+\section{Practice Problems}\label{sec:ktpractice}
+
+The problems below are of standard examination difficulty and are meant to be worked without looking
+back at the chapter. Answers, with brief working, follow the list. Take
+$R = \SI{8.314}{J.mol^{-1}.K^{-1}}$ and $k_B=\SI{1.38e-23}{J/K}$ unless stated otherwise.
+
+\begin{enumerate}[itemsep=3pt]
+\item Find $v_{\text{rms}}$ for oxygen ($M=\SI{32}{g/mol}$) at \SI{300}{K}.
+\item At what temperature is the rms speed of a gas double its value at \SI{300}{K}?
+\item Find the total internal energy of 2 moles of a rigid diatomic gas at \SI{300}{K}.
+\item At the same temperature, by what factor is the rms speed of helium ($M=\SI{4}{g/mol}$) greater than
+      that of nitrogen ($M=\SI{28}{g/mol}$)?
+\item A gas has $\gamma = 4/3$. How many degrees of freedom does each molecule have, and what kind of
+      molecule is it likely to be?
+\item A sealed rigid container of gas is heated from \SI{300}{K} to \SI{600}{K}. What happens to
+      (a) the pressure, (b) the mean free path, (c) the collision frequency?
+\item One mole of a monatomic gas is mixed with one mole of a rigid diatomic gas. Find $C_v$ of the
+      mixture, and its $\gamma$.
+\item \emph{Conceptual.} Two different gases are at the same temperature. What is necessarily equal
+      between them, and what is necessarily different (assuming different molar masses)?
+\item For oxygen ($M=\SI{32}{g/mol}$) at \SI{300}{K}, find the most probable speed $v_p$, the mean
+      speed $\bar v$ and the rms speed $v_{\text{rms}}$, and verify that they are in the ratio
+      $\sqrt2:\sqrt{8/\pi}:\sqrt3$.
+\item A gas is heated at constant volume so that its rms speed doubles. By what factor does the
+      absolute temperature change, and by what factor the pressure?
+\item Carbon dioxide (CO$_2$) is a \emph{linear} triatomic molecule; water vapour (H$_2$O) is
+      \emph{non-linear}. Assuming rigid molecules, find $f$, $C_v$ and $\gamma$ for each, and explain
+      the difference.
+\item \emph{Conceptual.} Sketch how the Maxwell--Boltzmann curve changes when a gas is heated. Which way
+      does the peak move, and what happens to the fast tail? Name one everyday process governed by that
+      tail.
+\item A vessel of volume \SI{0.050}{m^3} holds \SI{1}{mol} of nitrogen and \SI{2}{mol} of helium at
+      \SI{300}{K}. Find the partial pressure of each gas and the total pressure.
+\item Find the average translational kinetic energy of a gas molecule at \SI{27}{\celsius}, in joules
+      and in electronvolts ($\SI{1}{eV}=\SI{1.60e-19}{J}$).
+\item An ultra-high-vacuum chamber is pumped down to \SI{1e-8}{Pa} at \SI{300}{K}. Find the number of
+      molecules per cubic centimetre and the mean free path, taking $d=\SI{3.7e-10}{m}$.
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item $v_{\text{rms}} = \sqrt{3(8.314)(300)/0.032} \approx \SI{484}{m/s}$.
+\item $v_{\text{rms}} \propto \sqrt{T}$, so doubling the speed needs four times the absolute temperature:
+      $T = \SI{1200}{K}$ (\SI{927}{\celsius}).
+\item $U = n\tfrac{f}{2}RT = 2\times\tfrac52\times8.314\times300 \approx \SI{12.5}{kJ}$.
+\item $v \propto 1/\sqrt{M}$: the ratio is $\sqrt{28/4} = \sqrt7 \approx 2.65$.
+\item $\gamma = 1 + 2/f = 4/3$ gives $f = 6$: a rigid non-linear polyatomic molecule (3 translations
+      $+$ 3 rotations), such as methane or water vapour.
+\item (a) $P = n_Vk_BT$ with $n_V$ fixed: the pressure doubles. (b) $\lambda = 1/(\sqrt2\pi d^2 n_V)$
+      depends only on $n_V$ and $d$, both fixed: \textbf{unchanged}. (c) $z=\bar v/\lambda \propto
+      \sqrt{T}$: it rises by a factor $\sqrt2\approx1.41$.
+\item $C_v^{\text{mix}} = \dfrac{1\cdot\tfrac32R + 1\cdot\tfrac52R}{2} = 2R \approx
+      \SI{16.6}{J.mol^{-1}.K^{-1}}$. Then $C_p = 3R$ and $\gamma = 3/2$.
+\item Necessarily equal: the average translational kinetic energy per molecule, $\tfrac32k_BT$.
+      Necessarily different: the rms speed (and the other two characteristic speeds). The lighter gas
+      moves faster in exactly the ratio $\sqrt{M_2/M_1}$, so that $\tfrac12 m\overline{v^2}$ still
+      matches.
+\item $\sqrt{RT/M} = \sqrt{8.314(300)/0.032} \approx \SI{279}{m/s}$, so
+      $v_p=\sqrt2\times279 \approx \SI{395}{m/s}$, $\bar v = \sqrt{8/\pi}\times279\approx\SI{446}{m/s}$ and
+      $v_{\text{rms}} = \sqrt3\times279\approx\SI{484}{m/s}$. The ratio $395:446:484 = 1:1.13:1.22$, which
+      is $\sqrt2:\sqrt{8/\pi}:\sqrt3$.
+\item $v_{\text{rms}}\propto\sqrt T$, so doubling it needs $T$ to rise by a factor $2^2 = 4$. At fixed
+      volume $P\propto T$, so the pressure also rises by a factor 4.
+\item \textbf{CO$_2$ (linear):} 3 translations $+$ 2 rotations, $f=5$, so $C_v=\tfrac52R$ and
+      $\gamma = 1+\tfrac25 = 1.4$. \textbf{H$_2$O (non-linear):} 3 translations $+$ 3 rotations, $f=6$, so
+      $C_v = 3R$ and $\gamma = 1+\tfrac26 = \tfrac43 \approx 1.33$. A linear molecule has no rotation about
+      its own axis that can take up energy, so it has one rotational degree of freedom fewer than a bent
+      one, and a larger $\gamma$. (Real CO$_2$ already has partly excited vibrations at room temperature,
+      so its measured $\gamma$ is about 1.29.)
+\item The peak moves \emph{right} ($v_p\propto\sqrt T$) and becomes \emph{lower and broader}, since the
+      area under the curve, the total fraction, stays equal to one. The fast tail grows much fatter
+      (Figure~\ref{fig:ktmaxwell}). Everyday consequences: faster evaporation, faster cooking and faster
+      chemical reactions, all driven by the enlarged high-energy tail.
+\item $P_i=n_iRT/V$: helium $2(8.314)(300)/0.050\approx\SI{9.98e4}{Pa}$, nitrogen
+      $\approx\SI{4.99e4}{Pa}$; total (Dalton) $\approx\SI{1.50e5}{Pa}$. The heavier nitrogen exerts
+      half the pressure of the helium only because there is half as much of it: pressure counts molecules,
+      not mass.
+\item $\overline K=\tfrac32k_BT=1.5(1.38\times10^{-23})(300)\approx\SI{6.2e-21}{J}\approx\SI{0.039}{eV}$.
+\item $n_V=P/k_BT=10^{-8}/(1.38\times10^{-23}\times300)\approx\SI{2.4e12}{m^{-3}}$, that is,
+      about $2.4$ million molecules per cubic centimetre, still a great many.
+      $\lambda=1/(\sqrt2\pi d^2n_V)\approx\SI{6.8e5}{m}$, nearly \SI{700}{km}: a molecule crosses the
+      chamber thousands of times, bouncing between the walls, before it meets another molecule.
+\end{enumerate}
+
+}
+
+% ================================================================
+\section{Challenge Problems}\label{sec:ktchallenge}
+
+The five problems below are original problems in the spirit of olympiad and JEE Advanced collections.
+The first three extend the chapter's main results; the last two apply effusion and the mean free path to
+real technology. Work each before reading the answer.
+
+\begin{challengebox}{Three speeds of a gas (extends the Maxwell distribution)}
+For nitrogen ($M=\SI{28}{g/mol}$) at \SI{300}{K}, compute the rms, mean and most probable molecular speeds,
+and show that their ratio is universal (independent of the gas and the temperature).
+\challengeans{With $R=\SI{8.314}{J.mol^{-1}.K^{-1}}$:
+\[
+v_{\text{rms}}=\sqrt{\frac{3RT}{M}}\approx\SI{517}{m/s},\quad
+\bar v=\sqrt{\frac{8RT}{\pi M}}\approx\SI{476}{m/s},\quad
+v_p=\sqrt{\frac{2RT}{M}}\approx\SI{422}{m/s}.
+\]
+Their ratio is $v_{\text{rms}}:\bar v:v_p=\sqrt3:\sqrt{8/\pi}:\sqrt2\approx1.22:1.13:1$, the \emph{same
+for every gas at every temperature}, because all three scale as $\sqrt{T/M}$; only the numerical constant
+from the Maxwell distribution differs. Always $v_p<\bar v<v_{\text{rms}}$, since the high-speed tail pulls
+the mean and the rms above the peak.}
+\end{challengebox}
+
+\begin{challengebox}{How far between collisions (extends the mean free path)}
+Estimate the mean free path of an air molecule at \SI{300}{K} and \SI{1.0e5}{Pa} (molecular diameter
+$d\approx\SI{3.7e-10}{m}$), and compare it with the molecular size and spacing.
+\challengeans{
+\[
+\lambda=\frac{k_BT}{\sqrt2\,\pi d^2 P}=\frac{(1.38\times10^{-23})(300)}{\sqrt2\,\pi(3.7\times10^{-10})^2(1.0\times10^5)}
+\approx\SI{68}{nm}.
+\]
+That is about 180 molecular diameters. The spacing between molecules is only
+$n_V^{-1/3}=(k_BT/P)^{1/3}\approx\SI{3.5}{nm}$, so a molecule passes some twenty neighbours before
+actually striking one. Compared with Example~\ref{ex:ktmfp}, the free path is a little longer because
+the gas is warmer and slightly less dense ($\lambda\propto T/P$).}
+\end{challengebox}
+
+\begin{challengebox}{The ratio $\gamma$ of a gas mixture (extends equipartition)}
+Equal numbers of moles of helium (monatomic) and nitrogen (diatomic) are mixed. Find the molar heat
+capacities $C_v$ and $C_p$ and the ratio $\gamma$ of the mixture.
+\challengeans{Heat capacities add per mole. For the equimolar mixture,
+\[
+C_v=\frac{1}{2}\left(\frac{3R}{2}+\frac{5R}{2}\right)=2R,\qquad C_p=C_v+R=3R,
+\]
+so $\gamma=C_p/C_v=1.5$. It lies between helium's $\tfrac53\approx1.67$ and nitrogen's $\tfrac75=1.4$, as
+it must. Measuring $\gamma$ (for example from the speed of sound) is a classic way to \emph{determine} a
+gas's atomicity or a mixture's composition. Note that $1.5$ is not the average of $1.67$ and $1.4$: it is
+the heat capacities, not their ratios, that add.}
+\end{challengebox}
+
+\begin{challengebox}{Escaping through a pinhole (extends effusion)}
+A vessel contains a mixture of hydrogen and oxygen. Gas leaks slowly through a tiny hole. By what factor
+does hydrogen escape faster than oxygen, and what happens to the composition of the gas left behind? Then
+apply the same idea to uranium hexafluoride, $^{235}$UF$_6$ ($M=\SI{349}{g/mol}$) and $^{238}$UF$_6$
+($M=\SI{352}{g/mol}$): what is the enrichment factor of one effusion stage, and roughly how many ideal
+stages raise the $^{235}$U fraction from its natural \SI{0.72}{\percent} to the \SI{4}{\percent} used in
+power reactors?
+\challengeans{The effusion rate is $\tfrac14 n_V\bar vA\propto 1/\sqrt M$ per molecule present (Graham's
+law), so
+\[
+\frac{\text{rate}_{\text{H}_2}}{\text{rate}_{\text{O}_2}}=\sqrt{\frac{M_{\text{O}_2}}{M_{\text{H}_2}}}
+=\sqrt{\frac{32}{2}}=4.
+\]
+Hydrogen escapes four times as fast, so the remaining gas becomes progressively \emph{richer in oxygen}.
+For UF$_6$ the factor per stage is only $\sqrt{352/349}\approx1.0043$: each stage multiplies the ratio of
+$^{235}$U to $^{238}$U by 1.0043. The ratio must grow from $0.0072/0.9928$ to $0.04/0.96$, a factor of
+about 5.7, which needs $\ln5.7/\ln1.0043\approx400$ ideal stages. Real diffusion plants, with imperfect
+barriers, used well over a thousand. The nuclear physics of why $^{235}$U is the useful isotope is the
+subject of \chref{ch:nucleus} and the chapters after it.}
+\end{challengebox}
+
+\begin{challengebox}{When is a vacuum a vacuum? (extends the mean free path)}
+In a vacuum tube or an electron-beam instrument, molecules (and electrons) must cross the apparatus,
+about \SI{10}{cm}, without colliding. Find the pressure at \SI{300}{K} at which the mean free path of air
+molecules ($d=\SI{3.7e-10}{m}$) equals \SI{10}{cm}, and the fraction of atmospheric pressure that this
+represents.
+\challengeans{From $\lambda=k_BT/\sqrt2\pi d^2P$,
+\[
+P=\frac{k_BT}{\sqrt2\,\pi d^2\lambda}=\frac{(1.38\times10^{-23})(300)}{\sqrt2\,\pi(3.7\times10^{-10})^2(0.10)}
+\approx\SI{0.07}{Pa},
+\]
+less than a millionth of atmospheric pressure ($0.068/1.0\times10^{5}\approx7\times10^{-7}$). Below this
+pressure the gas stops behaving like a fluid inside the apparatus: molecules travel from wall to wall,
+and ideas such as viscosity and convection from \chref{ch:fluids} no longer apply. This is the regime of
+effusion and of molecular beams.}
+\end{challengebox}
+
+% ================================================================
+\section*{Looking Back on Part C}
+\addcontentsline{toc}{section}{Looking Back on Part C}
+
+\textbf{Part C found the laws of heat and the molecules behind them.}
+\begin{itemize}
+\item \textbf{Thermodynamics (\chref{ch:thermo}).} Energy is conserved once heat is counted:
+$\Delta U=Q-W$, with internal energy a state function and heat and work not. Applied to the standard
+processes (isothermal, adiabatic, isobaric, isochoric, and the polytropic family that contains them all),
+the first law fixes what a gas does when it is squeezed, heated or allowed to expand, and why $C_p>C_v$.
+The second law says that not all heat can become work: Carnot's limit $\eta_{\text{Carnot}}=1-T_c/T_h$ caps every
+engine, heat flows of itself only from hot to cold, and a refrigerator must pay in work to reverse that flow. Entropy, a state variable built from the Carnot cycle, turns all of this into one statement: the entropy of an isolated system never decreases.
+\item \textbf{Kinetic theory (\chref{ch:kinetic}).} All of that is molecules obeying Newton's laws.
+Pressure is the momentum molecules deliver to the walls, $P=\tfrac13\rho\overline{v^2}$; temperature is
+the average translational kinetic energy, $\tfrac32k_BT$ per molecule; the speeds follow the
+Maxwell--Boltzmann distribution, with $v_p<\bar v<v_{\text{rms}}$; equipartition gives $\tfrac12k_BT$ to
+every squared term and so predicts $C_v$, $C_p$ and $\gamma$; and the mean free path,
+$1/\sqrt2\pi d^2n_V$, sets how far a molecule travels between collisions.
+\end{itemize}
+\textbf{What kinetic theory added to thermodynamics.} Thermodynamics took two facts on trust: the
+ideal-gas law, and the claim that an ideal gas's internal energy depends on its temperature alone. Kinetic
+theory derived both, and in doing so turned $C_v$ and $\gamma$ from measured numbers into predictions of
+molecular shape. It also showed where the laws stop: real gases liquefy when molecules are crowded, and
+equipartition fails when quantum steps are large compared with $k_BT$. The two descriptions are one
+subject seen from two distances: thermodynamics from the outside, valid whatever the molecules are doing,
+and kinetic theory from the inside, explaining why.
+
+% ================================================================
+\section*{Looking Back on the Volume}
+\addcontentsline{toc}{section}{Looking Back on the Volume}
+
+\textbf{Volume~II asked how bulk matter responds to force and to heat, and found that both answers come
+from molecules in motion.}
+\begin{itemize}
+\item \textbf{Part~A: mechanical properties of matter (\chsref{ch:solids}{ch:fluids}).} A solid resists
+deformation through moduli that measure the stiffness of the springs between its atoms, and stores
+elastic energy exactly as a spring does in Volume~I. A fluid at rest pushes equally in all directions
+with a pressure that grows with depth, which explains buoyancy and hydraulics; a moving fluid obeys
+conservation of mass (continuity) and of energy (Bernoulli), and its viscosity and surface tension are the bulk signs of molecules attracting their neighbours and carrying momentum between layers.
+\item \textbf{Part~B: heat and temperature (\chref{ch:thermal}).} Temperature is what thermometers agree
+on in equilibrium; heat is energy in transit because of a temperature difference. Heating makes matter
+expand, raises its temperature in proportion to its specific heat, or changes its phase at fixed
+temperature, and heat moves by conduction, convection and radiation.
+\item \textbf{Part~C: thermodynamics and the molecular picture (\chsref{ch:thermo}{ch:kinetic}).} The laws
+of thermodynamics organise heat and work, and kinetic theory explains them from the motion of molecules.
+\end{itemize}
+
+\medskip
+\textbf{The volume as a whole.} Notice how little was ever really separate. A modulus of elasticity, the pressure of a gas and the viscosity of a fluid are averages of molecular forces and molecular momentum; the specific heat of a solid is $3R$ per mole because each atom is a little oscillator with six
+squared terms; the expansion of a heated rod and the pressure of a heated gas are both molecules moving
+more vigorously; and heat itself is the energy of molecular motion in transit. Volume~I's mechanics,
+applied to $10^{23}$ particles at once and read through averages, became the physics of matter: one quantity, $\tfrac12 k_BT$ per degree of freedom, seen in the pressure of a gas and in the heat capacities of gases and solids alike. The same
+two ideas, energy conservation and the Boltzmann factor, will keep reappearing in later physics wherever
+many particles share energy.
+
+\medskip
+\textbf{Ahead to Volume~III.} This volume treated atoms as hard, indivisible balls whose energies are a
+few hundredths of an electronvolt: $k_BT\approx\SI{0.026}{eV}$ at room temperature. Volume~III goes inside
+the atom to its nucleus (\chref{ch:nucleus}), where the energies are millions of electronvolts, tens of
+millions of times larger, and the rules change: nuclei can decay, spontaneously and at random, and can be
+split or fused. Two ideas from this volume travel with us. The first is statistics: just as the pressure
+of a gas is steady although each molecule is unpredictable, the decay of a large sample of nuclei follows a
+precise law although no single decay can be foreseen. The second is the fast tail of the Maxwell
+distribution: in the core of the Sun, at about \SI{1.5e7}{K}, the typical thermal energy $k_BT$ is only
+about \SI{1.3}{keV}, far too little to push two protons together against their electric repulsion, yet
+the few nuclei in the extreme tail, helped by quantum tunnelling, fuse often enough to power the star.

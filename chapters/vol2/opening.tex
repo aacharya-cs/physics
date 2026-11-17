@@ -1,0 +1,158 @@
+\volumeopening{About This Volume}
+
+\section*{Why Study the Properties of Matter and Heat?}
+
+Volume~I treated bodies as particles or as perfectly rigid objects, and that idealisation carried it a
+long way. Real matter is neither. A steel cable stretches under load, a ship floats because water pushes
+back, a railway line lengthens on a summer afternoon, and a gas heats up when it is compressed. This
+volume asks how bulk matter behaves, and it answers from two directions. First, how do solids and fluids
+respond to \emph{force}: what makes a cable strong, a ship float, a wing lift? Then, how does matter
+respond to \emph{heat}: what makes a metal expand, water boil, an engine turn?
+
+The second question has shaped history more than almost any other in physics. The steam engine, a
+machine that turns heat into motion, powered the Industrial Revolution, and the effort to understand what
+limited it created thermodynamics. Every engine, refrigerator, power station and jet turbine running today
+is an application of the handful of laws in these pages, and the question ``how much useful work can be
+obtained from a given amount of heat?'' still sets the efficiency of the electricity grid.
+
+The same laws also say something about time. Thermodynamics is where physics first admitted that some
+processes run one way only: heat flows from hot to cold and never back unaided, a broken cup does not
+reassemble, and scent spreads through a room but never gathers back into the bottle. This one-way
+character, captured by the second law, explains why no engine can turn heat entirely into work and why
+perpetual-motion machines are impossible.
+
+The ideas reach well beyond physics. Engineers use them to size beams, cables, engines and power plants;
+materials scientists, to explain why bridges need expansion joints and why frozen pipes burst; biologists,
+to understand the regulation of body temperature; earth scientists, to model ocean currents and the
+greenhouse effect; chemists, to describe the energetics of reactions and the behaviour of gases; and
+astrophysicists, to explain how a star balances gravity against the pressure of its hot interior.
+
+\section*{How This Volume Is Built}
+
+The volume has five chapters in three parts, and each part answers one question.
+
+\textbf{Part A, Mechanical Properties of Matter,} asks how bulk matter responds to force.
+\chref{ch:solids} studies how solids stretch, compress, shear and twist, why the response is described by
+stress and strain rather than force and extension, and when a solid stops springing back and breaks.
+\chref{ch:fluids} turns to fluids, which cannot resist a shear at all and so flow: pressure, buoyancy,
+the continuity and Bernoulli equations, viscosity and surface tension.
+
+\textbf{Part B, Heat and Temperature,} asks what heat does to ordinary matter. \chref{ch:thermal} defines
+temperature, then follows heat as it raises temperature, expands solids and liquids, melts and boils
+substances, and flows from hot to cold by conduction, convection and radiation.
+
+\textbf{Part C, Thermodynamics and the Molecular Picture,} asks what rules govern heat and work, and why.
+\chref{ch:thermo} states the first law (energy is conserved, with heat counted as energy in transit) and
+the second (heat has a preferred direction), and derives the efficiency of the best possible engine.
+\chref{ch:kinetic} then looks inside the gas and shows that pressure, temperature and the gas laws all
+emerge from molecules in motion obeying Newton's laws.
+
+Each idea is introduced by why it is worth having before how it works, and each result is derived or, where
+a derivation is beyond the level of the book, flagged as stated without proof. By the end you will be able
+to explain, from first principles, why a thick rope holds more than a thin one, why a ship of steel floats,
+why an aeroplane wing lifts, why a railway line buckles in summer, why a pressure cooker cooks faster, why
+no engine can be perfectly efficient, and why a gas warms when it is compressed.
+
+\section*{What It Builds On}
+
+The volume is the mechanics of Volume~I applied to matter in bulk, and it leans on that volume
+throughout. Hooke's law and the spring constant (\chref{ch:connected}) become Young's modulus;
+the work done by a varying force and elastic potential energy (\chref{ch:energy}) become the energy
+stored in a stretched wire and the work done by a gas; Newton's second law and the momentum of colliding
+particles (\chref{ch:newton} and \chref{ch:collisions}) give the pressure of a gas; and the moment of
+inertia (\chref{ch:rotation}) reappears in the stiffness of a beam. When a quantity from Volume~I returns it
+keeps its Volume~I symbol: kinetic energy $K$, length $\ell$, spring constant $k$.
+
+The mathematics is collected in \chref{ch:toolkit}, at the front of the book. Besides
+derivatives, integrals and the binomial approximation $(1+x)^n\approx1+nx$ (Section~\ref{sec:approx}),
+which this volume uses on almost every page, two of its sections were written with this volume in mind:
+exponentials, logarithms and first-order rate equations (Section~\ref{sec:explog}), needed for Newton's law
+of cooling and for isothermal work, and averages over a probability distribution with the two Gaussian
+integrals (Section~\ref{sec:averages}), needed for the speeds of gas molecules. Read them when a derivation
+first calls on them, or now if they are unfamiliar.
+
+\clearpage
+\section*{Notation Used in This Volume}
+
+Thermal physics is hard on the alphabet, and this volume keeps to one rule: within the volume, one symbol
+means one quantity. The table lists the symbols and where each first does its work; the paragraphs after
+it single out the collisions that most often cause examination errors.
+
+\begin{center}\small
+\begin{tabular}{@{}lp{0.38\textwidth}lp{0.27\textwidth}@{}}
+\toprule
+Symbol & Meaning (unit) & Where & Note\\
+\midrule
+$\sigma$ & stress, force per area (\si{Pa}) & \chref{ch:solids} & not Stefan's constant\\
+$\epsilon$ & strain, fractional deformation & \chref{ch:solids} & dimensionless\\
+$Y,\ G,\ B$ & Young's, shear and bulk moduli (\si{Pa}) & \chref{ch:solids} & $B$, to keep $K$ for conductivity\\
+$\nu$ & Poisson's ratio & \chref{ch:solids} & dimensionless\\
+$\ell,\ \Delta\ell$ & length of a wire or rod; its extension (\si{m}) & \chref{ch:solids} & as in Volume~I\\
+$k$ & spring constant (\si{N/m}) & \chref{ch:solids} & from Volume~I\\
+$I_g$ & second moment of area of a beam's section (\si{m^4}) & \chref{ch:solids} & not a moment of inertia\\
+$P,\ P_0;\ \rho$ & pressure, atmospheric pressure \SI{1.013e5}{Pa}; density (\si{kg/m^3}) & \chref{ch:fluids} & \\
+$\eta$ & coefficient of viscosity (\si{Pa.s}) & \chref{ch:fluids} & see the cautions\\
+$S$ & surface tension (\si{N/m}, equivalently \si{J/m^2}) & \chref{ch:fluids} & never $T$, which is temperature\\
+\midrule
+$T$ & absolute temperature (\si{K}) & \chref{ch:thermal} & only temperature\\
+$t_C,\ t$ & Celsius temperature (\si{\celsius}); time (\si{s}) & \chref{ch:thermal} & \\
+$\alpha_\ell,\ \alpha_A,\ \alpha_V$ & linear, area and volume expansion coefficients (\si{K^{-1}}) & \chref{ch:thermal} & never $\beta$ or $\gamma$\\
+$Q$ & heat supplied \emph{to} the system (\si{J}) & \chref{ch:thermal} & energy in transit\\
+$s$ & specific heat capacity (\si{J.kg^{-1}.K^{-1}}) & \chref{ch:thermal} & per kilogram\\
+$L_f,\ L_v$ & latent heats of fusion, vaporisation (\si{J/kg}) & \chref{ch:thermal} & \\
+$K$ & thermal conductivity (\si{W.m^{-1}.K^{-1}}) & \chref{ch:thermal} & capital\\
+$H$ & heat current $dQ/dt$ (\si{W}) & \chref{ch:thermal} & not a height\\
+$R_{\text{th}}$ & thermal resistance (\si{K/W}) & \chref{ch:thermal} & \\
+$\theta$ & an angle (shear strain, angle of contact) in Part~A; temperature excess $T-T_a$ in \chref{ch:thermal} & \chref{ch:solids} & see the cautions\\
+$\kappa$ & cooling constant in Newton's law (\si{s^{-1}}) & \chref{ch:thermal} & not plain $k$\\
+$\sigma_{\!s},\ e$ & Stefan's constant; emissivity & \chref{ch:thermal} & \\
+$n,\ R,\ N_A$ & amount of substance (\si{mol}); gas constant; Avogadro's number & \chref{ch:thermal} & $n$ always moles\\
+\midrule
+$W$ & work done \emph{by} the system (\si{J}) & \chref{ch:thermo} & sign convention\\
+$U$ & internal energy (\si{J}) & \chref{ch:thermo} & \\
+$C,\ C_p,\ C_v$ & molar heat capacity ($C=Ms$, met in \chref{ch:thermal}); its values at constant pressure and volume (\si{J.mol^{-1}.K^{-1}}) & \chref{ch:thermo} & per mole\\
+$\gamma$ & ratio $C_p/C_v$ & \chref{ch:thermo} & only this\\
+$x,\ C_x$ & polytropic index ($PV^{x}=$ constant); its molar heat capacity & \chref{ch:thermo} & not $n$\\
+$T_h,\ T_c$ & temperatures of the hot and cold reservoirs (\si{K}) & \chref{ch:thermo} & \\
+$Q_h,\ Q_c$ & heat taken from the hot, given to the cold reservoir (\si{J}) & \chref{ch:thermo} & magnitudes\\
+$\eta$;\ COP & efficiency of an engine; coefficient of performance of a refrigerator & \chref{ch:thermo} & see the cautions\\
+$S$ & entropy (\si{J/K}) & \chref{ch:thermo} & see the cautions\\
+\midrule
+$k_B$ & Boltzmann's constant (\si{J/K}) & \chref{ch:kinetic} & always subscripted\\
+$N$ & number of molecules, $nN_A$ & \chref{ch:kinetic} & \\
+$n_V$ & number density $N/V$ (\si{m^{-3}}) & \chref{ch:kinetic} & \\
+$m,\ M$ & mass of one molecule; molar mass & \chref{ch:kinetic} & \\
+$\phi(v)$ & distribution of molecular speeds (\si{s/m}) & \chref{ch:kinetic} & \\
+$\overline{K}$ & mean translational kinetic energy of a molecule (\si{J}) & \chref{ch:kinetic} & \\
+$v_p,\ \bar v,\ v_{\text{rms}}$ & most probable, mean and root-mean-square speeds (\si{m/s}) & \chref{ch:kinetic} & \\
+$f$ & number of degrees of freedom & \chref{ch:kinetic} & \\
+$\lambda$ & mean free path (\si{m}) & \chref{ch:kinetic} & not a wavelength\\
+$d$ & molecular diameter (\si{m}) & \chref{ch:kinetic} & \\
+$z$ & collision frequency of one molecule (\si{s^{-1}}) & \chref{ch:kinetic} & \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{trapbox}{the symbol collisions that cause examination errors}
+\textbf{(i) $\gamma$.} Many books use $\gamma$ for the volume expansion coefficient in thermal expansion
+\emph{and} for $C_p/C_v$ in thermodynamics. This book does not: the expansion coefficients are
+$\alpha_\ell$, $\alpha_A$, $\alpha_V$ (with $\alpha_A=2\alpha_\ell$ and $\alpha_V=3\alpha_\ell$, derived in
+\chref{ch:thermal}), and $\gamma$ always means $C_p/C_v$.\par\smallskip
+\textbf{(ii) $s$ and $C$.} Specific heat $s$ is per \emph{kilogram}, molar heat capacity $C$ per
+\emph{mole}; they differ by the molar mass, $C=Ms$. Mixing them up shifts an answer by a factor of
+$10$ to $1000$.\par\smallskip
+\textbf{(iii) $K$, $B$, $k$ and $k_B$.} Capital $K$ is thermal conductivity, which is why the bulk modulus
+is written $B$. Boltzmann's constant is always $k_B$. Plain $k$ keeps its Volume~I meaning, the spring
+constant, and appears only when a stretched wire is treated as a spring in \chref{ch:solids} and a molecular bond as a spring in \chref{ch:kinetic}; the cooling
+constant of Newton's law of cooling is written $\kappa$ (the generic rate constant $k$ of the
+Foundations' equation $dy/dt=-ky$).
+\par\smallskip
+\textbf{(iv) $n$ and $x$; $f$ and $\phi$.} The letter $n$ always counts moles, so the index of a polytropic
+process $PV^{x}=$ constant is written $x$. And $f$ counts degrees of freedom, so the distribution of
+molecular speeds is written $\phi(v)$.\par\smallskip
+\textbf{(v) $\sigma$.} Plain $\sigma$ is a mechanical stress; Stefan's radiation constant carries a
+subscript, $\sigma_{\!s}$, so the two never clash.\par\smallskip
+\textbf{(vi) $\eta$, $S$ and $\theta$.} The viscosity of a fluid and the efficiency of an engine are both traditionally $\eta$; surface tension (in this book, following NCERT) and entropy are both $S$; and $\theta$ is an angle in Part~A but the temperature excess of Newton's law of cooling in \chref{ch:thermal}. In each pair the two meanings never appear in the same chapter.\par\smallskip
+\textbf{(vii) $U$.} $U$, the potential energy of Volume~I, here means the internal energy of a system, which includes the potential energy of
+its molecules but also their kinetic energy.
+\end{trapbox}

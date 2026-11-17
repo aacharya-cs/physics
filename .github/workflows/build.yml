@@ -1,5 +1,5 @@
 # Build the book on every push and pull request; deploy main to GitHub Pages.
-# Recreated 2026-11-16 (the original was missing from this copy); not yet run in CI.
+# Recreated 2026-11-16; first run passed on GitHub the same day.
 name: build
 
 on:
@@ -43,13 +43,13 @@ jobs:
         run: |
           python3 -m pip install --quiet pymupdf
           mkdir -p site
-          python3 tools/compress_pdf.py main.pdf site/Mechanics_Vol1_Class11.pdf
+          python3 tools/compress_pdf.py main.pdf site/Physics.pdf
           cp tools/index.html site/index.html
 
       - uses: actions/upload-artifact@v4
         with:
-          name: Mechanics_Vol1_Class11
-          path: site/Mechanics_Vol1_Class11.pdf
+          name: Physics
+          path: site/Physics.pdf
 
       - if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.DEPLOY_PAGES == 'true'
         uses: actions/upload-pages-artifact@v3

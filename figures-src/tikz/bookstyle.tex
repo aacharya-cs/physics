@@ -24,6 +24,17 @@
 %       plum     potential energy U, total energy E, potentials
 %       steel    dimensions, construction lines, secondary labels
 %       grey     guides, paths not taken, ghost positions
+%     Thermal physics (Volume II):
+%       accent   heat Q, heat current H; isochoric curves (an isochoric step
+%                exchanges only heat)
+%       plum     work W
+%       primary  isotherms (crimson/primary for hot/cold isotherms in a cycle)
+%       teal     adiabats;  forest  isobars
+%       reservoirs: hot cAmber!55 fill, cold cEarth fill
+%     Nuclear physics (Volume III):
+%       proton   pale accent disc (style `proton')   neutron  cMoon disc (`neutron')
+%       alpha    plum      beta-minus, electron  primary      beta-plus, positron  crimson
+%       neutrino teal, dashed      gamma, photon  accent, always a wavy line (`photon')
 %   * Labels sit beside what they name, in the colour of what they name.
 % -----------------------------------------------------------------------------
 
@@ -134,6 +145,19 @@
   % given alongside it; colour knocked-out text with text=<colour>.
   % the contact point of a rolling body
   contact point/.style={circle,fill=cInk,inner sep=0pt,minimum size=2.6pt},
+  % an arrowhead part-way along a path (cycle directions, flow lines):
+  % \draw[curve,mid arrow] ... or [mid arrow=0.56]
+  mid arrow/.style={postaction={decorate},decoration={markings,
+    mark=at position #1 with {\arrow{bookhead}}}},
+  mid arrow/.default=0.5,
+  % ---------------------------------------------------- nuclear particles ---
+  % nucleons are pale discs (size set by the figure: circle,proton,minimum size=..);
+  % moving particles are arrows or outlined dots; a photon is always a wavy line,
+  % so it is never confused with a proton disc although both use the accent
+  proton/.style={draw=cAcc,fill=cAcc!35,thin line},
+  neutron/.style={draw=cSteel,fill=cMoon,thin line},
+  photon/.style={cAcc,decorate,decoration={snake,amplitude=1.3pt,
+    segment length=5pt,post length=2.5mm}},
   % ---------------------------------------------------------------- text ----
   % every figure starts from \small (9.6pt; subscripts 6.7pt); \footnotesize (8.75pt)
   % is the floor, for plain words only

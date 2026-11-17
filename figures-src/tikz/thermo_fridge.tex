@@ -1,0 +1,15 @@
+% thermo_fridge: energy-flow diagram of a refrigerator or heat pump (Vol II Ch 4, fig:thermo-fridge)
+% The engine diagram run backwards: work W (from the compressor) drives heat Q_c out of
+% the cold reservoir and delivers Q_h = Q_c + W to the hot one (first law, Delta U = 0 per
+% cycle).  The W arrow cannot be removed (Clausius).  Colours as in thermo_engine.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \draw[cSteel,thin line,fill=cAmber!55] (-2.2,1.9) rectangle (2.2,2.7);
+  \node at (0,2.3) {hot reservoir (room), $T_h$};
+  \draw[cSteel,thin line,fill=cEarth] (-2.2,-2.7) rectangle (2.2,-1.9);
+  \node at (0,-2.3) {cold reservoir (inside), $T_c$};
+  \node[body,rounded corners=3pt,minimum width=2.3cm,minimum height=1.1cm] at (0,0) {refrigerator};
+  \draw[vector,cAcc] (0,0.55) -- (0,1.9) node[midway,anchor=west,xshift=2pt] {$Q_h=Q_c+W$};
+  \draw[vector,cAcc] (0,-1.9) -- (0,-0.55) node[midway,anchor=west,xshift=2pt] {$Q_c$};
+  \draw[vector,cPlum] (2.7,0) -- (1.15,0);
+  \node[cPlum,anchor=west] at (2.7,0) {$W$ (compressor)};
+\end{tikzpicture}

@@ -1,0 +1,32 @@
+% decay_betaspec: two-body versus three-body decay spectra
+% (Vol III Ch 2, fig:decay-betaspec)
+% Left: alpha decay of Po-210 is two-body, so every alpha has
+%   K_alpha = Q (A-4)/A = 5.407 (206/210) = 5.304 MeV  (a single line).
+% Right: beta-minus electron spectrum for Q = 1 MeV, allowed shape with the
+% Coulomb (Fermi) factor omitted:
+%   n(K) ~ p E (Q-K)^2,  pc = sqrt(K^2 + 2 K m c^2),  E = K + m c^2,  mc^2 = 0.511 MeV,
+% normalised by its maximum 0.25226 (at K = 0.338 Q).  Its mean is 0.40 Q
+% (computed numerically); the endpoint K_max = Q.
+% Colours: alpha cPlum, electron cPrim, as in the rest of the chapter.
+\begin{tikzpicture}
+\begin{groupplot}[bookplot,
+    group style={group size=2 by 1, horizontal sep=14mm},
+    width=7.2cm, height=4.4cm, ymin=0, ymax=1.18]
+\nextgroupplot[xmin=4.8, xmax=5.65, xtick={5.0,5.304}, xticklabels={$5.0$,$5.30$},
+    xlabel={$\alpha$ kinetic energy (MeV)}, ylabel={number of particles},
+    title={$\alpha$ decay of $\iso{210}{Po}$: one sharp line},
+    title style={font=\small\itshape}]
+\addplot[cPlum] coordinates {(5.304,0) (5.304,1)};
+\node[cPlum,anchor=west] at (axis cs:5.33,0.9) {$5.30\,\mathrm{MeV}$};
+\nextgroupplot[xmin=0, xmax=1.12, xtick={0,1}, xticklabels={$0$,$Q$},
+    xlabel={electron kinetic energy $K_e$}, ylabel={number of electrons},
+    title={$\beta^-$ decay: a continuous spread},
+    title style={font=\small\itshape}, domain=0:1, samples=160]
+\addplot[draw=none,fill=cPrim!15] {sqrt(x^2+2*x*0.511)*(1-x)^2*(x+0.511)/0.25226} \closedcycle;
+\addplot[cPrim] {sqrt(x^2+2*x*0.511)*(1-x)^2*(x+0.511)/0.25226};
+\draw[guide] (axis cs:1,0) -- (axis cs:1,1.05);
+\node[anchor=south east] at (axis cs:1.08,1.0) {$K_{\max}=Q$};
+\draw[guide,cPrim] (axis cs:0.40,0) -- (axis cs:0.40,0.62);
+\node[anchor=west,cPrim,small label] at (axis cs:0.41,0.66) {mean $\approx0.4\,Q$};
+\end{groupplot}
+\end{tikzpicture}

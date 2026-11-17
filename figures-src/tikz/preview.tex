@@ -5,7 +5,8 @@
 \usepackage[fontsize=10.5pt]{fontsize}% match the book's body size
 \usepackage[T1]{fontenc}
 \usepackage{mathpazo}
-\usepackage{amsmath,amssymb,bm,siunitx}
+\usepackage{amsmath,amssymb,bm,mathtools,siunitx}
+\DeclareSIUnit{\amu}{u}\DeclareSIUnit{\curie}{Ci}\DeclareSIUnit{\year}{y}\DeclareSIUnit{\fm}{fm}
 \usepackage{tikz,pgfplots}
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.markings,%
@@ -21,6 +22,9 @@
 \newcommand{\vv}{\vc{v}}\newcommand{\va}{\vc{a}}\newcommand{\vF}{\vc{F}}\newcommand{\vp}{\vc{p}}
 \newcommand{\vr}{\vc{r}}\newcommand{\vL}{\vc{L}}\newcommand{\vtau}{\vc{\tau}}\newcommand{\vg}{\vc{g}}
 \newcommand{\vomega}{\vc{\omega}}\newcommand{\ex}{\times}
+% Volume III nuclear notation (keep in step with preamble.tex)
+\newcommand{\nuc}[3]{\prescript{#1}{#2}{\mathrm{#3}}}\newcommand{\iso}[2]{\prescript{#1}{}{\mathrm{#2}}}
+\newcommand{\Act}{\mathcal{A}}\newcommand{\Prod}{\mathcal{P}}\newcommand{\Thalf}{T_{1/2}}\newcommand{\Eb}{E_{\mathrm{b}}}
 \begin{document}
 \tikzset{every picture/.append style={bookfigure}}%
 \input{\figname}

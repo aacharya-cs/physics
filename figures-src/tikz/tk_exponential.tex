@@ -1,0 +1,62 @@
+% tk_exponential: first-order decay and growth with supply (Foundations, fig:tkexp)
+% Time is measured in half-lives, u = t/t_half, so that k t = u ln 2 and
+%   decay:             y/y0      = e^{-kt} = 2^{-u}        (falls by half per half-life)
+%   growth with supply y/(P/k)   = 1 - e^{-kt} = 1 - 2^{-u}  (from y = 0; climbs half the remaining gap per half-life)
+% Left: both on linear axes, with the halvings 1/2, 1/4, 1/8 marked on the decay curve and
+% the saturation level P/k drawn as a guide.  The time constant tau = 1/k = t_half/ln 2
+% = 1.443 t_half is where the decay curve has fallen to 1/e = 0.368.
+% Right: the decay curve on a logarithmic vertical axis is the straight line
+%   ln y = ln y0 - k t,  one decade (factor 10) per ln10/ln2 = 3.32 half-lives.
+% Colours: decay primary (main curve), growth with supply teal (a second curve).
+\begin{tikzpicture}
+  % ------------------------------------------------------------ left: linear axes
+  \begin{axis}[bookplot,
+      width=6.4cm, height=4.3cm, scale only axis,
+      xmin=0, xmax=5.4, ymin=0, ymax=1.18,
+      xtick={1,2,3,4,5}, ytick={0.125,0.25,0.5,1},
+      yticklabels={$\tfrac18$,$\tfrac14$,$\tfrac12$,$1$},
+      xlabel={$t/t_{1/2}$},
+      xlabel style={at={(axis description cs:1,0)},anchor=north east,yshift=-12pt},
+      ylabel={$y$},
+      ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90}]
+    % saturation level of the growth curve
+    \draw[guide] (axis cs:0,1) -- (axis cs:5.4,1);
+    % halvings on the decay curve
+    \draw[guide] (axis cs:1,0) -- (axis cs:1,0.5) -- (axis cs:0,0.5);
+    \draw[guide] (axis cs:2,0) -- (axis cs:2,0.25) -- (axis cs:0,0.25);
+    \draw[guide] (axis cs:3,0) -- (axis cs:3,0.125) -- (axis cs:0,0.125);
+    \node[dot,cPrim] at (axis cs:1,0.5) {};
+    \node[dot,cPrim] at (axis cs:2,0.25) {};
+    \node[dot,cPrim] at (axis cs:3,0.125) {};
+    % the time constant: y = 1/e at t = 1.443 t_half
+    \draw[guide] (axis cs:1.4427,0) -- (axis cs:1.4427,0.3679);
+    \node[anchor=south west,inner sep=1pt,font=\footnotesize,text=cSteel] at (axis cs:1.47,0.37) {$1/e$ at $t=\tau$};
+    % the two curves
+    \addplot[cPrim,domain=0:5.2] {2^(-x)};
+    \addplot[cTeal,domain=0:5.2] {1-2^(-x)};
+    \node[cPrim,anchor=south west,inner sep=1pt] at (axis cs:0.62,0.70) {$y_0e^{-kt}$};
+    \node[cTeal,anchor=north west,inner sep=1pt] at (axis cs:3.0,0.86) {$\dfrac{P}{k}\bigl(1-e^{-kt}\bigr)$};
+    \node[anchor=south east,inner sep=2pt,text=cSteel] at (axis cs:5.4,1) {$1$ stands for $y_0$, or for $P/k$};
+  \end{axis}
+  % ------------------------------------------------------------ right: semilog axes
+  \begin{scope}[xshift=8.9cm]
+  \begin{axis}[bookplot,
+      width=6.0cm, height=4.3cm, scale only axis,
+      ymode=log, log basis y=10,
+      xmin=0, xmax=7.4, ymin=0.006, ymax=1.6,
+      xtick={0,2,4,6}, ytick={0.01,0.1,1},
+      yticklabels={$0.01$,$0.1$,$1$},
+      xlabel={$t/t_{1/2}$},
+      xlabel style={at={(axis description cs:1,0)},anchor=north east,yshift=-12pt},
+      ylabel={$y/y_0$ (log scale)},
+      ylabel style={at={(axis description cs:0,1)},anchor=south west,rotate=-90,xshift=-6pt}]
+    \addplot[cPrim,domain=0:7.2,samples=2] {2^(-x)};
+    % one decade takes 3.32 half-lives
+    \draw[guide] (axis cs:0,0.1) -- (axis cs:3.3219,0.1) -- (axis cs:3.3219,0.006);
+    \node[dot,cPrim] at (axis cs:3.3219,0.1) {};
+    \node[anchor=south west,text=cSteel,align=left] at (axis cs:3.45,0.1)
+      {a factor 10\\ in $3.32\,t_{1/2}$};
+    \node[cPrim,anchor=south west,inner sep=1pt] at (axis cs:0.5,0.75) {$\ln y=\ln y_0-kt$};
+  \end{axis}
+  \end{scope}
+\end{tikzpicture}

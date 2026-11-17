@@ -1,0 +1,1714 @@
+\partdivider{B}{Heat and Temperature}{What temperature really measures, how matter expands and changes state, and how heat moves: the bridge from mechanics to the microscopic world.}{\chref{ch:thermal} Thermal Properties of Matter}
+\ncertchapter{3}{Thermal Properties of Matter}\chlabel{ch:thermal}
+
+Part A asked how bulk matter responds to \emph{force}: how a solid stretches under a stress until it
+yields (\chref{ch:solids}), and how a fluid transmits pressure, buoys up a ship and flows through a pipe
+(\chref{ch:fluids}). Every result there was mechanics, Newton's laws applied to matter in bulk. This
+chapter opens Part B by asking how the same matter responds to \emph{heat}: how heat raises its
+temperature, makes solids and liquids expand, melts and boils them, and flows from hot to cold. The
+tools of Part A are not left behind. Young's modulus returns to measure the force a heated rail exerts
+when it is forbidden to expand, buoyancy returns as the engine of convection, and the energy
+bookkeeping of \chref{ch:energy} returns as calorimetry, with heat as one more form in the ledger.
+
+Before any of that, two everyday words that people use interchangeably have to be told apart, because
+the whole subject rests on the difference. The chapter then builds outwards: thermometry and the
+ideal-gas equation (\S\ref{sec:thermometry}); expansion and the stress it causes when prevented
+(\S\ref{sec:expansion}); the heat needed to change temperature (\S\ref{sec:calorimetry}) and to change
+phase (\S\ref{sec:latent}); and the three ways heat travels (\S\ref{sec:conduction} to
+\S\ref{sec:cooling}). It stops short of two questions that Part C answers: what limits the conversion of
+heat into work (\chref{ch:thermo}), and what heat and temperature \emph{are} at the molecular level
+(\chref{ch:kinetic}).
+
+\begin{motivbox}{Why thermal physics matters}
+Heat is the quantity engineers spend the most effort moving, storing and keeping out. The chapter's
+ideas answer concrete questions.
+\begin{itemize}
+\item \textbf{Thermal expansion is designed around everywhere.} Bridges have expansion joints, railway
+tracks have gaps, and power lines sag in summer because materials grow with temperature; a bimetallic
+strip bends by exactly this and switches a thermostat, a kettle and an oven. Ignore it and rails buckle.
+\item \textbf{Specific heat and latent heat run heating and cooling.} Why water is used to cool engines
+and heat homes (its large specific heat), why sweating cools you (latent heat of vaporisation), why ice
+in a drink holds it cold so long (latent heat of fusion), and how much energy a power station must
+supply to boil water: all are specific-heat and latent-heat sums.
+\item \textbf{Heat transfer decides what stays warm or cool.} Conduction, convection and radiation set
+how a house is insulated, why a vacuum flask has a vacuum and a silvered lining, how a spacecraft dumps
+its heat and, through Newton's law of cooling, how a forensic examiner estimates the time of death.
+\end{itemize}
+\end{motivbox}
+
+\section{Temperature, Heat and Thermometry}\label{sec:thermometry}
+
+\subsection{Two ideas that must be pulled apart}
+
+\begin{defbox}{Temperature and heat}
+\begin{itemize}
+\item \textbf{Temperature} is a property of the \emph{state} of a body: a number that decides which
+      way heat will flow when two bodies touch. Heat flows from the higher temperature to the lower.
+      (\chref{ch:kinetic} will reveal temperature as a measure of the average kinetic energy of the
+      molecules.) We write $T$ for absolute temperature in kelvin and $t_C$ for a Celsius reading.
+\item \textbf{Heat} $Q$ is \emph{energy in transit} between bodies because of a temperature
+      difference, measured in joules. A body does not ``contain'' heat; it contains \emph{internal
+      energy}, and heat is the name for that energy while it is flowing.
+\end{itemize}
+\end{defbox}
+
+\why{The distinction is not pedantry. A bucket of lukewarm water can hold more internal energy than a
+red-hot nail, yet heat flows from the nail to the water, because the direction of flow is decided by
+\emph{temperature}, not by total energy content. Confusing the two is the source of half the wrong
+answers in calorimetry.}
+
+\subsubsection{Why temperature is well defined: thermal equilibrium}
+
+We just called temperature ``the number that decides which way heat flows.'' For that to be a
+consistent property of a body (one honest number, not a different verdict for every neighbour it
+touches) nature has to cooperate, and it does.
+
+Bring two bodies into contact. Heat flows from hot to cold until it stops; when it stops, they are at
+the same temperature and are said to be in \textbf{thermal equilibrium}. The crucial fact, which
+underwrites the whole idea of a thermometer, is that this relationship is \emph{transitive}: if body
+$A$ is in equilibrium with a thermometer, and body $B$ separately is in equilibrium with the same
+thermometer, then $A$ and $B$ would be in equilibrium with each other even if they never touch. That is
+why one thermometer can compare a patient in Delhi with a patient in Mumbai. This transitivity is called
+the \textbf{zeroth law of thermodynamics}; it is stated and unpacked with the other laws in
+\chref{ch:thermo}. Here we simply note that it is what makes ``temperature'' a meaningful label at all.
+
+\subsection{Temperature scales}
+
+A thermometer needs some property that changes steadily with temperature: the length of a mercury
+column (which relies on the thermal expansion of \S\ref{sec:expansion}), the pressure of a gas held at
+fixed volume, or the electrical resistance of a platinum wire. Two reproducible \textbf{fixed points}
+(historically, melting ice and boiling water at \SI{1}{atm}) then define a scale, and different scales
+simply chop the same interval into different numbers of divisions: 100 for Celsius, 180 for
+Fahrenheit.
+
+\begin{keybox}{Converting between scales}
+Equating the \emph{fractional position} between the fixed points on each scale (ice point $0$ and
+$32$, steam point $100$ and $212$):
+\[
+\frac{t_C - 0}{100} = \frac{t_F - 32}{180}
+\qquad\Longrightarrow\qquad
+t_F = \frac{9}{5}\,t_C + 32 ,
+\qquad
+T = t_C + 273.15 \ \text{(kelvin)}.
+\]
+The same recipe converts to any linear scale: (reading $-$ lower fixed point)/(upper $-$ lower) is the
+same number on every scale. The kelvin has the \emph{same size} as the Celsius degree; only the zero
+moves. So temperature \emph{differences} are numerically identical in \si{K} and \si{\celsius}:
+$\Delta T = \Delta t_C$.
+\end{keybox}
+
+\begin{exbox}{The crossing point of the scales}\label{ex:scale-crossing}
+At what temperature do the Celsius and Fahrenheit readings coincide?
+
+\stepn{1} Demand $t_F = t_C = x$ in the conversion:
+$\;x = \tfrac95 x + 32$.
+
+\stepn{2} Solve: $x - \tfrac95x = 32 \Rightarrow -\tfrac45 x = 32 \Rightarrow x = -40$.
+
+So $\SI{-40}{\celsius} = \SI{-40}{\degree F}$, the one temperature both thermometers agree on. No such
+crossing exists between Celsius and kelvin: equal-sized degrees with different zeros never meet.
+\ans{$-40^\circ$ on both scales}
+\end{exbox}
+
+\begin{trapbox}{differences convert differently from readings}
+A temperature \emph{reading} of \SI{30}{\celsius} is \SI{86}{\degree F} (multiply by $9/5$, add 32).
+But a temperature \emph{rise} of \SI{30}{\celsius} is a rise of only $\tfrac95\times30 = 54$
+Fahrenheit degrees: the ``$+32$'' belongs to readings, never to differences. Likewise a rise of
+\SI{30}{\celsius} is a rise of exactly \SI{30}{K}.
+\end{trapbox}
+
+\subsection{The ideal-gas thermometer and absolute zero}
+
+A mercury thermometer and a platinum-resistance thermometer, both calibrated at the two fixed points,
+disagree slightly in between, because mercury's expansion and platinum's resistance do not grow in
+exactly the same way. Which one is ``right''? Gases settle the question. Fill a bulb of fixed volume
+with a gas and measure its pressure $P$ at different temperatures (Figure~\ref{fig:gas-thermometer}).
+Each sample gives a straight line. Different gases, or different amounts of the same gas, give lines of
+different slope; but as the pressure is lowered, all gas thermometers agree ever more closely, and all
+the lines, extrapolated, reach zero pressure at the \emph{same} temperature, $\SI{-273.15}{\celsius}$.
+That universality, which no liquid or wire possesses, is why the absolute (kelvin) scale is anchored
+there.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermal_gas_thermometer}
+\figcaption{fig:gas-thermometer}{Pressure of a fixed volume of gas against Celsius temperature, for three gas samples (the colours only tell them apart). Each line is straight over the range where it can be measured, and every line, extrapolated (dashed), reaches zero pressure at the same point, \SI{-273.15}{\celsius}. Nature is pointing at a special temperature. The dashed parts are never reached in practice: every real gas liquefies first.}
+\end{figure}
+
+\inwords{Absolute zero is not ``the temperature where everything freezes.'' It is the temperature the
+gas laws themselves single out, the point where an ideal gas would exert no pressure at all.
+\chref{ch:kinetic} will reinterpret it as the point at which the molecules' kinetic energy of random
+motion would vanish.}
+
+\begin{remarkbox}{How the kelvin is fixed today}
+For most of the twentieth century the kelvin was defined by giving the triple point of water (the one
+temperature and pressure at which ice, water and vapour coexist) the exact value \SI{273.16}{K}; the
+ice point then sits at \SI{273.15}{K}, which is where the $273.15$ in $T=t_C+273.15$ comes from. Since
+2019 the kelvin has instead been defined by fixing the value of Boltzmann's constant $k_B$ (met in
+\chref{ch:kinetic}), which ties temperature directly to molecular energy. Nothing in this chapter
+changes: the two definitions agree to within the accuracy of the best measurements.
+\end{remarkbox}
+
+\subsection{The ideal-gas equation}\label{sec:gaslaw}
+
+The straight lines of Figure~\ref{fig:gas-thermometer}, and their counterparts at constant pressure and
+at constant temperature, compress three experimental laws into one equation. To write it we need a way
+of counting molecules.
+
+\begin{defbox}{The mole}
+Atoms are so small that counting them individually is hopeless, so they are counted in bulk packages
+called \textbf{moles}, as eggs are counted in dozens. One \textbf{mole} is
+$N_A = \SI{6.022e23}{}$ particles, \textbf{Avogadro's number} of them (since 2019 this number is exact
+by definition, $6.02214076\times10^{23}$). It is chosen so that one mole of a substance has a mass in
+grams very nearly equal to its molecular mass: one mole of carbon-12 is \SI{12}{g}, one mole of water
+about \SI{18}{g}.
+
+\smallskip
+The number of moles in a sample of mass $m$ made of molecules of molar mass $M$ is $n = m/M$ (with $m$
+and $M$ in matching units, for example grams and \si{g/mol}). Throughout this volume $n$ counts
+\emph{moles}; \chref{ch:kinetic} also counts individual molecules and calls that number $N = nN_A$.
+\end{defbox}
+
+\why{Why bother with moles at all? Because at the molecular scale the \emph{number} of particles is
+what matters: pressure is molecules drumming on a wall, and temperature measures their average energy.
+A mole is the bridge from the laboratory (grams, litres) to the molecular world ($10^{23}$ particles),
+and it is why the same constant $R$ works for every gas.}
+
+\begin{keybox}{The ideal-gas equation}
+For $n$ moles of a dilute gas at pressure $P$ (\si{Pa}), volume $V$ (\si{m^3}) and absolute
+temperature $T$ (\si{K}),
+\[
+\boxed{\;PV = nRT\;}, \qquad R = \SI{8.314}{J.mol^{-1}.K^{-1}}\ \text{(the gas constant)}.
+\]
+The historical gas laws are its shadows, one for each variable held fixed. Hold $n$ and one more
+variable constant, and the equation collapses to a proportionality between the remaining two.
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Hold fixed & Result & Name\\
+\midrule
+$T$ (and $n$) & $PV = $ const & Boyle's law\\
+$P$ (and $n$) & $V \propto T$ & Charles's law\\
+$V$ (and $n$) & $P \propto T$ & Gay-Lussac's law (the lines of Figure~\ref{fig:gas-thermometer})\\
+$P$ and $T$ & $V \propto n$ & Avogadro's law\\
+\bottomrule
+\end{tabular}
+\end{center}
+For instance, fixing $T$ and $n$ makes the whole right-hand side $nRT$ a constant, so $PV$ must be
+constant: Boyle's law. Fixing $P$ and $n$ leaves $V = (nR/P)\,T$, a constant times $T$: Charles's law.
+The single equation contains all of them, which is why they need not be memorised separately.
+\end{keybox}
+
+The equation is stated here as the summary of experiment; this chapter uses it only to explain the gas
+thermometer and in a few problems. \chref{ch:thermo} leans on it constantly, and \chref{ch:kinetic}
+\emph{derives} it from molecular motion. It is a model with limits: it holds for a gas dilute enough
+that its molecules are far apart compared with their size and rarely feel each other's attraction.
+Compress a gas strongly or cool it towards liquefaction and $PV/nRT$ drifts away from 1.
+
+\begin{trapbox}{the gas laws demand kelvins}
+``$V\propto T$'' is false in Celsius: doubling \SI{20}{\celsius} to \SI{40}{\celsius} does not double
+the volume (it raises $T$ from \SI{293}{K} to \SI{313}{K}, about $7\%$). The proportionality holds only
+for \emph{absolute} temperature: doubling \SI{293}{K} to \SI{586}{K} does double the volume. Every
+formula in this volume containing a bare $T$ (not a $\Delta T$) means kelvin.
+\end{trapbox}
+
+% ================================================================
+\section{Thermal Expansion}\label{sec:expansion}
+
+Bridges are built with visible gaps in their roadways, railway lines with small spaces between rails,
+and overhead power cables are strung to sag on purpose: all because metal grows when it warms and would
+tear itself apart if forbidden to. The same effect runs a thermostat (two bonded metals that bend as
+they heat), loosens the lid of a jar held under hot water and, in reverse, is why a bridge in winter
+must have room to \emph{shrink}. Heat a solid and it grows in length, in area and in volume, each with
+its own coefficient. The three coefficients are not independent, and deriving their relation is the
+heart of this section. First we define them, and then we build the one mathematical habit the whole
+chapter leans on.
+
+Why should a solid expand at all? Its atoms sit in a lattice, each vibrating about a point where the
+forces from its neighbours balance, like a mass between springs (the picture behind Young's modulus in
+\chref{ch:solids}). The ``springs'' are not symmetric: two atoms resist being pushed together much more
+fiercely than being pulled apart. As the temperature rises the vibrations grow, and an atom swinging
+in this lopsided potential spends more time on the far side than the near side, so its \emph{average}
+spacing grows. Expansion is the visible sum of that tiny lopsidedness over every bond in the body.
+
+\begin{defbox}{The three expansion coefficients}
+For a temperature rise $\Delta T$, a length $\ell$, an area $A$ and a volume $V$ of the body change by
+\[
+\frac{\Delta \ell}{\ell} = \alpha_\ell\,\Delta T, \qquad
+\frac{\Delta A}{A} = \alpha_A\,\Delta T, \qquad
+\frac{\Delta V}{V} = \alpha_V\,\Delta T .
+\]
+Each coefficient ($\alpha_\ell$ linear, $\alpha_A$ area, $\alpha_V$ volume) is the \emph{fractional}
+change per kelvin, a scalar with units \si{K^{-1}}. Typical solids have
+$\alpha_\ell \sim \SI{e-5}{K^{-1}}$ (steel $1.2\times10^{-5}$, brass $1.9\times10^{-5}$, glass
+about $9\times10^{-6}$); liquids, which have no lattice to hold them, are described by $\alpha_V$ alone
+and expand more (mercury $\alpha_V\approx\SI{1.8e-4}{K^{-1}}$). The changes are tiny, which is exactly
+what the tool below exploits. The coefficients themselves vary slowly with temperature; treating them
+as constants is accurate over a range of a hundred kelvin or so.
+\end{defbox}
+
+\subsection{The fractional-change toolkit}\label{sec:fractional}
+
+Notice that the coefficients above are defined not through $\Delta\ell$ but through $\Delta\ell/\ell$, a
+\emph{fractional} change, a pure ratio. This is deliberate, and it is the single most useful habit in
+the chapter. Almost every quantity here is a product or power of others ($A=\ell^2$, $V=\ell^3$, a
+pendulum's period $T_{\text{per}}\propto\sqrt{\ell}$, the gas law $PV=nRT$), and for products the
+clean thing to track is not how much each factor changes but what \emph{fraction} it changes by.
+
+\begin{keybox}{The fractional-change rule}
+If a quantity is a product of powers, $x = a\,b^{\,n}\,c^{\,p}\cdots$, then for \emph{small} changes
+the fractional changes simply add, each weighted by its power:
+\[
+\boxed{\;\frac{\Delta x}{x} \approx \frac{\Delta a}{a} + n\,\frac{\Delta b}{b} + p\,\frac{\Delta c}{c} + \cdots\;}
+\]
+Multiplication becomes addition; a power $n$ becomes a multiplier $n$. That is the entire toolkit.
+\end{keybox}
+
+The rule rests on the binomial approximation $(1+\varepsilon)^n\approx1+n\varepsilon$ for
+$|\varepsilon|\ll1$, collected with the other approximations in \chref{ch:toolkit}. There it was
+quoted; because this chapter leans on it so heavily, we now see where it comes from and how good it is.
+
+\begin{derivbox}{Where the rule comes from: the binomial approximation}
+\stepn{1} \textbf{The exact expansion.} For any power $n$ and any $|\varepsilon|<1$, the quantity
+$(1+\varepsilon)^n$ has an exact infinite-series expansion:
+\[
+(1+\varepsilon)^n = 1 + n\varepsilon + \frac{n(n-1)}{2!}\varepsilon^2
++ \frac{n(n-1)(n-2)}{3!}\varepsilon^3 + \cdots
+\]
+For a \emph{whole-number} $n$ this is the ordinary binomial theorem (multiply $(1+\varepsilon)$ by
+itself $n$ times and collect terms). For \emph{any} $n$, including the fractions and negative powers we
+will need, such as $n=\tfrac12$ for a pendulum or $n=-1$ for a density, the same series is what
+Taylor's theorem produces: each coefficient is the $k$-th derivative of $(1+\varepsilon)^n$ at
+$\varepsilon=0$, divided by $k!$. Check the first two terms: the value at $\varepsilon=0$ is $1$, and
+the first derivative $n(1+\varepsilon)^{n-1}$ at $\varepsilon=0$ is $n$, giving the term $n\varepsilon$.
+
+\stepn{2} \textbf{Why we keep only the first two terms.} Compare the \emph{sizes} of the terms when
+$\varepsilon$ is small. For a solid heated by \SI{100}{K}, $\varepsilon = \alpha_\ell\Delta T \sim
+10^{-3}$. Then
+\[
+\underbrace{n\varepsilon}_{\sim\,10^{-3}} \quad\text{against}\quad
+\underbrace{\tfrac{n(n-1)}{2}\varepsilon^2}_{\sim\,10^{-6}} \quad\text{against}\quad
+\underbrace{\cdots\varepsilon^3}_{\sim\,10^{-9}}
+\]
+Each term is about a thousand times smaller than the one before. Dropping everything past the linear
+term changes the answer by about one part in a thousand of itself, far below the precision of any
+expansion coefficient we will use. So, to first order,
+\[
+\boxed{\;(1+\varepsilon)^n \approx 1 + n\varepsilon \quad (|\varepsilon| \ll 1)\;}
+\]
+
+\stepn{3} \textbf{Apply it to a single power $x=b^n$.} Let $b$ change by a small fraction
+$\varepsilon = \Delta b/b$, so $b \to b(1+\varepsilon)$. Then
+\[
+x + \Delta x = \bigl[b(1+\varepsilon)\bigr]^n = b^n(1+\varepsilon)^n \approx b^n(1 + n\varepsilon),
+\]
+and subtracting $x=b^n$ and dividing by it,
+\[
+\frac{\Delta x}{x} \approx n\varepsilon = n\,\frac{\Delta b}{b}.
+\]
+A power $n$ has become a multiplier $n$.
+
+\stepn{4} \textbf{Apply it to a product $x=ab$.} With $a\to a(1+\varepsilon_a)$ and
+$b\to b(1+\varepsilon_b)$,
+\[
+(1+\varepsilon_a)(1+\varepsilon_b) = 1 + \varepsilon_a + \varepsilon_b
++ \underbrace{\varepsilon_a\varepsilon_b}_{\text{tiny: }\sim\,10^{-6}}
+\approx 1 + \varepsilon_a + \varepsilon_b .
+\]
+The cross-term is a product of two small numbers, negligible for the same reason as before, and the
+fractional changes simply \emph{add}. Combining Steps 3 and 4 for a general product of powers gives the
+boxed rule.
+\end{derivbox}
+
+\inwords{Everything reduces to one move: for small changes, $(1+\varepsilon)^n\approx1+n\varepsilon$.
+Keep the first-order term and throw away the square and beyond. Made once here, it is reused for every
+expansion coefficient, for the gas laws, for thermal stress and for the pendulum clock.}
+
+\begin{trapbox}{the approximation is only for small changes}
+$(1+\varepsilon)^n\approx1+n\varepsilon$ is not an identity; it is the first slice of an infinite
+series, good only while $|\varepsilon|\ll1$. For thermal expansion ($\varepsilon\sim10^{-3}$) it is
+superb. But do not reach for it when the fractional change is large: a gas whose volume doubles has
+$\varepsilon=1$, and there $1+n\varepsilon$ is worthless. A rule of thumb: if $\varepsilon$ is more
+than a few per cent, keep the next term or compute exactly.
+\end{trapbox}
+
+\subsection{The area and volume coefficients}
+
+The rule immediately settles how the three coefficients relate, with no fresh work.
+
+\begin{derivbox}{Why $\alpha_A = 2\alpha_\ell$ and $\alpha_V = 3\alpha_\ell$}
+\stepn{1} Area is a product of two lengths, $A = \ell\times\ell$. By the fractional-change rule
+(two equal factors, each changing by $\Delta\ell/\ell$):
+\[
+\frac{\Delta A}{A} = \frac{\Delta\ell}{\ell} + \frac{\Delta\ell}{\ell}
+= 2\,\frac{\Delta\ell}{\ell} = 2\alpha_\ell\Delta T
+\quad\Longrightarrow\quad \boxed{\;\alpha_A = 2\alpha_\ell\;}
+\]
+
+\stepn{2} Volume is a product of three lengths, $V = \ell^3$, so the power is $3$:
+\[
+\frac{\Delta V}{V} = 3\,\frac{\Delta\ell}{\ell} = 3\alpha_\ell\Delta T
+\quad\Longrightarrow\quad \boxed{\;\alpha_V = 3\alpha_\ell\;}
+\]
+
+\stepn{3} \emph{What was assumed:} only that $\alpha_\ell\Delta T \ll 1$ (so the rule applies), and
+that the material is \textbf{isotropic}: it expands equally in every direction, so a single
+$\alpha_\ell$ governs all three. For ordinary solids over ordinary temperature ranges both hold
+comfortably. A crystal such as quartz or graphite, whose atoms are bonded differently along different
+axes, has a different $\alpha_\ell$ along each axis, and then $\alpha_V$ is their sum.
+\end{derivbox}
+
+\inwords{Area is length times length, so it picks up the expansion \emph{twice}; volume picks it up
+three times. The factors 2 and 3 simply count how many lengths are being multiplied: the ``power
+becomes a multiplier'' half of the toolkit.}
+
+\begin{trapbox}{a hole expands like the material around it}
+Heat a metal plate with a hole in it: does the hole shrink (metal ``growing into'' it) or grow? It
+\textbf{grows}, exactly as if the hole were filled by a disc of the same metal. Every distance in the
+plate, including the hole's diameter, scales by the same factor $(1+\alpha_\ell\Delta T)$. This is why a
+stuck metal lid loosens under hot water: the lid's opening expands more than the glass neck (metals
+have larger $\alpha_\ell$ than glass).
+\end{trapbox}
+
+\begin{remarkbox}{A liquid in a container: apparent expansion}
+A liquid is always measured inside something that expands too. Fill a glass flask to the brim and heat
+both by $\Delta T$: the liquid's volume grows by $V\alpha_{V,\text{liq}}\Delta T$, but the flask's
+inside volume also grows, by $V\alpha_{V,\text{glass}}\Delta T$ (the cavity expands like solid glass,
+by the hole rule above). What overflows is the difference, so the liquid appears to expand with
+coefficient $\alpha_{V,\text{liq}}-\alpha_{V,\text{glass}}$. For mercury in glass the correction is
+about $15\%$; a liquid-in-glass thermometer works only because the liquid out-expands the glass.
+\end{remarkbox}
+
+\subsection{The anomalous expansion of water}
+
+One common liquid breaks the rule that heating expands. Water \emph{contracts} when heated from
+\SI{0}{\celsius} to \SI{4}{\celsius}, reaches its maximum density at \SI{4}{\celsius}, and only then
+expands like a normal liquid (Figure~\ref{fig:water-density}). The reason is molecular: just above
+freezing, many water molecules are still linked in open, ice-like hydrogen-bonded clusters, which take
+up more room than a random packing; warming breaks the clusters and lets the molecules pack more
+closely, an effect that outweighs ordinary expansion up to \SI{4}{\celsius}. Ice itself, a fully open
+lattice, is about $9\%$ less dense than water ($\rho_{\text{ice}}\approx\SI{917}{kg/m^3}$), which is why
+it floats (\chref{ch:fluids}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermal_water_density}
+\figcaption{fig:water-density}{Density of liquid water between \SI{0}{\celsius} and \SI{10}{\celsius}. The curve rises to a maximum at \SI{4}{\celsius} and then falls: below \SI{4}{\celsius} heating makes water denser, the opposite of normal behaviour. The whole change is tiny (about $0.03\%$), yet it decides how lakes freeze.}
+\end{figure}
+
+\why{This small anomaly is why lakes freeze from the top down. As a lake cools in winter, surface water
+cools, becomes denser and sinks, until the whole lake reaches \SI{4}{\celsius}. Further cooling makes the
+surface water \emph{lighter}, so it stays on top, reaches \SI{0}{\celsius} and freezes there. The ice
+then insulates the water beneath, which stays near \SI{4}{\celsius} at the bottom, and aquatic life
+survives the winter.}
+
+\subsection{Thermal stress: what happens when expansion is prevented}\label{sec:thermal-stress}
+
+So far the solid has been free to grow. But bridges, railway tracks and pipelines are \emph{clamped}
+(bolted down, welded, or wedged between fixed ends), and a clamped solid that is forbidden to expand
+does something dramatic instead: it pushes on whatever holds it, with enormous force. This is
+\textbf{thermal stress}, and it is why a railway line laid with no gaps can buckle on a hot afternoon,
+and why bridges ride on visible expansion joints.
+
+To put numbers on that force we recall three ideas from \chref{ch:solids} (Sections~\ref{sec:solids-stress} and~\ref{sec:solids-moduli}). For a rod of natural length
+$\ell$ and cross-sectional area $A$ pulled (or pushed) along its length by a force $F$ so that its
+length changes by $\Delta\ell$:
+\begin{itemize}
+\item the \textbf{stress} is the force per unit area, $\sigma = F/A$ (\si{Pa}): how hard the material
+      is worked internally;
+\item the \textbf{strain} is the fractional change in length, $\epsilon = \Delta\ell/\ell$
+      (dimensionless): exactly the kind of quantity the fractional-change toolkit is built for;
+\item \textbf{Young's modulus} $Y$ is the ratio of the two within the elastic limit,
+      $\sigma = Y\epsilon$, a property of the material alone (steel $Y\approx\SI{2e11}{Pa}$, bone about $\SI{1.6e10}{Pa}$, rubber about $\SI{e6}{Pa}$).
+\end{itemize}
+Stress is cause, strain is effect, and $Y$ is the exchange rate between them; $\sigma=Y\epsilon$ is
+Hooke's law in a size-independent form. It is linear only up to the elastic limit: beyond it the solid
+deforms permanently or breaks. For structural steel the stress at which permanent damage begins (the
+yield stress) is about \SI{250}{MPa}.
+
+\begin{derivbox}{Thermal stress in a clamped rod}
+\stepn{1} \textbf{Pretend, then undo.} Imagine the rod first expands freely by
+$\Delta\ell = \ell\,\alpha_\ell\Delta T$, and then the clamps squeeze it back to its original length.
+The clamps have imposed a compression of exactly $\Delta\ell$.
+
+\stepn{2} \textbf{That compression is a strain.} The strain forced on the rod is
+\[
+\epsilon = \frac{\Delta\ell}{\ell} = \alpha_\ell\Delta T ,
+\]
+a pure fractional squeeze, and exactly the free expansion the rod ``wanted'' to make.
+
+\stepn{3} \textbf{Convert strain to stress with $Y$.} Since $\sigma = Y\epsilon$,
+\[
+\boxed{\;\sigma = Y\alpha_\ell\,\Delta T\;}
+\qquad\text{and the force on the clamps is } F = \sigma A = YA\alpha_\ell\Delta T .
+\]
+Heating a clamped rod puts it in compression; cooling one puts it in tension.
+
+\stepn{4} \emph{Notice what dropped out:} the length. A short clamped rail is stressed exactly as much
+as a long one, because stress is set by the \emph{strain}, and thermal strain is a pure ratio,
+independent of size. That is the toolkit's ``fractions, not amounts'' lesson in action. The derivation
+assumes the clamps are perfectly rigid and the rod stays straight; a long, slender rod may instead
+relieve the stress by bowing sideways (buckling), which is exactly what an unjointed rail does.
+\end{derivbox}
+
+\begin{exbox}{The railway line}\label{ex:rail}
+A steel rail is \SI{20}{m} long on a \SI{10}{\celsius} morning. How much longer is it at
+\SI{50}{\celsius}, and what stress builds if it is instead clamped and cannot expand? Take
+$\alpha_\ell = \SI{1.2e-5}{K^{-1}}$ and $Y = \SI{2e11}{Pa}$.
+
+\stepn{1} $\Delta T = \SI{40}{K}$ (differences are the same in \si{\celsius} and \si{K}).
+
+\stepn{2} \textbf{Free expansion:}
+$\Delta\ell = \ell\,\alpha_\ell\,\Delta T = 20 \times 1.2\times10^{-5} \times 40
+= \SI{9.6e-3}{m} = \SI{9.6}{mm}$.
+
+\stepn{3} \textbf{If clamped instead:} the same strain $\alpha_\ell\Delta T$ becomes a stress
+\[
+\sigma = Y\alpha_\ell\Delta T = 2\times10^{11} \times 1.2\times10^{-5}\times 40
+= \SI{9.6e7}{Pa} = \SI{96}{MPa}.
+\]
+
+\stepn{4} \textbf{The force.} A standard heavy rail has a cross-section of about
+\SI{7.7e-3}{m^2}, so $F=\sigma A\approx9.6\times10^{7}\times7.7\times10^{-3}\approx\SI{7.4e5}{N}$,
+the weight of about 75 tonnes.
+
+\medskip
+Ten millimetres sounds trivial, but prevent it and \SI{96}{MPa} appears: nearly $40\%$ of the yield
+stress of steel, and easily enough to buckle track sideways. \ans{\SI{9.6}{mm} free; \SI{96}{MPa} if clamped}
+\end{exbox}
+
+\why{Because the numbers are alarming, engineers give thermal stress somewhere to go. Railway tracks
+are laid with expansion gaps (or welded continuously while pre-tensioned, with great care), bridges sit
+on sliding joints and rockers, pipelines run in zig-zags or fit expansion loops, and concrete roads are
+cast in slabs with tar-filled seams.}
+
+\subsection{The bimetallic strip}
+
+Thermal stress is usually a nuisance; the bimetallic strip turns it to use. Two strips of different
+metals (say steel, $\alpha_1$, and brass, $\alpha_2>\alpha_1$) are bonded face to face along their
+whole length. On heating, the brass ``wants'' to grow more than the steel, but the bond forbids the two
+from sliding past each other. The only way both can have their preferred lengths, at least
+approximately, is for the strip to \emph{bend}, with the longer, higher-expansion metal on the outside
+of the curve (Figure~\ref{fig:bimetal-strip}). Cooled below the temperature at which it was straight,
+it bends the other way.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermal_bimetal}
+\figcaption{fig:bimetal-strip}{A bimetallic strip, clamped at one end. Cold, it is straight; heated, it curls with the higher-expansion metal on the outside, because the outer layer of an arc is longer than the inner. Thickness and curvature are exaggerated: a real strip bends through a radius of tens of centimetres or more.}
+\end{figure}
+
+The same idea measured on a strip a few centimetres long gives a tip movement of a millimetre or so for
+a few tens of kelvin, enough to open or close an electrical contact. That is how the thermostat of an
+iron, an electric kettle's cut-out and old dial thermometers work. The radius of the curve is worked
+out in Challenge~\ref{chal:bimetal-radius} at the end of the chapter.
+
+\begin{keybox}{The fractional-change toolkit, applied across the chapter}
+The same rule reappears far beyond expansion. Three standing examples:
+\begin{itemize}
+\item \textbf{Pendulum clock:} the period is $T_{\text{per}} = 2\pi\sqrt{\ell/g}\propto \ell^{1/2}$
+      (its square-root dependence on $\ell$ was found by dimensional analysis in \chref{ch:measurement}), so
+      $\dfrac{\Delta T_{\text{per}}}{T_{\text{per}}} = \tfrac12\dfrac{\Delta \ell}{\ell}
+      = \tfrac12\alpha_\ell\Delta T$: the entire theory behind ``how many seconds does the clock lose
+      per day.''
+\item \textbf{Density:} $\rho = m/V$ with $m$ fixed, so
+      $\dfrac{\Delta\rho}{\rho} = -\dfrac{\Delta V}{V} = -\alpha_V\Delta T$, which for an isotropic
+      solid is $-3\alpha_\ell\Delta T$: heating lowers the density. A floating body therefore rides a
+      little lower in a warmed liquid (\chref{ch:fluids}).
+\item \textbf{Gas law:} $PV = nRT$ gives
+      $\dfrac{\Delta P}{P} + \dfrac{\Delta V}{V} = \dfrac{\Delta T}{T}$ at fixed $n$, for small
+      changes: the seed of many gas-law manipulations in \chref{ch:thermo}.
+\end{itemize}
+One habit, reused everywhere: for products and powers, work with fractional changes.
+\end{keybox}
+
+% ================================================================
+\section{Specific Heat and Calorimetry}\label{sec:calorimetry}
+
+Why does the sand on a beach scorch your feet at noon while the sea stays cool enough to swim in,
+under the very same Sun? Why does a metal spoon in hot soup burn your fingers almost at once, while the
+soup itself takes minutes to cool? Different substances need very different amounts of heat to warm by
+the same amount, a property called \emph{specific heat}. It governs why coastal towns have milder
+climates than inland ones, how a car radiator carries engine heat away, and why water is the coolant of
+choice in nearly every machine. This section makes the idea precise and shows how to do the
+bookkeeping when hot and cold bodies are mixed, the technique of \emph{calorimetry}. It is the first
+place in this volume where heat enters an energy balance, so it is the natural sequel to the energy
+conservation of \chref{ch:energy}.
+
+\subsection{How much heat changes temperature by how much}
+
+Pour the same heat into a cup of water and into a cup of oil, and they warm by different amounts. Two
+things clearly matter: \emph{how much} substance there is (twice the water needs twice the heat for the
+same rise), and \emph{what} the substance is (water is famously reluctant to change temperature). A
+third is obvious: a bigger temperature change needs more heat. Putting these together, the heat
+required is proportional to the mass, to the temperature change, and to a property of the material.
+
+\begin{defbox}{Specific heat and molar heat capacity}
+The heat $Q$ needed to raise the temperature of a mass $m$ by $\Delta T$, with no change of phase, is
+\[
+\boxed{\;Q = ms\,\Delta T\;}
+\]
+\begin{itemize}
+\item $s$ is the \textbf{specific heat capacity} (specific heat for short): the heat per unit
+      \emph{mass} per kelvin, a material property in \si{J.kg^{-1}.K^{-1}}. For water,
+      $s = \SI{4186}{J.kg^{-1}.K^{-1}}$, unusually large (problems often round it to $4200$).
+\item $ms$ is the \textbf{heat capacity} of that particular body, in \si{J/K}: the heat to warm the
+      whole body by one kelvin.
+\item $C = Ms$ is the \textbf{molar heat capacity}: heat per \emph{mole} per kelvin
+      (\si{J.mol^{-1}.K^{-1}}), obtained by multiplying $s$ by the molar mass $M$ in \si{kg/mol}.
+\item For gases the value depends on \emph{how} the gas is held while heated: at constant volume one
+      gets $C_v$, at constant pressure $C_p$, and they differ (\chref{ch:thermo}). For solids and
+      liquids the difference is small and usually ignored.
+\end{itemize}
+The two proportionalities are bookkeeping (double the mass or the rise, double the heat); all the
+\emph{physics} of a substance is hidden in the single number $s$, which \chref{ch:kinetic} will
+predict, for gases and simple solids, from molecular structure.
+\end{defbox}
+
+\begin{remarkbox}{The calorie and the mechanical equivalent of heat}
+Heat was once measured in its own unit, the \textbf{calorie}: the heat that warms \SI{1}{g} of water by
+\SI{1}{\celsius}, so that $s_{\text{water}}=\SI{1}{cal.g^{-1}.\celsius^{-1}}$. In the 1840s James Joule
+showed, by churning water with falling weights and measuring its temperature rise, that a definite
+amount of mechanical work always produces the same heating: $\SI{1}{cal}=\SI{4.186}{J}$. That
+experiment is what made heat a form of energy and opened the way to the first law of thermodynamics
+(\chref{ch:thermo}). The food ``Calorie'' is a kilocalorie.
+\end{remarkbox}
+
+\why{Water's large specific heat is why coastal cities have mild climates (the sea absorbs and releases
+vast amounts of heat with little temperature change), why it is the standard coolant, and why a
+hot-water bottle stays warm for hours. The same property makes the human body, mostly water, thermally
+stable.}
+
+\begin{exbox}{Heating water for tea}\label{ex:tea}
+How much heat raises \SI{300}{g} of water from \SI{20}{\celsius} to boiling (\SI{100}{\celsius}),
+and how does that compare with the same mass of copper ($s_{\text{Cu}} = \SI{385}{J.kg^{-1}.K^{-1}}$)?
+
+\stepn{1} Water: $Q = ms\,\Delta T = 0.3 \times 4186 \times 80 = \SI{100464}{J} \approx \SI{100}{kJ}$.
+
+\stepn{2} Copper, same mass and rise:
+$Q = 0.3 \times 385 \times 80 = \SI{9240}{J} \approx \SI{9.2}{kJ}$.
+
+\medskip
+Almost eleven times as much heat for the water, the ratio of the two specific heats. This is why a metal
+pan heats up almost at once on the flame while the water inside it takes minutes to boil.
+\ans{$\approx\SI{100}{kJ}$ for water; $\approx\SI{9.2}{kJ}$ for copper}
+\end{exbox}
+
+\subsection{Calorimetry: the accounting principle}
+
+\begin{keybox}{The principle of calorimetry}
+When bodies at different temperatures are mixed in an isolated container,
+\[
+\boxed{\;\text{heat lost by the hot bodies} = \text{heat gained by the cold bodies}\;}
+\]
+This is energy conservation with the signs made explicit: no work is done and no heat leaves, so the
+total internal energy is fixed and whatever one body loses another gains. Every calorimetry problem is
+this one line plus arithmetic. Equivalently, counting every heat as positive when gained,
+$\sum Q_i=0$.
+\end{keybox}
+
+\begin{derivbox}{The general mixing temperature}
+Mix a hot body ($m_1, s_1$, at $T_1$) with a cold one ($m_2, s_2$, at $T_2$), with no phase change and
+no heat lost to the surroundings, and let the final common temperature be $T_f$.
+
+\stepn{1} Heat lost by the hot body equals heat gained by the cold:
+\[
+m_1 s_1 (T_1 - T_f) = m_2 s_2 (T_f - T_2).
+\]
+
+\stepn{2} Expand and collect the $T_f$ terms on one side:
+\[
+m_1 s_1 T_1 + m_2 s_2 T_2 = (m_1 s_1 + m_2 s_2)\,T_f .
+\]
+
+\stepn{3} Solve:
+\[
+\boxed{\;T_f = \frac{m_1 s_1 T_1 + m_2 s_2 T_2}{m_1 s_1 + m_2 s_2}\;}
+\qquad\text{and, for many bodies,}\qquad
+T_f = \frac{\sum m_i s_i T_i}{\sum m_i s_i}.
+\]
+The final temperature is the average of the starting temperatures \emph{weighted by each body's heat
+capacity} $ms$. Equal masses of the same liquid ($m_1s_1 = m_2s_2$) collapse this to the plain
+arithmetic average; unequal masses or different substances, as in Example~\ref{ex:iron-water} below,
+pull the result towards whichever body has the larger $ms$. A large thermal mass barely budges, which is
+why the sea (enormous $ms$) sets the temperature of the air above it rather than the reverse. Because
+only differences of temperature appear in Step 1, Celsius readings can be used throughout.
+\end{derivbox}
+
+\begin{exbox}{A mixing problem, done with discipline}\label{ex:iron-water}
+A \SI{500}{g} block of iron ($s_{\text{Fe}}=\SI{450}{J.kg^{-1}.K^{-1}}$) at \SI{90}{\celsius} is
+dropped into \SI{200}{g} of water ($s_w=\SI{4200}{J.kg^{-1}.K^{-1}}$) at \SI{20}{\celsius} in an
+insulated cup. Find the final temperature. (Assume no water turns to steam, and neglect the cup.)
+
+\stepn{1} \textbf{Set up heat lost $=$ heat gained.} The iron \emph{cools}, losing
+$m_{\text{Fe}}\,s_{\text{Fe}}\,(90 - T_f)$; the water \emph{warms}, gaining $m_w\,s_w\,(T_f - 20)$.
+
+\stepn{2} \textbf{Compute each heat capacity $ms$ first}, because this is where the numbers live:
+\[
+m_{\text{Fe}}s_{\text{Fe}} = (0.5)(450) = \SI{225}{J/K}, \qquad
+m_w s_w = (0.2)(4200) = \SI{840}{J/K}.
+\]
+The water, though lighter, has nearly four times the heat capacity of the iron, so we should expect the
+final temperature to land much closer to the water's \SI{20}{\celsius}.
+
+\stepn{3} \textbf{Solve.} Setting the two heats equal,
+\[
+225\,(90 - T_f) = 840\,(T_f - 20).
+\]
+Expanding, $20250 - 225\,T_f = 840\,T_f - 16800$, so $37050 = 1065\,T_f$, giving
+\[
+T_f = \frac{37050}{1065} \approx \SI{34.8}{\celsius}.
+\]
+
+\medskip
+As predicted, the answer sits well below the midway point (\SI{55}{\celsius}) and close to the water's
+side: the substance with the larger $ms$ always pulls the mixture towards its own temperature. If a
+phase change is possible in the range, the check of \S\ref{sec:latent} must come first.
+\ans{\SI{34.8}{\celsius}}
+\end{exbox}
+
+\begin{remarkbox}{The calorimeter itself, and its water equivalent}
+A real calorimeter (a copper or aluminium cup) warms along with its contents, so it belongs in the heat
+balance with its own $m_cs_c$. It is often quoted as a \textbf{water equivalent} $m_{\text{eq}}=m_cs_c/s_w$: the
+mass of water with the same heat capacity. A \SI{100}{g} copper cup has
+$m_{\text{eq}}=0.1\times385/4186\approx\SI{9.2}{g}$, so it behaves like an extra \SI{9}{g} of water. Heat lost
+through the walls is the other correction; good calorimeters minimise it with insulation and a short
+experiment, and the rest is estimated with Newton's law of cooling (\S\ref{sec:cooling}).
+\end{remarkbox}
+
+% ================================================================
+\section{Change of State and Latent Heat}\label{sec:latent}
+
+The previous section assumed heat always changes temperature: $Q = ms\,\Delta T$. But watch a pot of
+water reach a rolling boil: keep heating, and the temperature stubbornly stays at \SI{100}{\celsius}
+while the water turns to steam. During a \emph{change of state}, heat pours in but the thermometer does
+not move. Where does the energy go? Answering that is this section's business, and it introduces a
+second kind of heat that the $ms\,\Delta T$ formula cannot capture.
+
+\subsection{Heat that changes phase instead of temperature}
+
+\begin{defbox}{Latent heat}
+During melting, freezing, boiling or condensing, a body absorbs or releases heat \emph{with no change
+of temperature}. The heat per unit mass is the \textbf{latent heat} $L$ (\si{J/kg}):
+\[ Q = mL. \]
+Melting absorbs the \textbf{latent heat of fusion} $L_f$ and freezing releases the same amount;
+boiling absorbs the \textbf{latent heat of vaporisation} $L_v$ and condensing releases it. For water at
+\SI{1}{atm}: $L_f = \SI{3.34e5}{J/kg}$ (at \SI{0}{\celsius}) and $L_v = \SI{2.26e6}{J/kg}$ (at
+\SI{100}{\celsius}).
+\end{defbox}
+
+Heat a block of ice from well below freezing at a steady rate and record its temperature against the
+heat supplied: the result, drawn to scale in Figure~\ref{fig:heating-curve}, is a staircase of sloping
+ramps and flat steps. On a ramp the heat goes into raising the temperature, $Q=ms\,\Delta T$, and the
+ramp's slope is $\Delta T/Q=1/(ms)$. On a flat the temperature is frozen and the heat goes into the
+change of phase, $Q=mL$, so the flat's \emph{length} is $mL$.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermal_heating_curve}
+\figcaption{fig:heating-curve}{Heating curve of \SI{1}{kg} of water, from ice at \SI{-30}{\celsius} to steam at \SI{115}{\celsius}, at a steady heating rate and \emph{drawn to true scale}. The flats (plum) are the phase changes: the temperature is frozen while the heat pulls molecules apart. The boiling flat dominates because $L_v \approx 6.8\,L_f$, and the ice and steam ramps are steeper than the water ramp because their specific heats are only about half of water's.}
+\end{figure}
+
+\inwords{On the flats, where does the heat go, if not into temperature? Into \emph{pulling molecules
+apart} against their mutual attraction: potential energy, not kinetic. Boiling separates molecules
+completely, which is why it costs nearly seven times as much as melting, which only loosens them.
+It is also why steam at \SI{100}{\celsius} scalds far worse than water at \SI{100}{\celsius}: it
+delivers an extra \SI{2.26e6}{J} per kilogram as it condenses on the skin, before any cooling even
+begins.}
+
+\subsection{Boiling point and pressure}
+
+The flats in Figure~\ref{fig:heating-curve} sit at \SI{0}{\celsius} and \SI{100}{\celsius} only at a
+pressure of \SI{1}{atm}. A liquid boils when its vapour pressure (the pressure of the vapour in
+equilibrium with it, which rises steeply with temperature) equals the pressure above it. Raise the
+pressure and the liquid must be hotter before it boils; lower it and it boils cooler. Water boils at
+about \SI{120}{\celsius} at \SI{2}{atm}, which is why a pressure cooker cooks faster, and at only about
+\SI{70}{\celsius} on the summit of Everest (about $\SI{0.33}{atm}$), which is why food cooked there in
+an open pot takes so long. Melting points depend on pressure far more weakly. Ice is unusual here too:
+because it is less dense than water, squeezing it \emph{lowers} its melting point slightly, so ice under
+a loaded wire melts and refreezes above it (\textbf{regelation}).
+
+\scopebox{The curve of boiling temperature against pressure, and the full phase diagram of a substance
+with its triple point (where solid, liquid and vapour coexist; for water \SI{273.16}{K} and
+\SI{611}{Pa}), are described qualitatively in the syllabus. The equation behind the curve (the
+Clausius--Clapeyron equation) is beyond it, and the numbers above are quoted from measurement.}
+
+\begin{trapbox}{always check whether the phase change completes}
+``Ice at \SI{0}{\celsius} is dropped into warm water: find the final temperature.'' Before writing any
+mixture equation, compare two numbers: the heat needed to melt \emph{all} the ice ($m_{\text{ice}}L_f$)
+and the heat the water can supply in cooling to \SI{0}{\celsius}. If the second is smaller, not all the
+ice melts and the answer is $T_f = \SI{0}{\celsius}$ with a mixture of ice and water. Solving the naive
+equation instead produces an impossible temperature below \SI{0}{\celsius} for a mixture that is
+supposed to be all water.
+\end{trapbox}
+
+\begin{exbox}{Ice into water, with the check}\label{ex:ice-water}
+\SI{50}{g} of ice at \SI{0}{\celsius} is dropped into \SI{200}{g} of water at \SI{40}{\celsius}. Find
+the final temperature. ($L_f = \SI{3.34e5}{J/kg}$, $s_w = \SI{4186}{J.kg^{-1}.K^{-1}}$.)
+
+\stepn{1} \textbf{The check first.} Heat to melt all the ice:
+$Q_{\text{melt}} = 0.05 \times 3.34\times10^5 = \SI{16700}{J}$.
+Heat available from the water cooling all the way to \SI{0}{\celsius}:
+$Q_{\text{avail}} = 0.2 \times 4186 \times 40 = \SI{33488}{J}$.
+Since $Q_{\text{avail}} > Q_{\text{melt}}$, all the ice melts and $T_f > \SI{0}{\celsius}$. Proceed.
+
+\stepn{2} Energy balance, with the melted ice then warming from \SI{0}{\celsius} to $T_f$:
+\[
+\underbrace{0.2\,s_w(40 - T_f)}_{\text{water cools}}
+= \underbrace{0.05\,L_f}_{\text{ice melts}} + \underbrace{0.05\,s_w(T_f - 0)}_{\text{meltwater warms}}
+\]
+
+\stepn{3} Insert numbers: $837.2(40-T_f) = 16700 + 209.3\,T_f$, so
+$33488 - 837.2\,T_f = 16700 + 209.3\,T_f$, giving $1046.5\,T_f = 16788$ and
+$T_f \approx \SI{16.0}{\celsius}$. \ans{$\approx\SI{16}{\celsius}$}
+\end{exbox}
+
+% ================================================================
+\section{Heat Transfer by Conduction}\label{sec:conduction}
+
+So far heat has simply ``flowed'' from hot to cold, and we have counted how much. The next question is
+how fast, and by what route. Why does a woollen blanket keep you warm, a metal railing feel colder than
+a wooden one at the same temperature, and a sea breeze blow onshore by day but offshore by night? Why
+do saucepans have copper bottoms but plastic handles, and why does a vacuum flask keep coffee hot for
+hours? Every one of these is a question about \emph{how heat moves}, and it moves by exactly three
+mechanisms: \textbf{conduction} (through direct contact), \textbf{convection} (carried by a moving
+fluid) and \textbf{radiation} (as electromagnetic waves, needing no medium at all). Recognising which
+one is at work is often the whole of a question; this section treats conduction, and
+\S\ref{sec:convection} and \S\ref{sec:radiation} the other two.
+
+\begin{tablebox}{The three mechanisms of heat transfer}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+ & \textbf{Conduction} & \textbf{Convection} & \textbf{Radiation}\\
+\midrule
+Carrier & molecular collisions & bulk flow of fluid & electromagnetic waves\\
+Needs a medium? & yes & yes (a fluid) & \textbf{no}\\
+Dominant in & solids & liquids and gases & vacuum; very hot bodies\\
+Example & spoon in tea & sea breeze; boiling & sunlight reaching Earth\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{tablebox}
+
+\subsection{Fourier's law for a slab}
+
+In conduction the material stays put. Energetic molecules at the hot end jostle their neighbours, which
+jostle theirs, and energy diffuses along; in metals the free electrons carry most of it, which is why
+good electrical conductors are also good conductors of heat. The rate at which heat crosses a surface
+is the \textbf{heat current} $H = dQ/dt$, in watts. Consider the simplest geometry, a uniform slab with
+its two faces held at fixed temperatures (Figure~\ref{fig:conduction-slab}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermal_slab}
+\figcaption{fig:conduction-slab}{Steady conduction through a uniform slab of thickness $\ell$ and face area $A$, between a hot reservoir at $T_1$ and a cold one at $T_2$. In the steady state the same heat current $H$ crosses every cross-section (two are marked): nothing accumulates anywhere, so the temperature in between no longer changes.}
+\end{figure}
+
+\begin{keybox}{Fourier's law of conduction (steady state)}
+For a slab of thickness $\ell$, face area $A$ and thermal conductivity $K$, with faces at $T_1>T_2$,
+\[
+\boxed{\;H = \frac{dQ}{dt} = \frac{K A\,(T_1 - T_2)}{\ell}\;}
+\]
+$H$ grows with area and with temperature difference, and shrinks with thickness. $K$ is a material
+property in \si{W.m^{-1}.K^{-1}}, ranging from about $400$ (copper) through $50$ (steel) and $0.8$
+(glass, brick) to $0.025$ (still air): a factor of more than $10^4$, which is why trapped air is the
+working principle of every insulator from wool to double glazing.
+\end{keybox}
+
+\begin{derivbox}{Why the conduction law has this form}
+Fourier's law is an experimental law, not a consequence of anything earlier in the book; what we can
+do is see that its form is the only sensible one.
+
+\stepn{1} Heat flows only when temperatures differ, and faster when they differ \emph{more}. The
+simplest law consistent with this makes the heat current proportional to the temperature
+\emph{gradient}, how steeply temperature changes with distance, $(T_1-T_2)/\ell$. Twice the
+temperature difference across the same thickness, twice the current; the same difference across twice
+the thickness, half the gradient and half the current.
+
+\stepn{2} The current is also proportional to the area $A$: two equal slabs side by side are two
+parallel paths and carry twice the heat.
+
+\stepn{3} The constant of proportionality is the material's \textbf{thermal conductivity} $K$, giving
+$H = KA(T_1-T_2)/\ell$. A large $K$ (metals) passes heat freely; a small $K$ (air, wool) throttles it.
+
+\stepn{4} \textbf{Why ``steady state''?} If the two faces are held at fixed $T_1, T_2$, then after a
+while every cross-section carries the \emph{same} $H$; otherwise heat would pile up somewhere and the
+temperature there would still be changing. Constant $H$ across a uniform slab means a constant gradient,
+so in the steady state the temperature falls \emph{linearly} from $T_1$ to $T_2$. In differential form,
+for any slice of thickness $dx$, $H=-KA\,dT/dx$; the minus sign says heat flows down the gradient.
+\end{derivbox}
+
+The law has limits worth knowing. It describes the steady state only; while a slab is still warming up,
+the current differs from place to place. And it assumes $K$ is constant, whereas real conductivities
+change with temperature (over a large temperature difference one uses an average $K$).
+
+\subsection{Thermal resistance: slabs in series and in parallel}
+
+\begin{derivbox}{Thermal resistances add like electrical ones}
+Rewrite the conduction law as $T_1-T_2 = H\cdot\dfrac{\ell}{KA}$. This has the form of Ohm's law,
+$V = IR$, with the temperature difference playing the voltage, $H$ the current, and
+\[
+R_{\text{th}} = \frac{\ell}{KA}\qquad(\si{K/W})
+\]
+the \textbf{thermal resistance}. (You will meet Ohm's law formally in electricity; here it is only a
+convenient analogy, and everything below follows from Fourier's law directly.)
+
+\stepn{1} \textbf{Series.} Stack two slabs of the same area face to face. In the steady state the same
+$H$ flows through both (heat cannot pile up at the interface), and the temperature drops \emph{add}:
+$\Delta T_{\text{total}} = \Delta T_1 + \Delta T_2$. Since $\Delta T = H R_{\text{th}}$ for each,
+$H R_{\text{total}} = HR_1 + HR_2$, so
+\[
+\boxed{\;R_{\text{series}} = R_1 + R_2\;}
+\]
+
+\stepn{2} \textbf{Parallel.} Place two slabs side by side between the same two reservoirs. Now they
+share the same $\Delta T$ and the currents add: $H=H_1+H_2=\Delta T/R_1+\Delta T/R_2$, so
+\[
+\boxed{\;\frac{1}{R_{\text{parallel}}} = \frac{1}{R_1} + \frac{1}{R_2}\;}
+\]
+
+\stepn{3} \textbf{Effective conductivity.} Two slabs of equal thickness $\ell$ and area $A$ but
+conductivities $K_1, K_2$ in series behave like a single slab of thickness $2\ell$ and conductivity
+$K_{\text{eff}}$:
+\[
+\frac{2\ell}{K_{\text{eff}}A} = \frac{\ell}{K_1 A} + \frac{\ell}{K_2 A}
+\quad\Longrightarrow\quad
+K_{\text{eff}} = \frac{2K_1K_2}{K_1+K_2},
+\]
+the harmonic mean, dominated by the \emph{poorer} conductor, which is why one thin layer of insulation
+does so much. Side by side (parallel) with equal areas, the same steps give the plain average
+$K_{\text{eff}}=\tfrac12(K_1+K_2)$, dominated by the \emph{better} conductor.
+\end{derivbox}
+
+\why{The thermal-resistance picture is how buildings are actually designed. A wall is a stack of
+layers (brick, air gap, insulation, plaster), and an engineer simply adds their resistances, as for
+resistors in series, to predict the heat loss and size the heating. The ``R-value'' printed on a roll of
+loft insulation is precisely $\ell/K$, the resistance of one square metre. Figure~\ref{fig:two-layer-wall}
+in the challenge problems shows how lopsided the temperature drop across such a wall can be.}
+
+\begin{trapbox}{metal feels colder than wood at the same temperature}
+A metal bench and a wooden bench on the same winter morning are at the \emph{same} temperature. The
+metal feels colder because its large $K$ conducts heat out of your hand faster: your skin senses the
+heat \emph{current} leaving it, not the temperature of what it touches. The sensation is a statement
+about $K$, not about $T$.
+\end{trapbox}
+
+\subsection{Conduction that drives a phase change: ice on a pond}
+
+When the heat conducted through a slab arrives at ice, or leaves water that is freezing, it feeds a
+latent heat instead of a temperature rise, and the two halves of this chapter meet. The classic case is
+a pond freezing over on a still, cold night.
+
+\begin{derivbox}{How fast ice thickens}
+Air above the pond is at $-\theta_a$ (that is, $\theta_a$ kelvin below \SI{0}{\celsius}); the water
+under the ice is at \SI{0}{\celsius}. Let the ice be $y$ thick at time $t$, with density $\rho$,
+conductivity $K$, and area $A$.
+
+\stepn{1} \textbf{Heat conducted up through the ice.} The ice is a slab of thickness $y$ with faces at
+\SI{0}{\celsius} and $-\theta_a$, so $H = KA\theta_a/y$ (treating the slab as in the steady state at
+each instant, because it thickens slowly).
+
+\stepn{2} \textbf{Heat released by freezing.} To thicken by $dy$, a mass $\rho A\,dy$ of water must
+freeze, releasing $\rho A\,dy\,L_f$. That heat must be conducted away in the time $dt$:
+\[
+\rho A L_f\,dy = \frac{KA\theta_a}{y}\,dt
+\quad\Longrightarrow\quad
+y\,dy = \frac{K\theta_a}{\rho L_f}\,dt .
+\]
+
+\stepn{3} \textbf{Integrate} from thickness $y_1$ at time $0$ to $y_2$ at time $t$:
+\[
+\boxed{\;t = \frac{\rho L_f}{2K\theta_a}\,\bigl(y_2^2 - y_1^2\bigr)\;}
+\]
+The time to grow from zero is proportional to the \emph{square} of the thickness: each new layer must
+send its heat through all the ice already formed, so the ice insulates the water below and thickening
+slows down. Doubling the thickness takes four times as long.
+\end{derivbox}
+
+% ================================================================
+\section{Convection and Radiation}\label{sec:convection}
+
+Conduction needs a temperature gradient in stationary matter. The other two mechanisms are different
+in kind: in convection the matter itself moves, and in radiation no matter is needed at all.
+
+\subsection{Convection: heat carried by moving fluid}
+
+In conduction the molecules stay put and pass energy along by collision. In \textbf{convection} the
+hot fluid \emph{itself moves}, carrying its energy bodily to a new place. Heat a pan of water from
+below: the bottom layer warms, expands (\S\ref{sec:expansion}), becomes less dense and is pushed up by
+buoyancy, exactly the Archimedes force of \chref{ch:fluids}; cooler, denser water sinks to take its
+place; and this rolling circulation, a \textbf{convection current}, stirs heat through the whole pot
+far faster than conduction alone could. This is \textbf{natural} convection, driven by gravity and
+density differences. Blow the fluid along with a fan or pump (a car radiator, a fan heater) and it is
+\textbf{forced} convection, which is faster still.
+
+\why{Convection runs much of the world. Sea breezes are convection: land heats faster than water by day
+(its specific heat is lower), the air above it rises, and cooler sea air flows in to replace it; at
+night the land cools faster and the breeze reverses. The same physics drives monsoon winds, ocean
+currents, the working of a room heater (warm air rises and circulates), and the cooling fins on an
+engine. It is also why the freezer compartment of an old refrigerator sits at the \emph{top}: cold air
+sinks, so it must be made where it can fall through the cabinet. Without gravity there is no natural
+convection, which is why a candle flame in orbit is a dim sphere rather than a tall, bright teardrop.}
+
+Convection is hard to capture in a single clean formula, because the fluid flow is complicated, so at
+this level we treat it qualitatively. The one quantitative statement we do use, Newton's law of cooling
+in \S\ref{sec:cooling}, is at heart a statement about convective (and radiative) loss from a warm body
+to the air around it.
+
+\subsection{Radiation: heat that needs no medium}\label{sec:radiation}
+
+Conduction and convection both need matter. \textbf{Thermal radiation} does not: it is energy carried
+by electromagnetic waves (mostly infrared at everyday temperatures), and it crosses a vacuum freely.
+This is how the Sun's energy reaches Earth across about \SI{1.5e11}{m} of empty space, and how you feel
+the warmth of a fire on your face before any warm air reaches you. Every body radiates, all the time;
+what we feel as heating or cooling is the \emph{difference} between what a body emits and what it
+absorbs from its surroundings.
+
+\begin{keybox}{The Stefan--Boltzmann law}
+Every body at absolute temperature $T$ radiates energy from its surface. For a perfect radiator (a
+\textbf{black body}, which absorbs all radiation falling on it) of surface area $A$, the rate of
+emission is
+\[
+\boxed{\;H = \sigma_{\!s}\,A\,T^4\;}, \qquad
+\sigma_{\!s} = \SI{5.67e-8}{W.m^{-2}.K^{-4}}\ \text{(Stefan's constant)}.
+\]
+A real body radiates a fraction $e$ of this, its \textbf{emissivity} ($0<e\le1$):
+$H = e\,\sigma_{\!s}AT^4$. A body at $T$ in surroundings at $T_a$ also absorbs radiation from them, and
+its \emph{net} loss is
+\[
+H_{\text{net}} = e\,\sigma_{\!s}A\left(T^4 - T_a^4\right).
+\]
+The striking feature is the \textbf{fourth power}: double the absolute temperature and the body
+radiates $2^4 = 16$ times as much.
+\end{keybox}
+
+The law is quoted here from experiment (Stefan, 1879); Boltzmann soon derived the $T^4$ from
+thermodynamics, and the value of $\sigma_{\!s}$ follows from quantum physics, both beyond this book. Two
+companion facts, also stated without proof, complete the picture. \textbf{Kirchhoff's law}: a good
+absorber is an equally good emitter (a body's emissivity equals its absorptivity), which is why the net
+formula above uses the same $e$ for both. \textbf{Wien's displacement law}: the wavelength at which a
+body radiates most strongly is inversely proportional to its absolute temperature,
+\[
+\lambda_{\max}T = \SI{2.90e-3}{m.K}.
+\]
+The Sun's surface, at about \SI{5800}{K}, peaks near \SI{500}{nm}, in the middle of the visible band
+(our eyes evolved to use it); skin at \SI{305}{K} peaks near \SI{9.5}{\micro m}, deep in the infrared.
+
+\inwords{The $T^4$ dependence is why very hot things shed heat with astonishing speed. It is why a
+filament lamp glows (raise the temperature enough and, by Wien's law, the radiation shifts into the
+visible band), why the Sun floods the solar system with light, and why heat loss from anything red-hot
+is dominated by radiation rather than conduction. Near room temperature the same law, with only a small
+temperature excess, gives the gentle radiative cooling that Newton's law describes next.}
+
+\why{Emissivity has consequences you can see. A shiny teapot (low $e$) stays hot longer than a dull
+black one (high $e$); a vacuum flask is silvered to make $e$ tiny and starve radiation, while its vacuum
+stops conduction and convection; and houses in hot climates are painted white to reflect rather than
+absorb sunlight. The greenhouse effect is the same physics: sunlight (peaking in the visible) passes
+through the atmosphere and warms the ground, but the ground re-radiates in the infrared, which water
+vapour and carbon dioxide absorb and partly send back down.}
+
+\begin{exbox}{Why a filament glows and a body does not}\label{ex:radiation}
+\textbf{(a)} A tungsten lamp filament runs at \SI{2800}{K}; your skin is at about \SI{305}{K}. By what
+factor does each square metre of filament out-radiate each square metre of skin (take equal $e$)?
+
+\stepn{1} The emitted power per unit area is $e\sigma_{\!s}T^4$, so the ratio is $(T_1/T_2)^4$:
+\[
+\left(\frac{2800}{305}\right)^{\!4} = (9.18)^4 \approx 7100 .
+\]
+The filament radiates roughly seven thousand times more fiercely per unit area, and (by Wien's law,
+with $\lambda_{\max}\approx\SI{1.0}{\micro m}$) enough of it spills into the visible to glow white-hot,
+while your skin radiates only in the invisible infrared.
+
+\textbf{(b)} Estimate the net power your body radiates, taking surface area $A=\SI{1.8}{m^2}$,
+emissivity $e=0.97$, skin at \SI{305}{K}, room walls at \SI{293}{K}.
+
+\stepn{2} Net power is emitted minus absorbed:
+\[
+H_{\text{net}} = e\sigma_{\!s}A\left(T_{\text{skin}}^4 - T_{\text{room}}^4\right)
+  = 0.97(5.67\times10^{-8})(1.8)\left(305^4 - 293^4\right) \approx \SI{127}{W}.
+\]
+This is comparable to the body's whole resting heat output (about \SI{100}{W}), which is why a still,
+cool room feels cold even when the air is not, why clothing (which radiates at a lower surface
+temperature) matters so much, and why radiant heaters warm you directly without heating the air.
+\ans{(a) $\approx7100$ times; (b) $\approx\SI{127}{W}$}
+\end{exbox}
+
+% ================================================================
+\section{Newton's Law of Cooling}\label{sec:cooling}
+
+A cup of tea left on a table cools quickly at first and then more and more slowly as it approaches room
+temperature. Newton noticed that the rate of cooling is roughly proportional to the temperature
+\emph{excess} over the surroundings. Why should it be, and what does the law predict over time? The
+answer connects back to radiation and forward to one of the most common equations in all of science.
+
+\begin{derivbox}{Where Newton's law comes from, and how it is solved}
+\stepn{1} \textbf{The origin.} A warm body at $T$ in surroundings at $T_a$ loses net radiated power
+proportional to $T^4 - T_a^4$ (\S\ref{sec:radiation}). Write $T = T_a + \theta$, where $\theta$ is the
+temperature excess. By the binomial approximation,
+\[
+T^4 - T_a^4 = T_a^4\Bigl[\bigl(1+\tfrac{\theta}{T_a}\bigr)^4 - 1\Bigr] \approx 4T_a^3\,\theta
+\qquad(\theta \ll T_a).
+\]
+So for a \emph{small} excess the loss rate is proportional to $\theta$ itself, and convective loss to
+the surrounding air behaves roughly the same way. The heat current is $H=bA\theta$ for some constant $b$
+set by the surface and the air (for pure radiation, $b=4e\sigma_{\!s}T_a^3$).
+
+\stepn{2} \textbf{The rate equation.} A body of mass $m$ and specific heat $s$ (assumed to be at one
+uniform temperature) loses heat $ms\,dT$ as its temperature changes by $dT$, so $ms\,\dfrac{d\theta}{dt}
+= -bA\theta$, or
+\[
+\boxed{\;\frac{d\theta}{dt} = -\kappa\,\theta\;}, \qquad \kappa=\frac{bA}{ms}\quad(\si{s^{-1}}),
+\qquad \theta = T - T_a .
+\]
+This is Newton's law of cooling. The constant $\kappa$ is larger for a body with more surface or less
+heat capacity: a thin wire cools faster than a thick bar of the same metal.
+
+\stepn{3} \textbf{The solution.} The rate of decrease is proportional to the quantity itself, the
+first-order decay equation of \chref{ch:toolkit} (Section~\ref{sec:explog}). Separate the variables,
+gathering the $\theta$'s on one side and the $t$'s on the other, and integrate:
+\[
+\frac{d\theta}{\theta} = -\kappa\,dt
+\quad\Longrightarrow\quad
+\ln\theta = -\kappa t + \text{const}.
+\]
+Exponentiating and fixing the constant from the initial excess $\theta_0$ at $t=0$:
+\[
+\boxed{\;\theta = \theta_0\,e^{-\kappa t}, \qquad\text{that is,}\qquad T - T_a = (T_0 - T_a)\,e^{-\kappa t}\;}
+\]
+
+\stepn{4} \textbf{Read it.} The excess decays exponentially (Figure~\ref{fig:newton-cooling}), so the
+body loses equal \emph{fractions} of its excess in equal times, never equal numbers of degrees. That one
+fact is the entire method for the problems. Taking logarithms gives the time to cool between two
+excesses, $t=\dfrac1\kappa\ln\dfrac{\theta_1}{\theta_2}$.
+\end{derivbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermal_cooling}
+\figcaption{fig:newton-cooling}{Newton's law of cooling for the coffee of Example~\ref{ex:coffee}: the excess over room temperature falls by the same \emph{factor} ($0.733$) in every \SI{5}{min} interval, so the drops shrink as the coffee approaches room temperature and it never quite gets there. The dashed line is the tempting linear extrapolation, which would have the coffee at room temperature in under \SI{19}{min}.}
+\end{figure}
+
+\begin{trapbox}{Newton's law is only the small-excess limit}
+Step 1 dropped every term beyond $4T_a^3\theta$. For radiation the error is about $5\%$ for an excess of
+\SI{10}{K} near room temperature but $35\%$ for an excess of \SI{60}{K}, and for a white-hot object the
+full $T^4 - T_a^4$ must be used; cooling is then far faster than exponential at first. Convective loss
+is not exactly linear either. Newton's law is a \emph{linearisation}, a good model for modest excesses,
+not a law of nature in its own right; exam problems use it as exact, and so may you, but know what it
+is.
+\end{trapbox}
+
+\begin{exbox}{Cooling coffee}\label{ex:coffee}
+Coffee cools from \SI{80}{\celsius} to \SI{64}{\celsius} in \SI{5}{min} in a \SI{20}{\celsius}
+room. Predict its temperature after a further \SI{5}{min}.
+
+\stepn{1} Work with the \emph{excess} over the room. Initial excess: $80-20 = \SI{60}{K}$. After
+\SI{5}{min}: $64-20 = \SI{44}{K}$. So each \SI{5}{min} interval multiplies the excess by
+$e^{-5\kappa}=44/60 = 0.733$.
+
+\stepn{2} After the next \SI{5}{min}: excess $= 44 \times 0.733 = \SI{32.3}{K}$, so
+$T = 20 + 32.3 \approx \SI{52.3}{\celsius}$.
+
+\medskip
+Note what we did \emph{not} do: subtract another \SI{16}{\celsius}. Cooling is exponential, not
+linear: the drops shrink as the body approaches room temperature. \ans{$\approx\SI{52.3}{\celsius}$}
+\end{exbox}
+
+\begin{methodbox}{The averaged form used in many exam questions}
+When a body cools from $T_1$ to $T_2$ in a time $t$, many problems approximate the rate by its
+average and the excess by its value at the average temperature:
+\[
+\frac{T_1-T_2}{t} = \kappa\left(\frac{T_1+T_2}{2} - T_a\right).
+\]
+This is a chord-and-midpoint approximation to the exact $t=\frac1\kappa\ln\frac{T_1-T_a}{T_2-T_a}$, and
+it is very good when the drop $T_1-T_2$ is small compared with the excess. Use whichever form the
+question signals; when both are possible they usually agree to within a few per cent
+(Challenge~\ref{chal:cooling-time} compares them).
+\end{methodbox}
+
+% ================================================================
+\section{Summary}\label{sec:summary-thermal}
+
+Temperature decides the direction of heat flow and heat is energy in transit; matter answers heat by
+warming, by expanding and by changing phase, and heat travels by conduction, convection and radiation.
+
+\begin{itemize}
+\item \textbf{Temperature and heat.} Temperature is a state; heat $Q$ is energy flowing because of a
+      temperature difference. The zeroth law (transitivity of thermal equilibrium) makes thermometers
+      meaningful. Scales: $t_F=\tfrac95t_C+32$, $T=t_C+273.15$; differences are equal in \si{K} and
+      \si{\celsius}.
+\item \textbf{Gas thermometer and ideal gas.} All dilute gases extrapolate to $P=0$ at
+      \SI{-273.15}{\celsius}, absolute zero. $PV=nRT$ with $T$ in kelvin contains Boyle's, Charles's,
+      Gay-Lussac's and Avogadro's laws.
+\item \textbf{Expansion.} $\Delta\ell/\ell=\alpha_\ell\Delta T$, and by the fractional-change rule
+      $\alpha_A=2\alpha_\ell$, $\alpha_V=3\alpha_\ell$ for an isotropic solid. Holes and cavities
+      expand like the material around them. Water is densest at \SI{4}{\celsius}, so lakes freeze from
+      the top.
+\item \textbf{Thermal stress.} A clamped rod develops $\sigma=Y\alpha_\ell\Delta T$, independent of its
+      length. A bimetallic strip bends with the higher-expansion metal outside.
+\item \textbf{Specific heat and calorimetry.} $Q=ms\,\Delta T$ ($C=Ms$ per mole); in an isolated mixture
+      heat lost $=$ heat gained, and the final temperature is the $ms$-weighted mean.
+\item \textbf{Latent heat.} $Q=mL$ at constant temperature; the flats of a heating curve have length
+      $mL$ and the ramps slope $1/(ms)$. Always check whether a phase change completes. Boiling point
+      rises with pressure.
+\item \textbf{Conduction.} $H=KA\,\Delta T/\ell$ in the steady state; $R_{\text{th}}=\ell/KA$ adds in
+      series, its reciprocal in parallel. Ice on a pond thickens as $t\propto y^2$.
+\item \textbf{Convection and radiation.} Convection is bulk flow driven by buoyancy (or a pump).
+      Radiation needs no medium: $H=e\sigma_{\!s}AT^4$, net $e\sigma_{\!s}A(T^4-T_a^4)$; Wien's law
+      $\lambda_{\max}T=\SI{2.90e-3}{m.K}$.
+\item \textbf{Newton's law of cooling.} For a small excess, $d\theta/dt=-\kappa\theta$, so
+      $\theta=\theta_0e^{-\kappa t}$: equal fractions in equal times.
+\end{itemize}
+
+% ================================================================
+\section{Problem Types}\label{sec:types-thermal}
+
+Nineteen types cover the questions examiners set on this chapter. Most share two lessons: work with
+fractions and ratios rather than amounts, and before solving, check which physical regime you are in
+(kelvin or Celsius, free or clamped, phase change complete or not, small excess or large).
+
+\archq{Converting between temperature scales}
+{``A thermometer with its own fixed points reads $X$; what is the Celsius temperature?'' or ``at what
+temperature do two scales agree?''}
+{The fractional position between the fixed points is the same on every scale:
+$\dfrac{X-X_{\text{ice}}}{X_{\text{steam}}-X_{\text{ice}}}=\dfrac{t_C-0}{100}$. Solve for the unknown.}
+{Forgetting to subtract the lower fixed point, or applying the offset to a temperature
+\emph{difference}.}
+{A faulty thermometer reads $-10^\circ$ in melting ice and $140^\circ$ in steam at \SI{1}{atm}. When it
+reads $50^\circ$, the true Celsius temperature is:}
+{\SI{33.3}{\celsius}}
+{\SI{26.7}{\celsius}}
+{\SI{40.0}{\celsius}}
+{\SI{60.0}{\celsius}\archans{C}{The fraction of the way from ice to steam is
+$\dfrac{50-(-10)}{140-(-10)}=\dfrac{60}{150}=0.4$, so $t_C=\SI{40}{\celsius}$. Option (A) forgets the
+offset ($50/150$); (B) adds the offset with the wrong sign ($40/150$); (D) forgets to divide by the
+$150$ divisions, as if the scale had 100.}}
+
+\archq{The gas laws in kelvin}
+{``A gas is heated at constant pressure (or volume) until its volume (or pressure) doubles; find the
+final temperature.''}
+{Convert to kelvin first: $V\propto T$ at fixed $P$ and $n$, $P\propto T$ at fixed $V$ and $n$. Convert
+back at the end if a Celsius answer is wanted.}
+{Doubling the Celsius reading. Proportionality holds only for absolute temperature.}
+{A gas at \SI{27}{\celsius} is heated at constant pressure until its volume doubles. Its final
+temperature is:}
+{\SI{54}{\celsius}}
+{\SI{600}{\celsius}}
+{\SI{573}{\celsius}}
+{\SI{327}{\celsius}\archans{D}{$T_1=\SI{300}{K}$; doubling $V$ at fixed $P$ doubles $T$ to
+\SI{600}{K}, which is $600-273=\SI{327}{\celsius}$. Option (A) doubles the Celsius reading; (B) forgets
+to convert \SI{600}{K} back to Celsius; (C) adds 273 instead of subtracting it.}}
+
+\archq{The pendulum-clock error}
+{``A pendulum clock is correct at one temperature; how many seconds does it gain or lose per day at
+another?''}
+{$T_{\text{per}}\propto\sqrt{\ell}$, so $\dfrac{\Delta T_{\text{per}}}{T_{\text{per}}}
+=\tfrac12\alpha_\ell\Delta T$; multiply by \SI{86400}{s} for the daily error.}
+{A rod that \emph{lengthens} makes the period \emph{longer}, so the clock \emph{loses} time when
+heated. The sign is the whole question; the bob's mass is irrelevant.}
+{A pendulum clock keeps correct time at \SI{20}{\celsius}. Its pendulum rod is steel,
+$\alpha_\ell=\SI{1.2e-5}{K^{-1}}$. When the temperature rises to \SI{40}{\celsius}, the clock will:}
+{lose about \SI{10.4}{s} per day}
+{gain about \SI{10.4}{s} per day}
+{lose about \SI{20.7}{s} per day}
+{keep correct time, since the bob's mass is unchanged\archans{A}{A rise of \SI{20}{K} lengthens the
+rod, so the period grows and the clock runs slow. The daily loss is
+$\tfrac12\alpha_\ell\Delta T\times86400=\tfrac12(1.2\times10^{-5})(20)(86400)\approx\SI{10.4}{s}$.
+Option (B) has the wrong sign; (C) forgets the factor $\tfrac12$; (D) is the misconception that mass
+matters.}}
+
+\archq{The scale-reading error}
+{``A metal scale is calibrated at one temperature but used at another. Is the reading too high or too
+low?''}
+{When the scale itself expands, its marks spread apart, so it under-reads. True length $=$
+reading $\times(1+\alpha_{\text{scale}}\Delta T)$ when the scale is hotter than its calibration.}
+{Two things can expand, the object and the ruler. Track which one the question asks about.}
+{A brass metre scale is correct at \SI{15}{\celsius}. At \SI{35}{\celsius} it is used to measure a rod
+and reads \SI{50.00}{cm}. With $\alpha_{\text{brass}}=\SI{1.9e-5}{K^{-1}}$, the true length of the rod
+is closest to:}
+{\SI{49.981}{cm}}
+{\SI{50.000}{cm}}
+{\SI{50.038}{cm}}
+{\SI{50.019}{cm}\archans{D}{The heated scale has expanded, so its ``\SI{50.00}{cm}'' mark is really
+farther out and the reading understates the true length:
+$50.00(1+1.9\times10^{-5}\times20)=\SI{50.019}{cm}$. Option (A) applies the correction with the wrong
+sign; (B) ignores the scale's expansion; (C) doubles the correction, as if using $\alpha_A$.}}
+
+\archq{The cavity, ring or hole}
+{``A plate has a hole, a ring is heated, or a ring must be slipped over a shaft.''}
+{A cavity expands exactly as if filled with the same metal: every linear dimension scales by
+$(1+\alpha_\ell\Delta T)$. Require $\Delta D/D=\alpha_\ell\Delta T$.}
+{Holes \emph{grow}; they do not shrink. If ring and shaft are of the same metal and both are heated, the
+gap between them does not close.}
+{A steel ring of inner diameter \SI{5.000}{cm} at \SI{20}{\celsius} is to be slipped over a shaft of
+diameter \SI{5.010}{cm} kept at \SI{20}{\celsius}. With $\alpha_\ell=\SI{1.2e-5}{K^{-1}}$, the ring must
+be heated to at least about:}
+{it can never fit, since heating shrinks the hole}
+{\SI{167}{\celsius}}
+{\SI{187}{\celsius}}
+{\SI{353}{\celsius}\archans{C}{The hole expands like solid metal:
+$\Delta T=\dfrac{0.010}{5.000\times1.2\times10^{-5}}\approx\SI{167}{K}$, so the ring must reach
+$20+167\approx\SI{187}{\celsius}$. Option (A) is the ``metal grows inwards'' misconception; (B)
+forgets to add the starting temperature; (D) uses the radius $2.5$ cm with the diameter change.}}
+
+\archq{Thermal stress, and stress balanced against a load}
+{``A rod, rail or wire is rigidly clamped and heated or cooled; find the stress or force,'' or ``a
+loaded wire regains its length when cooled; find the load.''}
+{Prevented expansion is an imposed strain $\alpha_\ell\Delta T$, so $\sigma=Y\alpha_\ell\Delta T$ and
+$F=YA\alpha_\ell\Delta T$. If a hanging mass restores the length, set its stress $mg/A$ equal to the
+thermal stress.}
+{The length is irrelevant data. Heating a clamped rod gives compression, cooling gives tension.}
+{A brass wire of radius \SI{1}{mm} is cooled by \SI{20}{K}. A mass $m$ hung from it stretches it back
+to exactly its original length. With $\alpha_\ell=\SI{1e-5}{K^{-1}}$, $Y=\SI{1e11}{Pa}$ and
+$g=\SI{10}{m/s^2}$, $m$ is closest to:}
+{\SI{6.3}{kg}}
+{\SI{25}{kg}}
+{\SI{63}{kg}}
+{\SI{2.0}{kg}\archans{A}{$mg/A=Y\alpha_\ell\Delta T$ gives $m=\dfrac{YA\alpha_\ell\Delta T}{g}
+=\dfrac{10^{11}\,\pi(10^{-3})^2(10^{-5})(20)}{10}\approx\SI{6.3}{kg}$. Option (B) takes the diameter
+as the radius; (C) gives the force in newtons as if it were the mass; (D) forgets the $\pi$ in the
+area.}}
+
+\archq{Density change on heating}
+{``A solid or liquid is heated; find the fractional change in density,'' or ``how does a floating
+body's submerged fraction shift with temperature?''}
+{With mass fixed, $\dfrac{\Delta\rho}{\rho}=-\dfrac{\Delta V}{V}=-\alpha_V\Delta T=-3\alpha_\ell\Delta T$
+for an isotropic solid.}
+{Use the \emph{volume} coefficient $3\alpha_\ell$, not $\alpha_\ell$. Density \emph{falls}. For
+floating, both body and liquid expansions matter.}
+{A block of iron is heated from \SI{0}{\celsius} to \SI{100}{\celsius}. With
+$\alpha_\ell=\SI{1.2e-5}{K^{-1}}$, the percentage change in its density is about:}
+{$-0.12\%$}
+{$-0.36\%$}
+{$+0.36\%$}
+{$-0.24\%$\archans{B}{$\dfrac{\Delta\rho}{\rho}=-3\alpha_\ell\Delta T=-3(1.2\times10^{-5})(100)=-0.36\%$.
+Option (A) uses $\alpha_\ell$ alone; (C) has the wrong sign (density falls as volume grows); (D) uses
+the area coefficient $2\alpha_\ell$.}}
+
+\archq{The mixing temperature}
+{``Bodies at different temperatures are mixed, or a hot metal is dropped in water. Find the final
+temperature.''}
+{Heat lost $=$ heat gained: $T_f=\dfrac{\sum m_i s_i T_i}{\sum m_i s_i}$, the heat-capacity-weighted
+mean. Compute each $ms$ first.}
+{Averaging the temperatures, or weighting by mass alone. If \emph{any} substance can change phase in
+the range, check that first.}
+{\SI{100}{g} of copper ($s=\SI{385}{J.kg^{-1}.K^{-1}}$) at \SI{100}{\celsius} is dropped into
+\SI{200}{g} of water ($s=\SI{4186}{J.kg^{-1}.K^{-1}}$) at \SI{20}{\celsius} in an insulated
+calorimeter of negligible heat capacity. The final temperature is closest to:}
+{\SI{60.0}{\celsius}}
+{\SI{46.7}{\celsius}}
+{\SI{26.7}{\celsius}}
+{\SI{23.5}{\celsius}\archans{D}{$T_f=\dfrac{0.1(385)(100)+0.2(4186)(20)}{0.1(385)+0.2(4186)}
+=\dfrac{20594}{875.7}\approx\SI{23.5}{\celsius}$. Option (A) is the plain average; (B) weights by mass
+only; (C) weights by specific heat only, ignoring the masses.}}
+
+\archq{Heat from impact, friction or falling}
+{``A bullet strikes a target, a block slides to rest, or ice falls and melts; find the temperature rise
+or the speed needed.''}
+{Mechanical energy becomes heat (\chref{ch:energy}). Equate the stated fraction of kinetic or potential
+energy to $ms\,\Delta T$, plus $mL$ if melting occurs. The mass usually cancels.}
+{Read the fraction carefully (``\SI{40}{\percent} heats the bullet''). If melting occurs, include both
+the warming up to the melting point \emph{and} the latent term.}
+{A lead bullet at \SI{127}{\celsius} strikes a target and just melts, $40\%$ of its kinetic energy
+going to heat it. Lead melts at \SI{327}{\celsius}, with $s=\SI{125}{J.kg^{-1}.K^{-1}}$ and
+$L_f=\SI{2.5e4}{J/kg}$. The impact speed was about:}
+{\SI{354}{m/s}}
+{\SI{500}{m/s}}
+{\SI{316}{m/s}}
+{\SI{224}{m/s}\archans{B}{Per kilogram,
+$0.4(\tfrac12 v^2)=s\,\Delta T+L_f=125(200)+2.5\times10^4=\SI{5e4}{J/kg}$, so
+$v=\sqrt{5\times10^4/0.2}=\SI{500}{m/s}$. Option (A) forgets the latent heat; (C) forgets the $40\%$;
+(D) forgets both.}}
+
+\archq{Does the phase change complete?}
+{``Ice at \SI{0}{\celsius} into warm water,'' or ``steam into cold water'': any mixture straddling a
+phase boundary.}
+{\emph{Before} writing a mixing equation, compare the heat to complete the change ($mL$) with the heat
+the other body can supply in reaching the transition temperature. If it falls short, the answer sits
+\emph{at} the transition temperature with a mixture of phases.}
+{Solving the mixing equation blindly gives an impossible temperature. The check \emph{is} the question.}
+{\SI{50}{g} of ice at \SI{0}{\celsius} is added to \SI{50}{g} of water at \SI{20}{\celsius}
+($L_f=\SI{3.34e5}{J/kg}$, $s_w=\SI{4186}{J.kg^{-1}.K^{-1}}$). The final state is:}
+{a mixture of ice and water at \SI{0}{\celsius}}
+{all water at \SI{10}{\celsius}}
+{all ice at \SI{0}{\celsius}}
+{all water at about \SI{-30}{\celsius}\archans{A}{Melting all the ice needs
+$0.05\times3.34\times10^{5}=\SI{16700}{J}$, but the water can give only
+$0.05(4186)(20)=\SI{4186}{J}$ before reaching \SI{0}{\celsius}. That melts only
+$4186/334000\approx\SI{12.5}{g}$, and the mixture settles at \SI{0}{\celsius}. Option (B) averages the
+temperatures, ignoring latent heat; (C) would need the water to lose its own latent heat, which nothing
+can absorb; (D) is what the blind mixing equation gives, an impossible ``water'' below freezing.}}
+
+\archq{The heating-curve budget}
+{``How much heat turns ice at one temperature into water or steam at another?'': a multi-stage
+journey through temperatures and phases.}
+{Add the segments: warm the ice $ms_{\text{ice}}\Delta T$, melt $mL_f$, warm the water $ms_w\Delta T$,
+boil $mL_v$, warm the steam $ms_{\text{steam}}\Delta T$, stopping where the question stops. Ramps use
+$s$, flats use $L$ (Figure~\ref{fig:heating-curve}).}
+{Forgetting a flat (usually a latent term), adding one that is not reached, or using water's $s$ for the
+ice or steam ramps.}
+{The heat required to convert \SI{10}{g} of ice at \SI{0}{\celsius} entirely into water at
+\SI{100}{\celsius} ($L_f=\SI{3.34e5}{J/kg}$, $s_w=\SI{4186}{J.kg^{-1}.K^{-1}}$) is closest to:}
+{\SI{3.3}{kJ}}
+{\SI{4.2}{kJ}}
+{\SI{7.5}{kJ}}
+{\SI{30.1}{kJ}\archans{C}{Two stages: melt the ice, $0.01\times3.34\times10^5=\SI{3340}{J}$, then warm
+the water, $0.01(4186)(100)=\SI{4186}{J}$; total $\approx\SI{7.5}{kJ}$. Option (A) is the melting alone;
+(B) the warming alone; (D) also boils the water, a stage the question does not reach.}}
+
+\archq{Reading $s$ or $L$ off a heating graph}
+{``A temperature-against-heat graph is given; find the specific or latent heat,'' or ``which graph fits
+substance X?''}
+{On a $T$--$Q$ graph a sloped segment has slope $1/(ms)$ (steeper means smaller $s$); a flat segment
+is a phase change of length $mL$.}
+{Steeper slope means \emph{smaller} specific heat, not larger. The flats' \emph{lengths}, not their
+heights, give the latent heats. (If the axes are swapped, $Q$ against $T$, the slope is $ms$ instead.)}
+{On a temperature-against-heat graph for a fixed mass of water, the ``ice'' ramp is twice as steep as the
+``liquid water'' ramp. The ratio $s_{\text{ice}}:s_{\text{water}}$ is:}
+{$2:1$}
+{$1:1$}
+{$4:1$}
+{$1:2$\archans{D}{On a $T$--$Q$ plot the slope is $1/(ms)$, so twice the slope means half the specific
+heat: $s_{\text{ice}}:s_w=1:2$ (true for real ice, about $2100$ against $4186$). Option (A) inverts the
+slope--$s$ relation; (B) assumes the phase does not matter; (C) squares the ratio.}}
+
+\archq{Slabs in series and parallel}
+{``Two slabs or rods of different conductivity are joined end to end (series) or side by side
+(parallel); find the effective $K$ or the junction temperature.''}
+{Treat them as thermal resistances $R_{\text{th}}=\ell/KA$. \textbf{Series:} same $H$, resistances add,
+junction found by equating currents. \textbf{Parallel:} same $\Delta T$, currents add.}
+{Series gives $K_{\text{eff}}=2K_1K_2/(K_1{+}K_2)$ for equal thicknesses; parallel gives the
+area-weighted mean. Swapping them is the classic error. The junction lies closer in temperature to the
+end joined by the \emph{better} conductor.}
+{Two rods of equal length and cross-section, of conductivities $K$ and $3K$, are joined end to end. The
+free end of the $K$ rod is held at \SI{100}{\celsius} and that of the $3K$ rod at \SI{0}{\celsius}. In
+the steady state the junction temperature is:}
+{\SI{75}{\celsius}}
+{\SI{25}{\celsius}}
+{\SI{50}{\celsius}}
+{\SI{33}{\celsius}\archans{B}{In series the same heat current crosses both:
+$K(100-T_j)=3K(T_j-0)$, so $100-T_j=3T_j$ and $T_j=\SI{25}{\celsius}$. The better conductor ($3K$)
+needs only a quarter of the drop. Option (A) gives the larger drop to the better conductor; (C) ignores
+the conductivities; (D) splits the drop in the ratio $1:2$.}}
+
+\archq{Steady conduction driving a phase change}
+{``A slab conducts from steam on one side to ice on the other; find the mass of ice melted per second,''
+or ``find $K$ from the melting rate.''}
+{In the steady state the conducted current all melts ice: $H=\dfrac{KA\,\Delta T}{\ell}=\dfrac{dm}{dt}L_f$.}
+{The heat feeds the \emph{latent} heat of melting, not a temperature rise; the ice stays at
+\SI{0}{\celsius}. Convert hours to seconds.}
+{A stone slab of area \SI{0.36}{m^2} and thickness \SI{0.1}{m} has steam at \SI{100}{\celsius} on its
+lower face and ice at \SI{0}{\celsius} on its upper face. If \SI{4.8}{kg} of ice melts per hour ($L_f=\SI{3.34e5}{J/kg}$), the thermal conductivity of the stone is about:}
+{\SI{0.62}{W.m^{-1}.K^{-1}}}
+{\SI{2.47}{W.m^{-1}.K^{-1}}}
+{\SI{1.24}{W.m^{-1}.K^{-1}}}
+{\SI{4.5e3}{W.m^{-1}.K^{-1}}\archans{C}{$K=\dfrac{(dm/dt)L_f\ell}{A\,\Delta T}
+=\dfrac{(4.8/3600)(3.34\times10^5)(0.1)}{0.36\times100}\approx\SI{1.24}{W.m^{-1}.K^{-1}}$. Options (A)
+and (B) are slips by a factor of 2 (halving or doubling the thickness or the temperature difference);
+(D) forgets to convert the melting rate to kilograms per second.}}
+
+\archq{Ice growing on a pond}
+{``Ice forms on a pond under cold air; find the time to thicken from $y_1$ to $y_2$.''}
+{The formed ice conducts the latent heat away, so $t=\dfrac{\rho L_f}{2K\theta_a}(y_2^2-y_1^2)$: time
+goes as the difference of the squares.}
+{Each successive centimetre takes \emph{longer}, because the ice insulates the water below. The law is
+not linear.}
+{The first \SI{1}{cm} of ice on a pond takes \SI{7}{h} to form. If the air stays equally cold, the
+further time for the ice to grow from \SI{1}{cm} to \SI{2}{cm} is:}
+{\SI{21}{h}}
+{\SI{7}{h}}
+{\SI{14}{h}}
+{\SI{28}{h}\archans{A}{Since $t\propto y^2$, reaching \SI{1}{cm} takes 1 unit and reaching
+\SI{2}{cm} takes 4 units, so the \SI{1}{cm}-to-\SI{2}{cm} stage takes $4-1=3$ units, that is,
+$3\times7=\SI{21}{h}$. Option (B) assumes linear growth; (C) assumes $t\propto y$ for the total;
+(D) is the total time from zero, not the further time.}}
+
+\archq{Rods forming a symmetric network}
+{``Identical rods form a square (or other symmetric frame); opposite corners are held at different
+temperatures. Find a temperature or a temperature difference.''}
+{Use symmetry first: points placed symmetrically with respect to the hot and cold corners are at the
+same temperature, so no heat flows between them.}
+{The tempting answers are the full difference or half of it; symmetry makes it \emph{zero}.}
+{Four identical rods form a square $ABCD$. Corners $A$ and $C$ (one diagonal) are held at
+\SI{100}{\celsius} and \SI{0}{\celsius}. In the steady state, the temperature difference between $B$
+and $D$ is:}
+{\SI{100}{\celsius}}
+{\SI{50}{\celsius}}
+{\SI{25}{\celsius}}
+{\SI{0}{\celsius}\archans{D}{Heat splits equally down the two identical paths $A\!\to\!B\!\to\!C$ and
+$A\!\to\!D\!\to\!C$, so $B$ and $D$ each sit at the midpoint temperature, \SI{50}{\celsius}, and their
+difference is zero. (A) and (B) confuse a corner's temperature with the difference; (C) has no basis
+in either path.}}
+
+\archq{Stefan's law and the $T^4$ ratio}
+{``A body's temperature is raised; by what factor does its radiated power change?'' or filament
+against surroundings comparisons.}
+{$H=e\sigma_{\!s}AT^4$, so power ratios are $(T_2/T_1)^4$ with $T$ in \emph{kelvin}. Net loss uses
+$T^4-T_a^4$.}
+{$T$ must be absolute: \SI{27}{\celsius} to \SI{327}{\celsius} is not a twelvefold rise. The fourth
+power makes the effect dramatic.}
+{A body at \SI{27}{\celsius} is heated to \SI{327}{\celsius}. The factor by which its rate of emission
+of radiant energy increases is:}
+{$12.1$}
+{$16$}
+{$2$}
+{about $2.2\times10^4$\archans{B}{In kelvin, $\SI{300}{K}\to\SI{600}{K}$, a doubling; $H\propto T^4$
+gives $(600/300)^4=2^4=16$. Option (A) takes the Celsius ratio $327/27$ and forgets the fourth power;
+(C) uses kelvin but forgets the fourth power; (D) raises the Celsius ratio to the fourth power.}}
+
+\archq{Newton's cooling, the ratio method}
+{``A body cools from $T_1$ to $T_2$ in a time $t$; find its temperature after a further $t$,'' or
+``compare cooling rates.''}
+{The excess over the surroundings decays exponentially, so equal time intervals multiply the excess by
+a constant ratio. Find the ratio from the first interval and apply it again.}
+{Do not subtract the same number of degrees twice. Work with the excess $\theta=T-T_a$, never the raw
+temperature.}
+{A body cools from \SI{60}{\celsius} to \SI{50}{\celsius} in \SI{10}{min} in surroundings at
+\SI{20}{\celsius}. Its temperature after the next \SI{10}{min} will be about:}
+{\SI{40.0}{\celsius}}
+{\SI{45.0}{\celsius}}
+{\SI{42.5}{\celsius}}
+{\SI{41.7}{\celsius}\archans{C}{The excess over \SI{20}{\celsius} falls from $40$ to $30$, a ratio of
+$0.75$. The next \SI{10}{min} multiplies it by $0.75$ again: $30\times0.75=22.5$, so
+$T=20+22.5=\SI{42.5}{\celsius}$. Option (A) is the linear-cooling trap; (B) halves the drop for no
+reason; (D) applies the ratio $50/60$ of the raw temperatures instead of the excesses.}}
+
+\archq{Newton's cooling, the averaged form}
+{``A body cools from $T_1$ to $T_2$ in time $t$; how long does it take to cool from $T_2$ to $T_3$?''
+with ``use the average temperature'' implied or stated.}
+{Apply $\dfrac{T_1-T_2}{t}=\kappa\Bigl(\dfrac{T_1+T_2}{2}-T_a\Bigr)$ to the first interval to find
+$\kappa$, then to the second interval to find the time.}
+{Using the excess at the start or the end of an interval instead of at its midpoint; or assuming equal
+drops take equal times.}
+{A body cools from \SI{90}{\celsius} to \SI{70}{\celsius} in \SI{10}{min} in surroundings at
+\SI{30}{\celsius}. Using the averaged form of Newton's law, the time to cool from \SI{70}{\celsius} to
+\SI{50}{\celsius} is about:}
+{\SI{16.7}{min}}
+{\SI{10.0}{min}}
+{\SI{15.0}{min}}
+{\SI{25.0}{min}\archans{A}{First interval: $20/10=\kappa(80-30)$, so $\kappa=\SI{0.04}{min^{-1}}$.
+Second: $20/t=0.04(60-30)=1.2$, so $t\approx\SI{16.7}{min}$ (the exact exponential gives
+\SI{17.1}{min}). Option (B) assumes equal drops take equal times; (C) uses the starting excesses ($60$
+and $40$); (D) uses the final excess of the second interval ($20$) in place of the average.}}
+
+% ================================================================
+\section{Practice Problems}\label{sec:practice-thermal}
+
+The problems below are of standard examination difficulty and are meant to be worked without looking
+back at the chapter. Answers, with brief working, follow the list. Take $s_w=\SI{4186}{J.kg^{-1}.K^{-1}}$,
+$s_{\text{ice}}=\SI{2100}{J.kg^{-1}.K^{-1}}$, $L_f=\SI{3.34e5}{J/kg}$, $L_v=\SI{2.26e6}{J/kg}$ and
+$\sigma_{\!s}=\SI{5.67e-8}{W.m^{-2}.K^{-4}}$ unless told otherwise.
+
+\begin{enumerate}[itemsep=3pt]
+\item Normal body temperature is \SI{98.6}{\degree F}. Express it in \si{\celsius} and in kelvin.
+\item A copper wire \SI{5.0}{m} long is heated from \SI{20}{\celsius} to \SI{120}{\celsius}. Find the
+      increase in its length ($\alpha_\ell=\SI{1.7e-5}{K^{-1}}$).
+\item A glass flask of volume \SI{1000}{cm^3} is filled to the brim with mercury at \SI{0}{\celsius}.
+      Both are heated to \SI{100}{\celsius}. How much mercury overflows?
+      ($\alpha_V$ of mercury $=\SI{1.82e-4}{K^{-1}}$; $\alpha_\ell$ of glass $=\SI{9e-6}{K^{-1}}$.)
+\item A brass pendulum clock ($\alpha_\ell=\SI{1.9e-5}{K^{-1}}$) keeps correct time at
+      \SI{25}{\celsius}. Does it gain or lose at \SI{5}{\celsius}, and by how much per day?
+\item Explain why a thick glass tumbler is more likely to crack than a thin one when boiling water is
+      poured into it.
+\item How much heat converts \SI{20}{g} of ice at \SI{-10}{\celsius} into steam at \SI{100}{\celsius}?
+\item A \SI{2.0}{kW} kettle holds \SI{1.0}{kg} of water at \SI{20}{\celsius}. Neglecting losses and the
+      kettle's own heat capacity, find (a) the time to bring it to the boil and (b) the further time to
+      boil away half of it.
+\item A window pane of area \SI{1.0}{m^2} and thickness \SI{4.0}{mm} ($K=\SI{0.8}{W.m^{-1}.K^{-1}}$)
+      has its inner surface at \SI{20}{\celsius} and its outer surface at \SI{5}{\celsius}. Find the
+      heat current through it. Why is the real loss through such a window much smaller when only the
+      \emph{air} temperatures inside and outside are \SI{20}{\celsius} and \SI{5}{\celsius}?
+\item The Sun has radius \SI{6.96e8}{m} and a surface temperature of \SI{5800}{K}. Treating it as a
+      black body, find the total power it radiates.
+\item A body at \SI{70}{\celsius} in a room at \SI{20}{\celsius} cools to \SI{50}{\celsius} in
+      \SI{6}{min}. Using Newton's law of cooling, how long does it take (from the start) to reach
+      \SI{30}{\celsius}?
+\item Convert \SI{68}{\degree F} to Celsius, and state the rise in kelvin corresponding to a rise of
+      45 Fahrenheit degrees.
+\item A brass sphere has diameter \SI{10}{cm} at \SI{20}{\celsius}. Find the increase in its diameter at
+      \SI{120}{\celsius} ($\alpha_\ell = \SI{1.9e-5}{K^{-1}}$). Does the answer change if the sphere is
+      hollow?
+\item \SI{100}{g} of a metal at \SI{100}{\celsius} is dropped into \SI{300}{g} of water at
+      \SI{25}{\celsius}; the mixture settles at \SI{30}{\celsius}. Find the metal's specific heat,
+      neglecting the container.
+\item \SI{10}{g} of steam at \SI{100}{\celsius} is passed into \SI{200}{g} of water at \SI{20}{\celsius}.
+      Show that all the steam condenses, and find the final temperature.
+\item Two slabs of equal thickness $\ell$ and area $A$ but conductivities $K_1$ and $K_2$ are pressed
+      together in series. Show that the combination conducts like a single slab, of thickness $2\ell$, with
+      conductivity $K_{\text{eff}} = \dfrac{2K_1K_2}{K_1+K_2}$.
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item $t_C=\tfrac59(98.6-32)=\SI{37.0}{\celsius}$; $T=37.0+273.15=\SI{310.15}{K}$.
+\item $\Delta\ell=\ell\alpha_\ell\Delta T=5.0(1.7\times10^{-5})(100)=\SI{8.5e-3}{m}=\SI{8.5}{mm}$.
+\item The flask's inside volume expands like glass, $\alpha_{V,\text{glass}}=3\alpha_\ell=\SI{2.7e-5}{K^{-1}}$.
+      Overflow $=V(\alpha_{V,\text{Hg}}-\alpha_{V,\text{glass}})\Delta T
+      =1000(1.82\times10^{-4}-0.27\times10^{-4})(100)=\SI{15.5}{cm^3}$.
+\item Colder, so the rod shortens, the period falls and the clock \emph{gains}. The fractional change
+      of period is $\tfrac12\alpha_\ell\Delta T=\tfrac12(1.9\times10^{-5})(20)=1.9\times10^{-4}$, which
+      over \SI{86400}{s} is about \SI{16.4}{s} per day.
+\item Glass conducts heat poorly. The inner surface heats and tries to expand at once, while the outer
+      surface is still cold; the outer layer holds the inner one back, so large thermal stresses
+      ($Y\alpha_\ell\Delta T$, with $\Delta T$ the difference across the wall) build up. In a thick
+      wall the inside--outside temperature difference is larger and lasts longer, so the stress can exceed
+      the strength of the glass. A thin wall warms nearly uniformly. (Heat-resistant glass has a
+      smaller $\alpha_\ell$ for the same reason.)
+\item $Q=0.02\bigl[2100(10)+3.34\times10^5+4186(100)+2.26\times10^6\bigr]=0.02(3.0336\times10^6)
+      \approx\SI{6.07e4}{J}=\SI{60.7}{kJ}$; the boiling stage is three quarters of it.
+\item (a) $t=\dfrac{ms\Delta T}{P}=\dfrac{1.0(4186)(80)}{2000}\approx\SI{167}{s}$ (under
+      \SI{3}{min}). (b) $t=\dfrac{(0.5)(2.26\times10^6)}{2000}=\SI{565}{s}$, more than three times as
+      long.
+\item $H=\dfrac{KA\Delta T}{\ell}=\dfrac{0.8(1.0)(15)}{0.004}=\SI{3000}{W}$. In reality thin layers of
+      still air cling to both faces; air conducts about thirty times worse than glass, so these films
+      carry most of the temperature drop and the glass surfaces are much closer to each other in
+      temperature than the air on either side. The films are resistances in series with the glass.
+\item $H=\sigma_{\!s}(4\pi R^2)T^4=5.67\times10^{-8}\times4\pi(6.96\times10^{8})^2\times5800^4
+      \approx\SI{3.9e26}{W}$.
+\item The excess falls from $50$ to $30$ in \SI{6}{min}, a factor $0.6$. To reach an excess of $10$
+      needs $t=6\,\dfrac{\ln(50/10)}{\ln(50/30)}=6\times\dfrac{1.609}{0.511}\approx\SI{18.9}{min}$.
+\item $t_C = \tfrac59(68-32) = \SI{20}{\celsius}$. A rise of 45 Fahrenheit degrees is
+      $\tfrac59\times45 = 25$ Celsius degrees, that is, \SI{25}{K} (no 32 is subtracted for a difference).
+\item $\Delta D = D\alpha_\ell\Delta T = 0.1\times1.9\times10^{-5}\times100 = \SI{1.9e-4}{m}=\SI{0.19}{mm}$.
+      Unchanged if hollow: thermal expansion scales every length alike, the cavity included.
+\item Heat lost by the metal $=$ heat gained by the water:
+      $0.1\,s_m(100-30) = 0.3(4186)(30-25)$, so
+      $s_m = 6279/7 \approx \SI{897}{J.kg^{-1}.K^{-1}}$ (close to aluminium).
+\item Condensing all the steam releases $0.01L_v = \SI{22600}{J}$. Heating all the water to the
+      boiling point would need $0.2(4186)(80)=\SI{66976}{J}$, more than the steam can supply even
+      after cooling as condensed water, so all the steam condenses and $T_f < \SI{100}{\celsius}$. The
+      balance
+      \[0.01L_v + 0.01\,s_w(100-T_f) = 0.2\,s_w(T_f-20)\]
+      gives $T_f \approx \SI{49.5}{\celsius}$.
+\item In series the same heat current $H$ crosses both slabs, and the temperature drops add, so the
+      thermal resistances add: $R_{\text{th}}=\dfrac{\ell}{K_1A}+\dfrac{\ell}{K_2A}$. A single slab of
+      thickness $2\ell$ has $R_{\text{th}}=\dfrac{2\ell}{K_{\text{eff}}A}$, so
+      $\dfrac{2}{K_{\text{eff}}} = \dfrac{1}{K_1}+\dfrac{1}{K_2}$, that is,
+      $K_{\text{eff}} = \dfrac{2K_1K_2}{K_1+K_2}$, the harmonic mean.
+\end{enumerate}
+}
+
+% ================================================================
+\section{Challenge Problems}\label{sec:challenge-thermal}
+
+Original problems in the spirit of the classic olympiad and JEE-Advanced collections. Work each before
+reading the solution.
+
+\begin{challengebox}{Steam meets ice (builds on calorimetry and change of state)}\label{chal:steam-ice}
+\SI{10}{g} of steam at \SI{100}{\celsius} is passed into \SI{100}{g} of ice at \SI{0}{\celsius} in an
+insulated vessel. Find the final temperature and the composition of the mixture.
+($L_v=\SI{2.26e6}{J/kg}$, $L_f=\SI{3.34e5}{J/kg}$, $s_w=\SI{4186}{J.kg^{-1}.K^{-1}}$.)
+\challengeans{First test the tempting assumption that everything ends as water at some $T_f>0$. The
+steam, condensing and then cooling to \SI{0}{\celsius}, can release at most
+\[
+m_{\text{st}}L_v+m_{\text{st}}s_w(100)=0.01(2.26\times10^6)+0.01(4186)(100)=22600+4186\approx\SI{26.8}{kJ}.
+\]
+But melting \emph{all} the ice needs $m_{\text{ice}}L_f=0.1(3.34\times10^5)=\SI{33.4}{kJ}$, more than the
+steam can give. So not all the ice melts, and the final temperature is pinned at
+\textbf{\SI{0}{\celsius}}. The \SI{26.8}{kJ} melts $\dfrac{26786}{334000}\approx\SI{80}{g}$ of ice,
+leaving
+\[
+\boxed{\text{about \SI{90}{g} of water (10 condensed, 80 melted) and \SI{20}{g} of ice, all at \SI{0}{\celsius}}.}
+\]
+The trap: blindly writing ``heat lost $=$ heat gained'' for a single $T_f$ gives an impossible
+temperature below \SI{0}{\celsius} for what is supposed to be all water, the signal that a phase change
+is only partial.}
+\end{challengebox}
+
+\begin{challengebox}{The bimetallic strip (builds on thermal expansion)}\label{chal:bimetal-radius}
+A bimetallic strip is made of two bonded metal layers, each \SI{0.5}{mm} thick, with linear expansion
+coefficients $\alpha_1=\SI{1.2e-5}{K^{-1}}$ and $\alpha_2=\SI{1.9e-5}{K^{-1}}$. It is straight at
+room temperature. Estimate the radius of curvature when it is heated by \SI{100}{K}
+(Figure~\ref{fig:bimetal-strip}).
+\challengeans{On heating, the higher-expansion layer grows more, so the strip bends with that layer on
+the outside. A simple model: let each layer keep its own free length along its mid-plane, and let the
+two mid-planes, a distance $d$ apart (here $d=\SI{0.5}{mm}$, one layer thickness), be concentric arcs of
+radii $R$ and $R+d$ subtending the same angle $\psi$. Then for an initial length $\ell$,
+\[
+(R+d)\,\psi=\ell(1+\alpha_2\Delta T),\qquad R\,\psi=\ell(1+\alpha_1\Delta T)
+\quad\Longrightarrow\quad
+\frac{R+d}{R}=\frac{1+\alpha_2\Delta T}{1+\alpha_1\Delta T}\approx1+(\alpha_2-\alpha_1)\Delta T,
+\]
+using the binomial approximation. So
+\[
+R\approx\frac{d}{(\alpha_2-\alpha_1)\Delta T}=\frac{0.5\times10^{-3}}{(0.7\times10^{-5})(100)}
+\approx\SI{0.71}{m}.
+\]
+The strip curls measurably from a tiny differential expansion, which is how a thermostat's contact opens
+and closes. The model is honest about scale but not exact: the bond actually stretches one layer and
+compresses the other, and a full elastic analysis (Timoshenko, 1925) for two layers of equal thickness
+and equal Young's modulus gives $R=\dfrac{2h}{3(\alpha_2-\alpha_1)\Delta T}\approx\SI{0.95}{m}$, with
+$h=\SI{1}{mm}$ the total thickness.}
+\end{challengebox}
+
+\begin{challengebox}{Heat through two layers (builds on conduction)}\label{chal:two-layer}
+A wall is a \SI{1}{cm} steel plate ($K_1=\SI{50}{W.m^{-1}.K^{-1}}$) backed by \SI{5}{cm} of insulation
+($K_2=\SI{0.8}{W.m^{-1}.K^{-1}}$). The inside face is at \SI{100}{\celsius}, the outside face at
+\SI{20}{\celsius}. Find the steady heat flux $q=H/A$ (heat current per unit area) and the temperature
+at the steel--insulation interface.
+\challengeans{In the steady state the same flux passes through both layers (heat cannot pile up at the
+interface). Per unit area the thermal resistances add in series:
+$R_{\text{th}}A=\dfrac{\ell_1}{K_1}+\dfrac{\ell_2}{K_2}=\dfrac{0.01}{50}+\dfrac{0.05}{0.8}
+=0.0002+0.0625=\SI{0.0627}{m^2.K/W}$, so
+\[
+q=\frac{\Delta T}{R_{\text{th}}A}=\frac{80}{0.0627}\approx\SI{1276}{W/m^2}.
+\]
+The interface temperature follows from the small drop across the steel:
+$T=100-q\,\dfrac{\ell_1}{K_1}=100-1276(0.0002)\approx\SI{99.7}{\celsius}$. Almost the entire
+\SI{80}{K} drop occurs across the insulation (Figure~\ref{fig:two-layer-wall}): the steel's resistance
+per unit area is about $300$ times smaller, so it barely resists at all.}
+\end{challengebox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermal_two_layer_wall}
+\figcaption{fig:two-layer-wall}{Steady conduction through a steel plate backed by insulation. The same flux $q$ crosses both layers, so the temperature drop across each is proportional to its resistance $\ell/K$. The profile above the wall is to scale: the steel loses only \SI{0.3}{K} and the insulation takes nearly all of the \SI{80}{K}.}
+\end{figure}
+
+\begin{challengebox}{Newton's law of cooling, exact and averaged (builds on cooling)}\label{chal:cooling-time}
+A body cools from \SI{80}{\celsius} to \SI{70}{\celsius} in \SI{5}{min} in a room at
+\SI{20}{\celsius}. How long will it take to cool from \SI{70}{\celsius} to \SI{60}{\celsius}? Solve it
+exactly, then with the averaged form, and compare.
+\challengeans{\textbf{Exact.} Newton's law $\dfrac{d\theta}{dt}=-\kappa\theta$ integrates to
+$\ln\dfrac{\theta_0}{\theta}=\kappa t$. From the first stage,
+$\kappa=\dfrac1{5}\ln\dfrac{80-20}{70-20}=\dfrac1{5}\ln\dfrac{60}{50}=\SI{0.0365}{min^{-1}}$. The second
+stage takes
+\[
+t=\frac{1}{\kappa}\ln\frac{70-20}{60-20}=\frac{1}{0.0365}\ln\frac{50}{40}\approx\SI{6.1}{min}.
+\]
+\textbf{Averaged.} $\dfrac{10}{5}=\kappa(75-20)$ gives $\kappa=\dfrac{2}{55}\,\si{min^{-1}}$; then
+$\dfrac{10}{t}=\dfrac{2}{55}(65-20)$ gives $t=\dfrac{550}{90}\approx\SI{6.1}{min}$, agreeing with the
+exact answer to better than $0.2\%$ because each drop (\SI{10}{K}) is small compared with the excess.
+The second \SI{10}{K} takes longer than the first, and \emph{not} \SI{5}{min}, because the excess over
+the room is smaller now, so cooling is slower. The common wrong answer, \SI{5}{min}, ignores that the
+rate depends on the \emph{difference} from the surroundings.}
+\end{challengebox}
+
+\section*{Looking Back on Part B}
+\addcontentsline{toc}{section}{Looking Back on Part B}
+
+\textbf{Part B followed heat into and through matter.}
+\begin{itemize}
+\item \textbf{Temperature and heat (\chref{ch:thermal}).} Temperature is a state that decides the
+direction of heat flow; heat is energy in transit because of a temperature difference. The zeroth law
+makes thermometers meaningful, and the gas thermometer singles out absolute zero
+(\SI{-273.15}{\celsius}), so that $T=t_C+273.15$ and $PV=nRT$ holds with $T$ in kelvin.
+\item \textbf{Expansion and stress.} Heated solids and liquids grow. A length obeys
+$\Delta\ell/\ell=\alpha_\ell\Delta T$, and the fractional-change rule then gives $\alpha_V=3\alpha_\ell$
+for an isotropic solid.
+Prevented expansion becomes a stress $Y\alpha_\ell\Delta T$: the Young's modulus of Part A meets
+heat. Water's anomaly below \SI{4}{\celsius} lets lakes freeze from the top.
+\item \textbf{Heat content.} Raising temperature costs $Q=ms\,\Delta T$; changing phase costs $Q=mL$ at
+\emph{constant} temperature, the flats of a heating curve. Calorimetry is this bookkeeping with
+$\sum Q=0$, after checking whether every phase change completes.
+\item \textbf{Heat transfer.} Conduction $H=KA\,\Delta T/\ell$ with resistances adding in series;
+convection by buoyant flow; radiation $e\sigma_{\!s}AT^4$, needing no medium; and, for small excesses,
+Newton's exponential law of cooling.
+\end{itemize}
+\textbf{The thread into Part C:} we can now track heat, but not yet the \emph{rules} that limit turning it
+into work, nor what heat and temperature \emph{are} at the molecular level. \chref{ch:thermo} supplies
+the first: heat and work are two ways of changing a system's internal energy (the first law), and heat
+flows spontaneously only from hot to cold (the second), which caps the efficiency of every engine.
+\chref{ch:kinetic} supplies the second: pressure, temperature, $PV=nRT$ and the specific heats of gases
+all emerge from molecules in random motion.

@@ -1,0 +1,26 @@
+% fluids_terminal: approach to terminal velocity (Vol II Ch 2, fig:fluids-terminal)
+% m dv/dt = (weight - buoyancy) - 6 pi eta r v  gives  v = v_t (1 - e^{-t/tau}),
+% tau = m/(6 pi eta r) = 2 r^2 rho_s/(9 eta).  The initial slope is a0 = v_t/tau =
+% (1 - rho/rho_s) g: the tangent at the origin reaches v_t at t = tau, where the
+% curve has reached 1 - 1/e = 63% of v_t.  Units: v in v_t, t in tau.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=9.0cm, height=5.0cm,
+    xmin=0, xmax=5.3, ymin=0, ymax=1.25,
+    xlabel={time $t$}, ylabel={speed $v$},
+    ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,yshift=1pt},
+    xlabel style={at={(axis description cs:1,0)},anchor=north east},
+    xtick={1}, xticklabels={$\tau$},
+    ytick={0.632,1}, yticklabels={$0.63\,v_t$,$v_t$}]
+  \addplot[guide,domain=0:5.2,samples=2] {1};
+  \addplot[guide,domain=0:1,samples=2] {0.632};
+  \draw[guide] (axis cs:1,0) -- (axis cs:1,1);
+  % initial tangent, slope a0
+  \addplot[cFor,thin line,domain=0:1.12,samples=2] {x};
+  \node[cFor,anchor=west] at (axis cs:1.14,1.12) {initial slope $a_0$};
+  % the curve
+  \addplot[cPrim,domain=0:5.2] {1-exp(-x)};
+  \node[cPrim,anchor=north west] at (axis cs:2.3,0.86) {$v=v_t\big(1-e^{-t/\tau}\big)$};
+  \node[anchor=south,font=\footnotesize] at (axis cs:4.0,1.0) {forces balance, $a=0$};
+\end{axis}
+\end{tikzpicture}

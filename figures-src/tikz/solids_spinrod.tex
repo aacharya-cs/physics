@@ -1,0 +1,42 @@
+% solids_spinrod: a uniform rod spun about one end (Vol II Ch 1, challenge, fig:solids-spinrod)
+% Top view: the rod (length l, cross-section A, density rho) turns at angular speed omega
+% about a vertical axis through its left end (out of the page).
+% The part of the rod beyond a cut at distance x moves in circles, so the cut must supply its
+% total centripetal force:  T(x) = int_x^l rho A omega^2 r dr = (1/2) rho A omega^2 (l^2 - x^2).
+% The tension (crimson) on the outer part at the cut points towards the axis.  A slice dr at
+% radius r (accent) is one term of the integral.
+% Below: T(x)/T(0) = 1 - (x/l)^2, largest at the axis and zero at the free end.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\L{6.0}
+  % the rod, cut at x = 2.4 (gap exaggerated)
+  \def\xc{2.4}
+  \draw[body] (0,-0.13) rectangle (\xc-0.06,0.13);
+  \draw[body] (\xc+0.06,-0.13) rectangle (\L,0.13);
+  % a slice at r = 4.2
+  \draw[slice] (4.15,-0.13) rectangle (4.35,0.13);
+  % the axis and the sense of rotation
+  \pic at (0,0) {out of page};
+  \draw[-smallhead,thin line,cFor] (-0.05,0.45) arc[start angle=95,end angle=265,radius=0.45];
+  \node[cFor,anchor=east] at (-0.5,0) {$\omega$};
+  % tension at the cut, acting on the outer part, towards the axis
+  \draw[guide] (\xc+0.06,0.13) -- (\xc+0.06,0.5);
+  \draw[force] (\xc+0.06,0.42) -- (\xc-0.8,0.42) node[anchor=east,inner sep=2pt] {$T(x)$};
+  % dimensions
+  \draw[dim] (0,-0.5) -- node[anchor=north,cSteel] {$x$} (\xc,-0.5);
+  \draw[dim] (0,-1.05) -- node[anchor=north,cSteel] {$r$} (4.25,-1.05);
+  \draw[dim] (0,-1.6) -- node[anchor=north,cSteel] {$\ell$} (\L,-1.6);
+  \draw[dimtick] (\xc,-0.15) -- (\xc,-0.6) (4.25,-0.15) -- (4.25,-1.15) (\L,-0.15) -- (\L,-1.7);
+  \node[cAcc,anchor=south] at (4.25,0.15) {$dr$};
+  % the tension along the rod
+  \begin{scope}[yshift=-4.6cm]
+  \begin{axis}[bookplot, anchor=origin, at={(0,0)},
+      width=6.0cm, height=2.1cm, scale only axis,
+      xmin=0, xmax=1.12, ymin=0, ymax=1.25,
+      xtick={1}, xticklabels={$\ell$}, ytick={1}, yticklabels={$T(0)$},
+      xlabel={$x$}, xlabel style={at={(axis description cs:1,0)},anchor=west},
+      ylabel={$T$}, ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90}]
+    \addplot[cCrim,domain=0:1] {1-x^2};
+    \node[cCrim,anchor=south west] at (axis cs:0.45,0.82) {$T\propto\ell^2-x^2$};
+  \end{axis}
+  \end{scope}
+\end{tikzpicture}

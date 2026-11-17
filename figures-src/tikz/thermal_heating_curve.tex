@@ -1,0 +1,36 @@
+% thermal_heating_curve: heating curve of water, to scale (Vol II Ch 3, fig:heating-curve)
+% 1 kg of ice at -30 C heated at a steady rate to steam at 115 C, 1 atm.
+% Heat for each stage (J), with s_ice = 2100, s_w = 4186, s_steam = 2010 J/(kg K),
+% L_f = 3.34e5 and L_v = 2.26e6 J/kg:
+%   ice -30 -> 0      63 000        melt      334 000
+%   water 0 -> 100   418 600        boil    2 260 000
+%   steam 100 -> 115  30 150        total   3 105 750
+% Horizontal axis is cumulative heat in per cent of the total:
+%   0, 2.03, 12.78, 26.26, 99.03, 100.
+% Ramps (temperature rising) in primary; flats (phase change, heat going into
+% the molecules' potential energy) in plum.  L_v / L_f = 6.77.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=12.4cm, height=5.6cm,
+    xmin=0, xmax=106, ymin=-40, ymax=135,
+    ytick={-30,0,100}, yticklabels={$-30$,$0$,$100$},
+    xlabel={heat added $Q$ (to scale)},
+    ylabel={$t_C$ (\si{\celsius})},
+    ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,yshift=1pt}]
+  \draw[guide] (axis cs:0,0) -- (axis cs:2.03,0);
+  \draw[guide] (axis cs:0,100) -- (axis cs:26.26,100);
+  \addplot[cPrim] coordinates {(0,-30) (2.03,0)};
+  \addplot[cPlum] coordinates {(2.03,0) (12.78,0)};
+  \addplot[cPrim] coordinates {(12.78,0) (26.26,100)};
+  \addplot[cPlum] coordinates {(26.26,100) (99.03,100)};
+  \addplot[cPrim] coordinates {(99.03,100) (100,115)};
+  % labels
+  \draw[leader,cPrim] (axis cs:1.2,-12) -- (axis cs:8,-24)
+    node[anchor=west,inner sep=1pt] {ice warms (steep: small $s_{\text{ice}}$)};
+  \node[cPlum,anchor=south,align=center] at (axis cs:7.4,3) {melting\\ $Q=mL_f$};
+  \node[cPrim,anchor=west] at (axis cs:21,50) {water warms};
+  \node[cPlum,anchor=north] at (axis cs:62.6,96) {boiling: $Q=mL_v$, about $6.8$ times the melting flat};
+  \draw[leader,cPrim] (axis cs:99.7,110) -- (axis cs:95,124)
+    node[anchor=east,inner sep=1pt] {steam warms};
+\end{axis}
+\end{tikzpicture}

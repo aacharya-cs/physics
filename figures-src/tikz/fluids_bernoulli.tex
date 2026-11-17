@@ -1,0 +1,48 @@
+% fluids_bernoulli: a tube of flow for the work--energy derivation (Vol II Ch 2, fig:fluids-bernoulli)
+% Centreline c(x) = 0.65 + 1.6 s(x) and half-width w(x) = 0.55 - 0.3 s(x), with the
+% smooth step s = 0 for x < 2, s = 1 for x > 4.5, and s = (1 - cos(pi u))/2 between
+% (u = (x-2)/2.5).  Inlet: wide and low (A1, v1, P1, h1); outlet: narrow and high.
+% In one short interval the slug's back face moves dx1 and its front face dx2, with
+% A1 dx1 = A2 dx2 = dV.  The tube is drawn as a flat channel, so dx2/dx1 is the width
+% ratio 1.1/0.5 = 2.2 (a circular pipe would have the square of it).
+% The surrounding fluid pushes the slug forward with P1 A1 and back with P2 A2.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    water/.style={fill=cPrim!10,draw=none},
+    declare function={
+      su(\x)=(\x<2) ? 0 : ((\x>4.5) ? 1 : (1-cos(180*(\x-2)/2.5))/2);
+      cl(\x)=0.65+1.6*su(\x);
+      hw(\x)=0.55-0.3*su(\x);}]
+  % fluid
+  \fill[water] plot[domain=0:7.2,samples=80] (\x,{cl(\x)+hw(\x)})
+    -- plot[domain=7.2:0,samples=80] (\x,{cl(\x)-hw(\x)}) -- cycle;
+  % streamlines
+  \foreach \f in {-0.5,0,0.5}
+    \draw[cPrim!45,hair line] plot[domain=0:7.2,samples=60] (\x,{cl(\x)+\f*hw(\x)});
+  % the two slugs that cross the ends in time dt
+  \fill[slice] (0.9,0.1) rectangle (1.3,1.2);
+  \fill[slice] (5.6,2.0) rectangle (6.48,2.5);
+  % walls
+  \draw[outline] plot[domain=0:7.2,samples=80] (\x,{cl(\x)+hw(\x)});
+  \draw[outline] plot[domain=0:7.2,samples=80] (\x,{cl(\x)-hw(\x)});
+  % flow direction
+  \draw[velocity] (2.45,0.74) -- (3.2,1.36);
+  \node[cFor,anchor=north west] at (3.45,1.15) {flow};
+  % pressure forces on the slug of fluid between the two ends
+  \draw[force] (-0.55,0.65) -- (0.88,0.65);
+  \node[cCrim,anchor=south] at (0.2,1.22) {$P_1A_1$};
+  \draw[force] (7.85,2.25) -- (6.5,2.25);
+  \node[cCrim,anchor=south] at (7.3,2.52) {$P_2A_2$};
+  % dx labels
+  \draw[dim] (0.9,-0.12) -- (1.3,-0.12) node[midway,anchor=north,cSteel] {$dx_1$};
+  \draw[dim] (5.6,2.72) -- (6.48,2.72) node[midway,anchor=south,cSteel] {$dx_2$};
+  % end labels
+  \node[anchor=north west,align=left] at (1.45,0.05) {$A_1,\ v_1,\ P_1$};
+  \node[anchor=south east,align=right] at (5.45,2.55) {$A_2,\ v_2,\ P_2$};
+  % datum and heights to the centreline
+  \draw[guide] (-1.0,-0.75) -- (8.4,-0.75);
+  \node[anchor=north east,cSteel] at (8.2,-0.75) {datum, $h=0$};
+  \draw[dim] (-0.85,-0.75) -- (-0.85,0.65) node[midway,anchor=east,cSteel] {$h_1$};
+  \draw[dimtick] (-0.95,0.65) -- (-0.6,0.65);
+  \draw[dim] (8.3,-0.75) -- (8.3,2.25) node[midway,anchor=west,cSteel] {$h_2$};
+  \draw[dimtick] (7.9,2.25) -- (8.4,2.25);
+\end{tikzpicture}

@@ -1,0 +1,1098 @@
+\ncertchapter{5}{Applications of Radioactivity}\chlabel{ch:nucapps}
+
+A nucleus decays at a moment no one can predict, yet a population of nuclei decays on a schedule that
+nothing can disturb: not heat, not pressure, not chemistry. That combination, a law that governs only the
+statistics but governs them exactly, is what makes radioactivity useful. Everything needed is now in
+place. \chref{ch:decay} gave the energetics of each decay and the particles it releases;
+\chref{ch:decaylaw} gave the exponential law $N(t)=N_0e^{-\lambda t}$, where $N(t)$ is the number of
+undecayed nuclei at time $t$, $N_0$ the number at $t=0$ and $\lambda$ the decay constant (probability of
+decay per unit time, in \si{s^{-1}}), together with the half-life $\Thalf=\ln2/\lambda$, the mean life
+$\tau=1/\lambda$ and the activity $\Act=\lambda N$ (decays per second, in becquerels);
+\chref{ch:reactions} showed how nuclei are made and transformed in reactions.
+
+This chapter puts these tools to work in four areas. Radioactive \emph{clocks} read the decay law
+backwards to date bones, rocks and the solar system. \emph{Medicine} uses radioactive atoms as tracers
+that the body cannot tell from ordinary ones, and as sources that kill cancer cells. Because the same
+radiation that heals can harm, the chapter then sets up the measurement of radiation \emph{dose} and the
+three rules of protection. Finally it closes a loop opened in \chref{ch:decaylaw}: a computer that knows
+nothing except ``each nucleus has a fixed chance of decaying in each small time step'' reproduces the
+exponential law unaided, and shows why the law is smooth only for large numbers.
+
+The limits are stated as they arise. Every date rests on assumptions about the sample's history; every
+dose figure for low exposures rests on an extrapolation; every shielding formula assumes a narrow beam.
+The chapter, and the volume, end with a section that combines ideas from all five chapters, and with a
+look back over the whole volume.
+
+\section{Radioactive Clocks}\label{sec:nucapp-clocks}
+
+A clock needs a process whose rate is known and cannot be tampered with. Chemical and biological rates
+change with temperature; the decay constant does not, because the energies that hold a nucleus together
+(millions of electronvolts) dwarf anything that heat or chemistry can supply (a few electronvolts). A
+radioactive isotope is therefore an ideal clock. To read it, two facts are needed: how much of the
+parent is left now, and either how much there was at the start or how much daughter has been made.
+
+\begin{derivbox}{The dating equation}
+Call the parent X and the daughter Y. Suppose a sample formed at $t=0$ with $N_{X,0}$ atoms of X and no
+atoms of Y, and that it has stayed \emph{closed}: no atoms of either kind have entered or left. After a
+time $t$ the number of parent atoms left is
+\[
+N_X=N_{X,0}\,e^{-\lambda t},
+\]
+with $\lambda$ the decay constant of X. Every parent that decayed is now a daughter, provided the
+daughter is stable (or the intermediate members of a chain are short-lived), so $N_Y=N_{X,0}-N_X$. The
+starting number $N_{X,0}$ is not known, but it can be eliminated: $N_{X,0}=N_X+N_Y$. Then
+\[
+N_X=(N_X+N_Y)\,e^{-\lambda t}\quad\Longrightarrow\quad e^{\lambda t}=1+\frac{N_Y}{N_X}.
+\]
+Taking logarithms (\chref{ch:toolkit}, Section~\ref{sec:explog}) and using $\lambda=\ln2/\Thalf$,
+\[
+t=\frac1\lambda\ln\!\Big(1+\frac{N_Y}{N_X}\Big)=\Thalf\log_2\!\Big(1+\frac{N_Y}{N_X}\Big).
+\]
+Check the limits: with no daughter, $N_Y=0$ and $t=0$; with equal numbers, $N_Y/N_X=1$ and
+$t=\Thalf$, as it must be, since half the parent has then become daughter.
+\end{derivbox}
+
+\begin{keybox}{Radioactive dating}
+For a closed sample that began with no daughter,
+\[
+t=\Thalf\log_2\!\Big(1+\frac{N_Y}{N_X}\Big).
+\]
+If the starting amount of parent is known by some other argument (as in radiocarbon dating), compare
+the present amount or activity with it directly:
+$t=\Thalf\log_2(N_{X,0}/N_X)=\Thalf\log_2(\Act_0/\Act)$.
+\end{keybox}
+
+Only a \emph{ratio} of two present-day numbers is needed, and a mass spectrometer measures ratios of
+atoms precisely. Figure~\ref{fig:nucapp-dating} shows why the method reaches so far back. The ratio
+$N_Y/N_X=2^{t/\Thalf}-1$ is $1,3,7,15,\dots$ after $1,2,3,4,\dots$ half-lives: it grows without limit,
+so even a sample many half-lives old has a large, easily measured ratio. The practical limit is set
+instead by the parent: once too little of it survives, its amount cannot be measured.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nucapp_dating}
+\figcaption{fig:nucapp-dating}{A closed sample with no daughter at the start. The parent fraction
+halves each half-life while the daughter fraction rises to fill the gap, so the two always add to $1$.
+Their ratio $N_Y/N_X$ (dashed, right axis) doubles-plus-one each half-life ($1$, $3$, $7$, $15$) and
+never levels off; this is what lets one measured ratio give an age.}
+\end{figure}
+
+\subsection{Radiocarbon}\label{sec:nucapp-c14}
+
+Organic remains (wood, bone, charcoal, cloth) are the commonest things an archaeologist wants to date,
+and they contain carbon. Carbon-14 is the clock. High in the atmosphere, neutrons released by cosmic rays
+convert nitrogen into carbon-14 by the reaction
+\[
+n+\iso{14}{N}\to\iso{14}{C}+p,
+\]
+a reaction of the kind treated in \chref{ch:reactions}. The carbon-14 forms carbon dioxide and mixes
+through the air. It decays by $\beta^-$ emission back to nitrogen,
+$\iso{14}{C}\to\iso{14}{N}+e^-+\bar\nu_e$, with $\Thalf=\SI{5730}{\year}$. Production at a steady rate
+balanced by decay is exactly the situation of constant production in \chref{ch:decaylaw}: the amount
+settles at the level where the decay rate equals the production rate. The result is that about $1.2$
+atoms in every $10^{12}$ atoms of atmospheric carbon are carbon-14. Plants take in this carbon dioxide by
+photosynthesis and animals eat the plants, so every living thing shares the same carbon-14 fraction and
+therefore the same activity per gram of carbon (the \emph{specific activity}).
+
+\begin{derivbox}{The specific activity of living carbon}
+One gram of carbon (molar mass \SI{12.01}{g.mol^{-1}}) contains $N_A/12.01=6.022\times10^{23}/12.01
+=5.01\times10^{22}$ atoms, of which a fraction $1.2\times10^{-12}$ is carbon-14:
+$N=6.0\times10^{10}$ atoms. The decay constant, with $\SI{1}{\year}=\SI{3.156e7}{s}$, is
+\[
+\lambda=\frac{\ln2}{\Thalf}=\frac{0.693}{5730\times3.156\times10^{7}\ \si{s}}=\SI{3.83e-12}{s^{-1}}.
+\]
+So the activity of one gram of living carbon is
+\[
+\Act=\lambda N=3.83\times10^{-12}\times6.0\times10^{10}=\SI{0.23}{\becquerel},
+\]
+that is, $0.23\times60\approx13.8$ decays per minute per gram of carbon. A tiny activity: a gram of
+living carbon gives fewer than one decay every four seconds, which is why radiocarbon laboratories now
+count carbon-14 atoms directly with an accelerator mass spectrometer rather than wait for them to decay.
+\end{derivbox}
+
+At death, intake stops. No new carbon-14 arrives and what is present decays away, while the stable
+carbon-12 stays. Comparing a sample's specific activity with the living value gives its age through
+$t=\Thalf\log_2(\Act_\text{living}/\Act_\text{sample})$, the second form of the dating result. The whole
+cycle is summarised in Figure~\ref{fig:nucapp-c14cycle}.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nucapp_c14cycle}
+\figcaption{fig:nucapp-c14cycle}{The radiocarbon cycle. Read the top row as a steady state: cosmic rays
+keep topping up the atmosphere's carbon-14 while it decays, and living things share it. The arrow
+marked ``death'' starts the clock (heavy boxes): from then on carbon-14 only decays, with
+$\Thalf=\SI{5730}{\year}$, and the present activity measures the time elapsed.}
+\end{figure}
+
+\begin{exbox}{An ancient hearth}\label{ex:nucapp-hearth}
+Charcoal from an ancient hearth shows $3.45$ decays per minute per gram of carbon; living wood shows
+$13.8$. How old is the hearth?
+
+\stepn{1} \textbf{Compare on the same basis.} Both activities are per gram of carbon, so their ratio is
+the ratio of carbon-14 atoms: $\Act_\text{living}/\Act_\text{sample}=13.8/3.45=4=2^2$.
+
+\stepn{2} \textbf{Count half-lives.} A factor of $4$ is two halvings, so $t=2\Thalf=2\times5730
+=\SI{11460}{\year}$.
+\ans{$\SI{1.15e4}{\year}$}
+\end{exbox}
+
+The method has limits, and each is instructive. Beyond about \SI{50000}{\year} (nearly nine half-lives,
+leaving $2^{-8.7}\approx0.2\%$ of the original carbon-14) too little remains to measure against the
+background. The production rate has not been perfectly steady, because the cosmic-ray flux varies with the
+Sun's activity and the Earth's magnetic field; dates are corrected with a calibration curve built from tree
+rings counted year by year. And human activity has disturbed the balance in both directions: burning
+fossil fuel, whose carbon-14 decayed away long ago, dilutes the atmospheric fraction, while the atmospheric
+nuclear-weapons tests of the 1950s and early 1960s nearly doubled it for a time. Samples are therefore
+compared with the living standard as it was before 1950.
+
+\subsection{Rocks and the Age of the Earth}\label{sec:nucapp-rocks}
+
+Carbon-14 is far too short-lived for geological time. Rocks are dated with long-lived parents, using the
+parent--daughter form of the dating result: uranium-238 decays through a chain to lead-206
+($\Thalf=\SI{4.468e9}{\year}$), potassium-40 partly to argon-40 ($\Thalf=\SI{1.248e9}{\year}$) and
+rubidium-87 to strontium-87 ($\Thalf=\SI{4.97e10}{\year}$). The uranium chain has fourteen steps, but
+every intermediate member is short-lived compared with uranium-238, so on geological time scales each
+uranium atom that decays becomes a lead atom almost at once and the derivation applies unchanged.
+
+The hardest assumption to secure is ``no daughter at the start''. Nature supplies a mineral that secures
+it: crystals of zircon accept uranium readily when they grow but exclude lead, so any lead found in a zircon
+was made there by decay (it is \emph{radiogenic}). The oldest zircons, from the Jack Hills of Western
+Australia, are $4.4$ billion years old. Meteorites, leftovers of the material from which the planets
+formed, give the age of the solar system, $4.57$ billion years.
+
+\begin{exbox}{Uranium--lead}\label{ex:nucapp-zircon}
+A zircon contains $0.50$ atoms of lead-206 for every atom of uranium-238. How old is it?
+
+\stepn{1} \textbf{Identify the form.} A daughter-to-parent ratio in a closed crystal that began with no
+lead: $t=\Thalf\log_2(1+N_Y/N_X)$.
+
+\stepn{2} \textbf{Compute.} $t=\SI{4.468e9}{\year}\times\log_2(1.50)=4.468\times10^{9}\times0.585
+=\SI{2.61e9}{\year}$, a little over half a half-life, consistent with a ratio below $1$.
+\ans{$\SI{2.61e9}{\year}$}
+\end{exbox}
+
+Potassium-40 adds one complication, which is \emph{branching} (\chref{ch:decaylaw}): it has two decay
+channels. In $10.72\%$ of its decays it becomes argon-40 (by electron capture or $\beta^+$ emission); in
+the rest it becomes calcium-40 by $\beta^-$ decay, and calcium is so common in rocks that the radiogenic part
+cannot be picked out. Only argon is useful. The parent still disappears at the rate set by its \emph{total}
+decay constant $\lambda$, so the number of parents that have decayed is $N_{X,0}-N_X=N_X(e^{\lambda t}-1)$,
+and only the fraction $f=0.1072$ of them became argon:
+\[
+\frac{N_Y}{N_X}=f\left(e^{\lambda t}-1\right)\quad\Longrightarrow\quad
+t=\Thalf\log_2\!\Big(1+\frac{N_Y}{fN_X}\Big).
+\]
+Argon is a gas and escapes from molten rock, so the clock starts when a lava flow solidifies, which is why
+the potassium--argon method dates volcanic events.
+
+\begin{trapbox}{the assumptions behind every date}
+The dating equation assumes a \emph{closed system} (no parent or daughter gained or lost since the clock
+started) and a known starting amount of daughter (often zero). A rock that was later reheated and lost some
+of its argon will look too young; one that absorbed uranium-bearing water will look wrong in a way that is
+hard to predict. Geologists guard against this by checking that different parent--daughter pairs in the
+same rock give the same age. A single date from a single method is a measurement with hidden assumptions,
+not a fact.
+\end{trapbox}
+
+\section{Radioactivity in Medicine}\label{sec:nucapp-medicine}
+
+Dating used radioactivity as a clock. Medicine uses two other properties: a radioactive atom can be
+\emph{followed} from outside the body, because its radiation escapes, and its radiation can \emph{kill}
+cells, because it ionises. Diagnosis uses the first property, therapy the second.
+
+\subsection{Diagnosis with Tracers}
+
+A radioactive isotope has the same electrons, and so the same chemistry, as a stable isotope of the same
+element. The body cannot tell them apart and sends the radioactive atom wherever it would send the stable
+one; the gamma rays that escape reveal where it went. This idea, the \emph{radioactive tracer}, needs an
+isotope that emits gamma rays (which leave the body, unlike $\alpha$ and $\beta$ particles), with an energy
+high enough to escape tissue but low enough to be stopped in a detector, and a half-life of hours, long
+enough to do the scan but short enough not to linger. Technetium-99m fits all three. It is an isomer,
+a long-lived excited state of technetium-99 (\chref{ch:decay}), which decays by emitting a single
+\SI{140}{keV} gamma ray with $\Thalf=\SI{6.0}{h}$. Attached to different carrier molecules, it images
+bones, the heart, the kidneys and the brain.
+
+Short half-lives create a logistical problem: the isotope decays on the way to the patient, so the
+supplier must send more than the patient needs. Working backwards through the decay law, the activity
+needed at dispatch, a time $t$ before use, is
+\[
+\Act_\text{dispatch}=\Act_\text{use}\times2^{t/\Thalf}.
+\]
+
+\begin{exbox}{Ordering technetium-99m}\label{ex:nucapp-tc99m}
+A hospital needs \SI{500}{\mega\becquerel} of technetium-99m ($\Thalf=\SI{6.0}{h}$) at 9:00\,a.m. The
+dose is prepared at 9:00\,p.m.\ the previous evening. What activity must be prepared?
+
+\stepn{1} \textbf{Elapsed time in half-lives.} \SI{12}{h} is $12/6.0=2$ half-lives.
+
+\stepn{2} \textbf{Work backwards.} The activity falls by $2^2=4$ in that time, so the dose must start at
+$500\times4=\SI{2000}{\mega\becquerel}$. Three-quarters of what is made decays before it is used; that is
+the price of an isotope short-lived enough to be safe.
+\ans{\SI{2.0}{\giga\becquerel}}
+\end{exbox}
+
+\subsection{Positron Emission Tomography}
+
+A tracer seen only through its gamma rays shows roughly where it is. Positron emission tomography (PET)
+locates it far more precisely by using the annihilation of \chref{ch:decay}. Fluorine-18 ($\beta^+$,
+$\Thalf=\SI{109.8}{min}$) is attached to a glucose-like molecule. Tissues that consume glucose quickly,
+such as tumours and active brain regions, accumulate it. Each positron travels about a millimetre, meets
+an electron and annihilates, $e^++e^-\to2\gamma$. The pair is almost at rest when it annihilates, so its
+total momentum is nearly zero, and the two photons must leave in exactly opposite directions to keep it
+zero (momentum conservation, \chref{ch:collisions}); their combined energy is the pair's rest energy,
+$2\times\SI{0.511}{\MeV}$, so each carries \SI{511}{keV}.
+
+A ring of detectors records pairs of photons that arrive at the same instant (Figure~\ref{fig:nucapp-pet}).
+Each such pair defines a line through the point of annihilation, and a computer reconstructs the
+distribution of the tracer from millions of these lines. The millimetre the positron travels before
+annihilating sets a basic limit on how sharp the image can be.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nucapp_pet}
+\figcaption{fig:nucapp-pet}{PET imaging. A positron from fluorine-18 in the tumour annihilates with an
+electron. Notice that the two \SI{511}{keV} photons leave back to back, because the pair had almost no
+momentum, and strike the ring at the same moment; the decay therefore lies somewhere on the dashed line
+joining the two struck detectors.}
+\end{figure}
+
+\subsection{Therapy}
+
+Ionising radiation kills cells by breaking their DNA, and rapidly dividing cancer cells are the least able
+to repair it. Two strategies deliver the dose where it is wanted. The first places the source inside the
+target. Iodine-131 ($\beta^-$, $\Thalf=\SI{8.02}{d}$), swallowed as sodium iodide, concentrates in the
+thyroid gland, which uses iodine to make hormones, and its short-range $\beta^-$ particles destroy
+overactive or cancerous thyroid tissue from within while sparing most of the body. The second aims beams
+from outside: gamma rays from cobalt-60 or X-rays from an accelerator are directed at a tumour from many
+directions, so that only the tumour, where the beams cross, receives the full dose.
+
+An isotope inside a patient leaves by two routes at once. It decays, and the body also excretes it. If
+excretion removes a fixed fraction of what is present per unit time (approximately true for many
+substances), it is a second exponential process, characterised by a \emph{biological half-life}
+$T_\text{bio}$, the time for the body to eliminate half of the substance by excretion alone. The physical
+half-life is written $T_\text{phys}$.
+
+\begin{derivbox}{Effective half-life}
+Write $\lambda_\text{phys}=\ln2/T_\text{phys}$ and $\lambda_\text{bio}=\ln2/T_\text{bio}$ for the two
+removal rates. The routes are independent, so the probabilities of removal per unit time add, exactly as
+the partial decay constants of a branching decay add (\chref{ch:decaylaw}):
+\[
+\frac{dN}{dt}=-\lambda_\text{phys}N-\lambda_\text{bio}N=-(\lambda_\text{phys}+\lambda_\text{bio})N .
+\]
+The amount in the body therefore falls exponentially with $\lambda_\text{eff}=\lambda_\text{phys}
++\lambda_\text{bio}$. Dividing $\ln2$ by each side's half-life gives the result below.
+\end{derivbox}
+
+\begin{keybox}{Effective half-life}
+For an isotope removed by physical decay and biological excretion together,
+\[
+\frac{1}{T_\text{eff}}=\frac{1}{T_\text{phys}}+\frac{1}{T_\text{bio}},
+\]
+and $T_\text{eff}$ is then used as an ordinary half-life. It is shorter than both, and close to the
+shorter of the two when they are very different.
+\end{keybox}
+
+\begin{trapbox}{half-lives do not add}
+It is the \emph{rates} that add, not the half-lives. Two removal routes make the substance disappear
+faster, so $T_\text{eff}$ must be shorter than either. Adding half-lives, or averaging them, gives an
+answer longer than one of them, which cannot be right.
+\end{trapbox}
+
+\section{Measuring Radiation Dose}\label{sec:nucapp-dose}
+
+Using radiation safely requires a number for ``how much radiation a person has received''. Activity will
+not do: it measures what a source emits, not what a body absorbs. The natural measure is the energy
+deposited, per kilogram, since a small organ that absorbs a given energy is affected more than the whole
+body absorbing the same energy. But energy alone is not enough either, and the reason shapes the
+definitions.
+
+\begin{defbox}{Absorbed dose and equivalent dose}
+The \textbf{absorbed dose} $D$ is the energy $E$ deposited by ionising radiation per unit mass $m$ of
+tissue,
+\[
+D=\frac{E}{m},
+\]
+measured in \textbf{grays}: $\SI{1}{\gray}=\SI{1}{J.kg^{-1}}$. The \textbf{equivalent dose} $H$ weights
+the absorbed dose by a dimensionless \textbf{radiation weighting factor} $w_R$ that measures how damaging
+each kind of radiation is for the same energy:
+\[
+H=w_RD,
+\]
+measured in \textbf{sieverts} (\si{\sievert}; dimensionally also \si{J.kg^{-1}}). The values used in
+radiation protection are $w_R=1$ for gamma rays, X-rays and $\beta$ particles; $2$ for protons; $20$ for
+$\alpha$ particles; and between about $2.5$ and $20$ for neutrons, depending on their energy.
+\end{defbox}
+
+Why should equal energies do unequal harm? An $\alpha$ particle deposits its few MeV in a track only
+tens of micrometres long, so it ionises densely and breaks both strands of a DNA molecule in several nearby
+places at once; such clustered damage is hard for the cell to repair. A gamma ray's electrons spread the
+same energy thinly over centimetres, producing isolated breaks that are mostly repaired. The weighting
+factor turns this difference into a number. Table~\ref{tab:nucapp-doses} puts the sievert on a human scale.
+
+\begin{tablebox}{Typical equivalent doses}
+\centering
+\begin{tabular}{@{}lr@{}}\toprule
+Exposure & Approximate equivalent dose\\\midrule
+chest X-ray & \SI{0.02}{\milli\sievert}\\
+transcontinental flight & \SI{0.04}{\milli\sievert}\\
+world-average natural background, per year & \SI{2.4}{\milli\sievert}\\
+CT scan of the abdomen & 8--\SI{10}{\milli\sievert}\\
+occupational limit, per year (averaged over five years) & \SI{20}{\milli\sievert}\\
+acute whole-body dose fatal to about half of those exposed & 4--\SI{5}{\sievert}\\\bottomrule
+\end{tabular}\label{tab:nucapp-doses}
+\end{tablebox}
+
+Radiation harm is of two kinds. \emph{Deterministic} effects (radiation burns, cataracts, radiation
+sickness) appear only above a threshold of roughly 0.5--\SI{1}{\sievert} received quickly, and grow more
+severe with dose, because enough cells are killed to impair an organ. \emph{Stochastic} effects, chiefly
+cancer arising from a cell that was damaged but survived, have no known threshold; what grows with dose is
+the \emph{probability} of harm, not its severity. For radiation protection the risk is taken as about $5\%$
+per sievert, so \SI{1}{\milli\sievert} adds roughly $0.05\times10^{-3}=1$ chance in $20\,000$.
+
+That figure deserves candour. It comes from groups exposed to large doses (chiefly the survivors of
+Hiroshima and Nagasaki) and is extended to small doses by assuming that risk is simply proportional to
+dose, with no threshold. Below about \SI{100}{\milli\sievert} the extra cancers, if any, are too few to
+detect against the natural cancer rate, so the straight-line assumption cannot be tested there. It is a
+deliberately cautious rule for setting limits, not a measured law.
+
+Everyone receives a natural dose. About half the world-average background comes from breathing radon-222,
+a gas produced in the uranium-238 chain (\chref{ch:decay}) that seeps out of rock and soil, together
+with its short-lived daughters. Parts of the Kerala coast, where the beach sand is rich in thorium-bearing
+monazite, have natural background levels several times the world average.
+
+\begin{exbox}{An internal $\alpha$ emitter}\label{ex:nucapp-po210dose}
+A \SI{1.0}{\kilo\becquerel} source of polonium-210 ($\alpha$ emitter, $\Thalf=\SI{138.4}{d}$) lodges in
+\SI{0.10}{kg} of tissue for one day. Each decay gives the $\alpha$ particle \SI{5.30}{\MeV}, all absorbed
+in the tissue. Find the absorbed and equivalent doses.
+
+\stepn{1} \textbf{Number of decays.} One day is short compared with the half-life (the activity falls by
+only $0.5\%$), so the activity is effectively constant: decays $=\Act t=10^{3}\times86\,400=8.64\times10^{7}$.
+
+\stepn{2} \textbf{Energy and absorbed dose.} $E=8.64\times10^{7}\times5.30\times1.602\times10^{-13}\
+\si{J}=\SI{7.3e-5}{J}$, so $D=E/m=\SI{7.3e-4}{\gray}$.
+
+\stepn{3} \textbf{Equivalent dose.} For $\alpha$ particles $w_R=20$: $H=20D=\SI{15}{\milli\sievert}$,
+about six years of natural background delivered to that tissue in a single day. (The recoiling lead
+nucleus also deposits its \SI{0.10}{\MeV} locally, which would add $2\%$.) Outside the body the same source
+would be harmless, because its $\alpha$ particles cannot penetrate the dead outer layer of skin; inside, every
+decay counts.
+\ans{$D=\SI{0.73}{\milli\gray}$, $H\approx\SI{15}{\milli\sievert}$}
+\end{exbox}
+
+\section{Protection: Time, Distance and Shielding}\label{sec:nucapp-shielding}
+
+Once dose can be measured, it can be reduced. For a source outside the body there are exactly three
+handles: how long one stays near it, how far away one stands, and what one puts in between.
+
+\begin{keybox}{Time, distance and shielding}
+\textbf{Time:} at a steady dose rate, dose is proportional to exposure time.
+\textbf{Distance:} from a small source, the dose rate falls as $1/r^2$ with distance $r$, so doubling the
+distance quarters the dose.
+\textbf{Shielding:} a gamma-ray beam's intensity $I$ falls exponentially with absorber thickness $x$,
+\[
+I=I_0e^{-\mu x}=I_0\,2^{-x/x_{1/2}},\qquad x_{1/2}=\frac{\ln2}{\mu},
+\]
+where $I_0$ is the intensity with no absorber, $\mu$ (in \si{cm^{-1}}) is the \textbf{linear
+attenuation coefficient} and $x_{1/2}$ is the \textbf{half-value layer}, the thickness that halves the beam.
+\end{keybox}
+
+The distance rule is geometry: a small source sends its photons out equally in all directions, and at
+distance $r$ they are spread over a sphere of area $4\pi r^2$, the same reasoning that gives the
+inverse-square law of gravitation (\chref{ch:gravitation}). It assumes a source small compared with $r$ and
+negligible absorption in the air between. The shielding rule needs a derivation.
+
+\begin{derivbox}{Why gamma rays are attenuated exponentially}
+A photon travels in a straight line until it interacts (by ejecting an electron, by scattering, or by
+creating an electron--positron pair), and is then removed from the beam. In a thin layer of thickness
+$dx$, each photon has the same small probability $\mu\,dx$ of interacting, whatever distance it has
+already travelled. This is the memoryless rule of radioactive decay with distance in place of time. Of
+$I$ photons entering the layer, $\mu I\,dx$ are removed:
+\[
+\frac{dI}{dx}=-\mu I\quad\Longrightarrow\quad I=I_0e^{-\mu x}.
+\]
+The thickness that halves the beam satisfies $e^{-\mu x_{1/2}}=\tfrac12$, so $x_{1/2}=\ln2/\mu$, the exact
+analogue of $\Thalf=\ln2/\lambda$. The mean distance a photon travels before interacting, its mean free
+path, is $1/\mu$, the analogue of the mean life $\tau=1/\lambda$ (and of the mean free path of a gas
+molecule in \chref{ch:kinetic}). The coefficient $\mu$ grows with the density and atomic number of the
+absorber and depends on the photon energy, which is why lead, dense and of high atomic number, is the
+standard shield.
+\end{derivbox}
+
+Figure~\ref{fig:nucapp-shielding} sets the two laws side by side. Charged particles behave quite
+differently. An $\alpha$ or $\beta$ particle loses its energy \emph{continuously}, in millions of small
+ionising collisions, and stops after a definite range. That is why a sheet of paper stops every $\alpha$
+particle from a source, whereas no thickness of lead stops every photon; it only reduces their number by a
+known factor.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nucapp_shielding}
+\figcaption{fig:nucapp-shielding}{Two ways to cut the dose from a gamma source. Left: each half-value layer
+halves the transmitted intensity, so the curve has exactly the shape of radioactive decay and never
+reaches zero. Right: doubling the distance from a point source quarters the dose rate; going from
+\SI{1}{m} to \SI{4}{m} cuts it sixteenfold.}
+\end{figure}
+
+\begin{exbox}{How much lead?}\label{ex:nucapp-lead}
+The half-value layer of lead for cobalt-60 gamma rays is about \SI{1.2}{cm}. What thickness reduces the
+intensity by a factor of $1000$?
+
+\stepn{1} \textbf{Number of half-value layers.} $2^{n}=1000$ gives $n=\log_21000=9.97$.
+
+\stepn{2} \textbf{Thickness.} $x=n\,x_{1/2}=9.97\times1.2=\SI{12}{cm}$. (Check: ten half-value layers give
+$2^{10}=1024$.)
+\ans{about \SI{12}{cm}}
+\end{exbox}
+
+\begin{remarkbox}{Where the shielding formula stops working}
+The exponential law describes a \emph{narrow} beam, where a photon that scatters is lost from the beam
+for good. Behind a real shield exposed to a broad source, some scattered photons are deflected back
+towards the person being protected, so more radiation gets through than $e^{-\mu x}$ predicts; engineers
+multiply by a ``build-up factor'' greater than $1$. And since $\mu$ depends on photon energy, a half-value
+layer quoted for cobalt-60 does not apply to technetium-99m, whose softer gamma rays are stopped far more
+easily.
+\end{remarkbox}
+
+\section{Decay from Pure Randomness: a Monte Carlo Simulation}\label{sec:nucapp-montecarlo}
+
+\chref{ch:decaylaw} began from a single assumption: each nucleus has the same fixed chance of decaying in
+each small time interval, independently of its age and of every other nucleus. The exponential law was
+derived from it with calculus. A computer can test the claim in a different way, by simply \emph{playing
+out} the assumption with random numbers and seeing whether exponential decay emerges. A calculation that
+uses random numbers to imitate a chance process is called a \emph{Monte Carlo simulation}, after the
+casino.
+
+Divide time into steps of length $\Delta t$. If $\lambda\Delta t$ is small, the probability that a given
+nucleus decays during one step is $p=\lambda\Delta t$. Most computer languages provide a function that
+returns a random number $u$ spread evenly between $0$ and $1$, so ``$u<p$'' happens with probability
+exactly $p$: it is a die that comes up ``decay'' a fraction $p$ of the time.
+
+\begin{methodbox}{Simulating radioactive decay}
+\begin{enumerate}[label=\arabic*.,itemsep=1pt]
+\item Choose $N_0$ (number of nuclei), $p=\lambda\Delta t$ and the number of steps. Set $N=N_0$.
+\item In each step, for each of the $N$ surviving nuclei draw a random number $u$; count a decay if
+      $u<p$. Subtract the number of decays from $N$ and record the new $N$.
+\item Repeat for the required number of steps, and plot $N/N_0$ against the step number.
+\item For lifetimes: take one nucleus, draw a random number each step until one falls below $p$, and record
+      that step number $n$ as its lifetime. Repeat for many nuclei and make a histogram of $n$.
+\end{enumerate}
+A fixed starting value (\emph{seed}) for the random-number generator makes the run reproducible.
+\end{methodbox}
+
+Figure~\ref{fig:nucapp-montecarlo} shows the output for $p=0.05$ (that is, $\lambda=0.05$ per step with
+$\Delta t=1$ step), three independent runs each for $N_0=1000$ and $N_0=100$, and $20\,000$ single-nucleus
+lifetimes. No exponential was put in; the only rule was ``decay if $u<p$''. Yet the survival curves follow
+$e^{-\lambda t}$, and the histogram of lifetimes follows the exponential distribution of lifetimes,
+$\lambda e^{-\lambda t}$.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nucapp_montecarlo}
+\figcaption{fig:nucapp-montecarlo}{A fixed-seed simulation with decay probability $p=0.05$ per step.
+Left: survival curves for $N_0=1000$ (blue) and $N_0=100$ (orange), three runs each, against $e^{-\lambda t}$
+(dashed). Notice that the large samples hug the curve while the small ones wander visibly. Right: histogram
+of $20\,000$ simulated lifetimes, following $\lambda e^{-\lambda t}$; its mean, $20.05$ steps, reproduces the
+mean life $\tau=1/\lambda=20$ steps.}
+\end{figure}
+
+The lifetime half of the simulation asks a different question: how long does one nucleus survive? It
+survives each step with probability $1-p$, so the chance that it decays exactly at step $n$ is
+\[
+P(n)=(1-p)^{n-1}p,
+\]
+the \emph{geometric distribution}, which is the step-by-step version of $\lambda e^{-\lambda t}$.
+
+\begin{derivbox}{The mean lifetime is $1/p$}
+The mean of a distribution is the sum of each value times its probability (\chref{ch:toolkit},
+Section~\ref{sec:averages}). Write $s=1-p$. Then
+\[
+\langle n\rangle=\sum_{n=1}^{\infty}n\,s^{n-1}p=p\,\frac{d}{ds}\sum_{n=0}^{\infty}s^{n}
+=p\,\frac{d}{ds}\frac{1}{1-s}=\frac{p}{(1-s)^2}=\frac1p .
+\]
+With $p=\lambda\Delta t$ and $\Delta t=1$ step, $\langle n\rangle=1/\lambda$ steps: the mean life $\tau$,
+exactly as found from calculus in \chref{ch:decaylaw}. For $p=0.05$ it is $20$ steps; the simulation's
+$20\,000$ lifetimes average $20.05$.
+\end{derivbox}
+
+Three lessons emerge.
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The exponential law is a law of averages.} No individual nucleus follows it; the population
+does. The number of decays in a step, among $N$ nuclei each with probability $p$, follows the
+\emph{binomial distribution}, the distribution of the number of successes in $N$ independent trials. Its
+mean is $Np$ and its standard deviation (typical spread about the mean) is $\sqrt{Np(1-p)}\approx\sqrt{Np}$.
+The mean follows because each trial contributes $p$ on average; the spread is stated here without proof
+(each trial contributes a variance $p(1-p)$, and variances of independent trials add).
+\item \textbf{Fluctuations shrink as $1/\sqrt{N}$.} The relative scatter is $\sqrt{Np}/(Np)=1/\sqrt{Np}$.
+For the $10^{20}$ or so nuclei of a real sample the curve is perfectly smooth; for $100$ nuclei it is
+visibly jagged. Counting experiments inherit this: a measurement that records $n$ counts has an
+uncertainty of about $\sqrt n$, so the fractional uncertainty $1/\sqrt n$ falls only slowly with counting
+time (the uncertainties of \chref{ch:measurement} in their radioactive form).
+\item \textbf{Small steps are required.} The rule $p=\lambda\Delta t$ is accurate only if $\lambda\Delta t\ll1$.
+The exact per-step probability is $1-e^{-\lambda\Delta t}$, and for $\lambda\Delta t=0.05$ the two differ by
+about $2.5\%$. This is the same small-step approximation that underlies every derivative.
+\end{enumerate}
+
+\begin{exbox}{Fluctuations in the first step}\label{ex:nucapp-mcspread}
+In the simulation with $N_0=1000$ and $p=0.05$, what is the expected number of decays in the first step,
+and its standard deviation?
+
+\stepn{1} \textbf{Mean.} $Np=1000\times0.05=50$.
+
+\stepn{2} \textbf{Spread.} $\sqrt{Np(1-p)}=\sqrt{1000\times0.05\times0.95}=6.9$. About two runs in three show
+between $43$ and $57$ decays in the first step; the relative spread, $6.9/50\approx14\%$, would shrink to
+$1.4\%$ with a hundred times as many nuclei.
+\ans{$50\pm7$}
+\end{exbox}
+
+\section{Putting the Volume Together}\label{sec:nucapp-together}
+
+The hardest examination problems, in JEE Advanced and the Physics Olympiad, rarely stay inside one
+chapter. A single question may ask for an activity (\chref{ch:decaylaw}), turn it into a power with a
+$Q$-value (\chref{ch:decay}), and then follow the product through a magnetic field or a detector. Such
+problems are not harder in kind, only longer. The method is to break them into stages and give each stage
+to the idea it belongs to.
+
+\begin{methodbox}{Multi-concept problems}
+\begin{enumerate}[label=\arabic*.,itemsep=1pt]
+\item Split the problem into stages: \emph{energetics} (masses, $Q$-values, binding energies),
+      \emph{kinetics} (the decay law, activity, chains, production), \emph{mechanics} (momentum, energy
+      sharing, motion in fields) and \emph{counting} (detector efficiency, dose, statistics).
+\item Solve each stage with the result it belongs to, carrying units through every step.
+\item At every joint between stages, check units and the order of magnitude before going on.
+\end{enumerate}
+\end{methodbox}
+
+\begin{exbox}{A nuclear battery}\label{ex:nucapp-battery}
+Early space power sources, such as the heaters that kept the Soviet Lunokhod rovers warm through the lunar night, used the heat of polonium-210 ($\Thalf=\SI{138.4}{d}$,
+molar mass \SI{210.0}{g.mol^{-1}}, $Q_\alpha=\SI{5.41}{\MeV}$). Find the thermal power of \SI{1.00}{g},
+assuming the energy of every decay is absorbed, and the power one year later.
+
+\stepn{1} \textbf{Kinetics: the activity.} $N=6.022\times10^{23}/210.0=2.87\times10^{21}$ nuclei and
+$\lambda=0.693/(138.4\times86\,400\ \si{s})=\SI{5.80e-8}{s^{-1}}$, so $\Act=\lambda N=\SI{1.66e14}{\becquerel}$
+(about \SI{4500}{\curie}).
+
+\stepn{2} \textbf{Energetics: the power.} Both the $\alpha$ particle and the recoiling nucleus stop in the
+source, so all of $Q$ becomes heat: $P=\Act Q=1.66\times10^{14}\times5.41\times1.602\times10^{-13}=\SI{144}{W}$.
+One gram glows red hot.
+
+\stepn{3} \textbf{Kinetics again: one year later.} One year is $365.25/138.4=2.64$ half-lives, so
+$P=144\times2^{-2.64}=\SI{23}{W}$.
+
+\stepn{4} \textbf{Check and interpret.} A loss of $84\%$ in a year is too fast for a long mission. Long missions
+therefore use plutonium-238 ($\Thalf=\SI{88}{\year}$): far less power per gram, but almost all of it is
+still there after a decade. Choosing an isotope is a trade between power and lifetime, because both are set
+by the same $\lambda$.
+\ans{\SI{144}{W}; \SI{23}{W}}
+\end{exbox}
+
+Examinations also test understanding with \emph{assertion--reason} items: two statements, an Assertion (A)
+and a Reason (R), with four standard options. (A) Both are true and R correctly explains A. (B) Both are
+true but R does not explain A. (C) A is true but R is false. (D) A is false but R is true. The method is to
+judge each statement on its own first, and only then ask whether R is the actual cause of A, not merely a
+true statement on the same topic. Eight such items, drawn from all five chapters, are among the Problem
+Types below.
+
+\section{Summary}\label{sec:summary-nucapps}
+
+The exponential law of \chref{ch:decaylaw} does practical work in four ways. Read backwards, it dates a
+sample from one measured ratio. Applied inside the body, together with excretion, it schedules medical
+isotopes and limits the dose they give. Applied to photons crossing matter, the same memoryless rule gives
+exponential shielding. And it emerges unaided from random numbers, as a law of averages whose fluctuations
+shrink as $1/\sqrt N$.
+
+\begin{itemize}
+\item Dating a closed sample with no initial daughter: $t=\Thalf\log_2(1+N_Y/N_X)$; with a known start,
+      $t=\Thalf\log_2(\Act_0/\Act)$. A branching parent with daughter fraction $f$:
+      $N_Y/N_X=f(e^{\lambda t}-1)$, $\lambda$ the total decay constant.
+\item Radiocarbon: living carbon has about $13.8$ decays per minute per gram ($\Thalf=\SI{5730}{\year}$);
+      useful to about \SI{50000}{\year}. Rocks use uranium--lead, potassium--argon and rubidium--strontium.
+\item Medicine: tracers (technetium-99m), PET (two back-to-back \SI{511}{keV} photons), therapy
+      (iodine-131, cobalt-60). Dispatch activity $\Act_\text{use}2^{t/\Thalf}$;
+      $1/T_\text{eff}=1/T_\text{phys}+1/T_\text{bio}$.
+\item Dose: $D=E/m$ in grays; $H=w_RD$ in sieverts ($w_R=1$ for $\gamma$, $\beta$; $20$ for $\alpha$).
+      Deterministic effects have a threshold; stochastic risk is taken as about $5\%$ per sievert.
+\item Protection: dose $\propto$ time, $\propto1/r^2$, and $I=I_0e^{-\mu x}=I_02^{-x/x_{1/2}}$ with
+      $x_{1/2}=\ln2/\mu$ (narrow beam). Charged particles have a definite range; photons do not.
+\item Simulation: decay with probability $p=\lambda\Delta t$ per step reproduces $e^{-\lambda t}$; lifetimes are
+      geometric with mean $1/p$; decays per step are binomial with spread $\sqrt{Np(1-p)}$; a count $n$ has
+      uncertainty $\sqrt n$.
+\end{itemize}
+
+Because this chapter closes the volume, the results of all five chapters are gathered in the
+formula sheet of Table~\ref{tab:nucapp-formulas}, followed by the ten errors that cost the most marks.
+
+\begin{tablebox}{Formula sheet for the volume}
+\renewcommand{\arraystretch}{1.22}
+\begin{tabular}{@{}p{0.29\linewidth}p{0.67\linewidth}@{}}\toprule
+Quantity & Relation\\\midrule
+Nuclear radius, density & $R=R_0A^{1/3}$, $R_0\approx\SI{1.2}{\fm}$; $\rho\approx\SI{2.3e17}{kg.m^{-3}}$ for all nuclei\\
+Mass--energy & $1\,\si{\amu}\times c^2=\SI{931.5}{\MeV}$\\
+Binding energy & $\Eb=[ZM(\iso{1}{H})+(A-Z)m_n-M]c^2$ (atomic masses)\\
+Energy from rearrangement & $Q=\sum E_{\mathrm{b},\text{products}}-\sum E_{\mathrm{b},\text{reactants}}$\\
+Reaction X$(a,b)$Y & $Q=[(m_a+m_X)-(m_b+m_Y)]c^2$; threshold $K_\text{th}=|Q|(1+m_a/m_X)$\\
+$\alpha$ decay & $Q=[M_X-M_Y-M_\text{He}]c^2$; $K_\alpha=Q(A-4)/A$\\
+$\beta^-$ decay, electron capture & $Q=[M_X-M_Y]c^2$\\
+$\beta^+$ decay & $Q=[M_X-M_Y-2m_e]c^2$ (needs $\Delta M\,c^2>\SI{1.022}{\MeV}$)\\
+Counting decays in a series & $n_\alpha=\Delta A/4$; $n_\beta=Z_f-Z_i+2n_\alpha$\\
+Decay law & $N=N_0e^{-\lambda t}=N_02^{-t/\Thalf}$; $\Act=\lambda N$\\
+Half-life, mean life & $\Thalf=\ln2/\lambda=0.693/\lambda$; $\tau=1/\lambda=1.443\,\Thalf$\\
+Branching, effective half-life & $\lambda=\sum_i\lambda_i$; $1/\Thalf=\sum_i1/T_i$; $1/T_\text{eff}=1/T_\text{phys}+1/T_\text{bio}$\\
+Daughter in a chain & $N_Y=\dfrac{\lambda_XN_{X,0}}{\lambda_Y-\lambda_X}\left(e^{-\lambda_Xt}-e^{-\lambda_Yt}\right)$;
+  $t_{\max}=\dfrac{\ln(\lambda_Y/\lambda_X)}{\lambda_Y-\lambda_X}$\\
+Secular equilibrium & $\lambda_XN_X=\lambda_YN_Y$\\
+Constant production & $\Act=\Prod(1-e^{-\lambda t})$, saturating at $\Prod$\\
+Dating & $t=\Thalf\log_2(1+N_Y/N_X)$, or $t=\Thalf\log_2(\Act_0/\Act)$\\
+Moderation (head-on) & $\phi=K'/K=\big((A-1)/(A+1)\big)^2$\\
+Chain reaction & $k^n$ neutrons per starting neutron after $n$ generations\\
+Coulomb barrier & $U_B=\dfrac{1}{4\pi\varepsilon_0}\dfrac{q_1q_2}{r}$, with $\dfrac{e^2}{4\pi\varepsilon_0}=\SI{1.44}{\MeV.\fm}$\\
+Dose & $D=E/m$ (\si{\gray}); $H=w_RD$ (\si{\sievert})\\
+Shielding, distance & $I=I_0e^{-\mu x}=I_02^{-x/x_{1/2}}$; dose rate $\propto1/r^2$\\\bottomrule
+\end{tabular}\label{tab:nucapp-formulas}
+\end{tablebox}
+
+\subsection*{Ten errors to avoid}
+\begin{enumerate}[label=\arabic*.,itemsep=1pt]
+\item Using the bare proton mass with atomic masses. Use $M(\iso{1}{H})$ so that the electron masses cancel.
+\item Forgetting the $2m_ec^2$ in $\beta^+$ $Q$-values, or wrongly adding it in $\beta^-$ decay and electron
+      capture.
+\item Giving all of $Q$ to the $\alpha$ particle. The recoiling daughter takes the fraction $4/A$.
+\item Treating the $\beta$ endpoint energy as the typical electron energy. The average is about $Q/3$.
+\item Leaving $\lambda$ in \si{\year^{-1}} when computing an activity in becquerels.
+\item Thinking a sample is ``gone'' after two half-lives. A quarter remains.
+\item Confusing ``fraction remaining'' with ``fraction decayed''.
+\item Using partial half-lives as if each channel ran alone. The sample decays with the total $\lambda$.
+\item Forgetting to subtract the background count before finding a half-life from counts.
+\item Confusing grays (energy per kilogram) with sieverts (biological effect).
+\end{enumerate}
+
+\section{Problem Types}\label{sec:types-nucapps}
+
+Sixteen types follow. The first eight belong to this chapter: dating, medical activity, dose, shielding,
+counting statistics, and a multi-stage problem. Nearly all of them are the decay law in disguise, so the
+first question is always which quantity is decaying and what plays the part of the half-life. The last
+eight are assertion--reason items (options as defined in Section~\ref{sec:nucapp-together}) that revisit the
+whole volume; for these, judge each statement alone before asking whether the reason is the cause.
+
+\archq{Radiocarbon dating}
+{``The carbon-14 activity per gram of an old sample is a given fraction of the living value; find its age.''}
+{Put both activities on the same basis (per gram of carbon), take the ratio
+$\Act_\text{living}/\Act_\text{sample}$, and use $t=\Thalf\log_2(\text{ratio})$ with $\Thalf=\SI{5730}{\year}$.
+A ratio that is a power of $2$ is a whole number of half-lives.}
+{Treating decay as linear: losing seven-eighths does not take seven-eighths of some fixed time. Or
+comparing a total activity with a per-gram activity.}
+{The activity per gram of carbon in an old bone is one-eighth of that in living bone ($\Thalf=\SI{5730}{\year}$).
+The age of the bone is about:}
+{\SI{5730}{\year}}{\SI{11460}{\year}}{\SI{17190}{\year}}{\SI{45840}{\year}\archans{C}{A factor of $8=2^3$ is
+three half-lives, $3\times5730=\SI{17190}{\year}$. Option (A) is one half-life and (B) two (a factor of $2$ or
+$4$); (D) multiplies the half-life by $8$, treating the factor as a number of half-lives.}}
+
+\archq{Parent--daughter dating of rocks}
+{``A mineral contains so many daughter atoms per parent atom; find its age.''}
+{Assume a closed system with no initial daughter and use $t=\Thalf\log_2(1+N_Y/N_X)$. The $1+$ restores the
+original number of parents, $N_X+N_Y$.}
+{Writing $\log_2(N_Y/N_X)$, which forgets that the original parent count is $N_X+N_Y$; or mixing $\ln$ with
+$\log_2$.}
+{A rock contains three atoms of a stable daughter for every atom of its parent ($\Thalf=\SI{1.3e9}{\year}$),
+and had no daughter when it formed. Its age is:}
+{\SI{3.9e9}{\year}}{\SI{2.6e9}{\year}}{\SI{2.1e9}{\year}}{\SI{1.8e9}{\year}\archans{B}{$1+N_Y/N_X=4=2^2$,
+so $t=2\Thalf=\SI{2.6e9}{\year}$. Option (A) multiplies the half-life by the ratio $3$; (C) is
+$\Thalf\log_23$, forgetting the $1+$; (D) is $\Thalf\ln4$, using the natural logarithm where the base-$2$
+logarithm belongs.}}
+
+\archq{Dating with a branching parent}
+{``Only part of the parent's decays produce the measured daughter'' (potassium--argon).}
+{The parent disappears with its \emph{total} $\lambda$, so decayed parents number $N_X(e^{\lambda t}-1)$, and only
+the fraction $f$ became the measured daughter: $N_Y/N_X=f(e^{\lambda t}-1)$, so $t=\Thalf\log_2(1+N_Y/fN_X)$.}
+{Ignoring the branching (using $1+N_Y/N_X$), or slowing the clock by $1/f$ as though the parent decayed only
+through the measured channel.}
+{Potassium-40 ($\Thalf=\SI{1.25e9}{\year}$) decays to argon-40 in $10.7\%$ of its decays. A lava sample that
+lost all its argon on solidifying now has $0.107$ argon-40 atoms per potassium-40 atom. Its age is about:}
+{\SI{0.18e9}{\year}}{\SI{0.87e9}{\year}}{\SI{1.25e9}{\year}}{\SI{11.7e9}{\year}\archans{C}{$1+N_Y/(fN_X)=1+0.107/0.107
+=2$, so exactly one half-life, \SI{1.25e9}{\year}. Option (A) ignores the branching, $\Thalf\log_2(1.107)$;
+(B) is $\Thalf\ln2$, mixing logarithms; (D) divides the age by $f$, as if the parent decayed only by the
+argon channel, which also exceeds the age of the universe.}}
+
+\archq{Medical activity and effective half-life}
+{``Activity needed at dispatch for a given activity at use,'' or ``an isotope eliminated both physically and
+biologically.''}
+{Work backwards with $\Act_\text{dispatch}=\Act_\text{use}\times2^{t/\Thalf}$. For combined removal the rates
+add: $1/T_\text{eff}=1/T_\text{phys}+1/T_\text{bio}$; then use $T_\text{eff}$ as an ordinary half-life.}
+{Adding or averaging the half-lives. Two removal routes act faster than either alone, so $T_\text{eff}$ is
+shorter than both.}
+{An isotope has a physical half-life of \SI{6}{h} and a biological half-life of \SI{12}{h}. Its effective
+half-life in the body is:}
+{\SI{4}{h}}{\SI{6}{h}}{\SI{9}{h}}{\SI{18}{h}\archans{A}{$1/T_\text{eff}=1/6+1/12=3/12$, so
+$T_\text{eff}=\SI{4}{h}$, shorter than both. Option (B) keeps only the shorter half-life; (C) averages and (D)
+adds the half-lives, both longer than the physical half-life alone, which is impossible.}}
+
+\archq{Absorbed and equivalent dose}
+{``Energy deposited in a mass of tissue,'' grays versus sieverts, or an internal emitter.}
+{$D=E/m$ in grays; $H=w_RD$ in sieverts, with $w_R=20$ for $\alpha$ and $1$ for $\gamma$, $\beta$. For an
+internal emitter, $E=(\text{number of decays})\times(\text{energy per decay})$, with decays $\approx\Act t$
+when $t\ll\Thalf$.}
+{Forgetting $w_R$ (quoting grays as sieverts), dividing by it instead of multiplying, or multiplying by the
+mass instead of dividing.}
+{A \SI{2.0}{kg} organ absorbs \SI{0.020}{J} of energy from $\alpha$ particles ($w_R=20$). The equivalent dose is:}
+{\SI{0.5}{\milli\sievert}}{\SI{200}{\milli\sievert}}{\SI{10}{\milli\sievert}}{\SI{800}{\milli\sievert}
+\archans{B}{$D=0.020/2.0=\SI{0.010}{\gray}$ and $H=20\times0.010=\SI{0.20}{\sievert}=\SI{200}{\milli\sievert}$.
+Option (A) divides by $w_R$; (C) forgets it, quoting the gray value as sieverts; (D) multiplies by the mass
+instead of dividing.}}
+
+\archq{Distance and shielding together}
+{``Dose rate at a new distance, behind an absorber.''}
+{Two independent factors multiply: $(r_1/r_2)^2$ for distance and $2^{-x/x_{1/2}}$ for shielding.}
+{Using $1/r$ instead of $1/r^2$, or applying only one of the two factors.}
+{The dose rate \SI{1.0}{m} from a gamma source is \SI{64}{\micro\sievert/h}. At \SI{2.0}{m}, behind lead two
+half-value layers thick, the dose rate is:}
+{\SI{16}{\micro\sievert/h}}{\SI{8}{\micro\sievert/h}}{\SI{4}{\micro\sievert/h}}{\SI{32}{\micro\sievert/h}
+\archans{C}{Distance: $(1/2)^2=1/4$; shielding: $2^{-2}=1/4$; so $64/16=\SI{4}{\micro\sievert/h}$. Option (A)
+applies only one factor; (B) uses $1/r$ for distance; (D) treats two half-value layers as a single halving and
+ignores the distance.}}
+
+\archq{Counting statistics}
+{``How uncertain is a count?'' or ``how long must one count for a given precision?''}
+{A count of $n$ random events has uncertainty $\sqrt n$, so a fractional uncertainty of $1/\sqrt n$. At a
+steady rate, $n$ grows in proportion to counting time.}
+{Taking the fractional uncertainty as $1/n$, so that precision seems to improve in proportion to time.}
+{To halve the fractional uncertainty of a measured count rate, the counting time must be multiplied by:}
+{$\sqrt2$}{$2$}{$8$}{$4$\archans{D}{Fractional uncertainty $=1/\sqrt n$; halving it needs $4n$ counts, so four
+times the time. Option (B) assumes uncertainty $\propto1/n$; (A) inverts the square root; (C) cubes instead of
+squaring.}}
+
+\archq{Multi-concept: power from a decaying source}
+{Several stages in one problem: activity, then energy per decay, then time dependence.}
+{Activity $\Act=\lambda N$; power $P=\Act Q$ when all the decay energy is absorbed; and $P$ decays with the
+same half-life as $\Act$, so after $t$, $P=P_0\,2^{-t/\Thalf}$.}
+{Letting the power fall linearly with time, or treating a source as exhausted after a couple of half-lives.}
+{A curium-242 heat source ($\Thalf=\SI{163}{d}$), of the kind tested for early space missions, delivers
+\SI{120}{W} at launch. One year ($365$ days) later it delivers about:}
+{\SI{0}{W}}{\SI{25}{W}}{\SI{54}{W}}{\SI{60}{W}\archans{B}{One year is $365/163=2.24$ half-lives, so
+$P=120\times2^{-2.24}=\SI{25}{W}$. Option (A) treats the source as used up; (C) divides the power by the
+number of half-lives, $120/2.24$; (D) halves it only once.}}
+
+\archq{Assertion--reason: the half-life and the amount present}
+{An assertion about half-life with a reason about the order of the decay process.}
+{A first-order law, $dN/dt=-\lambda N$, gives $N=N_0e^{-\lambda t}$, and the time to halve is $\ln2/\lambda$
+whatever $N_0$ is.}
+{Accepting a true R as an explanation without checking that it actually implies A; here it does.}
+{A: The half-life of a radioactive sample does not depend on how much of it is present.\quad R: Radioactive
+decay is a first-order process.}
+{both true; R explains A}{both true; R does not explain A}{A true; R false}{A false; R true\archans{A}{Both
+statements are true, and R is the reason: for a first-order process $\Thalf=0.693/\lambda$, independent of
+$N_0$. A zeroth- or second-order process would have a half-life that depends on the amount.}}
+
+\archq{Assertion--reason: the energy of $\alpha$ particles}
+{An assertion about the spread of particle energies with a reason about the number of final bodies.}
+{In a two-body decay, momentum and energy conservation fix both kinetic energies uniquely
+(\chref{ch:decay}). Three bodies can share the energy in many ways.}
+{Confusing the sharp $\alpha$ lines with the continuous $\beta$ spectrum, which comes from three-body decay.}
+{A: All $\alpha$ particles emitted in a given transition have the same kinetic energy.\quad R: $\alpha$ decay
+is a two-body decay.}
+{both true; R explains A}{both true; R does not explain A}{A true; R false}{A false; R true\archans{A}{Two
+bodies with equal and opposite momenta and a fixed total energy $Q$ can share it in only one way,
+$K_\alpha=Q(A-4)/A$, so R explains A.}}
+
+\archq{Assertion--reason: neutron excess in heavy nuclei}
+{An assertion about the neutron excess with a reason that is true but beside the point.}
+{Ask \emph{why} heavy nuclei need extra neutrons: protons repel each other by the long-range Coulomb force,
+which grows as $Z^2$, while extra neutrons add strong-force attraction without repulsion (\chref{ch:nucleus}).}
+{Accepting a true fact about the neutron as the explanation because it mentions neutrons.}
+{A: Heavy stable nuclei contain more neutrons than protons.\quad R: The neutron is slightly heavier than the
+proton.}
+{both true; R explains A}{both true; R does not explain A}{A true; R false}{A false; R true\archans{B}{Both are
+true, but the neutron excess comes from Coulomb repulsion among the protons, not from the neutron's mass
+(which would, if anything, favour protons, since a free neutron decays into a proton).}}
+
+\archq{Assertion--reason: activity halves each half-life}
+{An assertion about activity with a reason that misstates what the half-life depends on.}
+{$\Act=\lambda N$, so activity falls in step with $N$ and halves every $\Thalf$; $\Thalf=\ln2/\lambda$ depends
+only on the nuclide.}
+{Agreeing with R because larger samples have larger activities: the activity depends on $N$, the half-life
+does not.}
+{A: The activity of a pure sample of one radioactive nuclide halves every half-life.\quad R: The half-life of a
+nuclide depends on the number of nuclei initially present.}
+{both true; R explains A}{both true; R does not explain A}{A true; R false}{A false; R true\archans{C}{A is
+true because $\Act=\lambda N$ and $N$ halves every half-life. R is false: $\Thalf=\ln2/\lambda$ is fixed by the
+nuclide alone.}}
+
+\archq{Assertion--reason: fusing iron}
+{An assertion about energy release with a reason about the binding-energy curve.}
+{Energy is released when the products have a higher binding energy per nucleon $\Eb/A$ than the reactants.
+Near the peak at iron, any rearrangement lowers $\Eb/A$ (\chref{ch:reactions}).}
+{Thinking every fusion releases energy. Only fusion of nuclei lighter than iron does.}
+{A: Fusion of two $\iso{56}{Fe}$ nuclei releases energy.\quad R: $\iso{56}{Fe}$ lies near the maximum of the
+$\Eb/A$ curve.}
+{both true; R explains A}{both true; R does not explain A}{A true; R false}{A false; R true\archans{D}{Fusing two
+iron nuclei would make a nucleus with \emph{lower} $\Eb/A$, absorbing energy, so A is false; R is true, and is
+precisely why A fails.}}
+
+\archq{Assertion--reason: where the $\beta$ electron comes from}
+{An assertion that the emitted electron pre-existed in the nucleus.}
+{In $\beta^-$ decay a neutron changes into a proton, $n\to p+e^-+\bar\nu_e$; the electron is \emph{created} in
+the decay (\chref{ch:decay}). The uncertainty principle forbids an electron confined to a nucleus.}
+{Reasoning that because something comes out, it must have been inside.}
+{A: The electron emitted in $\beta^-$ decay was present inside the nucleus before the decay.\quad R: In $\beta^-$
+decay the atomic number increases by one.}
+{both true; R explains A}{both true; R does not explain A}{A true; R false}{A false; R true\archans{D}{A is
+false: the electron is created when a neutron becomes a proton. R is true, since one more proton means $Z$
+rises by one.}}
+
+\archq{Assertion--reason: mean life and half-life}
+{An assertion comparing $\tau$ and $\Thalf$ with a reason giving the relation between them.}
+{$\Thalf=\tau\ln2$, so $\tau=\Thalf/\ln2=1.443\,\Thalf$.}
+{Thinking the average lifetime must be the time by which half have decayed. The few long-lived survivors pull
+the mean above the median.}
+{A: The mean life of a radioactive nucleus is longer than its half-life.\quad R: $\tau=\Thalf/\ln2$ and $\ln2<1$.}
+{both true; R explains A}{both true; R does not explain A}{A true; R false}{A false; R true\archans{A}{Both are
+true, and dividing by $\ln2=0.693<1$ makes $\tau$ larger than $\Thalf$, so R is exactly the reason.}}
+
+\archq{Assertion--reason: can lead stop every gamma ray?}
+{An assertion about complete stopping with a reason about exponential attenuation.}
+{An exponential $I_0e^{-\mu x}$ never reaches zero: every half-value layer halves what is left. Charged particles,
+which have a definite range, are different (Section~\ref{sec:nucapp-shielding}).}
+{Carrying over the idea of a range from $\alpha$ and $\beta$ particles to photons.}
+{A: Gamma radiation from a source can be completely stopped by a sufficiently thick lead sheet.\quad R:
+Gamma-ray intensity decreases exponentially with thickness.}
+{both true; R explains A}{both true; R does not explain A}{A true; R false}{A false; R true\archans{D}{R is true,
+and it shows A is false: exponential attenuation reduces the intensity by any desired factor but never to zero.}}
+
+\section{Practice Problems}\label{sec:practice-nucapps}
+
+The problems below are of standard examination difficulty and follow the order of the chapter. Answers, with
+brief working, follow the list. Use $\SI{1}{\year}=\SI{3.156e7}{s}$ and
+$\SI{1}{\MeV}=\SI{1.602e-13}{J}$.
+
+\begin{enumerate}[itemsep=3pt]
+\item\label{pp:nucapp-bone} A bone retains $60\%$ of the carbon-14 activity per gram of carbon of living bone.
+      Find its age.
+\item\label{pp:nucapp-wood} A \SI{5.0}{g} sample of carbon from a wooden tool shows $25$ decays per minute.
+      Living carbon shows $13.8$ decays per minute per gram. Find the tool's age.
+\item\label{pp:nucapp-dino} Explain why radiocarbon cannot date a dinosaur bone (66 million years old).
+      What fraction of the carbon-14 would remain?
+\item\label{pp:nucapp-kar} Potassium-40 ($\Thalf=\SI{1.248e9}{\year}$) decays to argon-40 in $10.72\%$ of its
+      decays (by electron capture) and otherwise to calcium-40. A volcanic rock has $0.100$ argon-40 atoms per
+      potassium-40 atom. Find its age, assuming all argon escaped while the rock was molten.
+\item\label{pp:nucapp-rbsr} A meteorite contains $0.065$ atoms of radiogenic strontium-87 per atom of
+      rubidium-87 ($\Thalf=\SI{4.97e10}{\year}$). Find its age.
+\item\label{pp:nucapp-equal} A rock contains equal numbers of parent and daughter atoms. How old is it, in
+      half-lives? What if $N_Y/N_X=15$?
+\item\label{pp:nucapp-i131} Iodine-131 has $T_\text{phys}=\SI{8.02}{d}$. Suppose the thyroid eliminates iodine
+      with $T_\text{bio}=\SI{80}{d}$. Find the effective half-life.
+\item\label{pp:nucapp-f18} Fluorine-18 ($\Thalf=\SI{109.8}{min}$) is made at a cyclotron \SI{2.0}{h} by road
+      from a PET centre that needs \SI{400}{\mega\becquerel} on arrival. What activity must leave the cyclotron?
+\item\label{pp:nucapp-effshort} Show that $T_\text{eff}$ is always shorter than both $T_\text{phys}$ and
+      $T_\text{bio}$, and that it is close to the shorter of the two when they are very different.
+\item\label{pp:nucapp-gamma70} A \SI{70}{kg} worker absorbs \SI{0.35}{J} of gamma-ray energy spread through
+      the body. Find $D$ and $H$. What would $H$ be if the same energy were delivered by $\alpha$ particles?
+\item\label{pp:nucapp-lethal} A whole-body dose of \SI{5}{\gray} is likely to be fatal. How much energy is this
+      for a \SI{70}{kg} person, and by how much would it raise the body's temperature (specific heat of tissue
+      $s\approx\SI{4186}{J.kg^{-1}.K^{-1}}$, as in \chref{ch:thermal})? What does this say about how radiation
+      harms the body?
+\item\label{pp:nucapp-invsq} A technician moves from \SI{0.50}{m} to \SI{2.0}{m} from a point source. By what
+      factor does the dose rate change?
+\item\label{pp:nucapp-worker} The dose rate \SI{1.0}{m} from a source is \SI{80}{\micro\sievert/h}. Find the
+      rate at \SI{4.0}{m} behind \SI{2.4}{cm} of lead (half-value layer \SI{1.2}{cm}).
+\item\label{pp:nucapp-mu} Find the linear attenuation coefficient $\mu$ of lead for cobalt-60 gamma rays
+      (half-value layer \SI{1.2}{cm}), and the fraction of a narrow beam transmitted by \SI{5.0}{cm}.
+\item\label{pp:nucapp-pexact} For $\lambda\Delta t=0.05$, compute the exact per-step decay probability and the
+      percentage error of using $p=\lambda\Delta t$.
+\item\label{pp:nucapp-count} A detector records $400$ counts in a minute. Estimate the uncertainty in the count
+      rate. How long must one count to measure the rate to $1\%$?
+\item\label{pp:nucapp-chainsim} Extend the simulation method of Section~\ref{sec:nucapp-montecarlo} to a chain
+      $\mathrm X\to\mathrm Y\to{}$stable, with decay probabilities $p_X=0.02$ and $p_Y=0.04$ per step and no Y at
+      the start. Describe the algorithm, state the shape the curve for Y should have, and find the step at
+      which it should peak, using the time of maximum daughter population from \chref{ch:decaylaw},
+      $t_{\max}=\ln(\lambda_Y/\lambda_X)/(\lambda_Y-\lambda_X)$.
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item $t=5730\log_2(1/0.60)=5730\times0.737=\SI{4.2e3}{\year}$.
+\item The living value for \SI{5.0}{g} is $5.0\times13.8=69$ per minute; ratio $69/25=2.76$;
+      $t=5730\log_22.76=5730\times1.465=\SI{8.4e3}{\year}$.
+\item $66\times10^{6}/5730\approx11\,500$ half-lives; fraction $2^{-11\,500}\approx10^{-3467}$. Not a single
+      atom of the original carbon-14 remains (a living ten-tonne animal holds only about $10^{17}$ of them), so
+      the clock ran out after about \SI{50000}{\year}. Dinosaurs are dated by the rocks around them, with
+      long-lived parents.
+\item With $f=0.1072$: $0.100=0.1072\,(e^{\lambda t}-1)$, so $e^{\lambda t}=1.933$ and
+      $t=1.248\times10^{9}\times\ln1.933/0.693=\SI{1.19e9}{\year}$.
+\item $t=4.97\times10^{10}\log_2(1.065)=4.97\times10^{10}\times0.0909=\SI{4.5e9}{\year}$, the age of the solar
+      system.
+\item $N_Y/N_X=1$: $\log_22=1$ half-life. $N_Y/N_X=15$: $\log_216=4$ half-lives.
+\item $1/T_\text{eff}=1/8.02+1/80$, so $T_\text{eff}=\SI{7.3}{d}$: almost the physical half-life, because
+      excretion is ten times slower.
+\item $\SI{2.0}{h}=\SI{120}{min}$ is $120/109.8=1.093$ half-lives, so $400\times2^{1.093}=\SI{853}{\mega\becquerel}$.
+\item $1/T_\text{eff}=1/T_\text{phys}+1/T_\text{bio}$ exceeds both $1/T_\text{phys}$ and $1/T_\text{bio}$, so
+      $T_\text{eff}$ is smaller than both. If $T_\text{bio}\gg T_\text{phys}$, then $1/T_\text{bio}$ is negligible
+      and $T_\text{eff}\approx T_\text{phys}$ (and vice versa).
+\item $D=0.35/70=\SI{5.0}{\milli\gray}$; $H=\SI{5.0}{\milli\sievert}$ ($w_R=1$). As $\alpha$ particles,
+      $H=20\times5.0=\SI{100}{\milli\sievert}$.
+\item $E=5\times70=\SI{350}{J}$; $\Delta T=E/(ms)=350/(70\times4186)=\SI{0.0012}{K}$. A lethal dose would not
+      noticeably warm the body. The harm comes not from heat but from ionisation: the energy arrives in
+      concentrated packets that break chemical bonds in DNA at particular points.
+\item $(0.50/2.0)^2=1/16$: the dose rate falls sixteenfold.
+\item Distance: $(1/4)^2=1/16$; shielding: two half-value layers, $1/4$. Rate $=80/64=\SI{1.25}{\micro\sievert/h}$.
+\item $\mu=0.693/1.2=\SI{0.58}{cm^{-1}}$; transmitted fraction $e^{-0.58\times5.0}=0.056$, that is, $5.6\%$.
+\item $1-e^{-0.05}=0.0488$; using $0.05$ overestimates it by $2.5\%$.
+\item $\sqrt{400}=20$, so the rate is $400\pm20$ per minute, a $5\%$ uncertainty. For $1\%$ one needs
+      $1/\sqrt n=0.01$, that is, $n=10^4$ counts, which takes $10^4/400=\SI{25}{min}$.
+\item In each step, decide for each X nucleus whether it decays (probability $p_X$) and for each Y nucleus
+      whether it decays (probability $p_Y$); subtract the X decays from $N_X$, add them to $N_Y$, and subtract
+      the Y decays from $N_Y$. $N_Y$ rises from zero, peaks and falls, the shape of a daughter whose parent
+      outlives it only moderately. With $\lambda\approx p$ per step, $t_{\max}=\ln(0.04/0.02)/(0.04-0.02)=34.7$,
+      so the peak is near step $35$ (step $34$ if the exact per-step probabilities $1-e^{-\lambda}$ are used).
+\end{enumerate}
+}
+
+\section{Challenge Problems}\label{sec:challenge-nucapps}
+
+The five problems below each combine ideas from several chapters of the volume, in the style of JEE
+Advanced and Olympiad papers. Several are drawn from historical experiments. Break each into stages as
+in Section~\ref{sec:nucapp-together}.
+
+\begin{challengebox}{The $\alpha$ line of americium-241 (\chsref{ch:nucleus}{ch:decay})}
+The smoke-detector isotope americium-241 (\chref{ch:decaylaw}) decays by $\alpha$ emission to neptunium-237.
+The atomic masses are $M(\iso{241}{Am})=\SI{241.056829}{\amu}$, $M(\iso{237}{Np})=\SI{237.048173}{\amu}$ and
+$M(\iso{4}{He})=\SI{4.002603}{\amu}$. (a) Find $Q_\alpha$ and the $\alpha$ energy expected for a decay to the
+ground state of neptunium-237. (b) The strongest $\alpha$ line is measured at \SI{5.486}{\MeV}. Show that this
+decay leaves the neptunium in an excited state, and find its excitation energy; what is then emitted? (c) Find
+the radius of the path of a \SI{5.486}{\MeV} $\alpha$ particle (mass \SI{6.645e-27}{kg}, charge $2e$) moving
+perpendicular to a magnetic field of \SI{0.50}{T}.
+\challengeans{(a) $Q_\alpha=[241.056829-237.048173-4.002603](931.494)=\SI{5.638}{\MeV}$, and a decay to the
+ground state would give $K_\alpha=Q\times237/241=\SI{5.545}{\MeV}$. (b) Working backwards, the observed line
+corresponds to $Q'=K_\alpha A/(A-4)=5.486\times241/237=\SI{5.579}{\MeV}$, less than $Q_\alpha$ by
+\SI{0.060}{\MeV}. The missing \SI{60}{\keV} is left as excitation of the daughter, which drops to its ground
+state by emitting a gamma ray: the measured \SI{59.5}{\keV} line of americium sources. The two-body sharing
+rule of \chref{ch:decay} thus turns an $\alpha$ energy into a map of the daughter's levels. (c)
+$p=\sqrt{2mK}=\sqrt{2\times6.645\times10^{-27}\times5.486\times1.602\times10^{-13}}=\SI{1.08e-19}{kg.m.s^{-1}}$, so
+$r=p/(2eB)=1.08\times10^{-19}/(2\times1.602\times10^{-19}\times0.50)=\SI{0.67}{m}$. A field of this size
+bends $\alpha$ particles only gently, which is why magnetic analysis of $\alpha$ lines needs strong fields
+and long flight paths.}
+\end{challengebox}
+
+\begin{challengebox}{Activation and counting (\chref{ch:decaylaw})}
+A target is irradiated so that an isotope X ($\Thalf=\SI{2.0}{h}$) is produced at a constant
+$1.0\times10^{8}$ nuclei per second for \SI{4.0}{h}. Counting starts \SI{2.0}{h} after the irradiation ends and
+lasts \SI{10}{min}, with a detector that records $10\%$ of the decays. How many counts are recorded?
+\challengeans{\emph{Production.} $\Act=\Prod(1-e^{-\lambda t})=\Prod(1-2^{-t/\Thalf})$; after two half-lives of
+irradiation $\Act=10^{8}\times(1-\tfrac14)=\SI{7.5e7}{\becquerel}$. \emph{Waiting.} Two hours later (one
+half-life) $\Act=\SI{3.75e7}{\becquerel}$. \emph{Counting.} The activity falls slightly during the count, so
+integrate: decays $=\int_0^{600}\Act e^{-\lambda t}\,dt=(\Act/\lambda)(1-e^{-\lambda\times600\,\mathrm s})$, with
+$\lambda=0.693/7200=\SI{9.63e-5}{s^{-1}}$; this gives $3.90\times10^{11}\times0.0561=2.19\times10^{10}$ decays.
+Counts $=0.10\times2.19\times10^{10}=2.2\times10^{9}$. (Treating the activity as constant would give
+$2.25\times10^{9}$, $3\%$ high.)}
+\end{challengebox}
+
+\begin{challengebox}{Why radium is warm (\chsref{ch:decay}{ch:decaylaw})}
+Pierre Curie and Albert Laborde found in 1903 that radium salts are always warmer than their surroundings.
+(a) Find the heat output of \SI{1.00}{g} of radium-226 alone ($Q=\SI{4.87}{\MeV}$, $\Act=\SI{3.66e10}{\becquerel}$)
+in watts and in joules per hour. (b) A radium sample several weeks old gives five to six times this output.
+Explain.
+\challengeans{(a) $P=\Act Q=3.66\times10^{10}\times4.87\times1.602\times10^{-13}=\SI{0.029}{W}$, that is,
+\SI{103}{J} per hour, without end on any human time scale ($\Thalf=\SI{1600}{\year}$). (b) Within a few weeks the
+short-lived daughters (radon-222, polonium-218, lead-214, bismuth-214, polonium-214) reach secular
+equilibrium with the radium. Each then has the same activity as the radium and adds its own decay energy:
+three more $\alpha$ decays of $5.6$ to \SI{7.8}{\MeV} and two $\beta$ decays with their gamma rays, five to six
+times the radium's own output in all (the neutrinos' share escapes). (Lead-210, with $\Thalf=\SI{22}{\year}$, holds the chain back from going
+further on this time scale.)}
+\end{challengebox}
+
+\begin{challengebox}{Counting helium atoms (\chsref{ch:decay}{ch:decaylaw})}
+Rutherford and Royds showed in 1909 that $\alpha$ particles are helium nuclei by collecting the gas they
+became. What volume of helium, at standard temperature and pressure (\SI{22.4}{L} per mole, \chref{ch:kinetic}),
+does \SI{1.00}{g} of radium-226 alone ($\Act=\SI{3.66e10}{\becquerel}$) produce in one year?
+\challengeans{Each decay makes one helium atom. Decays in one year $=3.66\times10^{10}\times3.156\times10^{7}
+=1.15\times10^{18}$ atoms, that is, $1.15\times10^{18}/6.022\times10^{23}=\SI{1.9e-6}{mol}$, or
+$1.9\times10^{-6}\times\SI{22400}{cm^3}=\SI{0.043}{cm^3}$. Small but measurable, which is how the identification
+was made. (The radium's activity hardly changes in a year, since $\Thalf=\SI{1600}{\year}$; its daughters in
+equilibrium would add three more helium atoms per radium decay.)}
+\end{challengebox}
+
+\begin{challengebox}{The natural reactor at Oklo (\chsref{ch:decaylaw}{ch:reactions})}
+Today natural uranium contains $0.720\%$ uranium-235 ($\Thalf=\SI{7.04e8}{\year}$) and $99.27\%$ uranium-238
+($\Thalf=\SI{4.468e9}{\year}$). Find the percentage of uranium-235 in natural uranium 1.7 billion years ago.
+At Oklo in Gabon, natural uranium deposits at that time sustained chain reactions with ordinary groundwater as
+the moderator. Explain why that is impossible today.
+\challengeans{Each isotope decays independently, so going back in time multiplies each by $e^{\lambda t}$, and the
+ratio by $e^{(\lambda_{235}-\lambda_{238})t}$. With $\lambda_{235}=\SI{9.85e-10}{\year^{-1}}$ and
+$\lambda_{238}=\SI{1.55e-10}{\year^{-1}}$, $(\lambda_{235}-\lambda_{238})t=8.29\times10^{-10}\times1.7\times10^{9}
+=1.41$, so
+\[
+\frac{N_{235}}{N_{238}}=\frac{0.720}{99.27}\,e^{1.41}=0.00725\times4.10=0.0297,
+\]
+that is, $0.0297/1.0297=2.9\%$ uranium-235, similar to modern enriched reactor fuel. Today's $0.72\%$ is too
+dilute: ordinary water absorbs enough neutrons that the multiplication factor $k$ cannot reach $1$ with natural
+uranium, which is why light-water reactors need enriched fuel (\chref{ch:reactions}).}
+\end{challengebox}
+
+\section*{Looking Back on Part B}
+\addcontentsline{toc}{section}{Looking Back on Part B}
+
+\textbf{Part B turned the nucleus from an object of study into a source of energy and a tool.}
+\begin{itemize}
+\item \textbf{Nuclear reactions (\chref{ch:reactions}).} The bookkeeping of decay extends to reactions
+X$(a,b)$Y: the $Q$-value is the rest energy lost, and an endoergic reaction needs a threshold kinetic energy
+larger than $|Q|$, because momentum conservation forces some energy to stay as motion of the centre of mass
+(CM), exactly the inelastic-collision argument of \chref{ch:collisions}. The binding-energy curve of
+\chref{ch:nucleus}, peaked near iron, then explains both great energy sources at once: a heavy nucleus releases
+about \SI{200}{\MeV} by splitting, light nuclei release more per nucleon by fusing. Fission becomes a power
+source through the chain reaction, held exactly critical ($k=1$) with moderators that slow neutrons by
+collisions and delayed neutrons that make control possible. Fusion is blocked by the Coulomb barrier and
+proceeds in the Sun only because thermal motion (\chref{ch:kinetic}) and quantum tunnelling together let a tiny
+fraction of nuclei through.
+\item \textbf{Applications (\chref{ch:nucapps}).} The decay law read backwards dates bones with carbon-14 and the
+solar system with uranium; inside the body it combines with excretion to give an effective half-life; in matter
+it reappears as exponential attenuation, with the half-value layer playing the half-life. Dose is energy per
+kilogram, weighted for how densely each radiation ionises, and protection rests on time, distance and
+shielding. A simulation with nothing but random numbers reproduces the law and shows it to be a law of large
+numbers.
+\end{itemize}
+
+\section*{Looking Back on the Volume}
+\addcontentsline{toc}{section}{Looking Back on the Volume}
+
+\textbf{Part A built the nucleus and the law of its decay.}
+\begin{itemize}
+\item \textbf{The nucleus (\chref{ch:nucleus}).} A nucleus of $Z$ protons and $A-Z$ neutrons is a tiny drop of
+nuclear matter, of radius $R_0A^{1/3}$ and the same enormous density for every nucleus. It weighs less than its
+separated parts, and the deficit times $c^2$ is the binding energy. Binding energy per nucleon rises steeply,
+peaks near iron and then falls slowly: one curve that already contains fission, fusion and the limits of
+stability.
+\item \textbf{Radioactive decay (\chref{ch:decay}).} Unstable nuclei move towards the valley of stability by
+$\alpha$ decay, $\beta^\pm$ decay and electron capture, often followed by $\gamma$ emission. Each decay obeys the
+conservation of energy and momentum from Volume~I, together with conservation of charge, nucleon number and
+lepton number, and its $Q$-value comes from atomic masses. Momentum conservation shares the energy: sharply between two
+bodies in $\alpha$ decay, continuously among three in $\beta$ decay, which is how the neutrino was inferred
+before it was seen.
+\item \textbf{The decay law (\chref{ch:decaylaw}).} Each nucleus has a fixed probability per unit time of
+decaying, independent of its age. From that one assumption follow $N=N_0e^{-\lambda t}$, the half-life and mean
+life, activity, branching, and the chains that settle into secular or transient equilibrium. It is the same
+first-order equation as chemical kinetics, and the same law that governs a hot body cooling by Newton's law
+of cooling (\chref{ch:thermal}).
+\end{itemize}
+
+\textbf{Part B put the nucleus to work}: reactions, fission and fusion in \chref{ch:reactions}; dating,
+medicine, dose and simulation in this chapter.
+
+\medskip
+\textbf{The volume in five sentences.} The nucleus is a tiny drop of uniform nuclear matter whose mass is
+less than that of its parts, the deficit being its binding energy. The binding energy per nucleon peaks near
+iron, so heavy nuclei can release energy by splitting and light ones by fusing. Unstable nuclei move towards the
+valley of stability by $\alpha$, $\beta^\pm$ and electron-capture decays, often followed by $\gamma$ emission,
+with $Q$-values fixed by atomic masses. Each nucleus decays at random with a fixed probability per unit time,
+which makes populations decay exponentially and lets chains settle into equilibrium. That one exponential law
+dates rocks and bones, schedules medical isotopes, shields workers and emerges unaided from a few lines of
+random-number code.
+
+\medskip
+\textbf{The volume and the book.} Nothing in this volume needed a new principle of mechanics. Energy
+conservation (\chref{ch:energy}), extended by $E=mc^2$ to include rest energy, gives every $Q$-value; momentum
+conservation (\chref{ch:collisions}) shares that energy between products, fixes the threshold of a reaction and
+explains the slowing of neutrons in a moderator; the Coulomb potential energy of two nuclei has the same
+$1/r$ form as the gravitational potential energy of \chref{ch:gravitation}, with repulsion in place of
+attraction. From Volume~II came the statistical view: the temperatures and speed distributions of
+\chref{ch:kinetic} decide how often nuclei in the Sun meet fast enough to fuse, and the mean free path of a
+gas molecule reappears as the mean distance $1/\mu$ a gamma ray travels in lead. What the nucleus added is
+the idea that a law of nature can be exact about populations while saying nothing about individuals. The
+exponential that began, in \chref{ch:toolkit}, as a mathematical function has become, by the end of the book,
+the signature of pure chance.

@@ -1,0 +1,43 @@
+% decay_isobar: atomic masses of the A = 101 isobars (Vol III Ch 2, fig:decay-isobar)
+% Mass of each neutral atom above that of Ru-101, in MeV/c^2, from AME2020 mass
+% excesses (keV): Zr -73165, Nb -78886, Mo -83511, Tc -86336, Ru -87950,
+% Rh -87408, Pd -85428, Ag -81334, Cd -75836.  These agree with the source
+% figure (figs.py, recovered from its PDF) to 0.01 MeV.
+% Dashed curve: least-squares parabola through the nine points,
+%   M = 0.83397 u^2 - 0.38223 u + 0.18417,  u = Z - 44,  minimum at Z = 44.2.
+% Each arrow is one beta step; its drop is the Q-value (atomic masses), e.g.
+% Tc -> Ru 1.614 MeV (beta-), Rh -> Ru 0.542 MeV (below 1.022 MeV: EC only).
+% Colours: beta-minus cPrim, beta-plus/EC cCrim (as in decay_nzchart).
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=10.4cm, height=6.2cm,
+    xmin=39.4, xmax=48.7, ymin=-2.8, ymax=16.5,
+    xtick={40,...,48},
+    xticklabels={{40\\Zr},{41\\Nb},{42\\Mo},{43\\Tc},{44\\Ru},{45\\Rh},{46\\Pd},{47\\Ag},{48\\Cd}},
+    xticklabel style={align=center,font=\footnotesize},
+    ytick={0,5,10,15},
+    xlabel={proton number $Z$ and element (all with $A=101$)},
+    ylabel={mass above $\iso{101}{Ru}$ (MeV$/c^2$)}]
+\addplot[guide,domain=39.8:48.4,samples=80] {0.83397*(x-44)^2-0.38223*(x-44)+0.18417};
+\draw[-smallhead,construction,cPrim,shorten <=3pt,shorten >=3pt] (axis cs:40,14.785) -- (axis cs:41,9.064);
+\draw[-smallhead,construction,cPrim,shorten <=3pt,shorten >=3pt] (axis cs:41,9.064) -- (axis cs:42,4.439);
+\draw[-smallhead,construction,cPrim,shorten <=3pt,shorten >=3pt] (axis cs:42,4.439) -- (axis cs:43,1.614);
+\draw[-smallhead,construction,cPrim,shorten <=3pt,shorten >=3pt] (axis cs:43,1.614) -- (axis cs:44,0);
+\draw[-smallhead,construction,cCrim,shorten <=3pt,shorten >=3pt] (axis cs:48,12.114) -- (axis cs:47,6.616);
+\draw[-smallhead,construction,cCrim,shorten <=3pt,shorten >=3pt] (axis cs:47,6.616) -- (axis cs:46,2.522);
+\draw[-smallhead,construction,cCrim,shorten <=3pt,shorten >=3pt] (axis cs:46,2.522) -- (axis cs:45,0.542);
+\draw[-smallhead,construction,cCrim,shorten <=3pt,shorten >=3pt] (axis cs:45,0.542) -- (axis cs:44,0);
+\node[dot,cPrim,minimum size=4.5pt] at (axis cs:40,14.785) {};
+\node[dot,cPrim,minimum size=4.5pt] at (axis cs:41,9.064) {};
+\node[dot,cPrim,minimum size=4.5pt] at (axis cs:42,4.439) {};
+\node[dot,cPrim,minimum size=4.5pt] at (axis cs:43,1.614) {};
+\node[dot,cCrim,minimum size=4.5pt] at (axis cs:45,0.542) {};
+\node[dot,cCrim,minimum size=4.5pt] at (axis cs:46,2.522) {};
+\node[dot,cCrim,minimum size=4.5pt] at (axis cs:47,6.616) {};
+\node[dot,cCrim,minimum size=4.5pt] at (axis cs:48,12.114) {};
+\node[dot,cInk,minimum size=5pt] at (axis cs:44,0) {};
+\node[small label,anchor=north] at (axis cs:44,-0.25) {stable};
+\node[cPrim,anchor=west] at (axis cs:40.7,14.0) {$\beta^-$: $Z\to Z+1$};
+\node[cCrim,anchor=east] at (axis cs:47.6,14.0) {$\beta^+$ or EC: $Z\to Z-1$};
+\end{axis}
+\end{tikzpicture}

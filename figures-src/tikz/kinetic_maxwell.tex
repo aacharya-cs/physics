@@ -1,0 +1,56 @@
+% kinetic_maxwell: the Maxwell--Boltzmann speed distribution for nitrogen (Vol II Ch 5, fig:ktmaxwell)
+% Fraction of molecules per unit speed:
+%   phi(v) = 4 pi (m/2 pi k_B T)^{3/2} v^2 exp(-m v^2 / 2 k_B T)
+%          = (4/sqrt(pi)) v^2/v_p^3 exp(-(v/v_p)^2),   with v_p = sqrt(2RT/M).
+% Nitrogen, M = 0.028 kg/mol, R = 8.314 J/(mol K):
+%   T = 300 K: v_p = 422 m/s, mean = sqrt(8RT/pi M) = 476 m/s, v_rms = sqrt(3RT/M) = 517 m/s;
+%              peak height (4/sqrt(pi)) e^{-1}/v_p = 1.97e-3 s/m.
+%   T = 900 K: v_p = 731 m/s, peak height 1.14e-3 s/m (the area stays 1).
+% Fraction faster than 1000 m/s: erfc(x) + (2/sqrt(pi)) x e^{-x^2}, x = 1000/v_p:
+%   1.1% at 300 K, 29% at 900 K.
+% Plotted in units of 1e-3 s/m against v in m/s.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=12.4cm, height=6.4cm,
+    xmin=0, xmax=2150, ymin=0, ymax=2.45,
+    declare function={vp(\T)=sqrt(2*8.314*\T/0.028);
+                      phi(\v,\T)=1000*4/sqrt(pi)*(\v/vp(\T))^2/vp(\T)*exp(-(\v/vp(\T))^2);},
+    xtick={500,1000,1500,2000},
+    ytick={1,2},
+    xlabel={molecular speed $v$ (\si{m/s})},
+    ylabel={$\phi(v)$ ($10^{-3}$\,\si{s/m})},
+    xticklabel style={/pgf/number format/set thousands separator={}},
+    xlabel style={at={(axis description cs:0.5,-0.08)},anchor=north},
+    ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,yshift=2pt}]
+  % the fast tails, v > 1000 m/s
+  \addplot[area fill,fill=cAcc!30,domain=1000:2050,samples=40] {phi(x,900)} \closedcycle;
+  \addplot[area fill,fill=cAcc!70,domain=1000:2050,samples=40] {phi(x,300)} \closedcycle;
+  % the two distributions
+  \addplot[cPrim,domain=0:2100,samples=140] {phi(x,300)};
+  \addplot[cPlum,domain=0:2100,samples=140] {phi(x,900)};
+  % the three speeds at 300 K
+  \pgfmathsetmacro{\vP}{100*sqrt(2*8.314*3/2.8)}% m/s, scaled to avoid overflow
+  \pgfmathsetmacro{\vM}{100*sqrt(8*8.314*3/(pi*2.8))}
+  \pgfmathsetmacro{\vR}{100*sqrt(3*8.314*3/2.8)}
+  \draw[guide,cFor] (axis cs:\vP,0) -- (axis cs:\vP,{phi(\vP,300)});
+  \draw[guide,cFor] (axis cs:\vM,0) -- (axis cs:\vM,{phi(\vM,300)});
+  \draw[guide,cFor] (axis cs:\vR,0) -- (axis cs:\vR,{phi(\vR,300)});
+  \node[dot,cFor] at (axis cs:\vP,{phi(\vP,300)}) {};
+  \node[dot,cFor] at (axis cs:\vM,{phi(\vM,300)}) {};
+  \node[dot,cFor] at (axis cs:\vR,{phi(\vR,300)}) {};
+  \draw[leader,cFor] (axis cs:\vP,{phi(\vP,300)}) -- (axis cs:650,2.30)
+    node[anchor=west,inner sep=1pt] {$v_p=\SI{422}{m/s}$};
+  \draw[leader,cFor] (axis cs:\vM,{phi(\vM,300)}) -- (axis cs:720,2.02)
+    node[anchor=west,inner sep=1pt] {$\bar v=\SI{476}{m/s}$};
+  \draw[leader,cFor] (axis cs:\vR,{phi(\vR,300)}) -- (axis cs:790,1.74)
+    node[anchor=west,inner sep=1pt] {$v_{\text{rms}}=\SI{517}{m/s}$};
+  % curve labels
+  \node[cPrim,anchor=east] at (axis cs:215,1.25) {\SI{300}{K}};
+  \node[cPlum,anchor=west] at (axis cs:1130,1.02) {\SI{900}{K}};
+  % the tail
+  \draw[leader] (axis cs:1250,0.22) -- (axis cs:1450,0.62)
+    node[anchor=south west,inner sep=1pt,align=left,font=\footnotesize]
+    {faster than \SI{1000}{m/s}:\\ \SI{1.1}{\percent} at \SI{300}{K},
+     \SI{29}{\percent} at \SI{900}{K}};
+\end{axis}
+\end{tikzpicture}

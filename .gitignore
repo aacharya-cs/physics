@@ -10,3 +10,5 @@ figures-cache/
 figures-src/tikz/preview-*
 *.auxlock
 .DS_Store
+build/
+test-*

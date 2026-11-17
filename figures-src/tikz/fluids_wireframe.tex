@@ -1,0 +1,23 @@
+% fluids_wireframe: surface tension measured on a soap film (Vol II Ch 2, fig:fluids-wireframe)
+% A U-shaped frame with a sliding wire of length l carries a soap film.  The film
+% has two surfaces (front and back), each pulling the wire inwards with S per unit
+% length, so holding the wire needs F = 2 S l.  Pulling it out a further dx does work
+% F dx = 2 S l dx = S (2 l dx) = S x (new area), so S is also the energy per unit area.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    soap/.style={fill=cPlum!10,draw=none}]
+  % film
+  \fill[soap] (0,0) rectangle (3.0,1.6);
+  \fill[soap,ghost] (3.0,0) rectangle (3.6,1.6);
+  % frame (U shape)
+  \draw[outline] (4.2,0) -- (0,0) -- (0,1.6) -- (4.2,1.6);
+  % sliding wire and its later position
+  \draw[cInk,construction] (3.0,-0.2) -- (3.0,1.8);
+  \draw[cInk,thin line,hidden] (3.6,-0.2) -- (3.6,1.8);
+  % forces on the wire
+  \draw[force] (3.0,0.8) -- (1.95,0.8) node[anchor=south,pos=0.55] {$2S\ell$};
+  \draw[applied] (3.0,0.8) -- (4.05,0.8) node[anchor=west,cAcc] {$F$};
+  % dimensions
+  \draw[dim] (-0.3,0) -- (-0.3,1.6) node[midway,anchor=east,cSteel] {$\ell$};
+  \draw[dim] (3.0,2.0) -- (3.6,2.0) node[midway,anchor=south,cSteel] {$dx$};
+  \node[cPlum] at (1.1,0.35) {film};
+\end{tikzpicture}

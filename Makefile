@@ -1,4 +1,4 @@
-BOOK = Mechanics_Vol1_Class11.pdf
+BOOK = Physics.pdf
 
 .PHONY: pdf figures fig release clean
 

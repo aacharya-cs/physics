@@ -1,4 +1,4 @@
-% Mechanics, Volume 1 (Class 11, JEE/NEET)
+% Physics: A Reasoning-First Companion (JEE/NEET), in volumes, one PDF
 % Build: latexmk -pdf main.tex
 \documentclass[11pt,a4paper,twoside,openany]{book}
 \input{preamble}
@@ -8,23 +8,46 @@
 \input{frontmatter}
 \mainmatter
 
-\input{chapters/ch00-toolkit}
-\input{chapters/ch01-measurement}
-\input{chapters/ch02-straight-line}
-\input{chapters/ch03-vectors}
-\input{chapters/ch04-projectiles}
-\input{chapters/ch05-relative-motion}
-\input{chapters/ch06-circular-kinematics}
-\input{chapters/ch07-newtons-laws}
-\input{chapters/ch08-connected-bodies}
-\input{chapters/ch09-friction}
-\input{chapters/ch10-circular-dynamics}
-\input{chapters/ch11-work-energy}
-\input{chapters/ch12-collisions}
-\input{chapters/ch13-centre-of-mass}
-\input{chapters/ch14-rotation}
-\input{chapters/ch15-rolling}
-\input{chapters/ch16-gravitation}
-\input{chapters/ch17-kepler-orbits}
+% Foundations: the mathematical toolkit shared by every volume (numbered F)
+\input{chapters/foundations}
+
+% Volume I: Mechanics
+\input{chapters/vol1/volume}
+\input{chapters/vol1/ch01-measurement}
+\input{chapters/vol1/ch02-straight-line}
+\input{chapters/vol1/ch03-vectors}
+\input{chapters/vol1/ch04-projectiles}
+\input{chapters/vol1/ch05-relative-motion}
+\input{chapters/vol1/ch06-circular-kinematics}
+\input{chapters/vol1/ch07-newtons-laws}
+\input{chapters/vol1/ch08-connected-bodies}
+\input{chapters/vol1/ch09-friction}
+\input{chapters/vol1/ch10-circular-dynamics}
+\input{chapters/vol1/ch11-work-energy}
+\input{chapters/vol1/ch12-collisions}
+\input{chapters/vol1/ch13-centre-of-mass}
+\input{chapters/vol1/ch14-rotation}
+\input{chapters/vol1/ch15-rolling}
+\input{chapters/vol1/ch16-gravitation}
+\input{chapters/vol1/ch17-kepler-orbits}
+
+% Volume II: Properties of Matter and Thermal Physics
+\input{chapters/vol2/volume}
+\input{chapters/vol2/opening}
+\input{chapters/vol2/ch01-solids}
+\input{chapters/vol2/ch02-fluids}
+\input{chapters/vol2/ch03-thermal-properties}
+\input{chapters/vol2/ch04-thermodynamics}
+\input{chapters/vol2/ch05-kinetic-theory}
+
+% Volume III: Nuclei and Radioactivity
+\input{chapters/vol3/volume}
+\input{chapters/vol3/opening}
+\input{chapters/vol3/ch01-nucleus}
+\input{chapters/vol3/ch02-decay}
+\input{chapters/vol3/ch03-decay-law}
+\input{chapters/vol3/ch04-reactions}
+\input{chapters/vol3/ch05-applications}
+\input{chapters/vol3/glossary}
 
 \end{document}

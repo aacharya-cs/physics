@@ -1,0 +1,33 @@
+% fluids_acceltank: water in a tank accelerating horizontally (Vol II Ch 2, fig:fluids-acceltank)
+% In the tank's frame each parcel feels g down and the pseudo-force per unit mass a
+% backwards.  The free surface is perpendicular to the effective gravity g - a,
+% so it tilts at tan(theta) = a/g, higher at the rear.
+% Drawn to the challenge: a = 2.0 m/s^2, g = 9.8: tan(theta) = 0.204, theta = 11.5 deg.
+% Tank width 3.2 cm: rear-to-front height difference 3.2(0.204) = 0.65 cm,
+% about the rest level 1.3 (volume is unchanged).
+% Effective-gravity triangle beside the tank: g = 1.5 cm down, a = 0.306 cm back;
+% its resultant is perpendicular to the drawn surface.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    water/.style={fill=cPrim!12,draw=none}]
+  \def\t{0.204}
+  % water: surface y = 1.3 - t (x - 1.6)
+  \fill[water] (0,0) -- (0,{1.3+1.6*\t}) -- (3.2,{1.3-1.6*\t}) -- (3.2,0) -- cycle;
+  \draw[cPrim,construction] (0,{1.3+1.6*\t}) -- (3.2,{1.3-1.6*\t});
+  \draw[guide] (0,1.3) -- (3.2,1.3);
+  \node[anchor=west,cSteel,font=\footnotesize] at (3.25,1.3) {level at rest};
+  % tank
+  \draw[outline] (0,2.3) -- (0,0) -- (3.2,0) -- (3.2,2.3);
+  % angle of tilt at the front
+  \draw[angle arc] (2.6,1.3) arc[start angle=0,end angle={-atan(\t)},radius=1.0];
+  \node at ({1.6+1.25*cos(5.8)},{1.3-1.25*sin(5.8)}) {$\theta$};
+  % effective gravity, drawn beside the tank to scale: g = 1.5 cm, a = 0.306 cm
+  \coordinate (Q) at (5.7,2.1);
+  \draw[accel] (Q) -- ++(0,-1.5) node[anchor=north,cPrim] {$g$};
+  \draw[accel] (Q) -- ++(-0.306,0) node[anchor=east,cPrim] {$a$};
+  \draw[accel,resultant] (Q) -- ++(-0.306,-1.5);
+  \node[anchor=west,cPrim,align=left,font=\footnotesize] at (5.8,1.2) {effective\\ gravity};
+  \node[dot] at (Q) {};
+  \node[anchor=south east,font=\footnotesize] at (0,{1.3+1.6*\t+0.02}) {rear, deeper};
+  % acceleration of the tank
+  \draw[accel] (1.0,-0.45) -- (2.4,-0.45) node[anchor=west,cPrim] {$a$ (tank)};
+\end{tikzpicture}

@@ -1,0 +1,39 @@
+% react_chain: a fission chain reaction with multiplication factor k = 3 (Vol III Ch 4, fig:react-chain)
+% Generation 0: one neutron causes one fission; each fission frees three
+% neutrons, each of which causes a fission in the next generation, so the
+% number of fissions in generation n is k^n = 1, 3, 9, ...  One neutron of
+% generation 2 is drawn escaping (dashed): in a real assembly leakage and
+% non-fission capture remove neutrons, which is why k is less than the 2.4
+% neutrons released per fission.  Uranium-235 nuclei are amber, fragments
+% grey, neutron paths forest (they are moving particles).
+\begin{tikzpicture}[x=1cm,y=1cm,
+    U/.style={circle,ball color=cAmber,minimum size=5mm,inner sep=0pt},
+    F/.style={circle,fill=cGrey,draw=cSteel,hair line,minimum size=2.6mm,inner sep=0pt},
+    npath/.style={-smallhead,thin line,cFor}]
+  \node[anchor=east,cFor] (n0) at (-0.5,0) {$n$};
+  \node[U] (u0) at (0,0) {};
+  \draw[npath] (n0) -- (u0);
+  \node[F] at (0.65,0.32) {}; \node[F] at (0.65,-0.32) {};
+  \foreach \y/\i in {1.6/a,0/b,-1.6/c}{
+    \node[U] (u\i) at (2.4,\y) {};
+    \draw[npath] (0.9,0) -- (u\i);
+    \node[F] at (3.05,\y+0.3) {}; \node[F] at (3.05,\y-0.3) {};
+    \foreach \dy in {0.5,0,-0.5}{
+      \node[U,minimum size=4mm] at (4.9,\y+\dy) {};
+      \draw[npath] (3.3,\y) -- (4.68,\y+\dy);}
+  }
+  \draw[npath,dash pattern=on 2pt off 1.5pt] (3.3,1.6) -- (4.5,2.55)
+     node[anchor=west,text=cInk] {escapes};
+  \node[align=center] at (0,-2.65) {generation 0\\1 fission};
+  \node[align=center] at (2.4,-2.65) {generation 1\\3 fissions};
+  \node[align=center] at (4.9,-2.65) {generation 2\\9 fissions};
+  \node[anchor=west] at (5.7,0.35) {$\cdots$ after $n$ generations,};
+  \node[anchor=west] at (5.7,-0.2) {$k^n$ fissions per generation};
+  % key
+  \node[U,minimum size=3.5mm] at (5.95,-1.15) {};
+  \node[anchor=west] at (6.15,-1.15) {$\iso{235}{U}$};
+  \node[F] at (7.3,-1.15) {};
+  \node[anchor=west] at (7.45,-1.15) {fragment};
+  \draw[npath] (5.8,-1.7) -- (6.25,-1.7);
+  \node[anchor=west] at (6.3,-1.7) {neutron};
+\end{tikzpicture}

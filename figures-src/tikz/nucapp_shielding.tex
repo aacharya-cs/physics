@@ -1,0 +1,37 @@
+% nucapp_shielding: two ways to cut the dose from a gamma source (Vol III Ch 5, fig:nucapp-shielding)
+% Left:  narrow-beam attenuation, I/I0 = e^{-mu x} = 2^{-x/x_{1/2}}, x_{1/2} = ln2/mu;
+%        dots at 1..4 half-value layers (1/2, 1/4, 1/8, 1/16).
+% Right: point source, dose rate proportional to 1/r^2 (same photons spread over 4 pi r^2);
+%        relative to the rate at 1 m: 1 at 1 m, 1/4 at 2 m, 1/16 at 4 m.
+% (Source data: figs.py, fig 11.)
+\begin{tikzpicture}
+\begin{groupplot}[bookplot,
+    group style={group size=2 by 1, horizontal sep=19mm},
+    width=7.2cm, height=5.0cm]
+  % shielding
+  \nextgroupplot[xmin=0, xmax=6.3, ymin=0, ymax=1.12, domain=0:6,
+      xlabel={absorber thickness, $x/x_{1/2}$}, ylabel={$I/I_0$},
+      ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,yshift=2pt},
+      xtick={1,2,3,4,5,6},
+      ytick={0.25,0.5,1}, yticklabels={$\frac14$,$\frac12$,$1$}]
+  \addplot[cPrim] {2^(-x)};
+  \foreach \n in {1,2,3,4} {
+    \edef\temp{\noexpand\draw[guide] (axis cs:\n,0) -- (axis cs:\n,{2^(-\n)});
+               \noexpand\node[dot,cPrim] at (axis cs:\n,{2^(-\n)}) {};}\temp }
+  \node[cPrim,anchor=south west] at (axis cs:1.15,0.55) {$I=I_0\,2^{-x/x_{1/2}}=I_0e^{-\mu x}$};
+  % distance
+  \nextgroupplot[xmin=0.4, xmax=4.3, ymin=0, ymax=4.3, domain=0.5:4,
+      xlabel={distance from source, $r$ (\si{m})},
+      ylabel={dose rate (relative to \SI{1}{m})},
+      ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,yshift=2pt},
+      xtick={1,2,3,4}, ytick={1,2,3,4}]
+  \addplot[cPrim] {1/x^2};
+  \node[dot,cPrim] at (axis cs:1,1) {};
+  \node[dot,cPrim] at (axis cs:2,0.25) {};
+  \node[dot,cPrim] at (axis cs:4,0.0625) {};
+  \node[cPrim,anchor=south west] at (axis cs:1.03,1.0) {$1$};
+  \node[cPrim,anchor=south west] at (axis cs:2.0,0.27) {$\frac14$};
+  \node[cPrim,anchor=south] at (axis cs:4,0.1) {$\frac1{16}$};
+  \node[cPrim,anchor=west] at (axis cs:1.5,2.6) {rate $\propto 1/r^2$};
+\end{groupplot}
+\end{tikzpicture}

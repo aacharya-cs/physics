@@ -1,0 +1,48 @@
+% thermo_equivalence: why the Clausius and Kelvin-Planck statements stand or fall together
+% (Vol II Ch 4, fig:thermo-equivalence).  All Q and W are magnitudes per cycle.
+% (a) A forbidden device X moves Q_c from cold to hot with no work (violates Clausius).
+%     Pair it with an ordinary engine that takes Q_h, delivers W = Q_h - Q_c and rejects Q_c.
+%     Net: the cold reservoir is untouched; heat Q_h - Q_c from the hot reservoir becomes W
+%     entirely.  That violates Kelvin-Planck.
+% (b) A forbidden engine Y turns heat Q from the hot reservoir entirely into work W = Q
+%     (violates Kelvin-Planck).  Let W drive an ordinary refrigerator, which takes Q_c from
+%     the cold reservoir and delivers Q_c + W to the hot one.  Net: Q_c moves from cold to
+%     hot with no other effect.  That violates Clausius.
+% Colours as in thermo_engine (heat accent, work plum); forbidden devices drawn 
+% with a dashed outline so they read as hypothetical.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    dev/.style={body,rounded corners=3pt,minimum width=1.8cm,minimum height=1.0cm,align=center},
+    forbidden/.style={dev,fill=white,draw=cInk,dash pattern=on 3pt off 2pt},
+    comp/.style={cGrey,thin line,dash pattern=on 4pt off 2pt,rounded corners=4pt}]
+  % ---------------- (a) ----------------
+  \begin{scope}
+    \draw[cSteel,thin line,fill=cAmber!55] (-3.1,2.0) rectangle (3.1,2.65);
+    \node at (0,2.325) {hot reservoir, $T_h$};
+    \draw[cSteel,thin line,fill=cEarth] (-3.1,-2.65) rectangle (3.1,-2.0);
+    \node at (0,-2.325) {cold reservoir, $T_c$};
+    \draw[comp] (-2.85,-0.8) rectangle (2.85,0.8);
+    \node[forbidden] (X) at (-1.45,0) {$X$\\no work};
+    \node[dev] (E) at (1.05,0) {engine};
+    \draw[vector,cAcc] (-1.45,-2.0) -- (X.south) node[midway,anchor=west,xshift=1pt] {$Q_c$};
+    \draw[vector,cAcc] (X.north) -- (-1.45,2.0) node[midway,anchor=west,xshift=1pt] {$Q_c$};
+    \draw[vector,cAcc] (1.05,2.0) -- (E.north) node[midway,anchor=west,xshift=1pt] {$Q_h$};
+    \draw[vector,cAcc] (E.south) -- (1.05,-2.0) node[midway,anchor=west,xshift=1pt] {$Q_c$};
+    \draw[vector,cPlum] (E.east) -- ++(1.2,0) node[anchor=west,inner sep=2pt] {$W$};
+    \node[anchor=north] at (0,-2.8) {(a) Clausius broken $\Rightarrow$ Kelvin--Planck broken};
+  \end{scope}
+  % ---------------- (b) ----------------
+  \begin{scope}[xshift=7.6cm]
+    \draw[cSteel,thin line,fill=cAmber!55] (-3.1,2.0) rectangle (3.1,2.65);
+    \node at (0,2.325) {hot reservoir, $T_h$};
+    \draw[cSteel,thin line,fill=cEarth] (-3.1,-2.65) rectangle (3.1,-2.0);
+    \node at (0,-2.325) {cold reservoir, $T_c$};
+    \draw[comp] (-2.85,-0.8) rectangle (2.85,0.8);
+    \node[forbidden] (Y) at (-1.8,0) {$Y$\\no $Q_c$};
+    \node[dev,minimum width=2.1cm] (F) at (1.6,0) {refrigerator};
+    \draw[vector,cAcc] (-1.8,2.0) -- (Y.north) node[midway,anchor=west,xshift=1pt] {$Q$};
+    \draw[vector,cPlum] (Y.east) -- (F.west) node[midway,anchor=south] {$W=Q$};
+    \draw[vector,cAcc] (1.6,-2.0) -- (F.south) node[midway,anchor=west,xshift=1pt] {$Q_c$};
+    \draw[vector,cAcc] (F.north) -- (1.6,2.0) node[midway,anchor=west,xshift=1pt] {$Q_c+Q$};
+    \node[anchor=north] at (0,-2.8) {(b) Kelvin--Planck broken $\Rightarrow$ Clausius broken};
+  \end{scope}
+\end{tikzpicture}

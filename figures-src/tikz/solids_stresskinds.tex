@@ -1,0 +1,61 @@
+% solids_stresskinds: the three kinds of stress and strain (Vol II Ch 1, fig:solids-stresskinds)
+% Deformations are exaggerated about a hundredfold so that they can be seen; for a metal
+% the strains are below about 0.001.
+% Left (tensile): equal and opposite forces F normal to the end faces stretch the block from
+%   l to l + dl.  Its width shrinks slightly as it lengthens (Poisson contraction, Sec. on nu).
+%   Longitudinal strain dl/l.
+% Centre (shear): a tangential force F on the top face, with the equal and opposite
+%   tangential force from the fixed base, slides the top through dx relative to the base.
+%   Shear strain = angle theta, and tan(theta) = dx/h, so theta ~ dx/h for small angles.
+% Right (volume): an equal pressure increase dP on every face shrinks the cube; strain dV/V.
+% Dashed outlines are the undeformed shapes.  Forces crimson (book legend); dimensions steel.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % ------------------------------------------------------------ tensile
+  \begin{scope}
+    % undeformed outline (width 1.1, height 2.0) and stretched block (width 1.0, height 2.4)
+    \draw[guide] (-0.55,0) rectangle (0.55,2.0);
+    \draw[body] (-0.5,-0.2) rectangle (0.5,2.2);
+    \draw[force] (0,2.2) -- (0,2.95) node[anchor=west,inner sep=2pt] {$F$};
+    \draw[force] (0,-0.2) -- (0,-0.95) node[anchor=west,inner sep=2pt] {$F$};
+    % dimensions: natural length and extension (shared equally between the two ends)
+    \draw[dim] (-1.0,0) -- node[anchor=east,cSteel] {$\ell$} (-1.0,2.0);
+    \draw[dimtick] (-1.1,0) -- (-0.55,0) (-1.1,2.0) -- (-0.55,2.0);
+    \draw[dim] (0.95,-0.2) -- node[anchor=west,cSteel] {$\ell+\Delta\ell$} (0.95,2.2);
+    \draw[dimtick] (0.5,2.2) -- (1.05,2.2) (0.5,-0.2) -- (1.05,-0.2);
+    \node[anchor=north,align=center] at (0,-1.25) {tensile\\ strain $\Delta\ell/\ell$};
+  \end{scope}
+  % ------------------------------------------------------------ shear
+  \begin{scope}[xshift=4.3cm]
+    \def\h{1.9}\def\dx{0.42}
+    % fixed base
+    \path[ground,draw=none] (-1.25,-0.16) rectangle (1.65,0);
+    \draw[outline] (-1.25,0) -- (1.65,0);
+    % undeformed and sheared block
+    \draw[guide] (-0.95,0) rectangle (0.95,\h);
+    \draw[body] (-0.95,0) -- (0.95,0) -- (0.95+\dx,\h) -- (-0.95+\dx,\h) -- cycle;
+    % tangential forces: applied on top, equal and opposite from the base
+    \draw[force] (-0.75+\dx,\h+0.18) -- (0.95+\dx,\h+0.18) node[anchor=west,inner sep=2pt] {$F$};
+    \draw[force] (0.75,-0.42) -- (-0.95,-0.42) node[anchor=north west,inner sep=2pt,xshift=-4pt,yshift=-1pt] {$F$ (from the base)};
+    % the shear angle at the bottom left corner
+    \draw[angle arc] (-0.95,0.75) arc[start angle=90,end angle={90-atan(\dx/\h)},radius=0.75];
+    \node at (-0.70,1.02) {$\theta$};
+    % dimensions
+    \draw[dim] (-0.95,\h+0.62) -- node[anchor=south,cSteel] {$\Delta x$} (-0.95+\dx,\h+0.62);
+    \draw[dimtick] (-0.95,\h) -- (-0.95,\h+0.72) (-0.95+\dx,\h) -- (-0.95+\dx,\h+0.72);
+    \draw[dim] (1.75,0) -- node[anchor=west,cSteel] {$h$} (1.75,\h);
+    \node[anchor=north,align=center] at (0.2,-1.25) {shear\\ strain $\theta\approx\Delta x/h$};
+  \end{scope}
+  % ------------------------------------------------------------ volume
+  \begin{scope}[xshift=9.5cm,yshift=1.0cm]
+    \draw[guide] (-0.95,-0.95) rectangle (0.95,0.95);
+    \draw[body] (-0.8,-0.8) rectangle (0.8,0.8);
+    % pressure acts normal to each face: two arrows per face
+    \foreach \a in {0,90,180,270}{
+      \foreach \o in {-0.4,0.4}{
+        \draw[force,rotate=\a] (1.6,\o) -- (0.85,\o);
+      }
+    }
+    \node[cCrim,anchor=south,inner sep=2pt] at (0,1.62) {$\Delta P$ on every face};
+    \node[anchor=north,align=center] at (0,-2.25) {volume\\ strain $\Delta V/V$};
+  \end{scope}
+\end{tikzpicture}

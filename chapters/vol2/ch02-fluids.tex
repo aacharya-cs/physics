@@ -1,0 +1,1444 @@
+\ncertchapter{2}{Mechanical Properties of Fluids}\chlabel{ch:fluids}
+% ================================================================
+
+A ship made of steel, a material nearly eight times as dense as water, floats; a steel nail sinks. An
+airliner of several hundred tonnes climbs into the sky and stays there. A dam must be built far thicker at
+its base than at its top. A straw lets you drink, a syringe delivers medicine, and your heart pushes blood
+through thousands of kilometres of vessels. Every one of these is fluid mechanics, the physics of liquids
+and gases.
+
+\chref{ch:solids} described a solid by how it resists being deformed: a stress produces a strain, and the
+ratio is a modulus. One of those moduli, the shear modulus $G$, measures resistance to a sideways
+(shearing) deformation. A \textbf{fluid} is a substance whose shear modulus is zero: at rest it cannot
+resist a shearing force at all, however small, so it \emph{flows} and takes the shape of its container.
+That single difference reshapes the mechanics. A fluid at rest can only push, and only perpendicular to a
+surface, so the one quantity needed to describe its forces is pressure. A fluid in motion carries energy
+from place to place, and the work--energy theorem of \chref{ch:energy}, applied to a moving parcel of fluid,
+becomes Bernoulli's equation.
+
+The chapter follows that order: fluids at rest (pressure, Pascal's law, buoyancy), then ideal fluids in
+motion (continuity and Bernoulli), and finally the two properties that the ideal model leaves out,
+viscosity and surface tension. Each model has limits, and they are stated where the model is built: liquids
+are treated as incompressible, $g$ as uniform, and flows as steady until we say otherwise.
+
+\begin{motivbox}{Why fluid mechanics matters}
+Three ideas do most of the work in this chapter.
+\begin{itemize}
+\item \textbf{Pressure and Pascal's law build the machines that lift cars.} Because an enclosed liquid
+transmits a change of pressure to every part of itself, a small force on a small piston becomes a large
+force on a large one: the hydraulic jack, the car brake, the excavator arm and the dentist's chair all use
+this one principle. The same law $P=P_0+\rho gh$ tells you why a dam is thick at the base and why divers
+feel the water on their ears.
+\item \textbf{Buoyancy decides what floats.} Archimedes' principle is why a steel ship floats and a steel
+nail sinks, why a hot-air balloon rises, how a submarine chooses its depth, and how a hydrometer measures
+the strength of battery acid.
+\item \textbf{Bernoulli's equation links speed and pressure.} One energy equation (where a fluid moves
+faster, its pressure is lower) accounts for the spray of a perfume atomiser, the reading of a Venturi
+flow meter, the speed of water from a hole in a tank, and the pressure difference across an aircraft wing.
+\end{itemize}
+\end{motivbox}
+
+\section{Pressure in a Fluid}\label{sec:fluid-pressure}
+
+Start with a fluid at rest. Because it cannot resist shear, any force it exerts on a surface must be
+\emph{perpendicular} to that surface: a sideways component would be a shear, and the fluid would flow under
+the reaction to it. So the force a resting fluid exerts on a small flat area $A$ is fixed by one number, the
+force per unit area, whatever the direction the area faces.
+
+\begin{defbox}{Pressure}
+The \textbf{pressure} $P$ at a point in a fluid is the magnitude of the normal force per unit area on a
+small surface placed at that point:
+\[
+P=\frac{F_\perp}{A}\qquad\big(\text{unit: }\SI{1}{Pa}=\SI{1}{N/m^2}\big).
+\]
+Pressure is a scalar: at a point in a fluid at rest it has the same value whichever way the surface faces
+(derived below), and the force it produces on any surface points along the surface's normal, into it.
+Other units in use: $\SI{1}{atm}=\SI{1.013e5}{Pa}$ (average sea-level air pressure, written $P_0$),
+$\SI{1}{bar}=\SI{e5}{Pa}$, and $\SI{1}{mm}$ of mercury, about \SI{133}{Pa}. The pressure measured
+relative to the atmosphere, $P-P_0$, is called the \textbf{gauge pressure}; $P$ itself is the
+\textbf{absolute pressure}.
+\end{defbox}
+
+The claim that pressure has no direction is not obvious, and it is worth proving, because every result
+of the chapter leans on it.
+
+\begin{derivbox}{Pressure at a point is the same in every direction}
+\stepn{1} \textbf{Isolate a tiny wedge of fluid.} Take a small prism of resting fluid whose cross-section is
+a right-angled triangle: a vertical face of area $A_x$, a horizontal face of area $A_y$, and a slanted face
+of area $A$ at angle $\theta$ to the horizontal. Geometry gives $A_x=A\sin\theta$ and $A_y=A\cos\theta$.
+Let the pressures on the three faces be $P_x$, $P_y$ and $P$; each pushes normally inwards.
+
+\stepn{2} \textbf{Balance horizontally.} The slanted face's push has a horizontal component
+$PA\sin\theta$; the vertical face pushes the other way with $P_xA_x=P_xA\sin\theta$. Gravity has no
+horizontal part, and the fluid is at rest (Newton's first law, \chref{ch:newton}), so $P_x=P$.
+
+\stepn{3} \textbf{Balance vertically.} The horizontal face pushes up with $P_yA\cos\theta$; the slanted face
+pushes down with $PA\cos\theta$; the wedge's weight is $\rho g\times(\text{volume})$, where $\rho$ is the
+fluid's density (\si{kg/m^3}) and $g$ the acceleration due to gravity. The areas scale as the square of
+the wedge's size but the volume as the cube, so as the wedge shrinks to a point the weight becomes
+negligible beside the surface forces, leaving $P_y=P$.
+
+\stepn{4} \textbf{Conclude.} The angle $\theta$ was arbitrary, so $P_x=P_y=P$ for every orientation: at a
+point, a fluid at rest pushes equally in all directions.
+\end{derivbox}
+
+\inwords{A fluid at rest can only push, never pull or drag sideways, and at any one point it pushes equally
+hard in every direction. That is why a diver feels the water squeeze from all sides at once, not just from
+above.}
+
+The next question is how the pressure changes from point to point. Within one horizontal level it cannot
+change at all (a horizontal difference would push the fluid sideways), but it must grow with depth, because
+deeper fluid has more fluid above it to hold up.
+
+\begin{derivbox}{Pressure increases with depth: $P=P_0+\rho gh$}
+\stepn{1} \textbf{Choose a column.} In a liquid of uniform density $\rho$ whose free surface is open to the
+atmosphere (pressure $P_0$), isolate a vertical cylinder of cross-section $A$ reaching from the surface down
+to a depth $h$.
+
+\stepn{2} \textbf{List the forces on it.} The atmosphere pushes down on its top with $P_0A$. Its weight is
+$mg=\rho(Ah)g$, downwards. The liquid below pushes up on its base with $PA$, where $P$ is the pressure at
+depth $h$. The surrounding liquid also pushes on the curved side, but those pushes are horizontal and, at
+each depth, equal from opposite sides, so they cancel.
+
+\stepn{3} \textbf{Balance.} The column is at rest, so the vertical forces sum to zero:
+\[
+PA=P_0A+\rho Ahg\quad\Longrightarrow\quad\boxed{\;P=P_0+\rho gh\;}
+\]
+
+\stepn{4} \textbf{Read it.} Pressure grows linearly with depth. It depends on the vertical depth $h$ only,
+not on the width or shape of the container, and it is the same at every point of a horizontal level within
+one connected body of liquid. The gauge pressure at depth $h$ is $\rho gh$.
+\end{derivbox}
+
+\why{That the pressure depends only on \emph{depth}, not on the shape or amount of liquid, is the
+``hydrostatic paradox'': a thin tube of water and a whole lake press equally hard at the same depth. It is
+why a dam is built thick at the bottom, where $\rho gh$ is largest; why your ears hurt at the bottom of a
+pool; and why a water tower needs to be \emph{tall}, not large, to deliver pressure to a town.}
+
+\begin{trapbox}{the paradox of the base force}
+Three vessels of different shapes, with equal base areas $A$, are filled to the same depth $h$. The force
+on each base is the same, $\rho ghA$ (plus $P_0A$), even though the vessels hold different weights of
+liquid. There is no contradiction: in a vessel that widens upwards, the sloping walls carry part of the
+liquid's weight; in one that narrows upwards, the walls push \emph{down} on the liquid and add to the force
+on the base. The base force equals the liquid's weight only for straight vertical walls.
+\end{trapbox}
+
+The law $P=P_0+\rho gh$ also turns a column of liquid into a pressure gauge, which is how atmospheric
+pressure was first measured.
+
+\begin{exbox}{The mercury barometer}\label{ex:fluids-barometer}
+A long glass tube, closed at one end, is filled with mercury ($\rho=\SI{13600}{kg/m^3}$) and inverted into
+a dish of mercury. The column falls until its top is \SI{760}{mm} above the surface in the dish, leaving a
+near-vacuum above it. Find the atmospheric pressure ($g=\SI{9.8}{m/s^2}$).
+
+\stepn{1} The pressure at the top of the column is nearly zero (mercury vapour exerts only about
+\SI{0.2}{Pa}). Going down a depth $h=\SI{0.760}{m}$ adds $\rho gh$.
+
+\stepn{2} At the level of the dish's surface the column must have the pressure of the open surface beside
+it, which is $P_0$ (same level, same liquid). So
+$P_0=\rho gh=13600\times9.8\times0.760\approx\SI{1.013e5}{Pa}$.
+
+\medskip
+This is why \SI{1}{atm} is also called \SI{760}{mm} of mercury. A water barometer would need a column
+$13.6$ times taller, about \SI{10.3}{m}. \ans{$\approx\SI{1.013e5}{Pa}$}
+\end{exbox}
+
+Because pressure grows with depth, the force on a large vertical wall is not simply ``pressure times area'';
+the pressure must be added up strip by strip.
+
+\begin{exbox}{The force on a dam}\label{ex:fluids-dam}
+A vertical dam wall of width $w=\SI{100}{m}$ holds back water of depth $H=\SI{20}{m}$. Find the total force
+of the water on it, beyond what the atmosphere exerts on both faces ($g=\SI{9.8}{m/s^2}$).
+
+\stepn{1} A horizontal strip of the wall at depth $y$, of height $dy$, has area $w\,dy$ and feels gauge
+pressure $\rho gy$, so the force on it is $dF=\rho gy\,w\,dy$.
+
+\stepn{2} Add the strips from the surface to the base:
+\[
+F=\int_0^H\rho g w\,y\,dy=\tfrac12\rho gwH^2=\tfrac12(1000)(9.8)(100)(20)^2\approx\SI{1.96e8}{N}.
+\]
+
+\stepn{3} The result is the \emph{average} gauge pressure $\tfrac12\rho gH$ times the area $wH$, because the
+pressure rises linearly. Doubling the depth quadruples the force, and the push is concentrated low down:
+it acts, on balance, one third of the way up the wall. That is why dams are thickest at the base.
+\ans{$\approx\SI{2.0e8}{N}$}
+\end{exbox}
+
+\begin{remarkbox}{Where $P=P_0+\rho gh$ stops working}
+The derivation assumed a uniform density and a uniform $g$. Both are excellent for liquids over everyday
+depths, because a liquid is very hard to compress: at the bottom of the deepest ocean trench, about
+\SI{11}{km} down, water is compressed by only about $5\%$. Air is different. Its density is proportional to
+its pressure, so it thins with height and the pressure falls not linearly but exponentially, by a factor
+$e$ every \SI{8}{km} or so for an atmosphere at a uniform temperature (a first-order decay of the kind in
+\chref{ch:toolkit}, Section~\ref{sec:explog}; the gas law it needs, $PV=nRT$, comes in \chref{ch:thermal}, Section~\ref{sec:gaslaw}). Over a
+room or a building, though, the change in air pressure is tiny and the linear law is fine.
+\end{remarkbox}
+
+\section{Pascal's Law and the Hydraulic Press}\label{sec:pascal}
+
+The depth law contains a further consequence. In $P=P_0+\rho gh$ the pressure at depth $h$ is the surface
+pressure \emph{plus} a fixed amount. If the pressure at the surface is raised by $\Delta P$ (say, by
+pushing on a piston), then, provided the liquid does not compress, the depth term is unchanged, and the
+pressure at every point rises by the same $\Delta P$.
+
+\begin{keybox}{Pascal's law}
+A change of pressure applied to an enclosed incompressible fluid is transmitted undiminished to every part
+of the fluid and to the walls of its container.
+\end{keybox}
+
+The most useful application multiplies force (Figure~\ref{fig:fluids-hydraulic}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_hydraulic}
+\figcaption{fig:fluids-hydraulic}{The hydraulic lift. The pistons sit at the same level of one liquid, so the
+pressure under each is the same, $P=F_1/A_1$. On the large piston that pressure gives the much larger
+force $F_2=PA_2$. When the small piston moves down $d_1$, the liquid it displaces spreads under the large
+piston, which rises only $d_2=d_1A_1/A_2$.}
+\end{figure}
+
+\begin{derivbox}{The hydraulic lift multiplies force, not energy}
+\stepn{1} A force $F_1$ on the small piston (area $A_1$) creates pressure $F_1/A_1$ beneath it. By Pascal's
+law, and because both pistons are at the same level, the same pressure acts under the large piston (area
+$A_2$).
+
+\stepn{2} The force on the large piston is therefore
+\[
+F_2=PA_2=F_1\,\frac{A_2}{A_1},
+\]
+larger than $F_1$ by the area ratio, which for circular pistons is the square of the ratio of their radii.
+
+\stepn{3} \textbf{Energy check.} The liquid is incompressible, so the volume swept by the small piston,
+$A_1d_1$, equals the volume gained under the large one, $A_2d_2$. The work put in is
+$F_1d_1=PA_1d_1$; the work delivered is $F_2d_2=PA_2d_2$. These are equal, so the lift gains force at the
+cost of distance, exactly as a lever does, and creates no energy.
+\end{derivbox}
+
+\begin{exbox}{Lifting a car}\label{ex:fluids-carlift}
+A garage lift raises a \SI{1500}{kg} car on a piston of radius \SI{15}{cm}. The small piston has radius
+\SI{1.5}{cm}. What force must be applied to the small piston, and how far does the car rise when the small
+piston is pushed down \SI{20}{cm}? ($g=\SI{9.8}{m/s^2}$; ignore the weights of the pistons.)
+
+\stepn{1} Area ratio: $A_2/A_1=(15/1.5)^2=100$.
+
+\stepn{2} $F_1=F_2\,A_1/A_2=(1500\times9.8)/100\approx\SI{147}{N}$, about the weight of a \SI{15}{kg} bag.
+
+\stepn{3} $d_2=d_1A_1/A_2=\SI{20}{cm}/100=\SI{2}{mm}$. To raise the car \SI{20}{cm} the small piston must
+be pumped through \SI{20}{m} in total, which is why a jack has a valve and many short strokes.
+\ans{\SI{147}{N}; \SI{2}{mm}}
+\end{exbox}
+
+\begin{trapbox}{Pascal's law needs an incompressible fluid}
+If air gets into a car's brake lines, part of the pedal's travel is spent compressing the bubble instead
+of moving the brake pistons, and the pedal feels ``spongy''. The law holds for liquids because they barely
+compress; in a gas a pressure change is still transmitted, but only after the gas has been squeezed.
+\end{trapbox}
+
+\section{Archimedes' Principle and Floating}\label{sec:archimedes}
+
+Why do things feel lighter in water, and why does a steel ship float? Pressure increases with depth, so the
+fluid pushes up on the bottom of an immersed body harder than it pushes down on the top. The net upward
+push is the \textbf{buoyant force}, $F_B$ (Figure~\ref{fig:fluids-archimedes}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_archimedes}
+\figcaption{fig:fluids-archimedes}{Why a submerged body is pushed up. The pressure pushes are drawn to scale:
+the push on the deeper bottom face exceeds the push on the top, while the side pushes at each depth are
+equal and opposite and cancel. What remains is the buoyant force $F_B$, which equals the weight of the
+fluid the block displaces.}
+\end{figure}
+
+\begin{derivbox}{Archimedes' principle}
+\stepn{1} \textbf{A block first.} A block of face area $A$ and height $\ell$ is submerged with its top at depth
+$h$ in a fluid of density $\rho$. The fluid pushes down on the top with $(P_0+\rho gh)A$ and up on the
+bottom with $(P_0+\rho g(h+\ell))A$. The side pushes cancel.
+
+\stepn{2} The net upward force is
+\[
+F_B=\rho g\ell A=\rho gV,
+\]
+where $V=\ell A$ is the block's volume. Since $\rho V$ is the mass of fluid that would fill that volume,
+$F_B$ is the weight of the displaced fluid. The depth $h$ has cancelled.
+
+\stepn{3} \textbf{Any shape.} Now imagine the body removed and its place taken by fluid of the same shape.
+That fluid is at rest, so the pressure forces of the surroundings on its surface must exactly hold up its
+weight, $\rho Vg$, and they act along a line through its centre of mass. The surrounding fluid cannot know
+what fills the hole, so it pushes on the real body with exactly the same forces. Hence, for a body of any
+shape, fully or partly immersed:
+\[
+\boxed{\;F_B=\text{weight of the fluid displaced}=\rho V_{\text{disp}}\,g\;}
+\]
+acting through the centre of mass of the displaced fluid (the \textbf{centre of buoyancy}).
+\end{derivbox}
+
+\begin{trapbox}{what buoyancy does not depend on}
+For a liquid of uniform density, the buoyant force does not depend on how deep the body is, nor on what it
+is made of: a lead ball and an aluminium ball of the same volume feel the same buoyant force. Whether the
+body sinks depends on how that force compares with its weight, which is where its density enters.
+\end{trapbox}
+
+\begin{keybox}{The law of floating}
+A body floats at rest when the buoyant force balances its weight. It then sinks until it has displaced its
+\emph{own weight} of fluid, so for a body of average density $\rho_{\text{body}}$ in a fluid of density
+$\rho_{\text{fluid}}$ the submerged fraction is
+\[
+\frac{V_{\text{sub}}}{V_{\text{body}}}=\frac{\rho_{\text{body}}}{\rho_{\text{fluid}}}.
+\]
+A body whose average density is greater than the fluid's cannot displace enough fluid and sinks.
+\end{keybox}
+
+\why{Shaped into a hull, a ship's steel encloses so much air that its \emph{average} density is less than
+water's, so it floats. Ice ($\rho\approx\SI{917}{kg/m^3}$) floats with about $92\%$ of its volume below the
+water, which is why the visible part of an iceberg is so misleading. You float more easily in sea water
+than in a pool because sea water is denser. A submarine dives and surfaces by flooding and emptying ballast
+tanks, changing its average density; a fish's swim bladder does the same job.}
+
+\begin{exbox}{The apparent weight of a sunken block}\label{ex:fluids-ironblock}
+A block of iron of volume \SI{1.0}{\litre} ($\rho_{\text{Fe}}=\SI{7800}{kg/m^3}$) hangs from a spring
+balance, fully submerged in water. What does the balance read? ($g=\SI{9.8}{m/s^2}$.)
+
+\stepn{1} True weight: $W=\rho_{\text{Fe}}Vg=7800\times10^{-3}\times9.8\approx\SI{76.4}{N}$.
+
+\stepn{2} Buoyant force $=$ weight of displaced water $=1000\times10^{-3}\times9.8=\SI{9.8}{N}$.
+
+\stepn{3} The balance supports the rest: $W-F_B=76.4-9.8\approx\SI{66.6}{N}$.
+
+\medskip
+The block ``loses'' exactly the weight of the water it displaces. The ratio of true weight to loss of
+weight, $76.4/9.8=7.8$, is the block's density relative to water, which is how Archimedes could test a crown
+without melting it. \ans{$\approx\SI{66.6}{N}$}
+\end{exbox}
+
+\begin{exbox}{Does the glass overflow when the ice melts?}\label{ex:fluids-ice}
+A glass is filled to the brim with water, with an ice cube floating in it. When the ice melts, does the
+water overflow, stay level, or fall?
+
+\stepn{1} While floating, the ice displaces its own weight of water, that is, a volume of water whose mass
+equals the mass $m$ of the ice.
+
+\stepn{2} When it melts, the ice becomes water of the same mass $m$, which occupies exactly the volume it was
+displacing. The level does not change.
+
+\stepn{3} If the cube had a pebble frozen inside, the floating ice would displace the pebble's weight of
+water, a volume larger than the pebble's own. After melting the pebble sinks and displaces only its own
+volume, so the level \emph{falls}. Sea ice melting does not raise sea level for the reason in Step 2
+(apart from the small difference between salt and fresh water); ice sliding off land into the sea does.
+\ans{the level is unchanged}
+\end{exbox}
+
+\begin{remarkbox}{The limits of Archimedes' principle}
+The principle needs the fluid to press on the body from below. A block pressed flat against the bottom of a
+tank, with no water underneath it, feels no upward push at all, only the downward push on its top; this is
+how suction cups and stuck ships' hulls hold. The principle also assumes the fluid is at rest in a uniform
+field: in a lift accelerating upwards with acceleration $a$ both the body's apparent weight and the buoyant
+force scale with $g+a$ (the pseudo-force of \chref{ch:circdyn} acts on the displaced fluid too), so a
+floating body floats at the same depth.
+\end{remarkbox}
+
+\section{Streamline Flow and the Equation of Continuity}\label{sec:continuity}
+
+Now let the fluid move. A real flow can be fiendishly complicated, so we first build an \textbf{ideal
+fluid}, the simplest model that still captures most everyday flows, and say exactly what it assumes.
+
+\begin{defbox}{Steady flow, streamlines and the ideal fluid}
+A flow is \textbf{steady} if the velocity of the fluid at each fixed point does not change with time
+(different points may have different velocities). In steady flow each particle of fluid follows a fixed
+path, a \textbf{streamline}; the velocity at any point is along the tangent to the streamline there, so two
+streamlines never cross. A bundle of streamlines forms a \textbf{tube of flow}, whose walls fluid never
+crosses. Steady, smooth flow in layers is called \textbf{laminar}; flow with irregular, ever-changing eddies
+is \textbf{turbulent}. An \textbf{ideal fluid} is incompressible (constant density) and non-viscous (no
+internal friction), and its flow is steady.
+\end{defbox}
+
+The first law of an ideal flow is conservation of mass, and it has an immediate, useful consequence.
+
+\begin{derivbox}{The equation of continuity}
+\stepn{1} Consider a tube of flow (or a pipe) whose cross-section changes from $A_1$, where the speed is $v_1$,
+to $A_2$, where the speed is $v_2$. In a short time $dt$ the fluid at the first section advances
+$v_1\,dt$, so a volume $A_1v_1\,dt$ crosses it; similarly $A_2v_2\,dt$ crosses the second.
+
+\stepn{2} No fluid crosses the walls, the flow is steady (nothing accumulates between the sections), and
+the density is constant (the fluid cannot be squeezed to fit). So the two volumes are equal:
+\[
+\boxed{\;A_1v_1=A_2v_2\;}
+\]
+The product $Av$ is the \textbf{volume flow rate} (\si{m^3/s}), the same at every section.
+
+\stepn{3} Where the pipe narrows, the fluid speeds up; halve the area and the speed doubles.
+\end{derivbox}
+
+\inwords{Squeeze the end of a garden hose and the water jets out faster: the same volume each second through
+a smaller opening must move faster. A river runs fast through a narrow gorge and slowly across a wide plain
+for the same reason.}
+
+\begin{exbox}{Why a stream of water from a tap narrows}\label{ex:fluids-tap}
+Water leaves a tap of radius \SI{5.0}{mm} at \SI{1.0}{m/s} and falls freely. Find the radius of the stream
+\SI{20}{cm} below the tap ($g=\SI{9.8}{m/s^2}$).
+
+\stepn{1} Each parcel of water is in free fall, so (\chref{ch:straightline}) its speed after falling
+$y=\SI{0.20}{m}$ is $v=\sqrt{v_0^2+2gy}=\sqrt{1+3.92}\approx\SI{2.22}{m/s}$.
+
+\stepn{2} Continuity: $\pi r^2v=\pi r_0^2v_0$, so
+$r=r_0\sqrt{v_0/v}=5.0\times\sqrt{1.0/2.22}\approx\SI{3.4}{mm}$.
+
+\medskip
+The stream thins because it speeds up. Further down it eventually breaks into drops, which is surface
+tension at work (Section~\ref{sec:surface-tension}). \ans{$\approx\SI{3.4}{mm}$}
+\end{exbox}
+
+\begin{trapbox}{continuity is about volume, which needs constant density}
+$A_1v_1=A_2v_2$ conserves \emph{volume}, so it needs an incompressible fluid. Liquids qualify. So, perhaps
+surprisingly, does air at speeds well below the speed of sound (below about a third of it, roughly
+\SI{100}{m/s}), because the pressure changes in such flows are too small to change its density appreciably.
+For a compressible flow the conserved quantity is the mass flow rate, $\rho Av$.
+\end{trapbox}
+
+\section{Bernoulli's Equation}\label{sec:bernoulli}
+
+Continuity says a fluid speeds up in a narrow section. Speeding up a parcel of fluid needs a net force on
+it, and in a fluid that force can only come from a difference of pressure (and from gravity). So the
+pressure must be lower where the fluid moves faster. Making this quantitative is a matter of energy
+accounting: apply the work--energy theorem of \chref{ch:energy}, $W_{\text{net}}=\Delta K$, to a slug of
+moving fluid (Figure~\ref{fig:fluids-bernoulli}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_bernoulli}
+\figcaption{fig:fluids-bernoulli}{A tube of flow for the work--energy derivation. Follow the fluid between the
+two ends. In a short time its back face advances $dx_1$ and its front face $dx_2$, so the net effect is to
+move the shaded volume $dV=A_1\,dx_1=A_2\,dx_2$ from the wide, low, slow inlet to the narrow, high, fast
+outlet. The fluid behind pushes it forward with $P_1A_1$; the fluid ahead pushes back with $P_2A_2$.}
+\end{figure}
+
+\begin{derivbox}{Bernoulli's equation from the work--energy theorem}
+\stepn{1} \textbf{Set up the two ends.} The flow is ideal (steady, incompressible, non-viscous). At the inlet
+the area is $A_1$, the speed $v_1$, the pressure $P_1$ and the height $h_1$ above a chosen datum; at the
+outlet, $A_2$, $v_2$, $P_2$, $h_2$. In a short time the back face of the slug advances $dx_1$ and its front
+face $dx_2$, with $dV=A_1\,dx_1=A_2\,dx_2$ by continuity; the mass of that volume is $dm=\rho\,dV$.
+
+\stepn{2} \textbf{Work done by pressure.} The fluid behind pushes the slug forward with force $P_1A_1$ through
+$dx_1$, doing work $P_1A_1\,dx_1=P_1\,dV$. The fluid ahead pushes back with $P_2A_2$ through $dx_2$, doing
+negative work $-P_2\,dV$. The walls push perpendicular to the flow and do no work. Net pressure work:
+\[
+W_{\text{pressure}}=(P_1-P_2)\,dV.
+\]
+
+\stepn{3} \textbf{Work done by gravity.} Between the two instants, the fluid in the middle of the tube is
+unchanged (the flow is steady); the net effect is that the mass $dm$ has moved from height $h_1$ to $h_2$.
+Gravity therefore does work
+\[
+W_{\text{gravity}}=-dm\,g\,(h_2-h_1)=-\rho\,dV\,g\,(h_2-h_1).
+\]
+
+\stepn{4} \textbf{Change of kinetic energy.} By the same argument, the kinetic energy changes as if $dm$ had
+gone from speed $v_1$ to $v_2$: $\Delta K=\tfrac12\rho\,dV\,(v_2^2-v_1^2)$. With no viscous friction there is
+no other work, and $W_{\text{pressure}}+W_{\text{gravity}}=\Delta K$ reads
+\[
+(P_1-P_2)\,dV-\rho\,dV\,g\,(h_2-h_1)=\tfrac12\rho\,dV\,(v_2^2-v_1^2).
+\]
+
+\stepn{5} \textbf{Divide by $dV$ and collect the ends.}
+\[
+\boxed{\;P_1+\tfrac12\rho v_1^2+\rho gh_1=P_2+\tfrac12\rho v_2^2+\rho gh_2\;}
+\]
+The two ends were arbitrary, so the combination has the same value all along the tube of flow.
+\end{derivbox}
+
+\begin{keybox}{Bernoulli's equation}
+Along a streamline of a steady flow of an incompressible, non-viscous fluid,
+\[
+P+\tfrac12\rho v^2+\rho gh=\text{constant}.
+\]
+Each term is an energy per unit volume (\si{J/m^3}, the same unit as \si{Pa}): $\tfrac12\rho v^2$ is the
+kinetic energy per unit volume, $\rho gh$ the gravitational potential energy per unit volume, and $P$ the
+work per unit volume that the pressure can do in pushing the fluid along. For fluid at rest ($v=0$) the
+equation reduces to $P+\rho gh=\text{constant}$, the depth law of Section~\ref{sec:fluid-pressure}.
+\end{keybox}
+
+\inwords{Bernoulli's equation is energy conservation for a flowing fluid. If a fluid speeds up at the same
+height, its pressure must drop to pay for the extra kinetic energy; if it rises at the same speed, its
+pressure drops to pay for the extra potential energy. Speed and height are bought with pressure.}
+
+\begin{trapbox}{low pressure is not suction}
+``Fast flow means low pressure'' does not mean the moving fluid pulls on anything. Pressure is always a
+push. A region of fast flow simply pushes \emph{less} than the slower fluid around it, and the
+\emph{difference} of the pushes is the net force. The cause and effect also run the other way: in a pipe
+it is the pressure difference that accelerates the fluid into the narrow section.
+\end{trapbox}
+
+\subsection{Torricelli's law}
+
+The first application asks how fast water leaves a hole in a tank (Figure~\ref{fig:fluids-torricelli}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_torricelli}
+\figcaption{fig:fluids-torricelli}{Torricelli's law. Point 1 on the free surface and point 2 in the jet just
+outside the hole lie on one streamline (dashed). Both are open to the air, so both are at pressure $P_0$;
+the surface barely moves, so $v_1\approx0$. Bernoulli's equation turns the height $h$ into the jet speed
+$v=\sqrt{2gh}$, after which the water is a projectile and lands a distance $2\sqrt{hH}$ from the tank.}
+\end{figure}
+
+\begin{derivbox}{Torricelli's law: the speed of efflux}
+A wide tank of water has a small hole a depth $h$ below the free surface. Apply Bernoulli's equation between
+two well-chosen points on one streamline and evaluate its three terms at each.
+
+\stepn{1} \textbf{Choose the points.} Point~1 is on the free surface; point~2 is in the jet just outside the
+hole. Then
+\[
+P_1+\tfrac12\rho v_1^2+\rho gh_1=P_2+\tfrac12\rho v_2^2+\rho gh_2.
+\]
+
+\stepn{2} \textbf{Pressure terms.} The free surface and the emerging jet are both open to the atmosphere,
+so $P_1=P_2=P_0$, and these terms cancel. (The jet is a free stream surrounded by air; nothing confines it
+to push it above atmospheric pressure.)
+
+\stepn{3} \textbf{Kinetic terms.} By continuity, the surface falls at a speed smaller than the jet's by the
+ratio of the hole's area to the tank's, so for a wide tank $v_1\approx0$. At the hole the water leaves
+with the speed $v$ we want.
+
+\stepn{4} \textbf{Potential terms.} Measuring heights from the hole, $h_1=h$ and $h_2=0$.
+
+\stepn{5} \textbf{Combine.}
+\[
+\cancel{P_0}+0+\rho gh=\cancel{P_0}+\tfrac12\rho v^2+0
+\quad\Longrightarrow\quad\boxed{\;v=\sqrt{2gh}\;}
+\]
+The density has cancelled too: a denser liquid has more potential and more kinetic energy per unit volume
+in the same proportion.
+
+\medskip
+This is exactly the speed of a body falling freely from rest through $h$ (\chref{ch:straightline}),
+because the physics is the same: potential energy becoming kinetic energy. After leaving the hole
+horizontally, the jet is a projectile (\chref{ch:projectiles}). From a hole at height $H$ above the floor
+it falls for $t=\sqrt{2H/g}$ and lands a horizontal distance $vt=2\sqrt{hH}$ away. For a tank filled to a
+fixed depth $D=h+H$, this range is largest when $h=H=D/2$ (the product $hH$ of two numbers with a fixed
+sum is largest when they are equal), and the jet then lands a distance $D$ away.
+
+\medskip
+\noindent\textbf{Two ways to see the $\rho gh$.} A natural worry: should the pressure at the hole not be
+$P_0+\rho gh$, since the hole is at depth $h$? Inside the tank, just beside the hole, it is. There are two
+valid ways to keep the books, and they agree.
+\begin{itemize}
+\item \textbf{Surface to jet (used above).} The $\rho gh$ appears as the \emph{potential energy} of the high
+free surface. Both ends are at $P_0$.
+\item \textbf{Still water at the hole's depth to jet.} Start instead from a point inside the tank, at the
+hole's level but far enough from it that the water is nearly still. There the pressure really is
+$P_0+\rho gh$ and the height is zero, and Bernoulli gives $P_0+\rho gh=P_0+\tfrac12\rho v^2$: the same
+$v=\sqrt{2gh}$. Now $\rho gh$ appears as pressure.
+\end{itemize}
+Both work because hydrostatic pressure \emph{is} the weight of the column above: the same $\rho gh$ can be
+charged to height at the top or to pressure at the bottom. What you must not do is count it twice, by
+taking the surface point with its height and also putting $P_0+\rho gh$ in the jet; that gives a spurious
+$v=\sqrt{4gh}$.
+\end{derivbox}
+
+\begin{remarkbox}{How good is $\sqrt{2gh}$?}
+Real jets come out a few per cent slower, because a little energy is lost to viscosity at the edge of the
+hole. A sharp-edged hole also produces a jet that contracts just outside it to about $60\%$ of the hole's
+area (the \emph{vena contracta}), because the streamlines converging on the hole cannot turn sharply.
+So $\sqrt{2gh}$ gives the speed well, but the volume flow rate is usually about $0.6$ of $A\sqrt{2gh}$.
+\end{remarkbox}
+
+\subsection{The Venturi meter}
+
+The second application measures a flow from the pressure drop it causes in a constriction, which is the
+continuity equation and Bernoulli's equation working together.
+
+\begin{exbox}{A Venturi meter}\label{ex:fluids-venturi}
+Water flows through a horizontal pipe of diameter \SI{10}{cm}, which narrows smoothly to a throat of
+diameter \SI{5.0}{cm}. Pressure tappings show that the pressure in the throat is \SI{15}{kPa} lower than in
+the wide pipe. Find the speed in the wide pipe and the volume flow rate.
+
+\stepn{1} \textbf{Continuity.} Halving the diameter quarters the area, so $v_2=4v_1$.
+
+\stepn{2} \textbf{Bernoulli at one height.} $P_1-P_2=\tfrac12\rho(v_2^2-v_1^2)=\tfrac12\rho(16-1)v_1^2$, so
+\[
+v_1=\sqrt{\frac{2(P_1-P_2)}{15\rho}}=\sqrt{\frac{2(15000)}{15(1000)}}=\sqrt2\approx\SI{1.41}{m/s}.
+\]
+
+\stepn{3} \textbf{Flow rate.} $A_1v_1=\pi(0.050)^2(1.41)\approx\SI{1.11e-2}{m^3/s}$, about \SI{11}{\litre}
+each second.
+
+\medskip
+The same physics, a fast stream with lowered pressure, draws liquid up a tube into the air stream of a
+perfume atomiser or an old car's carburettor. \ans{\SI{1.41}{m/s}; \SI{11}{L/s}}
+\end{exbox}
+
+\why{Bernoulli's equation explains a wide range of effects. Two ships moving side by side are pushed
+together, because the water squeezed between them flows faster and presses less. A strong wind over a
+roof lowers the pressure above it while the still air inside presses as before, and roofs are lifted off.
+Wind blowing across a chimney top lowers the pressure there and helps draw the smoke up. A spinning football
+drags air round with it, so the air flows faster on one side than the other, and the pressure difference
+bends its path (the Magnus effect).}
+
+\begin{remarkbox}{What Bernoulli does and does not explain about lift}
+Over an aircraft wing the air flows faster above than below, and the pressure above is correspondingly
+lower; Bernoulli's equation relates the two correctly, and the pressure difference times the wing area is
+the lift. What Bernoulli does not explain is \emph{why} the air goes faster over the top. A popular
+explanation says that air parcels split at the front of the wing must ``meet again'' at the back, so the
+air over the longer upper surface must go faster. This is false: wind-tunnel pictures show the upper air
+arriving at the back well \emph{before} the lower air, and nothing requires the parcels to meet. The full
+answer is that the wing, by its shape and its tilt (angle of attack), turns the oncoming air
+\emph{downwards}. By Newton's third law (\chref{ch:newton}) the air pushes the wing up, and the pressure
+pattern round the wing is how that push is delivered. This is why a flat paper plane flies, and why an
+aerobatic aircraft can fly upside down by tilting its wing. Lift as ``pressure difference'' and lift as
+``reaction to the downward-turned air'' are the same force counted two ways.
+\end{remarkbox}
+
+\begin{remarkbox}{Estimate before you believe: the bottle ``eco-cooler''}
+A widely shared idea from rural Bangladesh mounts cut plastic bottles through a board in a window, wide end
+outside and narrow neck inside, and claims that the hut is cooled by several degrees with no electricity.
+Two explanations circulate. Both can be checked with this chapter, and both fail.
+
+\smallskip
+\textbf{``The bottle compresses the air, which expands and cools.''} The largest pressure a breeze of speed
+$v=\SI{2}{m/s}$ can build up against a board is about its kinetic energy per unit volume,
+$\tfrac12\rho v^2=\tfrac12(1.2)(2)^2\approx\SI{2.4}{Pa}$ (Bernoulli, bringing the air to rest). Even if all
+of that energy per unit volume were taken out of the air as heat, the temperature would fall by
+$\Delta P/(\rho s_p)$, where $s_p\approx\SI{1005}{J.kg^{-1}.K^{-1}}$ is air's specific heat capacity at constant pressure (heat per kilogram per kelvin, defined in \chref{ch:thermal} and predicted from molecular structure in \chref{ch:kinetic}): $2.4/(1.2\times1005)\approx\SI{0.002}{K}$. That is two thousandths of a degree.
+
+\smallskip
+\textbf{``The funnel speeds the breeze up, by continuity.''} Continuity applies only to air that actually
+passes through the bottle, and the speed of that air is set by the pressure difference across the board.
+By Bernoulli, \SI{2.4}{Pa} can drive air through any opening at no more than $\sqrt{2\Delta P/\rho}$, which
+is about the wind's own speed of \SI{2}{m/s}. The funnel cannot make the jet faster than the wind; most
+of the air arriving at the wide mouth simply spills round the board, and the bottles let \emph{less} air
+in than an open window would.
+
+\smallskip
+So the device cannot cool the incoming air, and careful measurements have not found the large
+temperature drops claimed for it. It can do no more than any opening does: let in a draught, which feels
+cooler on the skin because moving air carries heat and sweat away faster. The lesson is general: estimate
+the size of an effect before believing the story told about it.
+\end{remarkbox}
+
+\begin{remarkbox}{Where Bernoulli's equation stops working}
+The derivation assumed a steady flow of an incompressible, non-viscous fluid, and it applies along one
+streamline. Viscosity is the commonest failure: water pumped through a long horizontal pipe of uniform
+width keeps the same speed (continuity), yet its pressure falls steadily along the pipe, because work is
+being done against internal friction and turned into heat. Turbulence breaks the steady-flow assumption,
+and at speeds approaching the speed of sound air can no longer be treated as incompressible. Within these
+limits the equation is extremely accurate; beyond them it still gives the right trends, but not the
+numbers.
+\end{remarkbox}
+
+\section{Viscosity}\label{sec:viscosity}
+
+The ideal fluid has no internal friction, so nothing in it would ever slow down. Real fluids do: stirred
+tea stops swirling, and honey poured from a spoon drags behind it. The internal friction of a fluid is its
+\textbf{viscosity}. Its effects are usually small for water and air in pipes of everyday size, but they
+dominate the motion of small bodies, thin films and slow flows, and they are why Bernoulli's equation fails
+along long pipes.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_viscosity}
+\figcaption{fig:fluids-viscosity}{Viscous flow between a fixed plate and a moving one. The liquid sticks to
+both plates, so its speed rises from zero at the bottom to $v_0$ at the top, and each layer slides over the
+one below. Keeping the top plate moving at constant speed needs a steady force $F$, which is proportional
+to the area and to the velocity gradient $dv/dy$.}
+\end{figure}
+
+\begin{defbox}{Coefficient of viscosity}
+When layers of a fluid slide past one another (Figure~\ref{fig:fluids-viscosity}), each layer drags its
+neighbours. If the speed changes by $dv$ across a thickness $dy$ perpendicular to the flow, the tangential
+force needed on an area $A$ of a layer is
+\[
+F=\eta A\,\frac{dv}{dy}\qquad\text{(Newton's law of viscosity)},
+\]
+which defines the \textbf{coefficient of viscosity} $\eta$. Its SI unit is \si{N.s/m^2}$=\si{Pa.s}$, and its
+dimensions are $\mathsf{M\,L^{-1}\,T^{-1}}$, as found in \chref{ch:measurement}. Typical values near room
+temperature: air \SI{1.8e-5}{Pa.s}, water \SI{1.0e-3}{Pa.s}, engine oil about \SI{0.1}{Pa.s}, glycerine
+\SI{1.5}{Pa.s}, honey a few \si{Pa.s}.
+\end{defbox}
+
+The ratio $F/A$ is a shear stress, the quantity \chref{ch:solids} used for the shearing of a solid. The
+contrast is the point: in a solid, shear stress is proportional to the \emph{strain} (how far it has
+deformed), and the solid stops deforming; in a fluid, it is proportional to the \emph{rate} of strain
+($dv/dy$), and the fluid keeps flowing for as long as the stress acts.
+
+\begin{trapbox}{viscosity changes with temperature, in opposite ways}
+The viscosity of a liquid falls steeply as it is heated (warm honey pours easily; water's viscosity halves
+between \SI{20}{\celsius} and \SI{60}{\celsius}), because its molecules escape more easily from their
+neighbours' attraction. A gas becomes \emph{more} viscous when heated, because its viscosity comes from
+molecules carrying momentum between layers, and faster molecules carry more; the mean free path of \chref{ch:kinetic} explains why
+(Section~\ref{sec:ktmfp}).
+\end{trapbox}
+
+Whether a flow is smooth or turbulent is decided by a competition between the fluid's inertia, which tends
+to throw it about, and its viscosity, which smooths it out. For flow at speed $v$ through a pipe of
+diameter $D$, the ratio is measured by the dimensionless \textbf{Reynolds number}
+\[
+Re=\frac{\rho vD}{\eta}.
+\]
+Experiment shows that flow in a pipe is laminar when $Re$ is below about $2000$ and turbulent above about
+$3000$. Water at \SI{0.2}{m/s} in a \SI{1}{cm} pipe has $Re=(1000)(0.2)(0.01)/(10^{-3})=2000$, right at the
+boundary, which is why a tap opened gently gives a clear, smooth stream that turns ragged as it is opened
+further.
+
+\subsection{Stokes' law and terminal velocity}
+
+A body moving through a fluid drags the neighbouring layers with it, and their viscosity resists: this is
+\textbf{viscous drag}. For a small sphere moving slowly, so that the flow round it is smooth, the form of the
+drag follows from dimensions alone.
+
+\begin{derivbox}{The form of Stokes' law from dimensions}
+\stepn{1} \textbf{What can the drag depend on?} When the flow is smooth and slow, the fluid slides round the
+sphere rather than being flung aside, so its inertia (and hence its density) does not matter. The drag $F$
+can then depend only on the viscosity $\eta$, the sphere's radius $r$ and its speed $v$. Try
+$F=\beta\,\eta^a r^b v^c$ with $\beta$ a pure number.
+
+\stepn{2} \textbf{Match dimensions} (\chref{ch:measurement}):
+$\mathsf{M\,L\,T^{-2}}=(\mathsf{M\,L^{-1}\,T^{-1}})^a\,\mathsf{L}^b\,(\mathsf{L\,T^{-1}})^c$. Mass gives
+$a=1$; time gives $a+c=2$, so $c=1$; length gives $-a+b+c=1$, so $b=1$. Hence
+\[
+F=\beta\,\eta rv.
+\]
+Each factor makes sense: a more viscous fluid, a bigger sphere and a faster motion all shear the fluid
+harder.
+
+\stepn{3} \textbf{The number.} Dimensions cannot give $\beta$. A full solution of the flow round the sphere
+(beyond this book, so stated without proof) gives $\beta=6\pi$:
+\[
+\boxed{\;F=6\pi\eta rv\;}\qquad\text{(Stokes' law).}
+\]
+The feature to carry forward is that this drag is proportional to the speed.
+\end{derivbox}
+
+That proportionality produces a terminal velocity. Consider a small sphere of radius $r$ and density
+$\rho_s$ released from rest in a fluid of density $\rho<\rho_s$ and viscosity $\eta$.
+
+\begin{derivbox}{Terminal velocity of a falling sphere}
+\stepn{1} \textbf{The forces.} Weight $W=\tfrac43\pi r^3\rho_sg$ (down); buoyancy $F_B=\tfrac43\pi r^3\rho g$
+(up, Archimedes); drag $6\pi\eta rv$ (up, opposing the motion, and growing with $v$). With
+$m=\tfrac43\pi r^3\rho_s$, Newton's second law gives
+\[
+m\frac{dv}{dt}=\tfrac43\pi r^3(\rho_s-\rho)g-6\pi\eta rv.
+\]
+
+\stepn{2} \textbf{At release.} With $v=0$ there is no drag, and the acceleration is greatest:
+\[
+a_0=\frac{\tfrac43\pi r^3(\rho_s-\rho)g}{\tfrac43\pi r^3\rho_s}=\Big(1-\frac{\rho}{\rho_s}\Big)g.
+\]
+
+\stepn{3} \textbf{Terminal velocity.} As $v$ grows, the drag grows and the acceleration shrinks. It reaches
+zero when the drag balances weight minus buoyancy; the speed then stops changing. Setting $dv/dt=0$:
+\[
+6\pi\eta rv_t=\tfrac43\pi r^3(\rho_s-\rho)g\quad\Longrightarrow\quad
+\boxed{\;v_t=\frac{2r^2(\rho_s-\rho)g}{9\eta}\;}
+\]
+
+\stepn{4} \textbf{How the speed approaches $v_t$.} The equation of Step 1 can be written
+$dv/dt=(v_t-v)/\tau$, with $\tau=m/(6\pi\eta r)=2r^2\rho_s/(9\eta)$. The gap $v_t-v$ therefore decays at
+a rate proportional to itself, a first-order decay (\chref{ch:toolkit}, Section~\ref{sec:explog}), and
+\[
+v(t)=v_t\big(1-e^{-t/\tau}\big).
+\]
+The initial slope is $v_t/\tau=a_0$, as Step 2 requires. After one time constant $\tau$ the sphere has
+reached $63\%$ of $v_t$, and after $5\tau$ more than $99\%$ (Figure~\ref{fig:fluids-terminal}).
+
+\stepn{5} \textbf{Why the terminal state is stable.} The sphere has not ``run out of push'': the forces still
+act, but they cancel, so by Newton's first law it moves at constant $v_t$. If it were nudged faster, the
+drag would exceed the driving force and slow it back; if slower, the driving force would win.
+\end{derivbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_terminal}
+\figcaption{fig:fluids-terminal}{The approach to terminal velocity. The speed rises steeply at first, with
+slope $a_0=(1-\rho/\rho_s)g$, because the drag starts at zero; the growing drag then eats into the
+acceleration, and the speed levels off at $v_t$, where the forces balance. The tangent at the start would
+reach $v_t$ after one time constant $\tau$.}
+\end{figure}
+
+The $r^2$ in $v_t$ is the striking part: a droplet twice as wide falls four times as fast. This is why
+mist and fog hang in the air while rain falls, and it is the principle behind Millikan's measurement of the
+electron's charge from the fall of tiny oil drops.
+
+\begin{exbox}{A fog droplet}\label{ex:fluids-fog}
+A water droplet of radius \SI{10}{\micro m} falls through air ($\eta=\SI{1.8e-5}{Pa.s}$,
+$\rho_{\text{air}}=\SI{1.2}{kg/m^3}$, negligible beside water's \SI{1000}{kg/m^3}). Find its terminal
+velocity and the time it takes to reach it, and check that Stokes' law applies.
+
+\stepn{1} $v_t=\dfrac{2(10^{-5})^2(1000)(9.8)}{9(1.8\times10^{-5})}\approx\SI{1.2e-2}{m/s}$, about a
+centimetre per second.
+
+\stepn{2} $\tau=\dfrac{2r^2\rho_s}{9\eta}=\dfrac{2(10^{-5})^2(1000)}{9(1.8\times10^{-5})}\approx\SI{1.2e-3}{s}$.
+The droplet reaches its terminal velocity within a few milliseconds, and drifts down at it ever after.
+
+\stepn{3} \textbf{Check.} Using the droplet's diameter as the length,
+$Re=\rho_{\text{air}}v_t(2r)/\eta=(1.2)(0.012)(2\times10^{-5})/(1.8\times10^{-5})\approx0.016$, far below~$1$,
+so the flow round it is smooth and Stokes' law holds. \ans{\SI{1.2}{cm/s}; about \SI{1}{ms}}
+\end{exbox}
+
+\begin{trapbox}{Stokes' law is for small, slow bodies}
+Stokes' law assumes smooth flow round the sphere, which requires a Reynolds number (based on the sphere's
+diameter) well below~$1$. A raindrop, a falling ball or a skydiver is far outside that range. Their drag
+grows roughly as $v^2$, not $v$, and the Stokes formula overestimates their terminal speeds absurdly (see
+the last challenge problem of this chapter). Always check $Re$ before using Stokes' law.
+\end{trapbox}
+
+\section{Surface Tension}\label{sec:surface-tension}
+
+The second property the ideal fluid leaves out lives at its surface. A steel needle laid gently on water
+floats, insects walk on ponds, a drop of water on a waxed surface pulls itself into a bead, and water climbs
+up a thin glass tube by itself. All of these say that a liquid's surface behaves like a stretched elastic
+skin.
+
+The reason is molecular. A molecule deep inside a liquid is attracted by neighbours on all sides, and the
+pulls cancel. A molecule at the surface has neighbours only below and beside it, so it is pulled inwards,
+and bringing a molecule from the bulk to the surface costs energy. A liquid therefore has extra energy in
+proportion to its surface area, and, like any system, it moves towards lower energy by making its surface
+as small as it can.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_wireframe}
+\figcaption{fig:fluids-wireframe}{Measuring surface tension with a soap film. The film on the frame has two
+surfaces, front and back, each pulling the sliding wire inwards; holding the wire still needs $F=2S\ell$.
+Pulling it out by $dx$ does work $F\,dx$ and creates new surface of area $2\ell\,dx$, so the work per unit
+of new area is $S$.}
+\end{figure}
+
+\begin{defbox}{Surface tension and surface energy}
+Draw a line of length $\ell$ on a liquid surface. The surface on each side pulls the line towards itself,
+along the surface and perpendicular to the line, with a force proportional to $\ell$. The \textbf{surface
+tension} $S$ is that force per unit length:
+\[
+S=\frac{F}{\ell}\qquad(\si{N/m}).
+\]
+It acts along the surface, never out of it, and always so as to shrink the surface. Enlarging the surface
+by an area $\Delta A$ at constant temperature takes work $W=S\,\Delta A$
+(Figure~\ref{fig:fluids-wireframe}), so $S$ is equally the \textbf{surface energy} per unit area
+(\si{J/m^2}$=$\si{N/m}). Typical values near \SI{20}{\celsius}: water \SI{0.072}{N/m}, soap solution
+about \SI{0.03}{N/m}, mercury about \SI{0.47}{N/m}.
+\end{defbox}
+
+\inwords{Surface tension and surface energy are one idea seen two ways: a force pulling along the surface,
+or an energy price for having surface at all. A force of $S$ per metre, pulled through a distance, creates
+$S$ joules of surface energy per square metre.}
+
+This book writes surface tension as $S$, following NCERT; many books write $T$ or $\gamma$, but in this
+volume $T$ is always temperature and $\gamma$ the ratio of heat capacities. Surface tension falls as the
+temperature rises, and detergents lower it sharply, which is how soap lets water spread over and wet a
+greasy surface it would otherwise bead up on.
+
+\begin{trapbox}{a soap film has two surfaces}
+A soap film is a thin sheet of liquid with air on both sides, so it has two surfaces. Every force or energy
+for a film carries a factor $2$: the frame needs $F=2S\ell$, and blowing a soap bubble of radius $R$
+creates surface area $2\times4\pi R^2$. A liquid drop has only one surface.
+\end{trapbox}
+
+\subsection{The angle of contact}
+
+Where a liquid surface meets a solid wall, the shape of the surface depends on a competition: the liquid's
+molecules attract each other (cohesion) and are attracted by the wall (adhesion). The outcome is recorded
+by one angle (Figure~\ref{fig:fluids-contactangle}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_contactangle}
+\figcaption{fig:fluids-contactangle}{The angle of contact $\theta$ is measured from the wall, inside the
+liquid, to the tangent to the liquid surface at the contact point. A wetting liquid (left) climbs the wall,
+its surface curving up to meet it, and $\theta$ is small; a non-wetting liquid (right) is pushed down at the
+wall, and $\theta$ exceeds $90^\circ$. Measuring to the normal instead of the tangent would swap every
+$\cos\theta$ for a $\sin\theta$.}
+\end{figure}
+
+\begin{defbox}{Angle of contact}
+At the line where a liquid surface meets a solid, draw the tangent to the liquid surface. The \textbf{angle
+of contact} $\theta$ is the angle between that tangent and the solid surface, measured through the liquid.
+If $\theta<90^\circ$ the liquid \textbf{wets} the solid (adhesion beats cohesion) and its surface curves up
+against the wall: water on clean glass, $\theta\approx0$. If $\theta>90^\circ$ it does not wet the solid
+and its surface curves down: mercury on glass, $\theta\approx140^\circ$; water on wax, about $105^\circ$.
+\end{defbox}
+
+The tangent, not the normal, is used because surface tension pulls along the surface: the tangent's
+direction decides how much of that pull points along the wall.
+
+\subsection{Why a free drop is a sphere}
+
+A liquid makes its surface energy as small as it can. For a drop with no other forces acting, that fixes
+its shape.
+
+\begin{derivbox}{Least area at fixed volume}
+\stepn{1} \textbf{The question.} A free drop has a fixed volume $V$ (the liquid is nearly incompressible)
+and surface energy $S\times(\text{area})$. It settles into the shape of least energy, hence of least area
+for its volume. So the question is purely geometric: which closed shape of given volume has the least
+surface area?
+
+\stepn{2} \textbf{The sphere.} For a sphere of radius $R$, $V=\tfrac43\pi R^3$ and $A=4\pi R^2$. Eliminating
+$R$,
+\[
+A_{\text{sphere}}=4\pi\left(\frac{3V}{4\pi}\right)^{2/3}=(36\pi)^{1/3}V^{2/3}\approx4.84\,V^{2/3}.
+\]
+
+\stepn{3} \textbf{A cube for comparison.} A cube of the same volume has side $V^{1/3}$ and area
+$6V^{2/3}$, about $24\%$ more than the sphere. Every other shape tried (cylinder, ellipsoid, teardrop) also
+does worse.
+
+\stepn{4} \textbf{The general statement.} The \emph{isoperimetric inequality} of geometry (stated here
+without proof, because the proof needs the calculus of variations) says that every closed surface satisfies
+$A^3\ge36\pi V^2$, with equality only for the sphere. So no shape of volume $V$ has less area than the
+sphere, and since $S>0$, the sphere is the unique shape of least surface energy.
+
+\stepn{5} \textbf{Why only free drops are round.} A drop resting on a table or hanging from a tap also has
+gravitational potential energy, and its real shape minimises the sum. Surface energy scales as $R^2$ and
+gravitational energy as $R^4$ (mass $\propto R^3$ times height $\propto R$), so small drops are nearly
+spherical and large ones flatten into puddles. Water floating in an orbiting spacecraft is round at any
+size.
+\end{derivbox}
+
+\subsection{Excess pressure inside a drop and a bubble}
+
+A curved surface under tension squeezes what is inside it, just as a stretched balloon skin does. So the
+pressure just inside a curved liquid surface exceeds the pressure just outside, by an amount we call the
+\textbf{excess pressure} $\Delta P=P_{\text{in}}-P_{\text{out}}$ (Figure~\ref{fig:fluids-drop}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_drop}
+\figcaption{fig:fluids-drop}{Excess pressure in a drop, by a force balance. Cut the drop through its centre and
+look at the right half. The excess pressure pushes it to the right with $\Delta P$ times the area of the
+cut, $\pi R^2$ (crimson); the surface of the left half pulls its rim, of length $2\pi R$, to the left with
+$S$ per unit length (orange, an applied pull told apart from the pressure force). Equating the two gives
+$\Delta P=2S/R$.}
+\end{figure}
+
+\begin{derivbox}{Excess pressure inside a drop and a bubble}
+\stepn{1} \textbf{Force balance on half a drop.} In Figure~\ref{fig:fluids-drop} the right half of a drop of
+radius $R$ is pushed to the right by the liquid of the left half, with pressure $P_{\text{in}}$ on the
+circular cut of area $\pi R^2$. The outside air pushes on its curved surface; the net effect of a uniform
+pressure on a curved surface is the pressure times the area projected onto the cut, so the air's net push
+is $P_{\text{out}}\pi R^2$ to the left. The surface of the left half pulls along the rim with
+$S\times2\pi R$, to the left. Balance:
+\[
+\Delta P\,\pi R^2=2\pi RS\quad\Longrightarrow\quad\boxed{\;\Delta P_{\text{drop}}=\frac{2S}{R}\;}
+\]
+
+\stepn{2} \textbf{The same result from energy.} Let the drop grow by $dR$. The excess pressure does work
+$\Delta P\times(4\pi R^2)\,dR$ pushing the surface out, and the surface energy rises by
+$S\,d(4\pi R^2)=8\pi SR\,dR$. In equilibrium the two are equal, which again gives $\Delta P=2S/R$.
+
+\stepn{3} \textbf{A soap bubble has two surfaces}, inner and outer, each of nearly the same radius. Each
+contributes $2S/R$, so
+\[
+\boxed{\;\Delta P_{\text{bubble}}=\frac{4S}{R}\;}
+\]
+\stepn{4} \textbf{Read it.} The smaller the radius, the larger the excess pressure. That is why the first
+puff is the hardest when blowing up a bubble (or a balloon), and why, when a small and a large soap bubble
+are connected by a tube, the small one empties into the large one.
+\end{derivbox}
+
+\subsection{Capillary rise}
+
+The excess-pressure law and the angle of contact together explain why a liquid climbs or sinks in a narrow
+tube, a \textbf{capillary} (Latin \emph{capillus}, a hair), as in Figure~\ref{fig:fluids-capillary}.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_capillary}
+\figcaption{fig:fluids-capillary}{Capillarity, drawn to scale for equal tubes. Water, which wets glass, climbs
+the tube and forms a concave meniscus; mercury, which does not, is pushed down below the outside level
+and forms a convex one. The mercury's depression is only about a third of the water's rise, because its
+much larger density outweighs its larger surface tension.}
+\end{figure}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_capfbd}
+\figcaption{fig:fluids-capfbd}{The forces that hold up a capillary column. At the contact line the liquid
+surface pulls on the glass along its own tangent (dashed); by Newton's third law the glass pulls the liquid
+back with $S$ per unit length the other way. Its vertical part, $S\cos\theta$, lifts the column; its
+horizontal part, $S\sin\theta$, cancels round the circular rim.}
+\end{figure}
+
+\begin{derivbox}{Capillary rise: $h=2S\cos\theta/(\rho gr)$}
+\stepn{1} \textbf{Where the pull acts.} The liquid meets the glass along a circle at the top of the column, the
+contact line, of length $2\pi r$, where $r$ is the tube's inner radius. Along it the liquid surface pulls on
+the glass with $S$ per unit length, directed along the surface's tangent, which leaves the wall at the
+angle of contact $\theta$ (Figure~\ref{fig:fluids-capfbd}).
+
+\stepn{2} \textbf{The pull on the liquid.} By Newton's third law the glass pulls the liquid with an equal and
+opposite force, $S$ per unit length. Its component along the wall, $S\cos\theta$, points up; its component
+across the wall, $S\sin\theta$, points towards the glass, and round the circular rim these horizontal pulls
+cancel. The total upward force on the liquid is
+\[
+F_{\text{up}}=2\pi rS\cos\theta.
+\]
+A strongly wetting liquid ($\theta\to0$) pulls almost straight up; at $\theta=90^\circ$ there is no vertical
+pull and no rise.
+
+\stepn{3} \textbf{The weight to be held.} The raised liquid is very nearly a cylinder of radius $r$ and height
+$h$ (measured to the bottom of the meniscus), with weight $\rho\pi r^2hg$. The small extra liquid around
+the meniscus adds a volume $\pi r^3/3$ for a hemispherical meniscus, which replaces $h$ by $h+r/3$; for a
+tube of radius \SI{0.2}{mm}, where $h\approx\SI{7}{cm}$, that is a correction of about $0.1\%$, and it is
+neglected.
+
+\stepn{4} \textbf{Balance.} The pressure at the foot of the column equals the pressure at the same level in
+the open liquid outside, so the outside liquid neither helps nor hinders, and
+\[
+2\pi rS\cos\theta=\rho\pi r^2hg\quad\Longrightarrow\quad\boxed{\;h=\frac{2S\cos\theta}{\rho gr}\;}
+\]
+
+\stepn{5} \textbf{Check by pressure.} The meniscus is a spherical cap meeting the wall at angle $\theta$, so
+its radius of curvature is $R=r/\cos\theta$, and it is concave upwards for a wetting liquid. The pressure
+just below it is therefore lower than the air pressure above by $2S/R=2S\cos\theta/r$. But by the depth
+law it is also $P_0-\rho gh$, the pressure a height $h$ above the outside level. Equating the two gives the
+same $h$.
+
+\stepn{6} \textbf{Read it.} The rise is inversely proportional to the radius: halve the tube and the liquid
+climbs twice as high. For $\theta>90^\circ$, $\cos\theta<0$ and $h<0$: mercury is \emph{depressed}.
+\end{derivbox}
+
+\begin{trapbox}{a capillary never overflows}
+If a tube is shorter than the height $h$ the liquid would reach, the liquid does not spill out of the top.
+It rises to the rim and stops there, with a flatter meniscus (larger radius of curvature) whose smaller
+excess pressure exactly supports the shorter column. Capillarity cannot make a perpetual fountain.
+\end{trapbox}
+
+\begin{remarkbox}{Where the capillary formula stops working}
+The derivation treats the meniscus as a spherical cap, which is right only when gravity cannot distort it,
+that is, when the tube's radius is small compared with the \emph{capillary length}
+$\sqrt{S/(\rho g)}$, about \SI{2.7}{mm} for water. In a wide tube the surface is flat in the middle and the
+rise is far less than $2S\cos\theta/(\rho gr)$ predicts. The formula also needs a clean tube: a trace of
+grease raises $\theta$ and cuts the rise sharply.
+\end{remarkbox}
+
+\why{Viscosity is why honey pours slowly, why engine oil is graded by thickness, and why a narrowed blood
+vessel needs a higher pressure to keep the same flow. Surface tension is why raindrops are round, why soap
+cleans, why a paper towel soaks up a spill, and why a needle can float. Both are small forces that are easy
+to ignore, and both are indispensable to living things and to technology.}
+
+\begin{remarkbox}{How a redwood drinks}
+How does a \SI{100}{m} tree lift water from its roots to its highest leaves? The tempting answer, capillary
+rise in the trunk, fails, and seeing why uses several ideas of this section.
+
+\smallskip
+\textbf{Capillarity alone is far too weak.} A xylem vessel (the tree's water pipe) has a radius of about
+$r=\SI{20}{\micro m}$. For water wetting the wall,
+\[
+h=\frac{2S}{\rho gr}=\frac{2(0.072)}{(1000)(9.8)(20\times10^{-6})}\approx\SI{0.7}{m}.
+\]
+Enough for a seedling; useless for a redwood.
+
+\smallskip
+\textbf{The engine is evaporation at the leaves.} Water fills the microscopic pores of the cell walls inside
+a leaf, and as it evaporates, the surfaces retreat into pores only a few nanometres across. By the
+excess-pressure law, a meniscus of radius $R\approx\SI{5}{nm}$ can sustain a pressure difference of up to
+\[
+\Delta P=\frac{2S}{R}=\frac{2(0.072)}{5\times10^{-9}}\approx\SI{2.9e7}{Pa}\approx\SI{280}{atm}.
+\]
+Holding up a \SI{100}{m} column needs $\rho gh\approx\SI{9.8e5}{Pa}$, about \SI{10}{atm}, plus roughly as
+much again to overcome the viscous resistance of the flow. The menisci can pull far harder than this; in
+practice the suction measured in tall trees is a few tens of atmospheres at most.
+
+\smallskip
+\textbf{Cohesion carries the pull down.} Water molecules attract one another strongly (the same cohesion
+that gives water its high surface tension), so the water in the xylem hangs together as an unbroken thread
+from leaf to root, under \emph{tension}: its pressure is below zero, like a stretched rope. This is the
+\emph{cohesion--tension} explanation, the one accepted by plant physiologists. Its limit is also physical:
+water under tension can suddenly form a vapour bubble (cavitation) that breaks the thread, and this risk,
+growing with height, is thought to be one reason no tree grows much beyond about \SI{120}{m}.
+\end{remarkbox}
+
+\section{Summary}\label{sec:fluids-summary}
+A fluid at rest can only push, and only perpendicular to a surface, so its forces are described by one
+scalar, the pressure; a fluid in motion obeys conservation of mass (continuity) and of energy (Bernoulli);
+viscosity and surface tension are the two corrections that real liquids demand.
+
+\begin{itemize}
+\item Pressure $P=F_\perp/A$ is a scalar, the same in every direction at a point. In a liquid at rest
+      $P=P_0+\rho gh$, depending only on depth; $\rho gh$ is the gauge pressure. Air pressure falls
+      exponentially with height, not linearly.
+\item Pascal's law: a pressure change in an enclosed incompressible fluid is transmitted undiminished. A
+      hydraulic lift gives $F_2=F_1A_2/A_1$ and conserves work, $F_1d_1=F_2d_2$.
+\item Archimedes: the buoyant force equals the weight of the fluid displaced, for any shape and at any depth.
+      A floating body displaces its own weight; its submerged fraction is $\rho_{\text{body}}/\rho_{\text{fluid}}$.
+\item Continuity for an incompressible fluid: $A_1v_1=A_2v_2$.
+\item Bernoulli, along a streamline of an ideal fluid: $P+\tfrac12\rho v^2+\rho gh=\text{constant}$, the
+      work--energy theorem per unit volume. Applications: Torricelli's $v=\sqrt{2gh}$, the Venturi meter,
+      lift (with care). It fails where viscosity, turbulence or compressibility matter.
+\item Viscosity: $F=\eta A\,dv/dy$; $\eta$ in \si{Pa.s}. Flow in a pipe is laminar for
+      $Re=\rho vD/\eta$ below about $2000$. Stokes' law $F=6\pi\eta rv$ (small, slow spheres, $Re\ll1$)
+      gives the terminal velocity $v_t=2r^2(\rho_s-\rho)g/(9\eta)$, approached as
+      $v_t(1-e^{-t/\tau})$.
+\item Surface tension $S$ (\si{N/m}) is a force per unit length and an energy per unit area. A free drop
+      is a sphere; excess pressure is $2S/R$ in a drop and $4S/R$ in a soap bubble.
+\item Angle of contact: measured through the liquid to the surface's tangent; below $90^\circ$ the liquid
+      wets and rises in a capillary, above $90^\circ$ it is depressed: $h=2S\cos\theta/(\rho gr)$.
+\end{itemize}
+
+\section{Problem Types}\label{sec:fluids-types}
+Ten types cover the fluid questions examiners set. Most traps are of two kinds: forgetting that areas go as
+the \emph{square} of a radius, and using a formula (Stokes, the capillary rise, the excess pressure) outside
+the situation it was derived for.
+
+\archq{Pressure at depth}
+{``Find the gauge or absolute pressure at a given depth,'' or ``the force on a dam or a submarine
+window.''}
+{Gauge pressure $=\rho gh$; absolute pressure $=P_0+\rho gh$. Force on a small flat surface $=$ pressure
+$\times$ area; for a tall vertical wall, integrate (the average gauge pressure is $\tfrac12\rho gH$).}
+{Pressure depends only on the \emph{vertical depth}, never on the container's shape or the amount of fluid.
+``Gauge'' excludes the atmosphere; ``absolute'' includes it.}
+{The gauge pressure at a depth of \SI{10}{m} in a freshwater lake is about ($\rho=\SI{1000}{kg/m^3}$,
+$g=\SI{9.8}{m/s^2}$):}
+{\SI{9.8}{kPa}}
+{\SI{98}{kPa}}
+{\SI{980}{kPa}}
+{\SI{199}{kPa}\archans{B}{$\rho gh=1000\times9.8\times10=\SI{98000}{Pa}=\SI{98}{kPa}$, close to one
+atmosphere. Option (D) is the \emph{absolute} pressure, $98+101$~kPa; (A) and (C) slip a power of ten in
+converting pascals to kilopascals.}}
+
+\archq{The hydraulic lift}
+{``A force on a small piston lifts a load on a large piston: find the load, or the force needed.''}
+{The pressure is common: $F_1/A_1=F_2/A_2$, so $F_2=F_1A_2/A_1$. Areas go as the square of the radius (or
+diameter).}
+{Using the ratio of radii instead of the ratio of areas. And work is conserved: the large piston moves
+less.}
+{In a hydraulic lift the piston radii are in the ratio $1:10$. A force of \SI{50}{N} on the small piston can
+support a load of:}
+{\SI{500}{N}}
+{\SI{50}{N}}
+{\SI{5000}{N}}
+{\SI{0.5}{N}\archans{C}{The force scales as the area, that is, as the radius squared: $10^2=100$, so
+$F_2=50\times100=\SI{5000}{N}$. Option (A) uses the radius ratio; (B) confuses equal pressures with equal
+forces; (D) inverts the ratio.}}
+
+\archq{Floating and the submerged fraction}
+{``What fraction of a floating body is submerged (or above the surface)?'' or ``what is its density?''}
+{A floating body displaces its own weight: $V_{\text{sub}}/V=\rho_{\text{body}}/\rho_{\text{fluid}}$. The
+fraction above is $1$ minus this.}
+{Answering with the submerged fraction when the fraction above the surface is asked for, or dividing by the
+wrong volume.}
+{A block of ice ($\rho=\SI{917}{kg/m^3}$) floats in water ($\rho=\SI{1000}{kg/m^3}$). The fraction of its
+volume above the surface is about:}
+{$8\%$}
+{$9\%$}
+{$50\%$}
+{$92\%$\archans{A}{Submerged fraction $=917/1000=0.917$, so the fraction above is $1-0.917\approx8\%$.
+Option (D) is the submerged fraction; (B) divides the excess $1000-917$ by $917$ instead of $1000$; (C)
+is a guess.}}
+
+\archq{Apparent weight and relative density}
+{``A body weighs $W_1$ in air and $W_2$ when fully immersed in water: find its density (or the liquid's).''}
+{The loss of weight $W_1-W_2$ is the buoyant force, $\rho_wVg$. So
+$\rho_{\text{body}}/\rho_w=W_1/(W_1-W_2)$.}
+{Dividing by the weight in water, $W_2$, instead of by the \emph{loss} of weight.}
+{A body weighs \SI{60}{N} in air and \SI{40}{N} when fully immersed in water. Its density is
+($\rho_w=\SI{1000}{kg/m^3}$):}
+{\SI{1500}{kg/m^3}}
+{\SI{2000}{kg/m^3}}
+{\SI{670}{kg/m^3}}
+{\SI{3000}{kg/m^3}\archans{D}{Loss of weight $=\SI{20}{N}=\rho_wVg$; the density relative to water is
+$60/20=3$, so $\rho=\SI{3000}{kg/m^3}$. Option (A) takes $60/40$; (B) takes $40/20$; (C) inverts
+$40/60$.}}
+
+\archq{Continuity: the narrowing pipe}
+{``A pipe changes cross-section: find the new speed,'' often as the first step of a Bernoulli problem.}
+{$A_1v_1=A_2v_2$: speed is inversely proportional to area, and area goes as diameter squared.}
+{Halving the diameter quarters the area, so the speed rises fourfold, not twofold.}
+{Water flows at \SI{2}{m/s} in a pipe. Where the pipe narrows to half its diameter, the speed becomes:}
+{\SI{4}{m/s}}
+{\SI{8}{m/s}}
+{\SI{1}{m/s}}
+{\SI{0.5}{m/s}\archans{B}{The area falls to a quarter, so the speed rises by $4$: $2\times4=\SI{8}{m/s}$.
+Option (A) uses the diameter ratio; (C) and (D) have the fluid slowing down in the narrow part, against
+continuity.}}
+
+\archq{Torricelli's law}
+{``Find the speed of water leaving a hole in a tank,'' or ``where the jet lands.''}
+{Bernoulli from the free surface to the jet: both at $P_0$, $v_1\approx0$, so $v=\sqrt{2gh}$, with $h$ the
+depth of the \emph{hole} below the surface. The jet is then a projectile.}
+{Counting $\rho gh$ twice (pressure at the hole \emph{and} height of the surface), which gives
+$\sqrt{4gh}$; or using the total depth of water instead of the depth of the hole.}
+{Water flows from a small hole \SI{5.0}{m} below the surface of a large open tank. The speed of the jet is
+about ($g=\SI{9.8}{m/s^2}$):}
+{\SI{7.0}{m/s}}
+{\SI{98}{m/s}}
+{\SI{9.9}{m/s}}
+{\SI{14}{m/s}\archans{C}{$v=\sqrt{2gh}=\sqrt{2\times9.8\times5.0}=\sqrt{98}\approx\SI{9.9}{m/s}$. Option
+(A) drops the $2$, $\sqrt{gh}$; (B) forgets the square root; (D) counts $\rho gh$ twice,
+$\sqrt{4gh}$.}}
+
+\archq{Bernoulli in a horizontal pipe}
+{``The speed changes between two points at the same height: find the pressure difference,'' or ``find the
+flow rate from a measured pressure difference'' (Venturi meter).}
+{At one height $P_1-P_2=\tfrac12\rho(v_2^2-v_1^2)$; get the speeds from continuity first.}
+{Using $\tfrac12\rho(v_2-v_1)^2$ instead of $\tfrac12\rho(v_2^2-v_1^2)$, or dropping the $\tfrac12$. Fast flow
+has the \emph{lower} pressure.}
+{Water flows through a horizontal pipe at \SI{2.0}{m/s}; in a narrow section its speed is \SI{6.0}{m/s}. The
+pressure in the narrow section is lower by:}
+{\SI{16}{kPa}}
+{\SI{32}{kPa}}
+{\SI{8}{kPa}}
+{\SI{18}{kPa}\archans{A}{$\tfrac12(1000)(6.0^2-2.0^2)=500\times32=\SI{16000}{Pa}$. Option (B) drops the
+$\tfrac12$; (C) squares the difference of the speeds, $\tfrac12\rho(4.0)^2$; (D) forgets the slow flow's
+kinetic term, $\tfrac12\rho v_2^2$.}}
+
+\archq{Terminal velocity and Stokes' law}
+{``Find the terminal velocity of a small sphere in a viscous fluid,'' or ``how it changes when drops
+merge or the radius changes.''}
+{$v_t=2r^2(\rho_s-\rho)g/(9\eta)$, so $v_t\propto r^2$. When drops merge, the volume is conserved: $n$
+drops of radius $r$ make one of radius $n^{1/3}r$.}
+{Scaling with $r$ instead of $r^2$, or adding the volumes as if the radius added.}
+{Eight identical small raindrops, each falling at terminal speed $v$ in the Stokes regime, merge into one
+drop. Its terminal speed is:}
+{$4v$}
+{$2v$}
+{$8v$}
+{$v$\archans{A}{Volume conserved: $\tfrac43\pi R^3=8\times\tfrac43\pi r^3$, so $R=2r$; and $v_t\propto r^2$
+gives $4v$. Option (B) scales with $r$; (C) scales with the mass; (D) forgets that a larger drop falls
+faster.}}
+
+\archq{Excess pressure in drops and bubbles}
+{``Find the pressure inside a drop or a bubble,'' or ``which way does air flow between two bubbles.''}
+{Drop or air bubble inside a liquid (one surface): $2S/R$. Soap bubble in air (two surfaces): $4S/R$.
+Convert the radius to metres.}
+{Using the diameter as the radius, or the one-surface formula for a soap bubble.}
+{A soap bubble in air has a diameter of \SI{2.0}{cm}. If $S=\SI{0.030}{N/m}$, the excess pressure inside
+it is:}
+{\SI{3}{Pa}}
+{\SI{6}{Pa}}
+{\SI{0.12}{Pa}}
+{\SI{12}{Pa}\archans{D}{$R=\SI{0.010}{m}$ and two surfaces: $4S/R=4(0.030)/0.010=\SI{12}{Pa}$. Option
+(B) uses $2S/R$ (one surface) or puts the diameter for the radius in $4S/R$; (A) makes both slips at once;
+(C) leaves the radius in centimetres.}}
+
+\archq{Capillary rise}
+{``Find the height a liquid rises (or falls) in a capillary,'' or ``how the height changes with the radius or
+with tilting.''}
+{$h=2S\cos\theta/(\rho gr)$, so $h\propto1/r$. For a tilted tube the \emph{vertical} height stays the same,
+so the length of liquid in the tube grows.}
+{Scaling with $1/r^2$, or expecting the liquid to overflow a short tube.}
+{Water rises \SI{6.0}{cm} in a clean glass capillary. In a tube of half the radius it rises:}
+{\SI{3.0}{cm}}
+{\SI{12}{cm}}
+{\SI{24}{cm}}
+{\SI{6.0}{cm}\archans{B}{$h\propto1/r$, so halving $r$ doubles $h$ to \SI{12}{cm}. Option (A) takes
+$h\propto r$; (C) takes $h\propto1/r^2$, as if the rise went with the area; (D) assumes the rise does not
+depend on the radius.}}
+
+\section{Practice Problems}\label{sec:fluids-practice}
+
+The problems below are of standard examination difficulty. Take $g=\SI{9.8}{m/s^2}$,
+$P_0=\SI{1.013e5}{Pa}$ and the density of water \SI{1000}{kg/m^3} unless told otherwise. Answers, with brief
+working, follow the list.
+
+\begin{enumerate}[itemsep=3pt]
+\item Find the gauge and the absolute pressure at the bottom of a swimming pool \SI{2.0}{m} deep.
+\item A U-tube contains water. Oil of density \SI{800}{kg/m^3} is poured into one arm until it stands
+      \SI{12}{cm} above the oil--water boundary. How high does the water in the other arm stand above that
+      boundary?
+\item A wooden block floats in water with $60\%$ of its volume submerged. Find its density, and the fraction
+      submerged when it floats in oil of density \SI{800}{kg/m^3}.
+\item The pistons of a hydraulic lift have areas \SI{5.0}{cm^2} and \SI{250}{cm^2}. What force on the small
+      piston supports a load of \SI{1000}{kg}?
+\item Water flows through a horizontal pipe at \SI{1.5}{m/s} with pressure \SI{2.0e5}{Pa}. Find the pressure
+      where the pipe's cross-section is reduced to a third.
+\item An open tank has a hole of area \SI{2.0}{cm^2} at \SI{1.25}{m} below the water surface. Find the speed
+      of the jet and the volume of water leaving each second (ignore the contraction of the jet).
+\item A steel ball of radius \SI{1.0}{mm} ($\rho=\SI{7800}{kg/m^3}$) falls through glycerine
+      ($\rho=\SI{1260}{kg/m^3}$, $\eta=\SI{1.5}{Pa.s}$). Find its terminal velocity, and check that Stokes'
+      law applies.
+\item How much work is needed to blow a soap bubble of radius \SI{3.0}{cm}, if $S=\SI{0.030}{N/m}$?
+\item A drop of water of radius \SI{1.0}{mm} is sprayed into $1000$ identical droplets. Find the energy
+      needed ($S=\SI{0.072}{N/m}$).
+\item A clean glass capillary of inner radius \SI{0.25}{mm} stands in water ($S=\SI{0.072}{N/m}$,
+      $\theta=0$). How high does the water rise? What happens if only \SI{4.0}{cm} of the tube projects
+      above the water?
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item Gauge: $\rho gh=1000(9.8)(2.0)=\SI{1.96e4}{Pa}$. Absolute: $1.013\times10^5+0.196\times10^5
+\approx\SI{1.21e5}{Pa}$.
+\item The pressures at the level of the boundary are equal in the two arms (same level, same connected
+liquid below it), so $\rho_{\text{oil}}(12)=\rho_w h$ and $h=0.8\times12=\SI{9.6}{cm}$.
+\item $\rho=0.60\times1000=\SI{600}{kg/m^3}$. In oil the submerged fraction is $600/800=0.75$, that is,
+$75\%$.
+\item $F_1=mg\,A_1/A_2=1000(9.8)(5.0/250)=\SI{196}{N}$.
+\item Continuity: $v_2=3\times1.5=\SI{4.5}{m/s}$. Bernoulli: $P_2=2.0\times10^5-\tfrac12(1000)(4.5^2-1.5^2)
+=2.0\times10^5-9000=\SI{1.91e5}{Pa}$.
+\item $v=\sqrt{2(9.8)(1.25)}=\sqrt{24.5}\approx\SI{4.95}{m/s}$; flow rate
+$Av=(2.0\times10^{-4})(4.95)\approx\SI{9.9e-4}{m^3/s}$, about \SI{1}{\litre} each second.
+\item $v_t=2r^2(\rho_s-\rho)g/(9\eta)=2(10^{-3})^2(7800-1260)(9.8)/(9\times1.5)$, which is about
+\SI{9.5e-3}{m/s}, just under \SI{1}{cm/s}. Check: $Re=\rho vD/\eta=1260(0.0095)(0.002)/1.5$, which is
+about $0.016$, far below $1$, so Stokes' law holds.
+\item Two surfaces: $W=S\times2(4\pi R^2)=0.030\times8\pi(0.030)^2\approx\SI{6.8e-4}{J}$.
+\item Volume conserved: $1000r^3=R^3$, so $r=R/10=\SI{0.10}{mm}$. New area minus old:
+$4\pi(1000r^2-R^2)=4\pi(10^{-5}-10^{-6})\approx\SI{1.13e-4}{m^2}$. Energy $=S\Delta A\approx\SI{8.1e-6}{J}$.
+\item $h=\dfrac{2(0.072)}{1000(9.8)(2.5\times10^{-4})}\approx\SI{5.9}{cm}$. With only \SI{4.0}{cm} of tube,
+the water rises to the top and stops; the meniscus flattens (its radius of curvature grows to about
+$5.9/4.0\approx1.5$ times the tube's radius) so that its smaller excess pressure supports the
+\SI{4.0}{cm} column. It does not overflow.
+\end{enumerate}
+}
+
+\section{Challenge Problems}\label{sec:fluids-challenge}
+
+The problems below are harder than examination questions, chiefly because each needs a principle of the
+chapter applied in a setting where no formula has been prepared for it. Attempt each fully before reading its
+solution.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_bucket}
+\figcaption{fig:fluids-bucket}{Water in a spinning bucket, drawn to the numbers of the challenge. In the frame
+turning with the bucket, each parcel feels $g$ down and the pseudo-force per unit mass $\omega^2r$ outwards;
+the free surface sets itself perpendicular to their resultant (dashed), which makes it a paraboloid. The
+level at rest lies halfway between the centre and the rim of the curved surface.}
+\end{figure}
+
+\begin{challengebox}{The rotating bucket (builds on pressure at depth)}
+A cylindrical bucket of water of radius $R=\SI{10}{cm}$ spins steadily about its vertical axis at
+$\omega=\SI{10}{rad/s}$, the water turning with it. By how much does the water at the rim stand above the
+water at the axis?
+
+\challengeans{Work in the frame rotating with the bucket (\chref{ch:circdyn},
+Section~\ref{sec:noninertial}), in which the water is at rest. Each parcel at distance $r$ from the axis feels
+gravity $g$ down and a centrifugal pseudo-force $\omega^2r$ per unit mass outwards. A free surface at rest
+must be perpendicular to the net effective gravity (otherwise the surface liquid would slide along it), so
+its slope is
+\[
+\frac{dz}{dr}=\frac{\omega^2r}{g}\quad\Longrightarrow\quad z(r)=\frac{\omega^2r^2}{2g},
+\]
+a paraboloid (Figure~\ref{fig:fluids-bucket}). The rise at the rim is
+\[
+\Delta z=\frac{\omega^2R^2}{2g}=\frac{(10)^2(0.10)^2}{2(9.8)}\approx\SI{51}{mm}.
+\]
+In the ground frame the same result follows without pseudo-forces: a ring of water at radius $r$ moves in a
+circle, so the horizontal pressure gradient must supply its centripetal acceleration,
+$dP/dr=\rho\omega^2r$; along the surface the pressure is $P_0$, so the depth below the surface must grow
+outwards to match. \ans{\SI{51}{mm}}}
+\end{challengebox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_acceltank}
+\figcaption{fig:fluids-acceltank}{Water in a tank accelerating to the right, drawn to the numbers of the
+challenge. In the tank's frame the effective gravity is $g$ down plus the pseudo-force per unit mass $a$
+backwards; the surface settles perpendicular to it, tilted at $\tan\theta=a/g$ and deeper at the rear.}
+\end{figure}
+
+\begin{challengebox}{The accelerating tank (builds on pressure at depth)}
+An open tank of water is carried on a truck accelerating horizontally at $a=\SI{2.0}{m/s^2}$. At what angle to
+the horizontal does the water surface settle, and which end is deeper?
+
+\challengeans{In the truck's frame the water is at rest and feels gravity $g$ down plus a pseudo-force $a$ per
+unit mass backwards (\chref{ch:circdyn}). The free surface sets itself perpendicular to their resultant
+(Figure~\ref{fig:fluids-acceltank}), tilting by
+\[
+\tan\theta=\frac{a}{g}=\frac{2.0}{9.8}\quad\Longrightarrow\quad\theta\approx11.5^\circ,
+\]
+with the water deeper at the \emph{rear}. In the ground frame: the water must be accelerated forwards, which
+needs a higher pressure behind each parcel than in front, and the extra depth at the rear supplies it. The
+same $\tan\theta=a/g$ gives the angle of a plumb line hanging in an accelerating train. \ans{$11.5^\circ$,
+deeper at the rear}}
+\end{challengebox}
+
+\begin{challengebox}{Capillarity between plates (builds on capillary rise)}
+Two parallel, clean glass plates a distance $d=\SI{0.20}{mm}$ apart are dipped vertically into water
+($S=\SI{0.072}{N/m}$, $\theta\approx0$). How high does the water climb between them? Compare with a
+capillary tube whose \emph{diameter} equals the gap.
+
+\challengeans{Take a width $w$ of the plates (along the water surface). The water touches each plate along a
+line of length $w$, so two lines pull up with $2Sw\cos\theta$. They hold up a slab of width $w$, thickness
+$d$ and height $h$, weighing $\rho gwdh$. So
+\[
+2Sw\cos\theta=\rho gwdh\quad\Longrightarrow\quad h=\frac{2S\cos\theta}{\rho gd}
+=\frac{2(0.072)}{(1000)(9.8)(0.20\times10^{-3})}\approx\SI{73}{mm}.
+\]
+A tube of diameter $d$ has radius $r=d/2$, and $h=2S/(\rho gr)=4S/(\rho gd)\approx\SI{147}{mm}$, twice as
+high. The reason is geometric: per unit length of the pulling edge, the plates must hold up a slab of
+thickness $d/2$ (area $wd$ shared by two edges of length $w$), while the tube holds up only
+$\pi r^2/(2\pi r)=r/2=d/4$. (The plates rise as high as a tube whose \emph{radius} equals the gap.)
+\ans{\SI{73}{mm}, half the tube's}}
+\end{challengebox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{fluids_bubbles}
+\figcaption{fig:fluids-bubbles}{Two soap bubbles, drawn to scale for $r_1=\SI{2.0}{cm}$ and $r_2=\SI{3.0}{cm}$.
+The smaller bubble has the higher pressure, so the shared film bulges into the larger one, with radius of
+curvature $R=\SI{6.0}{cm}$. The three films meet at equal angles of $120^\circ$, which fixes how far apart the
+centres are.}
+\end{figure}
+
+\begin{challengebox}{Two soap bubbles in contact (builds on excess pressure)}
+Two soap bubbles of radii $r_1=\SI{2.0}{cm}$ and $r_2=\SI{3.0}{cm}$ meet and share a common film. What is the
+radius of curvature of that film, and which way does it bulge?
+
+\challengeans{Each bubble's interior is at an excess pressure $4S/r$ above the air outside. The shared film
+separates the two interiors, so it carries the difference,
+$4S\big(\tfrac1{r_1}-\tfrac1{r_2}\big)$. A film of radius of curvature $R$ supports $4S/R$, so
+\[
+\frac1R=\frac1{r_1}-\frac1{r_2}\quad\Longrightarrow\quad R=\frac{r_1r_2}{r_2-r_1}=\frac{(2.0)(3.0)}{3.0-2.0}
+=\SI{6.0}{cm}.
+\]
+The smaller bubble has the higher pressure, so the film bulges into the larger bubble
+(Figure~\ref{fig:fluids-bubbles}). For equal bubbles $R\to\infty$: the shared film is flat.
+\ans{\SI{6.0}{cm}, bulging into the larger bubble}}
+\end{challengebox}
+
+\begin{challengebox}{The raindrop that cannot obey Stokes (builds on terminal velocity)}
+Estimate the terminal velocity of a raindrop of radius $r=\SI{1.0}{mm}$ from Stokes' law
+($\eta_{\text{air}}=\SI{1.8e-5}{Pa.s}$, $\rho_{\text{air}}=\SI{1.2}{kg/m^3}$). Then compute the Reynolds number
+$Re=\rho_{\text{air}}v(2r)/\eta$ and explain why the answer is wrong. Finally, estimate the true terminal
+velocity using a drag force $\tfrac12C\rho_{\text{air}}Av^2$, with $A=\pi r^2$ and a drag coefficient
+$C\approx0.5$.
+
+\challengeans{Stokes' law gives
+\[
+v_t=\frac{2r^2(\rho_w-\rho_{\text{air}})g}{9\eta}\approx\frac{2(10^{-3})^2(1000)(9.8)}{9(1.8\times10^{-5})}
+\approx\SI{121}{m/s},
+\]
+which is absurd: raindrops of this size fall at about \SI{6.5}{m/s}. The Reynolds number shows why:
+\[
+Re=\frac{(1.2)(121)(2\times10^{-3})}{1.8\times10^{-5}}\approx1.6\times10^4,
+\]
+far beyond the $Re\ll1$ that Stokes' law requires. At such speeds the drop leaves a turbulent wake, and the
+drag is dominated by the momentum given to the air it pushes aside, which grows as $v^2$. Balancing that drag
+against the weight, $\tfrac12C\rho_{\text{air}}\pi r^2v^2=\tfrac43\pi r^3\rho_wg$, gives
+\[
+v=\sqrt{\frac{8r\rho_wg}{3C\rho_{\text{air}}}}=\sqrt{\frac{8(10^{-3})(1000)(9.8)}{3(0.5)(1.2)}}
+\approx\SI{6.6}{m/s},
+\]
+close to the measured value. The lesson: check $Re$ before trusting Stokes' law. It holds for fog droplets
+and fine dust, not for raindrops. \ans{Stokes \SI{121}{m/s} (wrong); about \SI{6.6}{m/s}}}
+\end{challengebox}
+
+\section*{Looking Back on Part A}
+\addcontentsline{toc}{section}{Looking Back on Part A}
+
+\textbf{Part A applied the mechanics of Volume~I to bulk matter.} Forces and equilibrium
+(\chref{ch:newton}) and work and energy (\chref{ch:energy}) were all it needed; what was new was the way a
+material responds.
+\begin{itemize}
+\item \textbf{Solids (\chref{ch:solids}).} A solid resists deformation. The response is described by
+\emph{stress} (force per unit area) and \emph{strain} (fractional deformation), tied together by a modulus
+for each kind of deformation: Young's modulus $Y$ for stretching, the bulk modulus $B$ for squeezing, and the
+shear modulus $G$ for shearing. Below the elastic limit a solid behaves as a spring and stores
+$\tfrac12\times\text{stress}\times\text{strain}$ of energy per unit volume; beyond it, it yields and
+eventually breaks.
+\item \textbf{Fluids at rest (\chref{ch:fluids}).} A fluid has no shear modulus, so at rest it can only push
+perpendicular to a surface, and its forces reduce to one scalar, pressure. Pressure grows with depth as
+$P=P_0+\rho gh$, is transmitted undiminished through an enclosed liquid (Pascal, hence hydraulics), and
+buoys a body with the weight of the fluid it displaces (Archimedes, hence floating).
+\item \textbf{Fluids in motion (\chref{ch:fluids}).} Continuity ($Av=\text{constant}$) is conservation of
+mass; Bernoulli's equation ($P+\tfrac12\rho v^2+\rho gh=\text{constant}$) is the work--energy theorem per unit
+volume. Viscosity, a shear stress proportional to the \emph{rate} of strain, and surface tension, an energy
+per unit area of surface, are the corrections real fluids demand.
+\end{itemize}
+The two chapters share one language. Stress and pressure are both force per unit area, measured in pascals;
+the bulk modulus of a solid and the near-incompressibility of a liquid are the same property; and the
+energy stored in a stretched wire, in a raised column of liquid and in a liquid surface are all energies
+per unit volume or per unit area, traded against work.
+
+\textbf{The thread into Part B:} throughout Part A the temperature was fixed. Yet the moduli, the viscosity
+and the surface tension all change when a material is heated, and a gas's pressure depends on its
+temperature as much as on its volume. \chref{ch:thermal} lets the temperature change, and finds that it
+governs expansion, changes of state and the flow of heat itself.

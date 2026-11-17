@@ -1,0 +1,51 @@
+% nuc_rutherford: alpha particles (K = 7.7 MeV) passing a gold nucleus (Z = 79) at
+% impact parameters b (Vol III Ch 1, fig:nuc-rutherford).
+% Physics: a repulsive inverse-square force gives a hyperbola with the nucleus at the
+% outer focus.  With d = 2Ze^2/(4 pi eps0 K) = 2(79)(1.44)/7.7 = 29.55 fm (head-on
+% closest approach), the orbit equation is
+%     r(t) = p / (e cos t - 1),   p = 2b^2/d,   e = sqrt(1 + (2b/d)^2),
+% t measured from the point of closest approach, which lies in the direction
+% psi = 180 - t_inf, where cos t_inf = 1/e.  The particle enters along y = b from
+% the left (t -> +t_inf) and leaves at the deflection angle 180 - 2 t_inf, so
+% tan(theta/2) = d/(2b).  Closest approach r_min = (d/2)(1 + e).
+% Each path is drawn out to r = Rmax and clipped to the frame.  Gold radius
+% R = 1.2 (197)^(1/3) = 6.98 fm.  Units: fm, 1 fm = 0.42 mm.
+\begin{tikzpicture}[x=0.42mm,y=0.42mm]
+  \def\rfd{29.548}
+  \def\Rmax{200}
+  % frame
+  \begin{scope}
+    \clip (-130,-50) rectangle (130,122);
+    % head-on closest-approach circle
+    \draw[guide] (0,0) circle[radius=\rfd];
+    \foreach \b in {8,16,30,60,100}{
+      \pgfmathsetmacro\rfe{sqrt(1+(2*\b/\rfd)^2)}
+      \pgfmathsetmacro\rfp{2*\b/\rfd*\b}
+      \pgfmathsetmacro\rftinf{acos(1/\rfe)}
+      \pgfmathsetmacro\rfpsi{180-\rftinf}
+      \pgfmathsetmacro\rfthm{acos((1+\rfp/\Rmax)/\rfe)}
+      \draw[curve,cPlum]
+        plot[domain=\rfthm:-\rfthm,samples=240,variable=\s]
+        ({\rfp/(\rfe*cos(\s)-1)*cos(\rfpsi+\s)},{\rfp/(\rfe*cos(\s)-1)*sin(\rfpsi+\s)});
+    }
+    % head-on: in to d and straight back
+    \draw[curve,cPlum,-smallhead] (-130,0) -- (-\rfd-1,0);
+  \end{scope}
+  % gold nucleus
+  \fill[cInk] (0,0) circle[radius=6.98];
+  % labels at the left, level with each incoming line
+  \foreach \b/\lab in {100/100,60/60,30/30,16/16,8/8}{
+    \node[anchor=east,font=\footnotesize,cPlum] at (-131,\b+1.5) {$b=\lab$\,fm};
+  }
+  \node[anchor=east,font=\footnotesize,cPlum,align=right] at (-131,-5)
+    {head-on: stops\\ at $d$ and returns};
+  % annotations
+  \draw[leader] (-0.72*\rfd,-0.70*\rfd) -- (-55,-40)
+    node[anchor=east,font=\footnotesize,inner sep=1pt] {closest approach $d=30$\,fm};
+  \draw[leader] (4.5,-5) -- (40,-22)
+    node[anchor=west,font=\footnotesize,inner sep=1pt] {gold nucleus, $R\approx7$\,fm};
+  % scale bar
+  \draw[dim] (78,-44) -- node[anchor=south,font=\footnotesize] {50\,fm} (128,-44);
+  % the incoming direction
+  \draw[velocity] (-128,-24) -- (-104,-24) node[anchor=west,font=\footnotesize,cFor] {incoming $\alpha$};
+\end{tikzpicture}

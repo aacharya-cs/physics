@@ -16,8 +16,13 @@
 \usepackage[a4paper,twoside,inner=25mm,outer=22mm,top=22mm,bottom=25mm,
             headsep=6mm,footskip=12mm]{geometry}
 
-\usepackage{amsmath,amssymb,bm}
+\usepackage{amsmath,amssymb,bm,mathtools}
 \usepackage{siunitx}
+% units for Volume III (eV, keV, MeV, Bq, Gy, Sv come with siunitx)
+\DeclareSIUnit{\amu}{u}              % atomic mass unit
+\DeclareSIUnit{\curie}{Ci}
+\DeclareSIUnit{\year}{y}
+\DeclareSIUnit{\fm}{fm}                % femtometre (not built in)
 \usepackage{tikz}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
@@ -88,9 +93,9 @@
 
 \hypersetup{colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black,
             bookmarksnumbered=true,pdfborder={0 0 0},
-            pdftitle={Mechanics: A Reasoning-First Companion (Volume I)},
-            pdfsubject={Class 11 mechanics for JEE and NEET},
-            pdfkeywords={mechanics, physics, JEE, NEET, Class 11}}
+            pdftitle={Physics: A Reasoning-First Companion},
+            pdfsubject={Physics for JEE and NEET: mechanics, properties of matter, thermal physics, nuclei and radioactivity},
+            pdfkeywords={physics, mechanics, fluids, thermodynamics, kinetic theory, JEE, NEET, Class 11}}
 
 \tikzset{
   lbl/.style={fill=white,draw=none,inner sep=2pt,rounded corners=1.5pt,font=\footnotesize},
@@ -129,7 +134,7 @@
 
 \titleformat{\chapter}[display]
   {\normalfont\filright}
-  {\vspace*{6pt}\normalsize\scshape\lowercase{chapter} \Huge\bfseries\thechapter}
+  {\vspace*{6pt}\normalsize\scshape\chapterword\ \Huge\bfseries\thechapter}
   {6pt}
   {\vspace{2pt}{\color{rulegrey}\titlerule[1.1pt]}\vspace{10pt}%
    \parbox{\textwidth}{\raggedright\huge\bfseries\linespread{1.0}\selectfont#1}\vspace{6pt}%
@@ -160,6 +165,9 @@
 % ----------------------------------------------------------------- TOC ------
 \setcounter{tocdepth}{1}
 \setcounter{secnumdepth}{3}
+% \volumetocline{numeral}{title}{page}: the top level of the contents
+\newcommand{\volumetocline}[3]{\par\addvspace{20pt}\noindent
+  {\Large\scshape Volume #1\quad\bfseries\upshape #2\hfill\normalsize\mdseries #3}\par\addvspace{2pt}}
 \titlecontents{part}[0pt]
   {\addvspace{14pt}\large\bfseries}{}{}{}[\addvspace{4pt}]
 \titlecontents{chapter}[1.6em]
@@ -304,8 +312,49 @@
 \newcommand{\wex}[1]{\begin{exbox}{#1}}
 \newcommand{\wexend}{\end{exbox}}
 
-% --- chapter and part openers ----------------------------------------------
-% \ncertchapter{n}{Title} keeps the numbering the manuscript already uses.
+% --- volumes, chapter and part openers --------------------------------------
+% The book is one PDF in several volumes.  The Foundations chapter (the
+% mathematical toolkit) comes first and serves every volume; it is numbered F,
+% so its boxes and figures read F.1, F.2.  Chapter and part numbers restart in
+% each volume.  \currvol holds F, I, II, ...; hyperref's anchors include it,
+% so Figure 2.3 of Volume I and Figure 2.3 of Volume II never collide.
+\def\currvol{F}
+\def\chapterword{chapter}
+
+% \foundationschapter{Title}: the shared opening chapter
+\newcommand{\foundationschapter}[1]{%
+  \def\currvol{F}\def\chapterword{foundations}%
+  \renewcommand{\thechapter}{F}%
+  \setcounter{chapter}{0}%
+  \chapter{#1}}
+
+% \volumedivider{numeral}{Title}{thesis}{part list}: starts a volume
+\newcommand{\volumedivider}[4]{%
+  \cleardoublepage
+  \def\currvol{#1}\def\chapterword{chapter}%
+  \renewcommand{\thechapter}{\arabic{chapter}}%
+  \setcounter{chapter}{0}\setcounter{part}{0}%
+  \thispagestyle{empty}%
+  \phantomsection
+  \pdfbookmark[-2]{Volume #1: #2}{volume.#1}%
+  \addtocontents{toc}{\protect\volumetocline{#1}{#2}{\thepage}}%
+  \vspace*{4.2cm}
+  \begin{center}
+    {\Large\scshape Volume #1}\\[6mm]
+    {\color{rulegrey}\rule{0.5\textwidth}{0.9pt}}\\[9mm]
+    {\Huge\bfseries #2}\\[10mm]
+    {\color{rulegrey}\rule{0.5\textwidth}{0.4pt}}\\[10mm]
+    \begin{minipage}{0.76\textwidth}\centering\large\itshape #3\end{minipage}\\[14mm]
+    \begin{minipage}{0.80\textwidth}\centering #4\end{minipage}
+  \end{center}
+  \cleardoublepage}
+
+% \volumeopening{Title}: an unnumbered opening chapter of a volume (purpose,
+% map, notation).  It carries no numbered boxes or figures.
+\newcommand{\volumeopening}[1]{%
+  \chapter*{#1}\addcontentsline{toc}{chapter}{#1}\markboth{#1}{#1}}
+
+% \ncertchapter{n}{Title} sets the chapter number explicitly.
 \newcommand{\ncertchapter}[2]{%
   \setcounter{chapter}{\numexpr#1-1\relax}%
   \chapter{#2}}
@@ -332,8 +381,31 @@
 % ch:measurement, ch:straightline, ch:vectors, ch:projectiles, ch:relative,
 % ch:circkin, ch:newton, ch:connected, ch:friction, ch:circdyn, ch:energy,
 % ch:collisions, ch:com, ch:rotation, ch:rolling, ch:gravitation, ch:kepler)
-\newcommand{\chref}[1]{Chapter~\ref{#1}}
-\newcommand{\chsref}[2]{Chapters~\ref{#1} and~\ref{#2}}
+% Every chapter label is set with \chlabel, which also records its volume, so
+% \chref prints "Chapter~11" within a volume, "Volume~I, Chapter~11" from
+% another volume, and "the Foundations" for the toolkit.
+% Volume II labels: ch:solids, ch:fluids, ch:thermal, ch:thermo, ch:kinetic.
+% Volume III labels: ch:nucleus, ch:decay, ch:decaylaw, ch:reactions, ch:nucapps.
+\makeatletter
+\newcommand{\setchvol}[2]{\expandafter\gdef\csname chvol@#1\endcsname{#2}}
+\newcommand{\chlabel}[1]{\label{#1}%
+  \immediate\write\@auxout{\string\setchvol{#1}{\currvol}}}
+\def\chv@F{F}
+\newcommand{\chref}[1]{%
+  \ifcsname chvol@#1\endcsname
+    \expandafter\let\expandafter\chv@this\csname chvol@#1\endcsname
+    \ifx\chv@this\chv@F the Foundations%
+    \else\ifx\chv@this\currvol Chapter~\ref{#1}%
+    \else Volume~\chv@this, Chapter~\ref{#1}\fi\fi
+  \else Chapter~\ref{#1}\fi}
+\makeatother
+\makeatletter
+\newcommand{\chsref}[2]{%
+  \ifcsname chvol@#1\endcsname
+    \expandafter\let\expandafter\chv@this\csname chvol@#1\endcsname
+    \ifx\chv@this\currvol\else Volume~\chv@this, \fi
+  \fi Chapters~\ref{#1} and~\ref{#2}}
+\makeatother
 \newcommand{\vc}[1]{\vec{\bm{#1}}}
 \newcommand{\uhat}[1]{\hat{\bm{#1}}}
 \newcommand{\A}{\vc{A}}
@@ -353,3 +425,22 @@
 \newcommand{\vomega}{\vc{\omega}}
 \newcommand{\ex}{\times}
 \newcommand{\faExclam}{}
+
+% --- Volume III: nuclear notation ----------------------------------------------
+% \nuc{A}{Z}{X} a nuclide with mass and atomic number; \iso{A}{X} mass number only
+\newcommand{\nuc}[3]{\prescript{#1}{#2}{\mathrm{#3}}}
+\newcommand{\iso}[2]{\prescript{#1}{}{\mathrm{#2}}}
+\newcommand{\Act}{\mathcal{A}}      % activity (decays per second)
+\newcommand{\Prod}{\mathcal{P}}     % constant production rate
+\newcommand{\Thalf}{T_{1/2}}        % half-life
+\newcommand{\Eb}{E_{\mathrm{b}}}    % binding energy
+
+% --- unique hyperlink anchors across volumes ---------------------------------
+\renewcommand{\theHpart}{\currvol.\arabic{part}}
+\renewcommand{\theHchapter}{\currvol.\arabic{chapter}}
+\renewcommand{\theHsection}{\theHchapter.\arabic{section}}
+\renewcommand{\theHequation}{\theHchapter.\arabic{equation}}
+\renewcommand{\theHfigure}{\theHchapter.\arabic{figure}}
+\renewcommand{\theHtable}{\theHchapter.\arabic{table}}
+\providecommand{\theHfigc}{}\renewcommand{\theHfigc}{\theHchapter.\arabic{figc}}
+\providecommand{\theHbxcount}{}\renewcommand{\theHbxcount}{\theHchapter.\arabic{bxcount}}

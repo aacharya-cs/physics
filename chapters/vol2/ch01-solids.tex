@@ -1,0 +1,820 @@
+% ================================================================
+\partdivider{A}{Mechanical Properties of Matter}{How solids resist being deformed and how fluids push, float and flow: the mechanics of bulk matter, built from the forces and energy of Volume~I.}{\chref{ch:solids} Mechanical Properties of Solids\\[1.2mm]
+\chref{ch:fluids} Mechanical Properties of Fluids}
+\ncertchapter{1}{Mechanical Properties of Solids}\chlabel{ch:solids}
+% ================================================================
+
+Why can a steel cable hold up a bridge while a rubber band of the same thickness cannot? Why does a
+diving board bend under you and spring back, while a biscuit snaps? Why are bones hollow, girders
+I-shaped, and aircraft made of aluminium alloy rather than lead? Each of these is a question about
+\textbf{elasticity}: how a solid deforms when forces act on it, and whether it returns to its shape when
+they are removed.
+
+Volume~I mostly avoided the question. Its rigid bodies (\chref{ch:rotation}) do not deform at all, and
+its springs (\chref{ch:connected}) obey Hooke's law, $F=-kx$, with a spring constant $k$ that belongs to
+one particular spring. Neither idea is enough to design a bridge. A real cable stretches, and an engineer
+needs to predict how far before the cable is made, from the properties of steel rather than of one
+finished cable. This chapter supplies that prediction. It rests on two ideas, \emph{stress} and
+\emph{strain}, which remove the size and shape of the sample, tied together by one number for each
+material and each way of deforming it, its \emph{modulus}. Hooke's spring constant turns out to be a
+modulus multiplied by a ratio of dimensions.
+
+The limits deserve stating from the start. Everything here assumes small deformations, a material that
+is the same in every direction, and loads applied slowly enough that nothing vibrates. Beyond the
+elastic limit the simple laws fail, and the chapter describes, without a full theory, what happens
+there: permanent deformation and, eventually, fracture.
+
+\begin{motivbox}{Why elasticity matters}
+Every structure trusted with a life is an elasticity calculation. A lift cable, a bridge span and a hip
+implant must neither stretch too far nor break, which means keeping the stress (force per area) safely
+below the limit of the material: that is why cables are thick and why the same load is safe on one
+material and dangerous on another. Shape matters as much as material: a hollow bone, an I-shaped girder
+and a tube resist bending far better than a solid rod of the same mass, because bending is resisted most
+by material far from the axis, an idea that echoes the moment of inertia of \chref{ch:rotation}. And
+elastic energy, stored and released, is what lets a diving board spring, a car suspension absorb a bump
+and a pole-vaulter's pole hurl an athlete over the bar; released suddenly, the same energy makes a
+snapped cable dangerous.
+\end{motivbox}
+
+\section{Stress and Strain}\label{sec:solids-stress}
+
+When a rod is pulled, two things compete. The external force tries to stretch it; the bonds between its
+atoms pull back, trying to restore their natural spacing. In equilibrium these balance, and the rod
+settles at a slightly greater length. To describe this in a way that does not depend on the particular
+rod, we need quantities that do not change when the rod is made thicker or longer: force spread over
+area, and stretch relative to length.
+
+\begin{defbox}{Stress and strain}
+Take a rod of natural length $\ell$ and cross-sectional area $A$, pulled at its two ends by equal and
+opposite forces of magnitude $F$, so that it stretches by $\Delta\ell$.
+\begin{itemize}
+\item \textbf{Stress} is the internal force per unit area across any cross-section,
+      \[ \sigma=\frac{F}{A}\qquad(\text{unit }\si{N/m^2}=\si{Pa}). \]
+      Imagine cutting the rod anywhere along its length: the two pieces must pull on each other with
+      force $F$, or each piece would accelerate. That internal pull, spread over the area of the cut, is
+      the stress. It is a scalar here because the force is perpendicular to the cut; it is taken as
+      positive in tension and negative in compression.
+\item \textbf{Strain} is the \emph{fractional} deformation,
+      \[ \epsilon=\frac{\Delta\ell}{\ell}\qquad(\text{dimensionless}). \]
+\end{itemize}
+Stress measures how hard the material is being worked; strain measures how much it gives.
+\end{defbox}
+
+\inwords{Dividing by area and by length describes the \emph{material}, not the particular sample. A
+thick rope holds more than a thin one made of the same fibre, but at the same \emph{stress} both are
+equally close to breaking. That is why engineers quote stress, not force: it is the fair measure of how
+hard a material is being pushed, whatever its size. The unit of stress is the unit of pressure, and the
+pressure of a fluid (\chref{ch:fluids}) is a special case of stress, one that pushes equally in every
+direction.}
+
+Pulling along the length is only one way to deform a solid. The direction of the force relative to the
+surface it acts on decides what kind of deformation follows, and there are three kinds.
+
+\begin{defbox}{Three kinds of stress and strain}
+The three are shown in Figure~\ref{fig:solids-stresskinds}.
+\begin{itemize}
+\item \textbf{Tensile or compressive.} The force is \emph{perpendicular} to the face it acts on,
+      pulling out or pushing in along the length. The response is a \textbf{longitudinal strain}
+      $\Delta\ell/\ell$. Examples: a stretched wire, a loaded pillar.
+\item \textbf{Shear.} The force is \emph{parallel} to the face (tangential), and an equal and opposite
+      tangential force acts on the opposite face, so the top of a block slides over its bottom without
+      the block as a whole moving. The shearing stress is the tangential force per area of the face,
+      $F/A$. The response is a \textbf{shear strain}, the angle $\theta$ (in radians) through which an
+      originally perpendicular side tilts; if the top moves by $\Delta x$ relative to the bottom, a
+      height $h$ below it, then $\tan\theta=\Delta x/h$, and for the small angles of elasticity
+      $\theta\approx\Delta x/h$ (the small-angle approximation of \chref{ch:toolkit}). Examples: a twisted
+      shaft, a sheet cut by scissors.
+\item \textbf{Volume (hydrostatic).} An equal increase in pressure $\Delta P$ acts on \emph{every} face
+      at once. The response is a \textbf{volume strain} $\Delta V/V$, the fractional change in volume.
+      Example: a body sunk deep in the sea.
+\end{itemize}
+Each kind of strain is matched by its own elastic modulus, defined in the next section.
+\end{defbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{solids_stresskinds}
+\figcaption{fig:solids-stresskinds}{The three ways to deform a solid, with the deformations exaggerated
+about a hundredfold (dashed outlines are the undeformed shapes). Tensile: forces normal to the end faces
+lengthen the block, which also grows slightly narrower. Shear: equal and opposite tangential forces on
+the top and bottom faces tilt the sides through the angle $\theta$, which \emph{is} the strain. Volume:
+the same extra pressure on every face shrinks the block without changing its shape.}
+\end{figure}
+
+\begin{exbox}{Shearing a metal block}\label{ex:solids-shear}
+An aluminium cube of side \SI{10}{cm} has its bottom face glued to a bench. A tangential force of
+\SI{1.0e5}{N} is applied to its top face. How far does the top face move? (Shear modulus of aluminium,
+defined in the next section: $G=\SI{2.5e10}{Pa}$, so that shear strain $=$ shear stress$/G$.)
+
+\stepn{1} Shear stress: $F/A=\num{1.0e5}/(0.10)^2=\SI{1.0e7}{Pa}$.
+
+\stepn{2} Shear strain: $\theta=\num{1.0e7}/\num{2.5e10}=\SI{4.0e-4}{rad}$, about $0.02^\circ$.
+
+\stepn{3} Displacement of the top: $\Delta x=h\theta=(0.10)(\num{4.0e-4})=\SI{4.0e-5}{m}$.
+
+\smallskip
+A force equal to the weight of ten tonnes moves the top face by \SI{0.04}{mm}: metals are stiff, which is
+why the rigid-body model of Volume~I works so well for them. \ans{\SI{0.04}{mm}}
+\end{exbox}
+
+\section{Hooke's Law and the Elastic Moduli}\label{sec:solids-moduli}
+
+Robert Hooke found in 1660 that, for small deformations, the extension of a spring or wire is
+proportional to the force: \emph{ut tensio, sic vis}, ``as the extension, so the force.''
+\chref{ch:connected} used that law for a spring. In the language of the last section it becomes a
+statement about any material: for small strains, \emph{stress is proportional to strain}. The constant of
+proportionality is the material's \textbf{modulus of elasticity}, and it measures the stiffness of the
+material rather than of one object.
+
+\begin{keybox}{The three elastic moduli}
+For small strains, stress $=$ modulus $\times$ strain, with one modulus for each kind of deformation:
+\[
+\underbrace{Y=\frac{F/A}{\Delta\ell/\ell}}_{\text{Young's modulus}},\qquad
+\underbrace{G=\frac{F/A}{\theta}}_{\text{shear modulus}},\qquad
+\underbrace{B=-\frac{\Delta P}{\Delta V/V}}_{\text{bulk modulus}}.
+\]
+Each is a stress divided by a dimensionless strain, so each has the unit of pressure, the pascal. A
+\emph{large} modulus means a stiff material: a large stress produces only a small strain. The bulk
+modulus carries a minus sign because an increase in pressure \emph{decreases} the volume, and the sign
+makes $B$ positive. Its reciprocal, $1/B$, is called the \textbf{compressibility}. (The bulk modulus is
+written $B$ in this volume because $K$ is reserved for thermal conductivity in \chref{ch:thermal}.)
+\end{keybox}
+
+\inwords{One relation, stress $=$ modulus $\times$ strain, wears three hats depending on how the material
+is pushed. Pull a wire and $Y$ governs it; shear or twist a shaft and $G$ governs it; squeeze from all
+sides and $B$ governs it. A fluid cannot be pulled or sheared into a new shape that it then holds, so it
+has no $Y$ or $G$ at all, only a bulk modulus; that is why sound in a gas, a wave of compression, depends
+on the bulk modulus of the gas.}
+
+The relation between the modulus of a material and the spring constant of an object made from it is the
+first thing worth deriving, because it connects this chapter to Volume~I.
+
+\begin{derivbox}{A wire is a spring: $k=YA/\ell$ and $\Delta\ell=F\ell/AY$}
+\stepn{1} Solve the definition of Young's modulus for the force:
+\[
+Y=\frac{F/A}{\Delta\ell/\ell}\qquad\Longrightarrow\qquad F=\frac{YA}{\ell}\,\Delta\ell .
+\]
+\stepn{2} This is Hooke's law, $F=kx$ in magnitude, with extension $x=\Delta\ell$ and spring constant
+\[
+\boxed{\;k=\frac{YA}{\ell}\;}
+\]
+The spring constant of \chref{ch:connected} is therefore not a property of the material alone: it is the
+modulus (the material) multiplied by $A/\ell$ (the shape). A thicker wire is a stiffer spring; a longer
+one is a softer spring.
+
+\stepn{3} Solving instead for the extension,
+\[
+\boxed{\;\Delta\ell=\frac{F\ell}{AY}\;}
+\]
+The stretch grows with the load $F$ and the length $\ell$ (a longer wire has more material to stretch),
+and shrinks with the area $A$ and the stiffness $Y$. Doubling the length doubles the stretch; halving the
+radius quarters the area and so \emph{quadruples} the stretch. That last consequence is the most tested
+in examinations.
+\end{derivbox}
+
+\begin{exbox}{How much does a steel wire stretch?}\label{ex:solids-wire}
+A steel wire \SI{1.0}{m} long with cross-sectional area \SI{1.0}{mm^2} carries a \SI{10}{kg} load. How far
+does it stretch, and what is its spring constant? ($Y_{\text{steel}}=\SI{2.0e11}{Pa}$,
+$g=\SI{9.8}{m/s^2}$.)
+
+\stepn{1} Force and area: $F=mg=\SI{98}{N}$; $A=\SI{1.0e-6}{m^2}$.
+
+\stepn{2} Stress: $\sigma=F/A=\SI{9.8e7}{Pa}=\SI{98}{MPa}$.
+
+\stepn{3} Extension: $\Delta\ell=\dfrac{F\ell}{AY}=\dfrac{(98)(1.0)}{(\num{1.0e-6})(\num{2.0e11})}
+=\SI{4.9e-4}{m}\approx\SI{0.49}{mm}$.
+
+\stepn{4} Spring constant: $k=YA/\ell=\SI{2.0e5}{N/m}$, about a hundred times stiffer than a typical
+laboratory spring.
+
+\smallskip
+Half a millimetre under a load heavier than a bag of cement: steel gives very little, which is exactly why
+loads are hung from it. \ans{\SI{0.49}{mm}; \SI{2.0e5}{N/m}}
+\end{exbox}
+
+\begin{trapbox}{a longer wire is not a stronger one}
+A longer wire \emph{stretches more} for the same load ($\Delta\ell\propto\ell$), but it \emph{breaks at
+the same load}, because breaking depends on the stress $F/A$, which does not involve the length. Length
+affects how much a wire gives, not when it fails.
+\end{trapbox}
+
+Typical values, collected in Table~\ref{tab:solids-moduli}, show how widely the moduli differ, and
+they hide one more lesson: for solids the three moduli are of the same order, while for liquids and gases
+only $B$ exists.
+
+\begin{tablebox}{Approximate elastic moduli (in \si{GPa}, $\SI{1}{GPa}=\SI{e9}{Pa}$)}
+\centering
+\begin{tabular}{@{}lccc@{}}
+\toprule
+Material & $Y$ & $G$ & $B$\\
+\midrule
+steel & $200$ & $80$ & $160$\\
+copper & $120$ & $44$ & $140$\\
+aluminium & $70$ & $25$ & $70$\\
+glass & $65$ & $26$ & $40$\\
+bone (along its length) & $16$ & -- & --\\
+soft rubber & about $0.001$ to $0.01$ & -- & $2$\\
+water & -- & -- & $2.2$\\
+air (at atmospheric pressure, constant temperature) & -- & -- & $0.0001$\\
+\bottomrule
+\end{tabular}\label{tab:solids-moduli}
+
+\smallskip
+\raggedright
+Values vary by tens of per cent with composition and treatment. A dash means the modulus does not exist
+(fluids) or is not needed here.
+\end{tablebox}
+
+\why{The stiffness of a material is set by the strength of its interatomic bonds, so the modulus is a
+window onto the microscopic world. Steel resists stretching about $10^{5}$ times more strongly than soft
+rubber, because metallic bonds are far stiffer than the tangled polymer chains of rubber, which stretch by
+straightening out rather than by pulling atoms apart. Rubber is nevertheless hard to \emph{compress}
+($B\approx\SI{2}{GPa}$, like water): its chains straighten easily, but its atoms resist being crowded
+together. Choosing a material, steel for a bridge, rubber for a tyre, aluminium for a wing, is largely
+choosing a modulus.}
+
+\begin{exbox}{How much does water compress in the deep sea?}\label{ex:solids-water}
+By what fraction is the volume of water reduced at a depth of \SI{1.0}{km}, where the pressure exceeds the
+surface pressure by $\rho gh$? ($B_{\text{water}}=\SI{2.2e9}{Pa}$, $\rho=\SI{1000}{kg/m^3}$.)
+
+\stepn{1} $\Delta P=\rho gh=(1000)(9.8)(1000)=\SI{9.8e6}{Pa}$, about $97$ atmospheres.
+
+\stepn{2} $\Delta V/V=-\Delta P/B=-\num{9.8e6}/\num{2.2e9}=-\num{4.5e-3}$.
+
+\smallskip
+Less than half a per cent, under nearly a hundred atmospheres. This is why \chref{ch:fluids} treats
+liquids as incompressible, and why that model fails only in the deepest oceans or at very high pressures.
+\ans{$0.45\%$ smaller}
+\end{exbox}
+
+\subsection{Poisson's ratio: stretch one way, thin the other}
+
+A stretched rubber band visibly grows narrower as it lengthens. Every solid does the same, though usually
+too little to see: pulling it longer makes it thinner, and squashing it shorter makes it bulge. The two
+strains are linked by a pure number.
+
+\begin{defbox}{Poisson's ratio}
+When a rod of width (or diameter) $d$ is stretched, its \textbf{longitudinal strain} $\Delta\ell/\ell$ is
+accompanied by a \textbf{lateral strain} $\Delta d/d$ of the opposite sign. Their ratio defines
+\textbf{Poisson's ratio},
+\[
+\boxed{\;\nu=-\frac{\Delta d/d}{\Delta\ell/\ell}\;}
+\]
+The minus sign makes $\nu$ positive. It is dimensionless and, for most solids, between about $0.2$ and
+$0.5$: about $0.3$ for metals, close to $0.5$ for rubber, and nearly $0$ for cork.
+\end{defbox}
+
+Why does $0.5$ appear as an upper value? Because of what stretching does to the volume.
+
+\begin{derivbox}{Volume change of a stretched rod, and why $\nu\le\tfrac12$}
+\stepn{1} For a rod of square cross-section $d\times d$, the volume is $V=\ell d^{2}$. Take logarithms and
+differentiate (the logarithmic differentiation of \chref{ch:toolkit}):
+\[
+\frac{\Delta V}{V}=\frac{\Delta\ell}{\ell}+2\frac{\Delta d}{d}.
+\]
+(A circular section gives the same result, since its area is also proportional to $d^{2}$.)
+
+\stepn{2} Substitute $\Delta d/d=-\nu\,\Delta\ell/\ell$:
+\[
+\boxed{\;\frac{\Delta V}{V}=(1-2\nu)\,\frac{\Delta\ell}{\ell}\;}
+\]
+\stepn{3} Read it. For $\nu=\tfrac12$ the volume does not change at all: the material flows sideways
+exactly enough to make room. For $\nu<\tfrac12$, stretching increases the volume. A value above
+$\tfrac12$ would mean that pulling a rod \emph{reduces} its volume; by the relation $Y=3B(1-2\nu)$ quoted
+below, it would also make the bulk modulus negative, so that squeezing the material would make it expand,
+and no stable material behaves like that. Rubber, with $\nu\approx0.5$, is the nearly volume-conserving
+extreme, which is why its bulk modulus is so much larger than its Young's modulus.
+\end{derivbox}
+
+\inwords{Poisson's ratio ties the sideways squeeze to the lengthwise pull. Cork ($\nu\approx0$) barely
+changes width when pushed into a bottle neck, which is exactly why it makes a good stopper; rubber
+($\nu\approx0.5$) bulges strongly and keeps its volume. For a material that behaves the same in every
+direction the four constants $Y$, $G$, $B$ and $\nu$ are not independent: any two fix the others, through
+$Y=2G(1+\nu)=3B(1-2\nu)$. These relations are stated here without proof, because the derivation needs the
+full three-dimensional theory of strain; the steel values in Table~\ref{tab:solids-moduli} satisfy them
+with $\nu\approx0.29$.}
+
+\section{The Stress--Strain Curve}\label{sec:solids-curve}
+
+Hooke's law holds only for small strains. Pull a real material further and it passes through a sequence
+of regimes, recorded in its \textbf{stress--strain curve}, measured by stretching a sample slowly in a
+testing machine and plotting stress against strain (Figure~\ref{fig:solids-stressstrain}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{solids_stressstrain}
+\figcaption{fig:solids-stressstrain}{Left: a ductile metal (strain axis not to scale; the straight part
+really ends near a strain of $0.002$). Hooke's law holds up to A; beyond the yield point B the deformation
+becomes permanent, so unloading from C retraces a line parallel to the elastic one and leaves a permanent
+set. Past the ultimate stress D the sample narrows locally (necks) and breaks at E. Right: rubber has no
+straight region, stretches to several times its length, and returns along a lower path, so a loading and
+unloading cycle turns the area between the curves into heat.}
+\end{figure}
+
+\begin{defbox}{Landmarks on the stress--strain curve}
+\begin{itemize}
+\item \textbf{Proportional limit} (A): up to here stress is proportional to strain, and the moduli
+      describe the material.
+\item \textbf{Elastic limit, or yield point} (B): up to here the material returns to its original
+      length when unloaded, even if the last part of the curve is not quite straight. The stress at B is
+      the \textbf{yield strength}, the practical limit for design.
+\item \textbf{Plastic region} (B to D): the deformation is now partly permanent. Unloaded from a point
+      such as C, the material retraces a line parallel to the elastic one and keeps a \textbf{permanent
+      set}.
+\item \textbf{Ultimate tensile strength} (D): the greatest stress the material can bear. Beyond it the
+      sample narrows at one place (necking), and the force needed to stretch it further falls.
+\item \textbf{Fracture point} (E): where it breaks.
+\end{itemize}
+A \textbf{ductile} material, such as copper or mild steel, has a long plastic region and can be drawn into
+wire; a \textbf{brittle} one, such as glass or cast iron, breaks at or near its elastic limit with almost
+no warning.
+\end{defbox}
+
+\begin{remarkbox}{Elastomers and elastic hysteresis}
+Rubber, and the elastic tissue of the aorta, are \textbf{elastomers}: they stretch to several times their
+length, never obey Hooke's law, and still return to their original length. Their unloading curve lies
+below the loading curve (Figure~\ref{fig:solids-stressstrain}, right), so a full cycle of stretching and
+release does net work on the material; that work, equal to the area of the loop, becomes heat. This
+\textbf{elastic hysteresis} is useful in shock absorbers and the soles of running shoes, and it is why a
+car tyre warms up as it rolls.
+\end{remarkbox}
+
+\why{The curve explains why the structures around us do not collapse. Engineers keep the working stress
+of a lift cable, a bridge girder or an aircraft spar several times below the yield strength; the ratio
+is the \textbf{factor of safety}, chosen to cover flaws, fatigue and loads nobody foresaw. The plastic
+region is useful knowledge too: it is what a blacksmith exploits to forge a horseshoe, what lets a car's
+crumple zone absorb a crash, and what makes soft metals drawable into wires and beatable into sheets.
+\chref{ch:thermal} (Section~\ref{sec:thermal-stress}) will show another source of stress: a steel rail clamped at both ends and warmed by
+\SI{40}{K} develops a stress of about \SI{96}{MPa}, a large fraction of the yield strength of ordinary
+steel, which is why railway lines and bridges need expansion gaps.}
+
+\begin{exbox}{Choosing a crane rope with a factor of safety}\label{ex:solids-crane}
+A crane must lift loads of up to \SI{1.0e4}{kg}. Its steel rope has a yield strength of
+\SI{3.0e8}{Pa}. Find the least radius of rope that would just reach yield, and the radius needed for a
+factor of safety of $10$.
+
+\stepn{1} The weight is $mg=\SI{9.8e4}{N}$. Yield is reached when $mg/(\pi r^{2})=\num{3.0e8}$, so
+$r=\sqrt{mg/(\pi\sigma_y)}=\sqrt{\num{9.8e4}/(\pi\times\num{3.0e8})}=\SI{1.0}{cm}$.
+
+\stepn{2} A factor of safety of $10$ means a working stress of one tenth of the yield strength, so the
+area must be ten times larger and the radius $\sqrt{10}$ times larger: $r=\SI{3.2}{cm}$.
+
+\smallskip
+Real crane ropes are made of many thin strands twisted together, which makes them flexible and means one
+broken strand is not a disaster, but the area they must provide is set by exactly this calculation.
+\ans{\SI{1.0}{cm}; \SI{3.2}{cm}}
+\end{exbox}
+
+\section{Elastic Potential Energy}\label{sec:solids-energy}
+
+Stretching a wire takes work, and while the wire stays within its elastic limit that work is stored, to
+be returned when the load is removed. \chref{ch:energy} found the energy of a stretched spring,
+$U=\tfrac12kx^{2}$, by integrating a force that grows from zero. The same calculation for a wire gives a
+result that belongs to the material.
+
+\begin{derivbox}{Energy stored in a stretched wire}
+\stepn{1} At extension $x$ the wire pulls back with force $F(x)=kx=\dfrac{YA}{\ell}\,x$. Stretching it a
+further $dx$ takes work $F(x)\,dx$.
+
+\stepn{2} Integrate from zero to the final extension $\Delta\ell$:
+\[
+U=\int_0^{\Delta\ell}\frac{YA}{\ell}\,x\,dx=\frac{YA}{\ell}\cdot\frac{(\Delta\ell)^{2}}{2}
+=\frac12\,\underbrace{\frac{YA\,\Delta\ell}{\ell}}_{F}\,\Delta\ell=\frac12\,F\,\Delta\ell ,
+\]
+which is $\tfrac12kx^{2}$ with $k=YA/\ell$.
+
+\stepn{3} Divide by the volume $A\ell$ to obtain the \textbf{energy density}, the energy stored per unit
+volume, which no longer depends on the size of the wire:
+\[
+\boxed{\;u=\frac{U}{A\ell}=\frac12\,\sigma\,\epsilon=\frac12\,Y\epsilon^{2}=\frac{\sigma^{2}}{2Y}\;}
+\]
+\end{derivbox}
+
+\inwords{The stored energy is $\tfrac12F\,\Delta\ell$, not $F\,\Delta\ell$, for the same reason as in a
+spring's $\tfrac12kx^{2}$: the force grew linearly from zero, so its average over the stretch was half
+its final value. Per unit volume the energy is half the stress times the strain, the area of the triangle
+under the straight part of the stress--strain curve. Beyond the elastic limit the area under the curve is
+still the work done, but only part of it comes back; the rest is the work of permanent deformation, which
+ends up as heat.}
+
+\begin{exbox}{Energy density in a loaded steel wire}\label{ex:solids-energy}
+Find the elastic energy per unit volume in the steel wire of Example~\ref{ex:solids-wire}, and the total
+energy it stores.
+
+\stepn{1} $u=\dfrac{\sigma^{2}}{2Y}=\dfrac{(\num{9.8e7})^{2}}{2(\num{2.0e11})}=\SI{2.4e4}{J/m^3}$.
+
+\stepn{2} The volume is $A\ell=\SI{1.0e-6}{m^3}$, so $U=\SI{0.024}{J}$. Check:
+$\tfrac12F\Delta\ell=\tfrac12(98)(\num{4.9e-4})=\SI{0.024}{J}$.
+\ans{\SI{2.4e4}{J/m^3}; \SI{24}{mJ}}
+\end{exbox}
+
+\section{Applications of Elastic Behaviour}\label{sec:solids-apps}
+
+The point of understanding elasticity is to build with it: to choose shapes and materials that carry
+loads without sagging too far, breaking, or wasting material. Three classic decisions follow from the
+ideas above, and each comes with an honest statement of what the model leaves out.
+
+\subsection{Beams: why girders are I-shaped and bones are hollow}
+
+A horizontal beam bends under a load, its upper layers stretching and its lower layers compressing
+(Figure~\ref{fig:solids-beam}). How far it sags depends on the material through $Y$ and on the shape of
+its cross-section through a single geometric number.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{solids_beam}
+\figcaption{fig:solids-beam}{Left: a cantilever (sag exaggerated). Above the neutral axis the layers
+stretch, below it they compress, and the axis itself keeps its length. Right: four cross-sections of
+\emph{equal area}, so equal mass per metre, with their resistance to bending (the second moment of area
+$I_g$) relative to the square. Moving material away from the neutral axis, by standing a plank on edge,
+gathering it into flanges or rolling it into a tube, makes the same material several times stiffer.}
+\end{figure}
+
+\begin{defbox}{The depression of a cantilever}
+A horizontal beam of length $\ell$, clamped at one end and loaded with a force $F$ at the free end, sags at
+the tip by a \textbf{depression}
+\[
+\delta=\frac{F\ell^{3}}{3\,Y\,I_g},\qquad I_g=\int y^{2}\,dA ,
+\]
+where $Y$ is Young's modulus and $I_g$ is the \textbf{second moment of area} of the cross-section about its
+horizontal neutral axis ($y$ is the height of an element of area $dA$ above that axis). The integral has
+the same form as the moment of inertia $I=\int r^{2}\,dm$ of \chref{ch:rotation}, with area in place of
+mass, which is why it rewards placing material \emph{far} from the axis. For a rectangle of width $b$ and
+depth $d$, $I_g=bd^{3}/12$. The result is derived just below; three consequences matter more than the
+derivation:
+\begin{itemize}
+\item \textbf{The $\ell^{3}$ is severe.} Doubling the length of a beam makes it sag eight times as much.
+\item \textbf{Depth beats width.} Since $I_g\propto bd^{3}$, a plank laid on edge is far stiffer than the
+      same plank laid flat: standing it up, so that depth and width exchange, multiplies the stiffness by
+      $(d/b)^{2}$. That is why floor joists stand on edge.
+\item \textbf{Shape beats bulk.} An I-section (material gathered into top and bottom flanges) and a hollow
+      tube are several times stiffer than a solid bar of the same mass (Figure~\ref{fig:solids-beam}),
+      which is why steel girders and rails are I-shaped, and why bones, bamboo and bicycle frames are
+      hollow.
+\end{itemize}
+\end{defbox}
+
+\begin{derivbox}{Where $\delta=F\ell^{3}/3YI_g$ comes from (beyond the syllabus)}
+This derivation is above the level of the examination, but it uses only Hooke's law, the turning effect
+of a force and two integrations, and it shows exactly why shape enters through $\int y^{2}\,dA$. Read it
+for understanding, not for reproduction.
+
+\stepn{1} \textbf{Bending stretches one side and compresses the other.} Bend a short piece of beam into an
+arc of radius $R$. The neutral axis keeps its length; a layer a height $y$ above it lies on an arc of
+radius $R+y$, so it is stretched by the strain $y/R$, proportional to its distance from the axis. By
+Hooke's law the stress there is $\sigma=Yy/R$.
+
+\stepn{2} \textbf{Add up the layers into a bending moment.} The force on a strip of area $dA$ is
+$\sigma\,dA$, at lever arm $y$ about the neutral axis, so its turning effect (its moment, as for the torque
+of \chref{ch:rotation}) is $y\,\sigma\,dA$. Summing over the cross-section,
+\[
+M=\int y\,\sigma\,dA=\frac{Y}{R}\int y^{2}\,dA=\frac{YI_g}{R}.
+\]
+Because $y$ is \emph{squared}, material far from the axis counts for far more. Rearranged, this is the
+\textbf{bending equation}, $1/R=M/(YI_g)$.
+
+\stepn{3} \textbf{The moment along a cantilever.} At a distance $x$ from the wall, the part of the beam
+beyond $x$ carries the load $F$ at a further distance $(\ell-x)$, so the moment there is $M(x)=F(\ell-x)$.
+For a small sag $y_s(x)$ (measured downwards) the curvature is $1/R=d^{2}y_s/dx^{2}$, a result about
+curves quoted here from mathematics, so
+\[
+YI_g\,\frac{d^{2}y_s}{dx^{2}}=F(\ell-x).
+\]
+\stepn{4} \textbf{Integrate twice.} At the clamped end the sag and the slope are both zero, which fixes
+both constants of integration at zero:
+\[
+YI_g\,\frac{dy_s}{dx}=F\Big(\ell x-\frac{x^{2}}{2}\Big),\qquad
+YI_g\,y_s=F\Big(\frac{\ell x^{2}}{2}-\frac{x^{3}}{6}\Big).
+\]
+At the free end, $x=\ell$, the bracket is $\tfrac12\ell^{3}-\tfrac16\ell^{3}=\tfrac13\ell^{3}$, so
+\[
+\boxed{\;\delta=y_s(\ell)=\frac{F\ell^{3}}{3YI_g}\;}
+\]
+\stepn{5} \textbf{A beam supported at both ends.} A beam of length $\ell$ resting on two supports and
+loaded by $F$ at its centre is, by symmetry, level at the centre, so each half behaves like a cantilever of
+length $\ell/2$ clamped at the middle and pushed up by $F/2$ at its support. Its sag is therefore
+\[
+\delta=\frac{(F/2)(\ell/2)^{3}}{3YI_g}=\frac{F\ell^{3}}{48\,YI_g}=\frac{F\ell^{3}}{4\,Y\,bd^{3}}
+\quad\text{for a rectangular section,}
+\]
+the form in which the result usually appears in examinations.
+\end{derivbox}
+
+\begin{exbox}{A tube against a solid rod}\label{ex:solids-tube}
+A solid circular rod of radius $r$ and a tube of outer radius $2r$ are made of the same material and have
+the same mass per metre. Compare their resistance to bending. ($I_g=\tfrac14\pi R^{4}$ for a solid disc of
+radius $R$ about a diameter, stated here from the integral $\int y^2\,dA$.)
+
+\stepn{1} Equal areas: $\pi\big((2r)^{2}-r_{\text{in}}^{2}\big)=\pi r^{2}$, so the inner radius is
+$r_{\text{in}}=\sqrt3\,r$.
+
+\stepn{2} The tube's $I_g$ is that of the full disc minus that of the hole:
+$\tfrac14\pi\big((2r)^{4}-(\sqrt3\,r)^{4}\big)=\tfrac14\pi(16-9)r^{4}=7\times\tfrac14\pi r^{4}$.
+
+\smallskip
+The tube is seven times stiffer than the solid rod for the same material and weight. It is weaker in one
+respect the model ignores: a very thin-walled tube can buckle or dent locally, which is why bicycle tubes
+and bones are not made arbitrarily thin. \ans{tube $7\times$ stiffer}
+\end{exbox}
+
+\subsection{Self-weight: how high can a mountain be?}
+
+A structure must carry its own weight, and the stress at its base grows with its height. That sets an
+upper limit on the height of anything built of a given material, including mountains.
+
+\begin{exbox}{The tallest possible mountain}\label{ex:solids-mountain}
+Model a mountain as a column of rock of uniform cross-section and height $h$. The stress at its base is
+the weight above divided by the area, $\rho Ahg/A=\rho gh$. Rock begins to flow plastically at a stress of
+about \SI{3e8}{Pa}; its density is about \SI{3e3}{kg/m^3}. Estimate the greatest height.
+
+\stepn{1} Set $\rho gh=\sigma_y$: $h=\dfrac{\sigma_y}{\rho g}=\dfrac{\num{3e8}}{(\num{3e3})(9.8)}\approx\SI{10}{km}$.
+
+\smallskip
+The estimate is crude (a real mountain is wider at the base, which lowers the stress, and rock strength
+varies), but it is the right size: Mount Everest is \SI{8.8}{km} high, and no mountain on Earth is much
+taller. On Mars, where $g$ is about $0.38$ of its value on Earth, Olympus Mons rises over \SI{20}{km},
+as the same estimate predicts. \ans{about \SI{10}{km}}
+\end{exbox}
+
+\why{Elasticity is where physics meets civil and mechanical engineering. The thickness of a crane rope is
+set so that its working stress is a safe fraction of its yield strength; the ropes, pillars and beams of
+every structure are sized by $\Delta\ell=F\ell/AY$, the stress limit, and the depression formulas of this
+chapter; and the choice to alloy iron with a little carbon, or to prefer aluminium for aircraft, trades
+stiffness, strength and weight. The next chapter turns from solids, which resist a change of shape, to
+fluids, which do not.}
+
+\section{Summary}\label{sec:summary-solids}
+
+Stress (force per area) and strain (fractional deformation) describe a material independently of the size
+of the sample; within the elastic limit they are proportional, and the constant of proportionality, one
+for each kind of deformation, is the modulus. A wire is a spring whose constant is the modulus times
+$A/\ell$, and the energy it stores is half the stress times the strain per unit volume. Beyond the elastic
+limit a material deforms permanently and eventually breaks, and the design of every structure keeps its
+stresses well inside that limit, using shape as much as material to do so.
+
+\begin{itemize}
+\item Stress $\sigma=F/A$ (\si{Pa}); longitudinal strain $\epsilon=\Delta\ell/\ell$; shear strain
+      $\theta\approx\Delta x/h$; volume strain $\Delta V/V$.
+\item Moduli: $Y=\sigma/\epsilon$, $G=(F/A)/\theta$, $B=-\Delta P/(\Delta V/V)$; fluids have only $B$.
+\item $\Delta\ell=F\ell/AY$, and a wire is a spring with $k=YA/\ell$; the stretch is proportional to
+      $\ell/r^{2}$.
+\item Poisson's ratio $\nu=-(\Delta d/d)/(\Delta\ell/\ell)$; a stretched rod changes volume by
+      $\Delta V/V=(1-2\nu)\,\Delta\ell/\ell$, so $\nu\le\tfrac12$.
+\item Stress--strain curve: proportional limit, elastic limit (yield), plastic region with permanent set,
+      ultimate strength, fracture. Breaking depends on stress, never on length.
+\item Elastic energy $U=\tfrac12F\,\Delta\ell$; energy density $u=\tfrac12\sigma\epsilon=\sigma^{2}/2Y$.
+\item A cantilever sags by $F\ell^{3}/3YI_g$ with $I_g=\int y^{2}dA$; depth and distance from the neutral
+      axis buy stiffness, which is why girders are I-shaped and bones hollow.
+\end{itemize}
+
+\section{Problem Types}\label{sec:types-solids}
+
+Six types cover the elasticity questions examiners set. Almost all of them rest on $\Delta\ell=F\ell/AY$
+and on remembering that a material fails at a given \emph{stress}.
+
+\archq{Elongation when the dimensions change}
+{``A wire's length, radius or load is changed; find the new extension,'' or ``compare two wires of the
+same material.''}
+{Use $\Delta\ell=\dfrac{F\ell}{AY}=\dfrac{F\ell}{\pi r^{2}Y}$ and track each factor: $\Delta\ell\propto F$,
+$\propto\ell$, $\propto1/r^{2}$. If the volume is fixed, a change of length forces a change of area.}
+{The radius enters \emph{squared}: halving the radius quadruples the stretch. And ``same volume, twice the
+length'' halves the area as well.}
+{A wire stretches by \SI{1.0}{mm} under a certain load. A second wire of the same material and the same
+volume, but twice the length, carries the same load. Its extension is:}
+{\SI{1.0}{mm}}{\SI{2.0}{mm}}{\SI{4.0}{mm}}{\SI{8.0}{mm}\archans{C}{Same volume with twice the length
+means half the area. Since $\Delta\ell\propto\ell/A$, the extension is multiplied by $2\times2=4$, giving
+\SI{4.0}{mm}. Option (B) forgets the change of area; option (D) treats the area as falling by a factor of
+four, as if the radius (not the area) had halved.}}
+
+\archq{The compound wire}
+{Two wires of different materials joined end to end (in series) or side by side (in parallel); the total
+extension or the share of the load is wanted.}
+{In series the same force acts through both and the extensions add. In parallel the extension is common
+and the load divides in proportion to each wire's $YA/\ell$, its spring constant.}
+{In series the \emph{force} is common, not the stress (the areas may differ); in parallel the
+\emph{extension} is common. Decide first what is shared.}
+{Two wires of equal length and equal area, with Young's moduli $Y$ and $2Y$, are joined end to end and
+pulled. The ratio of their extensions (first to second) is:}
+{$1:1$}{$2:1$}{$1:2$}{$4:1$\archans{B}{In series the same force acts on both, and with equal areas the
+stresses are equal too. Since $\Delta\ell\propto1/Y$, the stiffer wire stretches half as much: $2:1$.
+Option (C) inverts the dependence on $Y$; option (A) assumes equal extensions, which is the parallel
+case.}}
+
+\archq{Elastic energy stored}
+{``A wire is stretched by $\Delta\ell$ (or to a stress $\sigma$); find the energy stored,'' or ``compare
+energies when the dimensions change.''}
+{$U=\tfrac12F\,\Delta\ell=\tfrac12\dfrac{YA}{\ell}(\Delta\ell)^{2}$; per unit volume
+$u=\tfrac12\sigma\epsilon=\tfrac12Y\epsilon^{2}$.}
+{The energy is $\tfrac12F\,\Delta\ell$, not $F\,\Delta\ell$, because the force grew from zero; and it goes
+as the \emph{square} of the extension.}
+{A wire stretched by \SI{1}{mm} stores energy $U$. Stretched instead by \SI{2}{mm}, still within the
+elastic limit, it stores:}
+{$U$}{$2U$}{$U/2$}{$4U$\archans{D}{$U=\tfrac12\dfrac{YA}{\ell}(\Delta\ell)^{2}\propto(\Delta\ell)^{2}$, so
+doubling the extension quadruples the energy. Option (B) treats the energy as proportional to the
+extension, forgetting that the force doubles too.}}
+
+\archq{Breaking load and factor of safety}
+{``Will a wire break? Find the greatest load, or the factor of safety,'' given a breaking stress or yield
+strength.}
+{Failure depends on stress: $F_{\max}=\sigma_{\text{break}}A$, with $A=\pi r^{2}=\pi d^{2}/4$. The factor of
+safety is $\sigma_{\text{break}}/\sigma_{\text{working}}$.}
+{Using the diameter as the radius, forgetting to divide the force by $g$ to get a mass, or thinking the
+length matters.}
+{A steel wire of \emph{diameter} \SI{1.0}{mm} has a breaking stress of \SI{4.0e8}{Pa}. The greatest mass
+it can support is about ($g=\SI{9.8}{m/s^2}$):}
+{\SI{32}{kg}}{\SI{128}{kg}}{\SI{41}{kg}}{\SI{314}{kg}\archans{A}{$A=\pi(\SI{0.5e-3}{m})^{2}=\SI{7.85e-7}{m^2}$,
+so $F_{\max}=\sigma A=\SI{314}{N}$ and $m=F_{\max}/g=\SI{32}{kg}$. Option (B) uses the diameter as the
+radius; option (C) takes the area as $d^{2}$; option (D) forgets to divide by $g$.}}
+
+\archq{Bulk modulus and compression}
+{A body is placed under extra pressure on all sides (deep water, a hydraulic press); a change in volume,
+radius or density is wanted.}
+{$\Delta V/V=-\Delta P/B$. A linear dimension changes by one third of the volume strain, since
+$V\propto r^{3}$; the density rises by the same fraction as the volume falls.}
+{Reporting the volume strain when the change in radius is asked for, or multiplying by $3$ where one
+should divide.}
+{A steel sphere ($B=\SI{1.6e11}{Pa}$) is lowered into the deep ocean, where the pressure exceeds that at
+the surface by \SI{1.0e8}{Pa}. Its radius decreases by about:}
+{$0.063\%$}{$0.19\%$}{$0.021\%$}{$0.031\%$\archans{C}{$\Delta V/V=\num{1.0e8}/\num{1.6e11}=\num{6.25e-4}$,
+and $\Delta r/r=\tfrac13\,\Delta V/V=\num{2.1e-4}=0.021\%$. Option (A) is the volume strain itself; option
+(B) multiplies by $3$ instead of dividing; option (D) divides by $2$.}}
+
+\archq{Poisson's ratio and volume change}
+{A wire or rod is stretched and the change in its diameter or volume is wanted, with $\nu$ given.}
+{$\Delta d/d=-\nu\,\Delta\ell/\ell$ and $\Delta V/V=(1-2\nu)\,\Delta\ell/\ell$.}
+{Assuming the volume stays constant (true only for $\nu=\tfrac12$), or forgetting that the lateral strain
+enters twice because there are two sideways directions.}
+{A wire with Poisson's ratio $0.25$ is stretched to a longitudinal strain of $0.20\%$. Its volume:}
+{increases by $0.10\%$}{increases by $0.20\%$}{does not change}{increases by $0.30\%$\archans{A}{$\Delta
+V/V=(1-2\times0.25)(0.20\%)=0.10\%$. Option (B) ignores the sideways contraction; option (C) assumes
+volume is conserved; option (D) adds the lateral strain instead of subtracting it.}}
+
+\section{Practice Problems}\label{sec:practice-solids}
+
+The problems below are of standard examination difficulty. Take $g=\SI{9.8}{m/s^2}$ and use
+Table~\ref{tab:solids-moduli} where a modulus is not given.
+
+\begin{enumerate}[itemsep=3pt]
+\item A copper wire \SI{2.0}{m} long and \SI{1.0}{mm} in diameter carries a \SI{2.0}{kg} load. Find its
+      extension.
+\item Two wires of the same material have lengths in the ratio $1:2$ and diameters in the ratio $2:1$.
+      They carry equal loads. Find the ratio of their extensions.
+\item What extra pressure compresses water by $0.10\%$ of its volume? Express it also in atmospheres
+      ($\SI{1}{atm}=\SI{1.013e5}{Pa}$, as in \chref{ch:fluids}).
+\item A steel wire is stretched to a strain of $0.10\%$. Find the elastic energy stored per cubic metre.
+\item A rubber cord with Poisson's ratio $0.50$ is stretched by $2.0\%$. By what percentage does its
+      diameter change, and what happens to its volume?
+\item A steel wire and a brass wire ($Y=\SI{1.0e11}{Pa}$), each \SI{1.0}{m} long with cross-section
+      \SI{1.0}{mm^2}, are joined end to end and hung from a ceiling with a \SI{10}{kg} load at the bottom.
+      Neglecting the weight of the wires, find the total extension.
+\item A steel wire hangs vertically from a support. Its breaking stress is \SI{4.0e8}{Pa} and its density
+      \SI{7800}{kg/m^3}. How long can it be before it breaks under its own weight? Does the answer depend
+      on its thickness?
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item $A=\pi(\num{0.5e-3})^{2}=\SI{7.85e-7}{m^2}$; $\Delta\ell=\dfrac{(19.6)(2.0)}{(\num{7.85e-7})(\num{1.2e11})}
+      =\SI{4.2e-4}{m}\approx\SI{0.42}{mm}$.
+\item $\Delta\ell\propto\ell/d^{2}$: $\dfrac{1/2^{2}}{2/1^{2}}=\dfrac18$, so $1:8$.
+\item $\Delta P=B\,|\Delta V/V|=(\num{2.2e9})(\num{1.0e-3})=\SI{2.2e6}{Pa}$, about $22$ atmospheres.
+\item $u=\tfrac12Y\epsilon^{2}=\tfrac12(\num{2.0e11})(\num{1.0e-3})^{2}=\SI{1.0e5}{J/m^3}$.
+\item $\Delta d/d=-\nu\,\Delta\ell/\ell=-1.0\%$: the diameter shrinks by $1.0\%$. With $\nu=\tfrac12$,
+      $\Delta V/V=(1-2\nu)\,\Delta\ell/\ell=0$, so the volume is unchanged (to first order in the strain).
+\item The same force, $F=\SI{98}{N}$, acts through both wires, so the extensions add:
+      $\dfrac{F\ell}{A}\Big(\dfrac1{Y_s}+\dfrac1{Y_b}\Big)=\num{9.8e7}\,(\num{5e-12}+\num{1e-11})
+      =\SI{1.47e-3}{m}\approx\SI{1.5}{mm}$, of which the brass provides two thirds.
+\item The top of the wire carries the weight of the whole wire, $\rho A\ell g$, so the greatest stress is
+      $\rho g\ell$. Setting it equal to the breaking stress, $\ell=\dfrac{\num{4.0e8}}{(7800)(9.8)}
+      \approx\SI{5.2}{km}$. The area cancels, so the thickness does not matter: a thicker wire is heavier in
+      exact proportion to its greater strength. (This is the mountain estimate of
+      Example~\ref{ex:solids-mountain} for a wire.)
+\end{enumerate}
+}
+
+\section{Challenge Problems}\label{sec:challenge-solids}
+
+The five problems below go beyond examination level, chiefly because each needs a stress or strain that
+varies from place to place, or a quantity from another chapter. Attempt each fully before reading its
+solution.
+
+\begin{challengebox}{A rod spun about its end (builds on stress and strain)}
+A uniform rod of length $\ell=\SI{1.0}{m}$, density $\rho=\SI{7800}{kg/m^3}$ and Young's modulus
+$Y=\SI{2.0e11}{Pa}$ is spun in a horizontal plane about a vertical axis through one end at
+$\omega=\SI{100}{rad/s}$ (Figure~\ref{fig:solids-spinrod}). Find the greatest tensile stress in the rod
+and its total extension. (Neglect gravity.)
+\challengeans{The tension is not uniform. The part of the rod beyond a distance $x$ from the axis moves
+in circles, and the only horizontal force on it is the tension $T(x)$ at the cut, which must provide its
+total centripetal force (\chref{ch:circdyn}). A slice of length $dr$ at radius $r$ has mass $\rho A\,dr$
+and needs the force $\rho A\,dr\,\omega^{2}r$, so
+\[
+T(x)=\int_x^{\ell}\rho A\omega^{2}r\,dr=\tfrac12\rho A\omega^{2}(\ell^{2}-x^{2}),
+\]
+largest at the axis. The greatest stress is
+\[
+\sigma_{\max}=\frac{T(0)}{A}=\tfrac12\rho\omega^{2}\ell^{2}=\tfrac12(7800)(100)^{2}(1.0)^{2}
+\approx\SI{39}{MPa}.
+\]
+The extension adds up the local strains $\sigma(x)/Y$ over the length:
+\[
+\Delta\ell=\int_0^{\ell}\frac{\sigma(x)}{Y}\,dx=\frac{\rho\omega^{2}}{2Y}\int_0^{\ell}(\ell^{2}-x^{2})\,dx
+=\frac{\rho\omega^{2}\ell^{3}}{3Y}\approx\SI{0.13}{mm}.
+\]
+The $\tfrac13$, where a uniform tension would give $\tfrac12$, is the signature of a tension that varies
+quadratically along the rod.
+\ans{\SI{39}{MPa}; \SI{0.13}{mm}}}
+\end{challengebox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{solids_spinrod}
+\figcaption{fig:solids-spinrod}{A rod spun about one end, seen from above. The cut at distance $x$ must
+pull the whole outer part towards the axis, so the tension $T(x)$ is the total centripetal force needed
+beyond $x$: greatest at the axis, which carries the whole rod, and zero at the free end, which carries
+nothing. The graph shows $T\propto\ell^{2}-x^{2}$.}
+\end{figure}
+
+\begin{challengebox}{A wire stretched by its own weight (builds on stress and strain)}
+A uniform steel wire of length $\ell=\SI{100}{m}$ hangs vertically from one end ($\rho=\SI{7800}{kg/m^3}$,
+$Y=\SI{2.0e11}{Pa}$). Find its extension under its own weight. Why is it not $\rho g\ell^{2}/Y$?
+\challengeans{The tension is not uniform. At a height $x$ above the free end the wire supports only the
+weight of the length $x$ below it, $\rho Axg$, so the stress there is $\sigma(x)=\rho gx$: largest at the
+top, zero at the bottom. An element $dx$ stretches by $(\sigma/Y)\,dx$, so
+\[
+\Delta\ell=\int_0^{\ell}\frac{\rho gx}{Y}\,dx=\frac{\rho g\ell^{2}}{2Y}
+=\frac{(7800)(9.8)(100)^{2}}{2(\num{2.0e11})}\approx\SI{1.9}{mm}.
+\]
+The factor $\tfrac12$ comes from averaging a stress that rises linearly from bottom to top: the wire
+stretches as if its whole weight hung from its midpoint. The same averaging gives the force on a dam wall
+in \chref{ch:fluids}, where the pressure rises linearly with depth.
+\ans{\SI{1.9}{mm}}}
+\end{challengebox}
+
+\begin{challengebox}{Twisting a wire (builds on the shear modulus)}
+A wire of radius $r=\SI{0.50}{mm}$, length $\ell=\SI{1.0}{m}$ and shear modulus $G=\SI{8.0e10}{Pa}$ is
+clamped at its upper end. What torque must be applied to the lower end to twist it through a right angle?
+\challengeans{Divide the wire into thin cylindrical shells of radius $r'$ and thickness $dr'$. When the free
+end turns through the angle $\psi$, a line drawn along the surface of a shell is tilted through the shear
+angle $r'\psi/\ell$, so the shear stress in the shell is $Gr'\psi/\ell$. That stress acts over the shell's
+end area $2\pi r'\,dr'$ at lever arm $r'$, giving a torque $d\tau=(Gr'\psi/\ell)(2\pi r'\,dr')\,r'$. Adding the
+shells,
+\[
+\tau=\frac{2\pi G\psi}{\ell}\int_0^{r}r'^{3}\,dr'=\frac{\pi Gr^{4}}{2\ell}\,\psi
+=\frac{\pi(\num{8.0e10})(\num{0.50e-3})^{4}}{2(1.0)}\cdot\frac{\pi}{2}\approx\SI{12}{mN.m}.
+\]
+Note the $r^{4}$: halving the radius makes the wire sixteen times easier to twist. That is why a very thin
+fibre is used as the suspension of a torsion balance, the instrument with which the gravitational constant
+of \chref{ch:gravitation} was first measured.
+\ans{\SI{12}{mN.m}}}
+\end{challengebox}
+
+\begin{challengebox}{Two rods clamped end to end (builds on Young's modulus)}
+A steel rod and an aluminium rod, each \SI{0.50}{m} long and of the same cross-section, are joined end to
+end and fixed between two immovable walls at \SI{20}{\celsius}, then heated to \SI{70}{\celsius}. Free to
+expand, a rod would lengthen by the fraction $\alpha_\ell\,\Delta T$, where $\alpha_\ell$ is its linear
+expansion coefficient (defined in \chref{ch:thermal}) and $\Delta T$ the rise in temperature. Take
+$\alpha_\ell=\SI{1.2e-5}{K^{-1}}$ and $Y=\SI{2.0e11}{Pa}$ for steel, $\alpha_\ell=\SI{2.4e-5}{K^{-1}}$
+and $Y=\SI{7.0e10}{Pa}$ for aluminium. Find the stress in the rods, and how far, and which way, the
+junction moves.
+\challengeans{A single rod clamped between walls is the simplest case: the walls impose a compressive
+strain equal to the free expansion, so $\sigma=Y\alpha_\ell\,\Delta T$, independent of length and area
+(derived in full in \chref{ch:thermal}, Section~\ref{sec:thermal-stress}). Two rods in series need one
+more idea. The force is the same throughout (each rod pushes on the other), and with equal areas so is
+the stress $\sigma$. The walls fix the \emph{total} length, so the two free expansions must be undone by
+the two elastic compressions together:
+\[
+\ell(\alpha_{\text{s}}+\alpha_{\text{a}})\Delta T=\sigma\ell\Big(\frac{1}{Y_{\text{s}}}+\frac{1}{Y_{\text{a}}}\Big),
+\quad\text{so}\quad
+\sigma=\frac{(\alpha_{\text{s}}+\alpha_{\text{a}})\Delta T}{1/Y_{\text{s}}+1/Y_{\text{a}}}
+=\frac{(\num{3.6e-5})(50)}{\num{1.93e-11}}\approx\SI{93}{MPa}
+\]
+(compressive), with subscripts s for steel and a for aluminium.
+The steel's net strain is $\alpha_{\text{s}}\Delta T-\sigma/Y_{\text{s}}=\num{6.0e-4}-\num{4.7e-4}
+=+\num{1.3e-4}$: it ends up slightly \emph{longer}. The aluminium's is
+$\num{1.2e-3}-\num{1.33e-3}=-\num{1.3e-4}$: it is squeezed shorter than it started, by exactly the amount
+the steel grew. So the junction moves towards the aluminium, by $(0.50)(\num{1.3e-4})\approx\SI{0.07}{mm}$.
+The softer, more expansive aluminium loses the contest. The stress lies between the values the two rods
+would reach clamped alone (\SI{120}{MPa} for steel, \SI{84}{MPa} for aluminium), and it does not depend on
+the common length, which is why rails and bridges need expansion gaps however long or short they are.
+\ans{\SI{93}{MPa}; the junction moves \SI{0.07}{mm} towards the aluminium}}
+\end{challengebox}
+
+\begin{challengebox}{Where does half the energy go? (builds on elastic energy)}
+A wire of natural length \SI{1.0}{m} and cross-section \SI{1.0}{mm^2} ($Y=\SI{2.0e11}{Pa}$) supports a
+\SI{10}{kg} load. Find the elastic energy stored, and compare it with the work done by gravity as the load
+descends through the extension.
+\challengeans{The extension is $\Delta\ell=\dfrac{mg\ell}{AY}=\SI{0.49}{mm}$ (Example~\ref{ex:solids-wire}),
+and the wire stores
+\[
+U=\tfrac12F\,\Delta\ell=\tfrac12(98)(\num{0.49e-3})\approx\SI{24}{mJ}.
+\]
+But gravity does $W=mg\,\Delta\ell=\SI{48}{mJ}$ as the load descends, twice as much. Where does the other
+half go? It depends on how the load is attached. If it is released suddenly from the unstretched position,
+it overshoots, oscillates about the equilibrium and is brought to rest by internal friction, which turns
+the surplus \SI{24}{mJ} into heat. If instead it is lowered gently by a hand, the hand pushes up throughout
+and does work $-\SI{24}{mJ}$, so the net work on the load is just what the wire stores. Either way the wire
+holds exactly half the work done by gravity: the energy method of \chref{ch:energy} must account for every
+force that does work.
+\ans{\SI{24}{mJ}, half of the \SI{48}{mJ} done by gravity}}
+\end{challengebox}

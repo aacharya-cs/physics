@@ -1,0 +1,22 @@
+% thermal_slab: steady conduction through a uniform slab (Vol II Ch 3, fig:conduction-slab)
+% Faces held at T1 (hot) and T2 (cold), thickness l, face area A, conductivity K.
+% Fourier: H = K A (T1 - T2) / l.  In the steady state the same H crosses every
+% cross-section (two are marked), and T falls linearly from T1 to T2 across the slab.
+% Fills: amber = hot reservoir, pale blue = cold reservoir (not vectors).  The heat
+% current is drawn in accent, the colour this chapter uses for heat flow.
+\begin{tikzpicture}
+  \def\w{4.4}\def\h{2.2}
+  \fill[cAmber!55] (-0.7,0) rectangle (0,\h);
+  \fill[cEarth] (\w,0) rectangle (\w+0.7,\h);
+  \fill[cMoon] (0,0) rectangle (\w,\h);
+  \draw[outline] (0,0) rectangle (\w,\h);
+  \node[rotate=90] at (-0.35,\h/2) {hot, $T_1$};
+  \node[rotate=90] at (\w+0.35,\h/2) {cold, $T_2$};
+  % two cross-sections
+  \foreach \x in {1.5,3.0}{\draw[guide] (\x,0) -- (\x,\h);}
+  \draw[applied] (0.3,0.75*\h) -- (\w-0.3,0.75*\h);
+  \node[cAcc,knockout,anchor=south] at (\w/2,0.75*\h+0.08) {heat current $H$};
+  \node[anchor=north,align=center,font=\footnotesize,fill=cMoon,inner sep=1.5pt] at (\w/2,0.5*\h) {same $H$ through\\ every cross-section};
+  \draw[dim] (0,-0.35) -- (\w,-0.35) node[midway,below,cSteel] {thickness $\ell$};
+  \node[cSteel,anchor=south] at (\w/2,\h+0.05) {face area $A$, conductivity $K$};
+\end{tikzpicture}

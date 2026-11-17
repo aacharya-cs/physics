@@ -1,0 +1,30 @@
+% thermal_cooling: Newton's law of cooling for the coffee example (Vol II Ch 3, fig:newton-cooling)
+% Coffee at 80 C in a 20 C room reaches 64 C after 5 min.  Excess theta = T - T_a:
+%   theta = 60 exp(-kappa t),  kappa = ln(60/44)/5 = 0.06203 per minute,
+% so every 5 min multiplies theta by 44/60 = 0.733: 60, 44, 32.3, 23.7, 17.3, ...
+% The dashed line is the tempting (wrong) linear extrapolation, 16 degrees per 5 min,
+% which would reach room temperature at 18.75 min.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=10.4cm, height=5.4cm,
+    xmin=0, xmax=33, ymin=0, ymax=70,
+    xtick={0,5,10,15,20,25,30},
+    ytick={60,44,32.27,23.66},
+    yticklabels={$60$,$44$,$32.3$,$23.7$},
+    xlabel={time $t$ (min)},
+    ylabel={excess $\theta=T-T_a$ (\si{K})},
+    ylabel style={at={(axis description cs:0,1)},anchor=south west,rotate=-90,xshift=-14pt}]
+  \addplot[guide,domain=0:18.75,samples=2] {60-3.2*x};
+  \addplot[cPrim,domain=0:31] {60*exp(-0.062031*x)};
+  \foreach \t/\v in {0/60,5/44,10/32.27,15/23.66}{
+    \edef\temp{\noexpand\node[dot,cPrim] at (axis cs:\t,\v) {};}\temp
+    \edef\temp{\noexpand\draw[guide] (axis cs:0,\v) -- (axis cs:\t,\v);}\temp
+  }
+  \node[cPrim,anchor=south west] at (axis cs:17,22) {$\theta=\theta_0e^{-\kappa t}$};
+  \node[cPrim,anchor=south west,font=\footnotesize,align=left] at (axis cs:17,30)
+    {each \SI{5}{min} multiplies\\ $\theta$ by $0.733$};
+  \node[cSteel,anchor=south west,font=\footnotesize,align=left,inner sep=1pt] (w) at (axis cs:1.5,4)
+    {wrong: equal\\ drops of \SI{16}{K}};
+  \draw[leader,cSteel] (w.east) -- (axis cs:13.5,16.8);
+\end{axis}
+\end{tikzpicture}

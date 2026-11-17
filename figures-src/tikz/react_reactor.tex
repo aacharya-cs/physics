@@ -1,0 +1,38 @@
+% react_reactor: schematic pressurised-water reactor (Vol III Ch 4, fig:react-reactor)
+% Not to scale.  Water in the vessel is both moderator and coolant; fuel rods
+% (amber) stand in it; control rods (dark) enter from above and set k.  The
+% primary loop carries hot water (accent) to the steam generator and returns
+% it cool (primary blue); the secondary loop's steam turns a turbine and
+% generator and is condensed back to water.  Overall efficiency is about 1/3.
+% Flow colours here mean hot (accent) and cool (primary), as the caption says.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % vessel and shield
+  \draw[outline,fill=cSlope] (0,0) rectangle (4.2,4.6);
+  \fill[cPrim!12] (0.3,0.3) rectangle (3.9,3.7);
+  \node[anchor=north] at (2.1,-0.08) {shield and pressure vessel};
+  \node[cPrim] at (2.1,0.95) {water: moderator};
+  \node[cPrim] at (2.1,0.55) {and coolant};
+  % fuel rods
+  \foreach \x in {0.8,1.5,2.2,2.9,3.5}{\fill[cAmber] (\x-0.1,1.3) rectangle (\x+0.1,3.3);}
+  % control rods
+  \foreach \x in {1.15,1.85,2.55}{
+    \fill[cInk!80] (\x-0.07,2.1) rectangle (\x+0.07,4.6);
+    \draw[cInk!80,construction] (\x,4.6) -- (\x,5.0);}
+  \node[anchor=south] at (1.85,5.0) {control rods (Cd or B)};
+  \draw[leader] (0.7,2.3) -- (-0.35,2.3) node[anchor=east] {fuel rods};
+  % primary loop
+  \draw[vector,cAcc] (4.2,3.2) -- (6.3,3.2) node[midway,anchor=south] {hot water};
+  \draw[vector,cPrim] (6.3,1.0) -- (4.2,1.0) node[midway,anchor=north] {cool return};
+  % steam generator
+  \draw[outline,fill=cMoon,rounded corners=2pt] (6.3,0.6) rectangle (8.0,3.6);
+  \node[align=center] at (7.15,2.1) {steam\\generator};
+  % steam to turbine
+  \draw[vector,cGrey] (8.0,3.2) -- (9.4,3.2) node[midway,anchor=south,text=cInk] {steam};
+  \draw[outline,fill=cSlope] (9.4,2.6) -- (10.8,2.2) -- (10.8,4.2) -- (9.4,3.8) -- cycle;
+  \node[anchor=south] at (10.1,4.1) {turbine};
+  \draw[outline] (10.8,3.2) -- (11.3,3.2);
+  \draw[outline,fill=cMoon] (11.85,3.2) circle[radius=0.55];
+  \node at (11.85,3.2) {gen.};
+  \draw[vector,cPrim!70] (10.1,2.4) -- (10.1,1.0) -- (8.0,1.0);
+  \node[anchor=south,align=center] at (9.05,1.05) {condensed\\water};
+\end{tikzpicture}

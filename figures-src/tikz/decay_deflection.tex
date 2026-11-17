@@ -1,0 +1,21 @@
+% decay_deflection: alpha, beta-minus and gamma in a magnetic field into the page
+% (Vol III Ch 2, fig:decay-deflection)
+% Force F = q v x B.  With v along +x and B into the page (-z):
+%   x x (-z) = +y, so a positive charge (alpha) bends up and an electron down.
+% Radius r = p/(|q|B).  At 1 T a 5.3 MeV alpha (pc = 199 MeV, q = 2e) has
+% r = 0.33 m; a 1 MeV electron (pc = 1.42 MeV) has r = 4.7 mm, about 70 times
+% smaller.  The drawing is NOT to scale (alpha radius 9 cm, electron 1.7 cm here);
+% the caption says so.  Gamma photons carry no charge: undeflected.
+% Colours: alpha cPlum, electron cPrim, photon cAcc (as in the rest of the chapter).
+\begin{tikzpicture}
+\foreach \x in {0.6,1.2,...,5.4} \foreach \y in {-1.5,-0.9,...,1.5}
+  \pic at (\x,\y) {into page};
+\node[small label,anchor=west,text=cSteel] at (5.65,1.8) {$\vc{B}$ into the page};
+\draw[outline,fill=cRock!60] (-1,-0.25) rectangle (0,0.25);
+\node[small label] at (-0.5,-0.55) {source};
+\draw[vector,line cap=butt,photon] (0,0) -- (6,0) node[right,small label,knockout,text=cAcc] {$\gamma$: undeflected};
+\draw[vector,cPlum] (0,0) arc[start angle=-90,end angle=-62,radius=9]
+  node[right,small label,knockout,text=cPlum] {$\alpha$: slight bend upwards (large $p/q$)};
+\draw[vector,cPrim] (0,0) arc[start angle=90,end angle=10,radius=1.7]
+  node[right,small label,knockout,text=cPrim,yshift=-2pt] {$\beta^-$: strong bend downwards};
+\end{tikzpicture}

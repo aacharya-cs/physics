@@ -1,0 +1,1691 @@
+\partdivider{C}{Thermodynamics and the Molecular Picture}{The laws governing heat, work and energy, and the kinetic theory that explains them from the ceaseless motion of molecules. Here the whole volume converges.}{\chref{ch:thermo} Thermodynamics\\[1.2mm]
+\chref{ch:kinetic} Kinetic Theory}
+\ncertchapter{4}{Thermodynamics}\chlabel{ch:thermo}
+
+\chref{ch:thermal} described what heat \emph{does} to matter: it raises temperatures, expands solids,
+melts ice and flows from hot to cold. This chapter asks a sharper question. When heat and work are
+exchanged, what rules govern the conversion of one into the other? A kilogram of coal releases about
+\SI{30}{MJ} of heat when it burns; how much of that can a power station turn into electrical work, and
+why can it never be all of it?
+
+The answers are the laws of thermodynamics, and they are unusual among physical laws in needing no
+model of what matter is made of. The \textbf{first law} is energy conservation, extended to count heat as
+a transfer of energy: it is the bookkeeping of \chref{ch:energy}, where friction's ``lost'' mechanical
+energy reappeared as heat, now run in both directions. The \textbf{second law} is new. It says which
+energy-conserving processes actually happen, and it sets a ceiling on the efficiency of every engine that
+depends only on two temperatures. From it comes \textbf{entropy}, the quantity that tells the future from
+the past.
+
+The method throughout is the one used for the gas laws: describe a system by a few measurable state
+variables (pressure, volume, temperature), and follow how they change. We use the ideal gas as the
+working example because its equation of state $PV=nRT$ (\chref{ch:thermal}, Section~\ref{sec:gaslaw}) makes every integral
+doable; where a result holds only for the ideal gas, we say so. \chref{ch:kinetic} then opens the box
+and explains the same results from molecules in motion.
+
+\begin{motivbox}{Why thermodynamics matters}
+Thermodynamics is the physics of engines and of limits; it built the industrial world and drew the
+boundary of what is possible.
+\begin{itemize}
+\item \textbf{The first law is energy accounting for heat and work.} It tells you how much fuel an engine
+needs, how a refrigerator moves heat ``uphill'' at a cost, and why you cannot get more work out than
+energy in. Every power station, engine and air conditioner is a first-law balance sheet.
+\item \textbf{The second law sets a ceiling no cleverness can beat.} Carnot's result, that even a perfect
+engine must reject a fixed fraction of its heat, set only by the two temperatures, is why car engines
+manage 25 to 40 per cent and the best power stations about 60 per cent; it is also why heat flows from
+hot to cold and never back on its own, and why a perpetual-motion machine is impossible.
+\item \textbf{Entropy gives time a direction.} The same law says that the entropy of an isolated system
+never decreases, which is why heat spreads out, why gases mix but never spontaneously un-mix, and why
+the future looks different from the past.
+\end{itemize}
+\end{motivbox}
+
+% ================================================================
+\section{Systems, Equilibrium and the Zeroth Law}\label{sec:thermo-zeroth}
+
+Before stating any law we need words for what the law is about. Thermodynamics always divides the world
+in two: the part we study and everything else. The laws then speak about what crosses the boundary
+between them.
+
+\begin{defbox}{System, surroundings, equilibrium}
+The \textbf{system} is the body or region under study (the gas in a cylinder, the water in a kettle);
+everything that can exchange energy with it is the \textbf{surroundings}. The boundary may let energy
+through as heat (a \emph{diathermic} wall, such as thin metal) or block heat (an \emph{adiabatic} wall,
+an ideal insulator), and it may be fixed or movable (a piston). A system is in \textbf{thermodynamic
+equilibrium} when its macroscopic properties, such as pressure, volume and temperature, are uniform
+throughout and do not change with time. Two systems in contact through a diathermic wall are in
+\textbf{thermal equilibrium} with each other when no heat flows between them.
+\end{defbox}
+
+\subsection{Thermal equilibrium and the zeroth law}
+
+\chref{ch:thermal} introduced temperature as the property that decides which way heat flows, used a thermometer to measure it, and named in passing the assumption hidden in that procedure. It deserves a formal statement here, at the head of the laws, because nothing else in thermodynamics would make sense without it.
+
+\begin{defbox}{The zeroth law of thermodynamics}
+If body $A$ is in thermal equilibrium with body $C$, and body $B$ is separately in thermal equilibrium
+with $C$, then $A$ and $B$ are in thermal equilibrium with each other.
+\end{defbox}
+
+\why{This sounds too obvious to call a law until you notice that it is what makes a \emph{thermometer}
+possible. The thermometer is body $C$: it comes to equilibrium with the patient, and its reading can then
+be compared with the reading it gives for a bath or a bottle the patient never touches. The law
+guarantees that ``same temperature'' is a consistent label: all bodies in equilibrium with one another
+share a single number, the temperature. It is a fact of experience, not a theorem; nothing in mechanics
+implies it. It was called ``zeroth'' because its logical necessity was recognised only after the first
+and second laws already had their numbers.}
+
+\subsection{Internal energy, heat and work}
+
+Three energies appear in every thermodynamic argument, and most errors in the subject come from
+confusing them. One is a store; the other two are ways of filling or emptying it.
+
+\begin{defbox}{Internal energy, heat and work}
+\begin{itemize}
+\item \textbf{Internal energy} $U$ (\si{J}, a scalar) is the total energy of the molecules of the system
+      measured in the frame of its centre of mass (CM): their random kinetic energy plus the potential
+      energy of their mutual forces. It excludes the kinetic energy of the system moving as a whole and
+      its potential energy in external fields. $U$ is a \textbf{state variable}: its value is fixed by the
+      present equilibrium state, for example by $(P,V,T)$, and not by the history that led there.
+\item \textbf{Heat} $Q$ (\si{J}) is energy transferred between the system and its surroundings
+      \emph{because of a temperature difference} between them.
+\item \textbf{Work} $W$ (\si{J}) is energy transferred by a macroscopic force acting through a macroscopic
+      displacement: for a gas, by a moving piston.
+\end{itemize}
+$Q$ and $W$ are \emph{not} state variables. A system does not ``contain'' heat or work; they describe
+energy in transit, and how much is transferred depends on the path taken between two states.
+\end{defbox}
+
+\begin{remarkbox}{Heat is not a substance}
+Until the 1840s most scientists pictured heat as an invisible fluid, ``caloric'', that flowed from hot
+bodies to cold ones and was conserved. Rumford's observation that boring a cannon produced heat without limit, and Joule's careful measurements that a falling weight stirring water warms it by an amount proportional to the work done (\chref{ch:thermal}, Section~\ref{sec:calorimetry}), ended that picture: \SI{4.186}{J} of work produces the same warming as one calorie of heat. Heat and work are two routes for the same thing, energy, which is exactly what
+the first law will say. The phrase ``heat content of a body'' is a relic of the caloric theory; this book
+avoids it.
+\end{remarkbox}
+
+\subsection{Work done by an expanding gas}
+
+Of the two transfer modes, work is the one we can compute from mechanics alone. Doing so now gives the
+tool used in every process of this chapter, and it shows directly why work depends on the path.
+
+\begin{derivbox}{Work done by a gas on a moving piston}\label{der:thermo-pdv}
+\stepn{1} A gas at pressure $P$ pushes on a piston of face area $A$ with a force $F=PA$
+(Figure~\ref{fig:thermo-piston}).
+
+\stepn{2} If the piston moves out a small distance $ds$, slowly enough that the pressure stays uniform
+and equal to $P$, the work done \emph{by} the gas is
+\[ dW = F\,ds = PA\,ds . \]
+
+\stepn{3} But $A\,ds$ is exactly the volume swept out, $dV$. So $dW=P\,dV$, and over a finite change from
+volume $V_1$ to $V_2$,
+\[
+\boxed{\;W=\int_{V_1}^{V_2} P\,dV\;}
+\]
+
+\stepn{4} \textbf{Geometric reading.} On a graph of $P$ against $V$, the integral is the \textbf{area under
+the curve} between $V_1$ and $V_2$ (the same reading of an integral as the area under a force--distance
+graph in \chref{ch:energy}). Expansion ($dV>0$) gives positive work; compression gives negative work.
+\end{derivbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermo_piston}
+\figcaption{fig:thermo-piston}{The gas pushes the piston outwards with force $PA$. As the piston moves
+from its present position to the faded one, a distance $ds$, it sweeps out the orange slice of volume
+$dV=A\,ds$, and the gas does work $PA\,ds=P\,dV$. Nothing here depends on the shape of the cylinder, so
+$dW=P\,dV$ holds for any container whose walls move.}
+\end{figure}
+
+\begin{trapbox}{whose pressure goes into $\int P\,dV$}
+The derivation used the pressure of the gas, and that is legitimate only if the gas has a single, uniform
+pressure throughout, that is, if the piston moves slowly (we shall call such a change quasi-static in
+Section~\ref{sec:quasistatic}). In a sudden expansion the gas near the piston is thinner than the gas far
+from it, and there is no single $P$ to use. What is always true is that the work done by the gas equals
+the work done \emph{against} the external pressure on the piston, $W=\int P_{\text{ext}}\,dV$. A gas
+expanding into a vacuum pushes on nothing, so it does no work at all, however much its volume grows.
+\end{trapbox}
+
+\subsubsection{Why work depends on the path: a concrete demonstration}
+
+The claim that $W$ depends on the path deserves more than assertion. Take a gas between the same two
+states by two different routes and compare the numbers.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermo_twopaths}
+\figcaption{fig:thermo-twopaths}{Two routes between the same states $i$ and $f$. The work done by the gas
+is the area under each path. Path~1 expands while the pressure is high and encloses both shaded
+regions; path~2 drops the pressure first and encloses only the lower one. The change in internal energy,
+a state variable, is the same for both.}
+\end{figure}
+
+\begin{derivbox}{Same endpoints, different work}\label{der:thermo-twopaths}
+Take $i=(P,V)=(\SI{2e5}{Pa},\,\SI{1e-3}{m^3})$ and $f=(\SI{1e5}{Pa},\,\SI{2e-3}{m^3})$, the two corners
+in Figure~\ref{fig:thermo-twopaths}.
+
+\stepn{1} \textbf{Path 1} (expand first, at high pressure): the constant-pressure leg does
+$W=P\,\Delta V=(\num{2e5})(\num{1e-3})=\SI{200}{J}$; the constant-volume leg does none, since the piston
+does not move. Total $W_1=\SI{200}{J}$.
+
+\stepn{2} \textbf{Path 2} (drop the pressure first, then expand): now the expansion happens at the lower
+pressure, $W=(\num{1e5})(\num{1e-3})=\SI{100}{J}$. Total $W_2=\SI{100}{J}$.
+
+\stepn{3} Same start, same finish, yet $W_1\neq W_2$. The internal energy change $\Delta U$ is fixed by the
+endpoints alone, so (as the first law in the next section will show) the \emph{heats} supplied along the
+two paths must also differ, by exactly \SI{100}{J}.
+\end{derivbox}
+
+\subsection{The sign convention}
+
+Heat and work can each flow either way, so we must fix signs once and keep them. This book follows the
+convention of the NCERT textbooks and of most physics courses.
+
+\begin{keybox}{Sign convention used throughout this book}\label{key:thermo-signs}
+\begin{itemize}
+\item $Q>0$ when heat flows \emph{into} the system; $Q<0$ when the system gives heat out.
+\item $W>0$ when work is done \emph{by} the system on its surroundings (expansion); $W<0$ when work is done
+      \emph{on} the system (compression).
+\end{itemize}
+With these signs the first law reads $Q=\Delta U+W$. Many chemistry books, and some physics books,
+instead let $W$ stand for the work done \emph{on} the gas; their first law is $\Delta U=Q+W$. The physics is
+identical, only the letter's meaning differs. Check the convention before borrowing any formula.
+\end{keybox}
+
+% ================================================================
+\section{The First Law and the Specific Heats of a Gas}\label{sec:firstlaw}
+
+We now have the three energies, internal energy $U$, heat $Q$ and work $W$, and a sign for each. The
+first law states how they balance. Energy is never created or destroyed, only moved between the store
+($U$) and the two doors through which it enters or leaves (heat and work). Everything in the rest of the
+chapter is this one equation applied to different situations.
+
+\subsection{The first law}
+
+\begin{keybox}{First law of thermodynamics}\label{key:firstlaw}
+For any process taking a system from one equilibrium state to another,
+\[
+\boxed{\;Q=\Delta U+W\;}
+\qquad\text{that is,}\qquad
+\text{heat in} = \text{rise in internal energy}+\text{work done by the system}.
+\]
+For a small step of a quasi-static process, $\delta Q=dU+P\,dV$. Here $dU$ is a small change in the
+state variable $U$, while $\delta Q$ and $P\,dV$ are small \emph{amounts} transferred; the different
+symbol is a reminder that there is no ``$Q$ of the state'' whose change $\delta Q$ is.
+\end{keybox}
+
+We write $Q$ and $W$, not $\Delta Q$ and $\Delta W$, for the same reason: a $\Delta$ means ``final value
+minus initial value'' of something the system has, and the system has no value of heat or work.
+
+\inwords{Feed a gas some heat. It can bank the energy (raise $U$, which for a gas means getting hotter) or
+spend it (push the piston, doing work), and the first law says the books balance exactly. Every process
+in Section~\ref{sec:processes} is a different split between banking and spending.}
+
+\why{The first law is why a car engine, a power station and a pressure cooker can be designed on paper.
+Burning petrol releases heat; the engine's job is to turn as much of it as possible into work rather than
+into internal energy of the engine block. And the law's hard limit, that you cannot get out more work than
+the energy you put in, is the reason a ``free-energy'' machine (a \emph{perpetual-motion machine of the
+first kind}) is impossible, however clever the mechanism.}
+
+The law is not a definition in disguise. Its content is that $U$, defined as heat in minus work out,
+\emph{is} a state variable: measure $Q-W$ along any path between two given states and you get the same
+number. Figure~\ref{fig:thermo-twopaths} shows the content at work: $W$ differed by \SI{100}{J} between the
+two paths, so the heats must differ by the same \SI{100}{J}, and they do.
+
+\begin{exbox}{Boiling water: where does the latent heat go?}\label{ex:thermo-boiling}
+At atmospheric pressure ($\SI{1.013e5}{Pa}$), \SI{1.00}{g} of water at \SI{100}{\celsius} occupies
+\SI{1.00}{cm^3}; as steam at the same temperature it occupies \SI{1671}{cm^3}. The latent heat of
+vaporisation (\chref{ch:thermal}, Section~\ref{sec:latent}) is $L_v=\SI{2256}{J/g}$. How much of this heat does work on the
+atmosphere, and how much raises the internal energy?
+
+\stepn{1} \textbf{Heat in.} $Q=mL_v=(1.00)(2256)=\SI{2256}{J}$, positive because heat enters the water.
+
+\stepn{2} \textbf{Work done by the water.} The steam pushes back the atmosphere at constant pressure:
+$W=P\,\Delta V=(\num{1.013e5})(1671-1)\times10^{-6}=\SI{169}{J}$.
+
+\stepn{3} \textbf{Internal energy.} $\Delta U=Q-W=2256-169=\SI{2087}{J}$.
+
+\stepn{4} \textbf{Read the result.} About 93 per cent of the latent heat goes into pulling the molecules
+apart against their mutual attraction (a rise in intermolecular potential energy at constant temperature);
+only 7 per cent pays for pushing the atmosphere out of the way. Water vapour is not an ideal gas here: its
+$U$ changed at constant $T$, which the next caution says an ideal gas cannot do.
+\ans{$W\approx\SI{169}{J}$, $\Delta U\approx\SI{2087}{J}$}
+\end{exbox}
+
+\begin{trapbox}{for an ideal gas, $U$ depends on $T$ alone}
+In an ideal gas the molecules exert no forces on one another except in collisions, so there is no
+intermolecular potential energy and $U$ is purely the kinetic energy of molecular motion.
+\chref{ch:kinetic} shows that this kinetic energy is fixed by the temperature alone; experimentally,
+Joule found that a real gas expanding freely into a vacuum changes its temperature hardly at all, and the
+ideal gas is the limit in which the change is exactly zero. Two consequences are used constantly:
+\begin{itemize}
+\item an isothermal process ($T$ constant) has $\Delta U=0$, whatever happens to $P$ and $V$;
+\item a free expansion into a vacuum ($Q=0$, $W=0$) has $\Delta U=0$, so $T$ is unchanged.
+\end{itemize}
+For real gases, liquids and solids, $U$ depends on volume too, as the boiling water above shows.
+\end{trapbox}
+
+\subsection{Why a gas has two specific heats, and why \texorpdfstring{$C_p>C_v$}{Cp > Cv}}
+
+\chref{ch:thermal} (Section~\ref{sec:calorimetry}) defined the specific heat $s$ (per kilogram) and the molar heat capacity $C$ (per
+mole) as the heat needed per unit temperature rise. For a solid or liquid that is one number, because
+its volume barely changes when heated. For a gas the answer depends on what is held fixed while the heat
+goes in.
+
+Heat a gas in a sealed rigid box, and every joule goes into $U$. Heat it under a freely sliding piston, at
+constant pressure, and it expands as it warms, so some of the joules leave again as work and \emph{more}
+heat is needed for the same temperature rise. Hence $C_p>C_v$, before any algebra.
+
+\why{This is not hair-splitting. A parcel of air rising in the atmosphere expands against the air around
+it, a rigid gas cylinder left in the sun does not, and the two warm or cool at different rates for the
+same heat. The ratio of the two heat capacities also sets how fast sound travels through a gas, and
+whether a diesel engine's compression stroke gets hot enough to ignite the fuel.}
+
+\begin{defbox}{The two molar heat capacities of a gas}
+For $n$ moles of gas taking in a small amount of heat $\delta Q$ while its temperature rises by $dT$,
+\[
+C_v=\frac{1}{n}\left(\frac{\delta Q}{dT}\right)_{V\ \text{constant}},
+\qquad
+C_p=\frac{1}{n}\left(\frac{\delta Q}{dT}\right)_{P\ \text{constant}},
+\]
+both in \si{J.mol^{-1}.K^{-1}}. So $Q=nC_v\,\Delta T$ when the volume is clamped, and $Q=nC_p\,\Delta T$
+when the pressure is held fixed. The subscript names what was held fixed while the heat went in; for a gas,
+a heat capacity without that information is meaningless.
+\end{defbox}
+
+\begin{derivbox}{Mayer's relation, \texorpdfstring{$C_p-C_v=R$}{Cp - Cv = R}}\label{der:mayer}
+Take $n$ moles of ideal gas through the same small temperature rise $dT$, twice.
+
+\stepn{1} \textbf{At constant volume.} The piston does not move, so $W=0$ and the first law collapses to
+$\delta Q=dU$. By the definition of $C_v$,
+\[ dU=nC_v\,dT . \]
+Because $U$ of an ideal gas depends only on $T$, \emph{this expression for $dU$ holds in every process},
+not only at constant volume: any two states at the same pair of temperatures have the same $\Delta U$. We
+use this at once.
+
+\stepn{2} \textbf{At constant pressure.} Now the gas expands, and the first law reads
+\[ nC_p\,dT=dU+P\,dV=nC_v\,dT+P\,dV . \]
+
+\stepn{3} Evaluate $P\,dV$ from the ideal-gas equation. At constant pressure, a small change of $PV=nRT$
+gives
+\[ P\,dV=nR\,dT . \]
+
+\stepn{4} Substitute and divide by $n\,dT$:
+\[ C_p=C_v+R \qquad\Longrightarrow\qquad \boxed{\;C_p-C_v=R\;} \]
+
+\stepn{5} \textbf{Read the result.} The difference is exactly the work, $R$ per mole per kelvin, that the gas
+does while expanding at constant pressure. $R$ here is not an abstract constant; it is the rate at which
+heat leaks out as work. For liquids and solids, which barely expand, $C_p$ and $C_v$ are nearly equal,
+and for real gases at high density the relation is only approximate.
+\end{derivbox}
+
+\begin{keybox}{The ratio \texorpdfstring{$\gamma$}{gamma}, and \texorpdfstring{$C_v$}{Cv} in terms of it}\label{key:gamma}
+The ratio of the two heat capacities is
+\[ \gamma\equiv\frac{C_p}{C_v}>1\qquad\text{always, since } C_p=C_v+R. \]
+Dividing Mayer's relation by $C_v$ gives $\gamma-1=R/C_v$, so
+\[
+\boxed{\;C_v=\frac{R}{\gamma-1}\;},\qquad C_p=\frac{\gamma R}{\gamma-1}.
+\]
+These let every later formula trade $C_v$ for $\gamma$. \chref{ch:kinetic} predicts, from molecular
+structure alone, $C_v=\tfrac32R$ and $\gamma=\tfrac53$ for a monatomic gas, and $C_v=\tfrac52R$,
+$\gamma=\tfrac75$ for a diatomic gas near room temperature; air, which is mostly diatomic, has
+$\gamma=1.40$. Until then we take these values as given.
+\end{keybox}
+
+% ================================================================
+\section{Thermodynamic Processes}\label{sec:processes}
+
+The first law says energy is conserved, but not yet how a gas behaves as it is compressed in an engine
+cylinder, expanded through a nozzle or heated in a sealed can. That depends on \emph{how} the change is
+made: which variable is held fixed, and whether heat can get in. There are four standard ways, at constant
+temperature (isothermal), with no heat exchanged (adiabatic), at constant volume (isochoric) and at
+constant pressure (isobaric), and they are the building blocks of every engine cycle. This section first
+says what may be drawn on a $P$--$V$ diagram, then treats all four processes as members of one family.
+
+\subsection{State variables and quasi-static change}\label{sec:quasistatic}
+
+\begin{defbox}{State variables and the equation of state}
+\begin{itemize}
+\item A \textbf{state variable} is any quantity fixed by the system's present equilibrium state, with no
+      memory of its history: $P$, $V$, $T$ and $U$ all qualify; $Q$ and $W$ do not.
+\item State variables come in two kinds. \textbf{Extensive} ones scale with the amount of substance ($V$,
+      $U$, $n$); \textbf{intensive} ones do not ($P$, $T$). Divide a gas in two with a partition, and each
+      half has half the volume but the same pressure and temperature.
+\item The variables are linked by an \textbf{equation of state}. For $n$ moles of ideal gas it is
+      $PV=nRT$, so fixing any two of $(P,V,T)$ fixes the third. That is why a single point on the
+      $P$--$V$ plane specifies the state completely.
+\end{itemize}
+\end{defbox}
+
+\begin{defbox}{Quasi-static process}
+An equation of state holds only in equilibrium. A gas in the middle of an explosion has no single
+pressure or temperature, and so no point on the diagram. A \textbf{quasi-static} process is carried out
+so slowly that the system passes through a continuous chain of equilibrium states, and \emph{that} is
+what a curve on the $P$--$V$ diagram depicts. Every process drawn as a curve in this chapter is
+quasi-static by assumption; Section~\ref{sec:reversible} adds the stricter idea of a \emph{reversible}
+process.
+\end{defbox}
+
+``Slowly'' means slowly compared with the time the gas takes to even out its pressure, which for a
+litre of gas is about the time sound takes to cross it, well under a millisecond. So the compression
+stroke of a car engine, a few milliseconds long, is close to quasi-static as far as pressure goes, even
+though it is far too fast for much heat to leak out; we shall use both facts.
+
+A \emph{process} is then a path on the $P$--$V$ diagram. For each one we ask the same three questions:
+what is $W$, what is $\Delta U$, and what does the first law then say about $Q$?
+
+\subsection{One relation for all four: the polytropic process}\label{sec:polytropic}
+
+The four textbook processes look like four separate topics. They are not: each is a special case of a
+single relation, and deriving the general case once makes the special cases almost free.
+
+\begin{defbox}{Polytropic process}
+A \textbf{polytropic} process is a quasi-static process of an ideal gas that obeys
+\[
+\boxed{\;PV^{x}=\text{constant}\;}
+\]
+for some fixed number $x$, the \textbf{polytropic index} (a pure number, which may be any real value).
+The four standard processes are four choices of $x$:
+\begin{center}
+\begin{tabular}{@{}clll@{}}
+\toprule
+$x$ & Relation & Process & Held fixed\\
+\midrule
+$0$ & $P=$ constant & isobaric & pressure $P$\\
+$1$ & $PV=$ constant & isothermal & temperature $T$\\
+$\gamma$ & $PV^\gamma=$ constant & adiabatic & no heat, $Q=0$\\
+$\infty$ & $V=$ constant & isochoric & volume $V$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{defbox}
+
+The rows for $x=0$ and $x=1$ are immediate ($PV=nRT$ is constant exactly when $T$ is). The row for the
+adiabatic process is a result, derived in Section~\ref{sec:adiabatic}. The last row needs a word: rewrite
+$PV^x=$ constant as $P^{1/x}V=$ constant; as $x\to\infty$, $1/x\to0$, $P^{1/x}\to1$ for any fixed $P$, and
+the relation becomes $V=$ constant. The ``infinity'' is an honest limit, not a trick.
+
+\inwords{Read the index as a dial. Turn it from $0$ up through $1$ and $\gamma$ towards $\infty$, and the
+$P$--$V$ curve through a given state tilts continuously from flat (isobaric) to vertical (isochoric),
+passing through the isotherm and the adiabat on the way. Everything in this section is one journey along
+that dial.}
+
+\begin{trapbox}{two different $n$'s in other books}
+Many books write the polytropic law as $PV^n=$ constant and then use $n$ for the number of moles in
+$PV=nRT$ on the same page, so a formula such as $W=nR(T_1-T_2)/(n-1)$ has two different $n$'s in it,
+the top one moles and the bottom one the index. This book keeps $n$ for moles and writes the index as
+$x$, so the same formula reads $W=nR(T_1-T_2)/(x-1)$.
+\end{trapbox}
+
+\subsubsection{The shapes of the curves}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermo_polytropes}
+\figcaption{fig:thermo-polytropes}{The polytropic family through one state $(V_0,P_0)$, drawn for a
+monatomic gas ($\gamma=\tfrac53$). The slope at the common point is $-xP_0/V_0$, so the curves steepen in
+order of $x$: flat for the isobar, vertical for the isochore. The adiabat is the steeper of the two
+falling curves, by the factor $\gamma$, and it lies below the isotherm on the expansion side.}
+\end{figure}
+
+\begin{derivbox}{The slope of a polytropic curve}\label{der:polyslope}
+\stepn{1} Differentiate $PV^x=$ constant with respect to $V$, using the product rule:
+\[ \frac{dP}{dV}\,V^x+P\,xV^{x-1}=0 . \]
+
+\stepn{2} Solve for the slope:
+\[ \frac{dP}{dV}=-\,\frac{xPV^{x-1}}{V^x}=-\,x\,\frac{P}{V} . \]
+
+\stepn{3} At a shared point $(P,V)$ the slope is $-x$ times $P/V$: the larger $x$, the steeper the fall
+(Figure~\ref{fig:thermo-polytropes}). In particular the adiabat's slope is exactly $\gamma$ times the
+isotherm's, the most useful single fact for sketching these diagrams. For negative $x$ the slope is
+positive: pressure and volume rise together, as in a process with $P\propto V$ ($x=-1$).
+\end{derivbox}
+
+\subsection{The general work integral}
+
+We now compute the work once, for any index, and collect the special cases afterwards.
+
+\begin{derivbox}{Work in a polytropic process (\texorpdfstring{$x\neq1$}{x not 1})}\label{der:polywork}
+\stepn{1} Along the path $PV^x=P_1V_1^{\,x}$, so $P=P_1V_1^{\,x}V^{-x}$. Insert into
+$W=\int_{V_1}^{V_2}P\,dV$:
+\[ W=P_1V_1^{\,x}\int_{V_1}^{V_2}V^{-x}\,dV . \]
+
+\stepn{2} Integrate the power, which is allowed whenever $x\neq1$, so that the exponent $1-x$ is not zero:
+\[ W=P_1V_1^{\,x}\,\frac{V_2^{\,1-x}-V_1^{\,1-x}}{1-x} . \]
+
+\stepn{3} \textbf{Tidy up.} The constant may be written either as $P_1V_1^{\,x}$ or as $P_2V_2^{\,x}$, so
+$P_1V_1^{\,x}V_2^{\,1-x}=P_2V_2^{\,x}V_2^{\,1-x}=P_2V_2$ and $P_1V_1^{\,x}V_1^{\,1-x}=P_1V_1$. Hence
+\[ W=\frac{P_2V_2-P_1V_1}{1-x}=\boxed{\;\frac{P_1V_1-P_2V_2}{\,x-1\,}\;} \]
+
+\stepn{4} \textbf{Temperature form.} Since $PV=nRT$ at every point, $P_1V_1=nRT_1$ and $P_2V_2=nRT_2$:
+\[ \boxed{\;W=\frac{nR\,(T_1-T_2)}{\,x-1\,}\;} \]
+
+\stepn{5} \textbf{Check.} For $x=0$ (constant pressure) this gives $W=nR(T_2-T_1)=P(V_2-V_1)$, the
+rectangle under a horizontal line, as it must. As $x\to1$ the formula becomes $0/0$; that case needs its
+own integral, done in Section~\ref{sec:isothermal}.
+\end{derivbox}
+
+\subsection{The general heat capacity}
+
+Here is the payoff that the four-separate-processes approach hides completely: \emph{every} path has its
+own molar heat capacity, and one formula gives all of them.
+
+\begin{derivbox}{The molar heat capacity along a polytropic path}\label{der:polyC}
+\stepn{1} Define $C_x$ as the molar heat capacity \emph{along the path}: the heat taken in is
+$Q=nC_x\,\Delta T$ for a temperature change $\Delta T=T_2-T_1$.
+
+\stepn{2} Use the first law with two results already in hand: $\Delta U=nC_v\,\Delta T$ (true for every
+process of an ideal gas, Derivation~\ref{der:mayer}), and the work from Derivation~\ref{der:polywork},
+\[
+W=\frac{nR(T_1-T_2)}{x-1}=\frac{nR\,\Delta T}{1-x}.
+\]
+
+\stepn{3} Assemble $Q=\Delta U+W$ and divide by $n\,\Delta T$:
+\[
+C_x\,\Delta T=C_v\,\Delta T+\frac{R\,\Delta T}{1-x}
+\quad\Longrightarrow\quad
+\boxed{\;C_x=C_v+\frac{R}{1-x}\;}
+\]
+
+\stepn{4} With $C_v=R/(\gamma-1)$ (Result~\ref{key:gamma}) this can be written in terms of $\gamma$ and $x$
+alone:
+\[
+C_x=R\left(\frac{1}{\gamma-1}+\frac{1}{1-x}\right)=R\,\frac{\gamma-x}{(\gamma-1)(1-x)} .
+\]
+\end{derivbox}
+
+\begin{keybox}{Every process's heat capacity from one formula}\label{key:polyC}
+\[
+C_x=C_v+\frac{R}{1-x}=R\,\frac{\gamma-x}{(\gamma-1)(1-x)}
+\]
+\begin{center}
+\begin{tabular}{@{}cllc@{}}
+\toprule
+$x$ & Process & $C_x$ & Diatomic gas\\
+\midrule
+$0$ & isobaric & $C_v+R=C_p$ & $\tfrac72R$\\
+$1$ & isothermal & infinite & infinite\\
+$\gamma$ & adiabatic & $0$ & $0$\\
+$\infty$ & isochoric & $C_v$ & $\tfrac52R$\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{keybox}
+
+\inwords{The heat capacity answers ``how much heat per kelvin?'', and each row tells a story. Isochoric: no
+work, so all the heat becomes temperature, and the capacity is $C_v$. Isobaric: the gas also does work as
+it expands, so more heat is needed per kelvin, $C_p>C_v$. Isothermal: heat flows in but the temperature
+does not move, so the heat per kelvin is infinite. Adiabatic: no heat at all, yet the temperature
+changes, so the capacity is zero.}
+
+\begin{trapbox}{a heat capacity can be zero, infinite or negative}
+For a gas, ``the specific heat'' is not one number; it depends on the path. Stranger still, for
+$1<x<\gamma$ the formula gives a \textbf{negative} $C_x$: the numerator $\gamma-x$ is positive and the
+factor $1-x$ is negative. Such a gas \emph{gives out} heat while its temperature \emph{rises} (in a
+compression), or takes heat in while it cools (in an expansion). There is no paradox: in a compression the
+work done on the gas exceeds the rise in $U$, and the surplus leaves as heat.
+Example~\ref{ex:thermo-polytropic} shows the numbers.
+\end{trapbox}
+
+\subsection{The four special cases}
+
+Three of the four cases are now substitutions; the fourth, the isotherm, is the one value of $x$ that the
+general integral skipped.
+
+\subsubsection{Isothermal process (\texorpdfstring{$x=1$}{x = 1})}\label{sec:isothermal}
+
+At $x=1$ the exponent $1-x$ in the work integral vanishes and the power rule fails; the integral becomes
+a logarithm instead.
+
+\begin{derivbox}{Isothermal work}\label{der:isowork}
+\stepn{1} With $T$ fixed, $P=nRT/V$, so
+\[ W=\int_{V_1}^{V_2}\frac{nRT}{V}\,dV=nRT\int_{V_1}^{V_2}\frac{dV}{V} . \]
+
+\stepn{2} The integral of $1/V$ is $\ln V$ (\chref{ch:toolkit}, Section~\ref{sec:explog}), so
+\[ \boxed{\;W=nRT\,\ln\frac{V_2}{V_1}=nRT\,\ln\frac{P_1}{P_2}\;} \]
+using $P_1V_1=P_2V_2$ for the second form. The logarithm carries the sign: positive for expansion,
+negative for compression.
+
+\stepn{3} Since $\Delta T=0$, $\Delta U=0$, and the first law gives $Q=W$: every joule of heat that enters
+leaves as work. Consistently, $C_1=Q/(n\,\Delta T)$ is infinite, because $Q\neq0$ while $\Delta T=0$.
+\end{derivbox}
+
+An isothermal process needs the gas to stay in good thermal contact with a large body at fixed
+temperature (a \emph{reservoir}, defined in Section~\ref{sec:heatengine}) and to change slowly enough for
+heat to flow across with only an infinitesimal temperature difference. It is an idealisation, approached
+by slow changes in thin-walled containers.
+
+\subsubsection{Adiabatic process (\texorpdfstring{$x=\gamma$}{x = gamma})}\label{sec:adiabatic}
+
+The other cases fix $x$ by holding $P$, $T$ or $V$ constant. The adiabatic case is different: nothing is
+held constant except that no heat crosses the boundary, and the index $\gamma$ is \emph{forced} by that
+demand.
+
+\begin{derivbox}{\texorpdfstring{$Q=0$}{Q = 0} forces \texorpdfstring{$PV^\gamma=$}{PV gamma =} constant}\label{der:adiabat}
+\stepn{1} Set $\delta Q=0$ in the first law for a small quasi-static step: $0=nC_v\,dT+P\,dV$.
+
+\stepn{2} A small change of $PV=nRT$ gives $P\,dV+V\,dP=nR\,dT$, so $n\,dT=(P\,dV+V\,dP)/R$.
+
+\stepn{3} Substitute and multiply by $R$: $\;C_v(P\,dV+V\,dP)+RP\,dV=0$.
+
+\stepn{4} Replace $R$ by $C_p-C_v$ (Mayer) and collect: $\;C_vV\,dP+C_pP\,dV=0$.
+
+\stepn{5} Divide by $C_vPV$ and write $\gamma=C_p/C_v$:
+\[ \frac{dP}{P}+\gamma\,\frac{dV}{V}=0 . \]
+
+\stepn{6} Integrate (each term gives a logarithm, \chref{ch:toolkit}, Section~\ref{sec:explog}):
+$\ln P+\gamma\ln V=$ constant, that is,
+\[ \boxed{\;PV^\gamma=\text{constant}\;} \]
+the polytropic law with $x=\gamma$. Using $P=nRT/V$ gives the equivalent forms $TV^{\gamma-1}=$ constant
+and $P^{1-\gamma}T^\gamma=$ constant.
+\end{derivbox}
+
+\begin{keybox}{Adiabatic work, two ways}\label{key:adiawork}
+Setting $x=\gamma$ in the polytropic work gives
+\[
+W=\frac{nR(T_1-T_2)}{\gamma-1}=\frac{P_1V_1-P_2V_2}{\gamma-1},
+\]
+and the same result follows in one line from the first law: with $Q=0$,
+$W=-\Delta U=nC_v(T_1-T_2)=nR(T_1-T_2)/(\gamma-1)$. Since an expansion does positive work, it must have
+$T_2<T_1$: \textbf{an adiabatic expansion cools the gas, and an adiabatic compression heats it}. Air rising
+in the atmosphere expands and cools in this way until its water vapour condenses into cloud; a bicycle
+pump grows warm for the reverse reason.
+\end{keybox}
+
+\begin{trapbox}{``adiabatic'' does not mean ``constant temperature''}
+It means \emph{no heat flow}. The temperature changes precisely \emph{because} no heat can flow: the work
+must be paid for out of $U$. Isothermal and adiabatic are opposite extremes: very slow with perfect thermal
+contact ($x=1$), against perfectly insulated or too fast for heat to move ($x=\gamma$). A diesel engine
+compresses air by a factor of about 20 in a few milliseconds, close to adiabatic; from \SI{300}{K},
+$T_2=300\times20^{0.4}\approx\SI{990}{K}$, hot enough to ignite the fuel without a spark. Real
+processes lie between the extremes, with $1<x<\gamma$.
+\end{trapbox}
+
+\subsubsection{Isobaric (\texorpdfstring{$x=0$}{x = 0}) and isochoric (\texorpdfstring{$x\to\infty$}{x to infinity}) processes}
+
+\begin{derivbox}{Isobaric process (\texorpdfstring{$P$}{P} constant)}\label{der:isobaric}
+\stepn{1} \textbf{Work.} $P$ comes straight out of the integral:
+\[ W=\int_{V_1}^{V_2}P\,dV=P(V_2-V_1)=nR\,\Delta T, \]
+the last step from $PV=nRT$ at constant $P$.
+
+\stepn{2} \textbf{Heat.} At $x=0$, $C_0=C_v+R=C_p$, as it must be, so $Q=nC_p\,\Delta T$.
+
+\stepn{3} \textbf{First-law check.} $\Delta U=nC_v\,\Delta T$ and $W=nR\,\Delta T$, so
+$Q=\Delta U+W=n(C_v+R)\,\Delta T=nC_p\,\Delta T$, in agreement with Step~2.
+\end{derivbox}
+
+\begin{derivbox}{Isochoric process (\texorpdfstring{$V$}{V} constant)}\label{der:isochoric}
+\stepn{1} \textbf{Work.} The volume never changes, so $dV=0$ and $W=\int P\,dV=0$: the walls do not move.
+
+\stepn{2} \textbf{Heat capacity.} As $x\to\infty$, $R/(1-x)\to0$ and $C_x\to C_v$, the constant-volume
+capacity, as its name requires.
+
+\stepn{3} \textbf{First law.} With $W=0$, $Q=\Delta U=nC_v\,\Delta T$: every joule of heat goes into
+internal energy, and so into temperature.
+\end{derivbox}
+
+\subsection{The four processes in one table}
+
+\begin{tablebox}{All four processes as one family (\texorpdfstring{$n$}{n} moles of ideal gas)}
+\begin{center}
+\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}cllllc@{}}
+\toprule
+$x$ & Process & Path & Work $W$ & $\Delta U$ & $C_x$\\
+\midrule
+$0$ & isobaric & $P=$ constant & $P\,\Delta V=nR\,\Delta T$ & $nC_v\,\Delta T$ & $C_p$\\
+$1$ & isothermal & $PV=$ constant & $nRT\ln\dfrac{V_2}{V_1}$ & $0$ & infinite\\
+$\gamma$ & adiabatic & $PV^\gamma=$ constant & $\dfrac{nR(T_1-T_2)}{\gamma-1}$ & $-W$ & $0$\\
+$\infty$ & isochoric & $V=$ constant & $0$ & $nC_v\,\Delta T$ & $C_v$\\
+\midrule
+$x$ & polytropic & $PV^x=$ constant & $\dfrac{nR(T_1-T_2)}{x-1}$ & $nC_v\,\Delta T$ & $C_v+\dfrac{R}{1-x}$\\
+\bottomrule
+\end{tabular}\label{tab:processes}
+\end{center}
+Read the bottom row and set $x$ to $0$, $1$, $\gamma$ and $\infty$ to recover the rows above it. One
+entry never changes: $\Delta U=nC_v\,\Delta T$ in \emph{every} row (in the adiabatic row,
+$-W=nC_v\,\Delta T$ too), because $U$ of an ideal gas depends only on $T$. All the variety lies in how the
+heat divides between $\Delta U$ and $W$.
+\end{tablebox}
+
+\begin{exbox}{One gas, two routes, different work}\label{ex:thermo-isoadia}
+Two moles of a monatomic ideal gas ($\gamma=\tfrac53$) at \SI{300}{K} double their volume (a)
+isothermally, (b) adiabatically. Find the work done by the gas in each case, and the final temperature in
+(b). Take $R=\SI{8.314}{J.mol^{-1}.K^{-1}}$.
+
+\stepn{1} \textbf{(a) Isothermal.} $W=nRT\ln(V_2/V_1)=2(8.314)(300)\ln2\approx\SI{3458}{J}$. The temperature
+stays at \SI{300}{K}, so $\Delta U=0$ and $Q=W=\SI{3458}{J}$.
+
+\stepn{2} \textbf{(b) Adiabatic.} Use $TV^{\gamma-1}=$ constant with $\gamma-1=\tfrac23$:
+\[ T_2=300\times2^{-2/3}\approx\SI{189.0}{K}. \]
+
+\stepn{3} Work from the temperature drop:
+\[ W=\frac{nR(T_1-T_2)}{\gamma-1}=\frac{2(8.314)(300-189.0)}{2/3}\approx\SI{2769}{J}. \]
+
+\stepn{4} \textbf{Compare.} The adiabatic route does less work ($2769<3458$), as the steeper adiabat of
+Figure~\ref{fig:thermo-isoadia} predicts: it encloses less area. All of it is paid for out of internal
+energy, which is why the gas cools by \SI{111}{K}; on the isothermal route the surroundings keep topping
+up the gas with heat.
+\ans{(a) \SI{3458}{J} at \SI{300}{K}; (b) \SI{2769}{J}, final $T\approx\SI{189}{K}$}
+\end{exbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermo_isoadia}
+\figcaption{fig:thermo-isoadia}{Example~\ref{ex:thermo-isoadia} drawn to scale. Both curves start at the
+same state and end at twice the volume. The teal area under the adiabat is its work, \SI{2769}{J}; the
+isotherm adds the pale blue sliver, \SI{689}{J}, for a total of \SI{3458}{J}. The adiabat ends at a lower
+pressure because the gas has cooled.}
+\end{figure}
+
+\begin{exbox}{A polytropic compression, and a negative heat capacity}\label{ex:thermo-polytropic}
+One mole of a diatomic ideal gas ($\gamma=1.4$, $C_v=\tfrac52R$) is compressed along $PV^{1.3}=$ constant
+from $V_1=\SI{2}{L}$ to $V_2=\SI{1}{L}$, starting at $T_1=\SI{300}{K}$. Find $T_2$, $W$, $\Delta U$, $Q$ and
+the heat capacity $C_x$, and comment on the signs.
+
+\stepn{1} \textbf{Final temperature.} With $PV=nRT$, $PV^x=$ constant becomes $TV^{x-1}=$ constant, so
+$T_2=T_1(V_1/V_2)^{x-1}=300\times2^{0.3}\approx\SI{369.3}{K}$. The gas warms by $\Delta T=\SI{69.3}{K}$.
+
+\stepn{2} \textbf{Work.} $W=\dfrac{nR(T_1-T_2)}{x-1}=\dfrac{(8.314)(-69.3)}{0.3}\approx\SI{-1922}{J}$.
+Negative, as a compression must be: \SI{1922}{J} of work is done \emph{on} the gas.
+
+\stepn{3} \textbf{Internal energy.} $\Delta U=nC_v\,\Delta T=\tfrac52(8.314)(69.3)\approx\SI{+1441}{J}$,
+positive, consistent with the warming.
+
+\stepn{4} \textbf{Heat.} $Q=\Delta U+W=1441+(-1922)=\SI{-480}{J}$. \textbf{Heat leaves the gas}, even though
+its temperature rose.
+
+\stepn{5} \textbf{Heat capacity.} $C_x=C_v+\dfrac{R}{1-x}=\tfrac52(8.314)+\dfrac{8.314}{1-1.3}
+=20.79-27.71=\SI{-6.93}{J.mol^{-1}.K^{-1}}$. Check: $nC_x\,\Delta T=(1)(-6.93)(69.3)\approx\SI{-480}{J}=Q$.
+
+\stepn{6} \textbf{Read the result.} This is the regime $1<x<\gamma$ of the caution above. The compression
+puts in \SI{1922}{J} of work, more than enough to raise $U$ by \SI{1441}{J}, and the remaining
+\SI{480}{J} leaves as heat. A negative heat capacity is what happens when work, not heat, drives the
+temperature.
+\ans{$T_2\approx\SI{369}{K}$, $W\approx\SI{-1922}{J}$, $\Delta U\approx\SI{1441}{J}$, $Q\approx\SI{-480}{J}$, $C_x\approx\SI{-6.93}{J.mol^{-1}.K^{-1}}$}
+\end{exbox}
+
+\subsection{Cyclic processes}\label{sec:cyclic}
+
+Every engine works in a cycle: its working substance is taken through a sequence of processes that
+returns it to its starting state, ready to go round again. A cycle is a closed loop on the $P$--$V$
+diagram, and the first law says something simple about it.
+
+\begin{keybox}{A cycle: \texorpdfstring{$\Delta U=0$}{Delta U = 0}, net work = enclosed area}\label{key:cycle}
+Around any closed loop the system returns to its initial state, so every state variable returns to its
+initial value: $\Delta U=0$, and the first law gives
+\[ Q_{\text{net}}=W_{\text{net}} . \]
+The net work is the area under the outgoing part of the loop minus the area under the returning part,
+that is, the \textbf{area enclosed by the loop}. It is positive when the loop is traversed clockwise (the
+gas expands at higher pressure than it is compressed: an engine) and negative when traversed
+anticlockwise (a refrigerator).
+\end{keybox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermo_rectcycle}
+\figcaption{fig:thermo-rectcycle}{A rectangular cycle, $A\to B\to C\to D\to A$, traversed clockwise. The
+expansion $B\to C$ happens at the higher pressure and the compression $D\to A$ at the lower, so the gas
+does more work than is done on it; the difference is the shaded area. Two legs are at constant volume
+(orange, the colour of heat, since no work is done on these legs) and two at constant pressure (green).}
+\end{figure}
+
+\begin{exbox}{A rectangular cycle, leg by leg}\label{ex:thermo-rectcycle}
+A monatomic ideal gas ($C_v=\tfrac32R$, $C_p=\tfrac52R$) is taken round the cycle of
+Figure~\ref{fig:thermo-rectcycle}, between pressures \SI{1e5}{Pa} and \SI{2e5}{Pa} and volumes
+\SI{1e-3}{m^3} and \SI{2e-3}{m^3}. Find the work and heat on each leg, and verify the cycle rule.
+
+\stepn{1} \textbf{A useful shortcut.} For an ideal gas $nC_v\,\Delta T=(C_v/R)\,\Delta(PV)$ and
+$nC_p\,\Delta T=(C_p/R)\,\Delta(PV)$, since $nR\,\Delta T=\Delta(PV)$. So the heats follow from the change in
+$PV$ alone, without knowing $n$ or $T$.
+
+\stepn{2} \textbf{$A\to B$ (constant volume, pressure up).} $W=0$;
+$Q=\tfrac32\,V\Delta P=\tfrac32(\num{1e-3})(\num{1e5})=\SI{+150}{J}$.
+
+\stepn{3} \textbf{$B\to C$ (constant pressure, expansion).} $W=P\,\Delta V=(\num{2e5})(\num{1e-3})=\SI{+200}{J}$;
+$Q=\tfrac52\,P\Delta V=\SI{+500}{J}$.
+
+\stepn{4} \textbf{$C\to D$ (constant volume, pressure down).} $W=0$;
+$Q=\tfrac32(\num{2e-3})(\num{-1e5})=\SI{-300}{J}$.
+
+\stepn{5} \textbf{$D\to A$ (constant pressure, compression).} $W=(\num{1e5})(\num{-1e-3})=\SI{-100}{J}$;
+$Q=\tfrac52(\num{-100})=\SI{-250}{J}$.
+
+\stepn{6} \textbf{Totals.} $W_{\text{net}}=200-100=\SI{100}{J}$, which is the enclosed area
+$\Delta P\,\Delta V=(\num{1e5})(\num{1e-3})$; $Q_{\text{net}}=150+500-300-250=\SI{100}{J}=W_{\text{net}}$, as
+$\Delta U=0$ requires. Note that the gas \emph{absorbed} \SI{650}{J} on the first two legs and
+\emph{rejected} \SI{550}{J} on the last two: only the difference became work. Section~\ref{sec:secondlaw}
+shows that this rejection is not a design flaw but a law.
+\ans{$W_{\text{net}}=Q_{\text{net}}=\SI{100}{J}$; heat absorbed \SI{650}{J}}
+\end{exbox}
+
+\begin{trapbox}{``returns to the start'' never means ``nothing happened''}
+Around a cycle only the state variables return to their initial values. The transfers do not cancel:
+heat was taken in and given out, and net work was done. Writing $W_{\text{net}}=0$ for a cycle confuses
+$W$ with $\Delta U$.
+\end{trapbox}
+
+% ================================================================
+\section{Heat Engines, Refrigerators and the Second Law}\label{sec:secondlaw}
+
+A car engine wastes most of its fuel's energy as heat out of the exhaust and radiator; a coal or nuclear
+power station throws away roughly two-thirds of the energy released in its fuel as warm water and
+steam. The rectangular cycle above absorbed \SI{650}{J} and rejected \SI{550}{J}. Is this rejection a
+failure of engineering, or is it compulsory? The first law cannot tell us: it would be equally satisfied
+by an engine that turned all \SI{650}{J} into work. This section shows that the rejection is compulsory,
+finds the smallest possible amount, and in doing so meets a second law of nature as fundamental as the
+first.
+
+\subsection{What the first law cannot forbid}
+
+The first law is bookkeeping. It forbids creating energy, but it would happily allow a ship that sails by
+extracting heat from the sea and turning it into work, or a cup of tea that heats itself up by cooling the
+room around it. Energy would balance in both. Neither ever happens. Heat flows from hot to cold of its own
+accord, and never the other way; a moving block brought to rest by friction warms the floor, but a warm
+floor never cools itself to set a block moving. Processes have a \emph{direction}, and a second,
+independent law is needed to say which.
+
+The law was first stated, not for molecules or entropy, but for engines, and it is clearest there. So we
+first describe engines and refrigerators, then state the law in two forms and show they say the same
+thing.
+
+\subsection{Heat engines and their efficiency}\label{sec:heatengine}
+
+\begin{defbox}{Reservoir, heat engine, efficiency}
+A \textbf{heat reservoir} is a body so large that it can give out or take in any amount of heat without
+its temperature changing: the atmosphere, the sea, a furnace kept burning. A \textbf{heat engine} is a
+device that, working in a cycle, takes heat from a hot reservoir at temperature $T_h$, turns part of it
+into work, and gives the rest to a cold reservoir at $T_c$ (Figure~\ref{fig:thermo-engine}). Per cycle let
+$Q_h$ be the heat taken in, $Q_c$ the heat rejected and $W$ the work delivered, all three taken
+\emph{positive} as magnitudes, with the arrows showing the directions. Its \textbf{efficiency} is the
+fraction of the heat taken in that becomes work:
+\[
+\eta=\frac{W}{Q_h}.
+\]
+\end{defbox}
+
+For engines and refrigerators it is clearer to work with magnitudes and draw the directions than to carry
+the signs of Result~\ref{key:thermo-signs}; the two descriptions agree, since the working substance takes in
+$Q=Q_h-Q_c$ net per cycle and does $W$ of work. Petrol and diesel engines (where the ``hot reservoir'' is
+burning fuel and the ``cold reservoir'' the atmosphere), steam turbines and jet engines are all heat
+engines.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermo_engine}
+\figcaption{fig:thermo-engine}{Every heat engine, reduced to its energy flows per cycle. It takes $Q_h$
+from the hot reservoir, delivers work $W$, and gives the remainder $Q_c$ to the cold reservoir. The
+first law fixes $W=Q_h-Q_c$; the second law will say that the $Q_c$ arrow can never be removed.}
+\end{figure}
+
+\begin{keybox}{Efficiency from the first law}\label{key:efficiency}
+The working substance returns to its initial state every cycle, so $\Delta U=0$ and $W=Q_h-Q_c$. Hence
+\[
+\eta=\frac{W}{Q_h}=\frac{Q_h-Q_c}{Q_h}=1-\frac{Q_c}{Q_h}.
+\]
+The first law alone allows any $\eta$ up to $1$, which would need $Q_c=0$.
+\end{keybox}
+
+For the rectangular cycle of Example~\ref{ex:thermo-rectcycle}, $Q_h=\SI{650}{J}$ (the heat absorbed, on
+legs $A\to B$ and $B\to C$) and $W=\SI{100}{J}$, so $\eta=100/650\approx15$ per cent. Note that $Q_h$ is the
+heat \emph{absorbed}, summed over the legs where heat enters, and not the net heat.
+
+\subsection{Refrigerators and heat pumps}\label{sec:refrigerator}
+
+Run an engine backwards and it becomes a refrigerator: work is put in, and heat is moved from the cold
+reservoir to the hot one (Figure~\ref{fig:thermo-fridge}). In a kitchen refrigerator a compressor does
+the work, the cold reservoir is the food compartment and the hot reservoir is the room, which receives the
+heat through the coils at the back.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermo_fridge}
+\figcaption{fig:thermo-fridge}{A refrigerator is the engine of Figure~\ref{fig:thermo-engine} with every
+arrow reversed: work $W$ is spent to move heat $Q_c$ out of the cold reservoir, and the hot reservoir
+receives $Q_h=Q_c+W$. The Clausius statement says the $W$ arrow can never be removed.}
+\end{figure}
+
+\begin{defbox}{Coefficient of performance}
+A refrigerator is judged by what you want, the heat $Q_c$ removed from the cold space, per unit of what
+you pay for, the work $W$:
+\[
+\text{COP}=\frac{Q_c}{W}=\frac{Q_c}{Q_h-Q_c}.
+\]
+A \textbf{heat pump} is the same machine used to warm the hot side (a house in winter, drawing heat from the
+cold air outside), so its figure of merit is $\text{COP}_{\text{hp}}=Q_h/W=1+\text{COP}$. Unlike an
+efficiency, a COP can be, and usually is, greater than $1$; it measures heat \emph{moved}, not energy
+created.
+\end{defbox}
+
+\subsection{The second law: two statements}
+
+Experience with engines and refrigerators, codified by Kelvin, Planck and Clausius, is summed up in two
+statements of what no device can do.
+
+\begin{defbox}{Second law of thermodynamics}\label{def:secondlaw}
+\begin{itemize}
+\item \textbf{Kelvin--Planck statement (engines).} No process is possible whose \emph{sole} result is the
+      absorption of heat from a single reservoir and its complete conversion into work. Every engine must
+      reject some heat to a colder body: $Q_c>0$, so $\eta<1$.
+\item \textbf{Clausius statement (refrigerators).} No process is possible whose \emph{sole} result is the
+      transfer of heat from a colder body to a hotter one. Every refrigerator needs work: $W>0$.
+\end{itemize}
+\end{defbox}
+
+The words ``sole result'' matter. An ideal gas expanding isothermally turns all the heat it absorbs into
+work ($Q=W$, Derivation~\ref{der:isowork}), but that is not the sole result: the gas ends up at a larger
+volume and lower pressure, and cannot go on expanding for ever. To repeat the process the gas must be
+brought back, and the Kelvin--Planck statement says that a cycle which does this must reject heat. Like
+the first law, the second law is a summary of experience, not a theorem derived from mechanics; no
+violation has ever been observed. A machine that would break it, such as the ship running on the heat of
+the sea, is called a \emph{perpetual-motion machine of the second kind}.
+
+\subsubsection{Why the two statements are equivalent}
+
+The two statements look different, one about engines and one about refrigerators, yet each implies the
+other. The proof is short and worth seeing, because the same style of argument proves Carnot's theorem
+below: assume a forbidden device exists, connect it to an ordinary one, and show that the combination is
+forbidden by the other statement (Figure~\ref{fig:thermo-equivalence}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermo_equivalence}
+\figcaption{fig:thermo-equivalence}{Each statement of the second law implies the other. The dashed
+devices are the hypothetical violators; the grey dashed outline encloses the composite machine. In (a),
+the composite takes $Q_h-Q_c$ from the hot reservoir and turns it all into work, leaving the cold
+reservoir untouched. In (b), the composite moves $Q_c$ from cold to hot and does nothing else.}
+\end{figure}
+
+\begin{derivbox}{Kelvin--Planck and Clausius stand or fall together}\label{der:equivalence}
+\stepn{1} \textbf{If Clausius fails, so does Kelvin--Planck.} Suppose a device $X$ could move heat $Q_c$
+from the cold reservoir to the hot one with no work (Figure~\ref{fig:thermo-equivalence}a). Run an
+ordinary engine between the same reservoirs, adjusted so that it rejects exactly $Q_c$ per cycle while
+taking $Q_h$ and delivering $W=Q_h-Q_c$. Per cycle the cold reservoir receives $Q_c$ from the engine and
+loses $Q_c$ to $X$: no net change. The hot reservoir loses $Q_h-Q_c$, and $W=Q_h-Q_c$ of work appears.
+The composite turns heat from a single reservoir entirely into work with no other result, which the
+Kelvin--Planck statement forbids.
+
+\stepn{2} \textbf{If Kelvin--Planck fails, so does Clausius.} Suppose an engine $Y$ could turn heat $Q$ from
+the hot reservoir entirely into work $W=Q$ (Figure~\ref{fig:thermo-equivalence}b). Use that work to drive
+an ordinary refrigerator, which takes $Q_c$ from the cold reservoir and delivers $Q_c+W=Q_c+Q$ to the hot
+one. The hot reservoir loses $Q$ to $Y$ and gains $Q_c+Q$: a net gain of $Q_c$, exactly what the cold
+reservoir lost, and no work is left over. The composite moves heat from cold to hot with no other result,
+which the Clausius statement forbids.
+
+\stepn{3} So a violation of either statement would allow a violation of the other: logically they are one
+law. Use whichever form fits the problem.
+\end{derivbox}
+
+\subsection{Reversible processes}\label{sec:reversible}
+
+To find the best possible engine we need the idea of a process that wastes nothing.
+
+\begin{defbox}{Reversible process}
+A process is \textbf{reversible} if it can be run backwards so that \emph{both} the system \emph{and} its
+surroundings are returned exactly to their initial states. This needs two things: the process must be
+quasi-static (Section~\ref{sec:quasistatic}), and it must be free of every dissipative effect, such as
+friction, viscosity, electrical resistance, and heat flow across a finite temperature difference. All
+other processes are \textbf{irreversible}.
+\end{defbox}
+
+Quasi-static is necessary but not enough: a piston compressing a gas slowly against friction is
+quasi-static, yet the work done against friction cannot be recovered by running it backwards. Heat flow
+across a finite temperature gap is irreversible because, by the Clausius statement, the heat cannot be
+made to flow back without outside work. Every real process is irreversible to some degree; reversible
+processes are the idealised limit, approached by making changes slowly and frictionlessly and letting
+heat flow only across tiny temperature differences.
+
+\subsection{The Carnot cycle}\label{sec:carnot}
+
+In 1824 Sadi Carnot, a French engineer, asked what the most efficient possible engine between two
+reservoirs would look like. Its heat must be exchanged reversibly, so heat may flow only while the
+working substance sits at the temperature of the reservoir it touches; that means isothermal legs at
+$T_h$ and $T_c$. To get from one temperature to the other without exchanging heat at any intermediate
+temperature, the connecting legs must exchange no heat at all; that means adiabatic legs.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermo_carnot}
+\figcaption{fig:thermo-carnot}{The Carnot cycle, two isotherms joined by two adiabats and traversed
+clockwise, drawn to scale for Example~\ref{ex:thermo-carnot} (monatomic gas, $T_h=\SI{500}{K}$,
+$T_c=\SI{300}{K}$). Heat enters only on leg~1 and leaves only on leg~3; the enclosed area is the net work.
+For a monatomic gas the adiabats are steep, so the loop is slender.}
+\end{figure}
+
+\inwords{The cycle is not one clever design among many; for an engine that exchanges heat with only two
+reservoirs it is the \emph{only} reversible one. Any other loop between the same two temperatures would
+have to take in or give out heat at some temperature between $T_h$ and $T_c$, and that heat would cross a
+finite temperature gap to or from a reservoir.}
+
+\subsubsection{The efficiency of the Carnot engine, derived}
+
+Nothing needs to be taken on trust: with an ideal gas as working substance, every leg of
+Figure~\ref{fig:thermo-carnot} can be computed with the results of Section~\ref{sec:processes}.
+
+\begin{derivbox}{Carnot cycle, part 1: heat and work on each leg}\label{der:carnot1}
+Let the corners be $A\to B\to C\to D\to A$ as in Figure~\ref{fig:thermo-carnot}, with the isotherms at
+$T_h$ (hot) and $T_c$ (cold), and take $n$ moles of ideal gas.
+
+\stepn{1} \textbf{Leg 1, $A\to B$: isothermal expansion at $T_h$.} By Derivation~\ref{der:isowork}, $\Delta U=0$
+and
+\[
+Q_h=W_{AB}=nRT_h\ln\frac{V_B}{V_A}.
+\]
+This is the only leg on which heat is absorbed.
+
+\stepn{2} \textbf{Leg 2, $B\to C$: adiabatic expansion.} $Q=0$, and Result~\ref{key:adiawork} gives
+\[
+W_{BC}=\frac{nR\,(T_h-T_c)}{\gamma-1}>0,
+\]
+as the gas cools from $T_h$ to $T_c$.
+
+\stepn{3} \textbf{Leg 3, $C\to D$: isothermal compression at $T_c$.} Work is done on the gas, $W_{CD}<0$, and
+the gas rejects heat of magnitude
+\[
+Q_c=|W_{CD}|=nRT_c\ln\frac{V_C}{V_D}.
+\]
+
+\stepn{4} \textbf{Leg 4, $D\to A$: adiabatic compression.} $Q=0$ and
+\[
+W_{DA}=\frac{nR\,(T_c-T_h)}{\gamma-1}=-W_{BC}.
+\]
+\textbf{The two adiabatic works cancel exactly}: one leg pays back what the other delivered. The net work
+is decided by the isotherms alone, $W=Q_h-Q_c$, which is also the first law for the whole cycle.
+\end{derivbox}
+
+\begin{derivbox}{Carnot cycle, part 2: the volume ratios match}\label{der:carnot2}
+The efficiency $\eta=1-Q_c/Q_h$ still contains two logarithms:
+\[
+\frac{Q_c}{Q_h}=\frac{T_c\ln(V_C/V_D)}{T_h\ln(V_B/V_A)} .
+\]
+The adiabats make them equal.
+
+\stepn{1} Apply $TV^{\gamma-1}=$ constant to leg $B\to C$: $\;T_hV_B^{\gamma-1}=T_cV_C^{\gamma-1}$.
+
+\stepn{2} Apply it to leg $D\to A$: $\;T_cV_D^{\gamma-1}=T_hV_A^{\gamma-1}$.
+
+\stepn{3} Divide the first equation by the second; the temperatures cancel:
+\[
+\frac{V_B^{\gamma-1}}{V_A^{\gamma-1}}=\frac{V_C^{\gamma-1}}{V_D^{\gamma-1}}
+\quad\Longrightarrow\quad
+\frac{V_B}{V_A}=\frac{V_C}{V_D} .
+\]
+The expansion ratio on the hot isotherm equals the compression ratio on the cold one.
+
+\stepn{4} The two logarithms are therefore equal and cancel:
+\[
+\boxed{\;\frac{Q_c}{Q_h}=\frac{T_c}{T_h}\;}
+\qquad\Longrightarrow\qquad
+\boxed{\;\eta_{\text{Carnot}}=1-\frac{T_c}{T_h}\;}
+\quad (T\ \text{in kelvin}).
+\]
+
+\stepn{5} \textbf{Pause on what happened.} Every trace of the working gas, $n$, $\gamma$ and the volumes,
+has vanished. The efficiency depends on the two reservoir temperatures and nothing else. That strongly
+suggests the result is universal, and Carnot's theorem below proves it.
+\end{derivbox}
+
+\begin{exbox}{The whole Carnot cycle, audited leg by leg}\label{ex:thermo-carnot}
+One mole of a monatomic ideal gas ($\gamma=\tfrac53$) runs a Carnot cycle between $T_h=\SI{500}{K}$ and
+$T_c=\SI{300}{K}$, doubling its volume on the hot isotherm ($V_A=\SI{1.00}{L}$, $V_B=\SI{2.00}{L}$). Find the
+remaining corners, the heats, the works and the efficiency.
+
+\stepn{1} \textbf{Adiabatic corners.} $TV^{2/3}=$ constant gives $V_C/V_B=(T_h/T_c)^{3/2}=(5/3)^{1.5}=2.152$,
+so $V_C=\SI{4.30}{L}$; likewise $V_D=2.152\,V_A=\SI{2.15}{L}$. Check: $V_C/V_D=2=V_B/V_A$.
+
+\stepn{2} \textbf{Heats.} $Q_h=RT_h\ln2=(8.314)(500)(0.6931)=\SI{2881}{J}$; $\;Q_c=RT_c\ln2=\SI{1729}{J}$.
+
+\stepn{3} \textbf{Ratio test.} $Q_c/Q_h=1729/2881=0.600=T_c/T_h=300/500$.
+
+\stepn{4} \textbf{Adiabatic legs.} $W_{BC}=R(200)/(2/3)=\SI{2494}{J}$ and $W_{DA}=\SI{-2494}{J}$, cancelling.
+
+\stepn{5} \textbf{Net work and efficiency.} $W=Q_h-Q_c=\SI{1153}{J}$; $\;\eta=1153/2881=0.400=1-300/500$.
+\ans{$\eta=40$ per cent, $W=\SI{1153}{J}$ per cycle}
+\end{exbox}
+
+\begin{trapbox}{Carnot efficiency needs kelvins, and is a ceiling}
+Between \SI{100}{\celsius} and \SI{0}{\celsius} the Carnot efficiency is \emph{not}
+$1-0/100=100$ per cent. Convert first: $\eta=1-273/373=26.8$ per cent. And this is a \emph{ceiling}: a
+real engine between these temperatures, with its friction and its heat flows across finite temperature
+gaps, does strictly worse. Nor can the ceiling be reached by lowering $T_c$ to zero: the coldest
+available reservoir is usually the atmosphere or a river, near \SI{300}{K}.
+\end{trapbox}
+
+\subsection{Carnot's theorem: no engine can do better}\label{sec:carnot-theorem}
+
+The ideal-gas calculation gives the efficiency of one particular reversible engine. Carnot's theorem
+extends it to every engine, using the argument of Derivation~\ref{der:equivalence}.
+
+\begin{derivbox}{A better-than-Carnot engine would violate the second law}\label{der:carnot-theorem}
+\stepn{1} Suppose, for contradiction, that an engine $X$ working between the same two reservoirs had
+$\eta_X>\eta_{\text{Carnot}}$. Then from the same heat input $Q_h$ it would deliver more work,
+$W_X>W_C$, where $W_C$ is the work of a Carnot engine taking in $Q_h$.
+
+\stepn{2} Because the Carnot engine is reversible, it can be run backwards as a refrigerator: fed work
+$W_C$, it takes $Q_h-W_C$ from the cold reservoir and delivers $Q_h$ to the hot one, every arrow of
+Figure~\ref{fig:thermo-engine} reversed.
+
+\stepn{3} Couple them: let $X$ drive the reversed Carnot engine, using $W_C$ of its output and keeping the
+surplus $W_X-W_C>0$.
+
+\stepn{4} Audit the composite over one cycle. The hot reservoir gets back exactly the $Q_h$ that $X$ took,
+so it is unchanged. The cold reservoir receives $Q_h-W_X$ from $X$ and loses $Q_h-W_C$ to the
+refrigerator: a net loss of $W_X-W_C$, exactly the surplus work.
+
+\stepn{5} So the composite turns heat from a single reservoir entirely into work, which the Kelvin--Planck
+statement forbids. The assumption was false:
+\[
+\boxed{\;\eta\le\eta_{\text{Carnot}}=1-\frac{T_c}{T_h}\ \text{for every engine between the same two reservoirs.}\;}
+\]
+
+\stepn{6} Now let $X$ be any \emph{reversible} engine. Then $\eta_X\le\eta_{\text{Carnot}}$, and running the
+same argument with the roles swapped ($X$ reversed, driven by the Carnot engine) gives
+$\eta_{\text{Carnot}}\le\eta_X$. So every reversible engine between two given reservoirs has
+\emph{the same} efficiency, $1-T_c/T_h$, whatever its working substance; the ideal gas was only scaffolding.
+An irreversible engine has strictly lower efficiency.
+\end{derivbox}
+
+\begin{remarkbox}{Temperature without a thermometer substance}
+Because $Q_c/Q_h=T_c/T_h$ holds for every reversible engine, whatever it is made of, Kelvin realised
+that it could \emph{define} temperature: the ratio of two temperatures is the ratio of the heats a
+reversible engine exchanges with reservoirs at those temperatures. Fixing the triple point of water at
+\SI{273.16}{K} then fixes the scale. This \emph{thermodynamic temperature} depends on no property of any
+particular substance, and our derivation shows that it coincides with the ideal-gas temperature of
+\chref{ch:thermal}, since we used ideal-gas temperatures and got the same ratio.
+\end{remarkbox}
+
+\subsubsection{The Carnot refrigerator}
+
+\begin{derivbox}{Coefficient of performance of a Carnot refrigerator}\label{der:carnot-cop}
+\stepn{1} Run backwards, the Carnot cycle still has $Q_c/Q_h=T_c/T_h$, since the same legs are traversed in
+reverse with the same heats. Divide the numerator and denominator of the COP by $Q_c$:
+\[
+\text{COP}=\frac{Q_c}{Q_h-Q_c}=\frac{1}{Q_h/Q_c-1}=\frac{1}{T_h/T_c-1}
+\quad\Longrightarrow\quad
+\boxed{\;\text{COP}_{\text{Carnot}}=\frac{T_c}{T_h-T_c}\;}
+\]
+and for a heat pump $\text{COP}_{\text{hp}}=T_h/(T_h-T_c)$.
+
+\stepn{2} By the same coupling argument as Carnot's theorem, no refrigerator between the same reservoirs
+can have a larger COP.
+
+\stepn{3} \textbf{Read it.} The COP is large when the temperature difference is small and collapses as
+$T_h-T_c$ grows. Moving heat ``uphill'' is cheap when the hill is low, which is why a freezer costs more to
+run than a refrigerator, and why heat pumps work best in mild winters.
+\end{derivbox}
+
+\begin{exbox}{A kitchen refrigerator}\label{ex:thermo-fridge}
+A refrigerator keeps its interior at \SI{260}{K} in a room at \SI{300}{K}, and must remove \SI{130}{J} of
+heat per second that leaks in through its walls. Find the least electrical power its compressor needs, and
+the heat delivered to the room per second.
+
+\stepn{1} \textbf{Best possible COP.} $\text{COP}_{\text{Carnot}}=T_c/(T_h-T_c)=260/40=6.5$.
+
+\stepn{2} \textbf{Least power.} $W=Q_c/\text{COP}=130/6.5=\SI{20}{J}$ per second, that is, \SI{20}{W}.
+
+\stepn{3} \textbf{Heat to the room.} $Q_h=Q_c+W=\SI{150}{J}$ per second. The room gains more heat than the
+refrigerator removes from the food; leaving its door open would warm the kitchen, not cool it.
+\ans{at least \SI{20}{W}; \SI{150}{W} into the room}
+\end{exbox}
+
+% ================================================================
+\section{Entropy}\label{sec:entropy}
+
+\scopebox{Entropy is not examined in the NCERT syllabus and only occasionally at JEE Advanced. It is
+included because the earlier sections keep pointing at it (free expansion is ``irreversible'', heat
+``never flows back''), and because it turns the second law from a list of impossible machines into a
+single quantitative statement. The derivations here use only the Carnot results above.}
+
+The two statements of the second law are about what cannot be built. A law of that form is hard to apply
+to a process that is not an engine, such as a gas rushing into a vacuum or two blocks coming to the same
+temperature. We would like a state variable that measures how far a process is from reversible, as $U$
+measures energy. The Carnot cycle hands it to us.
+
+\subsection{From the Carnot cycle to a new state variable}
+
+Write the Carnot result $Q_c/Q_h=T_c/T_h$ with the heats given their signs from the gas's point of view:
+the gas takes in $+Q_h$ at $T_h$ and $-Q_c$ at $T_c$. Then
+\[
+\frac{Q_h}{T_h}+\frac{-Q_c}{T_c}=0 :
+\]
+around a reversible cycle, the heats taken in, each divided by the temperature at which it is taken in,
+add to zero. Clausius showed that the same is true of \emph{any} reversible cycle, by approximating it
+with many thin Carnot cycles side by side (their shared adiabatic legs are traversed in opposite
+directions and cancel). We state that generalisation without the detailed proof, which needs more care
+with limits than this book gives:
+\[
+\oint\frac{\delta Q_{\text{rev}}}{T}=0\quad\text{around every reversible cycle.}
+\]
+A quantity whose sum around every closed loop is zero has the same total along every path between two
+given states (go out by one path and back by the other: the sum is zero, so the two path sums are equal).
+That is exactly the property of a state variable, like the $\Delta U$ of the first law.
+
+\begin{defbox}{Entropy}
+The \textbf{entropy} $S$ of a system is the state variable (\si{J/K}, a scalar) whose change between two
+equilibrium states is
+\[
+\boxed{\;\Delta S=S_2-S_1=\int_1^2\frac{\delta Q_{\text{rev}}}{T}\;}
+\]
+evaluated along \emph{any reversible path} joining the two states, where $\delta Q_{\text{rev}}$ is the heat
+taken in on a small step of that path and $T$ the temperature at which it is taken in. Only changes in $S$
+are defined this way, just as only changes in potential energy were in \chref{ch:energy}. (In \chref{ch:fluids} the letter $S$ meant surface tension; the two meanings never meet in one chapter, and entropy is $S$ in every book.)
+\end{defbox}
+
+Because $S$ is a state variable, $\Delta S$ for an \emph{irreversible} process is found by inventing a
+reversible path between the same two end states and computing along that. The actual process may have
+quite different heat flows, or none at all.
+
+\begin{derivbox}{Entropy change of an ideal gas}\label{der:entropy-gas}
+\stepn{1} On a reversible step, the first law gives $\delta Q_{\text{rev}}=dU+P\,dV=nC_v\,dT+\dfrac{nRT}{V}\,dV$.
+
+\stepn{2} Divide by $T$:
+$\dfrac{\delta Q_{\text{rev}}}{T}=nC_v\,\dfrac{dT}{T}+nR\,\dfrac{dV}{V}$. Each term is now a function of a single
+variable, which is why the integral does not depend on the path.
+
+\stepn{3} Integrate (two logarithms, \chref{ch:toolkit}, Section~\ref{sec:explog}):
+\[
+\boxed{\;\Delta S=nC_v\ln\frac{T_2}{T_1}+nR\ln\frac{V_2}{V_1}\;}
+\]
+
+\stepn{4} \textbf{Checks.} Isothermal: $\Delta S=nR\ln(V_2/V_1)=Q/T$, since $Q=nRT\ln(V_2/V_1)$. Reversible
+adiabatic: $Q=0$ at every step, so $\Delta S=0$; setting the formula to zero gives
+$C_v\ln(T_2/T_1)=-R\ln(V_2/V_1)$, that is, $TV^{R/C_v}=TV^{\gamma-1}=$ constant, the adiabatic law of
+Derivation~\ref{der:adiabat} recovered by a different road. A reversible adiabatic process is
+\emph{isentropic}.
+\end{derivbox}
+
+\subsection{The entropy form of the second law}
+
+For an irreversible engine, Carnot's theorem gives $\eta<1-T_c/T_h$, so $Q_c/Q_h>T_c/T_h$ and
+\[
+\frac{Q_h}{T_h}-\frac{Q_c}{T_c}<0 .
+\]
+Around a cycle containing irreversible steps, the sum of $Q/T$ (heats with signs, temperatures of the
+reservoirs) is \emph{negative}. Clausius generalised this, as before, to the \textbf{Clausius inequality}
+$\oint\delta Q/T\le0$, with equality only for reversible cycles. We state its consequence for an isolated
+system, which exchanges no heat at all, without the general proof.
+
+\begin{keybox}{Second law: the entropy statement}\label{key:entropy-law}
+The entropy of an isolated system never decreases:
+\[
+\boxed{\;\Delta S_{\text{isolated}}\ge0\;}
+\]
+with equality only for reversible processes. Applied to a system together with its surroundings (which
+together are isolated), $\Delta S_{\text{system}}+\Delta S_{\text{surroundings}}\ge0$. The entropy of one
+part \emph{can} fall, as the food in a refrigerator shows, provided the rest gains at least as much.
+\end{keybox}
+
+The Clausius statement follows at once. Let heat $Q$ pass from a reservoir at $T_h$ to one at $T_c$. The
+hot reservoir loses entropy $Q/T_h$, the cold one gains $Q/T_c$, and
+\[
+\Delta S_{\text{total}}=Q\left(\frac{1}{T_c}-\frac{1}{T_h}\right),
+\]
+which is positive if $T_h>T_c$ and negative otherwise. Heat flows from hot to cold, never the reverse,
+because only that direction raises the total entropy.
+
+\begin{exbox}{Entropy produced by heat flow and by free expansion}\label{ex:thermo-entropy}
+(a) \SI{1000}{J} of heat leaks from a furnace wall at \SI{500}{K} into the air at \SI{300}{K}. Find the
+total entropy change. (b) One mole of ideal gas in an insulated container expands freely into an equal
+evacuated volume. Find its entropy change.
+
+\stepn{1} \textbf{(a)} $\Delta S=-\dfrac{1000}{500}+\dfrac{1000}{300}=-2.000+3.333=\SI{+1.33}{J/K}$. Positive,
+as it must be for a spontaneous process. Had the \SI{1000}{J} instead run a Carnot engine, it would have
+delivered $1000(1-300/500)=\SI{400}{J}$ of work and produced no entropy; the leak wastes that opportunity.
+
+\stepn{2} \textbf{(b)} Here $Q=0$ and $W=0$, so $\Delta U=0$ and $T$ is unchanged. Tempting, but wrong, is
+$\Delta S=Q/T=0$: the expansion is irreversible, so $Q/T$ does not give $\Delta S$. Instead take a reversible
+path between the same end states, an isothermal expansion from $V$ to $2V$:
+$\Delta S=nR\ln2=(8.314)(0.693)=\SI{+5.76}{J/K}$. The gas never spontaneously returns to half the box,
+because that would lower the entropy of an isolated system.
+\ans{(a) $+\SI{1.33}{J/K}$; (b) $+\SI{5.76}{J/K}$}
+\end{exbox}
+
+\begin{trapbox}{$\Delta S=Q/T$ only on a reversible path}
+For an irreversible process the actual heat divided by the temperature is \emph{less} than $\Delta S$ (it
+is zero for the free expansion, while $\Delta S=nR\ln2$). Always compute $\Delta S$ along an imagined
+reversible path between the actual end states.
+\end{trapbox}
+
+\begin{remarkbox}{Entropy and disorder}
+Entropy is often described as ``disorder''. The picture is suggestive but loose. The precise statement,
+due to Boltzmann, is $S=k_B\ln\Omega$, where $k_B$ is Boltzmann's constant (\chref{ch:kinetic}) and
+$\Omega$ is the number of microscopic arrangements of the molecules consistent with the macroscopic state.
+We quote it without proof, since deriving it needs statistical mechanics. When a gas doubles its
+volume, each molecule has twice as many places to be, so $\Omega$ grows by a factor $2^{N}$ for $N$
+molecules and $S$ by $k_BN\ln2=nR\ln2$, exactly the result of Example~\ref{ex:thermo-entropy}. The second law
+then reads: isolated systems move towards macroscopic states that can be realised in overwhelmingly more
+ways. A spontaneous decrease is not strictly impossible, only so improbable for $10^{23}$ molecules that
+it is never seen; this is why the second law is a statistical law, and why it gives time its direction.
+\end{remarkbox}
+
+% ================================================================
+\section{Summary}\label{sec:summary-thermo}
+
+The first law counts energy, the second law says which way it flows, and an ideal gas lets both be
+computed: every process is a path on the $P$--$V$ diagram, work is the area under it, and the
+efficiency of every engine is capped by two temperatures.
+
+\begin{itemize}
+\item \textbf{Zeroth law:} thermal equilibrium is transitive, so temperature is a consistent label.
+\item \textbf{Work by a gas:} $W=\int P\,dV$, the area under the path; it depends on the path. Heat $Q$
+      depends on the path too; the internal energy $U$ is a state variable.
+\item \textbf{Signs:} $Q>0$ into the system, $W>0$ done by the system. \textbf{First law:} $Q=\Delta U+W$.
+\item \textbf{Ideal gas:} $U$ depends on $T$ only, so $\Delta U=nC_v\,\Delta T$ in every process;
+      $C_p-C_v=R$; $\gamma=C_p/C_v$, $C_v=R/(\gamma-1)$.
+\item \textbf{Polytropic family} $PV^x=$ constant: $W=nR(T_1-T_2)/(x-1)$, $C_x=C_v+R/(1-x)$; isobaric $x=0$,
+      isothermal $x=1$ ($W=nRT\ln(V_2/V_1)$, $Q=W$), adiabatic $x=\gamma$ ($Q=0$, $TV^{\gamma-1}=$ constant,
+      expansion cools), isochoric $x\to\infty$ ($W=0$). Slope $-xP/V$: the adiabat is $\gamma$ times steeper
+      than the isotherm.
+\item \textbf{Cycles:} $\Delta U=0$, $W_{\text{net}}=Q_{\text{net}}=$ enclosed area, positive if clockwise.
+\item \textbf{Engines:} $\eta=W/Q_h=1-Q_c/Q_h$, with $Q_h$ the heat absorbed. \textbf{Refrigerators:}
+      $\text{COP}=Q_c/W$; heat pumps $\text{COP}_{\text{hp}}=Q_h/W$.
+\item \textbf{Second law:} no engine turns all its heat into work (Kelvin--Planck); no heat flows from cold to
+      hot unaided (Clausius); the two are equivalent.
+\item \textbf{Carnot:} $\eta_{\text{Carnot}}=1-T_c/T_h$ (kelvin), the same for every reversible engine and an
+      upper bound for all; $\text{COP}_{\text{Carnot}}=T_c/(T_h-T_c)$.
+\item \textbf{Entropy:} $\Delta S=\int\delta Q_{\text{rev}}/T$ along a reversible path. For an ideal gas,
+      $\Delta S=nC_v\ln(T_2/T_1)+nR\ln(V_2/V_1)$. The entropy of an isolated system never decreases.
+\end{itemize}
+
+% ================================================================
+\section{Problem Types}\label{sec:types-thermo}
+
+Thirteen types cover the thermodynamics questions examiners set. Almost all of them turn on two facts:
+$\Delta U$ depends only on the end states while $Q$ and $W$ depend on the path, and the process named in
+the question (``slowly'', ``suddenly'', ``at constant pressure'') selects the formula.
+
+\archq{First law with the sign convention}
+{``Heat $Q$ is supplied and the system expands (or is compressed) by a given amount; find $\Delta U$,'' often
+with a phase change.}
+{Write $Q=\Delta U+W$ with $Q>0$ for heat in and $W>0$ for work done \emph{by} the system. At constant
+pressure, $W=P\,\Delta V$.}
+{Adding $W$ instead of subtracting it, which is the first law of the other sign convention applied to this
+book's $W$.}
+{\SI{1.00}{g} of water at \SI{100}{\celsius} becomes \SI{1671}{cm^3} of steam at a pressure of
+\SI{1.013e5}{Pa}; the latent heat is \SI{2256}{J/g}. The increase in internal energy is about:}
+{\SI{2256}{J}}
+{\SI{2425}{J}}
+{\SI{169}{J}}
+{\SI{2087}{J}\archans{D}{$W=P\,\Delta V=(\num{1.013e5})(\num{1670e-6})=\SI{169}{J}$ is done by the steam on
+the atmosphere, so $\Delta U=Q-W=2256-169=\SI{2087}{J}$. Option (A) ignores the work, (B) adds it (the sign
+error), and (C) is the work itself.}}
+
+\archq{First law across two paths}
+{``Along one path from $A$ to $B$, heat $Q_1$ is supplied and work $W_1$ done; find $Q$ or $W$ for another path
+between the same states.''}
+{$\Delta U$ depends only on the end states: compute it on the path where both $Q$ and $W$ are known, then use
+$Q=\Delta U+W$ on the other path.}
+{Treating $Q$ (or $W$) as if it were the same on both paths. Only $\Delta U$ is.}
+{A gas goes from state $A$ to state $B$ along a path on which \SI{600}{J} of heat is supplied and the gas does
+\SI{250}{J} of work. Along a different path from $A$ to $B$ the gas does only \SI{100}{J} of work. The heat
+supplied along the second path is:}
+{\SI{350}{J}}
+{\SI{600}{J}}
+{\SI{700}{J}}
+{\SI{450}{J}\archans{D}{$\Delta U=Q_1-W_1=600-250=\SI{350}{J}$ on either path, so on the second
+$Q=\Delta U+W_2=350+100=\SI{450}{J}$. Option (A) is $\Delta U$, not $Q$; (B) assumes $Q$ is path-independent;
+(C) adds the work to the old heat.}}
+
+\archq{Net work of a cycle: the enclosed area}
+{``A gas is taken clockwise (or anticlockwise) around a closed loop on a $P$--$V$ diagram; find the net work or
+the net heat per cycle.''}
+{$\Delta U=0$ around a cycle, so $Q_{\text{net}}=W_{\text{net}}=$ enclosed area; positive if clockwise,
+negative if anticlockwise.}
+{Integrating leg by leg when only the net is asked; or writing $W_{\text{net}}=0$ because the gas ``returns to
+the start''.}
+{A gas is carried clockwise around a rectangular cycle on a $P$--$V$ diagram between pressures \SI{1e5}{Pa} and
+\SI{2e5}{Pa} and volumes \SI{1e-3}{m^3} and \SI{2e-3}{m^3}. The net work done by the gas per cycle is:}
+{\SI{100}{J}}
+{\SI{50}{J}}
+{\SI{200}{J}}
+{\SI{0}{J}\archans{A}{The enclosed area is $\Delta P\,\Delta V=(\num{1e5})(\num{1e-3})=\SI{100}{J}$, positive
+because the loop is clockwise. Option (B) uses the triangle formula, (C) is the work of the high-pressure
+expansion alone, and (D) confuses $W_{\text{net}}$ with $\Delta U$.}}
+
+\archq{Free expansion into a vacuum}
+{``A gas in an insulated container expands freely into an evacuated chamber; what happens to its temperature
+(or internal energy, or entropy)?''}
+{No opposing pressure, so $W=0$; insulated, so $Q=0$; hence $\Delta U=0$, and for an ideal gas $T$ is
+unchanged.}
+{Expecting cooling because ``expansion cools''. That is true of a reversible adiabatic expansion, where the gas
+does work, not of a free one.}
+{An ideal monatomic gas, thermally insulated, expands freely into an evacuated chamber and doubles its volume.
+Its temperature:}
+{falls, because the gas expands}
+{is unchanged}
+{rises, because the gas speeds up as it rushes in}
+{falls to $2^{-2/3}$ of its initial value\archans{B}{$W=0$ and $Q=0$, so $\Delta U=0$, and for an ideal gas
+$U$ depends only on $T$. Option (D) applies $TV^{\gamma-1}=$ constant, which holds only for a quasi-static
+adiabatic process, and a free expansion is neither quasi-static nor reversible; (A) and (C) have no
+energy to pay for a change.}}
+
+\archq{Slow or sudden compression}
+{``A gas is \emph{suddenly} (or \emph{slowly}) compressed to a fraction of its volume; find the final pressure
+or temperature.'' The adverb is the switch.}
+{Slowly, with good thermal contact: isothermal, $PV=$ constant. Suddenly, or insulated: adiabatic,
+$PV^\gamma=$ constant and $TV^{\gamma-1}=$ constant.}
+{Using the isothermal exponent for a sudden change, or the wrong $\gamma$ for the gas.}
+{A monatomic ideal gas ($\gamma=\tfrac53$) at pressure $P_0$ is \emph{suddenly} compressed to one-quarter of its
+volume. The final pressure is about:}
+{$4P_0$}
+{$7.0P_0$}
+{$10.1P_0$}
+{$16P_0$\archans{C}{Sudden means adiabatic: $P=P_0\,4^{5/3}\approx10.1P_0$. Option (A) is the slow, isothermal
+answer; (B) uses the diatomic $\gamma=1.4$; (D) squares the volume ratio.}}
+
+\archq{Slopes of isotherm and adiabat}
+{``Compare the slopes of the isothermal and adiabatic curves through a point,'' or ``identify which curve on a
+$P$--$V$ diagram is which.''}
+{From $PV^x=$ constant, $dP/dV=-xP/V$: the isotherm ($x=1$) has slope $-P/V$, the adiabat ($x=\gamma$) has
+$-\gamma P/V$.}
+{Thinking the two curves look alike because both fall. The adiabat is always the steeper, by the factor
+$\gamma$.}
+{At the point where an isothermal and an adiabatic curve of the same gas cross on a $P$--$V$ diagram, the ratio
+of the adiabatic slope to the isothermal slope is:}
+{$1$}
+{$1/\gamma$}
+{$\gamma-1$}
+{$\gamma$\archans{D}{$(dP/dV)_{\text{adiabatic}}=-\gamma P/V$ and $(dP/dV)_{\text{isothermal}}=-P/V$ at the
+same $(P,V)$, so the ratio is $\gamma>1$. Option (B) inverts it; (C) confuses the exponent of $V$ in
+$TV^{\gamma-1}$ with the slope.}}
+
+\archq{Molar heat capacity of a given process}
+{``A gas follows $VT=$ constant, or $P\propto V$, or $PV^2=$ constant; find its molar heat capacity, or the heat
+for a temperature rise.''}
+{Rewrite the relation as $PV^x=$ constant (use $PV=nRT$ to eliminate $T$), read off $x$, then
+$C_x=C_v+R/(1-x)$ and $Q=nC_x\,\Delta T$.}
+{Getting $x$ wrong when converting. $VT=$ constant with $T\propto PV$ gives $PV^2=$ constant, so $x=2$, not
+$-1$.}
+{One mole of a monatomic ideal gas is taken through a process in which $VT=$ constant. The molar heat capacity
+of the gas for this process is:}
+{$3R/2$}
+{$R/2$}
+{$5R/2$}
+{$2R$\archans{B}{$T\propto PV$, so $VT=$ constant becomes $PV^2=$ constant and $x=2$:
+$C=\tfrac32R+R/(1-2)=\tfrac12R$. Option (A) is $C_v$, ignoring the work; (C) is $C_p$; (D) uses $x=-1$, the
+index for $P\propto V$.}}
+
+\archq{Work and heat on one leg}
+{``A gas expands along a given path; find $W/Q$, or the fraction of heat converted to work.''}
+{Compute $W$ (area, or $nR\,\Delta T$ at constant pressure) and $\Delta U=nC_v\,\Delta T$ separately; then
+$Q=\Delta U+W$.}
+{Taking $W=Q$, which holds only when $\Delta U=0$ (isothermal).}
+{One mole of a monatomic ideal gas expands at constant pressure, doubling its volume from an initial temperature
+$T_0$. The ratio $W/Q$ of the work done by the gas to the heat absorbed is:}
+{$2/3$}
+{$3/5$}
+{$2/5$}
+{$1$\archans{C}{$W=R\,\Delta T=RT_0$ (the temperature doubles) and $Q=C_p\,\Delta T=\tfrac52RT_0$, so
+$W/Q=\tfrac25$. Option (A) is $W/\Delta U$, (B) is $\Delta U/Q$, and (D) forgets that part of the heat raises
+$U$.}}
+
+\archq{Carnot efficiency and the kelvin trap}
+{``An ideal (Carnot) engine works between two temperatures; find its efficiency, work or rejected heat,'' often
+``between the boiling and freezing points of water''.}
+{$\eta=1-T_c/T_h$ with temperatures in kelvin; then $W=\eta Q_h$ and $Q_c=Q_h-W$.}
+{Using Celsius temperatures; dividing by the wrong temperature; forgetting the ``$1-$''.}
+{A Carnot engine operates between the boiling point and the freezing point of water. Its efficiency is closest
+to:}
+{26.8 per cent}
+{36.6 per cent}
+{73.2 per cent}
+{100 per cent\archans{A}{$\eta=1-273/373=0.268$. Option (B) divides the temperature difference by the cold
+temperature, $100/273$; (C) is $T_c/T_h$, the ``$1-$'' forgotten; (D) uses Celsius, $1-0/100$.}}
+
+\archq{Carnot engines in series}
+{``Two Carnot engines in series, the heat rejected by the first feeding the second, have equal efficiencies
+(or equal works); find the intermediate temperature.''}
+{For reversible engines $Q/T$ is the same at every reservoir. Equal efficiency: $1-T/T_h=1-T_c/T$, so
+$T=\sqrt{T_hT_c}$. Equal work: the temperature drops are equal, $T=\tfrac12(T_h+T_c)$.}
+{Mixing up the two conditions: equal efficiency gives the geometric mean, equal work the arithmetic mean.}
+{Two Carnot engines work in series between \SI{800}{K} and \SI{200}{K}, the heat rejected by the first being the
+input to the second. If the two have equal efficiency, the intermediate temperature is:}
+{\SI{300}{K}}
+{\SI{500}{K}}
+{\SI{600}{K}}
+{\SI{400}{K}\archans{D}{$T/800=200/T$ gives $T=\sqrt{800\times200}=\SI{400}{K}$. Option (B), the arithmetic mean,
+is the answer for equal \emph{work}; (A) and (C) have no basis in either condition.}}
+
+\archq{Efficiency of a non-Carnot cycle}
+{``A gas goes round a rectangular, triangular or other cycle; find its efficiency.''}
+{$\eta=W_{\text{net}}/Q_{\text{in}}$: $W_{\text{net}}$ is the enclosed area; $Q_{\text{in}}$ is the sum of the
+heats on the legs where heat is \emph{absorbed} ($Q>0$), each from $nC\,\Delta T$ with the right $C$.}
+{Putting the net heat (which equals $W_{\text{net}}$, giving $\eta=1$) or all legs in the denominator.}
+{A gas is taken round a cycle: heated at constant volume (pressure rises), then expanded at constant pressure,
+then returned to the start along a straight line. In $\eta=W_{\text{net}}/Q_{\text{in}}$ the denominator
+$Q_{\text{in}}$ should include the heat of:}
+{only the constant-volume leg}
+{both the constant-volume and the constant-pressure legs}
+{only the constant-pressure leg}
+{all three legs, added with their signs\archans{B}{Heat is absorbed on the constant-volume heating ($nC_v\,\Delta T>0$)
+and on the constant-pressure expansion ($nC_p\,\Delta T>0$), so both belong in $Q_{\text{in}}$. Option (D)
+gives the net heat, which equals $W_{\text{net}}$ and would make $\eta=1$; (A) and (C) each miss a leg that
+absorbs heat.}}
+
+\archq{Refrigerators and heat pumps}
+{``A refrigerator or heat pump works between two temperatures; find its best COP, or the work for a given
+heat.''}
+{Refrigerator: $\text{COP}=Q_c/W\le T_c/(T_h-T_c)$. Heat pump: $\text{COP}_{\text{hp}}=Q_h/W\le T_h/(T_h-T_c)$.
+Kelvin throughout.}
+{Using the refrigerator COP for a heat pump (they differ by $1$), or quoting an efficiency.}
+{A heat pump keeps a house at \SI{300}{K} when the outside air is at \SI{270}{K}. The greatest possible amount of
+heat delivered to the house per joule of work is:}
+{\SI{10}{J}}
+{\SI{9}{J}}
+{\SI{1.11}{J}}
+{\SI{0.10}{J}\archans{A}{$\text{COP}_{\text{hp}}=T_h/(T_h-T_c)=300/30=10$. Option (B) is the refrigerator COP
+$T_c/(T_h-T_c)$, which counts the heat taken from outside, not the heat delivered; (C) is $T_h/T_c$;
+(D) is the Carnot efficiency.}}
+
+\archq{Entropy change of an irreversible process}
+{``Find the entropy change in a free expansion, a mixing, or a heat flow between two bodies.''}
+{Entropy is a state variable: replace the actual process by a reversible one between the same end states,
+then use $\Delta S=\int\delta Q_{\text{rev}}/T$ (for an ideal gas,
+$\Delta S=nC_v\ln(T_2/T_1)+nR\ln(V_2/V_1)$).}
+{Using the actual heat: $Q=0$ in a free expansion does not make $\Delta S=0$.}
+{One mole of an ideal gas in an insulated container expands freely into vacuum, doubling its volume. The
+entropy change of the gas is:}
+{zero, because no heat flows}
+{$-R\ln2$}
+{$+R\ln2\approx\SI{+5.76}{J/K}$}
+{$+R\approx\SI{+8.31}{J/K}$\archans{C}{$T$ is unchanged, so take a reversible isothermal expansion from $V$ to
+$2V$: $\Delta S=R\ln2=\SI{5.76}{J/K}$. Option (A) uses $Q/T$ for an irreversible process; (B) has the wrong
+sign, which would let an isolated system lose entropy; (D) drops the logarithm.}}
+
+% ================================================================
+\section{Practice Problems}\label{sec:practice-thermo}
+
+The problems below are of standard examination difficulty. Take $R=\SI{8.314}{J.mol^{-1}.K^{-1}}$.
+Answers, with brief working, follow the list.
+
+\begin{enumerate}[itemsep=3pt]
+\item A gas absorbs \SI{500}{J} of heat and does \SI{200}{J} of work. Find $\Delta U$. In a second process the
+      gas is compressed, \SI{300}{J} of work being done on it, while it loses \SI{100}{J} of heat. Find
+      $\Delta U$ again.
+\item Half a mole of a diatomic ideal gas is heated at constant pressure from \SI{300}{K} to \SI{400}{K}. Find
+      $W$, $\Delta U$ and $Q$.
+\item How much heat must be supplied to two moles of an ideal gas at \SI{300}{K} to triple its volume
+      isothermally?
+\item Air ($\gamma=1.4$) at \SI{300}{K} and atmospheric pressure is compressed adiabatically in a pump until its
+      pressure is three times atmospheric. Find its temperature.
+\item An ideal monatomic gas is heated along a path on which $P\propto V$. Find its molar heat capacity along
+      this path.
+\item An inventor claims an engine that, per cycle, absorbs \SI{1000}{J} at \SI{400}{K}, rejects \SI{500}{J} at
+      \SI{300}{K} and delivers the rest as work. Is the claim possible? Answer using (a) Carnot's theorem and
+      (b) entropy.
+\item A freezer at \SI{-18}{\celsius} sits in a kitchen at \SI{30}{\celsius} and must remove heat at
+      \SI{100}{W}. Find the least power its compressor can draw.
+\item Find the entropy change when \SI{1.0}{kg} of ice melts at \SI{0}{\celsius} ($L_f=\SI{3.34e5}{J/kg}$).
+\item Can the temperature of a gas rise when no heat is supplied to it? Can it fall while heat is supplied?
+      Give an example of each.
+\item Three moles of an ideal gas at \SI{400}{K} are compressed isothermally to half their volume. Find
+      the work done \emph{by} the gas and the heat exchanged, with signs.
+\item A diatomic gas ($\gamma = 1.4$) is compressed adiabatically to one-eighth of its volume. Starting at
+      \SI{300}{K}, find the final temperature.
+\item An ideal gas is taken \emph{anticlockwise} round a rectangular cycle on a $P$--$V$ diagram between $P = \SI{1e5}{Pa}$ and \SI{3e5}{Pa}, and $V = \SI{1e-3}{m^3}$ and \SI{4e-3}{m^3}. Find the net work done by the gas per cycle and the net heat it absorbs.
+\item A Carnot engine operates between \SI{600}{K} and \SI{300}{K}. Find its efficiency. If it absorbs
+      \SI{2000}{J} per cycle, how much work does it deliver?
+\item A Carnot engine has an efficiency of 40 per cent with its cold reservoir at \SI{300}{K}. By how much
+      must the temperature of the hot reservoir be raised to reach 50 per cent, $T_c$ unchanged?
+\item \emph{Conceptual.} A room cannot be cooled by leaving the refrigerator door open. Explain in two
+      sentences using the first and second laws.
+\item Two moles of a monatomic gas are heated at constant volume from \SI{300}{K} to \SI{500}{K}. Find
+      $Q$, $\Delta U$ and $W$. Then repeat for constant pressure, and explain why $Q$ differs.
+\item One mole of a monatomic gas expands polytropically, $PV^{1.2}=$ constant, to double its volume,
+      starting at \SI{350}{K}. Find the final temperature $T_2$, the work done, the molar heat capacity
+      $C_x$ along the process, and $Q$. Is heat absorbed or released? Comment on the sign of $C_x$.
+\item A petrol engine burns fuel at about \SI{2000}{K} and exhausts at about \SI{800}{K}. What is the
+      \emph{highest} efficiency it could possibly have, and why do real engines fall well short?
+\item \emph{Cascade.} A Carnot engine between \SI{600}{K} and \SI{400}{K} feeds the heat it rejects to a
+      second Carnot engine between \SI{400}{K} and \SI{300}{K}. Show that the two together have the same
+      efficiency as a single Carnot engine between \SI{600}{K} and \SI{300}{K}.
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item $\Delta U=Q-W=500-200=\SI{300}{J}$. Second process: $Q=\SI{-100}{J}$, $W=\SI{-300}{J}$, so
+      $\Delta U=-100-(-300)=\SI{+200}{J}$.
+\item $W=nR\,\Delta T=0.5(8.314)(100)\approx\SI{416}{J}$; $\Delta U=nC_v\,\Delta T=0.5(\tfrac52)(8.314)(100)
+      \approx\SI{1039}{J}$; $Q=nC_p\,\Delta T\approx\SI{1455}{J}$, and $416+1039=1455$.
+\item $\Delta U=0$, so $Q=W=nRT\ln3=2(8.314)(300)(1.0986)\approx\SI{5480}{J}$.
+\item $P^{1-\gamma}T^\gamma=$ constant gives $T_2=T_1(P_2/P_1)^{(\gamma-1)/\gamma}=300\times3^{0.2857}
+      \approx\SI{411}{K}$.
+\item $P\propto V$ is $PV^{-1}=$ constant, so $x=-1$ and $C=C_v+R/(1-(-1))=\tfrac32R+\tfrac12R=2R
+      \approx\SI{16.6}{J.mol^{-1}.K^{-1}}$.
+\item (a) Claimed $\eta=500/1000=50$ per cent, but $\eta_{\text{Carnot}}=1-300/400=25$ per cent: impossible.
+      (b) Per cycle the engine's entropy returns to its start, while the reservoirs change by
+      $-1000/400+500/300=-2.50+1.67=\SI{-0.83}{J/K}$, a decrease of total entropy: impossible.
+\item $T_c=\SI{255}{K}$, $T_h=\SI{303}{K}$; $\text{COP}\le255/48=5.31$, so $W\ge100/5.31\approx\SI{18.8}{W}$.
+\item Melting is reversible at the melting point, so $\Delta S=Q/T=3.34\times10^5/273\approx\SI{1.22e3}{J/K}$.
+\item Yes to both. An adiabatic compression ($Q=0$) heats the gas, the work done on it raising $U$. In a
+      polytropic expansion with $1<x<\gamma$, for example $PV^{1.2}=$ constant for air, heat flows in while the
+      gas cools, because it does more work than the heat supplied.
+\item $W = nRT\ln\tfrac{V_2}{V_1} = 3(8.314)(400)\ln\tfrac12 \approx \SI{-6915}{J}$: the work done
+      \emph{by} the gas is negative, since work is done \emph{on} it. Isothermal, so $\Delta U = 0$ and
+      $Q = W = \SI{-6915}{J}$: the gas \emph{rejects} that heat.
+\item $TV^{\gamma-1}$ is constant: $T_2 = 300\times8^{0.4} \approx 300\times2.30 = \SI{689}{K}$.
+      Adiabatic compression heats the gas, as in a bicycle pump.
+\item The enclosed area is $(\SI{2e5}{Pa})(\SI{3e-3}{m^3}) = \SI{600}{J}$, and the loop runs anticlockwise (with $V$ horizontal), so the gas is compressed at the higher pressure and $W_{\text{net}}=\SI{-600}{J}$ per cycle: net work is done \emph{on} the gas. $\Delta U = 0$ round the loop, so $Q_{\text{net}} = \SI{-600}{J}$: the gas gives out \SI{600}{J} of heat per cycle, as a refrigerator's working substance does.
+\item $\eta = 1 - T_c/T_h = 1-300/600 = 50$ per cent; $W = 0.5\times2000 = \SI{1000}{J}$.
+\item $0.4 = 1 - 300/T_h$ gives $T_h = \SI{500}{K}$. For 50 per cent, $T_h = \SI{600}{K}$. Raise
+      $T_h$ by \SI{100}{K}.
+\item The refrigerator extracts $Q_c$ from its interior but exhausts $Q_h=Q_c + W$ into the room from its
+      rear coils (first law), so the net effect on the room is heating by $W$, the compressor's work. The
+      second law forbids moving heat from cold to hot without such work, so an open refrigerator
+      \emph{warms} the room.
+\item \textbf{Constant volume:} $W=0$, so $Q = \Delta U = nC_v\Delta T = 2(\tfrac32R)(200)
+      \approx \SI{4988}{J}$. \textbf{Constant pressure:} $\Delta U$ is the \emph{same} \SI{4988}{J}, since
+      it depends only on $\Delta T$, but now $W = nR\Delta T = 2R(200) \approx \SI{3326}{J}$ is also done,
+      so $Q = \Delta U + W \approx \SI{8314}{J}$. The extra heat pays for the work of expansion, which is
+      exactly why $C_p > C_v$.
+\item $TV^{x-1}$ is constant with $x=1.2$, so $T_2 = 350(1/2)^{0.2} \approx \SI{304.7}{K}$ (the expansion
+      cools the gas, $\Delta T\approx\SI{-45.3}{K}$). $W = \dfrac{nR(T_1-T_2)}{x-1} = \dfrac{8.314(45.3)}{0.2}
+      \approx \SI{1883}{J}$, done by the gas. $C_x = C_v + \dfrac{R}{1-x} = \tfrac32R - 5R = -3.5R
+      \approx \SI{-29.1}{J.mol^{-1}.K^{-1}}$. Then $Q = nC_x\Delta T = (-29.1)(-45.3)\approx\SI{1318}{J}$,
+      \emph{absorbed}. The heat capacity is negative because $1<x<\gamma=\tfrac53$: the gas absorbs heat yet
+      cools, doing more work than the heat supplied and drawing the balance from $U$ (check:
+      $\Delta U=nC_v\Delta T\approx\SI{-565}{J}=Q-W$).
+\item Carnot ceiling: $\eta_{\text{Carnot}} = 1 - 800/2000 = 60$ per cent. Real engines fall short because of
+      friction, rapid (non-quasi-static) combustion and heat leaking through the cylinder walls, all
+      irreversible.
+\item First engine: $\eta_1 = 1 - \tfrac{400}{600}=\tfrac13$, so from heat $Q_h$ taken at \SI{600}{K} it
+      rejects $Q_m = \tfrac23 Q_h$ at \SI{400}{K}. The second takes that $Q_m$ and rejects
+      $Q_c = Q_m\tfrac{300}{400} = \tfrac23 Q_h\cdot\tfrac34 = \tfrac12 Q_h$ at \SI{300}{K}. Overall
+      $\eta = 1 - Q_c/Q_h = \tfrac12 = 1 - \tfrac{300}{600}$, the same as one engine across the whole
+      drop: the intermediate temperature cancels.
+\end{enumerate}
+}
+
+% ================================================================
+\section{Challenge Problems}\label{sec:challenge-thermo}
+
+These problems extend the methods of the chapter beyond the standard examination question. Each states
+which idea it builds on. Attempt each before reading the solution.
+
+\begin{challengebox}{Isothermal against adiabatic for a diatomic gas (builds on the first law)}
+One mole of a diatomic ideal gas ($\gamma=1.4$) at \SI{300}{K} doubles its volume, once isothermally and once
+adiabatically. Find the final temperature and the work done in each case, and explain physically which
+process does more work.
+\challengeans{\emph{Isothermal:} $T_f=\SI{300}{K}$ by definition, and all the heat drawn in becomes work,
+$W=nRT\ln2=(8.314)(300)(0.693)\approx\SI{1729}{J}$. \emph{Adiabatic:} no heat enters, so the work comes out
+of internal energy and the gas cools:
+\[
+T_f=T_i\left(\frac{V_i}{V_f}\right)^{\gamma-1}=300\,(0.5)^{0.4}\approx\SI{227.4}{K},
+\qquad
+W=\frac{nR(T_i-T_f)}{\gamma-1}=\frac{(8.314)(72.6)}{0.4}\approx\SI{1510}{J}.
+\]
+The isothermal expansion does more work because the surroundings keep supplying heat to hold its
+temperature, and so its pressure, up; the adiabatic gas has only its own internal energy to spend.}
+\end{challengebox}
+
+\begin{challengebox}{How good is the rectangular cycle? (builds on cycles and Carnot's theorem)}
+For the rectangular cycle of Example~\ref{ex:thermo-rectcycle} (pressures \SI{1e5}{Pa} and \SI{2e5}{Pa},
+volumes \SI{1}{L} and \SI{2}{L}, traversed clockwise): (a) find its efficiency with a monatomic and with a
+diatomic working gas; (b) find the ratio of the highest to the lowest temperature reached, and the Carnot
+efficiency between those temperatures; (c) explain why the cycle falls so far short.
+\challengeans{(a) $W_{\text{net}}=\SI{100}{J}$ in both cases. Heat is absorbed on $A\to B$ ($Q=(C_v/R)V\Delta P$)
+and $B\to C$ ($Q=(C_p/R)P\Delta V$). Monatomic: $Q_{\text{in}}=\tfrac32(100)+\tfrac52(200)=\SI{650}{J}$, so
+$\eta=100/650\approx15.4$ per cent. Diatomic: $Q_{\text{in}}=\tfrac52(100)+\tfrac72(200)=\SI{950}{J}$, so
+$\eta\approx10.5$ per cent; more of the heat goes into the extra (rotational) internal energy.
+(b) $T\propto PV$: the hottest state is $C$ ($PV=\SI{400}{J}$) and the coldest $A$ ($PV=\SI{100}{J}$), a ratio of
+4. A Carnot engine between them would have $\eta=1-\tfrac14=75$ per cent.
+(c) Carnot's bound is reached only if all heat is taken in at the highest temperature and given out at the
+lowest. Here most of the heat is absorbed while the gas is far colder than the hottest state $C$ (on $A\to B$ its temperature only rises from
+that of $A$ to twice that), and rejected while it is far hotter than the coldest state $A$. In a real engine those heats would cross
+large temperature gaps to and from the reservoirs, which is irreversible; the efficiency pays for it.}
+\end{challengebox}
+
+\begin{challengebox}{The polytropic surprise (builds on molar heat capacities)}
+A diatomic ideal gas is taken along the process $PV^{1.2}=$ constant. Find its molar heat capacity for this
+process, and interpret the sign.
+\challengeans{With $x=1.2$,
+\[
+C=C_v+\frac{R}{1-x}=\frac{5R}{2}+\frac{R}{1-1.2}=\frac{5R}{2}-5R=-\frac{5R}{2}\approx\SI{-20.8}{J.mol^{-1}.K^{-1}}.
+\]
+A \emph{negative} heat capacity: when the gas expands along this path and takes in heat, its temperature
+\emph{falls}. Between the isotherm ($x=1$) and the adiabat ($x=\gamma=1.4$), the expanding gas does more work
+than the heat it receives, and the deficit comes out of its internal energy. (Stars also have a negative heat
+capacity, for a different reason: as a star radiates energy away, gravity pulls it tighter and its core
+\emph{heats up}.)}
+\end{challengebox}
+
+\begin{challengebox}{Two engines in series (builds on Carnot's theorem)}
+A Carnot engine runs between \SI{600}{K} and an intermediate reservoir at $T$, and a second Carnot engine
+takes all the heat rejected by the first and runs between $T$ and \SI{300}{K}
+(Figure~\ref{fig:thermo-cascade}). The two produce equal work. Find $T$, and compare the combined efficiency
+with that of a single Carnot engine between \SI{600}{K} and \SI{300}{K}.
+\challengeans{For reversible engines $Q_h/600=Q_m/T=Q_c/300$; call the common value $\Delta S_0$. Then
+$W_1=Q_h-Q_m=\Delta S_0(600-T)$ and $W_2=Q_m-Q_c=\Delta S_0(T-300)$. Equal work requires equal temperature drops:
+$T=\tfrac12(600+300)=\SI{450}{K}$, the arithmetic mean. The combined efficiency is
+\[
+\eta=\frac{W_1+W_2}{Q_h}=1-\frac{Q_c}{Q_h}=1-\frac{300}{600}=50\text{ per cent},
+\]
+the same as a single Carnot engine across the whole range. Staging neither helps nor hurts: the intermediate
+temperature cancels, and Carnot's theorem forbids beating $1-T_c/T_h$ however the drop is divided.
+(The common value $\Delta S_0=Q/T$ is the entropy that flows through the chain unchanged, Section~\ref{sec:entropy}.)}
+\end{challengebox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{thermo_cascade}
+\figcaption{fig:thermo-cascade}{Two Carnot engines in series. The heat $Q_m$ rejected by engine~1 into the
+intermediate reservoir is all taken up by engine~2, so the intermediate reservoir neither gains nor loses
+energy per cycle. Because $Q/T$ is the same at every reservoir of a reversible chain, each engine's work is
+proportional to its own temperature drop.}
+\end{figure}
+
+\begin{challengebox}{The most work from two bodies (builds on entropy)}
+Two identical blocks, each with heat capacity $ms=\SI{1000}{J/K}$ (mass times specific heat, as in \chref{ch:thermal}) independent of temperature, are at
+\SI{400}{K} and \SI{100}{K}. (a) If they are simply put in contact, what is the final temperature, and how
+much work is obtained? (b) Instead a reversible engine runs between them, taking heat from the hot block and
+rejecting it to the cold one, until they reach a common temperature $T_f$. Find $T_f$ and the work delivered.
+\challengeans{(a) Energy conservation gives $T_f=\tfrac12(400+100)=\SI{250}{K}$ and no work at all. The total
+entropy rises by $ms\ln(250/400)+ms\ln(250/100)=1000(-0.470+0.916)\approx\SI{+446}{J/K}$.
+(b) A reversible process leaves the total entropy unchanged. The blocks change by
+$ms\ln(T_f/400)+ms\ln(T_f/100)=0$, so $T_f^2=400\times100$ and $T_f=\sqrt{400\times100}=\SI{200}{K}$. The work is
+the heat lost by the hot block minus the heat gained by the cold one:
+\[
+W=ms(400-T_f)-ms(T_f-100)=ms\left(\sqrt{400}-\sqrt{100}\right)^2=1000\times(20-10)^2=\SI{1.0e5}{J}.
+\]
+The engine leaves the blocks colder (\SI{200}{K} instead of \SI{250}{K}) because it has carried
+$2ms(\SI{50}{K})=\SI{1.0e5}{J}$ of their internal energy off as work. Direct contact throws away exactly this
+opportunity, and the entropy it creates measures the loss.}
+\end{challengebox}

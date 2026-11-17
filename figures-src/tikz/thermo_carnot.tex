@@ -1,0 +1,50 @@
+% thermo_carnot: the Carnot cycle on the P-V diagram (Vol II Ch 4, fig:thermo-carnot)
+% Drawn to scale for the worked example: one mole of monatomic gas (gamma = 5/3),
+% T_h = 500 K, T_c = 300 K, V_B/V_A = 2.  Units: nR T_h = 2, V_A = 1, so P_A = 2.
+%   A (1, 2)            hot isotherm  PV = 2      (A -> B, absorbs Q_h)
+%   B (2, 1)            adiabat       PV^(5/3) = 2^(5/3) = 3.1748   (B -> C)
+%   C (4.3033, 0.2789)  cold isotherm PV = 2(300/500) = 1.2         (C -> D, rejects Q_c)
+%   D (2.1517, 0.5577)  adiabat       PV^(5/3) = 2                  (D -> A)
+% with V_C = V_B (T_h/T_c)^(3/2) and V_D = V_A (T_h/T_c)^(3/2), (5/3)^(3/2) = 2.1517,
+% so V_C/V_D = V_B/V_A = 2, the ratio the derivation finds.
+% Colours: hot isotherm crimson, cold isotherm primary (temperature), adiabats teal
+% (the adiabatic colour of this chapter).  Enclosed area (net work) pale primary.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=9.2cm, height=5.0cm, scale only axis,
+    xmin=0, xmax=5.0, ymin=0, ymax=2.35,
+    xlabel={volume $V$}, ylabel={pressure $P$},
+    xlabel style={at={(axis description cs:1,0)},anchor=north east},
+    ylabel style={at={(axis description cs:0,1)},anchor=south west,rotate=-90,xshift=-4pt}]
+  \pgfmathsetmacro\r{(5/3)^1.5}
+  \pgfmathsetmacro\VC{2*\r}
+  \pgfmathsetmacro\VD{\r}
+  \pgfmathsetmacro\Kb{2^(5/3)}
+  % enclosed area
+  \fill[cPrim!12] plot[domain=1:2,samples=30] (axis cs:\x,{2/\x})
+     -- plot[domain=2:\VC,samples=40] (axis cs:\x,{\Kb*\x^(-5/3)})
+     -- plot[domain=\VC:\VD,samples=30] (axis cs:\x,{1.2/\x})
+     -- plot[domain=\VD:1,samples=30] (axis cs:\x,{2*\x^(-5/3)}) -- cycle;
+  \draw[leader,cPrim] (axis cs:2.3,0.65) -- (axis cs:2.75,0.95)
+     node[anchor=south west,inner sep=1pt] {enclosed area $=W_{\text{net}}$};
+  % the four legs
+  \addplot[cCrim,domain=1:2,mid arrow] {2/x};
+  \addplot[cTeal,domain=2:\VC,mid arrow] {\Kb*x^(-5/3)};
+  \addplot[cPrim,domain=\VC:\VD,mid arrow] {1.2/x};
+  \addplot[cTeal,domain=\VD:1,mid arrow] {2*x^(-5/3)};
+  % corners
+  \node[dot] at (axis cs:1,2) {};
+  \node[dot] at (axis cs:2,1) {};
+  \node[dot] at (axis cs:\VC,{1.2/\VC}) {};
+  \node[dot] at (axis cs:\VD,{1.2/\VD}) {};
+  \node[anchor=south east,inner sep=2pt] at (axis cs:1,2) {$A$};
+  \node[anchor=south west,inner sep=2pt] at (axis cs:2,1) {$B$};
+  \node[anchor=south west,inner sep=2pt] at (axis cs:\VC,{1.2/\VC}) {$C$};
+  \node[anchor=north east,inner sep=1pt] at (axis cs:\VD,{1.2/\VD}) {$D$};
+  % leg labels
+  \node[cCrim,anchor=south west,inner sep=1pt] at (axis cs:1.5,1.36) {1: isothermal at $T_h$, absorbs $Q_h$};
+  \node[cTeal,anchor=south west,inner sep=1pt] at (axis cs:3.25,0.47) {2: adiabatic expansion};
+  \node[cPrim,anchor=north,inner sep=2pt] at (axis cs:2.85,0.33) {3: isothermal at $T_c$, rejects $Q_c$};
+  \node[cTeal,anchor=east,align=right,inner sep=2pt] at (axis cs:1.33,0.9) {4: adiabatic\\ compression};
+\end{axis}
+\end{tikzpicture}

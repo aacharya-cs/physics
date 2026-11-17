@@ -1,0 +1,24 @@
+% nucapp_c14cycle: the radiocarbon cycle (Vol III Ch 5, fig:nucapp-c14cycle)
+% Production: cosmic-ray neutrons, n + 14N -> 14C + p, in the upper atmosphere.
+% Production balances decay (T_{1/2} = 5730 y), fixing 14C/C at about 1.2e-12 in the air
+% and in everything alive: 13.8 decays per minute per gram of carbon (derived in the text).
+% After death intake stops and 14C -> 14N + e^- + antineutrino runs down unreplenished.
+% A flow chart: the top row is the steady state, the bottom row the clock after death.
+\begin{tikzpicture}[
+    stage/.style={draw=cSteel,thin line,rounded corners=2pt,align=center,
+      text width=40mm,minimum height=15mm,inner sep=3pt},
+    clock/.style={stage,draw=cInk,outline},
+    flow/.style={-bookhead,thin line,cInk}]
+  \node[stage] (a) at (0,2.5) {upper atmosphere:\\cosmic-ray neutrons\\$n+\iso{14}{N}\to\iso{14}{C}+p$};
+  \node[stage] (b) at (5.4,2.5) {$\iso{14}{C}$ forms CO$_2$\\and mixes through\\the air};
+  \node[stage] (c) at (10.8,2.5) {plants take in CO$_2$;\\animals eat plants};
+  \node[stage] (d) at (10.8,0) {while alive: steady\\$13.8$ decays per minute\\per gram of carbon};
+  \node[clock] (e) at (5.4,0) {after death: intake stops;\\$\iso{14}{C}\to\iso{14}{N}+e^-+\bar\nu_e$\\with $\Thalf=\SI{5730}{y}$};
+  \node[clock] (f) at (0,0) {measure activity now:\\$t=\Thalf\log_2\dfrac{\Act_\text{living}}{\Act_\text{sample}}$};
+  \draw[flow] (a) -- (b);
+  \draw[flow] (b) -- (c);
+  \draw[flow] (c) -- (d);
+  \draw[flow] (d) -- node[above,font=\footnotesize] {death} (e);
+  \draw[flow] (e) -- (f);
+  \node[note,cSteel,anchor=south] at (5.4,3.45) {steady state: production balances decay};
+\end{tikzpicture}

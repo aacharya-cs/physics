@@ -1,0 +1,62 @@
+% decay_useries: the uranium-238 (4n+2) decay series (Vol III Ch 2, fig:decay-useries)
+% Main branch, as in the source (figs.py):
+% U-238 -a-> Th-234 -b-> Pa-234m -b-> U-234 -a-> Th-230 -a-> Ra-226 -a-> Rn-222
+% -a-> Po-218 -a-> Pb-214 -b-> Bi-214 -b-> Po-214 -a-> Pb-210 -b-> Bi-210 -b->
+% Po-210 -a-> Pb-206 (stable).  8 alpha and 6 beta-minus steps:
+%   n_alpha = (238-206)/4 = 8,  n_beta = 82 - 92 + 2(8) = 6.
+% Drawn with x = Z and y = A (not A - Z, as the source did), so that a beta step
+% (A fixed, Z+1) is a horizontal arrow and an alpha step (A-4, Z-2) a diagonal
+% one, and the rows A = 238, 234, ..., 206 show that A mod 4 = 2 throughout.
+% Half-lives (NUBASE2020, rounded).  Minor branches (Po-218 -> At-218,
+% Bi-214 -> Tl-210, Bi-210 -> Tl-206) are omitted.
+% beta steps are drawn as arcs over the boxes, which sit almost side by side; half-lives
+% are \scriptsize (7.35pt, above the 6.5pt floor) so the widest boxes stay inside their column.
+% Colours: alpha cPlum, beta-minus cPrim (as in the rest of the chapter).
+\begin{tikzpicture}[x=1.27cm,y=0.33cm,
+  nbox/.style={draw=cInk,thin line,fill=white,align=center,minimum width=1.16cm,
+    minimum height=0.86cm,inner sep=0.6pt,font=\small},
+  stablebox/.style={fill=cGrey!35,outline},
+  alphastep/.style={-smallhead,construction,cPlum},
+  betastep/.style={-smallhead,construction,cPrim}]
+% axes
+\draw[thin line] (81.45,203.4) -- (92.55,203.4);
+\foreach \z in {82,...,92} {\draw[thin line] (\z,203.4) -- (\z,202.9);
+  \node[anchor=north,font=\footnotesize] at (\z,202.9) {\z};}
+\node[anchor=north] at (87,200.6) {proton number $Z$};
+\draw[thin line] (81.45,203.4) -- (81.45,240.2);
+\foreach \a in {206,210,...,238} {\draw[thin line] (81.45,\a) -- (81.32,\a);
+  \node[anchor=east,font=\footnotesize] at (81.32,\a) {\a};}
+\node[rotate=90,anchor=south] at (80.6,222) {mass number $A$};
+\node[nbox] (n0) at (92,238) {$\iso{238}{U}$\\[-1pt]{\scriptsize $4.47\!\times\!10^{9}$\,y}};
+\node[nbox] (n1) at (90,234) {$\iso{234}{Th}$\\[-1pt]{\scriptsize 24.1\,d}};
+\node[nbox] (n2) at (91,234) {$\iso{234}{Pa}$\\[-1pt]{\scriptsize 1.17\,min}};
+\node[nbox] (n3) at (92,234) {$\iso{234}{U}$\\[-1pt]{\scriptsize $2.45\!\times\!10^{5}$\,y}};
+\node[nbox] (n4) at (90,230) {$\iso{230}{Th}$\\[-1pt]{\scriptsize $7.54\!\times\!10^{4}$\,y}};
+\node[nbox] (n5) at (88,226) {$\iso{226}{Ra}$\\[-1pt]{\scriptsize 1600\,y}};
+\node[nbox] (n6) at (86,222) {$\iso{222}{Rn}$\\[-1pt]{\scriptsize 3.82\,d}};
+\node[nbox] (n7) at (84,218) {$\iso{218}{Po}$\\[-1pt]{\scriptsize 3.10\,min}};
+\node[nbox] (n8) at (82,214) {$\iso{214}{Pb}$\\[-1pt]{\scriptsize 26.8\,min}};
+\node[nbox] (n9) at (83,214) {$\iso{214}{Bi}$\\[-1pt]{\scriptsize 19.9\,min}};
+\node[nbox] (n10) at (84,214) {$\iso{214}{Po}$\\[-1pt]{\scriptsize 164\,\textmu s}};
+\node[nbox] (n11) at (82,210) {$\iso{210}{Pb}$\\[-1pt]{\scriptsize 22.2\,y}};
+\node[nbox] (n12) at (83,210) {$\iso{210}{Bi}$\\[-1pt]{\scriptsize 5.01\,d}};
+\node[nbox] (n13) at (84,210) {$\iso{210}{Po}$\\[-1pt]{\scriptsize 138\,d}};
+\node[nbox,stablebox] (n14) at (82,206) {$\iso{206}{Pb}$\\[-1pt]{\scriptsize stable}};
+\draw[alphastep] (n0) -- (n1);
+\draw[betastep] (n1.north) to[bend left=62] (n2.north);
+\draw[betastep] (n2.north) to[bend left=62] (n3.north);
+\draw[alphastep] (n3) -- (n4);
+\draw[alphastep] (n4) -- (n5);
+\draw[alphastep] (n5) -- (n6);
+\draw[alphastep] (n6) -- (n7);
+\draw[alphastep] (n7) -- (n8);
+\draw[betastep] (n8.north) to[bend left=62] (n9.north);
+\draw[betastep] (n9.north) to[bend left=62] (n10.north);
+\draw[alphastep] (n10) -- (n11);
+\draw[betastep] (n11.north) to[bend left=62] (n12.north);
+\draw[betastep] (n12.north) to[bend left=62] (n13.north);
+\draw[alphastep] (n13) -- (n14);
+% legend
+\draw[alphastep] (82.3,238.0) -- (82.9,236.0) node[right,text=cPlum] {$\alpha$ decay: $Z-2$, $A-4$};
+\draw[betastep] (82.3,233.0) -- (82.9,233.0) node[right,text=cPrim] {$\beta^-$ decay: $Z+1$, $A$ unchanged};
+\end{tikzpicture}

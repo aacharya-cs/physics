@@ -1,0 +1,13 @@
+% nuc_notation: reading the nuclide symbol for uranium-238 (Vol III Ch 1, fig:nuc-notation).
+% A = 238 nucleons, Z = 92 protons, so A - Z = 146 neutrons.
+\begin{tikzpicture}
+  \node[font=\fontsize{36}{36}\selectfont,inner sep=1pt] (X) at (0,0) {U};
+  \node[font=\large,anchor=south east,inner sep=1pt] (A) at ($(X.west)+(0.02,0.08)$) {238};
+  \node[font=\large,anchor=north east,inner sep=1pt] (Zn) at ($(X.west)+(0.02,-0.08)$) {92};
+  \draw[cTeal,thin line,-smallhead] (-3.2,1.0) node[anchor=east,align=right]
+    {mass number $A$\\ (protons $+$ neutrons)} -- (A.west);
+  \draw[cAcc,thin line,-smallhead] (-3.2,-1.0) node[anchor=east,align=right]
+    {atomic number $Z$\\ (protons; fixes the element)} -- (Zn.west);
+  \draw[cSteel,thin line,-smallhead] (2.2,0) node[anchor=west,align=left]
+    {chemical symbol;\\ neutron number $A-Z=146$} -- (X.east);
+\end{tikzpicture}

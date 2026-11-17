@@ -1,0 +1,23 @@
+% thermo_cascade: two Carnot engines in series (Vol II Ch 4, fig:thermo-cascade)
+% Replaces figs/ch_tm4_carnot.pdf.  Engine 1 runs between 600 K and an intermediate
+% reservoir at T; it rejects Q_m, which engine 2 takes in and runs between T and 300 K.
+% For reversible engines Q_h/600 = Q_m/T = Q_c/300, so W1 = Q_h - Q_m and W2 = Q_m - Q_c
+% are proportional to the temperature drops (600 - T) and (T - 300).
+% The answer T = 450 K (equal work) is deliberately not shown.  Colours as in thermo_engine.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    eng/.style={body,rounded corners=3pt,minimum width=1.9cm,minimum height=0.9cm}]
+  \draw[cSteel,thin line,fill=cAmber!55] (-2.0,4.4) rectangle (2.0,5.1);
+  \node at (0,4.75) {hot reservoir, $\SI{600}{K}$};
+  \draw[cSteel,thin line,fill=cMoon] (-2.0,1.65) rectangle (2.0,2.35);
+  \node at (0,2.0) {intermediate reservoir, $T$};
+  \draw[cSteel,thin line,fill=cEarth] (-2.0,-1.1) rectangle (2.0,-0.4);
+  \node at (0,-0.75) {cold reservoir, $\SI{300}{K}$};
+  \node[eng] (e1) at (0,3.375) {engine 1};
+  \node[eng] (e2) at (0,0.625) {engine 2};
+  \draw[vector,cAcc] (0,4.4) -- (e1.north) node[midway,anchor=west,xshift=2pt] {$Q_h$};
+  \draw[vector,cAcc] (e1.south) -- (0,2.35) node[midway,anchor=west,xshift=2pt] {$Q_m$};
+  \draw[vector,cAcc] (0,1.65) -- (e2.north) node[midway,anchor=west,xshift=2pt] {$Q_m$};
+  \draw[vector,cAcc] (e2.south) -- (0,-0.4) node[midway,anchor=west,xshift=2pt] {$Q_c$};
+  \draw[vector,cPlum] (e1.east) -- ++(1.4,0) node[anchor=west] {$W_1$};
+  \draw[vector,cPlum] (e2.east) -- ++(1.4,0) node[anchor=west] {$W_2$};
+\end{tikzpicture}

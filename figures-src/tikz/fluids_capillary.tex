@@ -1,0 +1,46 @@
+% fluids_capillary: capillary rise and fall (Vol II Ch 2, fig:fluids-capillary)
+% Same tube radius r in both baths.  h = 2 S cos(theta)/(rho g r):
+%   water  (S = 0.072 N/m, theta ~ 0,   rho = 1000):   S cos/rho = 7.2e-5
+%   mercury(S = 0.465 N/m, theta = 140, rho = 13600):  S cos/rho = -2.6e-5
+% so the mercury depression is 0.36 of the water rise; drawn 1.5 and 0.55.
+% Menisci are spherical caps meeting the wall at theta: water a hemisphere
+% (radius r, concave up); mercury radius r/|cos 140| = 1.305 r, convex, its radius
+% to the wall at 50 deg from the vertical, cap height 0.466 r.
+% h is measured to the lowest (water) or highest (mercury) point of the meniscus.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    water/.style={fill=cPrim!12,draw=none},
+    merc/.style={fill=cSteel!30,draw=none},
+    glass/.style={fill=cMoon,draw=cSteel,thin line}]
+  \def\r{0.22}\def\w{0.08}
+  % ---------------- water ----------------
+  \begin{scope}
+    \def\h{1.5}
+    \fill[water] (-1.6,-1.3) rectangle (1.6,0);
+    \fill[water] (-\r,0) -- (-\r,\h+\r) arc[start angle=180,end angle=360,radius=\r] -- (\r,0) -- cycle;
+    \draw[cPrim,thin line] (-1.6,0) -- ({-\r-\w},0) ({\r+\w},0) -- (1.6,0);
+    \draw[cPrim,thin line] (-\r,\h+\r) arc[start angle=180,end angle=360,radius=\r];
+    \draw[glass] ({-\r-\w},-0.9) rectangle (-\r,2.3);
+    \draw[glass] (\r,-0.9) rectangle ({\r+\w},2.3);
+    \draw[outline] (-1.6,0.4) -- (-1.6,-1.3) -- (1.6,-1.3) -- (1.6,0.4);
+    \draw[dimtick] ({\r+\w+0.05},\h) -- (1.0,\h);
+    \draw[dim] (0.85,0) -- (0.85,\h) node[midway,anchor=west,cSteel] {$h$};
+    \node[align=center,anchor=north] at (0,-1.4) {water in glass:\\ $\theta<90^\circ$, rises};
+  \end{scope}
+  % ---------------- mercury ----------------
+  \begin{scope}[xshift=4.4cm]
+    \def\h{0.55}
+    \pgfmathsetmacro{\Rc}{\r/cos(40)}          % = r/|cos 140|
+    \pgfmathsetmacro{\yc}{-\h-\Rc}               % centre of the convex cap
+    \fill[merc] (-1.6,-1.3) rectangle (1.6,0);
+    \fill[white] (-\r,0) -- (-\r,{\yc+\Rc*cos(50)}) arc[start angle=140,end angle=40,radius=\Rc]
+       -- (\r,0) -- cycle;
+    \draw[cSteel,thin line] (-1.6,0) -- ({-\r-\w},0) ({\r+\w},0) -- (1.6,0);
+    \draw[cSteel,thin line] (-\r,{\yc+\Rc*cos(50)}) arc[start angle=140,end angle=40,radius=\Rc];
+    \draw[glass] ({-\r-\w},-0.9) rectangle (-\r,2.3);
+    \draw[glass] (\r,-0.9) rectangle ({\r+\w},2.3);
+    \draw[outline] (-1.6,0.4) -- (-1.6,-1.3) -- (1.6,-1.3) -- (1.6,0.4);
+    \draw[dimtick] ({\r+\w+0.05},-\h) -- (1.0,-\h);
+    \draw[dim] (0.85,0) -- (0.85,-\h) node[midway,anchor=west,cSteel] {$h$};
+    \node[align=center,anchor=north] at (0,-1.4) {mercury in glass:\\ $\theta>90^\circ$, falls};
+  \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,56 @@
+% decay_antimatter: particles and antiparticles, annihilation, pair production
+% (Vol III Ch 2, fig:decay-antimatter)
+% Particle colours used throughout Vol III Ch 2: electron cPrim, positron cCrim,
+% neutrino/antineutrino cTeal (dashed outline), photon: the shared wavy `photon' style.
+% (b) e- and e+ essentially at rest: total momentum 0, so the rest energy
+%     2 m_e c^2 = 1.022 MeV must leave as two photons of 0.511 MeV each, back to
+%     back (one photon would carry momentum E/c, not 0).
+% (c) a photon of E > 2 m_e c^2 = 1.022 MeV creates a pair near a nucleus, which
+%     takes up the momentum that the photon brings in.
+\begin{tikzpicture}[
+  part/.style={circle,thin line,minimum size=7.5mm,inner sep=0pt},
+  electron/.style={part,draw=cPrim,fill=cPrim!12},
+  positron/.style={part,draw=cCrim,fill=cCrim!12},
+  neutrino/.style={part,draw=cTeal,fill=cTeal!8,dash pattern=on 2pt off 1.2pt},
+  gamma/.style={-smallhead,construction,photon},
+  track/.style={-smallhead,construction,cInk}]
+% ---------------------------------------------------------- (a) the pairs
+\node[note] at (1.75,2.75) {(a) particle and antiparticle};
+\node[electron] (e) at (0,1.65) {$e^-$};
+\node[positron] (p) at (3.5,1.65) {$e^+$};
+\draw[<->,thin line,cSteel] (e) -- (p)
+  node[midway,above,small label,text=cSteel] {same mass}
+  node[midway,below,small label,text=cSteel] {opposite charge};
+\node[neutrino] (n) at (0,0.15) {$\nu_e$};
+\node[neutrino] (nb) at (3.5,0.15) {$\bar\nu_e$};
+\draw[<->,thin line,cSteel] (n) -- (nb)
+  node[midway,above,small label,text=cSteel] {both neutral}
+  node[midway,below,small label,text=cSteel,align=center] {opposite $L_e$};
+\node[small label] at (0,-0.7) {$L_e=+1$};
+\node[small label] at (3.5,-0.7) {$L_e=-1$};
+% ------------------------------------------------------- (b) annihilation
+\begin{scope}[xshift=6.1cm]
+\node[note] at (1.2,2.75) {(b) annihilation};
+\node[electron] (a1) at (0,1.0) {$e^-$};
+\node[positron] (a2) at (2.4,1.0) {$e^+$};
+\draw[track] (a1) -- (0.88,1.0);
+\draw[track] (a2) -- (1.52,1.0);
+\node[dot,cAcc] at (1.2,1.0) {};
+\draw[gamma] (1.2,1.12) -- (1.2,2.25) node[right,small label,text=cInk] {$511\,\mathrm{keV}$};
+\draw[gamma] (1.2,0.88) -- (1.2,-0.25) node[right,small label,text=cInk] {$511\,\mathrm{keV}$};
+\node[small label,align=center] at (1.2,-0.8) {two photons, back to back};
+\end{scope}
+% --------------------------------------------------- (c) pair production
+\begin{scope}[xshift=10.6cm]
+\node[note] at (1.6,2.75) {(c) pair production};
+\draw[gamma] (-0.6,1.0) -- (1.1,1.0)
+  node[pos=0.42,above=2pt,small label,text=cInk] {$\gamma$, $E>1.022\,\mathrm{MeV}$};
+\shade[ball color=cRock] (1.25,0.5) circle[radius=0.16];
+\node[small label] at (1.25,0.08) {nucleus};
+\node[electron] (b1) at (2.75,1.9) {$e^-$};
+\node[positron] (b2) at (2.75,0.1) {$e^+$};
+\draw[track] (1.25,1.0) -- (b1);
+\draw[track] (1.25,1.0) -- (b2);
+\node[small label,align=center] at (1.5,-0.8) {energy becomes a pair};
+\end{scope}
+\end{tikzpicture}

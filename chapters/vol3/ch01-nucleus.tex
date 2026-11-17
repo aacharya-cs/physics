@@ -1,0 +1,725 @@
+\partdivider{A}{The Nucleus and Its Decay}{A nucleus weighs less than its parts, and that missing mass, the binding energy, decides which nuclei are stable, which decay, and how much energy each decay releases.}{\chref{ch:nucleus} The Nucleus\\[1.2mm]
+\chref{ch:decay} Radioactive Decay\\[1.2mm]
+\chref{ch:decaylaw} The Law of Radioactive Decay}
+
+\ncertchapter{1}{The Nucleus}\chlabel{ch:nucleus}
+
+Every atom has at its centre an object tens of thousands of times smaller than the atom itself, which
+carries all of its positive charge and more than \num{99.9} percent of its mass. Chemistry never sees this
+object: chemical reactions rearrange electrons and leave the nucleus untouched. Yet the nucleus holds
+the deepest energy store in ordinary matter. A gram of radium keeps itself warmer than its
+surroundings for centuries; a kilogram of uranium-235, completely fissioned, gives as much heat as
+burning about three thousand tonnes of coal; and the Sun has been
+shining on nuclear energy for four and a half billion years. To understand any of this, one needs to know
+what a nucleus is made of, how big it is, and how tightly its parts are held.
+
+This chapter answers those three questions. It begins with the experiment that found the nucleus,
+which uses nothing beyond the energy conservation of \chref{ch:energy} and the angular momentum of
+\chref{ch:rotation}, and it extracts the size of the nucleus from that experiment and its successors.
+It then meets the one genuinely new principle of this volume, that mass is a form of energy, and
+uses it to define the \emph{binding energy} of a nucleus: the energy that would be needed to take it
+apart. A single graph, the binding energy per nucleon plotted against the number of nucleons, then
+explains in one stroke why heavy nuclei release energy when they split and light ones when they fuse,
+and it will be the reference point for every later chapter. The chapter closes with the force that
+does the binding, and with the energy needed to remove a single nucleon.
+
+The limits are worth stating at the start. The nucleus will be treated as a uniform sphere of
+nucleons with a sharp edge, and its binding energy will be modelled by a liquid drop. Both pictures
+are averages: real nuclei have a soft surface about two femtometres thick, and the lightest nuclei
+are better described by the shell structure that the liquid drop ignores. Each place where the model
+stops working is flagged as it arises.
+
+\section{Finding the Nucleus and Naming It}\label{sec:nuc-naming}
+
+Before 1909 the accepted picture of the atom was J.\,J.~Thomson's ``plum pudding'': positive charge
+spread thinly through the whole volume of the atom, about \SI{e-10}{m} across, with electrons embedded
+in it like plums. Between 1909 and 1913 Hans Geiger and Ernest Marsden, working in Ernest Rutherford's
+laboratory, fired $\alpha$ particles (fast helium ions, of charge $+2e$ and mass about four times the
+hydrogen atom's) at thin metal foils. Almost all of them passed through with tiny deflections, but
+about one in eight thousand bounced back through more than $90^\circ$. A thin smear of positive charge
+cannot do that. The electric field inside a uniformly charged sphere of atomic size is far too weak to
+turn back an $\alpha$ particle moving at five percent of the speed of light, and electrons are thousands
+of times too light to do it (a bowling ball is not reversed by ping-pong balls). Rutherford concluded
+in 1911 that the positive charge and nearly all the mass are concentrated in a tiny central
+\emph{nucleus}; only near such a concentrated charge is the electric force strong enough to reverse
+the particle.
+
+Later experiments identified what the nucleus is made of: the \emph{proton} (Rutherford, 1919), the
+nucleus of the hydrogen atom, with charge $+e$; and the electrically neutral \emph{neutron}
+(Chadwick, 1932), slightly heavier than the proton. Together they are called \emph{nucleons}. A
+nucleus is described by how many of each it contains.
+
+\begin{defbox}{Nuclide notation}
+A \emph{nuclide} is a nucleus with a definite number of protons and neutrons. The number of protons
+$Z$ is the \emph{atomic number}; it fixes the nuclear charge $Ze$ and hence the chemical element. The
+total number of nucleons $A$ is the \emph{mass number}, so the number of neutrons is $A-Z$. The nuclide
+is written
+\[
+\nuc{A}{Z}{X},
+\]
+where X is the chemical symbol. Since the symbol already fixes $Z$, the shorter form $\iso{A}{X}$ (read
+``X-$A$'', as in uranium-238) is just as common. Both $A$ and $Z$ are pure numbers.
+\end{defbox}
+
+Figure~\ref{fig:nuc-notation} reads one symbol in full. In this book the neutron number is always
+written as $A-Z$; the letter $N$ is kept for the number of undecayed nuclei in a sample, which is the
+central quantity of \chref{ch:decaylaw}.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nuc_notation}
+\figcaption{fig:nuc-notation}{Reading the symbol $\nuc{238}{92}{U}$. The upper number counts all
+nucleons, the lower counts protons, and their difference is the number of neutrons. The lower number
+is redundant once the symbol is known, which is why it is often dropped.}
+\end{figure}
+
+Three families of related nuclides recur so often that they have names (Table~\ref{tab:nuc-families}).
+\begin{tablebox}{Isotopes, isobars and isotones}
+\centering
+\begin{tabular}{@{}llll@{}}\toprule
+\textbf{Name} & \textbf{Same} & \textbf{Different} & \textbf{Example}\\\midrule
+isotopes & $Z$ & $A-Z$ and $A$ & $\iso{12}{C}$, $\iso{13}{C}$, $\iso{14}{C}$\\
+isobars & $A$ & $Z$ and $A-Z$ & $\iso{14}{C}$, $\iso{14}{N}$\\
+isotones & $A-Z$ & $Z$ and $A$ & $\iso{13}{C}$, $\iso{14}{N}$ (seven neutrons each)\\\bottomrule
+\end{tabular}\label{tab:nuc-families}
+\end{tablebox}
+Isotopes are chemically identical, because chemistry depends only on the electron cloud, and the
+electron cloud depends only on $Z$. This is why a radioactive isotope can stand in for a stable one
+inside a living molecule and act as a tracer, one of the applications of \chref{ch:nucapps}. Isobars
+matter because, as \chref{ch:decay} shows, $\beta$ decay changes $Z$ while leaving $A$ fixed, so it
+moves a nucleus along a row of isobars.
+
+\section{How Big Is a Nucleus?}\label{sec:nuc-size}
+
+Rutherford's experiment does more than show that the nucleus exists: it puts an upper limit on its
+size. The reasoning needs only the conservation laws of Volume~I.
+
+\subsection{Head-on: the distance of closest approach}
+An $\alpha$ particle aimed straight at a nucleus slows down as it climbs the electric potential-energy
+hill, stops momentarily, and is pushed back. At the turning point all of its kinetic energy has become
+electric potential energy. The electric potential energy of two charges $q_1$ and $q_2$ a distance $r$
+apart is $q_1q_2/(4\pi\varepsilon_0 r)$ (from Class~12 electrostatics; $\varepsilon_0$ is the
+permittivity of free space), and for nuclear work the combination
+\[
+\frac{e^2}{4\pi\varepsilon_0}=\SI{1.44}{\MeV.\fm}
+\]
+is the convenient form: two elementary charges $r$ femtometres apart ($\SI{1}{\fm}=\SI{e-15}{m}$) have
+potential energy $1.44/r$ in \si{\MeV}. The electron-volt and its multiples are defined in the
+units table of the volume opening; $\SI{1}{\MeV}=\SI{1.602e-13}{J}$.
+
+\begin{derivbox}{Distance of closest approach}
+An $\alpha$ particle (charge $2e$) of kinetic energy $K$, far from a nucleus of charge $Ze$, moves
+straight towards it. Treat the nucleus as fixed (its recoil is discussed below). The only force is
+the electric repulsion, which is conservative, so $K+U$ is constant (\chref{ch:energy}). Far away
+$U=0$; at the turning point, a distance $d$ from the centre, the particle is momentarily at rest. Hence
+\begin{equation}\label{eq:nuc-closest}
+K=\frac{1}{4\pi\varepsilon_0}\frac{(2e)(Ze)}{d}
+\qquad\Longrightarrow\qquad
+d=\frac{2Ze^2}{4\pi\varepsilon_0 K}=\frac{2Z\,(\SI{1.44}{\MeV.\fm})}{K}.
+\end{equation}
+For a \SI{5.3}{\MeV} $\alpha$ particle (from polonium-210) and gold ($Z=79$),
+$d=2(79)(1.44)/5.3=\SI{43}{\fm}$.
+\end{derivbox}
+
+The angular distribution of Rutherford's scattered particles matched, in every detail, the prediction for
+a point charge. So the $\alpha$ particles never touched the gold nucleus, and its radius must be
+\emph{less} than about \SI{43}{\fm}, some three thousand times smaller than the atom. Treating the gold
+nucleus as fixed is a good approximation: it is 49 times heavier than the $\alpha$ particle, and
+\chref{ch:collisions} shows that a heavy target takes only a small fraction of the energy.
+
+\subsection{Off-centre: the impact parameter}
+Most $\alpha$ particles are not aimed exactly at a nucleus. The sideways offset of the incoming line
+from the centre of the nucleus is called the \emph{impact parameter} $b$. Figure~\ref{fig:nuc-rutherford}
+shows computed paths for several values of $b$: the closer the aim, the larger the deflection, and
+only a nearly head-on particle comes back. How close does an off-centre particle get?
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nuc_rutherford}
+\figcaption{fig:nuc-rutherford}{Computed paths of \SI{7.7}{\MeV} $\alpha$ particles passing a gold
+nucleus at impact parameters $b$ from \SIrange{8}{100}{\fm}. Each path is a hyperbola with the nucleus at
+its outer focus. Notice how small $b$ must be for a large deflection: only particles aimed within about
+\SI{15}{\fm} of the centre are turned back by more than $90^\circ$. Even the head-on particle stops at
+\SI{30}{\fm}, four times the radius of the gold nucleus (the black disc), so Rutherford's particles
+felt only the electric force.}
+\end{figure}
+
+\begin{derivbox}{Closest approach at impact parameter \texorpdfstring{$b$}{b}}
+The electric force on the $\alpha$ particle always points along the line from the nucleus, so it
+exerts no torque about the nucleus and the particle's angular momentum about the nucleus is conserved
+(\chref{ch:rotation}; it is the same argument that gives Kepler's second law in \chref{ch:kepler}).
+Far away, the particle of mass $m$ moves with speed $v_0$ along a line a distance $b$ from the nucleus,
+so its angular momentum is $mv_0b$. At closest approach, a distance $r_{\min}$ from the nucleus, the
+velocity is perpendicular to the radius, so the angular momentum is $mv\,r_{\min}$. Conservation of
+angular momentum and of energy give
+\[
+mv_0b=mv\,r_{\min},\qquad
+\tfrac12mv_0^2=\tfrac12mv^2+\frac{2Ze^2}{4\pi\varepsilon_0\,r_{\min}}.
+\]
+Divide the energy equation by $K=\tfrac12mv_0^2$, use $v=v_0b/r_{\min}$, and write $d$ for the head-on
+distance of Eq.~\eqref{eq:nuc-closest}:
+\[
+1=\frac{b^2}{r_{\min}^2}+\frac{d}{r_{\min}}
+\quad\Longrightarrow\quad
+r_{\min}^2-d\,r_{\min}-b^2=0
+\quad\Longrightarrow\quad
+r_{\min}=\frac{d}{2}\left(1+\sqrt{1+\frac{4b^2}{d^2}}\,\right),
+\]
+taking the positive root. For $b=0$ this gives $r_{\min}=d$, the head-on result. For $b\gg d$ it gives
+$r_{\min}\approx b$: a fast or distant particle hardly notices the nucleus. The full path is a hyperbola,
+the repulsive counterpart of the conic orbits of \chref{ch:kepler}, and its deflection angle $\theta$
+obeys $\tan(\theta/2)=d/(2b)$. That last result is stated without proof, because it needs the
+equation of the orbit, which is beyond this book; Figure~\ref{fig:nuc-rutherford} was drawn from it.
+\end{derivbox}
+
+The deflection formula explains why back-scattering was so rare. A deflection of more than $90^\circ$
+needs $\tan(\theta/2)>1$, that is, $b<d/2$. For \SI{7.7}{\MeV} $\alpha$ particles on gold, $d/2$ is
+about \SI{15}{\fm}, so each gold nucleus presents a ``target'' of radius \SI{15}{\fm} inside an atom about
+\SI{1.4e5}{\fm} in radius. Only a tiny fraction of the foil's area is covered by such targets.
+
+\begin{exbox}{An off-centre approach}\label{ex:nuc-offcentre}
+A \SI{7.7}{\MeV} $\alpha$ particle approaches a gold nucleus ($Z=79$) with impact parameter
+$b=\SI{16}{\fm}$. Find its distance of closest approach and its deflection.
+
+\emph{Solution.} The head-on distance is $d=2(79)(1.44)/7.7=\SI{29.5}{\fm}$. Then
+\[
+r_{\min}=\frac{29.5}{2}\left(1+\sqrt{1+\frac{4(16)^2}{29.5^2}}\,\right)=14.8\,(1+1.474)=\SI{36.6}{\fm}.
+\]
+The deflection is $\theta=2\tan^{-1}\!\big(29.5/(2\times16)\big)=2\tan^{-1}(0.923)=85^\circ$: this
+particle leaves almost at right angles to its arrival, as the $b=\SI{16}{\fm}$ path in
+Figure~\ref{fig:nuc-rutherford} shows, yet it never comes nearer than \SI{37}{\fm}.
+\end{exbox}
+
+\subsection{The nuclear radius}
+To measure the actual size, the projectiles must get close enough to feel the nuclear force. Then the
+scattering departs from the pure-Coulomb prediction, and the energy or angle at which that happens reveals
+the radius. Experiments with $\alpha$ particles of higher energy, and especially with fast electrons
+(which feel only the electric charge and so map out where the protons are), show that the nuclear
+radius $R$ grows as the cube root of the mass number:
+\begin{keybox}{Nuclear radius}
+\begin{equation}\label{eq:nuc-radius}
+R = R_0\,A^{1/3},\qquad R_0\approx\SI{1.2}{\fm}.
+\end{equation}
+This is an empirical rule, accurate to about ten percent for $A\gtrsim10$. $R$ is the radius of an
+equivalent uniform sphere; real nuclei have no sharp edge, and their density falls from its central
+value to near zero over about \SI{2}{\fm}.
+\end{keybox}
+The cube root is not an accident; it is the signature of constant density.
+
+\begin{derivbox}{Why \texorpdfstring{$R\propto A^{1/3}$}{R proportional to A to the 1/3} means constant density}
+If every nucleon occupies roughly the same volume $v$ and nucleons pack without overlapping, like marbles
+in a bag, the nuclear volume is $V=Av$. A sphere has $V=\tfrac43\pi R^3$, so $R^3\propto A$ and
+$R\propto A^{1/3}$. Conversely, given $R=R_0A^{1/3}$, the mass density of a nucleus of $A$ nucleons, each
+of mass $m_{\text{nucleon}}$, is
+\[
+\rho=\frac{A\,m_{\text{nucleon}}}{\tfrac43\pi R_0^3A}=\frac{3\,m_{\text{nucleon}}}{4\pi R_0^3},
+\]
+in which $A$ has cancelled. With $m_{\text{nucleon}}\approx\SI{1}{\amu}=\SI{1.66e-27}{kg}$ and
+$R_0=\SI{1.2e-15}{m}$,
+\[
+\rho\approx\frac{3(\num{1.66e-27})}{4\pi(\num{1.2e-15})^3}\approx\SI{2.3e17}{kg.m^{-3}}.
+\]
+\end{derivbox}
+
+\begin{keybox}{Nuclear matter has one density}
+Every nucleus, from carbon to uranium, has the same density, about \SI{2.3e17}{kg.m^{-3}}, which is
+$\num{2e14}$ times that of water. A teaspoon (\SI{5}{mL}) of nuclear matter would have a mass of about a
+billion tonnes. Nucleons behave like the molecules of an incompressible liquid drop, and this
+\emph{liquid-drop} picture will explain the shape of the binding-energy curve in
+Section~\ref{sec:nuc-curve}.
+\end{keybox}
+
+\begin{exbox}{Radii of helium-4 and uranium-238}\label{ex:nuc-radii}
+Find the radii of $\iso{4}{He}$ and $\iso{238}{U}$, and the ratio of their volumes.
+
+\emph{Solution.} $R_{\text{He}}=1.2\,(4)^{1/3}=\SI{1.90}{\fm}$ and
+$R_{\text{U}}=1.2\,(238)^{1/3}=\SI{7.44}{\fm}$. The volume ratio is
+$(7.44/1.90)^3=238/4=59.5$, the ratio of the mass numbers, as constant density requires. Uranium
+contains 59.5 times as many nucleons but is only 3.9 times wider.
+\end{exbox}
+
+\begin{trapbox}{the radius does not scale with the mass number}
+Doubling $A$ multiplies the radius by $2^{1/3}=1.26$, not by 2. It is the \emph{volume} that is
+proportional to $A$. Ratios avoid $R_0$ entirely: $R_1/R_2=(A_1/A_2)^{1/3}$.
+\end{trapbox}
+
+\begin{remarkbox}{Neutron stars}
+When the core of a massive star collapses, electrons are squeezed into protons, turning them into
+neutrons (the reaction $p+e^-\to n+\nu_e$, where $\nu_e$ is the neutrino of \chref{ch:decay}), and the
+core becomes in effect one gigantic nucleus, held together by gravity rather than by the nuclear
+force. At nuclear density, 1.4 solar masses fits in a sphere only about \SI{14}{km} in radius (Practice
+Problem~\ref{pp:nuc-neutronstar}). The estimate ignores the extra compression by gravity, and real
+neutron stars are about \SI{12}{km} in radius. Some spin hundreds of times per second, and their
+sweeping radio beams are observed as pulsars.
+\end{remarkbox}
+
+\section{Mass, Energy and the Atomic Mass Unit}\label{sec:nuc-massenergy}
+
+The size of a nucleus came from mechanics. Its binding needs one idea that is new to this book. Einstein's
+mass--energy relation states that mass is a form of energy: a body at rest whose internal energy
+changes by $\Delta E$ changes its mass by
+\[
+\Delta m=\frac{\Delta E}{c^2},
+\]
+where $c=\SI{2.998e8}{m.s^{-1}}$ is the speed of light. Equivalently, a body of mass $m$ at rest has
+\emph{rest energy} $mc^2$. This relation comes from special relativity, which is outside this book, so
+it is used here as an experimentally established fact. Nuclear physics itself is among its most
+precise tests: the mass differences measured with mass spectrometers agree with the energies released
+in nuclear reactions, measured calorimetrically or from the speeds of the products.
+
+Why did Volume~I never need it? For chemical reactions the change in mass is far too small to weigh, about
+one part in $10^{10}$ (a few electron-volts released by molecules whose rest energy is tens of
+\si{\giga\electronvolt}). For nuclear reactions it is about one part in a thousand, easily measured. This
+is the first sign that nuclear energies are a million times larger than chemical ones.
+
+Nuclear masses are quoted in \emph{unified atomic mass units} (\si{\amu}), defined so that one neutral
+$\iso{12}{C}$ atom has mass exactly \SI{12}{\amu}. Thus $\SI{1}{\amu}=\SI{1.66054e-27}{kg}$, close to the
+mass of one nucleon. Its rest energy is
+\[
+(\SI{1.66054e-27}{kg})(\SI{2.99792e8}{m.s^{-1}})^2=\SI{1.4924e-10}{J}=\SI{931.494}{\MeV}.
+\]
+\begin{keybox}{The conversion factor}
+\[
+(\SI{1}{\amu})\,c^2=\SI{931.494}{\MeV}.
+\]
+A mass difference measured in \si{\amu}, multiplied by $931.5$, gives the energy in \si{\MeV} directly.
+Masses are often quoted in \si{\MeV}$/c^2$ (the electron's mass is $\SI{0.511}{\MeV}/c^2$), so that $c^2$
+cancels silently in calculations.
+\end{keybox}
+
+\section{Mass Defect and Binding Energy}\label{sec:nuc-binding}
+
+Now weigh a helium-4 atom and compare it with the total mass of the two hydrogen atoms and two
+neutrons it could be built from. With the atomic masses $M(\iso{1}{H})=\SI{1.007825}{\amu}$ (the hydrogen
+\emph{atom}, a proton plus an electron) and $m_n=\SI{1.008665}{\amu}$ (the neutron),
+\[
+2\,M(\iso{1}{H})+2\,m_n=2(1.007\,825)+2(1.008\,665)=\SI{4.032980}{\amu},\qquad
+M(\iso{4}{He})=\SI{4.002603}{\amu}.
+\]
+The assembled atom is \emph{lighter} by \SI{0.030377}{\amu} (Figure~\ref{fig:nuc-massbalance}). That
+missing mass left as energy, mostly as gamma rays (high-energy photons) and kinetic energy, when the
+nucleons bound together; to pull them apart again, exactly that energy must be supplied.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nuc_massbalance}
+\figcaption{fig:nuc-massbalance}{Weighing the parts against the whole. Two hydrogen atoms and two
+neutrons (protons orange, neutrons grey) outweigh the helium-4 atom they can form, so the balance tips
+towards the separated parts. The missing \SI{0.030377}{\amu} is the binding energy divided by $c^2$.}
+\end{figure}
+
+This is not peculiar to nuclei. \emph{Every} bound system weighs less than its separated parts, by its
+binding energy divided by $c^2$; it is the mass--energy version of the negative total energy of a bound
+orbit in \chref{ch:kepler}. A hydrogen atom is lighter than a free proton plus a free electron by
+$\SI{13.6}{\electronvolt}/c^2$, about 1.4 parts in $10^{8}$ of its mass, far too little to weigh. Nuclear
+binding is about a million times stronger per particle, so for nuclei the mass difference approaches one
+percent and is measured routinely.
+
+\begin{defbox}{Mass defect and binding energy}
+For a nuclide $\nuc{A}{Z}{X}$ whose neutral atom has mass $M$, the \emph{mass defect} $\Delta m$ and the
+\emph{binding energy} $\Eb$ are
+\begin{equation}\label{eq:nuc-be}
+\Delta m = Z\,M(\iso{1}{H})+(A-Z)\,m_n - M,\qquad \Eb=\Delta m\,c^2.
+\end{equation}
+$\Eb$ is the minimum energy needed to separate the nucleus completely into free protons and neutrons.
+The \emph{binding energy per nucleon} $\Eb/A$ measures how tightly, on average, each nucleon is held.
+\end{defbox}
+
+For helium-4, $\Eb=(0.030\,377)(931.494)=\SI{28.30}{\MeV}$ and $\Eb/A=\SI{7.07}{\MeV}$.
+
+\begin{trapbox}{electron bookkeeping}
+Mass tables list \emph{atomic} masses, nucleus plus $Z$ electrons. Equation~\eqref{eq:nuc-be} uses the
+hydrogen \emph{atom} mass $M(\iso{1}{H})$, not the bare proton mass, so $Z$ electron masses appear on both
+sides and cancel automatically (the electrons' own binding energies, a few \si{\electronvolt} to
+\si{\keV}, are negligible). Mixing a bare proton mass with an atomic mass leaves $Z$ electrons unaccounted
+for. For uranium that is $92\times\SI{0.511}{\MeV}=\SI{47}{\MeV}$, a \num{2.6} percent error in $\Eb$.
+\end{trapbox}
+
+\begin{exbox}{Binding energy of oxygen-16}\label{ex:nuc-o16}
+Given $M(\iso{16}{O})=\SI{15.994915}{\amu}$, find $\Eb$ and $\Eb/A$.
+
+\emph{Solution.} $Z=8$ and $A-Z=8$, so
+\[
+\Delta m=8(1.007\,825)+8(1.008\,665)-15.994\,915=\SI{0.137005}{\amu}.
+\]
+Then $\Eb=0.137\,005\times931.494=\SI{127.6}{\MeV}$ and $\Eb/A=\SI{7.98}{\MeV}$, slightly above the
+values for neighbouring nuclei. Section~\ref{sec:nuc-curve} explains why: oxygen-16 has filled shells
+of both protons and neutrons.
+\end{exbox}
+
+\section{The Binding-Energy Curve}\label{sec:nuc-curve}
+
+Binding energies computed in this way for many nuclides, divided by $A$ and plotted against $A$, give
+Figure~\ref{fig:nuc-bea}. It is arguably the most important graph in nuclear physics, because the rest
+of this volume reads its energetics from it.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nuc_bea}
+\figcaption{fig:nuc-bea}{Binding energy per nucleon. The dots are computed with
+Eq.~\eqref{eq:nuc-be} from measured atomic masses (2020 Atomic Mass Evaluation) for 35 nuclides; the
+ringed ones are discussed in the text. The dashed curve is the liquid-drop formula of
+Remark~\ref{rem:nuc-semf}. Notice the steep rise, the isolated high point of helium-4, the broad
+maximum of about \SI{8.8}{\MeV} near iron-56 and nickel-62, and the slow decline beyond. Nuclei on either
+side of the maximum release energy by moving towards it.}
+\end{figure}
+
+Its features, and their explanations, are these.
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{A rough plateau near \SI{8}{\MeV} for $A\gtrsim20$.} If every nucleon attracted every other,
+the total binding would grow as the number of pairs, which is about $A^2/2$, and $\Eb/A$ would grow in
+proportion to $A$. It does not. The nuclear force has a short range, about \SIrange{2}{3}{\fm}, so each
+nucleon binds only to its immediate neighbours. This \emph{saturation} makes $\Eb$ proportional to $A$,
+just as the latent heat of a liquid is proportional to its mass.
+\item \textbf{A steep rise for light nuclei.} A small nucleus is mostly surface, and a surface nucleon
+has fewer neighbours to bind to. The surface area grows as $R^2\propto A^{2/3}$, so the fraction of
+nucleons at the surface goes as $A^{2/3}/A=A^{-1/3}$ and shrinks with size.
+\item \textbf{Spikes at $\iso{4}{He}$, $\iso{12}{C}$ and $\iso{16}{O}$.} Nucleons fill quantised energy
+levels (shells), much as electrons do in atoms, and filled shells are extra stable. Helium-4, at
+\SI{7.07}{\MeV} per nucleon against \SI{2.57}{\MeV} for helium-3, is so tightly bound that heavy nuclei
+emit it as a ready-made unit: the $\alpha$ particle of \chref{ch:decay}.
+\item \textbf{A maximum near $A\approx56$ to $62$}: $\Eb/A=\SI{8.79}{\MeV}$ for both $\iso{56}{Fe}$ and
+$\iso{62}{Ni}$ (nickel-62 is higher by a few \si{\keV}).
+\item \textbf{A slow decline for heavy nuclei}, to \SI{7.57}{\MeV} for $\iso{238}{U}$. Every proton repels
+every other proton, not just its neighbours, so the electric energy grows as the number of proton pairs
+divided by the size, $Z^2/R\propto Z^2/A^{1/3}$, faster than the saturated nuclear attraction.
+\end{enumerate}
+
+The curve converts at once into a rule for the energy of any nuclear process.
+\begin{keybox}{Energy from rearranging nucleons}
+In a nuclear reaction the numbers of protons and neutrons are conserved, so the energy released, called
+the $Q$-value, equals the increase in total binding energy:
+\begin{equation}\label{eq:nuc-qb}
+Q=\sum E_{\mathrm{b},\text{products}}-\sum E_{\mathrm{b},\text{reactants}}.
+\end{equation}
+Free nucleons have $\Eb=0$. A positive $Q$ means energy is released, as kinetic energy of the products
+or as gamma rays. Splitting a heavy nucleus (\emph{fission}) and joining two light ones
+(\emph{fusion}) both move nucleons \emph{up} the curve towards the peak, so both release energy. Iron and
+nickel are nuclear ``ash'': neither process can extract energy from them.
+\end{keybox}
+Equation~\eqref{eq:nuc-qb} follows from Eq.~\eqref{eq:nuc-be}: the $Z\,M(\iso{1}{H})$ and $(A-Z)\,m_n$
+terms are the same on both sides because protons and neutrons are conserved, so the difference of
+binding energies equals the difference of atomic masses times $c^2$, which is the energy released.
+\chref{ch:decay} uses the mass form for decays, and \chref{ch:reactions} uses both forms for fission and
+fusion. (In $\beta$ decay a neutron turns into a proton, so the numbers of protons and neutrons are
+\emph{not} separately conserved; \chref{ch:decay} handles that case with atomic masses directly.)
+
+\begin{exbox}{A fission estimate}\label{ex:nuc-fission}
+A nucleus with $A=240$ and $\Eb/A=\SI{7.6}{\MeV}$ splits into two equal fragments with
+$\Eb/A=\SI{8.5}{\MeV}$. Estimate the energy released.
+
+\emph{Solution.} By Eq.~\eqref{eq:nuc-qb},
+$Q=2(120)(8.5)-240(7.6)=2040-1824=\SI{216}{\MeV}$. A gain of only \SI{0.9}{\MeV} per nucleon, over 240
+nucleons, gives about \SI{200}{\MeV} per fission. A typical chemical reaction releases a few
+electron-volts per molecule, some fifty million times less.
+\end{exbox}
+
+\begin{trapbox}{per nucleon versus total}
+$Q$ is a difference of \emph{total} binding energies. Subtracting the values of $\Eb/A$ directly gives
+the gain per nucleon (\SI{0.9}{\MeV} above), not the energy released; multiply each $\Eb/A$ by its own
+$A$ first.
+\end{trapbox}
+
+\begin{remarkbox}{The semi-empirical mass formula}\label{rem:nuc-semf}
+In 1935 Carl Friedrich von Weizs\"acker turned the liquid-drop picture into a formula:
+\[
+\Eb(A,Z)=a_VA-a_SA^{2/3}-a_C\frac{Z(Z-1)}{A^{1/3}}-a_A\frac{(A-2Z)^2}{A}\pm\delta,
+\]
+with \emph{volume}, \emph{surface}, \emph{Coulomb}, \emph{asymmetry} and \emph{pairing} terms. The
+constants are fitted to measured masses; one common set, used for the figures here, is $a_V=15.75$,
+$a_S=17.8$, $a_C=0.711$ and $a_A=\SI{23.7}{\MeV}$. The first three terms were explained above: volume
+binding from saturation, the surface deficit, and the repulsion between all $Z(Z-1)/2$ pairs of protons.
+The asymmetry term reflects the \emph{Pauli exclusion principle} (no two identical nucleons may occupy
+the same quantum state): neutrons and protons fill separate ladders of energy levels, so an excess of
+either forces nucleons onto higher rungs. The small pairing term $\delta$ adds binding when $Z$ and $A-Z$
+are both even and subtracts it when both are odd.
+
+The dashed curve in Figure~\ref{fig:nuc-bea} is this formula, without the pairing term, with $Z$ at each
+$A$ set to the most stable value. Apart from the lightest nuclei, where shell effects dominate, it
+tracks the measured values to within two or three percent; it misses the helium-4 spike entirely,
+because a five-parameter liquid drop knows nothing of shells. Figure~\ref{fig:nuc-semfterms} shows how
+each term carves the curve. Setting $\partial\Eb/\partial Z=0$ at fixed $A$ predicts the most stable $Z$
+for each $A$, the ``valley of stability'' of \chref{ch:decay}.
+\end{remarkbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nuc_semfterms}
+\figcaption{fig:nuc-semfterms}{Building the binding-energy curve term by term (liquid-drop formula,
+per nucleon). Start from the constant volume term, which saturation predicts; subtract the surface
+deficit, large for small nuclei; subtract the Coulomb repulsion, large for heavy nuclei; subtract the
+neutron--proton asymmetry. What remains (blue) follows the measured values (dots) and peaks near
+$A\approx60$, because the surface and Coulomb losses pull in opposite directions.}
+\end{figure}
+
+\section{The Nuclear Force and Separation Energies}\label{sec:nuc-force}
+
+Binding requires a force that overpowers the electric repulsion of protons squeezed to within a few
+femtometres of each other. Two protons \SI{2}{\fm} apart repel with a force of
+$(\SI{1.44}{\MeV.\fm})/(\SI{2}{\fm})^2\approx\SI{0.36}{\MeV/\fm}$, which is about \SI{58}{N} acting on a
+particle of mass \SI{1.7e-27}{kg}. The force that holds them anyway, the \emph{strong nuclear force},
+has four features, each visible in the data already met.
+\begin{itemize}
+\item It is attractive, and near \SI{1}{\fm} its potential energy is tens of \si{\MeV} in magnitude,
+far larger than the electric potential energy of two protons there (\SI{1.44}{\MeV}).
+\item It has a short range, becoming negligible beyond about \SI{3}{\fm}. This is the saturation of
+feature~(a).
+\item It becomes strongly repulsive below about \SI{0.5}{\fm}, so nucleons cannot be squeezed together.
+This is why nuclear density is constant.
+\item It is \emph{charge-independent}: the proton--proton, neutron--neutron and neutron--proton nuclear
+forces are essentially equal.
+\end{itemize}
+There is no simple formula for this force, unlike Coulomb's or Newton's law; it is a residue of the
+deeper force between the quarks inside nucleons. Figure~\ref{fig:nuc-nnforce} sketches its potential
+energy.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nuc_nnforce}
+\figcaption{fig:nuc-nnforce}{Left: the potential energy of two nucleons against their separation
+(schematic, not a fitted curve): a repulsive core inside about \SI{0.5}{\fm}, a deep attractive well near
+\SI{1}{\fm}, and almost nothing beyond \SI{2}{\fm} to \SI{3}{\fm}. Right: zoomed out, the electric
+repulsion between two protons is far weaker at contact but falls off only as $1/r$, so it alone
+survives at large distances. In a big nucleus every proton repels \emph{all} the others but attracts
+only its neighbours.}
+\end{figure}
+
+\textbf{Why do nuclei need neutrons?} A proton and a neutron do bind, though only just: the deuteron
+$\iso{2}{H}$ has $\Eb=\SI{2.22}{\MeV}$, the smallest of any nucleus. Two protons do not bind, and
+neither, perhaps surprisingly, do two neutrons, although no electric repulsion acts between them. The
+nuclear attraction depends on how the nucleons' spins are aligned, and the Pauli exclusion principle
+forbids two identical nucleons from taking the most strongly bound arrangement; the details are beyond
+this book. (A common explanation, that two protons fail to bind only because of their electric
+repulsion, cannot be right, since two neutrons fail too.) In larger nuclei, neutrons supply nuclear
+attraction without adding any electric repulsion, so they act as the glue that holds many protons
+together. The glue has a limit. Neutrons obey the exclusion principle, so adding too many forces them
+onto ever higher energy levels, until converting a neutron into a proton becomes energetically
+favourable. A stable nucleus is a compromise between these two effects, which is the subject of the
+stability discussion in \chref{ch:decay}.
+
+The average $\Eb/A$ hides individual variation. The energy needed to remove just one nucleon is the
+\emph{separation energy}.
+\begin{defbox}{Separation energies}
+The \emph{neutron separation energy} $S_n$ of a nuclide with mass number $A$ and atomic number $Z$ is the
+energy needed to remove one neutron:
+\begin{equation}\label{eq:nuc-sn}
+S_n=\big[M(A-1,Z)+m_n-M(A,Z)\big]c^2=\Eb(A,Z)-\Eb(A-1,Z),
+\end{equation}
+where $M(A,Z)$ is the atomic mass. The \emph{proton separation energy} is
+$S_p=\big[M(A-1,Z-1)+M(\iso{1}{H})-M(A,Z)\big]c^2$; using the hydrogen-atom mass keeps the electrons
+balanced, since the daughter atom has one electron fewer.
+\end{defbox}
+The second form of Eq.~\eqref{eq:nuc-sn} follows by writing both atomic masses with
+Eq.~\eqref{eq:nuc-be}: everything cancels except the two binding energies. Separation energies are
+large for nuclei with filled shells, just as ionisation energies are large for the noble gases.
+
+\begin{exbox}{Removing one neutron from oxygen-16}\label{ex:nuc-sn}
+Given $M(\iso{15}{O})=\SI{15.003066}{\amu}$ and $M(\iso{16}{O})=\SI{15.994915}{\amu}$, find $S_n$ for
+$\iso{16}{O}$ and compare it with $\Eb/A$.
+
+\emph{Solution.} $S_n=[15.003\,066+1.008\,665-15.994\,915](931.494)=\SI{15.66}{\MeV}$, about twice the
+average $\Eb/A=\SI{7.98}{\MeV}$ of Example~\ref{ex:nuc-o16}. Removing a neutron from a filled shell is
+expensive. Check with the second form of Eq.~\eqref{eq:nuc-sn}:
+$\Eb(\iso{16}{O})-\Eb(\iso{15}{O})=127.62-111.96=\SI{15.66}{\MeV}$, the same answer.
+\end{exbox}
+
+\begin{trapbox}{one nucleon is not the average nucleon}
+$\Eb/A$ is an average over all nucleons; the cost of removing the \emph{last} one, $S_n$ or $S_p$, can
+be twice as large (filled shell) or much smaller (a lone nucleon outside a filled shell). A question that
+asks for the energy to remove one neutron wants $S_n$, not $\Eb/A$.
+\end{trapbox}
+
+With the size, mass and binding of a nucleus in hand, the next question is what happens when a nucleus
+is \emph{not} as tightly bound as it could be. \chref{ch:decay} shows that such a nucleus can lower its
+energy by emitting a particle, and uses the atomic masses of this chapter to find how much energy each
+decay releases.
+
+\section{Summary}\label{sec:nuc-summary}
+A nucleus is a dense drop of protons and neutrons whose mass is less than the mass of its parts; the
+missing mass is the binding energy, and the curve of binding energy per nucleon decides which way
+nuclear energy flows.
+
+\begin{itemize}
+\item Notation $\nuc{A}{Z}{X}$: $Z$ protons, $A$ nucleons, $A-Z$ neutrons. Isotopes share $Z$, isobars
+share $A$, isotones share $A-Z$.
+\item Closest approach of an $\alpha$ particle: head-on, $d=2Ze^2/(4\pi\varepsilon_0K)$ with
+$e^2/4\pi\varepsilon_0=\SI{1.44}{\MeV.\fm}$; at impact parameter $b$, energy and angular momentum
+conservation give $r_{\min}=\tfrac{d}{2}\big(1+\sqrt{1+4b^2/d^2}\big)$.
+\item $R=R_0A^{1/3}$ with $R_0\approx\SI{1.2}{\fm}$, so nuclear density is the same for all nuclei,
+about \SI{2.3e17}{kg.m^{-3}}.
+\item Mass is energy: $(\SI{1}{\amu})c^2=\SI{931.494}{\MeV}$.
+\item $\Delta m=Z\,M(\iso{1}{H})+(A-Z)\,m_n-M$ with atomic masses; $\Eb=\Delta m\,c^2$.
+\item $\Eb/A$ rises steeply, peaks at about \SI{8.8}{\MeV} near iron-56 and nickel-62, and declines slowly
+to \SI{7.6}{\MeV} for uranium; saturation, surface, Coulomb and asymmetry effects explain the shape.
+\item $Q=\sum E_{\mathrm b,\text{products}}-\sum E_{\mathrm b,\text{reactants}}$: fission and fusion both
+release energy by moving towards the peak.
+\item The nuclear force is strong, short-ranged, repulsive at very short range and charge-independent.
+\item $S_n=\Eb(A,Z)-\Eb(A-1,Z)$; separation energies are large for filled shells.
+\end{itemize}
+
+\section{Problem Types}\label{sec:nuc-types}
+Five types cover what examiners ask about the nucleus itself. All of them reduce to two tools: the
+cube-root rule for sizes, and mass differences times $931.5$ for energies.
+
+\archq{Nuclear size and density}
+{Radii, volumes or density; ``a nucleus whose radius is $n$ times that of \dots''.}
+{Use $R=R_0A^{1/3}$. Ratios avoid $R_0$: $R_1/R_2=(A_1/A_2)^{1/3}$, and volume ratios equal
+mass-number ratios. Density is the same for every nucleus.}
+{Scaling the radius in proportion to $A$, or to $\sqrt{A}$, instead of $A^{1/3}$.}
+{The radius of an $\iso{27}{Al}$ nucleus is \SI{3.6}{\fm}. The radius of a $\iso{125}{Te}$ nucleus is
+approximately:}
+{\SI{16.7}{\fm}}
+{\SI{6.0}{\fm}}
+{\SI{7.7}{\fm}}
+{\SI{3.6}{\fm}\archans{B}{$R_{\text{Te}}=3.6\,(125/27)^{1/3}=3.6\times\tfrac53=\SI{6.0}{\fm}$.
+Option (A) scales $R$ in proportion to $A$; (C) scales it as $\sqrt{A}$; (D) confuses equal density with
+equal size.}}
+
+\archq{Distance of closest approach}
+{An $\alpha$ particle or proton of given energy approaches a nucleus; ``how close does it get'', with or
+without an impact parameter.}
+{Head-on: $K=q_1q_2/(4\pi\varepsilon_0 d)$, with $e^2/4\pi\varepsilon_0=\SI{1.44}{\MeV.\fm}$. Off-centre:
+conserve energy \emph{and} angular momentum about the nucleus, $v_0b=v\,r_{\min}$, and solve
+$r_{\min}^2-d\,r_{\min}-b^2=0$.}
+{Forgetting that the $\alpha$ particle carries charge $2e$; or, off-centre, assuming the speed is zero
+at closest approach (it is not: only the radial velocity vanishes).}
+{A \SI{4.0}{\MeV} $\alpha$ particle approaches a gold nucleus ($Z=79$) with an impact parameter equal
+to its head-on distance of closest approach $d$. Its distance of closest approach is about:}
+{\SI{57}{\fm}}
+{\SI{28}{\fm}}
+{\SI{80}{\fm}}
+{\SI{92}{\fm}\archans{D}{$d=2(79)(1.44)/4.0=\SI{56.9}{\fm}$, and with $b=d$,
+$r_{\min}=\tfrac{d}{2}(1+\sqrt5)=1.618\,d=\SI{92}{\fm}$. Option (A) is the head-on value, which assumes
+the speed vanishes at closest approach; (B) uses charge $e$ for the $\alpha$ particle; (C) is
+$\sqrt2\,d$, a guess that adds $b$ and $d$ at right angles.}}
+
+\archq{Mass defect and binding energy}
+{Atomic masses are given; asked for $\Delta m$, $\Eb$, $\Eb/A$, ``which is more stable'', or the
+minimum energy to break a nucleus into nucleons.}
+{Count $Z$ and $A-Z$. Form $\Delta m=Z\,M(\iso{1}{H})+(A-Z)\,m_n-M$ with the hydrogen-\emph{atom} mass;
+$\Eb=931.5\,\Delta m$ (\si{\MeV}, with $\Delta m$ in \si{\amu}); divide by $A$ to compare stability.}
+{Using the bare proton mass with an atomic mass, which leaves $Z$ electrons unaccounted for.}
+{Using $M(\iso{12}{C})=\SI{12.000000}{\amu}$, $M(\iso{1}{H})=\SI{1.007825}{\amu}$ and
+$m_n=\SI{1.008665}{\amu}$, the binding energy per nucleon of carbon-12 is:}
+{\SI{7.42}{\MeV}}
+{\SI{15.4}{\MeV}}
+{\SI{7.68}{\MeV}}
+{\SI{92.2}{\MeV}\archans{C}{$\Delta m=6(1.007\,825)+6(1.008\,665)-12=\SI{0.098940}{\amu}$, so
+$\Eb=\SI{92.16}{\MeV}$ and $\Eb/A=\SI{7.68}{\MeV}$. Option (A) uses the bare proton mass
+(\SI{1.007276}{\amu}), losing six electrons; (B) divides by $Z$ instead of $A$; (D) is the total binding
+energy, not yet divided by $A$.}}
+
+\archq{Energy released, from the binding-energy curve}
+{Values of $\Eb/A$ (or a graph) are given instead of masses; a nucleus splits or nuclei combine.}
+{Convert each $\Eb/A$ to a total, $\Eb=A\times(\Eb/A)$, then $Q=\sum E_{\mathrm b,\text{products}}
+-\sum E_{\mathrm b,\text{reactants}}$. Free nucleons have $\Eb=0$; positive $Q$ means energy released.}
+{Subtracting the $\Eb/A$ values directly, which gives the gain per nucleon, not the energy released.}
+{A nucleus with $A=180$ and $\Eb/A=\SI{8.0}{\MeV}$ splits into two equal fragments, each with
+$\Eb/A=\SI{8.5}{\MeV}$. The energy released is:}
+{\SI{90}{\MeV}}
+{\SI{0.5}{\MeV}}
+{\SI{45}{\MeV}}
+{\SI{1530}{\MeV}\archans{A}{$Q=2(90)(8.5)-180(8.0)=1530-1440=\SI{90}{\MeV}$. Option (B) is the gain per
+nucleon; (C) counts only one fragment's gain; (D) is the total binding energy of the products, not the
+difference.}}
+
+\archq{Separation energies}
+{The energy to remove \emph{one} neutron or proton, rather than to take the whole nucleus apart.}
+{Write the removal as a reaction and find its mass deficit, Eq.~\eqref{eq:nuc-sn}. For a neutron add
+$m_n$; for a proton add $M(\iso{1}{H})$ and use the atomic mass of the daughter, so the electrons balance.
+Compare with $\Eb/A$ to judge whether the nucleus is especially tightly bound.}
+{Answering with $\Eb/A$, the average, instead of the cost of the one nucleon removed.}
+{Given $M(\iso{12}{C})=\SI{12.000000}{\amu}$, $M(\iso{11}{C})=\SI{11.011434}{\amu}$,
+$m_n=\SI{1.008665}{\amu}$ and $M(\iso{1}{H})=\SI{1.007825}{\amu}$, the energy needed to remove one neutron
+from carbon-12 is:}
+{\SI{7.68}{\MeV}}
+{\SI{18.7}{\MeV}}
+{\SI{17.9}{\MeV}}
+{\SI{92.2}{\MeV}\archans{B}{$S_n=[11.011\,434+1.008\,665-12.000\,000](931.494)=\SI{18.7}{\MeV}$. Option
+(A) is the average $\Eb/A$; (C) adds the hydrogen-atom mass instead of the neutron mass; (D) is the
+energy to take the whole nucleus apart.}}
+
+\section{Practice Problems}\label{sec:nuc-practice}
+
+Use $R_0=\SI{1.2}{\fm}$, $e^2/4\pi\varepsilon_0=\SI{1.44}{\MeV.\fm}$, $(\SI{1}{\amu})c^2=\SI{931.494}{\MeV}$,
+$M(\iso{1}{H})=\SI{1.007825}{\amu}$ and $m_n=\SI{1.008665}{\amu}$ throughout. Answers, with brief working,
+follow the list.
+
+\begin{enumerate}[itemsep=3pt]
+\item\label{pp:nuc-ge} The radius of a germanium nucleus is measured to be twice the radius of a
+$\iso{9}{Be}$ nucleus. How many nucleons are in the germanium nucleus?
+\item\label{pp:nuc-ual} Find the ratio of the nuclear radius of $\iso{238}{U}$ to that of $\iso{27}{Al}$.
+\item\label{pp:nuc-earth} If the Earth (\SI{5.97e24}{kg}) were compressed to nuclear density, what would
+its radius be?
+\item\label{pp:nuc-closest} In the Geiger--Marsden experiments of 1913 the $\alpha$ particles had
+\SI{7.7}{\MeV}. (a) Find their distance of closest approach to a gold nucleus ($Z=79$). (b) What minimum
+kinetic energy would an $\alpha$ particle need to touch the gold nucleus, taking both radii from
+$R=R_0A^{1/3}$ ($A=197$ for gold, $A=4$ for the $\alpha$ particle) and neglecting recoil?
+\item\label{pp:nuc-neutronstar} A neutron star has a mass of 1.4 solar masses
+($M_\odot=\SI{1.989e30}{kg}$) at nuclear density. Estimate its radius.
+\item\label{pp:nuc-fe} Given $M(\iso{56}{Fe})=\SI{55.934936}{\amu}$, find the binding energy and the
+binding energy per nucleon of iron-56.
+\item\label{pp:nuc-mirror} Tritium ($\iso{3}{H}$, \SI{3.016049}{\amu}) and helium-3 ($\iso{3}{He}$,
+\SI{3.016029}{\amu}) are \emph{mirror nuclei}: each turns into the other if every proton is swapped for a
+neutron and vice versa. (a) Compute both binding energies. (b) Account for the difference by estimating
+the electric potential energy $e^2/(4\pi\varepsilon_0R)$ of two protons separated by about the nuclear
+radius for $A=3$.
+\item\label{pp:nuc-li7} Find $\Eb/A$ for $\iso{7}{Li}$ (\SI{7.016003}{\amu}) and locate it on
+Figure~\ref{fig:nuc-bea}.
+\item\label{pp:nuc-deut} The deuteron $\iso{2}{H}$ has atomic mass \SI{2.014102}{\amu}. What is the
+minimum gamma-ray energy that can split it into a proton and a neutron? (Neglect the recoil.)
+\item\label{pp:nuc-dd} Using $\Eb/A=\SI{1.11}{\MeV}$ for $\iso{2}{H}$ and \SI{7.07}{\MeV} for $\iso{4}{He}$,
+find the energy released when two deuterons fuse into helium-4.
+\item\label{pp:nuc-y} A nucleus Y ($A=200$, $\Eb/A=\SI{7.8}{\MeV}$) splits into fragments with $A=110$
+($\Eb/A=\SI{8.5}{\MeV}$) and $A=90$ ($\Eb/A=\SI{8.6}{\MeV}$). Find $Q$.
+\item\label{pp:nuc-3alpha} In red giant stars three $\alpha$ particles fuse into $\iso{12}{C}$ (the
+triple-alpha process). Using $\Eb(\iso{4}{He})=\SI{28.30}{\MeV}$ and $\Eb(\iso{12}{C})=\SI{92.16}{\MeV}$,
+find the energy released.
+\item\label{pp:nuc-fefe} Explain, without calculation, why stars cannot generate energy by fusing two
+$\iso{56}{Fe}$ nuclei, and why the core of a massive star therefore collapses once it has turned to iron.
+\item\label{pp:nuc-sphe} Using $M(\iso{3}{H})=\SI{3.016049}{\amu}$, $M(\iso{3}{He})=\SI{3.016029}{\amu}$ and
+$M(\iso{4}{He})=\SI{4.002603}{\amu}$, find (a) the proton separation energy and (b) the neutron separation
+energy of $\iso{4}{He}$. Compare both with $\Eb/A$ for helium-4.
+\item\label{pp:nuc-snsum} Show that the energies needed to remove all the nucleons of a nucleus one at a
+time add up to its total binding energy $\Eb$, whatever the order of removal.
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item $R\propto A^{1/3}$, so $(A/9)^{1/3}=2$ and $A=72$ (germanium-72).
+\item $(238/27)^{1/3}=2.07$.
+\item $R=\big(3M/4\pi\rho\big)^{1/3}=\big(3(\num{5.97e24})/(4\pi\times\num{2.3e17})\big)^{1/3}\approx
+\SI{180}{m}$: the whole planet would fit inside a sports stadium.
+\item (a) $d=2(79)(1.44)/7.7=\SI{30}{\fm}$. (b) The surfaces touch when the centres are
+$1.2\,(197^{1/3}+4^{1/3})=6.98+1.90=\SI{8.88}{\fm}$ apart, so $K=2(79)(1.44)/8.88=\SI{25.6}{\MeV}$,
+more than three times what natural $\alpha$ sources provide. This is why Rutherford's $\alpha$ particles
+never revealed the size of the nucleus.
+\item $M=1.4\times\SI{1.989e30}{kg}=\SI{2.78e30}{kg}$, and $R=(3M/4\pi\rho)^{1/3}\approx\SI{14}{km}$.
+\item $\Delta m=26(1.007\,825)+30(1.008\,665)-55.934\,936=\SI{0.52846}{\amu}$; $\Eb=\SI{492.3}{\MeV}$;
+$\Eb/A=\SI{8.79}{\MeV}$.
+\item (a) $\Eb(\iso{3}{H})=\SI{8.48}{\MeV}$ and $\Eb(\iso{3}{He})=\SI{7.72}{\MeV}$; the difference is
+\SI{0.76}{\MeV}. (b) $R=1.2\,(3)^{1/3}=\SI{1.73}{\fm}$, so $e^2/(4\pi\varepsilon_0R)=1.44/1.73=
+\SI{0.83}{\MeV}$. The two nuclei differ only by swapping neutrons and protons; with a charge-independent
+nuclear force, the difference in binding should be the electric repulsion of helium-3's two protons, and
+the estimate confirms it.
+\item $\Delta m=\SI{0.04213}{\amu}$, $\Eb=\SI{39.2}{\MeV}$, $\Eb/A=\SI{5.61}{\MeV}$, on the steep
+rising part of the curve between helium-4 and carbon-12.
+\item $\Eb=[1.007\,825+1.008\,665-2.014\,102](931.494)=\SI{2.22}{\MeV}$.
+\item $Q=4(7.07)-2\times2(1.11)=28.28-4.44=\SI{23.8}{\MeV}$.
+\item $Q=110(8.5)+90(8.6)-200(7.8)=935+774-1560=\SI{149}{\MeV}$.
+\item $Q=92.16-3(28.30)=\SI{7.26}{\MeV}$ (\SI{7.27}{\MeV} with unrounded masses).
+\item Iron sits at the peak of the $\Eb/A$ curve. Any product heavier than iron has a lower $\Eb/A$, so the
+total binding would \emph{decrease}: fusing iron absorbs energy instead of releasing it. With no energy
+source left, the core can no longer support itself against gravity and collapses, producing a supernova
+and often a neutron star.
+\item (a) $S_p=[3.016\,049+1.007\,825-4.002\,603](931.494)=\SI{19.8}{\MeV}$.
+\newline (b) $S_n=[3.016\,029+1.008\,665-4.002\,603](931.494)=\SI{20.6}{\MeV}$. Both are nearly three times
+$\Eb/A=\SI{7.07}{\MeV}$: helium-4, with filled shells of both protons and neutrons, is exceptionally
+tightly bound.
+\item Removing nucleons one at a time, the separation energies are $\Eb(A)-\Eb(A-1)$, then
+$\Eb(A-1)-\Eb(A-2)$, and so on, ending with the binding energy of the last pair minus zero, where each
+$\Eb$ is that of whichever nuclide remains at that step. The sum telescopes to $\Eb(A)$ for any order,
+because a free nucleon has zero binding energy.
+\end{enumerate}
+}

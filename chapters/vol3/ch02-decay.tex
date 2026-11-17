@@ -1,0 +1,1069 @@
+\ncertchapter{2}{Radioactive Decay}\chlabel{ch:decay}
+
+\chref{ch:nucleus} treated nuclei as fixed objects with definite masses and binding energies. Most
+nuclides are not fixed at all. Of the more than $3000$ nuclides that have been made and studied, only
+about $251$ are stable; every other one, sooner or later, changes into something else by itself, with no
+push from outside. This chapter asks what such an unstable nucleus does: which particles it emits, how
+much energy they carry away, which nuclei are unstable in the first place, and where a chain of decays
+finally comes to rest.
+
+Almost every answer comes from tools already in hand. Energy conservation (\chref{ch:energy}), extended
+by $E=mc^2$ and the atomic-mass tables of \chref{ch:nucleus}, says whether a decay can happen and how much
+energy it releases. Momentum conservation (\chref{ch:collisions}) says how that energy is shared among
+the products, and it is momentum, more than anything else, that forced physicists to accept a new and
+almost undetectable particle, the neutrino. What is genuinely new is the cast: positrons, neutrinos and
+their antiparticles, which must be met before any decay equation can be written.
+
+Two limits should be stated at the outset. This chapter is about \emph{what} comes out of a decay and
+with what energy, not about \emph{when} a given nucleus decays; that question, whose answer is a law of
+chance, is the subject of \chref{ch:decaylaw}. And some of the reasons behind the facts (why an $\alpha$
+particle can leak out of a nucleus at all, why $\beta$ decays are slow) belong to quantum mechanics and
+the theory of the weak force. They are explained here in words, and flagged where they are stated
+without proof.
+
+\section{An Accidental Discovery}\label{sec:decay-discovery}
+
+In 1896 Henri Becquerel stored uranium salts in a drawer on top of a photographic plate wrapped in black
+paper. When the plate was developed it was fogged in the outline of the crystals, although no light had
+reached it. Marie and Pierre Curie then showed that the effect depended only on the \emph{amount} of
+uranium present, not on the chemical compound it was in, nor on temperature or pressure. They named it
+\textbf{radioactivity}, and by chemical separation they isolated two far more active elements, polonium
+and radium.
+
+The insensitivity to chemistry was the decisive clue. Chemical bonds involve energies of a few
+electron-volts and affect only the outer electrons of an atom; heating a sample by a few hundred kelvin
+changes the energy of each atom by only a fraction of an electron-volt. A process that ignores all of
+this must originate somewhere that chemistry and heat cannot reach: the nucleus, where, as
+\chref{ch:nucleus} showed, the energies are millions of electron-volts per particle. Before the emitted
+radiation can be described, the particles that take part in it need names.
+
+\section{The Cast of Particles}\label{sec:decay-particles}
+
+Radioactivity involves a handful of particles, some of them unfamiliar. Each is defined here before it
+is used anywhere else, with the mass, charge and one further property, lepton number, that the rest of
+the chapter needs. Masses are given both in atomic mass units ($\SI{1}{\amu}$, one-twelfth of the mass of
+a neutral carbon-12 atom) and as rest energies in MeV, linked by the conversion of \chref{ch:nucleus},
+$\SI{1}{\amu}\times c^2=\SI{931.494}{\MeV}$; writing a mass as ``MeV$/c^2$'' lets $c^2$ cancel silently in
+calculations.
+
+\begin{defbox}{Proton, neutron and nucleon}
+These were met in \chref{ch:nucleus}; their properties are collected here. The \textbf{proton} $p$
+carries charge $+e$, where $e=\SI{1.602e-19}{C}$ is the elementary charge, and has mass
+$m_p=\SI{1.007276}{\amu}=\SI{938.3}{\MeV}/c^2$. The \textbf{neutron} $n$ is electrically neutral and
+slightly heavier, $m_n=\SI{1.008665}{\amu}=\SI{939.6}{\MeV}/c^2$. Protons and neutrons are the two kinds of
+\textbf{nucleon}, the particles that make up a nucleus. In decay equations they are written $\nuc11{p}$
+(or $\nuc11{H}$, the nucleus of hydrogen) and $\nuc10{n}$: the upper number counts nucleons and the lower
+number counts charge in units of $e$.
+\end{defbox}
+
+\begin{defbox}{Electron}
+The \textbf{electron} $e^-$ carries charge $-e$ and has mass $m_e=\SI{0.000549}{\amu}=\SI{0.511}{\MeV}/c^2$,
+about $1/1836$ of a proton's. Electrons fill the shells of an atom around its nucleus; the innermost
+shell, closest to the nucleus, is called the \textbf{K shell}. An electron emitted by a nucleus is called a
+\textbf{beta-minus particle}, written $\beta^-$ or $\nuc{0}{-1}{e}$: nucleon number $0$, charge $-1$.
+\end{defbox}
+
+\begin{defbox}{Photon}
+A \textbf{photon} $\gamma$ is a single quantum (smallest indivisible packet) of electromagnetic radiation.
+It has no charge and no mass, always travels at the speed of light $c$, and carries energy $E=hf$, where
+$f$ is the frequency of the radiation and $h=\SI{6.626e-34}{\joule\second}$ is Planck's constant, together with
+momentum of magnitude $E/c$ (both stated without proof; they belong to the quantum theory of light).
+Visible light, X-rays and gamma rays are all photons and differ only in energy. Photons from the nucleus
+(keV to MeV) are called \textbf{gamma rays}; those from rearrangements of an atom's inner electrons (up to
+about $\SI{100}{\keV}$) are \textbf{X-rays}. Photons are created and absorbed freely: there is no
+conservation of photon number.
+\end{defbox}
+
+\begin{defbox}{Antiparticle}
+Every particle has an \textbf{antiparticle} with exactly the same mass but the \emph{opposite} electric
+charge, and the opposite value of every other conserved charge-like quantity (such as lepton number,
+defined below). Antiparticles are written with a bar ($\bar\nu$) or with the opposite charge sign ($e^+$
+for the antielectron). Together they make up \textbf{antimatter}. They are not rare or exotic in nuclear
+physics: radioactive decays create them routinely.
+\end{defbox}
+
+\begin{defbox}{Positron}
+The \textbf{positron} $e^+$ is the antiparticle of the electron: mass $\SI{0.511}{\MeV}/c^2$, charge $+e$.
+Predicted by Dirac (1928) and discovered by Anderson in cosmic rays (1932), it is emitted in $\beta^+$
+decay, where it is called a \textbf{beta-plus particle}, written $\beta^+$ or $\nuc{0}{+1}{e}$. A positron
+does not survive long in ordinary matter. Within about a nanosecond it meets an electron and the pair
+\textbf{annihilates}: both particles vanish and their total rest energy, $2m_ec^2=\SI{1.022}{\MeV}$,
+reappears as photons (Figure~\ref{fig:decay-antimatter}b). For a pair essentially at rest the total momentum
+is zero, so a single photon is impossible, since it would carry momentum $E/c\neq0$. Instead two photons
+of $\SI{511}{\keV}$ each fly off in exactly opposite directions. The reverse process, \textbf{pair
+production}, turns a photon of more than $2m_ec^2=\SI{1.022}{\MeV}$ into an electron and a positron; it
+needs a nearby nucleus to take up momentum (Figure~\ref{fig:decay-antimatter}c).
+\end{defbox}
+
+\begin{defbox}{Neutrino and antineutrino}
+The \textbf{electron neutrino} $\nu_e$ (Greek ``nu'') is an electrically neutral particle with an
+extremely small mass (less than $\SI{1}{\eV}/c^2$, so treated here as massless) that travels at very
+nearly the speed of light. It feels neither the strong nuclear force nor the electric force, only the
+\textbf{weak nuclear force}, so it passes through matter almost unhindered. Its antiparticle is the
+\textbf{electron antineutrino} $\bar\nu_e$ (``nu-bar''). Both are neutral and practically massless, so
+they are told apart by their lepton number $L_e$ (defined below), $+1$ for $\nu_e$ and $-1$ for $\bar\nu_e$. In practice an
+\emph{antineutrino} always accompanies an emitted \emph{electron} ($\beta^-$ decay), and a \emph{neutrino}
+accompanies an emitted \emph{positron} ($\beta^+$ decay) or a captured electron (electron capture).
+Neutrinos carry away energy and momentum but are almost never absorbed, so that energy is lost to any
+detector or absorber.
+\end{defbox}
+
+\begin{defbox}{Lepton and lepton number}
+A \textbf{lepton} is a particle that does not feel the strong nuclear force; in this chapter the leptons
+are the electron and the electron neutrino and their antiparticles. The electron and the neutrino are
+assigned \textbf{electron lepton number} $L_e=+1$; their antiparticles, the positron and the antineutrino, have
+$L_e=-1$; all other particles (protons, neutrons, photons, nuclei) have $L_e=0$. (The subscript distinguishes it from the
+angular momentum $L$ of \chref{ch:rotation}; heavier relatives of the electron, met only in particle
+physics, carry lepton numbers of their own.) In every process ever observed the \emph{total} electron
+lepton number is conserved. That is why leptons are created in balanced pairs:
+$e^-$ with $\bar\nu_e$ ($+1-1=0$), or $e^+$ with $\nu_e$ ($-1+1=0$).
+\end{defbox}
+
+Figure~\ref{fig:decay-antimatter} pictures the particle--antiparticle pairs and the two processes that
+convert rest energy into photons and back.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_antimatter}
+\figcaption{fig:decay-antimatter}{(a) A particle and its antiparticle have the same mass and opposite
+charge-like quantities; the neutrino and antineutrino are both neutral and differ only in lepton number
+$L_e$. (b) An electron and a positron at rest annihilate into two $\SI{511}{\keV}$ photons moving in
+opposite directions, which is the only way to conserve both energy and zero total momentum. (c) The
+reverse: a photon above $\SI{1.022}{\MeV}$, passing close to a nucleus, can create an electron--positron
+pair; the nucleus absorbs the photon's momentum.}
+\end{figure}
+
+\begin{tablebox}{The particles of radioactivity}
+\centering
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lcccc>{\raggedright\arraybackslash}p{5.0cm}@{}}
+\toprule
+\textbf{Particle} & \textbf{Symbol} & \textbf{Charge} & \textbf{Mass (MeV$/c^2$)} & $L_e$ & \textbf{Where it appears}\\
+\midrule
+proton & $p$, $\nuc11{p}$ & $+e$ & $938.3$ & $0$ & nuclei; target and product in reactions\\
+neutron & $n$, $\nuc10{n}$ & $0$ & $939.6$ & $0$ & nuclei; free mean life about $\SI{880}{s}$\\
+electron & $e^-$, $\beta^-$ & $-e$ & $0.511$ & $+1$ & atomic shells; emitted in $\beta^-$ decay; captured in EC\\
+positron & $e^+$, $\beta^+$ & $+e$ & $0.511$ & $-1$ & emitted in $\beta^+$ decay; annihilates\\
+neutrino & $\nu_e$ & $0$ & $\approx0$ & $+1$ & with $e^+$ in $\beta^+$ decay; in EC; from the Sun\\
+antineutrino & $\bar\nu_e$ & $0$ & $\approx0$ & $-1$ & with $e^-$ in $\beta^-$ decay; from reactors\\
+photon & $\gamma$ & $0$ & $0$ & $0$ & gamma decay, annihilation, X-rays\\
+alpha particle & $\alpha$, $\nuc42{He}$ & $+2e$ & $3727.4$ & $0$ & a helium-4 \emph{nucleus}; emitted in $\alpha$ decay\\
+\bottomrule
+\end{tabular}\label{tab:decay-particles}
+\end{tablebox}
+
+\begin{remarkbox}{What is really changing in beta decay?}
+Protons and neutrons are not fundamental. Each is built from three \emph{quarks}: the proton from two
+``up'' quarks and one ``down'' quark (charges $+\tfrac23e,+\tfrac23e,-\tfrac13e$, total $+e$), the neutron
+from one up and two down ($+\tfrac23e,-\tfrac13e,-\tfrac13e$, total $0$). In $\beta^-$ decay a single
+down quark turns into an up quark through the weak force, emitting an electron and an antineutrino:
+$d\to u+e^-+\bar\nu_e$. Charge is conserved ($-\tfrac13=+\tfrac23-1+0$), and so is lepton number
+($0=+1-1$). In $\beta^+$ decay an up quark turns into a down quark. None of this is needed for the
+calculations in this chapter, but it explains why the weak force, and only the weak force, can change a
+neutron into a proton.
+\end{remarkbox}
+
+\section{Three Kinds of Radiation}\label{sec:decay-three}
+
+With the particles named, the radiation itself can be sorted. Rutherford separated the emissions of
+uranium and radium by two tests: how far they penetrate matter, and how they bend in electric and
+magnetic fields (Figures~\ref{fig:decay-penetration} and~\ref{fig:decay-deflection}). He named the three
+kinds after the first three letters of the Greek alphabet. Table~\ref{tab:decay-radiation} collects what
+is now known about each.
+
+\begin{tablebox}{Alpha, beta and gamma radiation}
+\centering
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}>{\raggedright}p{2.3cm}>{\raggedright}p{3.6cm}>{\raggedright}p{3.6cm}>{\raggedright\arraybackslash}p{3.6cm}@{}}
+\toprule
+ & \textbf{alpha} ($\alpha$) & \textbf{beta} ($\beta^\mp$) & \textbf{gamma} ($\gamma$)\\
+\midrule
+Nature & helium-4 nucleus $\nuc42{He}$ & electron $e^-$ (or positron $e^+$) & high-energy photon\\
+Charge & $+2e$ & $-e$ (or $+e$) & $0$\\
+Mass & $\SI{4.0015}{\amu}$ & $\SI{0.000549}{\amu}$ & $0$\\
+Typical energy & $4$--$\SI{9}{\MeV}$, \emph{discrete} & up to a few MeV, \emph{continuous} & keV to a few MeV, \emph{discrete}\\
+Typical speed & about $0.05c$ & up to $0.99c$ & $c$\\
+Ionising power & very high & moderate & low\\
+Range in air & a few cm & up to metres & very long (weakened, not stopped)\\
+Stopped by & a sheet of paper, dead skin & a few mm of aluminium & several cm of lead reduce it greatly\\
+\bottomrule
+\end{tabular}\label{tab:decay-radiation}
+\end{tablebox}
+
+The speeds follow from the energies. A $\SI{5}{\MeV}$ $\alpha$ particle has kinetic energy only
+$5/3727=0.13\%$ of its rest energy, so the non-relativistic $K=\tfrac12mv^2$ of \chref{ch:energy} applies
+and $v/c=\sqrt{2K/mc^2}=\sqrt{2(5)/3727}=0.052$. An electron of a few MeV has a kinetic energy several
+times its rest energy of $\SI{0.511}{\MeV}$, so it moves at nearly $c$, and its kinematics would need
+relativity; this chapter avoids electron kinematics except where only energy conservation is used.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_penetration}
+\figcaption{fig:decay-penetration}{Penetrating power. Heavy, doubly charged $\alpha$ particles ionise
+densely and lose their energy within a few centimetres of air or a sheet of paper. Electrons penetrate
+farther, to a few millimetres of aluminium. Uncharged photons interact only occasionally, so their
+intensity falls exponentially with the thickness of lead and never reaches exactly zero: a weakened beam
+always gets through.}
+\end{figure}
+
+\begin{keybox}{Ionisation and range}
+An ionising particle loses energy by pulling electrons off the atoms it passes. The impulse given to each
+electron grows with the particle's charge and with the \emph{time} it spends nearby. A slow, doubly charged
+$\alpha$ particle lingers and pulls hard, creating tens of thousands of ion pairs per centimetre of air; a
+fast electron carries a single charge and races past. Dense ionisation means rapid energy loss and therefore
+a short range:
+\begin{center}
+heavier, slower, more highly charged $\;\Longrightarrow\;$ denser ionisation $\;\Longrightarrow\;$ shorter range.
+\end{center}
+An $\alpha$ source is therefore harmless outside the body (the dead outer layer of skin stops it) but very
+dangerous if inhaled or swallowed, where it deposits all its energy in a few hundredths of a millimetre of
+living tissue.
+\end{keybox}
+
+\begin{trapbox}{gamma rays are weakened, not stopped}
+``Lead stops gamma rays'' is a convenient slogan and a wrong statement. A photon either passes a layer
+untouched or is removed by a single interaction, so each centimetre of lead removes the same
+\emph{fraction} of the beam. The intensity falls exponentially and never reaches zero; shielding is
+specified by how many times it divides the intensity, not by a thickness that blocks it. The
+mathematics of such exponential falls is developed in \chref{ch:decaylaw}.
+\end{trapbox}
+
+\textbf{Bending in a magnetic field.} The second of Rutherford's tests uses the magnetic force on a moving
+charge. A charge $q$ moving with velocity $\vv$ through a magnetic field $\B$ feels the force
+$\vF=q\,\vv\times\B$, perpendicular to both (the cross product is defined in \chref{ch:toolkit},
+Section~\ref{sec:vecalg}). This law belongs to electromagnetism and is stated here without proof. Because
+the force is always perpendicular to $\vv$, it does no work and changes only the direction of motion. When
+$\vv$ is perpendicular to $\B$ the particle therefore moves on a circle, and the magnetic force of size
+$|q|vB$ supplies the centripetal force $mv^2/r$ of \chref{ch:circdyn}:
+\begin{equation}\label{eq:decay-radius}
+|q|vB=\frac{mv^2}{r}\quad\Longrightarrow\quad \boxed{\;r=\frac{mv}{|q|B}=\frac{p}{|q|B},\;}
+\end{equation}
+where $p$ is the magnitude of the momentum. (For fast electrons the result $r=p/|q|B$ still holds,
+with the relativistic momentum; it is quoted, not derived, here.) A large momentum and a small charge
+make a large, gently curved circle. Positive and negative charges bend in opposite directions, and
+photons, with no charge, do not bend at all (Figure~\ref{fig:decay-deflection}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_deflection}
+\figcaption{fig:decay-deflection}{Deflection in a magnetic field directed into the page. The force
+$q\vv\times\B$ bends positive $\alpha$ particles and negative electrons in opposite directions, and leaves
+uncharged photons undeflected. The radius $r=p/|q|B$ is far larger for the $\alpha$ particle, because its
+momentum is much larger: at $\SI{1}{T}$ a $\SI{5.3}{\MeV}$ $\alpha$ circles with $r=\SI{33}{cm}$
+(Example~\ref{ex:decay-alpharadius}) and a $\SI{1}{\MeV}$ electron with $r\approx\SI{5}{mm}$. The drawing
+exaggerates the $\alpha$ bend about tenfold.}
+\end{figure}
+
+\begin{exbox}{An alpha particle in a magnetic field}\label{ex:decay-alpharadius}
+Find the radius of the path of a $\SI{5.30}{\MeV}$ $\alpha$ particle (mass $\SI{6.645e-27}{kg}$, charge
+$+2e$) moving perpendicular to a magnetic field of $\SI{1.00}{T}$, and its speed as a fraction of $c$.
+
+\stepn{1} \textbf{Momentum.} The $\alpha$ is non-relativistic ($K\ll mc^2$), so $p=\sqrt{2mK}$ with
+$K=5.30\times\SI{1.602e-13}{J}$:
+$p=\sqrt{2(6.645\times10^{-27})(8.49\times10^{-13})}=\SI{1.06e-19}{\kilo\gram\metre\per\second}$.
+\stepn{2} \textbf{Radius.} From Eq.~\eqref{eq:decay-radius}, $r=p/(2eB)=
+\dfrac{1.06\times10^{-19}}{2(1.602\times10^{-19})(1.00)}=\SI{0.332}{m}$.
+\stepn{3} \textbf{Speed.} $v=p/m=\SI{1.60e7}{\metre\per\second}=0.053c$, matching the estimate above.
+\ans{$r\approx\SI{33}{cm}$, $v=0.053c$}
+\end{exbox}
+
+Every radiation detector exploits the ionisation described above, and one of them gave radioactivity its
+familiar sound.
+
+\begin{remarkbox}{Seeing the invisible}
+A \emph{Geiger--M\"uller tube} (Figure~\ref{fig:decay-geiger}) is a gas-filled cylinder with a thin wire
+at high voltage along its axis. A single ionising particle frees a few electrons, which accelerate towards
+the wire and knock out more electrons in an avalanche; each particle produces one sharp pulse, heard as a
+click. A \emph{cloud chamber} contains supersaturated vapour that condenses on ions, so a particle leaves
+a visible trail. The trails mirror Table~\ref{tab:decay-radiation}: $\alpha$ particles make short, thick,
+straight tracks (dense ionisation, heavy, hard to deflect), electrons make long, thin, wandering ones.
+Modern instruments use scintillator crystals, which flash when struck, and semiconductor diodes, which
+measure the energy deposited.
+\end{remarkbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_geiger}
+\figcaption{fig:decay-geiger}{A Geiger--M\"uller tube. One ionising particle frees a few electrons in the
+gas; the strong field near the thin central wire accelerates them so violently that each frees more, and
+the avalanche gives a pulse large enough to count. The pulse is the same whatever the particle's energy,
+so a Geiger counter counts particles but cannot measure their energies.}
+\end{figure}
+
+\section{The Rules Every Decay Obeys}\label{sec:decay-rules}
+
+Knowing what comes out is not yet enough to predict a decay. One needs the rules that every decay,
+whatever its kind, must satisfy. A nuclear decay is a reaction
+$\text{parent}\to\text{daughter}+\text{emitted particles}$, and it must conserve:
+\begin{enumerate}[label=\textbf{\arabic*.}]
+\item \textbf{electric charge}, so the lower numbers (charges, counting $e^-$ as $-1$ and $e^+$ as $+1$)
+      balance;
+\item \textbf{nucleon number}, so the upper numbers balance;
+\item \textbf{energy}, including rest-mass energy, and \textbf{linear momentum}, exactly as in the
+      collisions and explosions of \chref{ch:collisions};
+\item \textbf{lepton number} (Section~\ref{sec:decay-particles}): an emitted electron must be accompanied
+      by an antineutrino, and an emitted positron or a captured electron by a neutrino.
+\end{enumerate}
+The energy rule needs a number attached to it, and that number is the $Q$-value.
+
+\begin{defbox}{$Q$-value}
+The $Q$-value of a decay is the rest-mass energy that disappears:
+\[
+Q=\big(m_{\text{initial}}-m_{\text{final}}\big)c^2 .
+\]
+It appears as kinetic energy shared among the products. A decay can occur spontaneously only if $Q>0$.
+\end{defbox}
+
+The reason is energy conservation itself. The parent is at rest, with energy $m_{\text{initial}}c^2$. The
+products have energy $m_{\text{final}}c^2$ plus their kinetic energies, which cannot be negative. So the
+products can be formed only if $m_{\text{final}}<m_{\text{initial}}$, and the difference, $Q$, is exactly
+the kinetic energy they share. A decay with $Q>0$ is \emph{allowed}; whether it happens quickly or in
+billions of years is a separate question.
+
+\why{Mass tables list the masses $M$ of neutral \emph{atoms}, electrons included, not the masses $m$ of bare
+nuclei. Each decay below is first written with nuclear masses, where the physics is plain, and then
+converted to atomic masses, where the numbers are. The conversion is $M=m+Zm_e$, neglecting the binding
+energies of the electrons, whose difference between parent and daughter is at most tens of keV, far below
+the MeV $Q$-values. Whether the electron masses cancel or not is the commonest source of wrong answers in
+this chapter.}
+
+\section{Alpha Decay}\label{sec:decay-alpha}
+
+The first kind of radiation to examine in detail is the one that changes the nucleus most. In
+$\alpha$ decay the nucleus ejects a helium-4 nucleus:
+\[
+\nuc{A}{Z}{X}\;\longrightarrow\;\nuc{A-4}{Z-2}{Y}+\nuc42{He},\qquad\text{for example}\quad
+\nuc{226}{88}{Ra}\to\nuc{222}{86}{Rn}+\nuc42{He}.
+\]
+Here X is the parent and Y the daughter, $A$ the mass number and $Z$ the atomic number. The daughter sits
+two places lower in the periodic table, and its mass number is four less.
+
+\begin{derivbox}{The $Q$-value of $\alpha$ decay from atomic masses}
+With nuclear masses, $Q=[m(\mathrm{X})-m(\mathrm{Y})-m(\nuc42{He})]c^2$. Add $Zm_e$ to the first term, and
+$(Z-2)m_e+2m_e=Zm_e$ to the last two together. The added electrons balance exactly, so atomic masses may be
+used directly:
+\begin{equation}\label{eq:decay-Qalpha}
+\boxed{\;Q_\alpha=\big[M(\mathrm{X})-M(\mathrm{Y})-M(\iso4{He})\big]c^2 .\;}
+\end{equation}
+\end{derivbox}
+
+How is that energy shared between the two products? This is an explosion of the kind treated in
+\chref{ch:collisions}, a perfectly inelastic collision run backwards: no external force acts during the
+decay, so the total momentum, zero before, is zero after.
+
+\begin{derivbox}{How the energy is shared}
+The parent is at rest, so the $\alpha$ particle and the daughter fly apart with equal and opposite
+momenta, $\vp_\alpha=-\vp_{\mathrm{Y}}$, of common magnitude $p$. Both are slow compared with light (the
+$\alpha$ carries about $0.1\%$ of its rest energy), so $K=p^2/2m$ for each, and
+\[
+\frac{K_\alpha}{K_{\mathrm{Y}}}=\frac{p^2/2m_\alpha}{p^2/2m_{\mathrm{Y}}}=\frac{m_{\mathrm{Y}}}{m_\alpha}\approx\frac{A-4}{4},
+\qquad K_\alpha+K_{\mathrm{Y}}=Q,
+\]
+where the masses have been replaced by their mass numbers, accurate to about $0.1\%$. Solving the two
+equations:
+\begin{equation}\label{eq:decay-Kalpha}
+\boxed{\;K_\alpha=Q\,\frac{A-4}{A},\qquad K_{\mathrm{Y}}=Q\,\frac{4}{A}.\;}
+\end{equation}
+The lighter particle takes almost all the energy, just as the bullet, not the rifle, carries most of the
+kinetic energy when a gun is fired. Because a two-body decay fixes the share uniquely, every $\alpha$ from
+a given transition has the \emph{same} energy: the $\alpha$ spectrum is a sharp line
+(Figure~\ref{fig:decay-betaspec}, left).
+\end{derivbox}
+
+\begin{exbox}{Radium-226}\label{ex:decay-ra226}
+Find the energy released in $\nuc{226}{88}{Ra}\to\nuc{222}{86}{Rn}+\nuc42{He}$ and its share between the two
+products, given $M(\iso{226}{Ra})=\SI{226.025410}{\amu}$, $M(\iso{222}{Rn})=\SI{222.017578}{\amu}$ and
+$M(\iso4{He})=\SI{4.002603}{\amu}$.
+
+\stepn{1} \textbf{$Q$-value.} By Eq.~\eqref{eq:decay-Qalpha}, the mass lost is
+$226.025410-222.017578-4.002603=\SI{0.005229}{\amu}$, so $Q=(0.005229)(931.494)=\SI{4.871}{\MeV}$.
+\stepn{2} \textbf{Sharing.} By Eq.~\eqref{eq:decay-Kalpha}, $K_\alpha=4.871\times\tfrac{222}{226}=\SI{4.784}{\MeV}$
+and $K_{\mathrm{Rn}}=4.871\times\tfrac{4}{226}=\SI{0.086}{\MeV}$.
+\stepn{3} \textbf{Check.} $4.784+0.086=4.870$, equal to $Q$ within rounding; the radon recoils with less
+than $2\%$ of the energy. \ans{$Q=\SI{4.871}{\MeV}$; $\SI{4.784}{\MeV}$ and $\SI{0.086}{\MeV}$}
+\end{exbox}
+
+\begin{exbox}{Polonium-210}\label{ex:decay-po210}
+Given $M(\iso{210}{Po})=\SI{209.982874}{\amu}$, $M(\iso{206}{Pb})=\SI{205.974465}{\amu}$ and
+$M(\iso4{He})=\SI{4.002603}{\amu}$, find $Q$ for the $\alpha$ decay of polonium-210 and the kinetic energies
+of both products.
+
+The mass lost is $\Delta M=\SI{0.005806}{\amu}$, so $Q=(0.005806)(931.494)=\SI{5.408}{\MeV}$. Then
+$K_\alpha=5.408\times\tfrac{206}{210}=\SI{5.305}{\MeV}$, matching the measured line at \SI{5.304}{\MeV} in
+Figure~\ref{fig:decay-betaspec}, and $K_{\mathrm{Pb}}=5.408\times\tfrac{4}{210}=\SI{0.103}{\MeV}$.
+\ans{$Q=\SI{5.408}{\MeV}$; $\SI{5.305}{\MeV}$ and $\SI{0.103}{\MeV}$}
+\end{exbox}
+
+\begin{trapbox}{the $\alpha$ particle does not carry all of $Q$}
+It is tempting to equate the measured $\alpha$ energy with the $Q$-value. The daughter's recoil takes
+$4/A$ of $Q$, about $\SI{0.1}{\MeV}$ for heavy nuclei: small, but larger than the precision of an $\alpha$
+energy measurement, and in a solid source large enough to knock the recoiling atom out of its place.
+Going backwards from a measured $K_\alpha$, $Q=K_\alpha\,A/(A-4)$.
+\end{trapbox}
+
+The formulas say how much energy is released; they do not say why the nucleus emits this particular
+cluster, nor how it gets out.
+
+\begin{remarkbox}{Why an $\alpha$, and how it escapes}
+Why should a nucleus emit a bound cluster of four nucleons rather than single protons or neutrons? Because
+$\iso4{He}$ is so tightly bound ($\Eb=\SI{28.3}{\MeV}$, \chref{ch:nucleus}, Section~\ref{sec:nuc-binding}) that ejecting it is often
+energetically allowed ($Q>0$) when ejecting a single nucleon is not ($Q<0$). Escaping is still puzzling.
+For an $\alpha$ particle touching a thorium-234 nucleus, the centres are about
+$1.2(234^{1/3}+4^{1/3})=\SI{9.3}{\fm}$ apart, and the electric potential energy there is
+$(2)(90)(\SI{1.44}{\MeV.\fm})/(\SI{9.3}{\fm})\approx\SI{28}{\MeV}$; yet the $\alpha$ from uranium-238
+emerges with only $\SI{4.2}{\MeV}$. Classically it could never have climbed over this \emph{Coulomb
+barrier}. In 1928 George Gamow explained that the $\alpha$ is a quantum wave and \emph{tunnels} through
+the barrier: because a quantum particle is spread out like a wave, there is a small but non-zero
+probability of finding it on the far side of a barrier it could never climb classically (stated without
+proof; it needs quantum mechanics). The tunnelling probability is exponentially sensitive to energy. That
+explains the Geiger--Nuttall rule: as the $\alpha$ energy rises from $\SI{4.2}{\MeV}$ (uranium-238) to
+$\SI{7.7}{\MeV}$ (polonium-214), the half-life falls from $4.5\times10^{9}$ years to $\SI{164}{\micro\second}$, a
+factor of about $10^{21}$.
+\end{remarkbox}
+
+\section{Beta Decay and Its Relatives}\label{sec:decay-beta}
+
+Alpha decay removes nucleons; beta decay rearranges them. It changes a neutron into a proton, or the
+reverse, inside the nucleus. The mass number is unchanged, so parent and daughter are \emph{isobars}
+(same $A$, \chref{ch:nucleus}). There are three varieties, pictured in Figure~\ref{fig:decay-betaproc}.
+
+\textbf{Beta-minus ($\beta^-$).} A nucleus with too many neutrons converts one of them:
+\[
+n\to p+e^-+\bar\nu_e,\qquad \nuc{A}{Z}{X}\to\nuc{A}{Z+1}{Y}+e^-+\bar\nu_e,\qquad\text{for example}\quad
+\nuc{14}{6}{C}\to\nuc{14}{7}{N}+e^-+\bar\nu_e .
+\]
+\textbf{Beta-plus ($\beta^+$, positron emission).} A nucleus with too many protons converts one of them:
+\[
+p\to n+e^++\nu_e,\qquad \nuc{A}{Z}{X}\to\nuc{A}{Z-1}{Y}+e^++\nu_e,\qquad\text{for example}\quad
+\nuc{22}{11}{Na}\to\nuc{22}{10}{Ne}+e^++\nu_e .
+\]
+\textbf{Electron capture (EC).} The nucleus absorbs one of its own inner (K-shell) electrons:
+\[
+p+e^-\to n+\nu_e,\qquad \nuc{A}{Z}{X}+e^-\to\nuc{A}{Z-1}{Y}+\nu_e,\qquad\text{for example}\quad
+\nuc74{Be}+e^-\to\nuc73{Li}+\nu_e .
+\]
+The vacancy left in the K shell is filled by an outer electron, which emits a characteristic X-ray. Since
+the neutrino escapes unseen, that X-ray is how electron capture is detected.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_betaproc}
+\figcaption{fig:decay-betaproc}{The three beta processes, seen inside the nucleus. In each, one nucleon
+changes identity and the mass number is unchanged. Charge and lepton number balance in every case:
+$\beta^-$ creates an electron ($L_e=+1$) and an antineutrino ($L_e=-1$); $\beta^+$ creates a positron ($-1$)
+and a neutrino ($+1$); electron capture destroys an electron ($+1$) and creates a neutrino ($+1$), and the
+refilling of the K shell gives an X-ray.}
+\end{figure}
+
+The electrons and positrons are \emph{created} at the moment of decay, much as a photon is created when an
+atom de-excites; they were never inside the nucleus. A nucleus could not hold an electron anyway. By
+Heisenberg's uncertainty principle (stated without proof), a particle confined to a region of size
+$\Delta x$ must have a spread of momentum of at least about $\hbar/\Delta x$, where $\hbar=h/2\pi$.
+Confining an electron within $\Delta x\approx\SI{10}{\fm}$ therefore gives it momentum of order
+$\hbar/\Delta x$, that is, $pc\approx\hbar c/\Delta x=(\SI{197}{\MeV.\fm})/(\SI{10}{\fm})\approx\SI{20}{\MeV}$.
+That is far more than the energy of any $\beta$ electron ever observed (at most a few MeV), and far more
+than the electric attraction of the nucleus could hold.
+
+The force responsible is the \emph{weak nuclear force}, the only interaction that can change a neutron
+into a proton or the reverse. It is very feeble and very short-ranged, which is why $\beta$ decays are
+slow: typical $\beta$ half-lives are seconds to years, whereas a nucleus rearranging under the strong
+force takes about $\SI{e-22}{s}$.
+
+Writing the $Q$-values for the three processes is where the warning about atomic and nuclear masses
+(Section~\ref{sec:decay-rules}) matters most.
+
+\begin{derivbox}{$Q$-values with atomic masses: the electron trap}
+Let $m$ denote nuclear masses and $M$ atomic masses, so $M(\mathrm{X})=m(\mathrm{X})+Zm_e$ (electron
+binding energies neglected).
+\begin{itemize}
+\item $\beta^-$: $Q=[m(\mathrm{X})-m(\mathrm{Y})-m_e]c^2=\big[(M(\mathrm{X})-Zm_e)-(M(\mathrm{Y})-(Z+1)m_e)-m_e\big]c^2$.
+      The electrons cancel:
+      \begin{equation}\label{eq:decay-Qbminus}
+      \boxed{\;Q_{\beta^-}=[M(\mathrm{X})-M(\mathrm{Y})]c^2.\;}
+      \end{equation}
+      The daughter atom needs $Z+1$ electrons; the parent's $Z$ plus the emitted one make up the count.
+\item $\beta^+$: $Q=[m(\mathrm{X})-m(\mathrm{Y})-m_e]c^2=\big[(M(\mathrm{X})-Zm_e)-(M(\mathrm{Y})-(Z-1)m_e)-m_e\big]c^2$,
+      which leaves two electron masses:
+      \begin{equation}\label{eq:decay-Qbplus}
+      \boxed{\;Q_{\beta^+}=[M(\mathrm{X})-M(\mathrm{Y})-2m_e]c^2.\;}
+      \end{equation}
+      One $m_e$ is the positron created; the other is the parent's surplus atomic electron, which the
+      daughter atom no longer needs.
+\item EC: $Q=[m(\mathrm{X})+m_e-m(\mathrm{Y})]c^2=\big[(M(\mathrm{X})-Zm_e)+m_e-(M(\mathrm{Y})-(Z-1)m_e)\big]c^2$:
+      \begin{equation}\label{eq:decay-Qec}
+      \boxed{\;Q_{\mathrm{EC}}=[M(\mathrm{X})-M(\mathrm{Y})]c^2.\;}
+      \end{equation}
+      Strictly, the daughter atom is left with a K-shell vacancy; the neutrino carries $Q_{\mathrm{EC}}$ minus
+      the K-shell binding energy, and that small remainder (keV) leaves as the X-ray.
+\end{itemize}
+The neutrino's mass, below $\SI{1}{\eV}/c^2$, is neglected throughout.
+\end{derivbox}
+
+\begin{keybox}{The $2m_ec^2$ threshold}
+Positron emission requires the parent \emph{atom} to outweigh the daughter atom by more than
+$2m_ec^2=\SI{1.022}{\MeV}$. Electron capture requires only that the parent atom be heavier at all. A
+proton-rich nucleus whose atomic mass exceeds its daughter's by less than $\SI{1.022}{\MeV}/c^2$ can
+therefore decay \emph{only} by electron capture. Beryllium-7 is the classic example
+(Practice Problem~\ref{prob:decay-be7}).
+\end{keybox}
+
+\begin{trapbox}{the same mass difference gives two different $Q$-values}
+For a given pair of atoms, $\beta^-$ and EC use the bare atomic mass difference, while $\beta^+$ subtracts
+$\SI{1.022}{\MeV}$. A common error subtracts nothing (treating $\beta^+$ like $\beta^-$), or only
+$\SI{0.511}{\MeV}$ (counting the positron but forgetting the surplus atomic electron). Both errors
+disappear if the masses are first written as nuclear masses.
+\end{trapbox}
+
+\begin{exbox}{Sodium-22: two channels}\label{ex:decay-na22}
+The atomic masses are $M(\iso{22}{Na})=\SI{21.994437}{\amu}$ and $M(\iso{22}{Ne})=\SI{21.991385}{\amu}$. Find
+$Q$ for $\beta^+$ decay and for electron capture.
+
+The atomic mass difference is $\SI{0.003052}{\amu}$, which is $(0.003052)(931.494)=\SI{2.843}{\MeV}$. By
+Eq.~\eqref{eq:decay-Qec}, $Q_{\mathrm{EC}}=\SI{2.843}{\MeV}$; by Eq.~\eqref{eq:decay-Qbplus},
+$Q_{\beta^+}=2.843-1.022=\SI{1.821}{\MeV}$. Both channels are open, and sodium-22 uses both.
+\ans{$Q_{\beta^+}=\SI{1.821}{\MeV}$, $Q_{\mathrm{EC}}=\SI{2.843}{\MeV}$}
+\end{exbox}
+
+\begin{exbox}{Checking a decay against every rule}\label{ex:decay-na22check}
+Is $\nuc{22}{11}{Na}\to\nuc{22}{10}{Ne}+e^++\nu_e$ allowed?
+
+Go through the rules of Section~\ref{sec:decay-rules} one at a time. Charge: $11=10+1+0$. Nucleons:
+$22=22+0+0$. Lepton number: $0=0-1+1$. Energy: $Q_{\beta^+}=\SI{1.821}{\MeV}>0$
+(Example~\ref{ex:decay-na22}). Momentum: three products can share zero total momentum in many ways. All
+five pass, so the decay is allowed, and it is observed. \ans{allowed}
+\end{exbox}
+
+\begin{remarkbox}{The free neutron}
+Outside a nucleus a neutron is unstable. Its mass exceeds that of a hydrogen atom, so
+$n\to p+e^-+\bar\nu_e$ releases $Q=(1.008665-1.007825)(931.494)=\SI{0.782}{\MeV}$ (a $\beta^-$ decay, so
+the hydrogen \emph{atomic} mass is the right one to use). Its mean life is about $\SI{880}{s}$, roughly
+fifteen minutes. The reverse, $p\to n+e^++\nu_e$, is impossible for a free proton, which is lighter.
+Inside a nucleus it can happen, because the difference in binding energy between parent and daughter
+supplies the missing energy.
+\end{remarkbox}
+
+\section{The Missing Energy and the Neutrino}\label{sec:decay-neutrino}
+
+The neutrino has appeared in every $\beta$ equation so far, yet no detector registers it. Why believe in
+it? The evidence is the energy of the electrons. If $\beta^-$ decay produced only two bodies, daughter plus
+electron, momentum conservation would fix the electron's energy exactly, as it fixes the $\alpha$ energy
+(Eq.~\eqref{eq:decay-Kalpha}). Instead, experiments from 1914 to the late 1920s found a \emph{continuous}
+spread of electron energies, from zero up to a maximum equal to $Q$ (Figure~\ref{fig:decay-betaspec}). On
+average about two-thirds of the energy seemed to vanish. Niels Bohr was prepared to give up energy
+conservation in individual nuclear processes. In 1930 Wolfgang Pauli proposed what he called a desperate
+remedy: a third, neutral, nearly massless particle carries off the missing energy and momentum. Fermi named
+it the \emph{neutrino} (``little neutral one'') and built the theory of beta decay around it. It interacts
+so weakly that a typical MeV neutrino could pass through a light-year of lead. It was finally detected in
+1956 by Cowan and Reines beside a nuclear reactor.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_betaspec}
+\figcaption{fig:decay-betaspec}{Two-body versus three-body decay. Left: every $\alpha$ from polonium-210
+carries $\SI{5.30}{\MeV}$ (Example~\ref{ex:decay-po210}). Right: the electron energy in $\beta^-$ decay is
+spread continuously from $0$ to $Q$, and the antineutrino carries the rest. The curve is the simplest
+theoretical shape for $Q=\SI{1}{\MeV}$, ignoring the pull of the nucleus on the outgoing electron; its mean
+is $0.40Q$. That pull slows real $\beta^-$ electrons, and their mean is nearer $Q/3$.}
+\end{figure}
+
+\begin{keybox}{Three bodies share energy freely}
+With three products, the momenta need only add to zero, that is, form a closed triangle, and infinitely
+many triangles are possible (Figure~\ref{fig:decay-momentum}). The share of energy therefore varies from
+decay to decay. Neglecting the tiny recoil of the heavy daughter,
+\[
+K_e+E_{\bar\nu}=Q,\qquad 0\le K_e\le Q,
+\]
+where $K_e$ is the electron's kinetic energy and $E_{\bar\nu}$ the antineutrino's energy. The maximum
+electron energy, the \textbf{endpoint}, equals $Q$ and occurs when the antineutrino is left with
+essentially nothing.
+\end{keybox}
+
+\begin{exbox}{Sharing in a carbon-14 decay}\label{ex:decay-c14share}
+In a carbon-14 decay ($Q=\SI{0.156}{\MeV}$) an electron is detected with $K_e=\SI{0.100}{\MeV}$. What
+energy does the antineutrino carry?
+
+Neglecting the nuclear recoil (a few eV, as shown next), $E_{\bar\nu}=Q-K_e=0.156-0.100=\SI{0.056}{\MeV}$.
+\ans{$\SI{0.056}{\MeV}$}
+\end{exbox}
+
+The neglected recoil really is tiny. Even an electron at the carbon-14 endpoint ($\SI{0.156}{\MeV}$) has
+momentum $pc=\sqrt{K^2+2Km_ec^2}=\SI{0.43}{\MeV}$ (the relativistic relation, quoted here), and a
+nitrogen-14 nucleus taking that momentum moves off with $(pc)^2/2Mc^2\approx\SI{7}{\eV}$, a
+twenty-thousandth of $Q$. The daughter takes up momentum but almost no energy.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_momentum}
+\figcaption{fig:decay-momentum}{Why two-body and three-body decays differ. All the arrows are momenta.
+Left: in $\alpha$ decay the two momenta must be equal and opposite, which fixes the energy of each. Right:
+in $\beta^-$ decay any three momenta that add to zero are allowed (both examples close exactly), so the
+electron's share varies continuously from decay to decay.}
+\end{figure}
+
+
+\begin{trapbox}{endpoint versus typical energy}
+Tables quote the $\beta$ endpoint $Q$, but almost no electron has that energy; the average is roughly
+$Q/3$. When computing the heat deposited by a $\beta$ source, use the average electron energy: the
+neutrinos' share escapes (Practice Problem~\ref{prob:decay-mean}).
+\end{trapbox}
+
+\section{Gamma Decay}\label{sec:decay-gamma}
+
+Alpha and beta decays change the nucleus into a different nuclide; they often leave it with energy to
+spare. The daughter is then in an \emph{excited} nuclear state and, like an excited atom, drops to lower
+states by emitting photons. Nuclear energy levels are spaced by keV to MeV rather than eV, so the photons
+are gamma rays:
+\[
+\nuc{A}{Z}{X}^{*}\to\nuc{A}{Z}{X}+\gamma ,
+\]
+where the star marks the excited state. Neither $Z$ nor $A$ changes: gamma decay does not turn one element
+into another. Because the levels are discrete, gamma energies are sharp lines that fingerprint the
+nuclide. Occasionally the excited nucleus hands its energy directly to one of its own inner atomic
+electrons, which is ejected with a definite energy instead of a photon being emitted. This competing
+process, \textbf{internal conversion}, is followed by X-rays as the vacancy is filled.
+
+Momentum conservation applies here too: the photon carries momentum $E_\gamma/c$, so the nucleus recoils
+with the same momentum and kinetic energy $(E_\gamma/c)^2/2M=E_\gamma^2/2Mc^2$. For a $\SI{1.333}{\MeV}$
+photon from a nickel-60 nucleus ($Mc^2=60\times\SI{931.5}{\MeV}$) this is
+$1.333^2/(2\times55\,890)\,\si{\MeV}=\SI{16}{\eV}$, so to excellent accuracy the gamma energy equals the
+spacing of the levels.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_co60scheme}
+\figcaption{fig:decay-co60}{Decay scheme of cobalt-60, the workhorse of radiotherapy. Energy runs
+upwards. The $\beta^-$ decay lands on an excited state of nickel-60, which cascades to the ground state by
+emitting two gamma rays. The energy bookkeeping closes:
+$0.316+1.173+1.333=\SI{2.822}{\MeV}=Q$.}
+\end{figure}
+
+Figure~\ref{fig:decay-co60} shows how $\beta$ and $\gamma$ decay combine in one of the most used
+radioactive sources. The $\beta^-$ decay does not go to the ground state of nickel-60 but to a level
+$\SI{2.506}{\MeV}$ above it, so the electrons' endpoint is not $Q$ but $Q-\SI{2.506}{\MeV}$
+(Practice Problem~\ref{prob:decay-co60}).
+
+\begin{remarkbox}{Technetium-99m, a nucleus that waits}
+Most excited nuclear states decay in under $\SI{e-12}{s}$. A few, called \emph{isomers} (marked m), are
+trapped for much longer, because the transition requires a large change of angular momentum. Nuclei,
+like electrons, carry a quantised intrinsic angular momentum, or \emph{spin}, and a photon finds a large
+change of it very hard to carry away. Technetium-99m sits in its excited state with a half-life of
+$\SI{6.0}{h}$ before emitting a single $\SI{140}{\keV}$ gamma ray. That is long enough to prepare and inject
+a radiopharmaceutical, short enough that the patient's dose fades within a day, and the gamma energy
+passes easily out of the body to a camera. It is used in tens of millions of diagnostic scans every
+year (\chref{ch:nucapps}).
+\end{remarkbox}
+
+\section{Which Nuclei Are Unstable, and How They Decay}\label{sec:decay-stability}
+
+The decay modes are now known; the remaining question is which nuclei use which. The answer is a map.
+Figure~\ref{fig:decay-nzchart} plots the naturally occurring nuclides by proton number $Z$ and neutron
+number $A-Z$. Stable nuclei form a narrow band, the \textbf{valley of stability}. It follows $A-Z=Z$ for
+light nuclei and bends towards neutron excess for heavy ones, because extra neutrons add nuclear
+attraction without adding electric repulsion (\chref{ch:nucleus}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_nzchart}
+\figcaption{fig:decay-nzchart}{The naturally occurring nuclides, plotted by proton number $Z$ and neutron
+number $A-Z$. The stable ones (filled dots) form the valley of stability, which bends away from the line
+$A-Z=Z$ towards neutron excess as $Z$ grows. The open circles are radioactive nuclides so long-lived that
+they have survived since the Earth formed, such as potassium-40, thorium-232 and uranium-238. Nuclei above
+the valley have too many neutrons and undergo $\beta^-$ decay; nuclei below it have too many protons and
+undergo $\beta^+$ decay or electron capture. Lead ($Z=82$) is the heaviest element with stable nuclides;
+heavier nuclei shed mass mainly by $\alpha$ decay. (Bismuth-209, long counted as stable, was found in 2003
+to $\alpha$-decay with a half-life of about $2\times10^{19}$ years.)}
+\end{figure}
+
+\textbf{Why $\beta$ decay always heads for the valley.} Fix the mass number $A$ and compare all its
+isobars, the nuclei that differ only in how the $A$ nucleons are split between protons and neutrons. A
+$\beta$ decay turns one isobar into its neighbour, and by Eqs.~\eqref{eq:decay-Qbminus}--\eqref{eq:decay-Qec}
+it can happen only if the neighbour's atomic mass is lower. So the question is how the atomic mass varies
+with $Z$ at fixed $A$, and the liquid-drop formula of \chref{ch:nucleus} (Figure~\ref{fig:nuc-semfterms}) answers it.
+
+\begin{derivbox}{Why the isobar masses lie on a parabola}
+Build the atom from $Z$ hydrogen atoms (each of atomic mass $M_{\mathrm{H}}=M(\iso{1}{H})$) and $A-Z$ neutrons, and subtract the binding energy:
+$M(Z)c^2=ZM_{\mathrm{H}}c^2+(A-Z)m_nc^2-\Eb$. In the liquid-drop formula only two terms of $\Eb$ depend
+on $Z$ at fixed $A$: the Coulomb term $-a_CZ(Z-1)/A^{1/3}$ and the asymmetry term $-a_A(A-2Z)^2/A$, with
+$a_C\approx\SI{0.71}{\MeV}$ and $a_A\approx\SI{23.7}{\MeV}$ (pairing aside). Both are quadratic in $Z$, so
+\[
+M(Z)c^2=\text{const}-(m_n-M_{\mathrm{H}})c^2\,Z+\frac{a_CZ(Z-1)}{A^{1/3}}+\frac{a_A(A-2Z)^2}{A},
+\]
+a parabola in $Z$ that opens upwards. Its minimum, where $dM/dZ=0$, is at
+\[
+Z_0=\frac{4a_A+(m_n-M_{\mathrm{H}})c^2+a_CA^{-1/3}}{8a_A/A+2a_CA^{-1/3}} .
+\]
+Without the Coulomb term this would be $Z_0\approx A/2$ (the asymmetry term alone wants equal numbers);
+the Coulomb term, growing with $Z^2$, pushes the minimum to fewer protons, more so for large $A$. For
+$A=101$, with $(m_n-M_{\mathrm{H}})c^2=\SI{0.782}{\MeV}$, the formula gives $Z_0=43.9$; the measured lightest
+isobar is ruthenium-101, $Z=44$.
+\end{derivbox}
+
+Every isobar on the neutron-rich side of the minimum can roll one step downhill by $\beta^-$ decay, every
+isobar on the proton-rich side by $\beta^+$ decay or electron capture, and only the isobar at the bottom is
+stable (Figure~\ref{fig:decay-isobar}). Plotting the bottoms of the parabolas for every $A$ traces out the
+valley of Figure~\ref{fig:decay-nzchart}. For even $A$ the pairing effect of \chref{ch:nucleus} splits the
+curve into two parallel parabolas, one for even-$Z$ and one for odd-$Z$ nuclei, and sometimes two isobars
+are both stable.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_isobar}
+\figcaption{fig:decay-isobar}{Measured atomic masses of the isobars with $A=101$, relative to the lightest.
+The dashed curve is the best-fitting parabola. Its single minimum is at ruthenium-101, which is indeed the
+only stable nuclide with $A=101$. Neutron-rich isobars decay by $\beta^-$ towards it, proton-rich ones by
+$\beta^+$ or electron capture. Each step releases the mass difference as energy, so the steps far from the
+minimum release the most. Rhodium-101 lies only $\SI{0.54}{\MeV}$ above ruthenium-101, below the
+$\SI{1.022}{\MeV}$ threshold, and decays by electron capture alone.}
+\end{figure}
+
+Table~\ref{tab:decay-moves} summarises how each mode moves a nucleus on the chart of
+Figure~\ref{fig:decay-nzchart}.
+
+\begin{tablebox}{How each decay moves a nucleus on the chart}
+\centering
+\begin{tabular}{@{}lcccl@{}}
+\toprule
+\textbf{Decay} & $\Delta Z$ & $\Delta(A-Z)$ & $\Delta A$ & \textbf{Move on the chart}\\
+\midrule
+$\alpha$ & $-2$ & $-2$ & $-4$ & two steps diagonally down and to the left\\
+$\beta^-$ & $+1$ & $-1$ & $0$ & one step towards the valley from above\\
+$\beta^+$ or EC & $-1$ & $+1$ & $0$ & one step towards the valley from below\\
+$\gamma$ & $0$ & $0$ & $0$ & no move (energy only)\\
+\bottomrule
+\end{tabular}\label{tab:decay-moves}
+\end{tablebox}
+
+\section{Decay Series}\label{sec:decay-series}
+
+A heavy nucleus rarely reaches the valley in one step. An $\alpha$ decay moves it diagonally, parallel to
+the line $A-Z=Z$, while the valley bends away from that line; each $\alpha$ therefore leaves the daughter a
+little too neutron-rich, and $\beta^-$ decays follow. Uranium-238 passes through fourteen decays before
+ending as stable lead-206 (Figure~\ref{fig:decay-useries}). Each $\alpha$ decay lowers $A$ by $4$ and $\beta$
+decays leave $A$ unchanged, so every member of a chain has the same remainder when $A$ is divided by $4$.
+There are therefore exactly four natural chains:
+\begin{itemize}
+\item $4n$, the thorium series: $\iso{232}{Th}\to\iso{208}{Pb}$;
+\item $4n+1$, the neptunium series: $\iso{237}{Np}\to\iso{209}{Bi}$ (bismuth-209 itself $\alpha$-decays, with a
+      half-life of about $2\times10^{19}$ years, to thallium-205). It is extinct in nature: its
+      longest-lived member, neptunium-237, has a half-life of $2.1$ million years, and the Earth's
+      $4.5$ billion years is over two thousand of its half-lives;
+\item $4n+2$, the uranium series: $\iso{238}{U}\to\iso{206}{Pb}$;
+\item $4n+3$, the actinium series: $\iso{235}{U}\to\iso{207}{Pb}$.
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decay_useries}
+\figcaption{fig:decay-useries}{The uranium-238 ($4n+2$) series, plotted by mass number $A$ against proton
+number $Z$. Diagonal arrows are $\alpha$ decays ($A$ down by $4$, $Z$ down by $2$); curved arrows are
+$\beta^-$ decays ($A$ unchanged, $Z$ up by $1$). Every member has $A=4n+2$. Half-lives range from
+$4.47$ billion years to $164$ microseconds. The chain contains $8$ $\alpha$ and $6$ $\beta^-$ decays.
+Radon-222, a gas, seeps from uranium-bearing rock and is the largest natural source of radiation dose to
+the public.}
+\end{figure}
+
+\begin{derivbox}{Counting $\alpha$ and $\beta$ decays in a chain}
+Go from $\nuc{A}{Z}{X}$ to $\nuc{A'}{Z'}{Y}$ through $n_\alpha$ alpha decays and $n_\beta$ beta-minus
+decays, in any order. Only $\alpha$ decay changes $A$, by $4$ each time, so
+\[
+n_\alpha=\frac{A-A'}{4}.
+\]
+Each $\alpha$ lowers $Z$ by $2$ and each $\beta^-$ raises it by $1$: $Z'=Z-2n_\alpha+n_\beta$, so
+\[
+n_\beta=Z'-Z+2n_\alpha.
+\]
+For $\iso{238}{U}\to\iso{206}{Pb}$: $n_\alpha=32/4=8$ and $n_\beta=82-92+16=6$, as
+Figure~\ref{fig:decay-useries} shows. The counts do not depend on the order, which is why they can be found
+without knowing the chain.
+\end{derivbox}
+
+\begin{exbox}{The first three steps of the uranium series}\label{ex:decay-ufirst}
+Uranium-238 undergoes $\alpha$ decay, and the daughter undergoes two successive $\beta^-$ decays. Identify the
+three products.
+
+Balance the upper and lower numbers at each step:
+$\nuc{238}{92}{U}\xrightarrow{\alpha}\nuc{234}{90}{Th}\xrightarrow{\beta^-}\nuc{234}{91}{Pa}\xrightarrow{\beta^-}\nuc{234}{92}{U}$.
+The final product is an \emph{isotope} of the original: one $\alpha$ plus two $\beta^-$ restores $Z$ and
+lowers $A$ by $4$. (Uranium-234 makes up $0.005\%$ of natural uranium for exactly this reason.)
+\ans{thorium-234, protactinium-234, uranium-234}
+\end{exbox}
+
+\begin{exbox}{The thorium series}\label{ex:decay-thseries}
+How many $\alpha$ and $\beta^-$ decays take $\nuc{232}{90}{Th}$ to $\nuc{208}{82}{Pb}$?
+
+$n_\alpha=(232-208)/4=6$; $n_\beta=82-90+2(6)=4$. \ans{$6$ $\alpha$, $4$ $\beta^-$}
+\end{exbox}
+
+The arithmetic of chains, with its equal steps of $4$ in $A$, says nothing about \emph{how long} each step
+takes; Figure~\ref{fig:decay-useries} shows half-lives spanning twenty-one orders of magnitude. How a
+population of nuclei decays in time, and how a chain of such populations settles into equilibrium, is the
+subject of \chref{ch:decaylaw}.
+
+\section{Summary}\label{sec:summary-decay}
+An unstable nucleus moves towards the valley of stability by emitting an $\alpha$ particle, by converting
+a neutron into a proton or the reverse, or by shedding excess energy as a photon. Whether a decay is
+possible is decided by its $Q$-value; how the energy is shared is decided by momentum conservation.
+
+\begin{itemize}
+\item Particles: proton, neutron, electron, positron ($e^+$), neutrino ($\nu_e$), antineutrino
+      ($\bar\nu_e$), photon. An antiparticle has the same mass and opposite charges. Lepton number is
+      conserved: $e^-$ comes with $\bar\nu_e$, $e^+$ (or a captured $e^-$) with $\nu_e$.
+\item Electron--positron annihilation at rest gives two back-to-back $\SI{511}{\keV}$ photons; pair
+      production needs a photon above $\SI{1.022}{\MeV}$ and a nearby nucleus.
+\item Every decay conserves charge, nucleon number, energy, momentum and lepton number, and needs
+      $Q=(m_{\text{initial}}-m_{\text{final}})c^2>0$.
+\item $\alpha$: $Z\to Z-2$, $A\to A-4$; $Q_\alpha=[M(\mathrm{X})-M(\mathrm{Y})-M(\iso4{He})]c^2$;
+      $K_\alpha=Q(A-4)/A$, $K_{\mathrm{Y}}=4Q/A$; a sharp line.
+\item $\beta^-$: $Z\to Z+1$; $Q=[M(\mathrm{X})-M(\mathrm{Y})]c^2$. $\beta^+$: $Z\to Z-1$;
+      $Q=[M(\mathrm{X})-M(\mathrm{Y})-2m_e]c^2$. EC: $Z\to Z-1$; $Q=[M(\mathrm{X})-M(\mathrm{Y})]c^2$.
+      Atomic masses $M$ throughout.
+\item Beta spectra are continuous from $0$ to the endpoint $Q$ (three bodies); the mean electron energy
+      is roughly $Q/3$, and the neutrino's share escapes every absorber.
+\item $\gamma$: $Z$ and $A$ unchanged; sharp lines from transitions between nuclear levels.
+\item Penetration: $\alpha$ (paper) $<$ $\beta$ (mm of aluminium) $<$ $\gamma$ (attenuated by lead, never
+      stopped). In a magnetic field, $r=p/|q|B$.
+\item At fixed $A$ the atomic mass is a parabola in $Z$; $\beta$ decays run down it to the valley.
+\item In a decay series $A$ mod $4$ is fixed; $n_\alpha=\Delta A/4$, $n_\beta=Z'-Z+2n_\alpha$.
+\end{itemize}
+
+\section{Problem Types}\label{sec:types-decay}
+Seven types cover the decay questions examiners set. Most of them turn on two habits: write every decay
+with its upper and lower numbers balanced, and decide before calculating whether the electron masses
+cancel.
+
+\archq{Checking a process against the conservation laws}
+{``Is this decay or reaction possible?'', ``which particle is missing?'', annihilation or pair
+production.}
+{Tally, before and after: (1) electric charge; (2) nucleon number; (3) lepton number $L_e$ ($e^-,\nu_e$: $+1$;
+$e^+,\bar\nu_e$: $-1$; everything else $0$); (4) energy: $Q>0$ for a spontaneous process; (5) momentum:
+in particular, a process with zero total momentum cannot end as a single photon, and a single photon
+cannot turn into a pair in empty space. Any failure forbids the process.}
+{Checking only charge and nucleon number. Many forbidden processes balance both and fail on lepton number
+or momentum.}
+{Which of the following processes is forbidden?}
+{$\nuc{22}{11}{Na}\to\nuc{22}{10}{Ne}+e^++\nu_e$}
+{$n\to p+e^-+\bar\nu_e$}
+{$\gamma\to e^-+e^+$ in empty space}
+{$\nuc74{Be}+e^-\to\nuc73{Li}+\nu_e$\archans{C}{A lone photon carries momentum $E/c$ in every frame, but in
+the frame where the created pair has zero total momentum the photon would need zero momentum; energy and
+momentum cannot both be conserved without a nucleus nearby. Options (A), (B) and (D) balance charge,
+nucleon number and lepton number, have $Q>0$, and are all observed ($\beta^+$ decay, free-neutron decay
+and electron capture).}}
+
+\archq{Writing and completing decay equations}
+{``Identify X'', ``complete the equation'', or a chain of named emissions.}
+{Balance upper numbers ($A$) and lower numbers (charge) separately: $\alpha=\nuc42{He}$,
+$\beta^-=\nuc{0}{-1}{e}$, $\beta^+=\nuc{0}{+1}{e}$; a captured electron counts $-1$ on the left. Read the
+element off $Z$. Add the correct neutrino: antineutrino with $e^-$, neutrino with $e^+$ or EC.}
+{Pairing the electron with a neutrino instead of an antineutrino, which violates lepton number.}
+{Phosphorus-32 ($Z=15$) decays to sulphur-32 ($Z=16$). The particles emitted are:}
+{$e^+$ and $\nu_e$}
+{$e^-$ and $\nu_e$}
+{$e^+$ and $\bar\nu_e$}
+{$e^-$ and $\bar\nu_e$\archans{D}{$Z$ rises by $1$ at fixed $A$, so a neutron became a proton: $\beta^-$
+decay, which emits an electron ($L_e=+1$) and therefore an antineutrino ($L_e=-1$). Option (B) balances charge
+but gives total $L_e=+2$; (A) and (C) would lower $Z$, not raise it, and (C) also fails on lepton
+number.}}
+
+\archq{Counting decays in a radioactive series}
+{Initial and final nuclides of a chain are given; find the number of $\alpha$ and $\beta$ decays, or decide
+whether two nuclides can lie in the same series.}
+{$n_\alpha=\Delta A/4$, then $n_\beta=Z_{\text{final}}-Z_{\text{initial}}+2n_\alpha$. Two nuclides share a
+series only if their mass numbers leave the same remainder on division by $4$.}
+{Forgetting that each $\alpha$ lowers $Z$ by $2$, not $1$, or recalling the familiar counts for a whole
+series when the question stops part-way.}
+{The numbers of $\alpha$ and $\beta^-$ decays in the chain $\nuc{238}{92}{U}\to\nuc{214}{82}{Pb}$ are:}
+{$6$ $\alpha$ and $2$ $\beta^-$}
+{$6$ $\alpha$ and $4$ $\beta^-$}
+{$8$ $\alpha$ and $6$ $\beta^-$}
+{$5$ $\alpha$ and $2$ $\beta^-$\archans{A}{$n_\alpha=(238-214)/4=6$ and $n_\beta=82-92+2(6)=2$. Option (C) is
+the count for the whole series down to lead-206; (B) lets each $\alpha$ lower $Z$ by only $1$,
+giving $|82-92+6|=4$; (D) would end at $A=218$, not $214$.}}
+
+\archq{$Q$-value of $\alpha$ decay and energy sharing}
+{Atomic masses of parent, daughter and $\iso4{He}$ are given; asked for $Q$, the $\alpha$ kinetic energy, the
+recoil energy, or a speed ratio.}
+{$Q=[M(\mathrm{X})-M(\mathrm{Y})-M(\iso4{He})]\times\SI{931.5}{\MeV}/\si{\amu}$. Then $K_\alpha=Q(A-4)/A$ and
+$K_{\mathrm{Y}}=4Q/A$ (equal momenta). Speeds are inversely proportional to masses. Working backwards:
+$Q=K_\alpha A/(A-4)$.}
+{Giving the products equal energies, or equal speeds, instead of equal momenta; or assuming the heavy
+daughter does not move at all.}
+{Polonium-210 at rest emits an $\alpha$ particle; the $Q$-value is $\SI{5.41}{\MeV}$. The kinetic energy of
+the recoiling lead-206 nucleus is closest to:}
+{$\SI{5.30}{\MeV}$}
+{$\SI{0.103}{\MeV}$}
+{zero}
+{$\SI{2.70}{\MeV}$\archans{B}{$K_{\mathrm{Pb}}=4Q/A=4(5.41)/210=\SI{0.103}{\MeV}$. Option (A) is the $\alpha$
+particle's share, $Q(206/210)$, the result of giving the products equal speeds; (C) ignores momentum
+conservation; (D) shares $Q$ equally.}}
+
+\archq{$\beta^\pm$ and electron-capture $Q$-values}
+{A $\beta$ decay with atomic masses; ``is this decay possible?''; endpoint energies.}
+{$\beta^-$ and EC: $Q=[M(\mathrm{X})-M(\mathrm{Y})]c^2$. $\beta^+$: subtract $2m_ec^2=\SI{1.022}{\MeV}$. A
+decay is possible only if $Q>0$. If gamma rays follow, the $\beta$ endpoint is $Q$ minus the excitation
+energy of the level reached.}
+{Treating $\beta^+$ like $\beta^-$, or subtracting only one electron mass.}
+{The atomic masses of carbon-11 and boron-11 are $\SI{11.011434}{\amu}$ and $\SI{11.009305}{\amu}$. The
+$Q$-value for the $\beta^+$ decay of carbon-11 is:}
+{$\SI{1.983}{\MeV}$}
+{$\SI{1.472}{\MeV}$}
+{$\SI{0.961}{\MeV}$}
+{$\SI{3.005}{\MeV}$\archans{C}{The atomic mass difference is $\SI{0.002129}{\amu}=\SI{1.983}{\MeV}$, and
+for $\beta^+$ two electron masses come off: $1.983-1.022=\SI{0.961}{\MeV}$. Option (A) forgets the
+$2m_ec^2$ (it is $Q_{\mathrm{EC}}$); (B) subtracts only one $m_ec^2$; (D) adds $2m_ec^2$ instead of
+subtracting it.}}
+
+\archq{Energy sharing in three-body $\beta$ decay}
+{An electron of stated energy is observed; asked for the antineutrino's energy, the endpoint, or why the
+spectrum is continuous.}
+{Neglecting the heavy daughter's recoil, $K_e+E_\nu=Q$, and the endpoint is $K_{\max}=Q$. Two-body decays
+give fixed energies; three-body decays give a spectrum.}
+{Assuming every electron has the endpoint energy, or that the electron always takes a fixed fraction of
+$Q$.}
+{Phosphorus-32 decays by $\beta^-$ emission with endpoint energy $\SI{1.71}{\MeV}$. In one decay the electron
+has kinetic energy $\SI{0.50}{\MeV}$. Neglecting the recoil of the daughter, the energy carried by the
+antineutrino is:}
+{$\SI{1.21}{\MeV}$}
+{$\SI{1.71}{\MeV}$}
+{$\SI{0.50}{\MeV}$}
+{$\SI{0.57}{\MeV}$\archans{A}{The endpoint equals $Q$, so $E_{\bar\nu}=Q-K_e=1.71-0.50=\SI{1.21}{\MeV}$.
+Option (B) gives the antineutrino everything; (C) assumes an equal split; (D) is $Q/3$, the typical
+\emph{average} electron energy, which says nothing about this particular decay.}}
+
+\archq{Decay products in magnetic fields}
+{Radii, curvature or direction of tracks in a magnetic field.}
+{The magnetic force $|q|vB$ supplies the centripetal force $mv^2/r$, so $r=mv/|q|B=p/|q|B$, with
+$p=\sqrt{2mK}$ for a slow particle. For the two products of a decay at rest the momenta are equal, so
+$r\propto1/|q|$. The direction follows $q\vv\times\B$.}
+{Using $r\propto\sqrt m/q$ (true for equal kinetic energies) when the momenta are equal, or using the mass
+ratio.}
+{A uranium-238 nucleus at rest in a uniform magnetic field undergoes $\alpha$ decay to thorium-234 ($Z=90$).
+Taking both products to carry their full nuclear charges, the ratio $r_\alpha/r_{\mathrm{Th}}$ of the radii
+of their circular paths is:}
+{$1$}
+{$1/45$}
+{$58.5$}
+{$45$\archans{D}{Equal momenta, so $r\propto1/|q|$: $r_\alpha/r_{\mathrm{Th}}=90/2=45$. Option (A) forgets the
+charges; (B) inverts the ratio; (C) is the mass ratio $234/4$, which would apply only to equal speeds.}}
+
+\section{Practice Problems}\label{sec:practice-decay}
+
+The problems below follow the order of the problem types. Atomic masses not given in a problem are those
+quoted in the chapter; take $\SI{1}{\amu}\times c^2=\SI{931.494}{\MeV}$ and $m_ec^2=\SI{0.511}{\MeV}$.
+Answers, with brief working, follow the list.
+
+\begingroup\emergencystretch=1.5em
+\begin{enumerate}[itemsep=3pt]
+\item\label{prob:decay-allowed} Which of these are forbidden, and by which law? (a) $n\to p+e^-$;
+      (b) $n\to p+e^-+\bar\nu_e$; (c) $p\to n+e^++\bar\nu_e$; (d) $\nuc{14}{6}{C}\to\nuc{14}{7}{N}+e^++\nu_e$;
+      (e) an electron and a positron at rest annihilate into one photon.
+\item\label{prob:decay-annih} An electron and a positron annihilate at rest. Find the energy of each photon
+      and its wavelength ($hc=\SI{1240}{\eV\nano\metre}$).
+\item\label{prob:decay-pair} What is the minimum photon energy for pair production? Explain why a photon
+      cannot turn into an electron--positron pair in empty space, with no nucleus nearby.
+\item\label{prob:decay-na22total} When sodium-22 decays by $\beta^+$ inside a solid, the positron soon
+      annihilates. Show that the total energy finally released, counting the neutrino's share, equals
+      $Q_{\beta^+}+2m_ec^2$, and compare it with $Q_{\mathrm{EC}}$ for the same nucleus
+      (Example~\ref{ex:decay-na22}). How much of it can heat the solid?
+\item\label{prob:decay-compl} Complete each equation and name the decay mode:
+      (a) $\nuc{22}{11}{Na}\to{?}+e^++\nu_e$; (b) $\nuc{40}{19}{K}+e^-\to{?}+\nu_e$;
+      (c) $\nuc{11}{6}{C}\to\nuc{11}{5}{B}+{?}+{?}$; (d) $\nuc{32}{15}{P}\to\nuc{32}{16}{S}+{?}+{?}$.
+\item\label{prob:decay-ra2a} Radium-226 ($Z=88$) undergoes two successive $\alpha$ decays. Identify the final
+      nuclide.
+\item\label{prob:decay-isobar} Which single decay mode turns a nucleus into (a) an isobar, (b) a different
+      energy state of the same nuclide? Can any single decay produce an isotope of the parent?
+\item\label{prob:decay-u235} Find the numbers of $\alpha$ and $\beta^-$ decays in
+      (a) $\nuc{235}{92}{U}\to\nuc{207}{82}{Pb}$; (b) $\nuc{237}{93}{Np}\to\nuc{209}{83}{Bi}$.
+\item\label{prob:decay-mod4} To which natural series does $\iso{226}{Ra}$ belong? Can $\iso{232}{Th}$ ever
+      decay into $\iso{206}{Pb}$? Explain.
+\item\label{prob:decay-back} A chain contains $5$ $\alpha$ decays and $2$ $\beta^-$ decays and ends at
+      $\nuc{208}{82}{Pb}$. Find the starting nuclide's $A$ and $Z$.
+\item\label{prob:decay-u238a} Given $M(\iso{238}{U})=\SI{238.050788}{\amu}$, $M(\iso{234}{Th})=\SI{234.043601}{\amu}$
+      and $M(\iso4{He})=\SI{4.002603}{\amu}$, find $Q$ and $K_\alpha$ for the $\alpha$ decay of uranium-238.
+\item\label{prob:decay-po212} Polonium-212 emits $\alpha$ particles of kinetic energy $\SI{8.78}{\MeV}$.
+      Find the $Q$-value of the decay.
+\item\label{prob:decay-vratio} In the $\alpha$ decay of $\iso{226}{Ra}$ at rest, find the ratio of the speed of
+      the $\alpha$ particle to that of the recoiling radon nucleus.
+\item\label{prob:decay-be7} $M(\iso7{Be})=\SI{7.016929}{\amu}$ and $M(\iso7{Li})=\SI{7.016003}{\amu}$. Show that
+      beryllium-7 cannot decay by positron emission but can decay by electron capture, and find
+      $Q_{\mathrm{EC}}$.
+\item\label{prob:decay-c14q} Find the $Q$-value for the $\beta^-$ decay of carbon-14, given
+      $M(\iso{14}{C})=\SI{14.003242}{\amu}$ and $M(\iso{14}{N})=\SI{14.003074}{\amu}$.
+\item\label{prob:decay-trit} Tritium, with atomic mass $M(\iso3{H})=\SI{3.016049}{\amu}$, decays by $\beta^-$
+      emission to helium-3, with $M(\iso3{He})=\SI{3.016029}{\amu}$. Find $Q$ in keV. (This tiny
+      endpoint makes tritium the best nucleus for measuring the neutrino's mass.)
+\item\label{prob:decay-co60} The atomic masses of cobalt-60 and nickel-60 are $\SI{59.933816}{\amu}$ and
+      $\SI{59.930786}{\amu}$. Find $Q$ for the $\beta^-$ decay of cobalt-60. The decay feeds a nickel level at $\SI{2.506}{\MeV}$ (Figure~\ref{fig:decay-co60}). Find the
+      maximum kinetic energy of the emitted electrons.
+\item\label{prob:decay-nde} A free neutron decays ($Q=\SI{0.782}{\MeV}$) and the electron is observed with
+      kinetic energy $\SI{0.300}{\MeV}$. Estimate the antineutrino's energy.
+\item\label{prob:decay-twobody} Show from momentum and energy conservation that a nucleus at rest decaying
+      into exactly \emph{two} particles must give each a unique kinetic energy. Explain why this proved that
+      beta decay produces a third particle.
+\item\label{prob:decay-mean} The mean kinetic energy of $\beta^-$ electrons is roughly $Q/3$. For the decay of
+      cobalt-60 to the $\SI{2.506}{\MeV}$ level of nickel-60 (endpoint $\SI{0.316}{\MeV}$), estimate the
+      average energy carried away by antineutrinos per decay, and explain why this energy is lost to any
+      absorber.
+\item\label{prob:decay-rpa} A proton, a deuteron (charge $+e$, mass $2m_p$) and an $\alpha$ particle with
+      equal kinetic energies enter the same uniform magnetic field perpendicularly. Find the ratio of the
+      radii of their paths.
+\item\label{prob:decay-rrn} A $\iso{226}{Ra}$ nucleus at rest in a uniform magnetic field undergoes $\alpha$
+      decay. Treating both products as carrying their full nuclear charges ($+2e$ and $+86e$), find the ratio
+      of the radii of the $\alpha$ and radon paths.
+\item\label{prob:decay-dirs} A beam containing $\alpha$, $\beta^-$ and $\gamma$ radiation travels in the $+x$
+      direction through a magnetic field along $-z$. In which direction is each component initially
+      deflected?
+\end{enumerate}
+\endgroup
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item (a) Forbidden by lepton number, $L_e$: $0\to+1$ (and the electron energy would be fixed, contrary to
+      observation). (b) Allowed: free-neutron decay, $Q=\SI{0.782}{\MeV}$. (c) Forbidden by lepton number, $L_e$:
+      $0\to-1-1=-2$: it would need $\nu_e$, not $\bar\nu_e$ (and a free proton is too light in any case).
+      (d) Forbidden by charge, $6\to7+1=8$. (e) Forbidden by momentum: the pair has zero total momentum but
+      a single photon always carries momentum $E/c$; two photons are needed.
+\item Each photon carries $m_ec^2=\SI{0.511}{\MeV}$. Wavelength
+      $=hc/E=\SI{1240}{\eV\nano\metre}/\SI{511000}{\eV}=\SI{2.43e-3}{nm}=\SI{2.43}{pm}$.
+\item $2m_ec^2=\SI{1.022}{\MeV}$ (ignoring the small recoil energy of the nucleus). In empty space, view the
+      process in the frame where the created pair has zero total momentum: there the photon would need zero
+      momentum, but a photon always carries momentum $E/c$, so energy and momentum cannot both be
+      conserved. A nearby nucleus absorbs the excess momentum.
+\item $Q_{\beta^+}=\SI{1.821}{\MeV}$ is shared between the positron's kinetic energy and the neutrino;
+      annihilation then adds $2m_ec^2=\SI{1.022}{\MeV}$. Total $1.821+1.022=\SI{2.843}{\MeV}$, exactly
+      $Q_{\mathrm{EC}}$: either route releases the full atomic mass difference
+      $[M(\mathrm{X})-M(\mathrm{Y})]c^2$. Only the neutrino's share escapes; the rest (the positron's kinetic
+      energy and, if absorbed, the two $\SI{511}{\keV}$ photons) heats the solid.
+\item (a) $\nuc{22}{10}{Ne}$, $\beta^+$. (b) $\nuc{40}{18}{Ar}$, electron capture. (c) $e^+$ and $\nu_e$, $\beta^+$.
+      (d) $e^-$ and $\bar\nu_e$, $\beta^-$.
+\item $\nuc{226}{88}{Ra}\to\nuc{222}{86}{Rn}\to\nuc{218}{84}{Po}$: polonium-218.
+\item (a) $\beta^-$, $\beta^+$ or EC ($A$ unchanged). (b) $\gamma$ decay. No single decay gives an isotope:
+      $\alpha$ changes $Z$ by $2$ and $\beta$ by $1$.
+\item (a) $n_\alpha=28/4=7$, $n_\beta=82-92+14=4$. (b) $n_\alpha=28/4=7$, $n_\beta=83-93+14=4$.
+\item $226=4(56)+2$: the $4n+2$ (uranium) series. $232$ is of the form $4n$ but $206$ is $4n+2$; no
+      sequence of decays changes the remainder of $A$ on division by $4$, so no.
+\item $A=208+5(4)=228$; $82=Z-2(5)+2$ gives $Z=90$: thorium-228.
+\item $Q=[238.050788-234.043601-4.002603](931.494)=\SI{4.27}{\MeV}$; $K_\alpha=4.27(234/238)=\SI{4.20}{\MeV}$.
+\item $Q=K_\alpha A/(A-4)=8.78(212/208)=\SI{8.95}{\MeV}$.
+\item Equal momenta, so $v_\alpha/v_{\mathrm{Rn}}=m_{\mathrm{Rn}}/m_\alpha\approx222/4=55.5$.
+\item $\Delta M=\SI{0.000926}{\amu}$, equivalent to $\SI{0.862}{\MeV}<\SI{1.022}{\MeV}$, so
+      $Q_{\beta^+}=0.862-1.022=\SI{-0.160}{\MeV}<0$ (forbidden) while $Q_{\mathrm{EC}}=\SI{0.862}{\MeV}>0$.
+\item $(14.003242-14.003074)(931.494)=\SI{0.156}{\MeV}$.
+\item $(3.016049-3.016029)(931.494)=\SI{0.0186}{\MeV}\approx\SI{18.6}{\keV}$. (The difference is only
+      $\SI{0.000020}{\amu}$, so every digit of the masses matters.)
+\item $Q=(0.003030)(931.494)=\SI{2.822}{\MeV}$; $K_{\max}=2.822-2.506=\SI{0.316}{\MeV}$.
+\item $E_{\bar\nu}\approx0.782-0.300=\SI{0.48}{\MeV}$.
+\item At rest the total momentum is zero, so $\vp_1=-\vp_2$ and both particles have the same momentum
+      magnitude $p$. Energy: $p^2/2m_1+p^2/2m_2=Q$, so $p^2=2Qm_1m_2/(m_1+m_2)$, a single value, and each
+      kinetic energy $K_i=p^2/2m_i$ is fixed. With only two bodies a continuous electron spectrum is
+      impossible, so a third, unseen particle must share the energy.
+\item Endpoint $\SI{0.316}{\MeV}$; mean electron energy $\approx\SI{0.105}{\MeV}$, so the antineutrinos carry
+      on average $\approx\SI{0.21}{\MeV}$ per decay. Neutrinos interact so weakly that they escape any
+      absorber, so this energy never appears as heat.
+\item $r=\sqrt{2mK}/|q|B\propto\sqrt m/|q|$: $\sqrt1/1:\sqrt2/1:\sqrt4/2=1:\sqrt2:1$.
+\item Equal momenta, so $r\propto1/|q|$: $r_\alpha/r_{\mathrm{Rn}}=86/2=43$.
+\item $\vF=q\vv\times\B$ with $\uhat{x}\times(-\uhat{z})=+\uhat{y}$. $\alpha$: towards $+y$; $\beta^-$: towards
+      $-y$, and usually much more sharply, since its momentum is far smaller; $\gamma$: undeflected.
+\end{enumerate}
+}

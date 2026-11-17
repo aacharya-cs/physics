@@ -23,7 +23,9 @@ def strip_comments(s):
 def census(root):
     root = Path(root)
     rows = {}
-    for f in sorted((root / 'chapters').glob('ch*.tex')):
+    for f in sorted((root / 'chapters').rglob('*.tex')):
+        if f.name == 'volume.tex':
+            continue
         s = strip_comments(f.read_text())
         r = {}
         for k in KINDS:
@@ -39,7 +41,7 @@ def census(root):
         words = re.sub(r'\\[A-Za-z@]+', ' ', s)
         words = re.sub(r'[{}\[\]$&^_\\]', ' ', words)
         r['words'] = len(re.findall(r'[A-Za-z]{2,}', words))
-        rows[f.name[:4]] = r
+        rows[str(f.relative_to(root / 'chapters'))[:-4]] = r
     return rows
 
 

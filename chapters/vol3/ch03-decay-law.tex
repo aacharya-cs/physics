@@ -1,0 +1,1046 @@
+\ncertchapter{3}{The Law of Radioactive Decay}\chlabel{ch:decaylaw}
+
+\chref{ch:decay} described \emph{what} an unstable nucleus emits and how much energy the emission
+carries. This chapter asks \emph{when}. The answer is surprising twice over. For a single nucleus there
+is no answer at all: nothing in physics predicts the moment at which a particular nucleus will decay.
+For a sample of many nuclei the answer is a single exponential law, as smooth and as reliable as any
+law in mechanics, and it governs every timing question in the rest of this volume, from the activity of
+a hospital source to the age of the Earth.
+
+The chapter builds that law from one assumption, a fixed probability of decay per unit time, and then
+applies it in widening circles. It defines the three clocks of a decay (the decay constant, the
+half-life and the mean life) and the activity that a detector actually measures. It then treats
+samples that are not a single isotope left alone: mixtures of independent isotopes, nuclei that can
+decay in more than one way, chains in which the daughter is itself radioactive, and isotopes made at a
+steady rate in a reactor. The mathematics is the first-order rate equation of \chref{ch:toolkit}
+(Section~\ref{sec:explog}); here the work is the physics that leads to it, and the question of where it
+stops being true.
+
+A word on notation. In this volume the neutron number is always written $A-Z$, so that $N$ is free for
+its universal meaning here: $N$ or $N(t)$ is the number of \emph{undecayed} nuclei in a sample at time
+$t$, a pure number.
+
+\scopebox{The decay law, half-life, mean life and activity are examined in JEE Advanced; successive
+decay, equilibrium and activation are a regular source of its harder problems. The same mathematics is
+the first-order kinetics of the chemistry syllabus in every examination, so the whole chapter repays
+study even where the physics syllabus has been trimmed.}
+
+\section{A Law with No Memory}\label{sec:decaylaw-memory}
+
+The first thing to settle is what can be predicted at all. A uranium-238 nucleus formed in a supernova
+five billion years ago is exactly as likely to decay in the next second as one formed yesterday.
+Nuclei do not age: an old nucleus has no worn parts and no accumulated damage, because the process that
+ends its life is a quantum transition whose probability depends only on the nucleus's present
+structure, not on its history. That is the one physical assumption of this chapter.
+
+\begin{defbox}{Decay constant}
+Each nucleus of a given radioactive isotope has the same, constant probability per unit time of
+decaying, the \textbf{decay constant} $\lambda$. In a short interval $dt$ (short enough that
+$\lambda\,dt\ll1$),
+\[
+\Pr\big(\text{a given nucleus decays between }t\text{ and }t+dt\;\big|\;\text{it has survived to }t\big)=\lambda\,dt .
+\]
+$\lambda$ is a scalar with units of inverse time (\si{\per\second}, or \si{\per\year} for long-lived
+isotopes). It is a rate, not a probability; only the product $\lambda\,dt$ for a short interval is a
+probability. It does not depend on how long the nucleus has existed, and (to a very good
+approximation, discussed below) not on temperature, pressure or chemical state.
+\end{defbox}
+
+The constancy of $\lambda$ is stated here without proof, because the reason lies in quantum
+mechanics, beyond this book: it is an experimental fact, checked for many isotopes over many orders of
+magnitude of time. \chref{ch:toolkit} (Section~\ref{sec:averages}) showed what such a rule implies for a
+single system: the probability of surviving to time $t$ is $e^{-\lambda t}$, and the average waiting
+time is $1/\lambda$. For one nucleus that is all that can be said. A sample, however, contains an
+enormous number of nuclei (about \num{2.7e21} in a gram of radium), and Figure~\ref{fig:decaylaw-randomgrid}
+shows what happens when many such unpredictable events are added up.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decaylaw_randomgrid}
+\figcaption{fig:decaylaw-randomgrid}{Four hundred identical nuclei, each given the same chance of
+decaying per unit time (filled: undecayed; open: decayed). Which nuclei decay is completely
+unpredictable; how many survive is not: close to half after each half-life ($206$, $110$, $52$ here,
+against an exact $200$, $100$, $50$). The scatter is about $\sqrt{100}=10$ nuclei at the first
+half-life; with $10^{20}$ nuclei instead of $400$ the relative fluctuations become far too small to
+measure. (The decay times were drawn once with a fixed pseudo-random sequence, so the pattern is
+reproducible.)}
+\end{figure}
+
+\begin{derivbox}{The exponential decay law}
+Let $N(t)$ nuclei remain undecayed at time $t$. In the next interval $dt$, each of them decays with
+probability $\lambda\,dt$, independently of the others, so the expected number of decays is
+$N\lambda\,dt$. The population falls by that amount:
+\[
+dN=-\lambda N\,dt\qquad\Longrightarrow\qquad \frac{dN}{dt}=-\lambda N .
+\]
+This is the first-order decay equation of \chref{ch:toolkit} (Section~\ref{sec:explog}). Separating
+the variables and integrating from $N_0$ undecayed nuclei at $t=0$,
+\[
+\int_{N_0}^{N}\frac{dN'}{N'}=-\lambda\int_0^t dt'\quad\Longrightarrow\quad\ln\frac{N}{N_0}=-\lambda t
+\quad\Longrightarrow\quad N(t)=N_0\,e^{-\lambda t}.
+\]
+Two checks: at $t=0$ this gives $N_0$, and as $t\to\infty$ it tends to zero without ever reaching it,
+as a population that loses a fixed \emph{fraction} per unit time must.
+\end{derivbox}
+
+\begin{keybox}{The law of radioactive decay}
+For a sample of a single radioactive isotope, with nothing feeding it and nothing removed except by
+decay,
+\begin{equation}\label{eq:decaylaw-exp}
+\frac{dN}{dt}=-\lambda N,\qquad N(t)=N_0\,e^{-\lambda t}.
+\end{equation}
+The \emph{fractional} loss per unit time, $-(dN/dt)/N$, is the constant $\lambda$.
+\end{keybox}
+
+That last sentence is worth reading as a general statement. Any quantity that loses a fixed fraction of
+itself per unit time decays exponentially, whatever the mechanism: the charge on a capacitor
+discharging through a resistor, the intensity of light inside an absorbing slab, the concentration of a
+drug in the blood, and the reactant in a first-order chemical reaction
+(Section~\ref{sec:decaylaw-kinetics}). Radioactive decay is the cleanest case, because the fraction
+lost is set by the nucleus alone.
+
+\inwords{Each nucleus is a die rolled afresh every instant; no nucleus knows how long it has waited.
+Because the same fraction of the survivors is lost in every equal interval, the number left falls by the
+same \emph{factor} in every equal interval, and that is what an exponential is.}
+
+\begin{trapbox}{the smooth law is a statement about large numbers}
+Equation~\eqref{eq:decaylaw-exp} gives the \emph{expected} number of survivors. For a handful of nuclei it
+says nothing useful about any one of them, and even for $400$ nuclei the actual count scatters about the
+curve (Figure~\ref{fig:decaylaw-randomgrid}). A count of $n$ random events has a typical scatter of about
+$\sqrt n$ (Section~\ref{sec:decaylaw-counting}), so the relative fluctuation $1/\sqrt n$ is negligible
+only when $n$ is large. ``After one half-life exactly half remain'' is false for any finite sample; it is
+the average over many repetitions.
+\end{trapbox}
+
+\subsection{Where the law stops working}
+The derivation assumed three things, and each has a limit.
+First, a large number of nuclei, as the caution above explains. Second, a closed sample: nothing
+produced and nothing removed except by decay. When nuclei are fed in, by a parent's decay or by a
+reactor, the equation gains a source term; Sections~\ref{sec:decaylaw-chains}
+and~\ref{sec:decaylaw-activation} treat exactly that. Third, a $\lambda$ that is truly constant. Heat,
+pressure and chemistry change nuclear decay rates by at most a fraction of a percent, because nuclear
+energies (MeV) exceed thermal and chemical energies (a few eV at most) by a factor of about a million;
+the one measurable effect is in electron capture, whose rate depends on how many electrons sit at the
+nucleus. Strip an atom of \emph{all} its electrons and the change can be dramatic: a bare
+rhenium-187 nucleus, which as a neutral atom has a half-life of about $42$ billion years, decays with a
+half-life of about $33$ years, because a decay channel closed to the neutral atom (placing the emitted
+electron directly into an empty inner orbit) opens. Such conditions exist only in storage rings and
+stellar interiors. Finally, quantum mechanics predicts tiny departures from the exponential at extremely
+short and extremely long times, far outside anything measured for a nucleus. For every problem in this
+book, $\lambda$ is a fixed property of the isotope.
+
+\section{Half-Life and Mean Life}\label{sec:decaylaw-halflife}
+
+The decay constant is the natural parameter of the theory, but it is not the number most people
+remember. A clock is more vivid when it is stated as a time, and two times are in use. The first answers
+``how long until half is gone?''
+
+\begin{defbox}{Half-life}
+The \textbf{half-life} $\Thalf$ of an isotope is the time in which half of any sample of it decays.
+Setting $N=N_0/2$ in Eq.~\eqref{eq:decaylaw-exp} gives $e^{-\lambda\Thalf}=\tfrac12$, so
+\begin{equation}\label{eq:decaylaw-half}
+\Thalf=\frac{\ln2}{\lambda}=\frac{0.693}{\lambda}.
+\end{equation}
+After $n$ half-lives a fraction $(1/2)^n$ remains, so equivalently $N=N_0\,2^{-t/\Thalf}$, a form
+that suits mental arithmetic.
+\end{defbox}
+
+The half-life does not depend on the size of the sample: a gram and a tonne of radium both lose half
+their nuclei in the same \SI{1600}{\year}. That independence of $N_0$ is the fingerprint of a
+first-order process, and it is what Figure~\ref{fig:decaylaw-expdecay} shows: the curve halves in every
+half-life, wherever on the curve one starts. On a logarithmic vertical axis,
+$\ln N=\ln N_0-\lambda t$, so the decay becomes a straight line whose slope is $-\lambda$; this is how
+half-lives are read from data (Section~\ref{sec:decaylaw-counting}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decaylaw_expdecay}
+\figcaption{fig:decaylaw-expdecay}{Exponential decay. Left: the population halves in every half-life,
+whatever its starting size; the mean life $\tau$ is where $N$ has fallen to $N_0/e$, and the dashed
+rectangle of height $N_0$ and width $\tau$ has the same area as the shaded region under the curve.
+Right: on a logarithmic vertical axis the same decay is a straight line, falling by the same factor in
+every half-life; its slope gives $\lambda$.}
+\end{figure}
+
+Individual nuclei live for very different times: some decay at once, some last many half-lives. Their
+\emph{average} lifetime is the second clock, the mean life.
+
+\begin{derivbox}{Mean life $\tau=1/\lambda$}
+This is the mean waiting time of \chref{ch:toolkit} (Section~\ref{sec:averages}), recast for a
+population of nuclei. Of $N_0$ nuclei present at $t=0$, the number that decay between $t$ and $t+dt$ is
+$\lambda N\,dt=\lambda N_0e^{-\lambda t}\,dt$, and each of these lived for a time $t$. The fraction of
+nuclei with lifetimes in that interval is therefore $\lambda e^{-\lambda t}\,dt$, a probability
+distribution of lifetimes, and the average lifetime is the average of $t$ over it
+(\chref{ch:toolkit}, Section~\ref{sec:averages}):
+\[
+\tau=\int_0^\infty t\,\lambda e^{-\lambda t}\,dt=\lambda\cdot\frac{1}{\lambda^2}=\frac1\lambda ,
+\]
+using integration by parts, $\int_0^\infty te^{-\lambda t}\,dt=\Big[-\dfrac{t\,e^{-\lambda t}}{\lambda}\Big]_0^\infty
++\dfrac1\lambda\displaystyle\int_0^\infty e^{-\lambda t}\,dt=0+\dfrac{1}{\lambda^2}$. Hence
+\begin{equation}\label{eq:decaylaw-tau}
+\tau=\frac1\lambda=\frac{\Thalf}{\ln2}=1.443\,\Thalf .
+\end{equation}
+At $t=\tau$, $N=N_0/e=0.368\,N_0$. Geometrically, the area under the decay curve is
+$\int_0^\infty N_0e^{-\lambda t}\,dt=N_0/\lambda=N_0\tau$, so $\tau$ is the width of a rectangle of height $N_0$
+with the same area (Figure~\ref{fig:decaylaw-expdecay}). Check of dimensions: $\lambda$ is an inverse
+time, so $1/\lambda$ is a time.
+\end{derivbox}
+
+\begin{keybox}{Three clocks, one law}
+\[
+\lambda=\frac{\ln2}{\Thalf}=\frac1\tau,\qquad
+N(t)=N_0\,e^{-\lambda t}=N_0\,e^{-t/\tau}=N_0\,2^{-t/\Thalf}.
+\]
+The probability that one nucleus survives to time $t$ is $e^{-\lambda t}$; the probability that it
+decays between $t_1$ and $t_2$ is $e^{-\lambda t_1}-e^{-\lambda t_2}$.
+\end{keybox}
+
+\begin{trapbox}{half-life is not half the lifetime}
+A sample does not ``finish'' decaying after two half-lives: after two half-lives one quarter still
+remains, and after ten about $0.1\%$. Nor is the mean life equal to the half-life: it is $44\%$
+longer. The few very long-lived survivors pull the average up, just as a few billionaires raise a
+country's mean income above its median. The half-life is in fact the \emph{median} lifetime: half the
+nuclei live less than $\Thalf$, half live longer.
+\end{trapbox}
+
+\begin{exbox}{One law written three ways}
+Check that the three forms of $N(t)$ agree at $t=3\Thalf$.
+
+\stepn{1} $N_0\,2^{-t/\Thalf}=N_0\,2^{-3}=N_0/8$.
+
+\stepn{2} $N_0e^{-\lambda t}$ with $\lambda t=(\ln2/\Thalf)(3\Thalf)=3\ln2$: $e^{-3\ln2}=(e^{\ln2})^{-3}=2^{-3}=1/8$.
+
+\stepn{3} $N_0e^{-t/\tau}$ with $t/\tau=3\Thalf/(\Thalf/\ln2)=3\ln2$: the same $1/8$.
+
+The three forms are one function; choose whichever makes the arithmetic easiest.
+\end{exbox}
+
+\begin{exbox}{Fraction remaining and elapsed time: iodine-131}
+Iodine-131 ($\Thalf=\SI{8.02}{\day}$) is used to treat thyroid disease. What fraction of a dose
+remains after \SI{40.1}{\day}? How long until only $10\%$ remains?
+
+\stepn{1} $40.1/8.02=5$ half-lives, so $(1/2)^5=1/32$ of the dose remains (about $3\%$).
+
+\stepn{2} For $10\%$, $2^{-t/\Thalf}=0.10$ gives $t=\Thalf\log_2 10=3.32\,\Thalf=\SI{26.6}{\day}$.
+The time is not a whole number of half-lives, so the logarithm is needed; $t=\ln(N_0/N)/\lambda$ gives
+the same result.
+\end{exbox}
+
+\begin{exbox}{From half-life to decay constant: radium-226}
+Radium-226 has $\Thalf=\SI{1600}{\year}$. Find $\lambda$ in \si{\per\second} and the mean life.
+
+\stepn{1} With $\SI{1}{\year}=\SI{3.156e7}{s}$, $\lambda=\dfrac{0.693}{1600\times\SI{3.156e7}{s}}=\SI{1.37e-11}{\per\second}$.
+
+\stepn{2} $\tau=\Thalf/\ln2=1600/0.693=\SI{2308}{\year}$, about $2300$ years.
+\end{exbox}
+
+Memorylessness has a consequence that surprises almost everyone. Because $\lambda$ does not depend on
+age, a nucleus that has already survived for a time $t_1$ has exactly the same future as a freshly
+made one: its probability of surviving a further time $t$ is still $e^{-\lambda t}$, and its expected
+remaining life is still $\tau$. A nucleus is never ``due'' to decay.
+
+\section{Activity}\label{sec:decaylaw-activity}
+
+Detectors count decays, not nuclei. A Geiger counter clicks once for each emitted particle it catches,
+so the quantity that experiments measure directly is the rate of decay. It deserves its own name and
+symbol.
+
+\begin{defbox}{Activity}
+The \textbf{activity} $\Act$ of a sample is the number of decays per unit time:
+\begin{equation}\label{eq:decaylaw-activity}
+\Act=-\frac{dN}{dt}=\lambda N=\Act_0\,e^{-\lambda t},
+\end{equation}
+where $\Act_0=\lambda N_0$. Its SI unit is the \textbf{becquerel}: $\SI{1}{\becquerel}=1$ decay per
+second. The older unit, the \textbf{curie}, is $\SI{1}{\curie}=\SI{3.7e10}{\becquerel}$, roughly the
+activity of one gram of radium-226. The activity per unit mass, in \si{\becquerel\per\gram}, is the
+\textbf{specific activity}; for a pure isotope of molar mass $M_\text{molar}$ it is
+$\lambda N_A/M_\text{molar}$, where $N_A=\SI{6.022e23}{\per\mole}$ is Avogadro's number.
+\end{defbox}
+
+Activity decays with the same half-life as $N$, because it is $N$ multiplied by a constant. But
+activity is not the number of nuclei: to go from a measured activity to $N$ one must also know
+$\lambda$. The factor $\lambda$ makes the same number of nuclei very different in practice.
+
+\begin{keybox}{Short life, high activity}
+For a fixed number of nuclei, $\Act=\lambda N=N\ln2/\Thalf$: activity is inversely proportional to the
+half-life. Short-lived isotopes are fiercely active but soon gone; long-lived ones are mild but
+persistent.
+\end{keybox}
+
+The contrast is large. One gram of polonium-210 ($\Thalf=\SI{138.4}{\day}$, molar mass
+\SI{210}{g/mol}) has slightly more nuclei than one gram of radium-226 ($\SI{1600}{\year}$,
+\SI{226}{g/mol}), but a half-life $4200$ times shorter, so it emits about $4500$ times as many $\alpha$
+particles per second: about \SI{1.7e14}{\becquerel}. Each decay releases \SI{5.41}{\MeV}, so the gram
+gives off about \SI{140}{W} of heat, enough to raise it to several hundred degrees, and the air around it
+glows faintly blue from ionisation.
+
+\begin{exbox}{Activity and mass: the origin of the curie}
+Find the activity of \SI{1.00}{g} of radium-226 ($\Thalf=\SI{1600}{\year}$, molar mass
+\SI{226.0}{g/mol}).
+
+\stepn{1} Number of nuclei: $N=\dfrac{1.00}{226.0}\times\num{6.022e23}=\num{2.66e21}$.
+
+\stepn{2} Decay constant, in \si{\per\second} (convert years to seconds early):
+$\lambda=\SI{1.373e-11}{\per\second}$ from the previous example.
+
+\stepn{3} $\Act=\lambda N=(\num{1.373e-11})(\num{2.66e21})=\SI{3.66e10}{\becquerel}\approx\SI{0.99}{\curie}$.
+
+The curie was defined from early measurements of exactly this sample; the small difference reflects
+improved half-life data since.
+\end{exbox}
+
+\begin{remarkbox}{The smoke detector on the ceiling}
+Most household ionisation smoke detectors contain about \SI{0.3}{\micro\gram} of americium-241
+($\Thalf=\SI{432}{\year}$), an activity of roughly \SI{37}{\kilo\becquerel} (one microcurie). Its
+$\alpha$ particles ionise the air between two plates, so a small current flows. Smoke particles soak up
+the ions, the current drops, and the alarm sounds. A half-life of centuries means the source never needs
+replacing, and $\alpha$ particles cannot pass through the plastic case.
+\end{remarkbox}
+
+\section{Measuring Activity in Practice}\label{sec:decaylaw-counting}
+
+The activity is defined as decays per second, but no detector registers every decay, and some of what
+it registers is not from the sample at all. Four corrections separate the true activity from the raw
+count rate, and they matter as soon as a problem gives a detector reading rather than an activity.
+
+\begin{enumerate}[label=\textbf{(\arabic*)}]
+\item \textbf{Geometry.} A small source emits equally in all directions. A detector whose window
+subtends a solid angle $\Omega$ at the source intercepts only the fraction $\Omega/4\pi$ of the
+radiation; for a window of area $a$ at a distance $r$ large compared with its size, $\Omega\approx a/r^2$.
+\item \textbf{Intrinsic efficiency} $\varepsilon$. Of the radiation entering the detector, only the
+fraction $\varepsilon$ produces a count; a gamma ray, for instance, may pass straight through without
+interacting.
+\item \textbf{Background.} Cosmic rays and natural radioactivity in the surroundings produce counts even
+with no source present. This background rate, measured separately with the source removed, must be
+subtracted \emph{before} any other analysis.
+\item \textbf{Statistical uncertainty.} Decay is random, so repeated counts over equal times scatter. A
+count of $n$ events has an uncertainty of about $\sqrt n$ (stated here without proof; it follows from
+the statistics of independent random events, and \chref{ch:nucapps} demonstrates it by simulation).
+Counting $100$ events gives a precision of $10\%$; $10\,000$ events give $1\%$.
+\end{enumerate}
+
+\begin{keybox}{From count rate to activity}
+\[
+\text{net count rate}=\text{raw rate}-\text{background}=\Act\times\frac{\Omega}{4\pi}\times\varepsilon .
+\]
+The number of counts in a time $t$ is the net rate times $t$, provided $t$ is short compared with
+$\Thalf$ (so the activity hardly changes); otherwise use the number of decays in the interval, below.
+\end{keybox}
+
+How many decays happen in an interval? Between $t_1$ and $t_2$ the number of nuclei falls from
+$N_0e^{-\lambda t_1}$ to $N_0e^{-\lambda t_2}$, and every nucleus lost has decayed, so
+\[
+\text{decays between }t_1\text{ and }t_2=N_0\big(e^{-\lambda t_1}-e^{-\lambda t_2}\big),\qquad
+\text{decays ever}=N_0=\frac{\Act_0}{\lambda}=\Act_0\,\tau .
+\]
+The second result says that a sample's total output is its initial activity sustained for one mean
+life: another meaning of $\tau$.
+
+\begin{exbox}{Decays in an interval}
+A sample of \num{1.0e6} nuclei has $\Thalf=\SI{10}{min}$. How many decay between $t=\SI{10}{min}$
+and $t=\SI{20}{min}$?
+
+\stepn{1} The times are whole half-lives, so use $2^{-t/\Thalf}$: $N_0\big(2^{-1}-2^{-2}\big)=\num{1.0e6}\times(0.50-0.25)=\num{2.5e5}$.
+
+Using the initial activity instead, $\Act_0\times\SI{10}{min}=\lambda N_0\times\SI{600}{s}=\num{6.9e5}$,
+would be badly wrong: the activity falls by half within each interval.
+\end{exbox}
+
+The counts collected at successive times are also how a half-life is measured. After background is
+subtracted, the net rate either shows equal-ratio intervals that can be read by eye, or is plotted as
+$\ln(\text{rate})$ against $t$, which is a straight line of slope $-\lambda$.
+
+\begin{exbox}{Extracting a half-life from measured data}
+A detector records the following net count rates.
+
+\smallskip
+\begin{center}\begin{tabular}{lccccc}\toprule
+$t$ (\si{min}) & 0 & 10 & 20 & 30 & 40\\
+rate (\si{\per\second}) & 800 & 566 & 400 & 283 & 200\\\bottomrule\end{tabular}\end{center}
+
+Find $\Thalf$ and $\lambda$.
+
+\stepn{1} The rate halves every \SI{20}{min} ($800\to400\to200$), so $\Thalf=\SI{20}{min}$ and
+$\lambda=0.693/20=\SI{0.0347}{\per\minute}$.
+
+\stepn{2} Check the intermediate points: in \SI{10}{min} the factor is $2^{-1/2}=0.707$, and
+$800\times0.707=566$, $400\times0.707=283$. On a plot of $\ln(\text{rate})$ against $t$ the points lie
+on a line of slope \SI{-0.0347}{\per\minute}.
+\end{exbox}
+
+\begin{trapbox}{subtract the background first}
+A constant background added to a decaying signal makes the late counts fall too slowly, so the
+successive ratios drift and the half-life appears to lengthen with time. A decay that looks
+``non-exponential'' in raw data is often a pure exponential plus an unsubtracted background.
+\end{trapbox}
+
+\section{Mixtures of Independent Isotopes}\label{sec:decaylaw-mixtures}
+
+A real sample is often not one isotope but several that have nothing to do with each other: two fission
+products, say, or two isotopes made together in a reactor. They are labelled $1$ and $2$ here (these
+subscripts always mean \emph{independent} isotopes; the letters X and Y are kept for parent and
+daughter). Each decays by its own law, unaffected by the other, so the total activity is simply the sum:
+\[
+\Act_\text{total}(t)=\Act_{1,0}\,e^{-\lambda_1t}+\Act_{2,0}\,e^{-\lambda_2t},\qquad
+\frac{N_1}{N_2}=\frac{N_{1,0}}{N_{2,0}}\,e^{-(\lambda_1-\lambda_2)t}.
+\]
+On a semi-log plot this sum is \emph{not} a straight line. It is curved, steep at first and flatter
+later (Figure~\ref{fig:decaylaw-peeling}), because the short-lived isotope dominates early but soon dies
+away, leaving only the long-lived one. That suggests a way to take a measured curve apart.
+
+\begin{methodbox}{Curve peeling}
+\begin{enumerate}[label=\arabic*.,leftmargin=*,itemsep=1pt]
+\item Fit a straight line to the late-time tail of $\ln\Act$ against $t$; its slope gives the long
+half-life.
+\item Extrapolate that line back to $t=0$ and subtract it from the data at every time.
+\item The remainder is a new straight line on semi-log axes; its slope gives the short half-life.
+\end{enumerate}
+\end{methodbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decaylaw_peeling}
+\figcaption{fig:decaylaw-peeling}{Total activity of two independent isotopes (half-lives \SI{1}{h} and
+\SI{10}{h}, each starting at \SI{1000}{\becquerel}) on a logarithmic axis. Notice that the total is
+curved. Beyond about \SI{6}{h} the short-lived part is under $3\%$ of the total, so the tail is
+straight and belongs to the long-lived isotope. Subtracting its back-extrapolation leaves the
+short-lived component, another straight line.}
+\end{figure}
+
+\begin{exbox}{Ratio of two isotopes}
+Two isotopes start with equal numbers of nuclei. Their half-lives are \SI{10}{min} and \SI{20}{min}.
+Find the ratio of their numbers after \SI{1}{h}.
+
+\stepn{1} \SI{60}{min} is $6$ half-lives of the first and $3$ of the second, so
+$N_1/N_2=2^{-6}/2^{-3}=1/8$.
+
+\stepn{2} The ratio of their \emph{activities} is different, because $\lambda_1=2\lambda_2$:
+$\Act_1/\Act_2=2\times\tfrac18=\tfrac14$. Read the question for which ratio it wants.
+\end{exbox}
+
+\section{Parallel Decay: Branching}\label{sec:decaylaw-branching}
+
+So far each nucleus has had one way to decay. Some have two or more. Bismuth-212, for instance, decays
+both by $\alpha$ emission and by $\beta^-$ emission (the modes of \chref{ch:decay}). Each route, or
+\emph{channel}, labelled $i$, has its own probability per unit time $\lambda_i$, called a \textbf{partial
+decay constant}. A nucleus that can leave by either of two doors leaves sooner than one with a single
+door, and the question is how much sooner.
+
+\begin{derivbox}{Total decay constant and branching ratio}
+In a short time $dt$ the probability that a nucleus decays by channel $i$ is $\lambda_i\,dt$. The
+channels are mutually exclusive (a nucleus decays only once), so the probability that it decays by
+\emph{some} channel is the sum, $\big(\sum_i\lambda_i\big)dt$. The population therefore obeys
+\[
+\frac{dN}{dt}=-\Big(\sum_i\lambda_i\Big)N\qquad\Longrightarrow\qquad\lambda=\sum_i\lambda_i .
+\]
+Of the $\lambda N\,dt$ decays in $dt$, $\lambda_iN\,dt$ go through channel $i$, so the fraction going
+through channel $i$, the \textbf{branching ratio}, is $f_i=\lambda_i/\lambda$, the same at every time.
+Writing each $\lambda_i=\ln2/T_i$ defines the \textbf{partial half-life} $T_i$ of channel $i$, and
+dividing $\lambda=\sum\lambda_i$ by $\ln2$ gives the half-life relation below.
+\end{derivbox}
+
+\begin{keybox}{Branching}
+\[
+\lambda=\sum_i\lambda_i,\qquad \frac{1}{\Thalf}=\sum_i\frac{1}{T_i},\qquad
+f_i=\frac{\lambda_i}{\lambda},\qquad T_i=\frac{\Thalf}{f_i}.
+\]
+For two channels, $1/\Thalf=1/T_\alpha+1/T_\beta$, which combines like resistors in parallel: the
+combination is always shorter than either part. The number of decays by channel $i$ in any interval is
+$f_i$ times the total number of decays in that interval.
+\end{keybox}
+
+Two limits check the result. If one channel is switched off ($\lambda_2\to0$, so $T_2\to\infty$),
+$\Thalf\to T_1$, as it must. If the two channels are equally likely, $T_1=T_2$ and $\Thalf=T_1/2$:
+two equal doors halve the waiting time.
+
+\begin{trapbox}{partial half-lives are not observed half-lives}
+A partial half-life is \emph{not} the time for half the sample to decay by that route. It is the
+half-life the sample \emph{would} have if every other channel were switched off. In reality the parent
+population falls with the total $\lambda$, so the products of every channel grow with the same overall
+half-life $\Thalf$, shorter than any partial half-life. Measuring the half-life by watching only the
+$\alpha$ particles still gives $\Thalf$, not $T_\alpha$.
+\end{trapbox}
+
+\begin{exbox}{Two decay channels}
+A nucleus decays by $\alpha$ emission with partial half-life \SI{1620}{\year} and by $\beta^-$ emission
+with partial half-life \SI{405}{\year}. Find the half-life, the time for $3/4$ of a sample to decay,
+and the fraction of decays that are $\alpha$.
+
+\stepn{1} $1/\Thalf=1/1620+1/405=1/1620+4/1620=5/1620$, so $\Thalf=\SI{324}{\year}$, shorter than
+either partial half-life.
+
+\stepn{2} Three-quarters decays in two half-lives, \SI{648}{\year}.
+
+\stepn{3} $f_\alpha=\lambda_\alpha/\lambda=\Thalf/T_\alpha=324/1620=0.20$, so $20\%$ of decays are
+$\alpha$ and $80\%$ are $\beta^-$.
+\end{exbox}
+
+\section{Successive Decay: Radioactive Chains}\label{sec:decaylaw-chains}
+
+\chref{ch:decay} showed that a heavy nucleus rarely reaches stability in one step: uranium-238 passes
+through fourteen decays before ending as lead-206. Every intermediate member is both produced (by its
+parent's decay) and destroyed (by its own). The simplest chain has two radioactive members: a parent X
+decaying with constant $\lambda_X$ into a daughter Y, which decays with constant $\lambda_Y$ into a
+stable nuclide,
+$\mathrm{X}\xrightarrow{\;\lambda_X\;}\mathrm{Y}\xrightarrow{\;\lambda_Y\;}\text{stable}$, with
+half-lives $T_X$ and $T_Y$ and populations $N_X$ and $N_Y$. Each decay of X makes one Y, so the
+daughter is fed at the rate $\lambda_XN_X$ and drained at the rate $\lambda_YN_Y$:
+\begin{equation}\label{eq:decaylaw-chain}
+\frac{dN_X}{dt}=-\lambda_XN_X,\qquad\frac{dN_Y}{dt}=\lambda_XN_X-\lambda_YN_Y .
+\end{equation}
+The first equation is the ordinary decay law; the second is the decay law with a source term, and its
+source is itself decaying.
+
+\begin{derivbox}{The daughter population (Bateman solution)}
+Start with pure parent: $N_X(0)=N_0$ and $N_Y(0)=0$. Then $N_X=N_0e^{-\lambda_Xt}$, and the daughter's
+equation becomes
+\[
+\frac{dN_Y}{dt}+\lambda_YN_Y=\lambda_XN_0e^{-\lambda_Xt}.
+\]
+Multiply both sides by $e^{\lambda_Yt}$. By the product rule the left side is exactly
+$\frac{d}{dt}\big(N_Ye^{\lambda_Yt}\big)$ (this multiplier is called an \emph{integrating factor}), so
+\[
+\frac{d}{dt}\big(N_Ye^{\lambda_Yt}\big)=\lambda_XN_0e^{(\lambda_Y-\lambda_X)t}
+\;\Longrightarrow\;
+N_Ye^{\lambda_Yt}=\frac{\lambda_XN_0}{\lambda_Y-\lambda_X}\big(e^{(\lambda_Y-\lambda_X)t}-1\big),
+\]
+where the constant of integration was fixed by $N_Y(0)=0$. Therefore
+\begin{equation}\label{eq:decaylaw-bateman}
+N_Y(t)=\frac{\lambda_X N_0}{\lambda_Y-\lambda_X}\big(e^{-\lambda_Xt}-e^{-\lambda_Yt}\big),\qquad
+\Act_Y(t)=\lambda_YN_Y=\Act_X(0)\,\frac{\lambda_Y}{\lambda_Y-\lambda_X}\big(e^{-\lambda_Xt}-e^{-\lambda_Yt}\big).
+\end{equation}
+$N_Y$ starts at zero, rises and eventually falls. At its maximum $dN_Y/dt=0$; differentiating
+Eq.~\eqref{eq:decaylaw-bateman} gives $-\lambda_Xe^{-\lambda_Xt}+\lambda_Ye^{-\lambda_Yt}=0$, so
+$e^{(\lambda_Y-\lambda_X)t}=\lambda_Y/\lambda_X$ and the maximum occurs at
+\begin{equation}\label{eq:decaylaw-tmax}
+t_{\max}=\frac{\ln(\lambda_Y/\lambda_X)}{\lambda_Y-\lambda_X}.
+\end{equation}
+At that instant the second of Eqs.~\eqref{eq:decaylaw-chain} reads $0=\lambda_XN_X-\lambda_YN_Y$: the
+parent and daughter activities are momentarily equal.
+\end{derivbox}
+
+The formula looks as if it fails when $\lambda_Y=\lambda_X$, where both numerator and denominator
+vanish, so it is worth checking that limit. Write $\lambda_Y=\lambda_X+\delta$ with $\delta$ small:
+$e^{-\lambda_Xt}-e^{-\lambda_Yt}=e^{-\lambda_Xt}\big(1-e^{-\delta t}\big)\approx e^{-\lambda_Xt}\,\delta t$, so
+$N_Y\to\lambda N_0\,t\,e^{-\lambda t}$, a perfectly finite curve with its maximum at $t_{\max}=1/\lambda$
+(which is also the limit of Eq.~\eqref{eq:decaylaw-tmax}). The opposite limit, a very short-lived
+daughter ($\lambda_Y\gg\lambda_X$), gives $N_Y\approx(\lambda_X/\lambda_Y)N_X$ once $e^{-\lambda_Yt}$ has
+died away: the daughter decays as fast as it is made. Which of these behaviours appears depends on which
+nucleus lives longer, and three regimes follow (Figure~\ref{fig:decaylaw-successive}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decaylaw_successive}
+\figcaption{fig:decaylaw-successive}{Activities in a two-member chain starting from pure parent
+(blue: parent X; orange: daughter Y), for parent half-lives of $100$, $4$ and $\tfrac14$ times the
+daughter's; time is in units of the daughter's half-life. In each panel the daughter's curve crosses the
+parent's exactly at the daughter's maximum (dot). Notice that in transient equilibrium the daughter's
+activity settles \emph{above} the parent's, at $\tfrac43$ of it.}
+\end{figure}
+
+\subsection{Secular equilibrium (\texorpdfstring{$T_X\gg T_Y$}{TX much longer than TY})}
+After a few daughter half-lives the daughter decays as
+fast as it is produced. Over any practical time $N_X$ is constant, so $dN_Y/dt=0$ and
+\begin{equation}\label{eq:decaylaw-secular}
+\lambda_XN_X=\lambda_YN_Y\qquad\Longleftrightarrow\qquad\frac{N_Y}{N_X}=\frac{T_Y}{T_X}.
+\end{equation}
+The populations are in the ratio of the half-lives: the short-lived daughter is rare. Applied link by
+link, the same argument gives a striking result for a long chain in an undisturbed rock: every member
+has the same activity as the long-lived head of the chain.
+
+\subsection{Transient equilibrium (\texorpdfstring{$T_X>T_Y$}{TX longer than TY}, but not hugely)}
+Since $\lambda_Y>\lambda_X$, the term
+$e^{-\lambda_Yt}$ in Eq.~\eqref{eq:decaylaw-bateman} dies away first, leaving
+$N_Y\approx\dfrac{\lambda_X}{\lambda_Y-\lambda_X}N_0e^{-\lambda_Xt}=\dfrac{\lambda_X}{\lambda_Y-\lambda_X}N_X$.
+Multiplying by $\lambda_Y$ and dividing by $\Act_X=\lambda_XN_X$,
+\begin{equation}\label{eq:decaylaw-transient}
+\frac{\Act_Y}{\Act_X}=\frac{\lambda_Y}{\lambda_Y-\lambda_X}=\frac{T_X}{T_X-T_Y}>1 .
+\end{equation}
+The daughter then decays in step with the parent, with the \emph{parent's} half-life, and its activity
+exceeds the parent's. Secular equilibrium is the limit $\lambda_X\ll\lambda_Y$, where this ratio tends
+to $1$. In the other direction, as $T_X$ approaches $T_Y$ from above the ratio grows without bound, but
+the time to reach the equilibrium grows too, and at $T_X=T_Y$ there is no equilibrium at all.
+
+\subsection{No equilibrium (\texorpdfstring{$T_X<T_Y$}{TX shorter than TY})}
+Now Eq.~\eqref{eq:decaylaw-transient} would give a negative
+ratio, a sign that there is no steady ratio. The parent dies out first, leaving the daughter to decay
+with its own half-life.
+
+\begin{keybox}{Equilibrium in a parent--daughter chain}
+\[
+\text{secular } (T_X\gg T_Y):\ \Act_Y=\Act_X,\ \ \frac{N_Y}{N_X}=\frac{T_Y}{T_X};\qquad
+\text{transient } (T_X>T_Y):\ \frac{\Act_Y}{\Act_X}=\frac{T_X}{T_X-T_Y}.
+\]
+The daughter peaks at $t_{\max}=\ln(\lambda_Y/\lambda_X)/(\lambda_Y-\lambda_X)$, where the two
+activities are equal. For mass ratios, multiply number ratios by the ratio of molar masses.
+\end{keybox}
+
+\begin{remarkbox}{The bathtub picture}
+Think of the daughter population as water in a bathtub. The parent's decays are the tap, pouring in at
+the rate $\lambda_XN_X$. The drain empties at a rate proportional to the water level, $\lambda_YN_Y$,
+because more nuclei mean more decays. Start with an empty tub: the level rises until outflow matches
+inflow, and then holds steady. That steady state, $\lambda_YN_Y=\lambda_XN_X$, is secular equilibrium.
+If the tap itself slowly weakens (transient equilibrium), the level follows it down, lagging slightly,
+which is why the outflow then slightly exceeds the inflow. A reactor making an isotope at a constant
+rate (Section~\ref{sec:decaylaw-activation}) is a tap that never weakens.
+\end{remarkbox}
+
+\begin{exbox}{Time of the daughter maximum}
+A parent of half-life \SI{2.0}{h} decays to a daughter of half-life \SI{1.0}{h}. Starting with pure
+parent, when is the number of daughter nuclei largest?
+
+\stepn{1} $\lambda_X=0.693/2.0=\SI{0.347}{\per\hour}$ and $\lambda_Y=\SI{0.693}{\per\hour}$, so
+$\lambda_Y/\lambda_X=2$.
+
+\stepn{2} $t_{\max}=\dfrac{\ln2}{0.693-0.347}=\dfrac{0.693}{0.347}=\SI{2.0}{h}$. At that instant
+parent and daughter activities are equal; afterwards the pair settles into transient equilibrium with
+$\Act_Y/\Act_X=2/(2-1)=2$.
+\end{exbox}
+
+\begin{remarkbox}{The technetium ``cow''}
+Technetium-99m ($\Thalf=\SI{6.0}{h}$) is the workhorse of medical imaging, but it cannot be stored for
+long. Hospitals instead receive a shielded generator containing molybdenum-99 ($\SI{66}{h}$), which
+decays to technetium-99m. Equation~\eqref{eq:decaylaw-tmax} puts the daughter's maximum at
+$t_{\max}=\SI{23}{h}$, so the generator approaches transient equilibrium in about a day. Each morning a
+saline wash ``milks'' the accumulated technetium off the column, and within hours it regrows. The ideal
+transient ratio would be $66/(66-6.0)=1.10$; in practice about $12\%$ of molybdenum decays bypass the
+metastable state, so the technetium activity settles near $0.96$ of the molybdenum's. The generator is
+replaced weekly, after about $2.5$ parent half-lives.
+\end{remarkbox}
+
+\section{Production at a Constant Rate}\label{sec:decaylaw-activation}
+
+The bathtub remark ended with a tap that never weakens, and that is what a reactor or a particle
+accelerator provides. There a radioactive isotope is often \emph{made} at a constant rate $\Prod$
+(nuclei per second) while it decays. Cobalt-60, the classic radiotherapy source, is made by exposing
+ordinary cobalt-59 to reactor neutrons, $\iso{59}{Co}+n\to\iso{60}{Co}+\gamma$ (reactions of this kind
+are the subject of \chref{ch:reactions}). This is called \textbf{activation}. The number of radioactive
+nuclei then obeys
+\[
+\frac{dN}{dt}=\Prod-\lambda N .
+\]
+
+\begin{derivbox}{Growth to saturation}
+This is the equation of growth with supply in \chref{ch:toolkit} (Section~\ref{sec:explog}). With
+$N(0)=0$, the substitution $w=\Prod-\lambda N$ gives $dw/dt=-\lambda\,dN/dt=-\lambda w$, so $w$ decays
+exponentially from its initial value $w(0)=\Prod$: $w=\Prod e^{-\lambda t}$. Solving for $N$,
+\begin{equation}\label{eq:decaylaw-activation}
+N(t)=\frac{\Prod}{\lambda}\big(1-e^{-\lambda t}\big),\qquad\Act(t)=\lambda N=\Prod\big(1-e^{-\lambda t}\big)
+=\Prod\big(1-2^{-t/\Thalf}\big).
+\end{equation}
+Checks: at $t=0$, $N=0$; for $\lambda t\ll1$, $N\approx\Prod t$ (almost nothing has had time to decay);
+as $t\to\infty$, $N\to\Prod/\lambda$ and $\Act\to\Prod$. Production and decay then balance, the same
+balance as secular equilibrium, with the reactor playing the long-lived parent.
+\end{derivbox}
+
+\begin{keybox}{Activation}
+Irradiation for a time $t$ gives $\Act=\Prod\big(1-2^{-t/\Thalf}\big)$: $\tfrac12$ of the saturation
+activity $\Prod$ after one half-life, $\tfrac34$ after two, $\tfrac78$ after three. After the sample is
+removed at $t_0$, it decays freely: $\Act=\Act(t_0)\,2^{-(t-t_0)/\Thalf}$.
+\end{keybox}
+
+Figure~\ref{fig:decaylaw-activation} shows the consequence for anyone paying for reactor time: the
+approach to saturation is the decay curve turned upside down, so each further half-life of irradiation
+only halves the remaining gap. Irradiating beyond three or four half-lives gains almost nothing.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{decaylaw_activation}
+\figcaption{fig:decaylaw-activation}{Activation by production at a constant rate $\Prod$. After one
+half-life of irradiation the activity reaches $\tfrac12$ of saturation, after two $\tfrac34$, after
+three $\tfrac78$: each half-life halves the remaining gap, so irradiating beyond a few half-lives gains
+little. Once the source is removed (here after five half-lives), ordinary exponential decay takes
+over.}
+\end{figure}
+
+\begin{exbox}{Activity during production}
+A radioisotope with $\Thalf=\SI{10}{min}$ is produced at $\Prod=\num{1.0e10}$ nuclei per second. Find
+its activity and the number of nuclei present after \SI{20}{min} of production.
+
+\stepn{1} \SI{20}{min} is two half-lives, so $\Act=\Prod\big(1-\tfrac14\big)=\SI{7.5e9}{\becquerel}$.
+
+\stepn{2} $N=\Act/\lambda$ with $\lambda=0.693/\SI{600}{s}$:
+$N=\num{7.5e9}\times600/0.693=\num{6.5e12}$.
+\end{exbox}
+
+\section{A Bridge to Chemistry: First-Order Kinetics}\label{sec:decaylaw-kinetics}
+
+The decay law is not only nuclear. A first-order chemical reaction, such as the decomposition
+$\mathrm{N_2O_5}\to2\,\mathrm{NO_2}+\tfrac12\mathrm{O_2}$, obeys $d[\mathrm{R}]/dt=-k[\mathrm{R}]$, where
+$[\mathrm R]$ is the reactant concentration and $k$ is the chemical rate constant. (In this section
+only, $k$ is chemistry's rate constant; elsewhere in this volume $k$ is the neutron multiplication factor
+of \chref{ch:reactions}.) It is the same equation with different symbols, and everything in
+Sections~\ref{sec:decaylaw-memory} and~\ref{sec:decaylaw-halflife} carries over;
+Table~\ref{tab:decaylaw-kinetics} sets the two side by side.
+
+\begin{tablebox}{Radioactive decay and first-order reactions compared}
+\centering
+\begin{tabular}{@{}lll@{}}\toprule
+ & \textbf{Radioactive decay} & \textbf{First-order reaction}\\\midrule
+Quantity & number of nuclei $N$ & concentration $[\mathrm R]$\\
+Rate law & $dN/dt=-\lambda N$ & $d[\mathrm R]/dt=-k[\mathrm R]$\\
+Integrated form & $N=N_0e^{-\lambda t}$ & $[\mathrm R]=[\mathrm R]_0e^{-kt}$, that is,
+$k=\dfrac{2.303}{t}\log_{10}\dfrac{[\mathrm R]_0}{[\mathrm R]}$\\[6pt]
+Half-life & $\Thalf=0.693/\lambda$, independent of $N_0$ & $t_{1/2}=0.693/k$, independent of $[\mathrm R]_0$\\
+Effect of temperature & none (nuclear energies $\gg k_BT$) & strong: $k\propto e^{-E_a/k_BT}$ (Arrhenius)\\
+Microscopic picture & one nucleus, intrinsic probability & molecule must gain activation energy $E_a$\\\bottomrule
+\end{tabular}\label{tab:decaylaw-kinetics}
+\end{tablebox}
+
+The last two rows explain the difference. A chemical reaction needs a thermal kick over an energy
+barrier $E_a$ of order \SI{1}{eV} per molecule, not far above molecular thermal energies
+($k_BT\approx\SI{0.03}{eV}$ at room temperature, with $k_B$ Boltzmann's constant), so the factor
+$e^{-E_a/k_BT}$ changes enormously when the temperature is raised. The energies that govern nuclear
+decay are millions of electronvolts, more than a million times $k_BT$ even in the hottest laboratory
+furnace, so heat and chemistry cannot reach the nucleus. That is the physical reason $\lambda$ is a
+constant of the isotope, the assumption on which this chapter was built.
+
+\section{Summary}\label{sec:summary-decaylaw}
+One assumption, a fixed probability of decay per unit time for every nucleus, yields a smooth
+exponential law for large samples and, by adding sources and channels to the same equation, the
+behaviour of mixtures, branching decays, chains and activated samples.
+
+\begin{itemize}
+\item $dN/dt=-\lambda N$, so $N=N_0e^{-\lambda t}=N_0e^{-t/\tau}=N_0\,2^{-t/\Thalf}$, with
+      $\Thalf=\ln2/\lambda=0.693/\lambda$ and $\tau=1/\lambda=1.443\,\Thalf$. The half-life is the median
+      lifetime and is independent of the sample size.
+\item One nucleus survives to $t$ with probability $e^{-\lambda t}$, decays between $t_1$ and $t_2$ with
+      probability $e^{-\lambda t_1}-e^{-\lambda t_2}$, and has no memory of its age.
+\item Activity $\Act=\lambda N=\Act_0e^{-\lambda t}$, in becquerels, where
+      $\SI{1}{\curie}=\SI{3.7e10}{\becquerel}$. For a mass $m$, $N=(m/M_\text{molar})N_A$. For a fixed $N$, activity is inversely proportional to
+      half-life.
+\item Net count rate $=\Act\,(\Omega/4\pi)\,\varepsilon$ after the background is subtracted; a count of
+      $n$ carries an uncertainty of about $\sqrt n$. Decays between $t_1$ and $t_2$:
+      $N_0(e^{-\lambda t_1}-e^{-\lambda t_2})$; decays ever: $N_0=\Act_0\tau$.
+\item A semi-log plot of $\ln\Act$ against $t$ is a straight line of slope $-\lambda$ for one isotope;
+      a curved one signals a mixture, taken apart by curve peeling.
+\item Branching: $\lambda=\sum\lambda_i$, $1/\Thalf=\sum 1/T_i$, $f_i=\lambda_i/\lambda$, and every
+      channel's products grow with the total half-life.
+\item Chains: $dN_Y/dt=\lambda_XN_X-\lambda_YN_Y$, solved by the Bateman formula; the daughter peaks at
+      $t_{\max}=\ln(\lambda_Y/\lambda_X)/(\lambda_Y-\lambda_X)$, where the activities are equal. Secular
+      equilibrium: $\Act_Y=\Act_X$, $N_Y/N_X=T_Y/T_X$. Transient: $\Act_Y/\Act_X=T_X/(T_X-T_Y)$.
+\item Production at a constant rate: $\Act=\Prod(1-e^{-\lambda t})$, saturating at $\Act=\Prod$,
+      $N=\Prod/\lambda$.
+\item The law fails for small samples (fluctuations), for samples that are fed or depleted (add the source
+      term), and, very slightly, for electron capture in unusual chemical states; heat and chemistry do not
+      change $\lambda$, which is why first-order chemical kinetics, unlike decay, depends on temperature.
+\end{itemize}
+
+\section{Problem Types}\label{sec:types-decaylaw}
+Ten types cover the decay-law questions examiners set. Most of them turn on one habit: decide first
+whether the question is about nuclei remaining, nuclei decayed, or decays per second, because the three
+are easily confused.
+
+\archq{Fraction remaining and elapsed time}
+{``What fraction remains, or has decayed, after\dots'', ``how long until\dots''.}
+{If $t$ is a whole number of half-lives, use $(1/2)^n$. Otherwise use $N/N_0=2^{-t/\Thalf}$, so
+$t=\Thalf\log_2(N_0/N)$, or $t=\ln(N_0/N)/\lambda$.}
+{The wording: ``decayed'' is $1-N/N_0$, not $N/N_0$.}
+{Iodine-131 has a half-life of \SI{8.0}{\day}. The fraction of a sample that has \emph{decayed} after
+\SI{24}{\day} is:}
+{$\tfrac18$}
+{$\tfrac78$}
+{$\tfrac38$}
+{$\tfrac34$\archans{B}{$24/8.0=3$ half-lives, so $(1/2)^3=\tfrac18$ remains and $1-\tfrac18=\tfrac78$
+has decayed. Option (A) is the fraction remaining; (C) treats three half-lives as ``three eighths'';
+(D) counts only two half-lives.}}
+
+\archq{Decay constant, half-life, mean life and survival probability}
+{Conversions between $\lambda$, $\Thalf$ and $\tau$; the probability that \emph{one} nucleus survives
+or decays in a given window.}
+{$\lambda=0.693/\Thalf=1/\tau$, so $\Thalf=0.693\,\tau$. Survival to $t$: $e^{-\lambda t}$; decay between
+$t_1$ and $t_2$: $e^{-\lambda t_1}-e^{-\lambda t_2}$. A nucleus that has already survived has the same
+future as a fresh one.}
+{Treating the mean life as the half-life, or multiplying by $\ln2$ when one should divide; the mean life
+is the \emph{longer} of the two.}
+{The mean life of a radioactive isotope is \SI{10}{min}. Its half-life is:}
+{\SI{14.4}{min}}
+{\SI{5.0}{min}}
+{\SI{6.9}{min}}
+{\SI{10}{min}\archans{C}{$\Thalf=\tau\ln2=0.693\times10=\SI{6.9}{min}$. Option (A) divides by $\ln2$
+instead of multiplying, which would make the half-life longer than the mean life; (B) takes the
+half-life to be half the lifetime; (D) equates the mean and the median.}}
+
+\archq{Activity and mass}
+{Activity of a given mass, mass needed for a given activity, specific activity (\si{\becquerel} per
+gram).}
+{$N=(m/M_\text{molar})N_A$; $\lambda=0.693/\Thalf$ \emph{in} \si{\per\second}; $\Act=\lambda N$.
+Convert years to seconds early. $\SI{1}{\curie}=\SI{3.7e10}{\becquerel}$.}
+{Leaving $\lambda$ in \si{\per\year}, which gives ``becquerels'' too small by a factor of
+\num{3.2e7}, or forgetting the $\ln2$.}
+{The activity of \SI{1.0}{mg} of cobalt-60 ($\Thalf=\SI{5.27}{\year}$, molar mass \SI{60}{g/mol};
+$\SI{1}{\year}=\SI{3.156e7}{s}$) is about:}
+{\SI{4.2e10}{\becquerel}}
+{\SI{6.0e10}{\becquerel}}
+{\SI{4.2e13}{\becquerel}}
+{\SI{1.3e18}{\becquerel}\archans{A}{$N=(10^{-3}/60)(\num{6.022e23})=\num{1.0e19}$ and
+$\lambda=0.693/(5.27\times\num{3.156e7})=\SI{4.2e-9}{\per\second}$, so $\Act=\SI{4.2e10}{\becquerel}$
+(about \SI{1.1}{\curie}). Option (B) uses $N/\Thalf$, forgetting $\ln2$; (C) uses a gram instead of a
+milligram; (D) leaves $\lambda$ in \si{\per\year}, so the number is decays per year, not per second.}}
+
+\archq{Decays in an interval; counting}
+{Number of decays between two times, total decays ever, counts registered by a detector.}
+{Decays between $t_1$ and $t_2$: $N_0(e^{-\lambda t_1}-e^{-\lambda t_2})$. Total ever: $N_0=\Act_0\tau$.
+Counts $=$ activity $\times\,(\Omega/4\pi)\times\varepsilon\times$ time, valid only for times short
+compared with $\Thalf$; add any background.}
+{Multiplying the initial activity by a long time, as if the activity stayed constant.}
+{A sample contains \num{8.0e6} nuclei of an isotope with $\Thalf=\SI{1.0}{h}$. The number that decay
+between $t=\SI{1.0}{h}$ and $t=\SI{3.0}{h}$ is:}
+{\num{1.0e6}}
+{\num{4.0e6}}
+{\num{7.0e6}}
+{\num{3.0e6}\archans{D}{$N_0\big(2^{-1}-2^{-3}\big)=\num{8.0e6}\times\big(\tfrac12-\tfrac18\big)=\num{3.0e6}$.
+Option (A) is the number still undecayed at \SI{3}{h}; (B) is the number that decay in the first hour
+(or remain at \SI{1}{h}); (C) is the number that decay in the whole first three hours.}}
+
+\archq{Extracting half-lives from measured data}
+{A table or graph of count rates against time, possibly including background.}
+{Subtract background first. Then spot equal-ratio intervals (the halving time), or fit a straight line
+to $\ln(\text{rate})$ against $t$, whose slope is $-\lambda$.}
+{Taking ratios of raw rates; or interpolating linearly between readings, which treats an exponential as
+a straight line.}
+{A counter reads \SI{850}{\per\second} at $t=0$ and \SI{250}{\per\second} at $t=\SI{2.0}{h}$. With
+the source removed it reads \SI{50}{\per\second}. The half-life of the source is:}
+{\SI{0.50}{h}}
+{\SI{1.0}{h}}
+{\SI{1.13}{h}}
+{\SI{1.33}{h}\archans{B}{Net rates are $800$ and \SI{200}{\per\second}: a factor of $4=2^2$ in
+\SI{2.0}{h}, so $\Thalf=\SI{1.0}{h}$. Option (C) uses the raw ratio $850/250=3.4$, ignoring the
+background; (D) interpolates linearly ($\tfrac34$ lost in \SI{2}{h}, so half in \SI{1.33}{h}); (A)
+divides the time by the factor $4$.}}
+
+\archq{Mixtures of two isotopes}
+{Two independent isotopes in one sample; ratios at a later time; when activities or numbers are equal;
+a curved semi-log activity plot.}
+{Each decays independently; the total activity is the sum. $N_1/N_2=(N_{1,0}/N_{2,0})e^{-(\lambda_1-\lambda_2)t}$.
+For equal activities set $\lambda_1N_{1,0}e^{-\lambda_1t}=\lambda_2N_{2,0}e^{-\lambda_2t}$ and solve
+for $t$. Late times belong to the longer-lived isotope.}
+{Confusing a ratio of numbers with a ratio of activities: they differ by $\lambda_1/\lambda_2$.}
+{Isotopes 1 ($\Thalf=\SI{1.0}{h}$) and 2 ($\Thalf=\SI{3.0}{h}$) have equal \emph{activities} at
+$t=0$. After \SI{6.0}{h}, the ratio of their \emph{numbers of nuclei} $N_1/N_2$ is:}
+{$\tfrac1{16}$}
+{$\tfrac3{16}$}
+{$\tfrac1{48}$}
+{$\tfrac13$\archans{C}{Equal activities mean $N_{1,0}/N_{2,0}=\lambda_2/\lambda_1=\tfrac13$. After
+\SI{6}{h}, isotope 1 has passed $6$ half-lives and isotope 2 two, so
+$N_1/N_2=\tfrac13\times2^{-6}/2^{-2}=\tfrac13\times\tfrac1{16}=\tfrac1{48}$. Option (A) is the activity
+ratio; (B) multiplies by $\lambda_1/\lambda_2$ instead of dividing; (D) is the initial number ratio.}}
+
+\archq{Branching (parallel) decay}
+{One nucleus, two decay modes; partial half-lives or branching percentages.}
+{$\lambda=\sum_i\lambda_i$, that is, $1/\Thalf=\sum_i1/T_i$. Branching fraction $f_i=\lambda_i/\lambda$,
+so $T_i=\Thalf/f_i$. Decays by channel $i$ in any interval are $f_i$ times the total.}
+{Adding partial half-lives, or taking the observed half-life to be one of them; the combination is
+shorter than either.}
+{A nucleus decays by $\alpha$ emission with a partial half-life of \SI{6.0}{h} and by $\beta^-$
+emission with a partial half-life of \SI{3.0}{h}. The half-life of a sample is:}
+{\SI{9.0}{h}}
+{\SI{4.5}{h}}
+{\SI{3.0}{h}}
+{\SI{2.0}{h}\archans{D}{$1/\Thalf=1/6.0+1/3.0=3/6.0$, so $\Thalf=\SI{2.0}{h}$, shorter than either
+partial half-life (and one-third of decays are $\alpha$). Option (A) adds the half-lives; (B) averages
+them; (C) keeps only the faster channel.}}
+
+\archq{Successive decay and equilibrium}
+{Parent--daughter chains; ``time of maximum daughter''; abundance or mass ratios in old ores;
+transient-equilibrium ratios.}
+{Time of maximum: Eq.~\eqref{eq:decaylaw-tmax}. Secular equilibrium ($T_X\gg T_Y$):
+$N_Y/N_X=T_Y/T_X$, then multiply by the ratio of molar masses for a mass ratio. Transient:
+$\Act_Y/\Act_X=T_X/(T_X-T_Y)$.}
+{Inverting the ratio (the short-lived daughter is the \emph{rare} one), or forgetting the molar masses
+when a mass is asked for.}
+{An undisturbed uranium ore has reached secular equilibrium. The mass of radium-226
+($\Thalf=\SI{1600}{\year}$, \SI{226}{g/mol}) present per kilogram of uranium-238
+($\Thalf=\SI{4.47e9}{\year}$, \SI{238}{g/mol}) is about:}
+{\SI{0.34}{mg}}
+{\SI{0.36}{mg}}
+{\SI{0.38}{mg}}
+{\SI{2.7e6}{kg}\archans{A}{$N_\text{Ra}/N_\text{U}=1600/\num{4.47e9}=\num{3.58e-7}$; the mass ratio is
+$\num{3.58e-7}\times226/238=\num{3.40e-7}$, so \SI{0.34}{mg} per kilogram. Option (B) omits the molar
+masses; (C) inverts their ratio; (D) inverts the half-life ratio, making the short-lived daughter the
+abundant one.}}
+
+\archq{Production at a constant rate (activation)}
+{Nuclei produced at a steady rate $\Prod$ while decaying; saturation; irradiation followed by removal.}
+{$\Act=\Prod(1-2^{-t/\Thalf})$ and $N=\Act/\lambda$ during irradiation. After removal at $t_0$:
+$\Act=\Act(t_0)\,2^{-(t-t_0)/\Thalf}$. Saturation activity equals $\Prod$.}
+{Assuming saturation is reached after one or two half-lives, or forgetting that decay continues after
+removal.}
+{A sample is irradiated at a constant production rate for two half-lives of the product and then
+removed. One half-life after removal, its activity as a fraction of the saturation activity is:}
+{$\tfrac34$}
+{$\tfrac78$}
+{$\tfrac12$}
+{$\tfrac38$\archans{D}{At removal $\Act=\Prod(1-\tfrac14)=\tfrac34\Prod$; one half-life later it is
+$\tfrac12\times\tfrac34=\tfrac38$ of $\Prod$. Option (A) forgets the decay after removal; (B) carries on
+irradiating for a third half-life; (C) assumes saturation was reached before removal.}}
+
+\archq{First-order kinetics in chemistry}
+{A reaction ``first order'', or a percentage completed in a given time; asked for another percentage.}
+{The same law as decay: the fraction left is $2^{-t/t_{1/2}}$, so a percentage completed fixes the
+number of half-lives. $75\%$ complete $=$ two half-lives; $87.5\%$ $=$ three; $99.9\%\approx$ ten.}
+{Scaling times linearly with the percentage completed.}
+{A first-order reaction is $75\%$ complete in \SI{30}{min}. The time for it to be $87.5\%$ complete is:}
+{\SI{35}{min}}
+{\SI{60}{min}}
+{\SI{45}{min}}
+{\SI{15}{min}\archans{C}{$75\%$ complete means $\tfrac14$ left, two half-lives, so $t_{1/2}=\SI{15}{min}$;
+$87.5\%$ complete means $\tfrac18$ left, three half-lives, \SI{45}{min}. Option (A) scales linearly;
+(B) doubles the time; (D) is the half-life itself.}}
+
+\section{Practice Problems}\label{sec:practice-decaylaw}
+
+The problems below follow the order of the chapter and are meant to be worked without looking back.
+Where a constant is needed, use $N_A=\SI{6.022e23}{\per\mole}$ and $\SI{1}{\year}=\SI{3.156e7}{s}$.
+Answers, with brief working, follow the list.
+
+\begin{enumerate}[itemsep=3pt]
+\item What fraction of a radioactive sample remains after three mean lives?
+\item What percentage of a sample has decayed after $1.5$ half-lives?
+\item One-sixteenth of a sample remains after \SI{2.0}{h}. Find the half-life.
+\item What is the probability that a given nucleus survives its first half-life but decays during the
+      second?
+\item Free neutrons have a mean life of \SI{878}{s}. A beam of neutrons moves at \SI{2200}{m/s}. What
+      fraction of the neutrons decays in a flight of \SI{10}{km}?
+\item A nucleus with mean life $\tau=\SI{10}{\year}$ has already existed for \SI{10}{\year}. What is
+      its expected remaining lifetime? What is the probability that it survives a further
+      \SI{10}{\year}?
+\item What mass of cobalt-60 ($\Thalf=\SI{5.27}{\year}$, molar mass \SI{59.93}{g/mol}) has an activity of
+      \SI{1.00}{\curie}?
+\item An adult body contains about \SI{140}{g} of potassium (molar mass \SI{39.10}{g/mol}), of which
+      $0.0117\%$ of the atoms are potassium-40 ($\Thalf=\SI{1.248e9}{\year}$). Find the potassium-40
+      activity of the body.
+\item Find the activity of \SI{1.00}{g} of strontium-90 ($\Thalf=\SI{28.8}{\year}$, molar mass
+      \SI{90.0}{g/mol}), a fission product, in becquerels and in curies.
+\item A \SI{5000}{\becquerel} source sits in front of a detector that intercepts $2.0\%$ of the emitted
+      radiation and registers $50\%$ of what reaches it. How many counts are recorded in one minute
+      (background negligible)?
+\item A patient receives iodine-131 ($\Thalf=\SI{8.02}{\day}$) with an initial activity of
+      \SI{1.0}{\mega\becquerel}. How many decays occur in the patient's body in total, if none of the
+      iodine is excreted?
+\item Show that for $t\ll\Thalf$ the number of decays in a time $t$ is approximately $\Act_0t$, and
+      estimate the fractional error of this approximation when $t=0.01\,\Thalf$.
+\item Raw count rates (including a constant background) are $820$, $420$, $220$ and \SI{120}{\per\second}
+      at $t=0$, $1$, $2$ and \SI{3}{h}. With no source present the counter reads \SI{20}{\per\second}.
+      Find the half-life. What would one wrongly conclude by ignoring the background?
+\item A plot of $\ln\Act$ against $t$ (in days) is a straight line through $(0,\,10.0)$ and
+      $(20,\,8.27)$. Find the half-life and the initial activity.
+\item Isotope 1 ($\Thalf=\SI{1.0}{h}$) and isotope 2 ($\Thalf=\SI{4.0}{h}$) start with equal numbers of
+      nuclei. When are their activities equal?
+\item A sample contains two isotopes with half-lives \SI{1.0}{h} and \SI{10}{h}, each initially of
+      activity \SI{1000}{\becquerel}. Find the total activity after \SI{5.0}{h}. Which isotope dominates?
+\item A semi-log plot of a sample's total activity is curved at early times and straight at late times.
+      Explain how the straight part, and peeling (subtracting its extrapolation), reveal both half-lives.
+\item Bismuth-212 ($\Thalf=\SI{60.55}{min}$) decays $64.06\%$ by $\beta^-$ emission and $35.94\%$ by
+      $\alpha$ emission. Find both partial half-lives.
+\item Starting from \num{1.0e6} bismuth-212 nuclei (data as in the previous problem), how many $\alpha$
+      particles are emitted (a) in the first \SI{60.55}{min}, (b) in total?
+\item Natural uranium ore is billions of years old. Uranium-234 ($\Thalf=\SI{2.455e5}{\year}$) is a
+      member of the uranium-238 series ($\Thalf=\SI{4.468e9}{\year}$ for uranium-238). Predict the ratio
+      of uranium-234 to uranium-238 atoms in the ore. (The measured value is \num{5.4e-5}.)
+\item Old uranium ore contains \num{3.58e-7} radium-226 atoms per uranium-238 atom. Given that radium-226
+      has $\Thalf=\SI{1600}{\year}$, deduce the half-life of uranium-238.
+\item Radium-226 (\SI{1600}{\year}) decays to radon-222 (\SI{3.82}{\day}). What mass of radon is in
+      secular equilibrium with \SI{1.00}{g} of radium in a sealed vessel?
+\item A parent with $\Thalf=\SI{4.0}{h}$ feeds a daughter with $\Thalf=\SI{1.0}{h}$. In transient
+      equilibrium, what is the ratio of the daughter's activity to the parent's?
+\item How many half-lives of irradiation are needed to reach $90\%$ of the saturation activity?
+\item A sample is irradiated for two half-lives and then removed. What fraction of the saturation
+      activity remains three half-lives after removal?
+\item Sodium-24 ($\Thalf=\SI{15}{h}$) is produced in a reactor at a constant rate. Compare the activity
+      reached after \SI{15}{h} and after \SI{45}{h} of irradiation, and comment on the cost of the extra
+      \SI{30}{h}.
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item $e^{-3}=0.050$, that is, $5.0\%$.
+\item $1-2^{-1.5}=1-0.354=0.646$, that is, $64.6\%$.
+\item $1/16=2^{-4}$: four half-lives in \SI{2.0}{h}, so $\Thalf=\SI{30}{min}$.
+\item $e^{-\lambda\Thalf}-e^{-2\lambda\Thalf}=\tfrac12-\tfrac14=\tfrac14$.
+\item Flight time $\num{1.0e4}/2200=\SI{4.55}{s}$; fraction $1-e^{-4.55/878}=\num{5.2e-3}$, about
+      $0.52\%$.
+\item By memorylessness the expected remaining lifetime is still \SI{10}{\year}, and the probability of
+      surviving the next \SI{10}{\year} is $e^{-1}=0.37$. Its age is irrelevant.
+\item $\lambda=0.693/(5.27\times\num{3.156e7})=\SI{4.17e-9}{\per\second}$; $N=\num{3.7e10}/\lambda=\num{8.9e18}$;
+      mass $=(\num{8.9e18}/\num{6.022e23})\times59.93=\SI{8.8e-4}{g}=\SI{0.88}{mg}$.
+\item $N=(140/39.10)(\num{6.022e23})(\num{1.17e-4})=\num{2.52e20}$; $\lambda=0.693/(1.248\times10^{9}\times\num{3.156e7})
+      =\SI{1.76e-17}{\per\second}$; $\Act=\lambda N\approx\SI{4.4e3}{\becquerel}$: some four thousand
+      decays every second inside every adult, from a nuclide made before the Earth formed.
+\item $N=\num{6.69e21}$, $\lambda=0.693/(28.8\times\num{3.156e7})=\SI{7.62e-10}{\per\second}$;
+      $\Act=\SI{5.1e12}{\becquerel}=\SI{138}{\curie}$, some $30$ times less than a gram of polonium-210:
+      the half-life is $76$ times longer, partly offset by the lighter atoms.
+\item $5000\times0.020\times0.50\times60=3000$ counts. (This assumes the half-life is much longer than a
+      minute, so the activity stays constant during the count.)
+\item $N_0=\Act_0/\lambda=\num{1.0e6}\times(8.02\times86\,400)/0.693=\num{1.0e12}$ decays.
+\item Exact: $N_0(1-e^{-\lambda t})=(\Act_0/\lambda)(1-e^{-\lambda t})\approx\Act_0t\,(1-\lambda t/2)$, using
+      $e^{-x}\approx1-x+x^2/2$. The approximation $\Act_0t$ overestimates by the fraction
+      $\lambda t/2=0.693\times0.01/2=0.35\%$.
+\item Net rates $800$, $400$, $200$, \SI{100}{\per\second} halve every hour: $\Thalf=\SI{1.0}{h}$.
+      Ignoring background, the successive ratios ($1.95$, $1.91$, $1.83$) are not constant: the decay would
+      look non-exponential, with an apparently lengthening half-life.
+\item Slope $=(8.27-10.0)/20=\SI{-0.0865}{\per\day}=-\lambda$; $\Thalf=0.693/0.0865=\SI{8.0}{\day}$;
+      $\Act_0=e^{10.0}=\num{2.2e4}$ (in the plot's activity units).
+\item $\lambda_1e^{-\lambda_1t}=\lambda_2e^{-\lambda_2t}$ gives
+      $t=\ln(\lambda_1/\lambda_2)/(\lambda_1-\lambda_2)=\ln4/(0.693\times0.75)=\SI{2.67}{h}$. (This is the
+      same expression as $t_{\max}$ in a chain: compare Eq.~\eqref{eq:decaylaw-tmax}.)
+\item $1000\times2^{-5}+1000\times2^{-0.5}=31+707=\SI{738}{\becquerel}$, dominated by the \SI{10}{h}
+      isotope.
+\item At late times the short-lived component is negligible, so the straight tail gives the long
+      half-life. Extrapolate that line back to $t=0$ and subtract it from the early data; the remainder is
+      another straight line on semi-log axes, giving the short half-life.
+\item $T_\beta=60.55/0.6406=\SI{94.5}{min}$; $T_\alpha=60.55/0.3594=\SI{168.5}{min}$. Check:
+      $1/94.5+1/168.5=1/60.55$.
+\item (a) Half the nuclei decay in one half-life, and $35.94\%$ of those emit an $\alpha$ particle:
+      \num{1.80e5}. (b) \num{3.59e5}.
+\item Secular equilibrium: $N_{234}/N_{238}=T_{234}/T_{238}=\num{2.455e5}/\num{4.468e9}=\num{5.5e-5}$,
+      matching the measured value.
+\item $T_\text{U}=T_\text{Ra}/\num{3.58e-7}=1600/\num{3.58e-7}=\SI{4.47e9}{\year}$.
+\item $m_\text{Rn}=\SI{1.00}{g}\times\dfrac{3.82}{1600\times365.25}\times\dfrac{222}{226}=\SI{6.4e-6}{g}=\SI{6.4}{\micro\gram}$.
+\item $\Act_Y/\Act_X=T_X/(T_X-T_Y)=4/3$.
+\item $1-2^{-n}=0.9$ gives $n=\log_210=3.32$ half-lives.
+\item $\tfrac34\times2^{-3}=\tfrac{3}{32}=0.094$ of saturation.
+\item After \SI{15}{h}, $50\%$ of saturation; after \SI{45}{h}, $87.5\%$. Three times the reactor time
+      buys only $1.75$ times the activity.
+\end{enumerate}
+}
+
+\section*{Looking Back on Part A}
+\addcontentsline{toc}{section}{Looking Back on Part A}
+
+Part A asked three questions about the nucleus: what it is, how it comes apart, and when. The answers
+form a single argument. The nucleus is a tiny, dense drop of protons and neutrons held together by a
+short-range force; its mass is less than the mass of its parts, and that missing mass, the binding
+energy, is the reservoir of every energy in this volume. Where a rearrangement of nucleons would release
+some of that energy, the nucleus is unstable, and the rules of conservation decide which particles come
+out and with how much energy. Only the timing escapes prediction for the individual nucleus, and even
+the timing is lawful for a sample.
+
+\begin{itemize}
+\item \textbf{The nucleus (\chref{ch:nucleus}).} Rutherford scattering, read with the conservation of
+      energy and angular momentum, bounds the size of the nucleus; the radius $R=R_0A^{1/3}$ with
+      $R_0\approx\SI{1.2}{\femto\metre}$ means every nucleus has the same density. The mass defect gives the
+      binding energy $\Eb=\Delta m\,c^2$, and the binding energy per nucleon, peaking near iron and nickel and
+      shaped by the terms of the liquid-drop formula, is the map that says which rearrangements release
+      energy. The short-range nuclear force and the separation energies complete the picture.
+\item \textbf{Radioactive decay (\chref{ch:decay}).} $\alpha$, $\beta^\pm$, electron capture and
+      $\gamma$ decay conserve charge, nucleon number, energy, momentum and lepton number; the $Q$-value,
+      computed from atomic masses with the electrons counted correctly, is the energy released, shared
+      between the products by momentum conservation. The continuous $\beta$ spectrum demanded the
+      neutrino. The parabola of isobar masses explains the valley of stability, and $\alpha$ and $\beta$
+      steps carry heavy nuclei down the four natural decay series.
+\item \textbf{The decay law (this chapter).} A fixed probability per unit time gives
+      $N=N_0e^{-\lambda t}$, with $\Thalf=\ln2/\lambda$, $\tau=1/\lambda$ and activity $\Act=\lambda N$,
+      measured through a detector's geometry, efficiency and background. Adding isotopes, channels and
+      sources to the same equation describes mixtures, branching, chains with their secular and transient
+      equilibria, and production at a constant rate; the same equation is first-order chemical kinetics.
+\end{itemize}
+
+\noindent\textbf{The thread into Part B.} Part A let nuclei change only of their own accord. Part B makes
+them change on demand. \chref{ch:reactions} fires particles at nuclei, applies the same $Q$-value
+bookkeeping to reactions, and reads off the binding-energy curve why splitting the heaviest nuclei
+(fission) and fusing the lightest (fusion) both release energy. \chref{ch:nucapps} then turns the decay
+law of this chapter into a set of tools: the exponential clock dates rocks and bones, the activity and
+half-life of a source decide its medical use and the dose it delivers, and a simulation built on nothing
+but a fixed probability per step reproduces the law from pure randomness.

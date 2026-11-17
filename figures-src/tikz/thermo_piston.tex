@@ -1,0 +1,37 @@
+% thermo_piston: work done by a gas on a moving piston (Vol II Ch 4, fig:thermo-piston)
+% Gas at pressure P in a cylinder closed by a piston of face area A.  The gas pushes
+% the piston with force F = PA (crimson, a force).  When the piston moves out by a small
+% distance ds (ghost = later position), the gas does work dW = F ds = PA ds = P dV,
+% where dV = A ds is the thin slice swept out (the slice style).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\L{3.4}   % piston face position
+  \def\ds{0.8} % displacement
+  \def\h{1.5}   % half-height of bore
+  % gas
+  \fill[cMoon] (0,-\h) rectangle (\L,\h);
+  \foreach \x/\y in {0.4/0.8,1.1/-0.6,1.8/0.3,2.6/-1.0,3.1/0.9,0.7/-1.1,2.2/1.1,1.4/0.9,2.9/-0.2,0.5/0.1}
+    \node[point mass,cSteel] at (\x,\y) {};
+  \node[anchor=center] at (1.75,-0.25) {gas: $P$, $V$};
+  % swept slice dV = A ds
+  \fill[cAcc!40] (\L,-\h) rectangle (\L+\ds,\h);
+  \draw[cAcc,thin line] (\L+\ds,-\h) -- (\L+\ds,\h);
+  % cylinder walls (closed left end)
+  \draw[outline] (\L+2.3,\h) -- (0,\h) -- (0,-\h) -- (\L+2.3,-\h);
+  % ghost of piston at later position
+  \begin{scope}[ghost]
+    \draw[body] (\L+\ds,-\h) rectangle (\L+\ds+0.16,\h);
+  \end{scope}
+  % piston (now) and rod
+  \draw[body] (\L,-\h) rectangle (\L+0.16,\h);
+  \draw[outline,fill=cRock] (\L+0.16,-0.09) rectangle (\L+2.6,0.09);
+  % face area label
+  \draw[leader] (\L+0.08,-1.05) -- (\L+1.0,-2.0) node[anchor=north west,inner sep=1pt] {piston face, area $A$};
+  % force of gas on piston
+  \draw[force] (\L+0.16,0.62) -- ++(1.35,0) node[anchor=west] {$F=PA$};
+  % displacement
+  \draw[dim] (\L,\h+0.32) -- (\L+\ds,\h+0.32);
+  \node[cSteel,anchor=south] at (\L+0.5*\ds,\h+0.36) {$ds$};
+  \draw[dimtick] (\L,\h) -- (\L,\h+0.45);
+  \draw[dimtick] (\L+\ds,\h) -- (\L+\ds,\h+0.45);
+  \draw[leader,cAcc] (\L+0.5*\ds,-1.25) -- (\L-0.9,-2.0) node[anchor=north east,inner sep=1pt,cAcc] {slice $dV=A\,ds$};
+\end{tikzpicture}

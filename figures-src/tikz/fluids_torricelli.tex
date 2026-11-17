@@ -1,0 +1,42 @@
+% fluids_torricelli: speed of efflux from a hole (Vol II Ch 2, fig:fluids-torricelli)
+% Surface (point 1) a height h = 1.8 above a small side hole (point 2); hole a
+% height H = 1.5 above the floor.  Both points are at atmospheric pressure P0, and
+% v1 ~ 0 for a wide tank, so Bernoulli gives v = sqrt(2 g h).
+% The jet leaves horizontally and falls freely (projectile, Vol I): with
+% x = v t and drop y = g t^2/2, the drop is y = x^2/(4h), independent of g.
+% It reaches the floor at x = 2 sqrt(h H) = 2 sqrt(2.7) = 3.29.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    water/.style={fill=cPrim!10,draw=none},
+    num/.style={circle,draw=cInk,thin line,inner sep=0.8pt,font=\footnotesize}]
+  \def\h{1.8}\def\H{1.5}
+  % floor
+  \fill[ground strip] (-3.3,-0.18) rectangle (4.2,0);
+  \draw[outline] (-3.3,0) -- (4.2,0);
+  % stand under the tank
+  \fill[cRock] (-2.8,0) rectangle (-2.6,1.2);
+  \fill[cRock] (-0.2,0) rectangle (0,1.2);
+  % water and tank
+  \fill[water] (-3,1.2) rectangle (0,\H+\h);
+  \draw[cPrim,thin line] (-3,\H+\h) -- (0,\H+\h);
+  \draw[outline] (-3,\H+\h+0.35) -- (-3,1.2) -- (0,1.2) -- (0,\H-0.06);
+  \draw[outline] (0,\H+0.06) -- (0,\H+\h+0.35);
+  % a streamline from the surface to the hole
+  \draw[guide] (-2.1,\H+\h) .. controls (-1.5,\H+0.4) and (-0.6,\H) .. (0,\H);
+  % the jet: y = H - x^2/(4h)
+  \draw[cPrim,curve] plot[domain=0:{2*sqrt(\h*\H)},samples=40] (\x,{\H-\x*\x/(4*\h)});
+  % points 1 and 2
+  \node[dot] at (-2.1,\H+\h) {};
+  \node[num,anchor=south east] (n1) at (-2.15,\H+\h+0.06) {1};
+  \node[anchor=west] at (n1.east) {$P_0,\ v_1\approx0$};
+  \node[dot] at (0,\H) {};
+  \node[num,anchor=north east] at (-0.08,\H-0.06) {2};
+  % jet velocity
+  \draw[velocity] (0.05,\H) -- (1.15,\H) node[anchor=south west,cFor,inner sep=1pt] {$v=\sqrt{2gh}$};
+  \node[anchor=west,cPrim] at (2.45,1.2) {parabola};
+  % heights
+  \draw[dimtick] (0.1,\H+\h) -- (0.75,\H+\h);
+  \draw[dim] (0.55,\H) -- (0.55,\H+\h) node[midway,anchor=west,cSteel] {$h$};
+  \draw[dim] (-3.15,0) -- (-3.15,\H) node[midway,anchor=east,cSteel] {$H$};
+  \draw[dimtick] (-3.25,\H) -- (-3,\H);
+  \draw[dim] (0,-0.45) -- ({2*sqrt(\h*\H)},-0.45) node[midway,anchor=north,cSteel] {$2\sqrt{hH}$};
+\end{tikzpicture}

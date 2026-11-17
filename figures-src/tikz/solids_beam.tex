@@ -1,0 +1,73 @@
+% solids_beam: a cantilever and the shapes that resist bending (Vol II Ch 1, fig:solids-beam)
+% Left: a beam of length l clamped in a wall carries a load F at its free end.  Its centre
+% line sags as  y(x) = -delta (x/l)^2 (3 - x/l)/2  (from Y I_g y'' = F(l - x) with y = y' = 0
+% at the wall), reaching -delta at the tip, delta = F l^3/(3 Y I_g).  Sag exaggerated
+% (delta drawn as 0.9 cm on a 6 cm beam).  The upper layers are stretched and the lower ones
+% compressed; the neutral axis (dash-dot) keeps its length.
+% Right: four cross-sections of EQUAL area (so equal mass per length), with their second
+% moments of area about the horizontal neutral axis, in units of the first:
+%   square of side a:                 I = a^4/12                                   -> 1
+%   rectangle a/2 wide, 2a deep:      I = (a/2)(2a)^3/12 = 4 a^4/12                -> 4
+%   I-section, 2a deep like the rectangle (flanges 1.4a x 0.25a, web 0.2a x 1.5a;
+%       area 0.7 + 0.3 = 1.0 a^2):
+%       I = 0.2(1.5)^3/12 + 2[1.4(0.25)^3/12 + 0.35 (0.875)^2] = 0.5995 a^4      -> 7.2
+%   tube, outer radius 2r, inner sqrt(3) r, with pi r^2 = a^2:  I = (pi/4)(16-9) r^4 = 7 pi r^4/4
+%       = 7 a^4/(4 pi) = 0.557 a^4                                                -> 6.7
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % ------------------------------------------------------------ cantilever
+  \begin{scope}
+    \def\L{6.0}\def\d{0.9}\def\t{0.16}
+    \path[ground,draw=none] (-0.25,-1.6) rectangle (0,1.1);
+    \draw[outline] (0,-1.6) -- (0,1.1);
+    % undeformed beam
+    \draw[guide] (0,\t) rectangle (\L,-\t);
+    % deflected beam
+    \fill[cBlock] plot[domain=0:\L,samples=40,variable=\x] ({\x},{-\d*(\x/\L)^2*(3-\x/\L)/2+\t})
+      -- plot[domain=\L:0,samples=40,variable=\x] ({\x},{-\d*(\x/\L)^2*(3-\x/\L)/2-\t}) -- cycle;
+    \draw[cSteel,thin line] plot[domain=0:\L,samples=40,variable=\x] ({\x},{-\d*(\x/\L)^2*(3-\x/\L)/2+\t});
+    \draw[cSteel,thin line] plot[domain=0:\L,samples=40,variable=\x] ({\x},{-\d*(\x/\L)^2*(3-\x/\L)/2-\t});
+    \draw[cSteel,thin line] (\L,-\d+\t) -- (\L,-\d-\t);
+    \draw[rotation axis] plot[domain=0:\L,samples=40,variable=\x] ({\x},{-\d*(\x/\L)^2*(3-\x/\L)/2});
+    % load
+    \draw[force] (\L-0.02,-\d-\t) -- ++(0,-0.95) node[anchor=west,inner sep=2pt] {$F$};
+    % sag at the tip
+    \draw[dim] (\L+0.35,0) -- node[anchor=west,cSteel] {$\delta$} (\L+0.35,-\d);
+    \draw[dimtick] (\L,0) -- (\L+0.45,0) (\L+0.05,-\d) -- (\L+0.45,-\d);
+    % length
+    \draw[dim] (0,0.85) -- node[anchor=south,cSteel] {$\ell$} (\L,0.85);
+    % stretched above, compressed below
+    \node[anchor=south,font=\footnotesize,text=cSteel] at (1.6,\t) {upper layers stretched};
+    \node[anchor=north west,font=\footnotesize,text=cSteel] at (0.2,-0.62) {lower layers compressed};
+    \node[anchor=north west,font=\footnotesize,text=cSteel] at (3.8,-1.0) {neutral axis};
+    \draw[leader,cSteel] (3.95,-1.05) -- (4.2,-0.53);
+  \end{scope}
+  % ------------------------------------------------------------ cross-sections
+  \begin{scope}[xshift=8.6cm,yshift=-0.35cm]
+    \def\a{0.8}
+    % square
+    \draw[body] (-0.5*\a,-0.5*\a) rectangle (0.5*\a,0.5*\a);
+    \node[anchor=north] at (0,-1.0) {$1$};
+    % deep rectangle
+    \begin{scope}[xshift=1.4cm]
+      \draw[body] (-0.25*\a,-\a) rectangle (0.25*\a,\a);
+      \node[anchor=north] at (0,-1.0) {$4$};
+    \end{scope}
+    % I-section
+    \begin{scope}[xshift=3.0cm]
+      \draw[body] (-0.7*\a,0.75*\a) -- (0.7*\a,0.75*\a) -- (0.7*\a,\a) -- (-0.7*\a,\a) -- cycle;
+      \draw[body] (-0.7*\a,-\a) -- (0.7*\a,-\a) -- (0.7*\a,-0.75*\a) -- (-0.7*\a,-0.75*\a) -- cycle;
+      \draw[body] (-0.1*\a,-0.75*\a) rectangle (0.1*\a,0.75*\a);
+      \node[anchor=north] at (0,-1.0) {$7.2$};
+    \end{scope}
+    % tube
+    \begin{scope}[xshift=4.95cm]
+      \pgfmathsetmacro\r{\a/sqrt(pi)}
+      \draw[body,even odd rule] (0,0) circle[radius=2*\r] (0,0) circle[radius={sqrt(3)*\r}];
+      \node[anchor=north] at (0,-1.0) {$6.7$};
+    \end{scope}
+    % common neutral axis
+    \draw[rotation axis] (-0.75,0) -- (5.75,0);
+    \node[anchor=south,align=center,font=\footnotesize,text=cSteel] at (2.5,1.05)
+      {equal areas; stiffness against bending};
+  \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,47 @@
+% nuc_bea: binding energy per nucleon against mass number (Vol III Ch 1, fig:nuc-bea).
+% Dots: E_b/A = [Z m(1H) + (A-Z) m_n - M] (931.494 MeV/u) / A from measured atomic
+% masses (AME2020, as in the source's data.py, plus further stable nuclides), for
+% 35 nuclides; computed in python (standard library) and listed below to 3 decimals.
+% Dashed curve: the liquid-drop (semi-empirical) formula per nucleon,
+%   E_b/A = aV - aS A^(-1/3) - aC Z(Z-1)/A^(4/3) - aA (A-2Z)^2/A^2,
+% aV = 15.75, aS = 17.8, aC = 0.711, aA = 23.7 MeV, with Z the most stable charge
+% Z0(A) = A/(1.98 + 0.0155 A^(2/3)) taken as continuous (no pairing term).
+% Peak of the data: 62Ni 8.795, 56Fe 8.790 MeV.  238U 7.570, 4He 7.074, 3He 2.573.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=14cm, height=7.2cm,
+    xmin=0, xmax=255, ymin=0, ymax=9.9,
+    xlabel={mass number $A$}, ylabel={$\Eb/A$ (MeV per nucleon)},
+    xtick={0,50,100,150,200,250}, ytick={0,2,4,6,8},
+    declare function={zo(\a)=\a/(1.98+0.0155*\a^(2/3));
+      semf(\a,\z)=15.75-17.8*\a^(-1/3)-0.711*\z*(\z-1)/\a^(4/3)-23.7*(\a-2*\z)^2/\a^2;}]
+  % which way each process moves nucleons: towards the peak
+  \draw[cFor,construction,-bookhead] (axis cs:18,3.0) -- (axis cs:54,3.0);
+  \node[cFor,anchor=south west,align=left] at (axis cs:16,3.1) {fusion: light nuclei\\ climb towards the peak};
+  \draw[cAcc,construction,-bookhead] (axis cs:238,3.0) -- (axis cs:122,3.0);
+  \node[cAcc,anchor=south east,align=right] at (axis cs:240,3.1) {fission: heavy nuclei\\ split towards the peak};
+  \draw[guide] (axis cs:58,0) -- (axis cs:58,8.79);
+  % liquid-drop formula
+  \addplot[cSteel,thin line,dash pattern=on 4pt off 2pt,domain=12:250,samples=120] {semf(x,zo(x))};
+  \node[cSteel,anchor=north,align=center] at (axis cs:150,7.55) {liquid-drop formula};
+  % measured values
+  \addplot[only marks,mark=*,mark size=1.3pt,cPrim] coordinates {
+    (2,1.112) (3,2.827) (3,2.573) (4,7.074) (6,5.332) (7,5.606) (9,6.463) (11,6.928)
+    (12,7.680) (14,7.476) (16,7.976) (19,7.779) (20,8.032) (24,8.261) (27,8.332)
+    (28,8.448) (32,8.493) (40,8.551) (56,8.790) (62,8.795) (63,8.752) (64,8.736)
+    (88,8.733) (90,8.710) (120,8.504) (132,8.428) (138,8.393) (184,8.005) (197,7.916)
+    (206,7.875) (208,7.867) (209,7.848) (232,7.615) (235,7.591) (238,7.570)};
+  % ringed nuclides discussed in the text
+  \foreach \a/\b in {2/1.112,3/2.573,4/7.074,6/5.332,12/7.680,16/7.976,56/8.790,62/8.795,238/7.570}{
+    \edef\temp{\noexpand\draw[cCrim,thin line,fill=white,fill opacity=0] (axis cs:\a,\b) circle[radius=2.6pt];}\temp}
+  \node[anchor=west] at (axis cs:6,1.0) {$\iso{2}{H}$};
+  \node[anchor=west] at (axis cs:7,2.45) {$\iso{3}{He}$};
+  \draw[leader] (axis cs:5,6.98) -- (axis cs:29,6.25) node[anchor=west,inner sep=1pt] {$\iso{4}{He}$};
+  \node[anchor=west] at (axis cs:8,5.15) {$\iso{6}{Li}$};
+  \draw[leader] (axis cs:12.9,7.55) -- (axis cs:17,7.2) node[anchor=north west,inner sep=1pt] {$\iso{12}{C}$};
+  \node[anchor=south east] at (axis cs:15,8.05) {$\iso{16}{O}$};
+  \node[anchor=south east] at (axis cs:55,8.95) {$\iso{56}{Fe}$};
+  \node[anchor=south west] at (axis cs:63,8.95) {$\iso{62}{Ni}$};
+  \node[anchor=south] at (axis cs:236,7.75) {$\iso{238}{U}$};
+\end{axis}
+\end{tikzpicture}

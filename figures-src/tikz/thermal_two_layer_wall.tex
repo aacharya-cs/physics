@@ -1,0 +1,35 @@
+% thermal_two_layer_wall: steady conduction through two layers in series
+% (Vol II Ch 3, fig:two-layer-wall).  Steel l1 = 1 cm, K1 = 50 W/(m K); insulation
+% l2 = 5 cm, K2 = 0.8 W/(m K); inside 100 C, outside 20 C.  Per unit area:
+%   R1 = l1/K1 = 0.0002,  R2 = l2/K2 = 0.0625 m^2 K/W,  q = 80/0.0627 = 1276 W/m^2,
+%   interface T = 100 - 1276*0.0002 = 99.74 C.
+% Horizontal scale 1 cm of wall = 0.9 cm of drawing; the temperature profile above
+% the wall is drawn to scale (20 to 100 C over 2.4 cm): almost the whole drop lies
+% across the insulation.
+\begin{tikzpicture}
+  \def\s{0.9}            % drawing cm per cm of wall
+  \def\xa{0}\def\xb{0.9}\def\xc{5.4}
+  % the wall
+  \fill[cSteel!45] (\xa,0) rectangle (\xb,1.6);
+  \fill[cAmber!35] (\xb,0) rectangle (\xc,1.6);
+  \draw[outline] (\xa,0) rectangle (\xc,1.6);
+  \draw[outline] (\xb,0) -- (\xb,1.6);
+  \node[anchor=north,align=center] at (0.45,-0.05) {steel\\ $K_1$};
+  \node[anchor=north,align=center] at (3.15,-0.05) {insulation\\ $K_2$};
+  \draw[applied] (0.2,0.8) -- (\xc-0.2,0.8);
+  \node[cAcc,knockout,anchor=south] at (3.15,0.86) {same heat flux $q$};
+  \node[anchor=east] at (-0.1,0.8) {\SI{100}{\celsius}};
+  \node[anchor=west] at (\xc+0.1,0.8) {\SI{20}{\celsius}};
+  % temperature profile, to scale: y = 2.1 + 2.4*(T-20)/80
+  \begin{scope}[yshift=2.2cm]
+    \draw[thin line,-smallhead] (\xa,0) -- (\xa,2.75) node[anchor=south] {$T$};
+    \draw[thin line] (\xa,0) -- (\xc,0);
+    \draw[guide] (\xb,0) -- (\xb,2.4);
+    \draw[guide] (\xc,0) -- (\xc,2.4);
+    \draw[curve,cPrim] (\xa,2.4) -- (\xb,{2.4*(99.74-20)/80}) -- (\xc,0);
+    \node[anchor=south west,font=\footnotesize] at (\xb,2.4) {\SI{99.7}{\celsius} at the interface};
+    \node[cPrim,anchor=north east,font=\footnotesize] at (3.0,0.95) {nearly all the drop};
+  \end{scope}
+  \draw[dim] (\xa,-0.95) -- (\xb,-0.95) node[midway,below,cSteel] {\SI{1}{cm}};
+  \draw[dim] (\xb,-0.95) -- (\xc,-0.95) node[midway,below,cSteel] {\SI{5}{cm}};
+\end{tikzpicture}

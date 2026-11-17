@@ -1,0 +1,32 @@
+% nuc_massbalance: the parts outweigh the whole (Vol III Ch 1, fig:nuc-massbalance).
+% Left pan: 2 hydrogen atoms + 2 neutrons, 2(1.007825) + 2(1.008665) = 4.032980 u.
+% Right pan: one helium-4 atom, 4.002603 u.  Difference 0.030377 u = 28.30 MeV/c^2
+% (x 931.494 MeV per u).  The beam tilts down on the heavier (left) side.
+% Nucleons use the shared styles `proton' and `neutron' of bookstyle.tex (the caption names them).
+\begin{tikzpicture}
+  % stand and pivot
+  \fill[cRock] (-0.9,-1.05) rectangle (0.9,-0.9);
+  \draw[curve,cSteel] (0,-0.9) -- (0,1.2);
+  \fill[cInk] (0,1.2) circle[radius=2.6pt];
+  % beam, lower on the heavier left side
+  \draw[curve,cInk] (-3,0.9) -- (3,1.5);
+  % left pan
+  \draw[cSteel,thin line] (-3,0.9) -- (-3.7,-0.1) (-3,0.9) -- (-2.3,-0.1);
+  \draw[outline,fill=cSlope] (-3.8,-0.1) arc[start angle=180,end angle=360,x radius=0.8,y radius=0.3] -- cycle;
+  \node[circle,proton,minimum size=5.6mm,inner sep=0pt] at (-3.33,0.18) {$p$};
+  \node[circle,proton,minimum size=5.6mm,inner sep=0pt] at (-2.67,0.18) {$p$};
+  \node[circle,neutron,minimum size=5.6mm,inner sep=0pt] at (-3.33,0.76) {$n$};
+  \node[circle,neutron,minimum size=5.6mm,inner sep=0pt] at (-2.67,0.76) {$n$};
+  \node[align=center] at (-3,-0.85) {2 hydrogen atoms $+$ 2 neutrons\\ $4.032\,980$\,u};
+  % right pan
+  \draw[cSteel,thin line] (3,1.5) -- (2.3,0.5) (3,1.5) -- (3.7,0.5);
+  \draw[outline,fill=cSlope] (2.2,0.5) arc[start angle=180,end angle=360,x radius=0.8,y radius=0.3] -- cycle;
+  \foreach \x in {2.84,3.16}{
+    \node[circle,proton,minimum size=3.4mm,inner sep=0pt] at (\x,0.7) {};
+    \node[circle,neutron,minimum size=3.4mm,inner sep=0pt] at (\x,0.98) {};}
+  \node[align=center] at (3,-0.25) {one helium-4 atom\\ $4.002\,603$\,u};
+  % the moral
+  \node[align=center,cPlum] at (0,2.3)
+    {the parts outweigh the whole by $0.030\,377$\,u $=28.30$\,MeV$/c^2$,\\
+     the energy released when the nucleus formed};
+\end{tikzpicture}

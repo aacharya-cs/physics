@@ -1,0 +1,21 @@
+% decay_co60scheme: decay scheme of cobalt-60 (Vol III Ch 2, fig:decay-co60)
+% Q(beta-) = [M(Co60) - M(Ni60)] c^2 = (59.93381554 - 59.93078588)(931.494)
+%          = 2.822 MeV.  The beta- branch (99.9%) feeds the 2.506 MeV level of
+% Ni-60, so K_max = 2.822 - 2.506 = 0.316 MeV.  The level cascades:
+% 2.506 -> 1.333 (gamma 1.173 MeV) -> 0 (gamma 1.333 MeV).
+% Energy check: 0.316 + 1.173 + 1.333 = 2.822 MeV.  Vertical scale 1.55 cm/MeV.
+% Colours: electron cPrim; gamma rays in the shared wavy `photon' style.
+\begin{tikzpicture}[x=1cm,y=1.55cm,
+  level/.style={line width=1.3pt,cInk},
+  gamma/.style={-bookhead,construction,photon}]
+\draw[level] (-3.2,2.822) -- (-0.6,2.822)
+  node[pos=0.5,above] {$\iso{60}{Co}$\ \ ($\Thalf=5.27$\,y)};
+\draw[guide] (-0.6,2.822) -- (4.6,2.822) node[right,text=cInk] {$Q=2.822\,\mathrm{MeV}$};
+\draw[level] (0.4,2.506) -- (4.6,2.506) node[right] {$2.506\,\mathrm{MeV}$};
+\draw[level] (0.4,1.333) -- (4.6,1.333) node[right] {$1.333\,\mathrm{MeV}$};
+\draw[level] (0.4,0) -- (4.6,0) node[right] {$0$, ground state of $\iso{60}{Ni}$};
+\draw[vector,cPrim] (-1.1,2.822) -- (1.0,2.506);
+\node[cPrim,anchor=north east] at (0.2,2.62) {$\beta^-$, $K_{\max}=0.316\,\mathrm{MeV}$};
+\draw[gamma] (1.9,2.506) -- (1.9,1.333) node[midway,left,text=cAcc] {$\gamma_1=1.173\,\mathrm{MeV}$};
+\draw[gamma] (3.0,1.333) -- (3.0,0) node[midway,right,text=cAcc] {$\gamma_2=1.333\,\mathrm{MeV}$};
+\end{tikzpicture}

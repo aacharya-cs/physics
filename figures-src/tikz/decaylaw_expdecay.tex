@@ -1,0 +1,47 @@
+% decaylaw_expdecay: the exponential decay law on linear and semi-log axes (Vol III Ch 3, fig:decaylaw-expdecay)
+% N/N0 = 2^{-t/T},  t in units of the half-life T = T_{1/2}.
+% Mean life tau = T/ln2 = 1.4427 T, where N/N0 = 1/e = 0.3679.
+% The area under the curve, int_0^inf 2^{-t} dt = 1/ln2 = tau/T, equals the area of the
+% rectangle of height 1 and width tau (dashed outline): the geometric meaning of tau.
+% Right: on a log axis, ln N = ln N0 - lambda t is a straight line; each half-life drops it
+% by the same factor 2.
+\begin{tikzpicture}
+\begin{groupplot}[bookplot,
+    group style={group size=2 by 1, horizontal sep=21mm},
+    width=7.0cm, height=5.0cm, xmin=0, xmax=5.3, domain=0:5, samples=150,
+    xlabel={$t/\Thalf$}, xtick={1,2,3,4},
+]
+  % linear axes
+  \nextgroupplot[ymin=0, ymax=1.15,
+      ylabel={$N/N_0$},
+      ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,yshift=1pt},
+      ytick={0.25,0.5,1}, yticklabels={$\frac14$,$\frac12$,$1$}]
+  \addplot[area fill,draw=none] {2^(-x)} \closedcycle;
+  \draw[cSteel,thin line,dash pattern=on 3pt off 2pt] (axis cs:0,1) -- (axis cs:1.4427,1) -- (axis cs:1.4427,0);
+  \draw[guide] (axis cs:1,0) -- (axis cs:1,0.5) -- (axis cs:0,0.5);
+  \draw[guide] (axis cs:2,0) -- (axis cs:2,0.25) -- (axis cs:0,0.25);
+  \draw[guide] (axis cs:3,0) -- (axis cs:3,0.125) -- (axis cs:0,0.125);
+  \addplot[cPrim] {2^(-x)};
+  \node[dot,cPlum] at (axis cs:1.4427,0.3679) {};
+  \draw[leader,cPlum] (axis cs:1.47,0.38) -- (axis cs:2.25,0.50);
+  \node[cPlum,anchor=west,align=left,inner sep=1pt] at (axis cs:2.25,0.50)
+    {$t=\tau=1.44\,\Thalf$:\\ $N=N_0/e$};
+  \node[cSteel,anchor=north west,align=left] at (axis cs:2.0,1.10)
+    {rectangle $N_0\times\tau$\\ has the same area\\ as under the curve};
+  % semi-log axes
+  \nextgroupplot[ymode=log, ymin=0.025, ymax=1.5,
+      ylabel={$N/N_0$ (log scale)},
+      ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,yshift=1pt},
+      ytick={1,0.5,0.25,0.125,0.0625,0.03125},
+      yticklabels={$1$,$\frac12$,$\frac14$,$\frac18$,$\frac1{16}$,$\frac1{32}$},
+      log basis y=2]
+  \draw[guide] (axis cs:1,0.025) -- (axis cs:1,0.5);
+  \draw[guide] (axis cs:2,0.025) -- (axis cs:2,0.25);
+  \draw[guide] (axis cs:3,0.025) -- (axis cs:3,0.125);
+  \draw[guide] (axis cs:4,0.025) -- (axis cs:4,0.0625);
+  \draw[guide] (axis cs:5,0.025) -- (axis cs:5,0.03125);
+  \addplot[cPrim] {2^(-x)};
+  \node[cPrim,anchor=south west,align=left] at (axis cs:2.0,0.30)
+    {straight line:\\ $\ln N=\ln N_0-\lambda t$};
+\end{groupplot}
+\end{tikzpicture}

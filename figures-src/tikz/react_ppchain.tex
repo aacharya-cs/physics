@@ -1,0 +1,25 @@
+% react_ppchain: the main branch (ppI) of the proton-proton chain (Vol III Ch 4, fig:react-ppchain)
+% Step 1  p + p -> 2H + e+ + nu_e      (weak interaction; the slow step)
+% Step 2  2H + p -> 3He + gamma
+% Step 3  3He + 3He -> 4He + 2p
+% Steps 1 and 2 run twice for every helium-4 made.  Net: 4 1H -> 4He + 2e+ + 2 nu_e,
+% Q = [4(1.007825) - 4.002603] u c^2 = 26.7 MeV (with atomic masses, which
+% automatically include the annihilation of the two positrons).
+\begin{tikzpicture}[x=1cm,y=1cm,
+    st/.style={draw=cInk,thin line,fill=cMoon,rounded corners=2pt,
+               minimum height=7.5mm,minimum width=13mm,inner sep=3pt},
+    ar/.style={-smallhead,thin line,cInk}]
+  \foreach \y/\s in {1.1/a,-1.1/b}{
+    \node[st] (pp\s) at (0,\y) {$p+p$};
+    \node[st] (d\s) at (3.6,\y) {$\iso{2}{H}$};
+    \node[st] (h\s) at (7.0,\y) {$\iso{3}{He}$};
+    \draw[ar] (pp\s) -- node[anchor=south]{\textbf{1}} node[anchor=north]{emits $e^+$, $\nu_e$} (d\s);
+    \draw[ar] (d\s) -- node[anchor=south]{\textbf{2}\ \ $+\,p$} node[anchor=north]{emits $\gamma$} (h\s);
+  }
+  \node[st,fill=cAmber!45] (he4) at (10.4,0) {$\iso{4}{He}$};
+  \draw[ar] (ha.east) -- (he4.north west);
+  \draw[ar] (hb.east) -- (he4.south west);
+  \node at (8.85,0) {\textbf{3}};
+  \draw[ar,dash pattern=on 2pt off 1.5pt] (he4.east) -- ++(0.8,0)
+     node[anchor=west,align=left] {$+\,2p$\\(returned)};
+\end{tikzpicture}

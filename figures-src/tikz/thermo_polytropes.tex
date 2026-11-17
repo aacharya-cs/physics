@@ -1,0 +1,31 @@
+% thermo_polytropes: the polytropic family PV^x = const through one state (Vol II Ch 4, fig:thermo-polytropes)
+% All four curves pass through the state (V0, P0) = (1, 2) (arbitrary units):
+%   x = 0       isobaric    P = 2
+%   x = 1       isothermal  P = 2/V
+%   x = gamma   adiabatic   P = 2 V^(-gamma), gamma = 5/3 (monatomic gas)
+%   x = inf     isochoric   V = 1
+% Slope dP/dV = -x P/V, so at the common point the slopes are 0, -2, -10/3, infinite:
+% the curves steepen monotonically with x, and the adiabat is gamma times steeper
+% than the isotherm.  Colours distinguish the four processes (used book-wide in this chapter:
+% isobaric forest, isothermal primary, adiabatic teal, isochoric accent (an isochoric step exchanges only heat, so it takes the heat colour)).
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=8.6cm, height=4.9cm, scale only axis,
+    xmin=0, xmax=3.3, ymin=0, ymax=3.4,
+    xlabel={volume $V$}, ylabel={pressure $P$},
+    xlabel style={at={(axis description cs:1,0)},anchor=north east},
+    ylabel style={at={(axis description cs:0,1)},anchor=south west,rotate=-90,xshift=-4pt},
+    xtick={1}, xticklabels={$V_0$}, ytick={2}, yticklabels={$P_0$}]
+  \pgfmathsetmacro\g{5/3}
+  \draw[guide] (axis cs:0,2) -- (axis cs:1,2);
+  \addplot[cFor,domain=0.35:3.0,samples=2] {2};
+  \addplot[cPrim,domain=0.62:3.0] {2/x};
+  \addplot[cTeal,domain=0.74:3.0] {2*x^(-\g)};
+  \draw[curve,cAcc] (axis cs:1,0) -- (axis cs:1,3.25);
+  \node[dot] at (axis cs:1,2) {};
+  \node[cFor,anchor=south] at (axis cs:2.45,2.02) {$x=0$, isobaric};
+  \node[cPrim,anchor=south west,inner sep=1pt] at (axis cs:1.95,1.05) {$x=1$, isothermal};
+  \node[cTeal,anchor=north,inner sep=1pt] at (axis cs:2.35,0.42) {$x=\gamma$, adiabatic};
+  \node[cAcc,anchor=west] at (axis cs:1.04,3.1) {$x\to\infty$, isochoric};
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,27 @@
+% decaylaw_peeling: curve peeling for two independent isotopes (Vol III Ch 3, fig:decaylaw-peeling)
+% A1 = 1000 * 2^{-t/1 h}  (short-lived),  A2 = 1000 * 2^{-t/10 h}  (long-lived),  in Bq.
+% Total A1 + A2 is curved on a log axis.  For t > 6 h, A1/A2 = 2^{-0.9 t} < 0.024, so
+% the tail is the long-lived line to within about 2%; extrapolating it back to t = 0 and
+% subtracting leaves A1, a second straight line.  At t = 12 h: total = 435.5 Bq, A1 = 0.24 Bq.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=10.5cm, height=6.4cm,
+    xmin=0, xmax=12.6, ymode=log, ymin=1, ymax=3000,
+    domain=0:12, samples=150,
+    xlabel={time $t$ (h)}, xtick={0,2,4,6,8,10,12},
+    ylabel={activity (Bq, log scale)},
+    ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,yshift=1pt},
+    ytick={1,10,100,1000}, yticklabels={$1$,$10$,$100$,$1000$}]
+  \fill[cPrim!6] (axis cs:6,1) rectangle (axis cs:12,3000);
+  \node[cPrim,anchor=north,align=center] at (axis cs:9,2800)
+    {late times: only the\\ long-lived part remains};
+  \addplot[cInk] {1000*2^(-x)+1000*2^(-x/10)};
+  \addplot[cPrim,thin line,dash pattern=on 5pt off 2pt] {1000*2^(-x/10)};
+  \addplot[cAcc,domain=0:9.97,dash pattern=on 1.5pt off 1.5pt] {1000*2^(-x)};
+  \node[cInk,anchor=south west] at (axis cs:1.15,1100) {measured total};
+  \node[cPrim,anchor=north east,align=right] at (axis cs:11.9,330)
+    {long-lived part, $\Thalf=\SI{10}{h}$\\ (tail extrapolated back)};
+  \node[cAcc,anchor=north west,align=left] at (axis cs:0.3,30)
+    {total minus\\ long-lived part:\\ short-lived, $\Thalf=\SI{1}{h}$};
+\end{axis}
+\end{tikzpicture}
