@@ -1,0 +1,72 @@
+% cd_conical: the conical pendulum (Ch 10, fig:conical)
+% Left: a bob of mass m on a string of length \ell, hung from a fixed point, goes
+% round a horizontal circle of radius r = \ell sin(theta); theta is the string's
+% angle from the vertical.  Only two real forces act: tension T along the string
+% and the weight mg.  Right: the same two forces on the bob alone, with T
+% resolved: T cos(theta) up (balances mg), T sin(theta) towards the axis (the
+% unbalanced, centre-seeking part).  Drawn with theta = 35 degrees; in the force
+% diagram the arrows are to scale (T cos(theta) = mg).  Both forces crimson (book
+% legend); T's components dashed (component style).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\th{35}
+  \def\l{3.7}
+  \pgfmathsetmacro\r{\l*sin(\th)}
+  \pgfmathsetmacro\hb{\l*cos(\th)}
+  \def\Y{4.3}                                   % height of the support
+  \pgfmathsetmacro\yb{\Y-\hb}                   % height of the bob's circle
+  % support
+  \fill[cRock] (-1.0,\Y) rectangle (1.0,\Y+0.16);
+  \draw[outline] (-1.0,\Y) -- (1.0,\Y);
+  % the axis
+  \draw[guide] (0,\Y) -- (0,\yb-1.75);
+  % the circle (back half dashed, front half solid)
+  \draw[cPrim,thin line,hidden] (\r,\yb) arc[start angle=0,end angle=180,x radius=\r,y radius=\persp*\r];
+  \draw[cPrim,thin line] (\r,\yb) arc[start angle=0,end angle=-180,x radius=\r,y radius=\persp*\r];
+  % string
+  \coordinate (O) at (0,\Y);
+  \coordinate (P) at (\r,\yb);
+  \draw[cInk,thin line] (O) -- (P);
+  \node[anchor=south west,inner sep=2pt] at ($(O)!0.45!(P)$) {$\ell$};
+  % theta at the support, between the vertical and the string
+  \draw[angle arc] (0,\Y-0.8) arc[start angle=-90,end angle=-90+\th,radius=0.8];
+  \node at ($(O)+(-90+\th/2:1.08)$) {$\theta$};
+  % radius of the circle
+  % (the weight's line of action serves as the right-hand extension line)
+  \draw[dim] (0,\yb-1.6) -- node[below,cSteel] {$r=\ell\sin\theta$} (\r,\yb-1.6);
+  \draw[dimtick] (\r,\yb-1.4) -- (\r,\yb-1.75);
+  % forces on the bob
+  \draw[force] (P) -- ($(P)!1.45cm!(O)$) node[anchor=south west,inner sep=1pt] {$T$};
+  \draw[force] (P) -- ++(0,-1.25) node[pos=0.75,anchor=west,inner sep=3pt] {$mg$};
+  \shade[ball color=cBlock] (P) circle[radius=0.13];
+  \draw[cSteel,thin line] (P) circle[radius=0.13];
+  \node[anchor=west] at ($(P)+(0.17,0.1)$) {$m$};
+
+  % ---------------------------------------- the bob's forces, T resolved
+  \begin{scope}[shift={(7.1,1.5)}]
+    \def\T{2.2}
+    \pgfmathsetmacro\Tc{\T*cos(\th)}
+    \pgfmathsetmacro\Ts{\T*sin(\th)}
+    % construction lines of the rectangle
+    \draw[parallelogram] (-\Ts,0) -- (-\Ts,\Tc) -- (0,\Tc);
+    % components
+    \draw[component,cCrim] (0,0) -- (0,\Tc)
+      node[anchor=west,inner sep=2pt] {$T\cos\theta$};
+    \draw[component,cCrim] (0,0) -- (-\Ts,0)
+      node[anchor=north east,inner sep=2pt] {$T\sin\theta$};
+    % the tension itself
+    \draw[force] (0,0) -- (90+\th:\T) node[anchor=south east,inner sep=1pt] {$T$};
+    % weight, equal to T cos(theta)
+    \draw[force] (0,0) -- (0,-\Tc) node[anchor=north,inner sep=2pt] {$mg$};
+    % theta between T and the vertical
+    \draw[angle arc] (0,0.75) arc[start angle=90,end angle=90+\th,radius=0.75];
+    \node at (90+\th/2:1.0) {$\theta$};
+    \node[point mass] at (0,0) {};
+    % reading
+    \node[anchor=east,align=right,font=\footnotesize,cSteel] at (-0.3,-0.9)
+      {unbalanced:\\ points to the axis};
+    \draw[leader,cSteel] (-0.85,-0.55) -- (-0.7,-0.07);
+    \node[anchor=west,align=left,font=\footnotesize,cSteel] at (0.3,-0.9)
+      {balances\\ the weight};
+    \draw[leader,cSteel] (0.55,-0.55) -- (0.07,0.55);
+  \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,119 @@
+% gr_evidence: four effects beyond Newtonian gravity (Ch 16, fig:grev)
+% (a) Mercury's perihelion.  Three successive orbits r = p/(1 + e cos(phi - w)),
+%     e = 0.5, a = 10 mm, the Sun at the focus, perihelion direction w = 65, 90,
+%     115 degrees.  Real advance: 43 arcsec per century beyond the planetary
+%     perturbations; here it is exaggerated by a factor of about 10^5 per orbit.
+%     The perihelion advances in the same sense as the orbital motion.
+% (b) Starlight passing the Sun's limb is bent towards the Sun by
+%     delta = 4GM/(c^2 R) = 1.75 arcsec (drawn as 20 degrees).  Seen from the
+%     Earth the star appears along the final ray, i.e. farther from the Sun
+%     than its true position.
+% (c) Two identical clocks started together, one higher than the other: the
+%     lower clock, deeper in the well, runs slower (fractional rate difference
+%     gh/c^2; lag exaggerated).
+% (d) GPS: net +38 microseconds per day for a satellite clock
+%     (+45.7 gravitational, -7.2 motional); light travels about 300 m per
+%     microsecond, so an uncorrected fix drifts by about 10 km per day.
+%     Orbit radius not to scale (drawn 2.3, really 4.2 Earth radii).
+\begin{tikzpicture}[x=1mm,y=1mm]
+  % ---------------------------------------------------------- (a) Mercury
+  \begin{scope}[shift={(17.5,25)}]
+    \def\e{0.5}\def\p{7.5}% p = a(1 - e^2)
+    \foreach \w in {65,90}{
+      \draw[orbitpath] plot[domain=0:360,samples=120,variable=\t]
+        (\t:{\p/(1+\e*cos(\t-\w))}) -- cycle;
+      \node[point mass,fill=cSteel] at (\w:{\p/(1+\e)}) {};
+    }
+    \draw[cPrim,thin line] plot[domain=0:360,samples=120,variable=\t]
+        (\t:{\p/(1+\e*cos(\t-115))}) -- cycle;
+    \node[point mass] at (115:{\p/(1+\e)}) {};
+    % direction of orbital motion (anticlockwise) on the latest orbit
+    \draw[cPrim,thin line,-smallhead] (292:{\p/(1+\e*cos(177))}) -- (302:{\p/(1+\e*cos(187))});
+    % advance of the perihelion, in the same sense
+    \draw[rotation] (63:8.4) arc[start angle=63,end angle=117,radius=8.4];
+    \node[anchor=south,inner sep=1pt,font=\footnotesize] at (90:8.6) {perihelion advances};
+    \fill[cSun] (0,0) circle[radius=1.5];
+    \draw[hair line,cInk] (0,0) circle[radius=1.5];
+  \end{scope}
+  \node[anchor=north] at (17.5,4) {(a) Mercury's orbit};
+  \node[anchor=north,align=center,font=\footnotesize] at (17.5,-0.6)
+    {$43''$ per century,\\ hugely exaggerated};
+  % ---------------------------------------------------- (b) light bending
+  \begin{scope}[xshift=38mm]
+    \coordinate (S) at (14,18);      % Sun
+    \coordinate (B) at (14,24.2);    % closest approach, just above the limb
+    \coordinate (E) at (32.5,13);    % Earth
+    \coordinate (T) at ($(B)+(172.3:10.5)$);  % true star: incoming ray at -7.7 deg
+    \coordinate (A) at ($(B)!-0.49!(E)$);     % apparent star, on the final ray
+    \fill[cSun] (S) circle[radius=5];
+    \draw[hair line,cInk] (S) circle[radius=5];
+    \node[font=\footnotesize] at (S) {Sun};
+    \draw[planet] (E) circle[radius=1.8];
+    \node[anchor=north,font=\footnotesize] at ($(E)+(0,-2.2)$) {Earth};
+    % apparent direction, traced back from the Earth
+    \draw[guide] (B) -- (A);
+    % undeflected continuation of the incoming ray, and the deflection angle
+    \draw[guide] (B) -- ++(-7.7:10);
+    \draw[angle arc] ($(B)+(-7.7:7.5)$) arc[start angle=-7.7,end angle=-27.7,radius=7.5];
+    \node at ($(B)+(-17.7:9.6)$) {$\delta$};
+    % the actual ray, bent at the limb
+    \draw[vector,cAcc] (T) -- ($(B)+(172.3:1.2)$)
+      to[out=-7.7,in=152.3] ($(B)+(-27.7:1.2)$) -- ($(E)+(152.3:2.4)$);
+    % stars
+    \node[star,star points=5,star point ratio=2.2,fill=cAmber,draw=cInk,hair line,
+      inner sep=0pt,minimum size=3.4mm] at (T) {};
+    \node[star,star points=5,star point ratio=2.2,fill=white,draw=cInk,hair line,
+      inner sep=0pt,minimum size=3.4mm] at (A) {};
+    \node[anchor=south west,font=\footnotesize,inner sep=1pt] at ($(A)+(-1.6,1.6)$) {apparent};
+    \node[anchor=north west,font=\footnotesize,inner sep=1pt] at ($(T)+(-1.6,-1.8)$) {true};
+    \node[note,anchor=north east,font=\footnotesize\itshape] at (35,40) {not to scale};
+  \end{scope}
+  \node[anchor=north] at (55.5,4) {(b) bending of light};
+  \node[anchor=north,align=center,font=\footnotesize] at (55.5,-0.6)
+    {$\delta=1.75''$, twice\\ Newton's value};
+  % --------------------------------------------- (c) gravitational time dilation
+  \begin{scope}[xshift=76mm]
+    \path[ground,draw=none] (2,6.2) rectangle (33,8);
+    \draw[ground] (2,8) -- (33,8);
+    \draw[dim] (4,16) -- (4,34) node[midway,left=0.3mm,cSteel] {$h$};
+    \foreach \cy/\ang/\lab in {34/0/{higher:\\ runs faster}, 16/28/{lower:\\ runs slower}}{
+      \draw[outline,fill=white] (12,\cy) circle[radius=5.2];
+      \foreach \k in {0,30,...,330}{
+        \draw[hair line,cInk] (12,\cy) ++(90-\k:4.3) -- ++(90-\k:0.9);}
+      \node[anchor=west,align=left,font=\footnotesize] at (18.6,\cy) {\lab};
+    }
+    % hands: both clocks started at 12 together; the lower one has done less
+    \fill[cGrey!45] (12,16) -- ++(0:3.7) arc[start angle=0,end angle=28,radius=3.7] -- cycle;
+    \draw[guide] (12,16) -- ++(0:3.7);
+    \draw[thin line,cInk,-smallhead] (12,34) -- ++(0:3.7);
+    \draw[thin line,cInk,-smallhead] (12,16) -- ++(28:3.7);
+    \fill[cInk] (12,34) circle[radius=0.5] (12,16) circle[radius=0.5];
+  \end{scope}
+  \node[anchor=north] at (93.5,4) {(c) clock rates};
+  \node[anchor=north,align=center,font=\footnotesize] at (93.5,-0.6)
+    {lower clock falls\\ behind (exaggerated)};
+  % ------------------------------------------------------------------ (d) GPS
+  \begin{scope}[xshift=114mm]
+    \coordinate (O) at (17,13);
+    \draw[orbitpath] (O) ++(38:15) arc[start angle=38,end angle=100,radius=15];
+    \draw[planet] (O) circle[radius=6.5];
+    \node[font=\footnotesize] at (O) {Earth};
+    % satellite on the orbit, and its timed signal to a receiver
+    \coordinate (G) at ($(O)+(62:15)$);
+    \coordinate (R) at ($(O)+(118:6.5)$);
+    \draw[cAcc,thin line,hidden,-smallhead] (G) -- (R);
+    \fill[cInk] (R) circle[radius=0.6];
+    \begin{scope}[shift={(G)},rotate=-28]
+      \fill[cSteel!55] (-3.6,-0.9) rectangle (-1.4,0.9) (1.4,-0.9) rectangle (3.6,0.9);
+      \draw[hair line,cInk] (-3.6,-0.9) rectangle (-1.4,0.9) (1.4,-0.9) rectangle (3.6,0.9);
+      \draw[thin line,cInk] (-1.4,0) -- (1.4,0);
+      \draw[body] (-1.1,-1.1) rectangle (1.1,1.1);
+    \end{scope}
+    \node[anchor=south west,font=\footnotesize,align=left,inner sep=1pt]
+      at ($(G)+(2.4,1.6)$) {clock};
+    \node[cAcc,anchor=south east,font=\footnotesize,inner sep=1pt] at ($(R)!0.5!(G)+(-0.9,0.5)$) {signal};
+  \end{scope}
+  \node[anchor=north] at (131.5,4) {(d) GPS};
+  \node[anchor=north,align=center,font=\footnotesize] at (131.5,-0.6)
+    {clock gains $38\,\mu$s/day;\\ ignored: ${\sim}10$\,km/day};
+\end{tikzpicture}

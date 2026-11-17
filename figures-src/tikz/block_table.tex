@@ -1,0 +1,41 @@
+% block_table: a block on a table pulled by a hanging mass (Ch 8, fig:blocktable)
+% m1 slides on the table (kinetic friction mu_k), joined by a light string over a
+% light frictionless pulley at the table's edge to the hanging m2.
+% Force arrows are to scale for m1 = m2, mu_k = 0.3 (units of m2 g):
+%   a = (m2 - mu_k m1) g/(m1 + m2) = 0.35 g,  T = m1 m2 (1 + mu_k) g/(m1 + m2) = 0.65,
+%   friction mu_k m1 g = 0.3, weight m2 g = 1.
+% The string leaves the block horizontally, is tangent to the top of the pulley,
+% and leaves it vertically from the pulley's right-hand edge.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\u{1.5}                          % cm per m2 g
+  \def\r{0.32}                         % pulley radius
+  \def\h{0.32}                         % height of the string above the table
+  \def\E{5.0}                          % table edge
+  \pgfmathsetmacro\cx{\E+0.42}         % pulley centre
+  \pgfmathsetmacro\cy{\h-\r}
+  \pgfmathsetmacro\xs{\cx+\r}          % the hanging string
+  \def\ytop{-1.55}                     % top of m2
+  % table
+  \fill[cSlope] (-0.3,-0.36) rectangle (\E,0);
+  \draw[ground] (-0.3,0) -- (\E,0);
+  \draw[outline] (\E,0) -- (\E,-0.36);
+  % bracket and pulley
+  \draw[cInk,thin line,fill=cRock] (\E,-0.02) -- (\cx,\cy+0.06) -- (\cx,\cy-0.06) -- (\E,-0.30) -- cycle;
+  \draw[outline,fill=cMoon] (\cx,\cy) circle[radius=\r];
+  \draw[cSteel,hair line] (\cx,\cy) circle[radius=\r-0.07];
+  \node[point mass] at (\cx,\cy) {};
+  % string
+  \draw[cInk,thin line] (2.9,\h) -- (\cx,\h) arc[start angle=90,end angle=0,radius=\r] -- (\xs,\ytop);
+  % m1 on the table
+  \draw[body] (1.9,0) rectangle (2.9,0.64);
+  \node at (2.4,0.32) {$m_1$};
+  \draw[force] (2.9,\h) -- ++(0.65*\u,0) node[anchor=south,pos=0.55] {$T$};
+  \draw[applied] (1.9,0.06) -- ++(-0.3*\u,0) node[anchor=south east,inner sep=1pt] {$\mu_k m_1g$};
+  \draw[accel] (2.0,0.98) -- ++(0.8,0) node[anchor=west,cPrim] {$a$};
+  % m2 hanging
+  \draw[body] (\xs-0.32,\ytop-0.58) rectangle (\xs+0.32,\ytop);
+  \node at (\xs,\ytop-0.29) {$m_2$};
+  \draw[force] (\xs,\ytop) -- ++(0,0.65*\u) node[anchor=west,pos=0.45,xshift=1pt] {$T$};
+  \draw[force] (\xs,\ytop-0.58) -- ++(0,-1.0*\u) node[anchor=north] {$m_2g$};
+  \draw[accel] (\xs+0.75,\ytop-0.05) -- ++(0,-0.8) node[anchor=north,cPrim] {$a$};
+\end{tikzpicture}

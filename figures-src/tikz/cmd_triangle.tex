@@ -1,0 +1,49 @@
+% cmd_triangle: slicing a triangular lamina into strips (Ch 13, fig:cmdtri)
+% Base b = 4.5 cm on y = 0 from (0,0) to (b,0); apex at (3.0, h), h = 3.8 cm, so the
+% triangle is deliberately not isosceles.  The strip at height y runs from
+% x = 3.0 y/h to x = b + (3.0 - b) y/h; width b(1 - y/h); its midpoint
+% b/2 + (3.0 - b/2) y/h lies on the median from the apex to (b/2, 0).
+% The centroid is on that median at height h/3 (one-third of the way up the
+% median from the base's midpoint).  Strip drawn at y = 2.1 cm, dy = 0.2 cm.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\b{4.5}\def\h{3.8}\def\ax{3.0}
+  \def\y{2.1}\def\dy{0.2}
+  % left and right edges at height t
+  \pgfmathsetmacro\xla{\ax*\y/\h}
+  \pgfmathsetmacro\xra{\b+(\ax-\b)*\y/\h}
+  \pgfmathsetmacro\xlb{\ax*(\y+\dy)/\h}
+  \pgfmathsetmacro\xrb{\b+(\ax-\b)*(\y+\dy)/\h}
+  \pgfmathsetmacro\xm{\b/2+(\ax-\b/2)*(\y+\dy/2)/\h}
+  \pgfmathsetmacro\xg{\b/2+(\ax-\b/2)/3}
+  % the lamina
+  \filldraw[outline,fill=cMoon] (0,0) -- (\b,0) -- (\ax,\h) -- cycle;
+  % the strip
+  \filldraw[slice] (\xla,\y) -- (\xra,\y) -- (\xrb,\y+\dy) -- (\xlb,\y+\dy) -- cycle;
+  % median from the apex
+  \draw[cSteel,thin line,dash pattern=on 3pt off 2pt] (\ax,\h) -- (\b/2,0);
+  \fill[cInk] (\xm,\y+\dy/2) circle[radius=0.045];
+  \fill[cInk] (\b/2,0) circle[radius=0.04];
+  \node[cSteel,anchor=west,inner sep=3pt] at ($(\ax,\h)!0.86!(\b/2,0)$) {median};
+  % centroid
+  \pic at (\xg,\h/3) {cm};
+  % y, measured from the base (left)
+  \draw[dim] (-0.55,0) -- node[left,cSteel] {$y$} (-0.55,\y);
+  \draw[dimtick] (-0.68,\y) -- (\xla-0.08,\y);
+  \draw[dimtick] (-0.68,0) -- (-0.08,0);
+  % h/3 (right), to the centroid
+  \draw[dim] (\b+0.55,0) -- node[right,cSteel] {$h/3$} (\b+0.55,\h/3);
+  \draw[dimtick] (\xg+0.14,\h/3) -- (\b+0.68,\h/3);
+  \draw[dimtick] (\b+0.08,0) -- (\b+0.68,0);
+  % width of the strip, above it
+  \draw[dimtick] (\xlb,\y+\dy+0.06) -- (\xlb,\y+\dy+0.5);
+  \draw[dimtick] (\xrb,\y+\dy+0.06) -- (\xrb,\y+\dy+0.5);
+  \draw[dim] (\xlb,\y+\dy+0.4) -- (\xrb,\y+\dy+0.4);
+  \node[cSteel,anchor=west] at (\xrb+0.05,\y+\dy+0.42) {$b\,(1-y/h)$};
+  % thickness
+  \draw[leader,cAcc] (\xra-0.05,\y+\dy/2) -- (\xra+0.5,\y-0.3);
+  \node[cAcc,anchor=north west,inner sep=1pt] at (\xra+0.5,\y-0.3) {$dy$};
+  % base
+  \draw[dim] (0,-0.4) -- node[below,cSteel] {$b$} (\b,-0.4);
+  \draw[dimtick] (0,-0.08) -- (0,-0.53);
+  \draw[dimtick] (\b,-0.08) -- (\b,-0.53);
+\end{tikzpicture}

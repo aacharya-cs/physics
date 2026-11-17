@@ -1,0 +1,47 @@
+% gr_equivalence: Einstein's equivalence thought experiment (Ch 16, fig:equiv)
+% (a) A closed box at rest on the Earth: a released ball has weight mg and
+%     falls to the floor with acceleration g.
+% (b) The same box in deep space, far from any mass, its rocket giving it an
+%     upward acceleration a = g.  No force acts on the released ball; the
+%     floor accelerates up to meet it.  Relative to the box the ball's motion
+%     is the same as in (a): same start, same path, same time to reach the floor.
+% The faint ball is the same later instant in both boxes.
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \def\r{2.6}
+  % ---------------------------------------------------------------- (a)
+  \begin{scope}
+    \clip (-34,-14) rectangle (34,0);
+    \draw[planet] (0,-299.5) circle[radius=300];
+  \end{scope}
+  \node[font=\footnotesize] at (0,-7) {Earth};
+  \draw[outline,fill=white] (-17,0) rectangle (17,36);
+  \draw[guide] (0,26) -- (0,6);
+  \draw[moon,ghost] (0,6) circle[radius=\r];
+  \draw[moon] (0,26) circle[radius=\r];
+  \draw[force] (0,26) ++(0,-\r-0.4) -- ++(0,-10) node[anchor=west,pos=0.55] {$m\vg$};
+  \node[anchor=south] at (0,38) {(a) at rest on the Earth};
+  \node[anchor=north,align=center,font=\footnotesize] at (0,-15)
+    {gravity pulls the ball\\ down to the floor};
+  % ---------------------------------------------------------------- (b)
+  \begin{scope}[xshift=76mm]
+    % a few stars: deep space
+    \foreach \sx/\sy in {-30/28,-28/-6,-26/41,28/-8,31/3,30/37}{
+      \fill[cGrey] (\sx,\sy) circle[radius=0.45];}
+    % rocket nozzle and exhaust
+    \fill[cAmber!70] (-8,-3) -- (0,-15) -- (8,-3) -- cycle;
+    \fill[cAcc!80] (-4.5,-3) -- (0,-10.5) -- (4.5,-3) -- cycle;
+    \draw[outline,fill=cRock] (-10,0) -- (10,0) -- (8,-3) -- (-8,-3) -- cycle;
+    \draw[outline,fill=white] (-17,0) rectangle (17,36);
+    \draw[guide] (0,26) -- (0,6);
+    \draw[moon,ghost] (0,6) circle[radius=\r];
+    \draw[moon] (0,26) circle[radius=\r];
+    \node[anchor=west,font=\footnotesize,align=left] at (\r+1,26) {no force\\ on the ball};
+    \draw[accel] (21,8) -- (21,28) node[midway,anchor=west] {$a=g$};
+    \node[anchor=south] at (0,38) {(b) accelerating in deep space};
+    \node[anchor=north,align=center,font=\footnotesize] at (0,-15)
+      {the floor accelerates up\\ to meet the ball};
+  \end{scope}
+  % the verdict between the panels
+  \node[align=center,font=\footnotesize] at (38,18) {same result\\ inside};
+  \draw[dim,cInk] (27,12.5) -- (49,12.5);
+\end{tikzpicture}

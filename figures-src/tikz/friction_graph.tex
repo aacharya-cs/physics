@@ -1,0 +1,36 @@
+% friction_graph: friction f against applied force F (Ch 9, fig:friction)
+% Equal scales on both axes, so the static branch f = F rises at exactly 45 degrees
+% from the origin.  It ends at the ceiling mu_s N (closed dot: at F = mu_s N the
+% block is still held).  For F > mu_s N the block slides and f drops to the
+% constant mu_k N (open dot: that value starts just beyond breakaway).
+% Drawn with mu_s N = 3, mu_k N = 2.2 (so mu_k/mu_s = 0.73).
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    x=1.15cm, y=1.15cm,
+    xmin=0, xmax=7.2, ymin=0, ymax=3.9,
+    xtick={3}, xticklabels={$\mu_s N$},
+    ytick={2.2,3}, yticklabels={$\mu_k N$,$\mu_s N$},
+    xlabel={applied force $F$}, ylabel={friction $f$},
+    xlabel style={at={(axis description cs:1,-0.02)},anchor=north east},
+    ylabel style={at={(axis description cs:-0.15,0.5)}}]
+  \def\fs{3}\def\fk{2.2}
+  % guides to the axes
+  \draw[guide] (axis cs:0,\fs) -- (axis cs:\fs,\fs);
+  \draw[guide] (axis cs:0,\fk) -- (axis cs:\fs,\fk);
+  \draw[guide] (axis cs:\fs,0) -- (axis cs:\fs,\fk);
+  % static: f = F, a ceiling not a value
+  \addplot[cPrim,domain=0:\fs,samples=2] {x} node[pos=0.5,sloped,above,inner sep=6pt] {static: $f=F$};
+  % the drop at breakaway
+  \draw[guide,cAcc] (axis cs:\fs,\fs) -- (axis cs:\fs,\fk);
+  % kinetic: constant
+  \addplot[cAcc,domain=\fs:7.0,samples=2] {\fk};
+  \node[circle,fill=cPrim,inner sep=0pt,minimum size=4.5pt] at (axis cs:\fs,\fs) {};
+  \node[circle,fill=white,draw=cAcc,thin line,inner sep=0pt,minimum size=4.5pt] at (axis cs:\fs,\fk) {};
+  % labels
+  \node[cAcc,anchor=south] at (axis cs:5.1,\fk+0.06) {kinetic: $f=\mu_k N$};
+  \draw[leader] (axis cs:\fs+0.06,\fs+0.04) -- (axis cs:3.7,3.45)
+    node[anchor=west,font=\footnotesize] {breakaway: the ceiling};
+  \node[font=\footnotesize,text=cSteel] at (axis cs:1.95,0.35) {nothing moves};
+  \node[font=\footnotesize,text=cSteel] at (axis cs:5.1,0.35) {the body slides};
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,26 @@
+% power_cubic: power needed against drag rises as v^3 (Ch 11, fig:power)
+% Drag F = c v^2 (fast motion through air), and P = F v, so P = c v^3.
+% Units: v0 = 1, P0 = c v0^3 = 1.  Doubling the speed, v = 2 v0, needs
+% P = 8 P0: eight times the power.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=9.4cm, height=6.2cm,
+    xmin=0, xmax=2.45, ymin=0, ymax=10.2,
+    xlabel={speed $v$}, ylabel={power $P$},
+    ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,yshift=1pt},
+    xtick={1,2}, xticklabels={$v_0$,$2v_0$},
+    ytick={1,8}, yticklabels={$P_0$,$8P_0$}]
+  % reading-off guides
+  \draw[guide] (axis cs:1,0) -- (axis cs:1,1) -- (axis cs:0,1);
+  \draw[guide] (axis cs:2,0) -- (axis cs:2,8) -- (axis cs:0,8);
+  % the curve
+  \addplot[cPrim,domain=0:2.12] {x^3};
+  \node[point mass,fill=cPrim] at (axis cs:1,1) {};
+  \node[point mass,fill=cPrim] at (axis cs:2,8) {};
+  \node[cPrim,anchor=west] at (axis cs:2.15,9.2) {$P\propto v^3$};
+  % the point of the figure
+  \draw[leader,cInk,-smallhead,bend left=20] (axis cs:1.08,1.6) to (axis cs:1.88,7.4);
+  \node[anchor=east,align=right] at (axis cs:1.42,5.2)
+    {double the speed,\\ eight times\\ the power};
+\end{axis}
+\end{tikzpicture}

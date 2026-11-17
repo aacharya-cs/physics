@@ -1,0 +1,42 @@
+% vc_slack: where the string goes slack, and the flight that follows (Ch 10, fig:vcslack;
+% Example ex:slack).  String l = 5 m; the string slackens after a rise h = 8 m.
+% Units l = 1, g = 1.  theta from the lowest point; bob moves anticlockwise.
+%   cos(theta) = (l - h)/l = -0.6, theta = 126.87 deg (polar angle 36.87 deg),
+%   slack point (0.8, 0.6);  v^2 = g l |cos theta| = 0.6, along the tangent (-0.6, 0.8).
+% Projectile: x = 0.8 - 0.6 v t,  y = 0.6 + 0.8 v t - t^2/2.
+%   Apex at t = 0.8 v: further rise (0.8 v)^2/2 = 0.192 l = 0.96 m, at x = 0.512.
+%   It stays inside the circle (string slack) until t = 2.4787 (found numerically),
+%   at (-0.352, -0.936), where the string jerks taut again.
+\begin{tikzpicture}[x=2.8cm,y=2.8cm]
+  \pgfmathsetmacro\vs{sqrt(0.6)}
+  \coordinate (O) at (0,0);
+  \coordinate (S) at (0.8,0.6);
+  % the circle the bob would follow, and the part it does follow
+  \draw[orbitpath] (O) circle[radius=1];
+  \draw[cPrim,curve] (0,-1) arc[start angle=-90,end angle={atan2(0.6,0.8)},radius=1];
+  % the free flight
+  \draw[cAcc,curve] plot[domain=0:2.4787,samples=70,variable=\t]
+    ({0.8-0.6*\vs*\t},{0.6+0.8*\vs*\t-\t*\t/2});
+  \node[dot] at (-0.352,-0.936) {};
+  \node[cAcc,font=\footnotesize] at (-0.56,-0.2) {projectile};
+  % the string at the moment it slackens, and theta from the lowest point
+  \draw[guide] (O) -- (0,-1);
+  \draw[cInk,thin line,hidden] (O) -- node[pos=0.55,anchor=north west,inner sep=1pt] {$\ell$} (S);
+  \draw[angle arc,-smallhead] (0,-0.2) arc[start angle=-90,end angle=36.87,radius=0.2];
+  \node at (-30:0.33) {$\theta$};
+  \node[dot] at (O) {};
+  % launch
+  \draw[velocity] (0,-1) -- ++(0.4,0) node[anchor=north,pos=0.55] {$u$};
+  \node[dot] at (0,-1) {};
+  % slack point
+  \node[dot] at (S) {};
+  \node[anchor=north west,inner sep=0pt] at ($(S)+(0.13,-0.04)$) {$T=0$};
+  % heights
+  \def\xd{1.45}
+  \draw[dimtick] (0,-1) -- (\xd+0.1,-1);
+  \draw[dimtick] (S) -- (\xd+0.1,0.6);
+  \draw[dimtick] (0.512,0.792) -- (\xd+0.1,0.792);
+  \draw[dim] (\xd,-1) -- node[anchor=west,cSteel] {$8$ m} (\xd,0.6);
+  \draw[dim] (\xd,0.6) -- (\xd,0.792);
+  \node[cSteel,anchor=west] at (\xd,0.696) {$0.96$ m};
+\end{tikzpicture}

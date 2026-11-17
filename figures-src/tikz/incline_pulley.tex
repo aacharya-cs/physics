@@ -1,0 +1,54 @@
+% incline_pulley: block on a smooth incline joined over a pulley to a hanging mass
+% (Ch 8, fig:inclinepulley).  theta = 30 degrees.
+% Only the along-slope forces on m1 are drawn (T up the slope, m1 g sin(theta)
+% down it): N and m1 g cos(theta) cancel and do not affect the motion.
+% Force arrows are to scale for m1 = m2 (units of m2 g):
+%   a = (m2 - m1 sin(theta)) g/(m1 + m2) = 0.25 g (m2 descends),
+%   T = m1 m2 (1 + sin(theta)) g/(m1 + m2) = 0.75,  m1 g sin(theta) = 0.5,  m2 g = 1.
+% The string runs parallel to the slope, is tangent to the pulley, and leaves it
+% vertically from the pulley's right-hand edge.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\th{30}
+  \def\Lb{5.2}                          % base of the incline
+  \pgfmathsetmacro\H{\Lb*tan(\th)}
+  \def\u{1.0}                           % cm per m2 g
+  \def\r{0.30}                          % pulley radius
+  \coordinate (A) at (\Lb,\H);          % apex
+  \coordinate (C) at ($(A)+(0.10,0.30)$);% pulley centre
+  % height of the string above the slope = distance of C from the slope + r
+  \pgfmathsetmacro\d{-sin(\th)*0.10+cos(\th)*0.30+\r}
+  \pgfmathsetmacro\sP{cos(\th)*(\Lb+0.10)+sin(\th)*(\H+0.30)}  % tangent point, along slope
+  \def\ytop{2.15}                        % top of m2
+  % ground and incline
+  \path[ground,draw=none] (-0.4,-0.16) rectangle (\Lb+1.5,0);
+  \draw[outline] (-0.4,0) -- (\Lb+1.5,0);
+  \draw[outline,fill=cSlope] (0,0) -- (\Lb,0) -- (A) -- cycle;
+  \draw[angle arc] (1.0,0) arc[start angle=0,end angle=\th,radius=1.0];
+  \node at (\th/2:1.28) {$\theta$};
+  % bracket and pulley
+  \draw[cInk,thin line,fill=cRock] ($(A)+(-0.14,-0.02)$) -- ($(C)+(-0.05,0)$) -- ($(C)+(0.05,0)$)
+    -- ($(A)+(0.02,-0.16)$) -- cycle;
+  \draw[outline,fill=cMoon] (C) circle[radius=\r];
+  \draw[cSteel,hair line] (C) circle[radius=\r-0.07];
+  \node[point mass] at (C) {};
+  % the string: along the slope to the pulley, over it, and straight down
+  \draw[cInk,thin line] ($(\th:3.0)+(90+\th:\d)$) -- ($(C)+(90+\th:\r)$)
+    arc[start angle=90+\th,end angle=0,radius=\r] -- ($(C)+(\r,0)$) -- (\Lb+0.10+\r,\ytop);
+  % m1 and its along-slope forces, in the slope's frame
+  \begin{scope}[shift={(\th:2.0)},rotate=\th]
+    \draw[body] (0,0) rectangle (1.0,0.66);
+    \node[rotate=\th] at (0.5,0.33) {$m_1$};
+    \draw[force] (1.0,\d) -- ++(0.75*\u,0) node[anchor=south east,pos=0.9,inner sep=2pt] {$T$};
+    \draw[force] (0,0.33) -- ++(-0.5*\u,0) coordinate (w);
+    \draw[accel] (0.1,1.0) -- ++(0.8,0) coordinate (aa);
+  \end{scope}
+  \node[cCrim,anchor=south east,inner sep=1pt,yshift=3pt] at (w) {$m_1g\sin\theta$};
+  \node[cPrim,anchor=south] at (aa) {$a$};
+  % m2 hanging
+  \pgfmathsetmacro\xs{\Lb+0.10+\r}
+  \draw[body] (\xs-0.32,\ytop-0.58) rectangle (\xs+0.32,\ytop);
+  \node at (\xs,\ytop-0.29) {$m_2$};
+  \draw[force] (\xs,\ytop) -- ++(0,0.75*\u) node[anchor=west,pos=0.45,xshift=1pt] {$T$};
+  \draw[force] (\xs,\ytop-0.58) -- ++(0,-1.0*\u) node[anchor=west,pos=0.85,xshift=1pt] {$m_2g$};
+  \draw[accel] (\xs+0.85,\ytop) -- ++(0,-0.8) node[anchor=north,cPrim] {$a$};
+\end{tikzpicture}

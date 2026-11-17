@@ -1,0 +1,44 @@
+% cm_boat: walking on a boat, the centre of mass stays put (Ch 13, fig:cmboat)
+% Worked example: person 60 kg, boat 120 kg, length 3 m, frictionless water.
+% Water-fixed x in metres, drawn at 1 m = 1.75 cm (\m).  Before: boat from 0 to 3
+% (its CM at 1.5), person at its left end, x = 0.  System CM = (60*0 + 120*1.5)/180
+% = 1.0 m.  After: boat from -1 to 2 (CM 0.5), person at its right end, x = 2.
+% System CM = (60*2 + 120*0.5)/180 = 1.0 m: unchanged.  s_p = 2 m forward,
+% s_b = 1 m back; s_p + s_b = 3 m (the boat's length) and 60 s_p = 120 s_b.
+\begin{tikzpicture}[x=1cm,y=1cm,
+    person/.pic={% feet at the origin, about 1 cm tall
+      \draw[cInk,thin line,line cap=round] (-0.09,0) -- (0,0.4) -- (0.09,0)
+        (0,0.4) -- (0,0.78) (-0.13,0.5) -- (0,0.7) -- (0.13,0.5);
+      \filldraw[fill=cMoon,draw=cInk,thin line] (0,0.9) circle[radius=0.12];},
+    shift arrow/.style={thin line,cSteel,-smallhead}]
+  \def\m{1.75}
+  % a boat with hull from x = #1 to #1 + 3 (metres), the person at x = #2, deck at height #3
+  \def\boat#1#2#3{%
+    \draw[cPrim,thin line] ({\m*(#1)-0.6},#3-0.17) -- ({\m*(#1+3)+0.6},#3-0.17);
+    \filldraw[body] ({\m*(#1)},#3) -- ({\m*(#1+3)},#3) -- ({\m*(#1+3)-0.22},#3-0.32)
+      -- ({\m*(#1)+0.22},#3-0.32) -- cycle;
+    \pic at ({\m*(#2)},#3) {person};}
+  \def\yb{2.6}\def\ya{0}
+  \boat{0}{0}{\yb}
+  \node[anchor=east] at (-0.9,\yb-0.1) {before};
+  \boat{-1}{2}{\ya}
+  \node[anchor=east] at ({-\m-0.9},\ya-0.1) {after};
+  % the system's centre of mass, at x = 1 m in both
+  \draw[guide] (\m,-0.95) -- (\m,\yb+1.35);
+  \pic at (\m,\yb+0.45) {cm};
+  \pic at (\m,\ya+0.45) {cm};
+  \node[anchor=south,align=center] at (\m,\yb+1.35) {centre of mass of person and boat};
+  % the person's displacement relative to the water
+  \draw[dimtick] (0,\yb-0.08) -- (0,1.45);
+  \draw[dimtick] ({2*\m},\ya+1.12) -- ({2*\m},1.75);
+  \draw[shift arrow] (0,1.6) -- ({2*\m},1.6);
+  \node[cSteel,knockout,text=cSteel,anchor=south] at (0.45*\m,1.62) {$s_{\text{p}}=\SI{2}{m}$};
+  % the boat's displacement relative to the water (its right end)
+  \draw[dimtick] ({3*\m},\yb-0.42) -- ({3*\m},-1.0);
+  \draw[dimtick] ({2*\m},\ya-0.4) -- ({2*\m},-1.0);
+  \draw[shift arrow] ({3*\m},-0.85) -- ({2*\m},-0.85);
+  \node[cSteel,anchor=north] at (2.5*\m,-0.9) {$s_{\text{b}}=\SI{1}{m}$};
+  % the masses
+  \node[anchor=east,inner sep=2pt] at (-0.15,\yb+0.9) {\SI{60}{kg}};
+  \node[inner sep=0pt,font=\footnotesize] at ({2.2*\m},\yb-0.16) {\SI{120}{kg}};
+\end{tikzpicture}

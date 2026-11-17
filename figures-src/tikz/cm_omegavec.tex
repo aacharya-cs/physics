@@ -1,0 +1,52 @@
+% cm_omegavec: angular velocity is an axial vector (Ch 6, fig:omegavec)
+% (a) Oblique view: a particle circling anticlockwise (seen from above) about a
+%     vertical axis.  With r = (0,-R,0) at the front and v = (v,0,0),
+%     omega = r x v / R^2 points up the axis, so v = omega x r.
+% (b), (c) The same circle seen from above, i.e. drawn on the page: clockwise
+%     gives omega into the page, anticlockwise out of it.  In each case
+%     v = omega x r is tangent to the circle in the sense of rotation.
+% Colours: omega forest (angular velocity), v forest, r ink.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % ---------------------------------------------------------------- (a) ---
+  \begin{scope}
+    \def\a{1.65}\pgfmathsetmacro\b{\persp*\a}
+    \fill[cSlope] (0,0) ellipse[x radius=\a,y radius=\b];
+    \draw[rotation axis] (0,-1.15) -- (0,0);
+    \draw[cSteel,thin line] (0,0) ellipse[x radius=\a,y radius=\b];
+    % particle at parameter -35 degrees (front right)
+    \pgfmathsetmacro\px{\a*cos(-35)}\pgfmathsetmacro\py{\b*sin(-35)}
+    \pgfmathsetmacro\tx{-\a*sin(-35)}\pgfmathsetmacro\ty{\b*cos(-35)}
+    \pgfmathsetmacro\tl{sqrt(\tx*\tx+\ty*\ty)}
+    \draw[thin line,cInk] (0,0) -- node[above,inner sep=2pt] {$\vr$} (\px,\py);
+    \draw[velocity] (\px,\py) -- ++({1.0*\tx/\tl},{1.0*\ty/\tl})
+      node[anchor=west,cFor,inner sep=2pt] {$\vv$};
+    \shade[ball color=cBlock] (\px,\py) circle[radius=0.085];
+    \draw[cSteel,thin line] (\px,\py) circle[radius=0.085];
+    % the axis and omega
+    % curled fingers: back half behind the axis, front half in front of it
+    \draw[rotation,cFor] (0.36,1.16) arc[start angle=0,end angle=160,x radius=0.36,y radius=\persp*0.36];
+    \draw[velocity] (0,0) -- (0,2.05) node[anchor=south,cFor] {$\vomega$};
+    \draw[cFor,thin line] ([shift={(200:0.36 and \persp*0.36)}]0,1.16) arc[start angle=200,end angle=360,x radius=0.36,y radius=\persp*0.36];
+    \node[anchor=west,font=\footnotesize,cSteel,align=left] at (0.45,1.25) {axis of\\[-2pt]rotation};
+    \node[dot] at (0,0) {};
+    \node[anchor=north,align=center] at (0,-1.35) {(a)\enspace seen obliquely:\\ $\vomega$ along the axis};
+  \end{scope}
+  % ------------------------------------------------- (b) and (c), seen from above ---
+  \foreach \cx/\sgn/\lab/\words in {5.0/-1/b/{clockwise:\\ $\vomega$ into the page},
+                                    9.7/1/c/{anticlockwise:\\ $\vomega$ out of the page}}{
+    \begin{scope}[shift={(\cx,0.35)}]
+      \def\R{1.2}
+      \draw[outline] (0,0) circle[radius=\R];
+      \draw[thin line,cInk] (0,0) -- node[below,inner sep=2pt,pos=0.62] {$\vr$} (\R,0);
+      \draw[velocity] (\R,0) -- ++(0,\sgn*1.0) node[anchor=west,cFor,inner sep=3pt] {$\vv$};
+      \shade[ball color=cBlock] (\R,0) circle[radius=0.085];
+      \draw[cSteel,thin line] (\R,0) circle[radius=0.085];
+      % sense of rotation
+      \draw[rotation,cFor] (90-\sgn*30:\R+0.25) arc[start angle=90-\sgn*30,end angle=90+\sgn*30,radius=\R+0.25];
+      % omega at the centre
+      \ifnum\sgn<0 \pic at (0,0) {into page}; \else \pic at (0,0) {out of page}; \fi
+      \node[cFor,anchor=south] at (0,0.12) {$\vomega$};
+      \node[anchor=north,align=center] at (0,-1.7) {(\lab)\enspace\words};
+    \end{scope}
+  }
+\end{tikzpicture}

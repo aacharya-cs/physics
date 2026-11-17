@@ -1,0 +1,29 @@
+% work_area: work as the area under the F-x graph (Ch 11, fig:workarea)
+% A spring gun: the spring starts compressed by x0 and pushes the ball while it
+% relaxes.  After the ball has moved x the compression is x0 - x, so
+%   F = k(x0 - x),  falling linearly from kx0 to 0 at x = x0.
+% One thin strip (height F at its midpoint) has area F dx = dW; the strips add to the triangle
+%   W = (1/2)(kx0)(x0) = (1/2) k x0^2,  the energy the spring stored (Sec. on U).
+% Units: k = 1, x0 = 1.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=9.4cm, height=5.6cm,
+    xmin=0, xmax=1.22, ymin=0, ymax=1.2,
+    xlabel={distance moved $x$}, ylabel={force $F$},
+    ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,yshift=1pt},
+    xtick={1}, xticklabels={$x_0$},
+    ytick={1}, yticklabels={$kx_0$}]
+  % the area: the work done on the ball
+  \addplot[area fill,domain=0:1,samples=2] {1-x} \closedcycle;
+  % one thin strip, F dx
+  \def\xs{0.56}\def\dx{0.06}
+  \draw[strip,fill=cPrim!40] (axis cs:\xs,0) rectangle (axis cs:\xs+\dx,{1-\xs-0.5*\dx});
+  % the force line
+  \addplot[cPrim,domain=0:1,samples=2] {1-x};
+  \node[cPrim,anchor=south west] at (axis cs:0.30,0.72) {$F=k(x_0-x)$};
+  % labels
+  \draw[leader,cPrim] (axis cs:\xs+0.5*\dx,0.30) -- (axis cs:0.80,0.55)
+    node[anchor=south west,inner sep=1pt] {strip: $dW=F\,dx$};
+  \node[cPrim,align=left] at (axis cs:0.25,0.25) {$W=\text{area}$\\[1pt] $\phantom{W}=\tfrac12kx_0^2$};
+\end{axis}
+\end{tikzpicture}

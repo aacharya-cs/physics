@@ -1,0 +1,1811 @@
+\ncertchapter{10}{Circular Dynamics and Non-Inertial Frames}\label{ch:circdyn}
+
+\chref{ch:circkin} proved that a body moving on a circle must have an inward acceleration $v^2/r$ (speed $v$, radius $r$). It said nothing
+about what produces that acceleration. This chapter asks, for each real situation, \emph{which actual
+force supplies it}? For a car on a flat road it is friction; for a conical pendulum, a component of the
+string's tension; for a satellite, gravity; for a rider in a rotor, the normal force from the wall. The
+physics is the same in every case.
+
+The chapter works through horizontal circles, vehicles on curved roads, and the vertical circle, which is
+harder because the speed varies around the loop and a string can go slack. It then describes motion from
+inside an accelerating or rotating frame, where Newton's laws fail unless a pseudo-force is added, and
+closes with an application that draws these threads together: how a spinning spacecraft produces
+artificial gravity, and why any practical design must be very large.
+
+\section{The Central Principle}\label{sec:centralprinciple}
+
+A beginner's instinct is to draw a free-body diagram and then add ``the centripetal force'' as an extra
+arrow. \textbf{That is always wrong.} There is no such force in nature, and the extra arrow counts a
+force twice, an error that is hard to find later because each individual step looks reasonable. What
+\chref{ch:circkin} established is a \emph{requirement}:
+\[
+\text{if a body of mass } m \text{ moves on a circle of radius } r \text{ at speed } v,
+\quad\text{then}\quad
+\sum F_{\text{radial}} \;=\; \frac{mv^{2}}{r}.
+\]
+The left side is a sum of \emph{real} forces (tension, gravity, friction, the normal force). The right
+side is the bill those forces must collectively settle. ``Centripetal'' names the \emph{role}, like
+``goalkeeper''; it never names a new player.
+
+Two beliefs about a stone whirled on a string are worth correcting now. The outward tug you feel in your
+hand is real, but it is the third-law partner of the string's inward pull on the stone: it acts on
+\emph{you}, not on the stone. And if the string snaps, the stone is not flung radially outward. Nothing
+was pushing it outward; the inward pull simply stops, and by the first law (\chref{ch:newton}) the stone
+carries on in a straight line along the \emph{tangent} at the point of release.
+
+So the method is always the same two steps: \textbf{(1)} list the real forces; \textbf{(2)} resolve them
+along the radius and set the inward total equal to $mv^{2}/r$. If a tangential acceleration is also
+present, resolve along the tangent too and set that total to $ma_t$. Throughout the chapter these
+equations are written in the ground frame, which we treat as inertial; pseudo-forces appear only in
+\S\ref{sec:noninertial}, where the frame itself accelerates.
+
+\begin{methodbox}{The working equations}
+\[
+\sum F_{\text{radial (inward)}}=\frac{mv^{2}}{r}=m\omega^{2}r,
+\qquad\qquad
+\sum F_{\text{tangential}}=ma_t=mr\alpha.
+\]
+Here $\omega=v/r$ is the angular speed (\si{rad/s}), $a_t$ the tangential acceleration and $\alpha$ the
+angular acceleration (\si{rad/s^2}), all as in \chref{ch:circkin}. In \emph{uniform} circular motion the
+second equation is zero, and only the radial one is needed.
+\end{methodbox}
+
+\section{Horizontal Circles}
+In every case of this section the body stays at one height, so the vertical forces balance and the
+horizontal ones supply $mv^{2}/r$; the cases differ only in which real force has the horizontal part.
+
+\subsection{The conical pendulum: how can it just stay there?}
+
+A bob of mass $m$ on a string of length $\ell$ is whirled so that it travels a horizontal circle while the
+string, with tension $T$, sweeps out a cone at a fixed angle $\theta$ to the vertical (Figure~\ref{fig:conical}). Students find this puzzling.
+
+\begin{motivbox}{Resolving the puzzle: it is \emph{not} in equilibrium}
+Three questions are usually tangled together.
+
+\smallskip
+\textbf{``Why does it not fall?''} Because vertically it \emph{is} in equilibrium. The bob never moves
+up or down, so its vertical acceleration is zero and the vertical forces cancel: the upward part of the
+tension, $T\cos\theta$, matches the weight $mg$.
+
+\smallskip
+\textbf{``Then why does it not swing back to the middle?''} Because horizontally it is \emph{not} in
+equilibrium, and is not supposed to be. The inward force $T\sin\theta$ is unopposed, and that is
+exactly right: the bob \emph{is} accelerating, continuously bent out of the straight line it would
+otherwise follow. The unbalanced inward force is the reason the bob goes round instead of off.
+
+\smallskip
+\textbf{``Why does it sit at that particular angle?''} The angle is \emph{selected} by the speed. Spin
+the bob faster and it needs a bigger inward force; it swings outward, which increases $\theta$ and with
+it $T\sin\theta$, until supply matches demand again. Slow it down and it falls inward to a smaller cone.
+
+\smallskip
+\emph{In short:} \textbf{vertical equilibrium, horizontal acceleration}, as in every horizontal circle
+of this section.
+\end{motivbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_conical}
+\figcaption{fig:conical}{The conical pendulum. Only two real forces act: the tension $T$ along the
+string and the weight $mg$. Resolving $T$ vertically supports the bob; resolving it horizontally bends
+the bob's path. The circle has radius $r=\ell\sin\theta$, \emph{not} $\ell$.}
+\end{figure}
+
+\begin{derivbox}{Speed, angular speed and period}
+\stepn{1} \textbf{Identify the real forces.} Exactly two: the tension $T$ along the string, and the
+weight $mg$ downward. (No ``centripetal force'' is drawn; see \S\ref{sec:centralprinciple}.)
+
+\stepn{2} \textbf{Vertical: equilibrium.} The bob stays at the same height, so
+\[
+T\cos\theta=mg. \tag{i}
+\]
+
+\stepn{3} \textbf{Horizontal: Newton's second law along the radius.} The only horizontal force is the
+inward component of the tension, and the radius of the circle is $r=\ell\sin\theta$:
+\[
+T\sin\theta=\frac{mv^{2}}{r}. \tag{ii}
+\]
+
+\stepn{4} \textbf{Divide (ii) by (i)}: this eliminates both $T$ and $m$ in one stroke:
+\[
+\tan\theta=\frac{v^{2}}{rg}
+\qquad\Longrightarrow\qquad
+\boxed{\;v=\sqrt{rg\tan\theta}\;}
+\]
+
+\stepn{5} \textbf{Angular speed and period.} With $\omega=v/r$, and writing the period as $T_{\text{per}}$
+to keep it distinct from the tension $T$,
+\[
+\omega=\sqrt{\frac{g\tan\theta}{r}},
+\qquad
+T_{\text{per}}=\frac{2\pi}{\omega}=2\pi\sqrt{\frac{r}{g\tan\theta}}.
+\]
+Substituting $r=\ell\sin\theta$ and simplifying $\dfrac{\sin\theta}{\tan\theta}=\cos\theta$:
+\[
+\boxed{\;T_{\text{per}}=2\pi\sqrt{\frac{\ell\cos\theta}{g}}\;}
+\]
+
+\stepn{6} \textbf{Sanity checks.}
+\begin{itemize}
+\item As $\theta\to0$ (a nearly vertical string, very slow whirl), $T_{\text{per}}\to2\pi\sqrt{\ell/g}$,
+      the period of a simple pendulum swinging with \emph{small} amplitude (derived when oscillations
+      are studied). The match is no accident: a small conical motion is two small swings at right
+      angles, a quarter-cycle out of step. \checkmark
+\item As $\theta\to90^\circ$, $\cos\theta\to0$ so $T_{\text{per}}\to0$ and, from (i),
+      $T=mg/\cos\theta\to\infty$. A perfectly horizontal string is impossible: it has no upward
+      component to hold the bob up, however fast the bob is spun. \checkmark
+\item The mass has cancelled: on strings of the same length, a heavy bob and a light one cone out at
+      the same angle for the same speed. \checkmark
+\end{itemize}
+\end{derivbox}
+
+\begin{trapbox}{the radius is $\ell\sin\theta$, not $\ell$}
+The string length is the \emph{slant}; the circle's radius is its horizontal projection. Using $r=\ell$
+is the most common error in this problem.
+\end{trapbox}
+
+\subsection{A particle inside a smooth cone}
+In the conical pendulum the slanted force was a tension. A surface can play the same part. Picture a funnel held point-down, with a marble running round the inside of it. Given the right speed
+the marble settles into a steady horizontal circle partway up the wall, neither climbing nor slipping
+down. The apparatus looks nothing like a conical pendulum, but the force diagram is the same one
+(Figure~\ref{fig:cdcone}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_cone}
+\figcaption{fig:cdcone}{A particle riding the inside of a smooth cone whose wall makes an angle $\theta$ with the horizontal. The normal force is perpendicular to the wall, so it makes $\theta$ with the vertical: its vertical part supports the particle and its horizontal part turns it, exactly as the tension did in the conical pendulum.}
+\end{figure}
+
+\begin{derivbox}{The same two steps, a different force}
+A particle rides a horizontal circle of radius $r$ on the smooth inside wall of a cone whose axis is
+vertical and whose wall makes an angle $\theta$ with the horizontal (so the normal force makes
+$\theta$ with the vertical, and the cone's half-angle is $90^\circ-\theta$). The wall is smooth, so
+again only \emph{two} real forces act: the normal force $N$ (perpendicular to the wall) and the
+weight $mg$.
+
+\stepn{1} \textbf{Vertical equilibrium:} $N\cos\theta=mg$.
+
+\stepn{2} \textbf{Radial (inward) acceleration:} $N\sin\theta=\dfrac{mv^{2}}{r}$.
+
+\stepn{3} \textbf{Divide:} $\tan\theta=\dfrac{v^{2}}{rg}$, so
+\[
+\boxed{\;v=\sqrt{rg\tan\theta}\;}
+\]
+This is \emph{identical} to the conical pendulum.
+
+\smallskip
+\textbf{Watch which angle is given.} Many problems specify the cone by its half-angle $\alpha$, measured
+from the axis. Then $\theta=90^\circ-\alpha$ and the same result reads $v=\sqrt{rg\cot\alpha}$.
+
+\smallskip
+\textbf{Why identical?} One slanted force does double duty, its vertical part holding the body up
+and its horizontal part turning it; whether it is a tension or a normal force does not matter.
+\end{derivbox}
+
+\subsection{The rotor and the death well}\label{sub:rotor}
+So far one slanted force both held the body up and turned it. Remove the slant, so that the surface is
+vertical, and the two jobs must be shared between two different forces. Two fairground machines pose this problem.
+\textbf{The death well} (the \emph{maut ka kuan} of travelling fairs) is a large wooden cylinder
+standing on its end so that its wall is vertical; a motorcyclist rides round the
+\emph{inside} of that wall, high above the floor. Here the \textbf{wall is stationary and the rider
+moves}. \textbf{The rotor} uses the same cylinder, but the \textbf{cylinder itself
+spins} about its vertical axis while the riders stand with their backs against the wall. Once it is
+turning fast enough the floor is lowered away, and the riders stay pinned to the wall.
+
+In both, a body of mass $m$ travels a horizontal circle of radius $r$ pressed against a \emph{vertical}
+surface, and the question is the same: \emph{how fast must the motion be for the body not to slide down
+the wall?} What makes the problem feel unfamiliar is a reversal of geometry. On a floor the normal force
+is vertical and friction is horizontal; on a vertical wall \textbf{the normal force is horizontal and
+friction is vertical} (Figure~\ref{fig:rotor}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_rotor}
+\figcaption{fig:rotor}{Two fairground rides that look different and are not. In the \emph{death well} the
+wall is fixed and the rider drives round the inside; in the \emph{rotor} the cylinder spins and carries
+the rider with it. In both, the normal force is horizontal and friction vertical.}
+\end{figure}
+
+\begin{derivbox}{The minimum speed not to slide down}
+\stepn{1} \textbf{Get the directions right.} The wall is vertical, so the normal force $N$ it
+exerts is \textbf{horizontal}, pointing inward at the axis.
+Friction acts along the surface, which here means \textbf{vertically}, and it must point \emph{up} to
+stop the rider sliding down.
+
+\stepn{2} \textbf{Radial equation.} The only horizontal force is $N$, and it does the turning:
+\[
+N=\frac{mv^{2}}{r}=m\omega^{2}r.
+\]
+
+\stepn{3} \textbf{Vertical equation.} The rider does not slide, so friction balances the weight exactly:
+\[
+f=mg.
+\]
+
+\stepn{4} \textbf{Impose the friction limit} $f\le\mu N$ (here $\mu$ is the static coefficient, since
+the rider must not start to slip):
+\[
+mg\le\mu\,m\omega^{2}r
+\qquad\Longrightarrow\qquad
+\boxed{\;\omega_{\min}=\sqrt{\frac{g}{\mu r}}\;}
+\]
+The mass cancels: a heavy rider and a light one are equally safe, because both the weight to be
+supported and the normal force (hence the friction available) scale with $m$.
+
+\smallskip
+\textbf{The counter-intuitive reading:} spinning \emph{faster} presses you harder against the wall,
+which buys more friction, which is what holds you up. The ride's safety comes from its speed.
+\end{derivbox}
+
+\subsection{Why a cyclist leans into the bend}
+In the rotor friction held the body up; on a level road it does the turning, and that raises a new
+question. A cyclist taking a corner at speed tips the whole machine inward; a rider who tried to stay upright
+would fall \emph{outward}. Yet the inward force comes from friction at the tyres, which is available
+whether the bicycle leans or not. The reason for leaning involves \emph{torque}, the turning effect of a
+force, rather than force itself: it is about not toppling while using the inward force.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_cyclist}
+\figcaption{fig:cdcyc}{Why leaning is compulsory, not a matter of style (seen from behind, centre of the bend to the left). Upright (left), friction $f$ acts at road level, a height $h$ below $G$, and its moment about $G$ topples the rider outwards. Leaning (right) by $\theta$ with $\tan\theta=f/N$ makes the resultant contact force $F$ (dashed: $N$ and $f$ added) pass through $G$, so it has no moment about $G$.}
+\end{figure}
+
+\begin{derivbox}{The lean angle}
+Treat the rider and bicycle as one rigid body of mass $m$ moving at steady speed $v$ round a level bend
+of radius $r$. Friction acts at the \emph{ground}, well below the centre of gravity, so it would topple
+the rider outward unless something compensates. Leaning is that compensation (Figure~\ref{fig:cdcyc}).
+
+\stepn{1} \textbf{The two forces at the ground} are the normal force $N$ (up) and friction $f$
+(inward). Their resultant must pass through the centre of gravity $G$, the point at which the weight
+acts (in uniform gravity, the centre of mass of \chref{ch:com}); otherwise there is a net torque
+about $G$ and the cyclist starts to rotate, that is, falls over. (Torque is treated fully in
+\chref{ch:rotation}. Here we need one fact: a body that is not starting to rotate has zero net torque,
+or \emph{moment}, about $G$, even while $G$ accelerates. About any other point this fails for an
+accelerating body.)
+
+\stepn{2} \textbf{Vertical:} $N=mg$. \quad \textbf{Radial:} $f=\dfrac{mv^{2}}{r}$.
+
+\stepn{3} \textbf{The lean angle} $\theta$ from the vertical is the angle of that resultant:
+\[
+\tan\theta=\frac{f}{N}=\frac{mv^{2}/r}{mg}
+\qquad\Longrightarrow\qquad
+\boxed{\;\tan\theta=\frac{v^{2}}{rg}\;}
+\]
+
+\stepn{4} \textbf{The limit.} Since $f\le\mu N=\mu mg$, $\tan\theta\le\mu$: the steepest possible lean is
+$\tan^{-1}\mu$, and a bend that demands more lean than that cannot be taken at that speed however
+skilled the rider.
+
+\smallskip
+\textbf{Note the recurring formula.} This is the \emph{same} $\tan\theta=v^{2}/rg$ as the conical
+pendulum, the cone, and (in \S\ref{sec:roads}) the banked road, and for the same reason: here the
+slanted force is the resultant of $N$ and $f$.
+\end{derivbox}
+
+\subsection{Worked examples: applying the central principle}
+
+The examples below apply the central principle to four further circles, not all of them horizontal. In
+each, the work is in deciding which real force, or which component of one, points towards the centre.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_groove}
+\figcaption{fig:groove}{A block sliding in a circular groove, from above (left) and in section (right). The floor's push $N'$ only balances $mg$; the groove's \emph{side wall} is the only thing that can push horizontally, so the entire centripetal requirement is met by the side wall's normal force $N$.}
+\end{figure}
+
+\begin{exbox}{Block in a circular groove}
+A \SI{100}{g} block moves at uniform speed in a horizontal circular groove of radius \SI{25}{cm},
+completing one round in \SI{2.0}{s}. Find the normal contact force from the side wall.
+
+\stepn{1} \textbf{Speed from the period.} One full circumference in \SI{2.0}{s}:
+\[
+v=\frac{2\pi r}{T_{\text{per}}}=\frac{2\pi(0.25)}{2.0}=\SI{0.785}{m/s}.
+\]
+
+\stepn{2} \textbf{Centripetal acceleration.}
+\[
+a=\frac{v^{2}}{r}=\frac{(0.785)^{2}}{0.25}=\SI{2.47}{m/s^2},\qquad\text{towards the centre.}
+\]
+
+\stepn{3} \textbf{Identify the force that supplies it.} The floor's normal force is vertical and
+gravity is vertical; the \emph{only} horizontal force available is the push of the groove's side wall
+(Figure~\ref{fig:groove}, right).
+So that force alone must do the whole job:
+\[
+N=ma=(0.100)(2.47)=\boxed{\SI{0.247}{N}}
+\]
+\ans{$\approx\SI{0.25}{N}$}
+
+\smallskip
+\textbf{Note the reasoning order:} first the acceleration the motion \emph{demands}, then the real
+force that pays for it. That order works every time.
+\end{exbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_threeparticles}
+\figcaption{fig:threepart}{Three equal masses at the corners of an equilateral triangle of side $a$. On each, the two pulls $F$ add to $\sqrt3\,F$ directed at the centroid, which is exactly where the centripetal force must point for a circular orbit of radius $r=a/\sqrt3$. (Forces are shown on one mass only.)}
+\end{figure}
+
+\begin{exbox}{Three mutually orbiting masses}
+Three particles, each of mass $m$, sit at the corners of an equilateral triangle of side $a$, held
+together only by their mutual gravitation. Find the speed each must have to keep the triangle rigid
+while rotating, and the period.
+
+\stepn{1} \textbf{Find the radius of the circle.} Each particle orbits the centroid. For an equilateral
+triangle the centroid is a distance
+\[
+r=\frac{a}{2}\sec30^\circ=\frac{a}{\sqrt3}
+\]
+from each vertex.
+
+\stepn{2} \textbf{Find the net force on one particle.} It is pulled by the other two, each with
+$F=\dfrac{Gm^{2}}{a^{2}}$, where $G$ is the gravitational constant (not the point $G$ of the cyclist; Newton's law of gravitation, developed in \chref{ch:gravitation}; only this
+inverse-square form is needed here), and the angle between those two pulls is $60^\circ$. Their resultant is
+\[
+F_{\text{net}}=2F\cos30^\circ=\sqrt3\,\frac{Gm^{2}}{a^{2}},
+\]
+directed at the centroid (Figure~\ref{fig:threepart}): exactly where a centripetal force must point. \emph{This is why the
+configuration works at all.}
+
+\stepn{3} \textbf{Set it equal to the centripetal requirement.}
+\[
+\sqrt3\,\frac{Gm^{2}}{a^{2}}=\frac{mv^{2}}{r}=\frac{mv^{2}\sqrt3}{a}
+\qquad\Longrightarrow\qquad
+\boxed{\;v=\sqrt{\frac{Gm}{a}}\;}
+\]
+
+\stepn{4} \textbf{Period.}
+\[
+T_{\text{per}}=\frac{2\pi r}{v}=\frac{2\pi a/\sqrt3}{\sqrt{Gm/a}}
+=\boxed{\;2\pi\sqrt{\frac{a^{3}}{3Gm}}\;}
+\]
+\ans{$v=\sqrt{Gm/a}$;\; $T_{\text{per}}=2\pi\sqrt{a^{3}/3Gm}$}
+\end{exbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_offsetarm}
+\figcaption{fig:offsetarm}{When the cord hangs from an arm of length $a$ rather than from the axis
+itself, the radius of the circle is $r=a+\ell\sin\theta$. Using $\ell\sin\theta$ alone (the
+conical-pendulum reflex) gives the wrong answer.}
+\end{figure}
+
+\begin{exbox}{A conical pendulum on an offset arm}
+The cord of the rotating apparatus in Figure~\ref{fig:offsetarm} makes $45^\circ$ with the vertical. Given
+$a=\SI{20}{cm}$, $\ell=\sqrt2$\,\si{m} and $m=\SI{5.0}{kg}$, find (a) the rotation rate in rpm and (b) the
+tension in the cord. Take $g=\SI{9.8}{m/s^2}$.
+
+\stepn{1} \textbf{Get the radius right: the whole point of this example.} The bob is offset from the
+axis both by the arm and by the cord:
+\[
+r=a+\ell\sin45^\circ=0.20+\sqrt2\left(\tfrac{1}{\sqrt2}\right)=0.20+1.00=\SI{1.20}{m}.
+\]
+
+\stepn{2} \textbf{The two equations}, exactly as for the conical pendulum:
+\[
+T\cos\theta=mg, \qquad T\sin\theta=mr\omega^{2}.
+\]
+
+\stepn{3} \textbf{Divide to eliminate $T$:}
+\[
+\tan\theta=\frac{r\omega^{2}}{g}
+\qquad\Longrightarrow\qquad
+\omega=\sqrt{\frac{g\tan45^\circ}{r}}=\sqrt{\frac{9.8}{1.20}}=\SI{2.86}{rad/s}.
+\]
+
+\stepn{4} \textbf{Convert to rpm.} The rotation rate $n$ in revolutions per minute is
+\[
+n=\frac{\omega}{2\pi}\times60=\frac{2.86\times60}{6.283}=\boxed{\SI{27.3}{rpm}}
+\]
+
+\stepn{5} \textbf{Tension}, from the vertical equation:
+\[
+T=\frac{mg}{\cos45^\circ}=\sqrt2\,mg=\sqrt2(5.0)(9.8)=\boxed{\SI{69.3}{N}}
+\]
+\ans{\SI{27.3}{rpm}; \SI{69.3}{N}}
+\end{exbox}
+
+\begin{trapbox}{the radius is that of the \emph{actual} circle}
+In the plain conical pendulum $r=\ell\sin\theta$; here, with an offset arm, $r=a+\ell\sin\theta$. The formula
+$T_{\text{per}}=2\pi\sqrt{\ell\cos\theta/g}$ was derived \emph{assuming} $r=\ell\sin\theta$ and is therefore
+\textbf{invalid} here. When the geometry changes, go back to the two force equations rather than reaching
+for the packaged result.
+\end{trapbox}
+
+\begin{exbox}{Power delivered in accelerated circular motion \textnormal{(a classic examination problem)}}
+A particle of mass $m$ moves on a circle of radius $r$ with centripetal acceleration
+$a_r=k^{2}rt^{2}$, where $k$ is constant. Find the power delivered to it.
+
+\stepn{1} \textbf{Extract the speed.} By definition $a_r=v^{2}/r$, so
+\[
+\frac{v^{2}}{r}=k^{2}rt^{2}
+\qquad\Longrightarrow\qquad
+v^{2}=k^{2}r^{2}t^{2}
+\qquad\Longrightarrow\qquad
+v=krt.
+\]
+The speed grows linearly with time, so the motion is not uniform and a tangential force acts.
+
+\stepn{2} \textbf{Power from $P=\vF\cdot\vv$.} Power (\si{W}, a scalar) is the rate at which a force does
+work, $P=\vF\cdot\vv$ (quoted in \chref{ch:toolkit}, developed in \chref{ch:energy}). The net force has a
+centripetal part $\vF_c$ and a tangential part $\vF_t$ of magnitude $F_t=ma_t=m\dfrac{dv}{dt}=mkr$. But
+$\vF_c\perp\vv$, so it contributes \emph{nothing}:
+\[
+P=(\vF_c+\vF_t)\cdot\vv=F_tv=(mkr)(krt)=\boxed{\;mk^{2}r^{2}t\;}
+\]
+
+\stepn{3} \textbf{Cross-check by energy.} The power delivered equals the rate of growth of the kinetic
+energy $K=\tfrac{1}{2}mv^{2}$ (the work--energy theorem of \chref{ch:energy}):
+\[
+P=\frac{dK}{dt}=\frac{d}{dt}\left(\tfrac{1}{2}mk^{2}r^{2}t^{2}\right)=mk^{2}r^{2}t \quad\checkmark
+\]
+\ans{$P=mk^{2}r^{2}t$}
+
+\smallskip
+\textbf{The lesson worth keeping:} the centripetal force \emph{never} delivers power, however large it
+is, because it is always perpendicular to the velocity. Only the tangential force does work. This fact
+returns in the vertical circle.
+\end{exbox}
+
+\section{Vehicles on Curved Roads}\label{sec:roads}
+The cyclist showed friction on a level road doing the turning. A road can also be shaped to help: it
+can supply the inward force through friction, or through the normal force on a banked surface. The three cases below take them separately and then together, and Figure~\ref{fig:roadcases} sets them side by side.
+
+\begin{remarkbox}{A note on $\mu$ in this chapter}
+Every friction limit in this chapter is a body on the \emph{verge} of slipping, so $\mu$ always means the
+static coefficient $\mu_s$. A tyre that grips rolls, and its contact patch does not slide on the road;
+that is why static friction is right for a car on a bend.
+\end{remarkbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_roadcases}
+\figcaption{fig:roadcases}{The three strategies side by side, seen from behind with the centre of the bend to the left. (a) Friction alone works but fails on a wet road; (b) banking alone works at exactly one speed, with the horizontal part of $N$ doing the turning; (c) real roads combine the two and so permit a band of safe speeds. In (c) friction is drawn for a speed above the design speed; below it, friction points up the slope.}
+\end{figure}
+
+\subsection{By friction alone (a flat road)}
+On a level road the normal force is vertical and contributes nothing sideways, so friction between tyre
+and road must do the entire job of turning the car. We ask how fast the car may go before friction runs
+out.
+
+\begin{derivbox}{The skid speed}
+A car of mass $m$ rounds a level bend of radius $r$. Friction must do all the turning:
+\[
+f=\frac{mv^{2}}{r},
+\qquad\text{with the ceiling}\qquad
+f\le\mu N=\mu mg.
+\]
+Combining,
+\[
+\frac{mv^{2}}{r}\le\mu mg
+\qquad\Longrightarrow\qquad
+\boxed{\;v\le\sqrt{\mu rg}\;}
+\]
+Beyond this the demand exceeds what friction can supply and the car skids \emph{outward}. Mass cancels
+again.
+
+\smallskip
+\textbf{Why this is unsatisfactory in practice:} it stakes everything on $\mu$, which falls sharply in
+rain, ice or oil; that is why engineers bank roads.
+\end{derivbox}
+
+\subsection{By banking alone (a smooth banked road)}
+Now raise the outer edge of the road, as is done on motorway curves, velodromes and racetracks, and
+suppose for the moment that the surface is perfectly smooth. It is not obvious that the car can turn at
+all, since friction was the only horizontal force in the previous case. The resolution is that tilting
+the road also tilts the \emph{normal force}, giving it a horizontal component.
+
+\begin{derivbox}{The design speed}
+Bank the road at $\theta$ to the horizontal. The normal force, perpendicular to the surface, then makes
+$\theta$ with the vertical, and its horizontal part points towards the centre of the bend.
+
+\stepn{1} \textbf{Vertical equilibrium:} $N\cos\theta=mg$.
+
+\stepn{2} \textbf{Radial:} $N\sin\theta=\dfrac{mv^{2}}{r}$.
+
+\stepn{3} \textbf{Divide:}
+\[
+\boxed{\;\tan\theta=\frac{v^{2}}{rg}\qquad\text{or}\qquad v=\sqrt{rg\tan\theta}\;}
+\]
+
+
+\smallskip
+\textbf{Read what this means.} For a given bank angle there is exactly \emph{one} speed, the
+\textbf{design speed}, at which no friction is required. Below it, $N\sin\theta$ is more
+inward force than the turn needs, so the vehicle tends to slide \emph{down} the bank; above it, too
+little, so it tends to drift \emph{up} and out. The angle is independent of mass, which is why one
+banking suits cars, lorries and motorcycles alike.
+\end{derivbox}
+
+\subsection{By friction and banking together (the real case)}
+Real roads are banked \emph{and} rough, and vehicles travel them at many speeds. Friction is now the
+awkward force, because both its size and its direction depend on the speed. Rather than a single safe speed there
+is now a \emph{band} of them, and we want its two edges.
+
+\begin{motivbox}{How friction knows which way to point}
+Friction's direction is decided by the vehicle's speed relative to the design speed
+$v_0=\sqrt{rg\tan\theta}$:
+\begin{itemize}
+\item $v<v_0$: the vehicle tends to slide \emph{down} the slope, so friction acts \textbf{up} the slope.
+\item $v=v_0$: no tendency either way, so $f=0$: the banking alone is doing the whole job.
+\item $v>v_0$: the vehicle tends to slide \emph{up} and out, so friction acts \textbf{down} the slope.
+\end{itemize}
+As in \chref{ch:friction}, friction self-adjusts up to its ceiling $\mu N$; the two limits below are
+where it reaches that ceiling in each direction.
+\end{motivbox}
+
+\begin{derivbox}{Deriving the limiting speeds}
+\stepn{1} \textbf{Fastest case.} The vehicle tends to slide up and out, so friction acts \emph{down} the
+slope at its limit $\mu N$. Its components are $\mu N\cos\theta$ inward and $\mu N\sin\theta$ downward.
+\[
+\text{Vertical: } N\cos\theta-\mu N\sin\theta=mg,
+\qquad
+\text{Radial: } N\sin\theta+\mu N\cos\theta=\frac{mv^{2}}{r}.
+\]
+\stepn{2} \textbf{Divide} to eliminate $N$ and $m$, then divide top and bottom by $\cos\theta$:
+\[
+\frac{v_{\max}^{2}}{rg}=\frac{\sin\theta+\mu\cos\theta}{\cos\theta-\mu\sin\theta}
+=\frac{\tan\theta+\mu}{1-\mu\tan\theta}.
+\]
+\stepn{3} \textbf{Slowest case.} Friction now acts \emph{up} the slope, which is the same working with
+$\mu$ replaced by $-\mu$:
+\[
+\frac{v_{\min}^{2}}{rg}=\frac{\tan\theta-\mu}{1+\mu\tan\theta}.
+\]
+\end{derivbox}
+
+\begin{keybox}{The two limiting speeds}
+Resolving with friction at its limit $\mu N$, acting down the slope (fastest case) or up it (slowest):
+\[
+\boxed{\;v_{\max}=\sqrt{rg\,\frac{\tan\theta+\mu}{1-\mu\tan\theta}}\;}
+\qquad\qquad
+\boxed{\;v_{\min}=\sqrt{rg\,\frac{\tan\theta-\mu}{1+\mu\tan\theta}}\;}
+\]
+\textbf{Checks.} Setting $\mu=0$ collapses both to the design speed $\sqrt{rg\tan\theta}$ \checkmark.
+If $\mu\ge\tan\theta$ the expression under the root for $v_{\min}$ is zero or negative: there is no
+lower limit, and the vehicle can stand still on the bank without sliding. And $v_{\max}$ grows without
+bound as $\mu\tan\theta\to1$; for $\mu\tan\theta\ge1$ the bank is so steep and so rough that no
+speed makes the vehicle slide up it (in this model).
+\end{keybox}
+
+\subsection{Worked example: which way does friction point?}
+
+The example below works through both sides of the design speed, where friction points in opposite
+directions (Figure~\ref{fig:fricdir}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_frictiondir}
+\figcaption{fig:fricdir}{On a banked road, friction is a self-adjusting force whose \emph{direction}
+flips at the design speed. Below $v_0$ it acts up the slope to stop the vehicle sliding down; above
+$v_0$ it acts down the slope to stop it sliding up and out.}
+\end{figure}
+
+\begin{exbox}{Friction on a banked turn, above and below the design speed}
+A turn of radius \SI{20}{m} is banked for a \SI{200}{kg} vehicle travelling at \SI{10}{m/s}. Find the
+direction and magnitude of the friction when the vehicle instead moves at (a) \SI{5}{m/s},
+(b) \SI{15}{m/s}. Take $g=\SI{10}{m/s^2}$ and assume friction is sufficient.
+
+\stepn{1} \textbf{Find the banking angle from the design speed.}
+\[
+\tan\theta=\frac{v_0^{2}}{rg}=\frac{10^{2}}{20\times10}=\frac12.
+\]
+
+\stepn{2} \textbf{(a) At \SI{5}{m/s}, slower than designed.} The vehicle tends to slide \emph{down}
+the bank, so friction acts \textbf{up} the slope. Resolving horizontally (towards the centre) and
+vertically:
+\[
+N\sin\theta-f\cos\theta=\frac{mv^{2}}{r},
+\qquad
+N\cos\theta+f\sin\theta=mg.
+\]
+Rather than solve these simultaneously, resolve \emph{along} the slope, where $N$ does not appear.
+The inward acceleration is horizontal and the slope makes $\theta$ with the horizontal, so the
+acceleration has a component $(v^{2}/r)\cos\theta$ down the slope, while the weight has $mg\sin\theta$. With
+$\sin\theta=1/\sqrt5$, $\cos\theta=2/\sqrt5$, $mg=\SI{2000}{N}$ and $mv^{2}/r=\SI{250}{N}$:
+\[
+mg\sin\theta-f=\frac{mv^{2}}{r}\cos\theta
+\;\Longrightarrow\;
+f=\frac{2000-500}{\sqrt5}=\boxed{300\sqrt5\approx\SI{671}{N}\ \text{up the slope}}
+\]
+
+\stepn{3} \textbf{(b) At \SI{15}{m/s}, faster than designed.} Now the vehicle tends to slide
+\emph{up} and outward, so friction reverses to act \textbf{down} the slope. Resolving along the slope
+as before, now with $mv^{2}/r=\SI{2250}{N}$:
+\[
+f=\frac{mv^{2}}{r}\cos\theta-mg\sin\theta=\frac{4500-2000}{\sqrt5}
+=\boxed{500\sqrt5\approx\SI{1118}{N}\ \text{down the slope}}
+\]
+\ans{(a) $300\sqrt5$\,N up; (b) $500\sqrt5$\,N down}
+
+\smallskip
+\textbf{Do not memorise the sign pattern; derive it.} Ask only: \emph{if friction vanished, which way
+would the vehicle slide?} Friction then points the other way.
+\end{exbox}
+
+\subsection{The second critical speed: toppling}
+Everything so far has asked when the vehicle \emph{slides}. But a tall, narrow vehicle such as a loaded
+lorry or a double-decker bus can roll over while its tyres still grip, and the skidding analysis gives
+no warning of this because friction never reaches its limit. There is a \emph{second} critical speed,
+governed by the vehicle's shape, and the one that matters is whichever of the two is smaller.
+
+\begin{motivbox}{Skidding is not the only way to come off}
+Friction acts at ground level, but the weight acts at the centre of gravity, a height $h$ up. That offset
+gives friction a \emph{torque} about the centre of gravity, which transfers load from the inner wheels
+to the outer ones. When the inner wheels carry nothing at all, the vehicle tips.
+\end{motivbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_topple}
+\figcaption{fig:topple}{Seen from behind, with the centre of the bend to the left. Toppling. The wheels are $2a$ apart and the centre of gravity is at height $h$.
+Friction $f$ at road level has a moment about $G$ that unloads the inner wheel ($N_2$) and loads the
+outer one ($N_1$). When $N_2$ reaches zero, the vehicle overturns.}
+\end{figure}
+
+\begin{derivbox}{The toppling speed}
+Take a vehicle of mass $m$ on a level bend of radius $r$, with $N_1$ and $N_2$ the total normal
+reactions on the outer and inner wheels and $f$ the total friction (Figure~\ref{fig:topple}).
+
+\stepn{1} \textbf{Vertical equilibrium:} $N_1+N_2=mg$.
+
+\stepn{2} \textbf{Radial:} friction supplies the turn, $f=\dfrac{mv^{2}}{r}$.
+
+\stepn{3} \textbf{Rotational equilibrium about $G$.} The vehicle is not rotating, so moments about the
+centre of gravity must balance. (As for the cyclist, take moments about $G$ itself: the vehicle is
+accelerating, and about any other point the balance would need an extra term.) With the wheels $2a$
+apart and $G$ at height $h$, the outer reaction $N_1$ (lever arm $a$) turns the vehicle one way, and the
+inner reaction $N_2$ (arm $a$) and friction (arm $h$) turn it the other:
+\[
+N_1 a = N_2 a + f h.
+\]
+\textbf{Read this:} friction's moment $fh$ is what forces $N_1$ to exceed $N_2$.
+
+\stepn{4} \textbf{Solve for the inner reaction.} Substituting $N_1=mg-N_2$ and $f=mv^{2}/r$,
+\[
+N_2=\frac{mg}{2}-\frac{mv^{2}}{r}\cdot\frac{h}{2a}.
+\]
+The faster you go, the smaller $N_2$ becomes: the inner wheel is progressively unloaded.
+
+\stepn{5} \textbf{The limit.} Setting $N_2=0$:
+\[
+\boxed{\;v_{\text{topple}}=\sqrt{\frac{gra}{h}}\;}
+\]
+
+
+\smallskip
+\textbf{The model's limits.} This treats the vehicle as rigid on a flat road. A real vehicle rolls on its
+suspension, which shifts $G$ outward and lowers the true toppling speed below this estimate.
+\end{derivbox}
+
+\begin{remarkbox}{Which speed matters, and what engineers do about it}
+\[
+v_{\text{skid}}=\sqrt{\mu rg},
+\qquad\qquad
+v_{\text{topple}}=\sqrt{\frac{gra}{h}}.
+\]
+The vehicle fails at whichever is \textbf{lower}, so safe driving means staying below both.
+\begin{itemize}
+\item $v_{\text{skid}}\propto\sqrt{\mu}$: better tyres and road surface raise it.
+\item $v_{\text{topple}}\propto\sqrt{a/h}$: a \emph{wide} track ($a$ large) and a \emph{low} centre of
+      gravity ($h$ small) raise it. This is why racing cars are wide and low, and why a lorry piled
+      high with sugarcane (which raises $h$) can overturn at surprisingly low speeds.
+\end{itemize}
+\textbf{Designers prefer skidding to toppling}, because a skid can often be recovered and a rollover
+generally cannot. So a vehicle is built, where possible, with $v_{\text{skid}}<v_{\text{topple}}$,
+that is, with $\mu<a/h$.
+\end{remarkbox}
+
+\section{Motion in a Vertical Circle}\label{sec:vertcircle}
+
+In every horizontal circle above, gravity was perpendicular to the motion and did no work, so the speed
+could stay constant. Hang the circle vertically and that comfort disappears. Now gravity has a component
+\emph{along} the path: it helps on the way down and fights on the way up. So the speed changes
+continuously, fastest at the bottom, slowest at the top, which means
+\[
+\text{this is \textbf{non-uniform} circular motion: both } a_t \text{ and } a_r \text{ are non-zero.}
+\]
+Two consequences follow, and they dictate the whole method.
+
+\smallskip
+\textbf{First:} one equation is no longer enough. Newton's law along the radius gives the tension at a
+point only if the speed there is known, and the speed varies. So \emph{energy conservation} supplies the
+speed, and \emph{Newton's radial equation} converts it into a tension. \textbf{A typical
+vertical-circle problem uses both laws, in that order.}
+
+\smallskip
+\textbf{Second:} a string can only \emph{pull}, never push. At the top, gravity already points towards
+the centre. If gravity alone is more than enough to bend the path, the string would have to push, which
+it cannot; it goes \textbf{slack}, and the particle leaves the circle.
+
+\subsection{The two master equations}
+Consider a small bob of mass $m$ tied to a light inextensible string, swung in a vertical circle and
+given a speed $u$ at the lowest point. Nothing drives it after that; it coasts. While the string is taut
+its length is also the radius of the circle, so in this section's theory we call it $R$ (the worked
+examples use $\ell$). We want the \emph{speed} and the \emph{tension} at an arbitrary position,
+specified by the angle $\theta$ turned from the bottom (Figure~\ref{fig:vcgen}); every other result in the section follows from
+these two.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{vc_general}
+\figcaption{fig:vcgen}{The general position, at angle $\theta$ from the lowest point. The height risen, $h=R(1-\cos\theta)$, fixes the speed through energy conservation. The radial balance then fixes the tension: $T$ acts inwards, while the weight's component $mg\cos\theta$ acts outwards along the radius. Its other component, $mg\sin\theta$, lies along the tangent and slows the bob.}
+\end{figure}
+
+\begin{derivbox}{Speed and tension at any angle}
+With $\theta$ measured from the lowest point, the particle has risen a height $h$ (a new use of the
+letter: not the height of $G$ in \S\ref{sec:roads})
+\[
+h=R-R\cos\theta=R(1-\cos\theta). \tag{geometry}
+\]
+
+\stepn{1} \textbf{Energy conservation gives the speed.} The string is always perpendicular to the
+motion, so the tension does \emph{no work}; only gravity does. Hence
+\[
+\tfrac{1}{2}mv^{2}=\tfrac{1}{2}mu^{2}-mgh
+\qquad\Longrightarrow\qquad
+\boxed{\;v^{2}=u^{2}-2gh\;} \tag{I}
+\]
+Energy conservation is developed properly in \chref{ch:energy}. The same result follows from Newton's
+law alone. Along the tangent the only force is the component $-mg\sin\theta$ of the weight, so
+$m\dfrac{dv}{dt}=-mg\sin\theta$. With arc length $s=R\theta$, the chain rule gives
+$\dfrac{dv}{dt}=\dfrac{dv}{ds}\dfrac{ds}{dt}=\dfrac{v}{R}\dfrac{dv}{d\theta}$, so
+$v\,dv=-gR\sin\theta\,d\theta$. Integrating from $(0,u)$ to $(\theta,v)$ gives
+$v^{2}=u^{2}-2gR(1-\cos\theta)$, which is (I).
+
+\stepn{2} \textbf{Newton's law along the radius gives the tension.} Take the positive direction
+\textbf{inward}, towards the centre. The tension acts inward along the string, so it is $+T$. The
+weight's component along the inward radius is $-mg\cos\theta$: at the bottom ($\theta=0$) the weight
+points directly away from the centre, giving $-mg$; at the top ($\theta=180^\circ$) it points directly
+towards the centre, and $\cos180^\circ=-1$ turns the term into $+mg$. One expression therefore covers
+the whole circle:
+\[
+T-mg\cos\theta=\frac{mv^{2}}{R}
+\qquad\Longrightarrow\qquad
+T=mg\cos\theta+\frac{mv^{2}}{R}. \tag{II}
+\]
+
+\stepn{3} \textbf{Combine.} Substituting (I) with $h=R(1-\cos\theta)$ into (II),
+$T=mg\cos\theta+\dfrac{mu^{2}}{R}-2mg(1-\cos\theta)$, which collects to
+\[
+\boxed{\;T=\frac{mu^{2}}{R}+mg\,(3\cos\theta-2)\;}
+\qquad\text{equivalently}\qquad
+T=mg+\frac{mu^{2}}{R}-\frac{3mgh}{R}.
+\]
+
+\stepn{4} \textbf{Read the result before using it.} The tension \emph{falls} steadily as the particle
+rises ($\cos\theta$ decreases, $h$ increases). So $T$ is
+\textbf{greatest at the bottom} ($\theta=0$) and \textbf{least at the top} ($\theta=180^\circ$):
+\[
+T_{\text{bottom}}=\frac{mu^{2}}{R}+mg,
+\qquad\qquad
+T_{\text{top}}=\frac{mu^{2}}{R}-5mg.
+\]
+\end{derivbox}
+
+\why{\textbf{Why the tension is largest at the bottom.} There the string must support the weight
+\emph{and} supply the inward force; at the top gravity \emph{helps}. The particle is also faster at the
+bottom. So a string whirled in a vertical circle, if it snaps, snaps at the bottom.}
+
+\begin{keybox}{A result worth remembering: $T_b-T_t=6mg$}
+Subtracting the two tensions of Step~4:
+\[
+T_{\text{bottom}}-T_{\text{top}}=\left(\frac{mu^{2}}{R}+mg\right)-\left(\frac{mu^{2}}{R}-5mg\right)
+=\boxed{6mg}
+\]
+This holds for \emph{any} launch speed that completes the circle. Of the $6mg$, $2mg$ arises because the
+weight switches from opposing the tension to assisting it, and $4mg$ from the speed difference, since energy
+conservation gives $v_{\text{bottom}}^{2}-v_{\text{top}}^{2}=4gR$ across the height $2R$.
+\end{keybox}
+
+\subsection{The critical condition for completing the circle}
+Give the bob too little speed at the bottom and it will not get round; give it enough and it will.
+We now find the critical launch speed between the two.
+
+\begin{derivbox}{$u_{\min}=\sqrt{5gR}$}
+\stepn{1} \textbf{Where is the danger point?} The tension falls steadily as the bob rises, so it is
+smallest at the very top. If the string goes slack anywhere, it goes slack there first, and the top is
+the only point we need to test.
+
+\stepn{2} \textbf{Impose the physical constraint.} A string cannot push, so $T\ge0$. At the top:
+\[
+T_{\text{top}}=\frac{mu^{2}}{R}-5mg\ \ge\ 0
+\qquad\Longrightarrow\qquad
+\boxed{\;u\ge\sqrt{5gR}\;}
+\]
+
+\stepn{3} \textbf{What the critical case looks like.} At exactly $u=\sqrt{5gR}$:
+\[
+T_{\text{top}}=0,\qquad
+v_{\text{top}}=\sqrt{u^{2}-4gR}=\sqrt{gR},\qquad
+T_{\text{bottom}}=6mg.
+\]
+At that instant the string is limp and \textbf{gravity alone} supplies the entire centripetal
+requirement: $mg=mv_{\text{top}}^{2}/R$ gives $v_{\text{top}}=\sqrt{gR}$. Zero tension does
+\emph{not} mean the particle drops straight down: it is moving horizontally at $\sqrt{gR}$, and a
+projectile with that speed has its acceleration $g$ perpendicular to its velocity, so its path has radius
+of curvature $v^{2}/g=R$ (\S\ref{sec:curvature}): exactly the circle's. Momentarily the particle is in
+free fall, yet still on the circle.
+\end{derivbox}
+
+\begin{exbox}{A comfortable margin}
+A particle is given $u=\sqrt{8gR}$ at the bottom. Find the speed and tension at the top and bottom.
+
+\stepn{1} \textbf{Top speed:} $v_t^{2}=u^{2}-4gR=8gR-4gR=4gR$, so $v_t=2\sqrt{gR}$.
+
+\stepn{2} \textbf{Top tension:} $T_t=\dfrac{mu^{2}}{R}-5mg=8mg-5mg=\mathbf{3mg}$, comfortably
+positive, so the string stays taut.
+
+\stepn{3} \textbf{Bottom tension:} $T_b=\dfrac{mu^{2}}{R}+mg=8mg+mg=\mathbf{9mg}$.
+
+\stepn{4} \textbf{Check:} $T_b-T_t=9mg-3mg=6mg$ \checkmark, as it must be.
+\ans{$v_t=2\sqrt{gR}$; $T_t=3mg$; $T_b=9mg$}
+\end{exbox}
+
+\subsection{What happens when the particle cannot complete the circle}\label{sub:vcfail}
+Suppose $u<\sqrt{5gR}$, so the bob does not get round. Many students assume it simply swings back
+like a pendulum, but that is only one of two possible fates; Figure~\ref{fig:vertcases} shows both beside the complete circle.
+
+\begin{motivbox}{Two different ways to fail, and the quantity that decides}
+Which fate occurs depends on \emph{what runs out first} as the particle climbs:
+\begin{itemize}
+\item its \textbf{speed} runs out first ($v\to0$ while the string is still taut): the particle
+      stops, swings back, and \textbf{oscillates} like a pendulum;
+\item its \textbf{tension} runs out first ($T\to0$ while it is still moving): the string goes slack
+      and the particle \textbf{leaves the circle}, becoming a projectile.
+\end{itemize}
+So compute the height at which each would happen, and see which comes sooner.
+\end{motivbox}
+
+\begin{derivbox}{The two critical heights}
+\stepn{1} \textbf{Height $h_1$ where the speed vanishes.} Put $v=0$ in (I):
+\[
+0=u^{2}-2gh_1
+\qquad\Longrightarrow\qquad
+\boxed{\;h_1=\frac{u^{2}}{2g}\;}
+\]
+
+\stepn{2} \textbf{Height $h_2$ where the tension vanishes.} Put $T=0$ in the combined formula
+$T=mg+\dfrac{mu^{2}}{R}-\dfrac{3mgh}{R}$:
+\[
+0=mg+\frac{mu^{2}}{R}-\frac{3mgh_2}{R}
+\qquad\Longrightarrow\qquad
+\boxed{\;h_2=\frac{u^{2}+gR}{3g}\;}
+\]
+
+\stepn{3} \textbf{Compare them.} The particle meets whichever height is \emph{lower}.
+\[
+h_2<h_1
+\iff
+\frac{u^{2}+gR}{3g}<\frac{u^{2}}{2g}
+\iff
+2u^{2}+2gR<3u^{2}
+\iff
+\boxed{u^{2}>2gR}
+\]
+So:
+\begin{itemize}
+\item If $u>\sqrt{2gR}$: tension dies first $\Rightarrow$ the particle \textbf{leaves the circle}.
+\item If $u\le\sqrt{2gR}$: speed dies first $\Rightarrow$ the particle \textbf{oscillates}.
+\end{itemize}
+\end{derivbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_vertcases}
+\figcaption{fig:vertcases}{The three fates, decided entirely by the launch speed $u$. Completing the
+circle needs $u\ge\sqrt{5gR}$; below $\sqrt{2gR}$ the particle merely swings; in between it flies off
+the circle partway up the far side and continues as a projectile.}
+\end{figure}
+
+\begin{keybox}{The three regimes in full}
+\begin{enumerate}
+\item \textbf{$u\ge\sqrt{5gR}$, completes the circle.} The string stays taut all the way round.
+\item \textbf{$\sqrt{2gR}<u<\sqrt{5gR}$, leaves the circle.} The string goes slack at the height
+      $h_2=\dfrac{u^{2}+gR}{3g}$, which lies in the \emph{upper half}
+      ($90^\circ<\theta<180^\circ$), since $h_2>R$ exactly when $u^{2}>2gR$. From that moment there is no string force at all, so the particle
+      becomes an ordinary \textbf{projectile}, launched along the tangent with the speed it had, and
+      follows a parabola inside the circle until the string snaps taut again.
+\item \textbf{$0<u\le\sqrt{2gR}$, oscillates.} The particle rises to $h_1=\dfrac{u^{2}}{2g}$, which
+      lies in the \emph{lower half} ($0^\circ<\theta\le90^\circ$, since $h_1\le R$), momentarily stops with the string
+      still taut, and swings back. This is exactly a pendulum.
+\end{enumerate}
+\textbf{The boundary case} $u=\sqrt{2gR}$ gives $h_1=h_2=R$: speed and tension vanish together, exactly
+at the horizontal level of the centre.
+\end{keybox}
+
+\begin{remarkbox}{A rigid rod changes the answer, and here is why}
+Replace the string with a light \textbf{rod}. A rod can \emph{push} as well as pull, so the constraint
+$T\ge0$ disappears: at the top the rod can support the particle from below. The only remaining
+requirement is that the particle actually \emph{pass over} the top, that is, $v_{\text{top}}>0$:
+\[
+u^{2}-4gR>0
+\qquad\Longrightarrow\qquad
+\boxed{\;u>2\sqrt{gR}\;}
+\]
+At exactly $2\sqrt{gR}$ the particle only creeps ever closer to the top, so this is a limit, not an
+attainable value. Compare this with
+$\sqrt{5gR}$ for a string. The same relaxation applies to a bead threaded on a circular wire or a
+particle inside a smooth tube, anything that can push inward \emph{or} outward. By contrast, for a
+particle on the \emph{inside} of a smooth circular track or spherical shell, the normal force $N$
+plays exactly the role of the string's tension (it can only push inward), so the string conditions apply
+unchanged.
+\end{remarkbox}
+
+\subsection{A ball sliding off a smooth sphere}\label{sub:sphere}
+Every vertical circle so far had the body on the \emph{inside}, with the support pulling or pushing it
+towards the centre. Put the body on the outside and the same two laws give a different story. A ball balanced at the top of a large smooth dome is given the gentlest of nudges and slides down. It
+does not hug the surface all the way to the bottom; at some point it flies off. The question is
+\emph{where}, and the answer is a pure number, independent of the dome's size, the ball's mass and even
+the strength of gravity.
+
+\begin{motivbox}{The mirror image of the loop}
+On the outside of the curve the normal force points \emph{away} from the centre, while gravity points
+inward. Now it is gravity that supplies the turning and the
+normal force that opposes it. As the ball speeds up, more and more of gravity is consumed by the
+curving, leaving less for pressing on the surface. When nothing is left, $N=0$ and contact is lost.
+A car cresting a hump-backed bridge of radius $R$ is the everyday case: at the top $N=mg-mv^{2}/R$, so
+above $\sqrt{gR}$ the wheels leave the road.
+\end{motivbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_sphere}
+\figcaption{fig:sphere}{A ball released from rest at the top of a smooth sphere. Here the normal force $N$ points outwards, away from the centre, so it opposes the inward pull of gravity. As the ball speeds up, $N$ falls; it reaches zero at $\cos\theta=\tfrac{2}{3}$, after a drop of $R/3$. From there the ball flies off as a projectile.}
+\end{figure}
+
+\begin{derivbox}{Where the ball leaves, $\cos\theta=\tfrac{2}{3}$}
+A ball starts from rest at the top of a smooth sphere of radius $R$ and slides down. Let $\theta$ be the
+angle turned from the top (Figure~\ref{fig:sphere}).
+
+\stepn{1} \textbf{Radial equation.} Towards the centre, the inward component of gravity minus the
+outward normal force gives
+\[
+mg\cos\theta-N=\frac{mv^{2}}{R}. \tag{i}
+\]
+
+\stepn{2} \textbf{Energy conservation.} It has descended a height $h=R(1-\cos\theta)$:
+\[
+v^{2}=2gR(1-\cos\theta). \tag{ii}
+\]
+
+\stepn{3} \textbf{Impose the leaving condition} $N=0$ and substitute (ii) into (i):
+\[
+mg\cos\theta=\frac{m}{R}\cdot2gR(1-\cos\theta)
+\qquad\Longrightarrow\qquad
+\cos\theta=2-2\cos\theta
+\]
+\[
+\Longrightarrow\qquad
+3\cos\theta=2
+\qquad\Longrightarrow\qquad
+\boxed{\;\cos\theta=\frac{2}{3},\qquad \theta=48.2^\circ\;}
+\]
+The answer is independent of $R$, of $m$ and of $g$.
+
+\stepn{4} \textbf{If the ball is given an initial speed $u$ at the top}, (ii) becomes
+$v^{2}=u^{2}+2gR(1-\cos\theta)$ and the same steps give
+\[
+\cos\theta=\frac{2}{3}+\frac{u^{2}}{3gR}.
+\]
+With $u=\tfrac{1}{2}\sqrt{gR}$ this is $\cos\theta=\tfrac{3}{4}$, that is, $\theta=41.4^\circ$, so it leaves
+\emph{earlier}, as a faster start should imply. And if $u\ge\sqrt{gR}$ the formula demands
+$\cos\theta\ge1$, meaning the ball leaves \emph{immediately} at the top and never touches the sphere at
+all.
+
+\smallskip
+\textbf{The model's limits.} This assumes a smooth surface, so the ball slides without spinning. A
+uniform solid ball rolling without slipping on a rough dome keeps some of its energy in rotation, moves
+more slowly at each angle, and leaves later, at $\cos\theta=\tfrac{10}{17}$ ($\theta\approx54^\circ$;
+rolling is treated in \chref{ch:rolling}).
+\end{derivbox}
+
+\begin{trapbox}{inside a loop versus outside a sphere}
+These two problems look alike and have opposite signs. \textbf{Inside} a loop (or on a string) the
+support force points \emph{towards} the centre and \emph{adds} to the centripetal total. \textbf{Outside}
+a sphere it points \emph{away} and \emph{subtracts}. Draw the normal force before writing anything: it
+always points from the surface \emph{into} the body.
+\end{trapbox}
+
+\subsection{Worked examples: vertical circles}
+
+Five examples follow. The first needs only the radial equation at one point, because the speed there is
+given; the others combine the radial equation at a point with energy conservation between points.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{cd_fighter}
+\figcaption{fig:fighter}{At the lowest point of a dive, the centre of the circular path is directly \emph{above} the aircraft. So ``towards the centre'' means \emph{upwards}, and the air's force $F$ must exceed the weight by exactly $mv^{2}/r$. The two arrows are drawn to the worked example's ratio, $F\approx4.2\,mg$.}
+\end{figure}
+
+\begin{exbox}{A fighter plane pulling out of a dive}
+A \SI{16000}{kg} fighter pulls out of a dive at \SI{900}{km/h} on a vertical circle of radius
+\SI{2000}{m}. Find the vertical force the air exerts on it at the lowest point. Take
+$g=\SI{9.8}{m/s^2}$.
+
+\stepn{1} \textbf{Convert the speed.}
+$v=\SI{900}{km/h}=\dfrac{900\times1000}{3600}=\SI{250}{m/s}$.
+
+\stepn{2} \textbf{Which way is ``towards the centre''?} At the \emph{lowest} point of the loop the centre
+is directly above, so the centripetal direction is \textbf{up} (Figure~\ref{fig:fighter}).
+
+\stepn{3} \textbf{Newton's law along that direction.} Two forces act: the air's force $F$ (up) and the
+weight $mg$ (down):
+\[
+F-mg=\frac{mv^{2}}{r}
+\qquad\Longrightarrow\qquad
+F=m\left(g+\frac{v^{2}}{r}\right).
+\]
+
+\stepn{4} \textbf{Substitute.}
+\[
+F=16000\left(9.8+\frac{250^{2}}{2000}\right)=16000\,(9.8+31.25)=\boxed{\SI{6.57e5}{N}}
+\]
+\ans{\SI{6.57e5}{N}, upward}
+
+\smallskip
+\textbf{The physical point:} this is about $4.2$ times the plane's weight, and the $v^{2}/r$ term, not
+gravity, dominates it. The seat must push the pilot up with the same factor, ``4.2\,$g$'', which is why
+pulling out of a dive too sharply can cause the pilot to black out.
+\end{exbox}
+
+\begin{exbox}{Change in velocity, not change in speed \textnormal{(a classic examination problem)}}
+A stone on a string of length $\ell$ is whirled in a vertical circle and has speed $u$ at the lowest point.
+Find the \emph{magnitude of the change in its velocity} by the time the string is horizontal. (Assume
+$u^{2}\ge2g\ell$, so the stone reaches the horizontal with the string still taut.)
+
+\stepn{1} \textbf{Speed when horizontal.} It has risen $h=\ell$, so by energy conservation
+\[
+v^{2}=u^{2}-2g\ell.
+\]
+
+\stepn{2} \textbf{The directions: this is the whole question.} At the lowest point the velocity is
+\emph{horizontal}, of magnitude $u$. When the string is horizontal the velocity is \emph{vertical}, of
+magnitude $v$. The two are therefore at $90^\circ$ to each other.
+
+\stepn{3} \textbf{Subtract as vectors.} Since the final and initial velocities are perpendicular, $\vv_f\perp\vv_i$,
+\[
+|\Delta\vv|=|\vv_f-\vv_i|=\sqrt{v^{2}+u^{2}}=\sqrt{(u^{2}-2g\ell)+u^{2}}
+\]
+\[
+\boxed{\;|\Delta\vv|=\sqrt{2(u^{2}-g\ell)}\;}
+\]
+\ans{$\sqrt{2(u^{2}-g\ell)}$}
+
+\smallskip
+\textbf{The trap this question is built on} is answering $u-v$. That is the change in \emph{speed}; the
+question asked for the change in \emph{velocity}, and the direction turned through $90^\circ$. Whenever
+a question says ``change in velocity'', draw the two arrows and subtract them as vectors.
+\end{exbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{vc_slack}
+\figcaption{fig:vcslack}{Example~\ref{ex:slack}. The string goes slack at the point where the tension
+vanishes, necessarily in the upper half of the circle, after which the stone is an ordinary
+projectile and rises a little further under gravity alone.}
+\end{figure}
+
+\begin{exbox}{Where the string slackens, and how much higher it goes}\label{ex:slack}
+A particle hangs from a fixed point by a string of length \SI{5}{m}. It is projected from the lowest
+point so that the string goes slack after the particle has risen \SI{8}{m}. Find the speed just before
+the string slackens, and how much higher the particle then rises. Take $g=\SI{9.8}{m/s^2}$.
+
+\stepn{1} \textbf{Locate the point geometrically} (Figure~\ref{fig:vcslack}). With $h=\ell(1-\cos\theta)$ and $h=8$, $\ell=5$:
+\[
+\cos\theta=\frac{\ell-h}{\ell}=\frac{5-8}{5}=-0.6,
+\]
+so $\theta\approx126.9^\circ$, in the \emph{upper} half, exactly as the theory of \S\ref{sub:vcfail} predicts
+for a string that slackens.
+
+\stepn{2} \textbf{Use $T=0$ in the radial equation.} At that point gravity alone supplies the
+centripetal force; its component along the inward radius is $mg|\cos\theta|$, so
+\[
+mg|\cos\theta|=\frac{mv^{2}}{\ell}
+\qquad\Longrightarrow\qquad
+v^{2}=g\ell|\cos\theta|=9.8(5)(0.6)=29.4
+\]
+\[
+v=\boxed{\SI{5.42}{m/s}}
+\]
+
+\stepn{3} \textbf{After the string slackens it is a projectile.} Its velocity is along the tangent,
+perpendicular to the string; the string makes $180^\circ-\theta$ with the vertical, so the velocity makes
+that angle with the horizontal, and its sine is $\sin\theta=0.8$. Only the vertical component is lost to
+gravity, so the further rise is
+\[
+h'=\frac{(v\sin\theta)^{2}}{2g}=\frac{(5.42)^{2}(0.8)^{2}}{2(9.8)}
+=\frac{29.4\times0.64}{19.6}=\boxed{\SI{0.96}{m}}
+\]
+\ans{$v=\SI{5.42}{m/s}$; rises a further \SI{0.96}{m}}
+\end{exbox}
+
+\begin{exbox}{Finding the angle at which $T=mg$}
+A heavy particle hangs from a fixed point by an inextensible string of length $\ell$ and is projected
+horizontally with speed $\sqrt{g\ell}$. Find its speed and the string's inclination to the vertical at the
+moment the tension equals the particle's weight.
+
+\stepn{1} \textbf{Energy conservation} with $h=\ell(1-\cos\theta)$ and $u^{2}=g\ell$:
+\[
+v^{2}=u^{2}-2g\ell(1-\cos\theta)=g\ell-2g\ell(1-\cos\theta). \tag{i}
+\]
+
+\stepn{2} \textbf{Radial equation with the stated condition $T=mg$:}
+\[
+T-mg\cos\theta=\frac{mv^{2}}{\ell}
+\quad\Longrightarrow\quad
+mg-mg\cos\theta=\frac{mv^{2}}{\ell}
+\quad\Longrightarrow\quad
+v^{2}=g\ell(1-\cos\theta). \tag{ii}
+\]
+
+\stepn{3} \textbf{Equate (i) and (ii).}
+\[
+g\ell-2g\ell(1-\cos\theta)=g\ell(1-\cos\theta)
+\]
+\[
+1-2+2\cos\theta=1-\cos\theta
+\qquad\Longrightarrow\qquad
+3\cos\theta=2
+\qquad\Longrightarrow\qquad
+\boxed{\cos\theta=\tfrac{2}{3},\quad\theta=48.2^\circ}
+\]
+
+\stepn{4} \textbf{Speed, from (ii):}
+\[
+v^{2}=g\ell\left(1-\tfrac{2}{3}\right)=\frac{g\ell}{3}
+\qquad\Longrightarrow\qquad
+\boxed{v=\sqrt{\frac{g\ell}{3}}}
+\]
+\textbf{Check that the particle gets there.} With $u^{2}=g\ell$ it would stop at
+$h_1=u^{2}/2g=\ell/2$, that is at $\cos\theta=\tfrac12$ ($60^\circ$); since $48.2^\circ<60^\circ$ the
+string is still taut and the particle still moving at the required point.
+\ans{$v=\sqrt{g\ell/3}$ at $\theta=\cos^{-1}(2/3)=48.2^\circ$}
+
+\end{exbox}
+
+\begin{exbox}{A tube can push, so the rules relax}
+A small ball is inside a smooth circular \emph{tube} of radius $R$ held in a vertical plane, and is
+pushed along the tube with speed $u$ from a point at height $h$ above the lowest point. What speed is
+needed for it to pass over the top? The tube's bore is negligible compared with $R$.
+
+\stepn{1} \textbf{Recognise what kind of constraint a tube is.} A tube has walls on \emph{both} sides,
+so it can push the ball inward \emph{or} outward. The $T\ge0$ condition that governs a string therefore
+does not apply: the only requirement is that the ball physically \emph{passes over} it, that is,
+$v_{\text{top}}>0$.
+
+\stepn{2} \textbf{Energy conservation} from height $h$ to the top of the tube at height $2R$:
+\[
+v_{\text{top}}^{2}=u^{2}-2g(2R-h).
+\]
+
+\stepn{3} \textbf{Impose the (relaxed) condition} $v_{\text{top}}>0$:
+\[
+u^{2}-2g(2R-h)>0
+\qquad\Longrightarrow\qquad
+\boxed{\;u>\sqrt{2g(2R-h)}\;}
+\]
+As with the rod, the boundary value is a limit the ball approaches but never attains.
+\ans{$u>\sqrt{2g(2R-h)}$}
+
+\smallskip
+\textbf{Compare with a string.} For a string, starting at a height $h$ in the lower half, the
+requirement would be $u^{2}\ge5gR-2gh$, larger than the tube's $4gR-2gh$ by $gR$. Always check first
+\emph{what the constraint can do}: a string pulls only; a rod, a tube or a groove can push as well.
+\end{exbox}
+
+\section{Non-Inertial Frames and Pseudo-Forces}\label{sec:noninertial}
+
+Every problem so far was solved from the ground. Yet a passenger in a turning car, or a rider in a
+rotor, naturally describes the motion from where they sit, and feels pushed outward. Newton's laws
+hold in some frames and not in others. This section shows how to work honestly in a frame where they
+fail, first an accelerating one (a lift, a train), then a rotating one: the cost is one fictitious
+force, called a pseudo-force.
+
+\begin{defbox}{Inertial and non-inertial frames}
+An \emph{inertial} frame is one in which the first law holds (\chref{ch:newton}). A frame that
+accelerates or rotates relative to an inertial frame is \emph{non-inertial}: in it a free body appears
+to accelerate with no real force acting, so Newton's laws fail unless they are corrected.
+No real frame is exactly inertial: the ground shares the Earth's spin, whose centripetal acceleration
+at the equator is about \SI{0.034}{m/s^2}, a third of a percent of $g$. That is negligible in this
+book's problems, which is why the ground is treated as inertial.
+\end{defbox}
+
+\begin{derivbox}{The repair: pseudo-forces}
+Suppose your frame (a train, a lift) accelerates at $\va_0$ relative to the ground \emph{without
+rotating}, so that every point of it shares that acceleration. Watch a particle from
+inside that frame, where it appears to accelerate at $\va'$.
+
+\stepn{1} \textbf{Relate the two accelerations.} The particle's \emph{true} acceleration (as seen from the
+ground) is what it appears to do inside the frame \emph{plus} the frame's own acceleration:
+$\va_{\text{ground}}=\va'+\va_0$.
+
+\stepn{2} \textbf{Apply the real law in the ground frame,} where it is valid:
+$\vF_{\text{real}}=m\va_{\text{ground}}=m\va'+m\va_0$.
+
+\stepn{3} \textbf{Rearrange to look like $\vF=m\va'$ inside the frame.} Move the $m\va_0$ term to the
+force side:
+\[
+\vF_{\text{real}}\;\underbrace{-\,m\va_0}_{\vF_{\text{pseudo}}}=m\va'.
+\]
+So Newton's law \emph{does} work inside the accelerating frame, provided you add one extra force
+$\vF_{\text{pseudo}}=-m\va_0$ to every body, pointing \emph{opposite} to the frame's acceleration, with
+magnitude $m a_0$. Add it, then solve exactly as if the frame were at rest.
+\end{derivbox}
+
+\begin{trapbox}{a pseudo-force has no source and no reaction}
+A pseudo-force exists only because the frame accelerates. It has no source body, no third-law partner,
+and vanishes the instant you return to an inertial frame. Choose one frame and stay in it: in the
+ground frame use real forces only and write $\vF_{\text{real}}=m\va_{\text{ground}}$; in the accelerating
+frame add $-m\va_0$ and use $\va'$. Writing both the pseudo-force and the frame's acceleration in one
+equation counts that acceleration twice.
+\end{trapbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{pseudo_pendulum}
+\figcaption{fig:pseudo}{A bob hangs in a car accelerating at $a_0$. In the car's (non-inertial) frame it
+is in equilibrium under tension, weight, and a backward pseudo-force $ma_0$, giving $\tan\theta=a_0/g$.
+The ground frame, with no pseudo-force, gets the same angle.}
+\end{figure}
+
+Figure~\ref{fig:pseudo} shows the simplest application. A bob hangs from the roof of a car that
+accelerates horizontally at $a_0$, and the string settles at an angle $\theta$ to the vertical.
+\emph{In the car's frame} the bob is at rest under the tension, the weight and a backward pseudo-force
+$ma_0$: $T\sin\theta=ma_0$ and $T\cos\theta=mg$, so $\tan\theta=a_0/g$. \emph{In the ground frame}
+there is no pseudo-force; the bob accelerates forward at $a_0$, so $T\sin\theta=ma_0$ is now Newton's
+second law rather than a balance, and $T\cos\theta=mg$ as before. The equations, and the angle, are the
+same; only their interpretation differs.
+
+\begin{keybox}{Effective gravity}
+Inside a lift accelerating up at $a_0$, every body carries an extra pseudo-force $ma_0$ downward, so it
+behaves as if gravity were $g_{\text{eff}}=g+a_0$. Accelerating down, $g_{\text{eff}}=g-a_0$ (and zero in
+free fall). To solve almost any in-lift problem (apparent weight, pulleys, projectiles, pendulum
+periods), replace $g$ by $g_{\text{eff}}$. In general, in a frame translating with acceleration $\va_0$,
+$\vg_{\text{eff}}=\vg-\va_0$: in the car of Figure~\ref{fig:pseudo} its magnitude is
+$\sqrt{g^{2}+a_0^{2}}$, and the bob hangs along it.
+\end{keybox}
+
+\begin{exbox}{Apparent weight in a lift, from inside the lift}
+A person of mass $m$ stands on a scale in a lift accelerating up at $a_0$. \chref{ch:newton} found the
+scale reading in the ground frame: $N-mg=ma_0$. In the lift's frame the person is at rest under $N$, the
+weight $mg$ and the pseudo-force $ma_0$ downward, so $N-mg-ma_0=0$. Either way $N=m(g+a_0)=mg_{\text{eff}}$:
+the scale reads the effective weight. Accelerating down, $N=m(g-a_0)$, and in free fall ($a_0=g$)
+$N=0$. \ans{$N=m(g\pm a_0)$}
+\end{exbox}
+
+\subsection{Working inside a rotating frame}\label{sub:rotframe}
+The repair above assumed a frame that does not rotate, so that every point of it shares one acceleration
+$\va_0$. The passenger and the rotor rider of this section's opening sit in frames that \emph{do} rotate.
+Some circular-motion problems become much simpler from there, at the price of one extra pseudo-force.
+
+\begin{motivbox}{When is it worth leaving the ground frame?}
+The ground frame is always \emph{correct}, but it is not always \emph{convenient}. Consider a bead free
+to slide along a radial groove cut in a turntable that spins at constant $\omega$. Seen from the
+ground, the bead traces an outward spiral (Figure~\ref{fig:nifgroove}, left), and the only real horizontal force, the sideways push of
+the groove's wall, is perpendicular to the \emph{groove} but not to the path: it does work on the bead
+and changes both the size and the direction of its velocity, which makes the ground-frame algebra
+unpleasant.
+
+Now sit \emph{on} the turntable. In that frame the bead slides straight out along the groove
+(Figure~\ref{fig:nifgroove}, right).
+The price is one pseudo-force, the \textbf{centrifugal force} $m\omega^{2}x$ on a bead at distance $x$
+from the axis, pointing radially outward. The rule extends the one for a translating frame: add $-m\va_0$,
+where $\va_0$ is now the acceleration of the point of the frame at which the body currently sits. For a frame
+turning at constant $\omega$ that point has centripetal acceleration $\omega^{2}x$, so the pseudo-force
+is $m\omega^{2}x$ outward. A body moving relative to the frame needs one further term, the Coriolis
+force (see the remark at the end of this subsection).
+\end{motivbox}
+
+\begin{trapbox}{centrifugal force and $mv^2/r$ never share an equation}
+In the ground frame, set the inward resultant of the real forces equal to $mv^2/r$. In the rotating
+frame, add the outward centrifugal force $m\omega^2r$ (equal in size to $mv^2/r$) to the \emph{same} real
+forces and, for a body at rest in that frame, set the total to zero. Writing both counts the circular motion twice. A passenger in a car
+rounding a bend feels thrown outward, but in the ground frame nothing pushes them outward: their body
+tends to go straight on, and the door pushes them \emph{inward} round the bend.
+\end{trapbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nif_groove}
+\figcaption{fig:nifgroove}{The same bead described twice. In the ground frame (left) the wall's push $N$ is the only horizontal force; the bead's velocity is not along the groove, and its path is a spiral. In the table's frame (right) the table is at rest, $N$ is balanced across the groove by the Coriolis pseudo-force, and the only force along the groove is the centrifugal pseudo-force $m\omega^2x$: the motion is a straight slide along $x$.}
+\end{figure}
+
+\begin{exbox}{Bead sliding in a groove on a rotating table}
+A horizontal table turns at constant angular speed $\omega$ about its axis. A smooth radial groove is
+cut in it, and a particle is gently placed inside the groove at a distance $a$ from the centre. Find
+the particle's speed \emph{relative to the table} when its distance from the centre has grown to $b$.
+
+\stepn{1} \textbf{Choose the frame deliberately.} Work in the frame of the \emph{table}. The particle
+then moves along a straight line (the groove), and we must include the centrifugal pseudo-force.
+
+\stepn{2} \textbf{Write the force along the groove.} At distance $x$ from the axis the outward
+centrifugal force is $m\omega^{2}x$. The groove is smooth, and its wall pushes only \emph{sideways}, so
+along the groove this is the only force:
+\[
+ma = m\omega^{2}x
+\qquad\Longrightarrow\qquad
+a=\omega^{2}x.
+\]
+
+\stepn{3} \textbf{The acceleration depends on position, not time}, so use the chain-rule form
+$a=\dfrac{dv}{dt}=\dfrac{dv}{dx}\dfrac{dx}{dt}=v\dfrac{dv}{dx}$ rather than any constant-acceleration
+formula:
+\[
+v\frac{dv}{dx}=\omega^{2}x.
+\]
+
+\stepn{4} \textbf{Separate and integrate} from $(x=a,\ v=0)$ to $(x=b,\ v)$:
+\[
+\int_{0}^{v} v\,dv=\omega^{2}\int_{a}^{b} x\,dx
+\qquad\Longrightarrow\qquad
+\frac{v^{2}}{2}=\frac{\omega^{2}}{2}\left(b^{2}-a^{2}\right)
+\]
+\[
+\boxed{\;v=\omega\sqrt{b^{2}-a^{2}}\;}
+\]
+\ans{$v=\omega\sqrt{b^{2}-a^{2}}$}
+
+\smallskip
+\textbf{Checks.} At $b=a$ the formula gives $v=0$ \checkmark. A particle placed exactly at the centre
+would stay there, because the centrifugal force vanishes at the axis: an unstable equilibrium, but an
+equilibrium.
+\end{exbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nif_centriwork}
+\figcaption{fig:nifwork}{The centrifugal force depends only on the distance from the axis and points
+radially, so the work it does between two radii is the same along every path: it is a conservative
+force within the rotating frame.}
+\end{figure}
+
+\begin{exbox}{Work done by the centrifugal force \textnormal{(a classic problem)}}
+A small body of mass \SI{0.10}{kg} moves in a frame rotating at a constant
+$\omega=\SI{5.0}{rad/s}$. What work does the centrifugal force perform as the body is carried along an
+\emph{arbitrary} path from $r_1=\SI{30}{cm}$ to $r_2=\SI{50}{cm}$ from the rotation axis?
+
+\stepn{1} \textbf{Why ``arbitrary path'' is not a problem.} The centrifugal force $F=m\omega^{2}r$ is
+directed radially outward and its magnitude depends only on $r$. A force of that form is
+\textbf{conservative} (a term made precise in \chref{ch:energy}): only the radial part of any
+displacement does work, so all the sideways
+wandering contributes nothing and only the change in $r$ matters (Figure~\ref{fig:nifwork}).
+
+\stepn{2} \textbf{Integrate along the radius.}
+\[
+W=\int_{r_1}^{r_2} m\omega^{2}r\,dr
+= m\omega^{2}\left[\frac{r^{2}}{2}\right]_{r_1}^{r_2}
+=\frac{m\omega^{2}\left(r_2^{2}-r_1^{2}\right)}{2}.
+\]
+
+\stepn{3} \textbf{Substitute.}
+\[
+W=\frac{(0.10)(5.0)^{2}\big[(0.50)^{2}-(0.30)^{2}\big]}{2}
+=\frac{(0.10)(25)(0.25-0.09)}{2}
+=\frac{2.5\times0.16}{2}=\boxed{\SI{0.20}{J}}
+\]
+\ans{$W=\SI{0.20}{J}$}
+
+\smallskip
+\textbf{Positive, as it must be:} the body moved \emph{outward}, in the same direction as the
+centrifugal force, so that force did positive work on it.
+\end{exbox}
+
+\begin{remarkbox}{A word on the Coriolis force}
+A rotating frame requires \emph{two} pseudo-forces. The centrifugal force $m\omega^{2}r$ acts on
+\emph{every} body in the frame, moving or not. A body \textbf{moving relative to the frame} needs a
+second correction, the \textbf{Coriolis force} $2m(\vv_{\text{rel}}\ex\vomega)$, where $\vv_{\text{rel}}$ is the
+velocity relative to the frame and $\vomega$ the frame's angular velocity vector, along the axis
+(\chref{ch:circkin}); it is perpendicular to both. In the groove problem it points across the groove, so the wall's normal force
+absorbs it and it never enters the along-groove equation; that is why we could ignore it. On the
+rotating Earth the Coriolis force deflects winds, giving cyclones their spin, and bends the paths of
+long-range projectiles. It lies beyond this syllabus.
+\end{remarkbox}
+
+\subsection{Artificial gravity: the rotor, scaled up to a spacecraft}
+
+The ground-frame and rotating-frame descriptions now meet in one practical problem. A spacecraft coasting between planets is in \textbf{free fall}. The ship and everyone in it accelerate
+together under whatever gravity is present, so nobody presses on anything, and the crew float. That is
+the \emph{default} state, and it is a problem: months of it waste muscle and leach calcium from bone.
+Spinning the ship restores a sensation of weight. This is why, in both \emph{Interstellar} and \emph{The Martian}, the astronauts float in the
+ship's central hub and walk normally in the rotating ring: the same craft gives two different
+sensations, and the only difference is the radius.
+
+
+\begin{derivbox}{Why a spinning floor feels like a planet}
+This is the rotor of \S\ref{sub:rotor} with gravity switched off, so that the wall becomes the floor. An astronaut
+stands on the \emph{inside} of the outer rim, feet outward, head towards the axis.
+
+\stepn{1} \textbf{Apply the central principle.} The astronaut travels a circle of radius $r$ at angular
+speed $\omega$, so some real force must supply $m\omega^{2}r$ inward. The only thing in contact with
+them is the floor, so the floor must provide all of it:
+\[
+N=m\omega^{2}r \qquad\text{directed \emph{inward}, towards the axis.}
+\]
+
+\stepn{2} \textbf{Invoke Newton's third law.} The astronaut therefore pushes \emph{outward} on the floor
+with the same magnitude $m\omega^{2}r$ (Figure~\ref{fig:artgrav}, left).
+
+\stepn{3} \textbf{Compare with standing on Earth.} There the floor pushes up on you with $N=mg$ and you
+press down on it with $mg$. At the point of contact the two situations are mechanically identical: a
+surface pushes on your feet and your skeleton carries that push up through your body. The sensation we
+\emph{call} weight is that compression, so, standing still, your body cannot tell the two apart.
+(Moving, or comparing head with feet, it can, as the remark below shows.) Setting $m\omega^{2}r=mg_{\text{eff}}$,
+the effective gravity is
+\[
+\boxed{\;g_{\text{eff}}=\omega^{2}r=\frac{v^{2}}{r}\;}
+\]
+\end{derivbox}
+
+\why{\textbf{Notice what is absent from that derivation: any outward force on the astronaut.} The only
+real force is the floor's \emph{inward} push, which stops the crew moving off in a straight line. In
+the rotating frame of \S\ref{sub:rotframe} you would add the centrifugal force $m\omega^{2}r$ outward
+and solve a statics problem: the same answer, but only the ground frame identifies a real cause.}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{nif_artgrav}
+\figcaption{fig:artgrav}{\textbf{Left:} the mechanism. The floor of the rim pushes the astronaut inward
+with $N=m\omega^{2}r$, and by the third law the astronaut presses outward on it; that mutual push is
+what the body registers as weight. At the hub, where $r\approx0$, there is nothing to stand on and the
+crew float. \textbf{Right:} the design penalty. Since $g_{\text{eff}}=\omega^{2}r$, a given gravity can
+be bought with a small fast ring or a large slow one, but comfort forces designers towards the latter.}
+\end{figure}
+
+\begin{exbox}{The \emph{Endurance} from \emph{Interstellar}}
+The ring of the \emph{Endurance} is \SI{64}{m} across and turns at \SI{5.5}{rpm}. What gravity does its
+crew experience, and what does a \SI{1.8}{m} astronaut feel between head and feet? ($g=\SI{9.8}{m/s^2}$.)
+
+\stepn{1} \textbf{Convert the spin rate to \si{rad/s}.}
+\[
+\omega=\frac{2\pi n}{60}=\frac{2\pi(5.5)}{60}=\SI{0.576}{rad/s}.
+\]
+
+\stepn{2} \textbf{Effective gravity at the rim} ($r=\SI{32}{m}$):
+\[
+g_{\text{eff}}=\omega^{2}r=(0.576)^{2}(32)=\SI{10.6}{m/s^2}\approx\mathbf{1.08\,g}.
+\]
+
+\stepn{3} \textbf{The head-to-foot gradient.} Because $g_{\text{eff}}\propto r$ and the head, a height
+$h=\SI{1.8}{m}$ above the feet, is nearer the axis,
+\[
+\frac{g_{\text{head}}}{g_{\text{feet}}}=\frac{r-h}{r}=\frac{32-1.8}{32}=0.944,
+\]
+so the head feels about $\mathbf{5.6\%}$ less gravity than the feet. On Earth the corresponding figure
+is about six parts in ten million. \ans{$1.08\,g$; a $5.6\%$ head-to-foot gradient}
+\end{exbox}
+
+\begin{remarkbox}{Why real designs have to be enormous}
+Since $g_{\text{eff}}=\omega^{2}r$, the same gravity can be had from a small ring spun fast or a large
+ring spun slowly. Three effects punish the fast option, and all three grow as $\omega$ grows.
+
+\medskip
+\textbf{1. Coriolis force.} Anything moving relative to the rotating frame feels
+$2m(\vv_{\text{rel}}\ex\vomega)$, perpendicular to both its velocity and the axis. An astronaut
+climbing a ladder towards the hub at \SI{1.5}{m/s} inside the \emph{Endurance} is pushed sideways,
+along the rim, with
+\[
+a_{\text{cor}}=2\omega v_{\text{rel}}=2(0.576)(1.5)=\SI{1.73}{m/s^2},
+\]
+about $18\%$ of $g$. Walking along the rim instead, the same force points radially and makes you
+heavier or lighter: that is effect~3 below, seen from the rotating frame. Worse, every turn of the head
+moves the fluid in the inner
+ear in a misleading way, which the brain reads as vertigo and nausea. Studies put the comfortable
+ceiling near \SI{2}{rpm}, with \SIrange{4}{6}{rpm} tolerable only after adaptation.
+
+\medskip
+\textbf{2. Gravity gradient.} As computed above, $g_{\text{eff}}\propto r$ makes your head lighter than
+your feet by the fraction $h/r$. That is $5.6\%$ on a \SI{32}{m} ring and would be $18\%$ on a
+\SI{10}{m} one: enough to feel on every stand-up.
+
+\medskip
+\textbf{3. Walking changes your weight.} Move at speed $u$ along the rim and your true speed becomes
+$\omega r\pm u$, so
+\[
+g_{\text{eff}}=\frac{(\omega r\pm u)^{2}}{r}\approx\omega^{2}r\left(1\pm\frac{2u}{\omega r}\right),
+\]
+by the binomial approximation of \chref{ch:toolkit}, since $u\ll\omega r$.
+On the \emph{Endurance} (rim speed $\omega r\approx\SI{18.4}{m/s}$), walking at \SI{1.5}{m/s} with
+the spin makes you about $17\%$ heavier and walking against it about $16\%$ lighter. Jogging one way
+round the ring would be noticeably harder than the other.
+
+\medskip
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Spin rate & Radius for $1\,g$ & Rim speed\\
+\midrule
+\SI{1}{rpm}   & \SI{894}{m} & \SI{94}{m/s}\\
+\SI{2}{rpm}   & \SI{223}{m} & \SI{47}{m/s}\\
+\SI{3}{rpm}   & \SI{99}{m}  & \SI{31}{m/s}\\
+\SI{5.5}{rpm} & \SI{30}{m}  & \SI{17}{m/s}\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\medskip
+This is why serious station concepts are hundreds of metres across. To deliver $1\,g$ at a
+comfortable \SI{2}{rpm}, the \emph{Endurance} would need to be roughly \textbf{seven times} its filmed
+diameter.
+\end{remarkbox}
+
+\begin{trapbox}{the ISS is weightless for a quite different reason}
+Astronauts float on the International Space Station not because it is far from Earth, where gravity is
+still about $90\%$ of its surface value, and not because it spins. They float because the station is in
+\textbf{free fall}: it and everything in it accelerate together, so nothing presses on anything. The ISS
+has no rotating section. Attach a ring of radius \SI{32}{m} spinning at \SI{5.5}{rpm} and its crew
+would stand on its floor at once.
+\end{trapbox}
+
+\section{Summary}\label{sec:summary10}
+In every circular-motion problem the inward net force, made of real forces only, equals $mv^2/r$; if the
+speed also changes, the tangential net force equals $ma_t$. The settings differ only in which real force
+does the job. In an accelerating frame, and only there, a pseudo-force is added. The table collects the
+results.
+
+\medskip
+{\small\renewcommand{\arraystretch}{1.45}
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Situation & Key result\\
+\midrule
+Conical pendulum      & $v=\sqrt{rg\tan\theta}$, \; $T_{\text{per}}=2\pi\sqrt{\dfrac{\ell\cos\theta}{g}}$, \; $r=\ell\sin\theta$\\[3pt]
+Inside a smooth cone  & $v=\sqrt{rg\tan\theta}$, $\theta$ = wall's angle to the horizontal\\[3pt]
+Leaning cyclist       & $\tan\theta=\dfrac{v^{2}}{rg}$\\[3pt]
+Rotor / death well    & $\omega_{\min}=\sqrt{\dfrac{g}{\mu r}}$ \; (friction vertical, $N$ horizontal)\\[3pt]
+Flat road             & $v_{\max}=\sqrt{\mu rg}$\\[3pt]
+Banked, smooth        & $\tan\theta=\dfrac{v^{2}}{rg}$: one design speed only\\[3pt]
+Banked with friction  & $v_{\max}=\sqrt{rg\dfrac{\tan\theta+\mu}{1-\mu\tan\theta}}$, \;
+                        $v_{\min}=\sqrt{rg\dfrac{\tan\theta-\mu}{1+\mu\tan\theta}}$\\[5pt]
+Toppling              & $v_{\text{topple}}=\sqrt{\dfrac{gra}{h}}$ \;: the \emph{second} critical speed\\[4pt]
+Vertical circle       & $v^{2}=u^{2}-2gh$ \;and\; $T=\dfrac{mu^{2}}{R}+mg(3\cos\theta-2)$\\[4pt]
+\quad complete        & $u\ge\sqrt{5gR}$ \; (string) \quad or \quad $u>2\sqrt{gR}$ \; (rod/tube)\\[2pt]
+\quad leaves          & $\sqrt{2gR}<u<\sqrt{5gR}$, slack at $h_2=\dfrac{u^{2}+gR}{3g}$\\[3pt]
+\quad oscillates      & $u\le\sqrt{2gR}$, stops at $h_1=\dfrac{u^{2}}{2g}$\\[3pt]
+\quad always          & $T_b-T_t=6mg$\\[3pt]
+Ball off a sphere     & leaves at $\cos\theta=\dfrac23+\dfrac{u^{2}}{3gR}$; from rest, $48.2^\circ$\\[3pt]
+Accelerating frame    & add $-m\va_0$ to every body; in a lift $g_{\text{eff}}=g\pm a_0$\\[3pt]
+Rotating frame        & add $m\omega^{2}r$ outward; $W=\dfrac{m\omega^{2}(r_2^{2}-r_1^{2})}{2}$\\[3pt]
+Artificial gravity    & $g_{\text{eff}}=\omega^{2}r$\\
+\bottomrule
+\end{tabular}
+\end{center}
+}
+
+\medskip
+\textbf{Three questions that settle almost everything.}
+\emph{(1)} Which real force is doing the turning?
+\emph{(2)} Can the constraint push, or only pull? (String pulls only; rod, tube and groove do both.)
+\emph{(3)} If friction vanished, which way would the body slide? Friction points the other way.
+
+\section{Problem Types}\label{sec:types10}
+Circular dynamics questions are dominated by two set pieces: the banked road and the vertical circle.
+The five types below cover those and the closely related conical pendulum and rotor, in the order of the
+chapter. Every one is solved
+by the same opening: draw the real forces, choose horizontal (radial) and vertical axes, which put the
+whole acceleration along one axis, and set the inward resultant equal to $mv^2/r$.
+
+\archq{Conical pendulum}
+{``A bob whirls in a horizontal circle on a string making angle $\theta$ with the vertical, find the
+tension, speed or period.''}
+{Resolve: vertical $T\cos\theta=mg$; horizontal $T\sin\theta=\dfrac{mv^2}{r}$ with $r=\ell\sin\theta$.
+Dividing gives $\tan\theta=\dfrac{v^2}{rg}$, and $T=\dfrac{mg}{\cos\theta}$, always \emph{greater}
+than the weight.}
+{Setting $T=mg$. The string must both support the bob \emph{and} supply the centripetal pull, so it is
+always tighter than the weight.}
+{A conical pendulum's string makes $60^\circ$ with the vertical. The tension is:}
+{$mg/2$}{$mg$}{$2mg$}{$\sqrt3\,mg$\archans{C}{$T=\dfrac{mg}{\cos60^\circ}=\dfrac{mg}{0.5}=2mg$. (A) multiplies
+by $\cos60^\circ$ instead of dividing; (B) is the trap $T=mg$.}}
+
+\archq{The rotor and death well}
+{``A person is pressed against the inside wall of a rotating cylinder, find the minimum angular speed
+so they do not slide down.''}
+{The \emph{normal} force points inward and supplies the centripetal force, $N=m\omega^2r$; \emph{friction}
+acts \emph{upward} and must support the weight, $\mu N\ge mg$. Combining,
+$\boxed{\omega_{\min}=\sqrt{\dfrac{g}{\mu r}}}$, independent of mass.}
+{Taking friction as horizontal. Here the wall is vertical, so the normal force is horizontal and
+friction is \emph{vertical}: the reverse of the usual floor case.}
+{In a rotor of radius \SI{2}{m} with $\mu=0.5$ ($g=\SI{10}{m/s^2}$), the minimum angular speed is:}
+{\SI{1}{rad/s}}{\SI{2.2}{rad/s}}{\SI{3.2}{rad/s}}{\SI{10}{rad/s}\archans{C}{
+$\omega_{\min}=\sqrt{\dfrac{g}{\mu r}}=\sqrt{\dfrac{10}{0.5\times2}}=\sqrt{10}\approx\SI{3.2}{rad/s}$.
+(B) leaves out $\mu$; (D) forgets the square root.}}
+
+\archq{Banked or level road}
+{``Find the angle of banking for a road of radius $r$ at speed $v$,'' or the maximum safe speed on a
+banked or level road.}
+{For a frictionless banked road the horizontal component of the normal force supplies the centripetal
+force: $N\sin\theta=\dfrac{mv^2}{r}$ and $N\cos\theta=mg$. Dividing,
+$\boxed{\tan\theta=\dfrac{v^2}{rg}}$, independent of mass. On a \emph{level} road friction must supply it
+instead, giving $v_{\max}=\sqrt{\mu rg}$.}
+{Writing $N=mg\cos\theta$ as on an inclined plane. The acceleration is \emph{horizontal}, so it has a
+component $\dfrac{v^2}{r}\sin\theta$ perpendicular to the slope, and
+$N=mg\cos\theta+\dfrac{mv^2}{r}\sin\theta$.}
+{The angle of banking for a curve of radius \SI{100}{m} designed for \SI{20}{m/s} is given by
+($g=\SI{10}{m/s^2}$):}
+{$\tan\theta=0.2$}{$\tan\theta=0.4$}{$\tan\theta=2$}{$\tan\theta=4$\archans{B}{
+$\tan\theta=\dfrac{v^2}{rg}=\dfrac{400}{100\times10}=0.4$, that is, $\theta\approx21.8^\circ$.
+(A) is $v/r$, which is not even dimensionless; (D) forgets $g$.}}
+
+\archq{Banked road with friction}
+{``Find the maximum (or minimum) safe speed on a banked road when friction is also present.''}
+{With friction acting \emph{down} the slope at the limit,
+$v_{\max}=\sqrt{rg\dfrac{\tan\theta+\mu}{1-\mu\tan\theta}}$; with friction up the slope,
+$v_{\min}=\sqrt{rg\dfrac{\tan\theta-\mu}{1+\mu\tan\theta}}$. Setting $\mu=0$ recovers the frictionless
+$v=\sqrt{rg\tan\theta}$.}
+{Using the frictionless formula when $\mu$ is given, or getting the sign of the friction term
+backwards. At maximum speed the car tends to slide \emph{outward and up}, so friction acts \emph{down}
+the slope.}
+{A curve of radius \SI{90}{m} is banked with $\tan\theta=0.5$, and $\mu=1/3$ ($g=\SI{10}{m/s^2}$). The
+maximum safe speed is:}
+{\SI{11.3}{m/s}}{\SI{21.2}{m/s}}{\SI{27.4}{m/s}}{\SI{30}{m/s}\archans{D}{
+$\dfrac{\tan\theta+\mu}{1-\mu\tan\theta}=\dfrac{5/6}{5/6}=1$, so $v_{\max}=\sqrt{rg}=\sqrt{900}=\SI{30}{m/s}$.
+(A) is $v_{\min}$, (B) the frictionless design speed, (C) the result of forgetting the denominator.}}
+
+\archq{Vertical circle, critical speeds and tensions}
+{``A body on a string/track goes round a vertical circle, find the minimum speed at the top or
+bottom, or the tension somewhere.''}
+{Two laws together: Newton along the radius \emph{and} energy conservation between the two points. At
+the top both $T$ and $mg$ point inward, so $T+mg=\dfrac{mv_t^2}{R}$; setting $T\ge0$ gives
+$v_t^{\min}=\sqrt{gR}$, and energy then gives $v_b^{\min}=\sqrt{5gR}$. Always
+$T_b-T_t=6mg$.}
+{Using $v_{\min}=\sqrt{gR}$ at the \emph{bottom}. That is the \emph{top} condition. Also, for a rigid
+\emph{rod} (which can push) the top condition relaxes to $v_t>0$, so the speed at the bottom need only
+exceed $2\sqrt{gR}$.}
+{A stone on a string of length \SI{1.6}{m} is whirled in a vertical circle ($g=\SI{10}{m/s^2}$). The minimum speed at
+the highest point is:}
+{\SI{2}{m/s}}{\SI{4}{m/s}}{\SI{8}{m/s}}{\SI{16}{m/s}\archans{B}{$v_t^{\min}=\sqrt{gR}
+=\sqrt{10\times1.6}=\sqrt{16}=\SI{4}{m/s}$. (C) is $2\sqrt{gR}$, the bottom speed for a \emph{rod};
+(D) forgets the square root.}}
+
+\section{Practice Problems}\label{sec:practice10}
+
+The problems below are of standard examination difficulty and are meant to be worked without looking back at the chapter. Answers, with brief working, follow the list.
+
+\begin{enumerate}[itemsep=3pt]
+\item A car rounds a \emph{level} curve of radius \SI{60}{m} with $\mu=0.6$. Find its maximum speed
+      ($g=\SI{10}{m/s^2}$).
+\item A curve of radius \SI{90}{m} is banked at $45^\circ$ and is frictionless. Find the design speed ($g=\SI{10}{m/s^2}$).
+\item A stone on a string of length \SI{0.9}{m} is whirled in a vertical circle ($g=\SI{10}{m/s^2}$). Find (a) the
+      minimum speed at the lowest point to complete the circle and (b) the corresponding speed at the
+      top.
+\item A conical pendulum of length \SI{1.0}{m} makes $45^\circ$ with the vertical ($g=\SI{9.8}{m/s^2}$).
+      Find its period and the tension in terms of $mg$.
+\item In a rotor of radius \SI{2.5}{m} with $\mu=0.5$, find the minimum angular speed for a rider not to
+      slide down ($g=\SI{10}{m/s^2}$).
+\item A loaded van of track width $2a=\SI{1.5}{m}$ has its centre of gravity \SI{1.5}{m} above the road and
+      rounds a curve of radius \SI{50}{m} ($g=\SI{10}{m/s^2}$). Find the speed at which it would overturn, and say
+      whether skidding or toppling occurs first if $\mu=0.8$.
+\end{enumerate}
+
+\subsection*{Answers}
+{\small
+\begin{enumerate}[itemsep=2pt]
+\item $v_{\max}=\sqrt{\mu rg}=\sqrt{0.6(60)(10)}=\sqrt{360}\approx\SI{19.0}{m/s}$.
+\item $v=\sqrt{rg\tan45^\circ}=\sqrt{90(10)}=\SI{30}{m/s}$.
+\item (a) $u_{\min}=\sqrt{5gR}=\sqrt{5(10)(0.9)}=\sqrt{45}\approx\SI{6.7}{m/s}$;
+(b) $v_{\text{top}}=\sqrt{gR}=\sqrt{9}=\SI{3}{m/s}$.
+\item $T_{\text{per}}=2\pi\sqrt{\dfrac{\ell\cos\theta}{g}}=2\pi\sqrt{\dfrac{1.0(0.707)}{9.8}}
+\approx\SI{1.69}{s}$; tension $=\dfrac{mg}{\cos45^\circ}=\sqrt2\,mg\approx\mathbf{1.41\,mg}$.
+\item $\omega_{\min}=\sqrt{\dfrac{g}{\mu r}}=\sqrt{\dfrac{10}{0.5(2.5)}}=\sqrt{8}
+\approx\SI{2.83}{rad/s}$.
+\item $a=\SI{0.75}{m}$, so $v_{\text{topple}}=\sqrt{\dfrac{gra}{h}}
+=\sqrt{\dfrac{10(50)(0.75)}{1.5}}=\sqrt{250}\approx\SI{15.8}{m/s}$. Meanwhile
+$v_{\text{skid}}=\sqrt{\mu rg}=\sqrt{0.8(50)(10)}=\SI{20}{m/s}$. Since
+$v_{\text{topple}}<v_{\text{skid}}$, this tall, narrow vehicle \textbf{overturns before it skids}, the
+dangerous case ($\mu=0.8>a/h=0.5$).
+\end{enumerate}
+}
+
+
+\section{Challenge Problems}\label{sec:challenge10}
+These problems extend the methods of \chsref{ch:friction}{ch:circdyn} beyond the standard examination
+question. Each states which idea it builds on. Attempt each before reading the solution.
+
+\begin{challengebox}{The most efficient pull, and the most efficient hold (builds on optimising against friction)}
+A \SI{10}{kg} crate is placed on a rough incline of $30^\circ$ ($\mu_s=0.3$). (a) Find the least force
+that will drag it up the slope, and the angle at which to apply it. (b) Left alone, the crate slides
+down. Find the least force that will hold it at rest, and its direction. ($g=\SI{9.8}{m/s^2}$.)
+\challengeans{Let the pull make an angle $\beta$ above the incline. Perpendicular to the incline,
+$N=mg\cos\theta-F\sin\beta$; along it, on the point of slipping, $F\cos\beta=mg\sin\theta+\mu N$. Hence
+\[
+F=\frac{mg(\sin\theta+\mu\cos\theta)}{\cos\beta+\mu\sin\beta}.
+\]
+With the angle of friction $\lambda=\arctan\mu=\arctan(0.3)=16.7^\circ$, the denominator is
+$\cos(\beta-\lambda)/\cos\lambda$, largest at $\beta=\lambda$. So the least force is applied at
+$\beta=\lambda$ \emph{above the incline surface}, and
+\[
+F_{\min}=mg\sin(\theta+\lambda)=10\times9.8\times\sin(46.7^\circ)\approx\SI{71.3}{N}.
+\]
+Pulling at the friction angle rather than straight along the slope saves force by lifting some weight off
+the surface, which cuts the normal force and with it the friction. (Check: $F\sin\lambda\approx\SI{20}{N}
+<mg\cos\theta\approx\SI{85}{N}$, so the crate stays on the surface.)
+
+(b) The crate slides if left alone because $\tan30^\circ=0.577>\mu_s$. On the point of sliding
+\emph{down}, friction acts \emph{up} the slope, so the signs of the friction terms reverse:
+$F\cos\beta+\mu N=mg\sin\theta$ with $N=mg\cos\theta-F\sin\beta$, giving
+\[
+F=\frac{mg(\sin\theta-\mu\cos\theta)}{\cos\beta-\mu\sin\beta}.
+\]
+The denominator is now largest at $\beta=-\lambda$: the force should be directed at the friction angle
+\emph{into} the slope, pressing the crate on to the surface to increase the friction that helps. Then
+$F_{\min}=mg\sin(\theta-\lambda)=98\sin(13.3^\circ)\approx\SI{22.5}{N}$. Lifting helps when
+friction opposes you; pressing helps when friction is on your side.}
+\end{challengebox}
+
+\begin{challengebox}{The full speed band of a banked curve (builds on banking with friction)}
+A curve of radius \SI{50}{m} is banked at $15^\circ$, with $\mu_s=0.5$ between tyres and road
+($g=\SI{9.8}{m/s^2}$). (a) Find the maximum speed at which a car can round it without sliding.
+(b) Show that there is no minimum speed. (c) Keeping $\mu_s=0.5$, above what bank angle would there be
+no maximum speed either?
+\challengeans{(a) With friction acting down-slope at maximum speed,
+\[
+v_{\max}=\sqrt{rg\,\frac{\mu_s+\tan\theta}{1-\mu_s\tan\theta}}
+=\sqrt{50\times9.8\times\frac{0.5+\tan15^\circ}{1-0.5\tan15^\circ}}\approx\SI{20.8}{m/s}\approx\SI{75}{km/h}.
+\]
+Both effects help at the top end: the banking contributes an inward $N\sin\theta$, and friction adds its
+share on top. Without the bank ($\theta=0$) the limit would be only $\sqrt{\mu_s rg}=\SI{15.7}{m/s}$;
+the $15^\circ$ tilt buys nearly \SI{20}{km/h}.
+
+(b) Here $\mu_s=0.5>\tan15^\circ=0.268$, so $\tan\theta-\mu_s<0$ and the formula for $v_{\min}^{2}$
+is negative: friction alone can hold a stationary car on this bank, and no speed is too slow.
+
+(c) $v_{\max}$ becomes unbounded when the denominator $1-\mu_s\tan\theta$ reaches zero, at
+$\tan\theta=1/\mu_s=2$, that is $\theta\approx63.4^\circ$. On a steeper bank the vertical balance
+$N(\cos\theta-\mu_s\sin\theta)=mg$ can be met by no positive $N$ when friction acts down the slope at
+its limit: friction can always grow enough to stop an upward slide. (A stationary car would slide down such a
+bank, since $\tan\theta>\mu_s$.) The extreme case $\theta=90^\circ$ is the death well of
+\S\ref{sub:rotor}, where only a minimum speed exists.}
+\end{challengebox}
+
+\begin{challengebox}{A string that can break (builds on vertical circle)}
+A \SI{0.5}{kg} ball on a string of length \SI{2}{m} is whirled in a vertical circle. The string breaks if
+its tension exceeds \SI{50}{N}. (a) Find the range of speeds $u$ at the lowest point for which the ball goes
+all the way round with the string neither slackening nor breaking. (b) If instead $u=\SI{8.0}{m/s}$,
+find the angle from the lowest point at which the string goes slack. ($g=\SI{9.8}{m/s^2}$.)
+\challengeans{(a) Two conditions, one at each end of the circle. The tension is \emph{least} at the top, so
+slackening is tested there: $T_{\text{top}}=\dfrac{mu^{2}}{R}-5mg\ge0$ gives
+$u\ge\sqrt{5gR}=\sqrt{98}=\SI{9.90}{m/s}$. The tension is \emph{greatest} at the bottom, so breaking is
+tested there:
+\[
+T_{\text{bottom}}=\frac{mu^{2}}{R}+mg\le50
+\;\Longrightarrow\;
+u^{2}\le\frac{(50-4.9)(2)}{0.5}=180.4
+\;\Longrightarrow\;
+u\le\SI{13.4}{m/s}.
+\]
+So $\SI{9.90}{m/s}\le u\le\SI{13.4}{m/s}$. Because $T_{\text{bottom}}-T_{\text{top}}=6mg=\SI{29.4}{N}$
+always, the window exists only because the breaking tension exceeds $6mg$: a string rated below
+\SI{29.4}{N} could never take this ball round.
+
+(b) First decide the regime: $\sqrt{2gR}=\SI{6.26}{m/s}<8.0<\SI{9.90}{m/s}$, so the string slackens
+before the ball stops. From \S\ref{sub:vcfail}, $h_2=\dfrac{u^{2}+gR}{3g}=\dfrac{64+19.6}{29.4}
+=\SI{2.84}{m}$, so $\cos\theta=\dfrac{R-h_2}{R}=-0.422$ and $\theta\approx115^\circ$, in the upper
+half as the theory requires.}
+\end{challengebox}
+
+\section*{Looking Back on Part B}
+\addcontentsline{toc}{section}{Looking Back on Part B}
+
+\textbf{Part B gave motion its cause.}
+\begin{itemize}
+\item \textbf{Newton's laws (\chref{ch:newton}).} The first law defines force and the inertial frame; the second,
+$\vF=m\va$ (more generally $\vF=d\vp/dt$), does almost all the work, component by component; the third pairs every
+force with an equal, opposite one on a \emph{different} body, which is why action--reaction pairs never
+cancel and why propulsion is possible. The free-body diagram, every real force on one body, resolved to
+axes, is the master technique.
+\item \textbf{Connected bodies (\chref{ch:connected}).} An ideal string carries one tension throughout and links its
+bodies by an acceleration constraint. Atwood, block-on-table, and incline-pulley are one machine at three
+tilts. Springs combine by asking what is \emph{shared}: same force $\Rightarrow$ series (softer), same
+extension $\Rightarrow$ parallel (stiffer).
+\item \textbf{Friction (\chref{ch:friction})} is self-adjusting up to a ceiling $\mu_s N$, then drops to $\mu_k N$; the
+angle of repose measures $\mu_s$ directly, and the least force to drag a body is applied at the angle of
+friction.
+\item \textbf{Circular dynamics (\chref{ch:circdyn}).} Centripetal force is never new: it is the net inward
+component of real forces, whether friction on a flat road, the normal force on a banked one, or tension
+in a vertical circle, where energy conservation must supply the speed. In an accelerating frame, add one
+pseudo-force $-m\va_0$ (in a rotating frame, the centrifugal force) and Newton's laws work again.
+\end{itemize}
+\textbf{The thread into Part C:} solving $\vF=m\va$ through every instant is powerful but laborious. Next
+we find shortcuts, conserved quantities that connect a motion's endpoints without the middle.

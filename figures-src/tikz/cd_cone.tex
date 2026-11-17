@@ -1,0 +1,38 @@
+% cd_cone: a particle circling on the smooth inside wall of a cone (Ch 10, fig:cdcone)
+% The wall makes theta with the horizontal.  N is perpendicular to the wall, so it
+% makes the same theta with the vertical: N cos(theta) = mg, N sin(theta) = mv^2/r.
+% Drawn with theta = 60 degrees.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\th{60}
+  \def\H{4.0}                                  % height of the cone's rim
+  \pgfmathsetmacro\R{\H/tan(\th)}              % rim radius
+  \def\h{2.25}                                 % height of the particle's circle
+  \pgfmathsetmacro\r{\h/tan(\th)}              % its radius
+  % cone: two walls and the rim, with a light fill
+  \fill[cSlope] (0,0) -- (\R,\H) arc[start angle=0,end angle=-180,x radius=\R,y radius=\persp*\R] -- cycle;
+  \draw[outline] (-\R,\H) -- (0,0) -- (\R,\H);
+  \draw[outline] (0,\H) ellipse[x radius=\R,y radius=\persp*\R];
+  % the axis
+  \draw[guide] (0,-0.25) -- (0,\H+0.45);
+  % the particle's circle (back half dashed)
+  \draw[cPrim,thin line,hidden] (\r,\h) arc[start angle=0,end angle=180,x radius=\r,y radius=\persp*\r];
+  \draw[cPrim,thin line] (\r,\h) arc[start angle=0,end angle=-180,x radius=\r,y radius=\persp*\r];
+  % radius of the circle
+  \draw[dim] (0,\h-0.42) -- node[below,cSteel] {$r$} (\r,\h-0.42);
+  \draw[dimtick] (\r,\h-0.12) -- (\r,\h-0.55);
+  % angle theta between the wall and the horizontal, at the apex
+  \draw[guide] (0,0) -- (1.25,0);
+  \draw[angle arc] (0.75,0) arc[start angle=0,end angle=\th,radius=0.75];
+  \node at (25:1.0) {$\theta$};
+  % the particle and its forces
+  \coordinate (P) at (\r,\h);
+  \draw[force] (P) -- ++(0,-1.25) node[anchor=north] {$mg$};
+  \draw[force] (P) -- ++(180-90+\th:1.45) node[anchor=south east,inner sep=1pt] {$N$};
+  % theta between N and the vertical
+  \draw[guide] (P) -- ++(0,1.2);
+  \draw[angle arc] ($(P)+(0,0.7)$) arc[start angle=90,end angle=90+\th,radius=0.7];
+  \node at ($(P)+(90+\th/2:0.95)$) {$\theta$};
+  \shade[ball color=cBlock] (P) circle[radius=0.11];
+  \draw[cSteel,thin line] (P) circle[radius=0.11];
+  \node[anchor=west] at ($(P)+(0.15,0.08)$) {$m$};
+\end{tikzpicture}

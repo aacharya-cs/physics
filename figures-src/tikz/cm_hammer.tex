@@ -1,0 +1,50 @@
+% cm_hammer: a thrown hammer tumbles about its centre of mass (Ch 13, fig:cmhammer)
+% The CM follows an exact parabola (constant acceleration g, no drag); the
+% hammer turns at a constant rate about the CM (no torque about the CM).
+% Flight parameter s is proportional to time:
+%   x(s) = 9.3 s,   y(s) = 0.5 + 11 s - 11.5 s^2   (cm)
+% a parabola peaking at s = 0.478, y = 3.13 cm.  Orientation of the handle
+% (CM -> head) phi(s) = 100 - 720 s degrees: clockwise, two turns per unit s.
+% Hammer: handle length L = 1.25 cm, head 0.42 x 0.2 cm; the CM is d = 0.3 cm
+% from the head's centre (the heavy head pulls it close).  Seven snapshots at
+% equal time steps, s = 0.06 + 0.14 k.  Drawn for s in [0.035, 0.935], from just
+% after release (the ground is 0.25 cm below the release point's foot) to just
+% before the handle strikes the ground.  The thin orange curve is the path of
+% the handle's free end, computed from the same x, y, phi: it loops and kinks.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\X{9.3}\def\yo{0.5}\def\bb{11.5}
+  \def\L{1.25}\def\d{0.3}
+  \def\phio{100}\def\Om{720}
+  \def\sa{0.035}\def\sb{0.935}
+  % ground
+  \draw[ground] (-0.4,-0.25) -- (\X+0.5,-0.25);
+  % path of the handle's free end
+  \draw[cAcc,thin line] plot[domain=\sa:\sb,samples=240,variable=\s]
+    ({\X*\s - (\L-\d)*cos(\phio-\Om*\s)},
+     {\yo+(\bb-\yo)*\s-\bb*\s*\s - (\L-\d)*sin(\phio-\Om*\s)});
+  % the centre of mass: a parabola
+  \draw[cPrim,curve] plot[domain=\sa:\sb,samples=120,variable=\s]
+    ({\X*\s},{\yo+(\bb-\yo)*\s-\bb*\s*\s});
+  % snapshots of the hammer
+  \foreach \k in {0,...,6}{
+    \pgfmathsetmacro\s{0.06+0.14*\k}
+    \pgfmathsetmacro\cx{\X*\s}
+    \pgfmathsetmacro\cy{\yo+(\bb-\yo)*\s-\bb*\s*\s}
+    \pgfmathsetmacro\ph{\phio-\Om*\s}
+    \begin{scope}[shift={(\cx,\cy)},rotate=\ph]
+      % handle from the free end to the head
+      \filldraw[fill=cSun,draw=cInk,hair line] (-\L+\d,-0.045) rectangle (\d-0.1,0.045);
+      % head, centred a distance d from the CM
+      \filldraw[fill=cRock,draw=cInk,thin line] (\d-0.1,-0.21) rectangle (\d+0.1,0.21);
+      \pic {cm};
+    \end{scope}
+  }
+  % labels
+  \pgfmathsetmacro\sl{0.27}
+  \draw[leader,cPrim] (2.6,1.3) -- ({\X*\sl},{\yo+(\bb-\yo)*\sl-\bb*\sl*\sl-0.04});
+  \node[cPrim,anchor=north,align=center] at (2.9,1.32) {centre of mass:\\ a parabola};
+  \pgfmathsetmacro\sl{0.52}
+  \draw[leader,cAcc] (6.2,1.32) -- ({\X*\sl - (\L-\d)*cos(\phio-\Om*\sl)},
+     {\yo+(\bb-\yo)*\sl-\bb*\sl*\sl - (\L-\d)*sin(\phio-\Om*\sl)-0.04});
+  \node[cAcc,anchor=north,align=center] at (6.5,1.32) {path of the\\ handle's end};
+\end{tikzpicture}

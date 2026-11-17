@@ -1,0 +1,31 @@
+% work_angle: the sign of W = F d cos(theta) (Ch 11, fig:workangle)
+% Three blocks sliding to the right (displacement d along +x) under a force F
+% at theta = 35, 90 and 145 degrees to d.  cos(theta) > 0, = 0, < 0 gives
+% positive, zero and negative work.  The dashed guide marks the direction of d,
+% from which theta is measured.
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \foreach \th/\k/\sgn/\eff in {35/0/{W>0}/{speeds it up},
+                                90/1/{W=0}/{speed unchanged},
+                                145/2/{W<0}/{slows it down}}{
+    \begin{scope}[xshift=\k*50mm]
+      % floor and block
+      \path[ground,draw=none] (0,-1.8) rectangle (44,0);
+      \draw[ground] (0,0) -- (44,0);
+      \draw[body] (16,0) rectangle (28,8);
+      % direction of d, from which theta is measured
+      \coordinate (O) at (22,4);
+      \draw[guide] (O) -- ++(13,0);
+      % the force and its angle
+      \draw[force] (O) -- ++(\th:14) coordinate (F);
+      \draw[angle arc] ($(O)+(5.5,0)$) arc[start angle=0,end angle=\th,radius=5.5];
+      \node at ($(O)+(\th/2:8.6)$) {$\theta$};
+      \node[cCrim,anchor=south] at ($(F)+(0,0.4)$) {$\vF$};
+      % displacement
+      \draw[vector,cInk] (14,-6) -- (30,-6) node[midway,below=0.5mm] {$\vc{d}$};
+      % verdict
+      \node[anchor=north,align=center] at (22,-12)
+        {$\theta\ifnum\k=0 <\else\ifnum\k=1 =\else >\fi\fi 90^\circ$: $\sgn$\\[1pt]
+         \footnotesize \eff};
+    \end{scope}
+  }
+\end{tikzpicture}

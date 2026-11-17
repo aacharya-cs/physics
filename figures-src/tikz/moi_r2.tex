@@ -1,0 +1,29 @@
+% moi_r2: I weights each mass by r^2 (Ch 14, fig:moir2)
+% Three equal masses m at r, 2r, 3r from a rotation axis (r = 2.7 cm drawn).  Above
+% each, a bar of height proportional to its contribution m r^2: 1 : 4 : 9
+% (0.24 cm per unit).  Distances use the same dimension style as the moid_* figures,
+% and the axis the same dash-dot line.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\u{2.7}    % drawn length of r
+  \def\h{0.24}   % bar height per unit of m r^2
+  \def\bw{0.26}  % half width of a bar
+  \draw[rotation axis] (0,-1.85) -- (0,2.85) node[anchor=south] {axis};
+  % masses, bars and labels
+  \foreach \n in {1,2,3}{%
+    \pgfmathsetmacro\x{\n*\u}
+    \pgfmathsetmacro\top{0.45+\h*\n*\n}
+    \draw[cPrim,thin line,fill=cPrim!25] (\x-\bw,0.45) rectangle (\x+\bw,\top);
+    \pgfmathtruncatemacro\sq{\n*\n}
+    \node[cPrim,anchor=south] at (\x,\top) {$\sq\times$};
+    \draw[body] (\x,0) circle[radius=0.23];
+    \node at (\x,0) {$m$};
+  }
+  % what the bars measure
+  \node[cPrim,anchor=west] at (0.25,2.55) {contribution to $I$: $mr^2$};
+  % distances from the axis, stacked
+  \foreach \n/\y/\lab in {1/-0.55/r,2/-1.0/2r,3/-1.45/3r}{%
+    \draw[dimtick] (\n*\u,-0.26) -- (\n*\u,\y-0.12);
+    \draw[dim] (0,\y) -- (\n*\u,\y);
+    \node[cSteel,anchor=west,inner sep=2pt] at (\n*\u,\y) {$\lab$};
+  }
+\end{tikzpicture}

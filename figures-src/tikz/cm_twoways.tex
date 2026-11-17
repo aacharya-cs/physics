@@ -1,0 +1,43 @@
+% cm_twoways: the two ways the tip of a velocity arrow can move (Ch 6, fig:twoways)
+% v is 2.6 cm long in each panel; the changes dv are exaggerated for visibility.
+% (a) size only: dv lies along v (0.75 cm).
+% (b) direction only: v turns by 24 degrees at fixed length, so its tip stays on
+%     the circle of radius |v| about the tail and dv is the chord, which becomes
+%     perpendicular to v as the angle shrinks.
+% (c) both: dv = (a_t dt) along v + (a_r dt) across it, here 0.65 cm and 0.75 cm.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\v{2.6}
+  % ----------------------------------------------------------- (a) size ---
+  \begin{scope}
+    \draw[velocity] (0,0) -- (\v,0);
+    \node[cFor,anchor=north] at (\v/2,-0.05) {$\vv$};
+    \draw[accel] (\v,0) -- (\v+0.75,0) node[midway,anchor=south,cPrim,yshift=1pt] {$d\vv$};
+    \node[anchor=north,align=center] at (1.7,-0.9) {(a)\enspace size changes:\\ the tip moves \emph{along} $\vv$};
+  \end{scope}
+  % ------------------------------------------------------ (b) direction ---
+  \begin{scope}[shift={(5.1,0)}]
+    \def\dth{24}
+    \draw[guide] (-6:\v) arc[start angle=-6,end angle=40,radius=\v];
+    \draw[velocity,ghost] (0,0) -- (\dth:\v);
+    \node[anchor=south east,cFor,inner sep=1pt] at ($(0,0)!0.55!(\dth:\v)$) {$\vv+d\vv$};
+    \draw[velocity] (0,0) -- (\v,0);
+    \node[cFor,anchor=north] at (\v/2,-0.05) {$\vv$};
+    \draw[accel] (\v,0) -- (\dth:\v);
+    \node[cPrim,anchor=west] at ($(\dth/2:\v)+(0.12,0)$) {$d\vv$};
+    \node[anchor=north,align=center] at (1.5,-0.9) {(b)\enspace direction changes:\\ the tip moves \emph{across} $\vv$};
+  \end{scope}
+  % ----------------------------------------------------------- (c) both ---
+  \begin{scope}[shift={(10.0,0)}]
+    \def\at{0.65}\def\ar{0.75}
+    \draw[velocity,ghost] (0,0) -- (\v+\at,\ar);
+    \draw[velocity] (0,0) -- (\v,0);
+    \node[cFor,anchor=north] at (\v/2,-0.05) {$\vv$};
+    \draw[component,cPrim] (\v,0) -- (\v+\at,0);
+    \draw[component,cPrim] (\v+\at,0) -- (\v+\at,\ar);
+    \draw[right angle] (\v+\at-0.15,0) |- (\v+\at,0.15);
+    \node[cPrim,anchor=north] at (\v+\at/2,-0.05) {$a_t\,dt$};
+    \node[cPrim,anchor=west] at (\v+\at+0.02,\ar/2) {$a_r\,dt$};
+    \draw[accel] (\v,0) -- (\v+\at,\ar) node[anchor=south,cPrim] {$d\vv$};
+    \node[anchor=north,align=center] at (1.6,-0.9) {(c)\enspace both at once:\\ along and across add};
+  \end{scope}
+\end{tikzpicture}

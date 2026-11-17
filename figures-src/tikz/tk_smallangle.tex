@@ -1,0 +1,53 @@
+% tk_smallangle: sin(theta) ~ theta ~ tan(theta) for small theta in radians (Ch 0, fig:tksmall)
+% Left: a wedge of radius R and angle theta (drawn at 36 deg so the three lengths can
+% be told apart): perpendicular R sin(theta) < arc R theta < tangent R tan(theta).
+% Right: the three functions on 0 <= theta <= 1.1 rad.  The band marks theta < 10 deg
+% (0.1745 rad), where both sin(theta) ~ theta and tan(theta) ~ theta are within 1%:
+% sin(x)/x = 1 - x^2/6 reaches 0.99 at 14 deg, tan(x)/x = 1 + x^2/3 reaches 1.01 at 10 deg.
+% Colours match across the panels: theta (arc) primary, sin teal, tan accent.
+\begin{tikzpicture}
+  % ------------------------------------------------------------ left: the wedge
+  \begin{scope}[x=1cm,y=1cm]
+    \def\R{4.0}\def\th{36}
+    \pgfmathsetmacro\c{\R*cos(\th)}
+    \pgfmathsetmacro\s{\R*sin(\th)}
+    \pgfmathsetmacro\t{\R*tan(\th)}
+    % radii, the second one produced to meet the tangent
+    \draw[outline] (\R,0) -- (0,0) -- (\R,\t);
+    \node[anchor=north] at (\R/2,0) {$R$};
+    % perpendicular, arc, tangent
+    \draw[cTeal,curve] (\c,0) -- (\c,\s);
+    \draw[cAcc,curve] (\R,0) -- (\R,\t);
+    \draw[cPrim,curve] (\R,0) arc[start angle=0,end angle=\th,radius=\R];
+    \draw[right angle] (\c+0.18,0) -- (\c+0.18,0.18) -- (\c,0.18);
+    \node[dot] at (0,0) {};
+    % angle at the centre
+    \draw[angle arc] (0.85,0) arc[start angle=0,end angle=\th,radius=0.85];
+    \node at (\th/2:1.12) {$\theta$};
+    % labels
+    \node[cTeal,anchor=east] at (\c-0.04,\s*0.42) {$R\sin\theta$};
+    \node[cPrim,anchor=west,inner sep=1pt] at (\c+0.03,\s*0.3) {$R\theta$};
+    \node[cAcc,anchor=west] at (\R+0.04,\t*0.5) {$R\tan\theta$};
+  \end{scope}
+  % ------------------------------------------------------------ right: the graphs
+  \begin{scope}[xshift=6.7cm]
+  \begin{axis}[bookplot,
+      width=6.0cm, height=4.2cm, scale only axis,
+      xmin=0, xmax=1.18, ymin=0, ymax=2.05,
+      xtick={0.5,1}, ytick={0.5,1,1.5},
+      xlabel={$\theta$ (rad)},
+      xlabel style={at={(axis description cs:1,0)},anchor=west,xshift=2pt},
+      yticklabel style={/pgf/number format/fixed}, xticklabel style={/pgf/number format/fixed}]
+    \fill[cSlope] (axis cs:0,0) rectangle (axis cs:0.1745,2.05);
+    \draw[guide] (axis cs:0.1745,0) -- (axis cs:0.1745,2.05);
+    \addplot[cTeal,domain=0:1.1] {sin(deg(x))};
+    \addplot[cPrim,domain=0:1.1,samples=2] {x};
+    \addplot[cAcc,domain=0:1.1] {tan(deg(x))};
+    \node[cAcc,anchor=west] at (axis cs:1.1,{tan(deg(1.1))}) {$\tan\theta$};
+    \node[cPrim,anchor=west] at (axis cs:1.1,1.1) {$\theta$};
+    \node[cTeal,anchor=west] at (axis cs:1.1,{sin(deg(1.1))-0.04}) {$\sin\theta$};
+    \node[anchor=west,align=left,font=\footnotesize] at (axis cs:0.2,1.75)
+      {shaded, $\theta<10^\circ$:\\ all three agree within 1\,\%};
+  \end{axis}
+  \end{scope}
+\end{tikzpicture}

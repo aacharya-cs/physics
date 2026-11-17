@@ -1,0 +1,349 @@
+\ncertchapter{9}{Friction}\label{ch:friction}
+
+Friction is the force that makes walking possible, holds a parked car on a hill, and brings a braking
+vehicle to rest, warming its brakes and tyres. It is also the force students most often handle incorrectly. Like the normal force and the tension of
+\chref{ch:newton}, static friction (the friction between surfaces that are not sliding) has no fixed value: it takes whatever value is needed to prevent
+sliding. Unlike them, it has a ceiling. It can grow from zero up to that ceiling and no further, and only
+at the ceiling does the familiar formula $\mu N$ apply (here $N$ is the normal force and $\mu$ a
+number characterising the pair of surfaces, both defined precisely below).
+
+That one idea resolves almost every friction problem, provided it is applied in the right order.
+First assume the surfaces do not slide, and find the friction needed to keep them stuck. Then compare that
+with the ceiling. If the required friction is smaller, the assumption was right and friction takes the
+required value; if it is larger, the surfaces slide and friction drops to its kinetic value. Skipping the
+first step, and writing $f=\mu N$ immediately, is the commonest error in the chapter.
+
+A word of candour about the physics. The ``laws'' of friction, that it is proportional to the normal
+force and independent of the apparent area of contact, are empirical rules that hold well for dry
+surfaces over a useful range, not fundamental laws. Leonardo da Vinci recorded them in his notebooks
+in the 1490s, Guillaume Amontons rediscovered and published them in 1699, and Charles-Augustin de Coulomb
+extended them in the 1780s, distinguishing static from kinetic friction. A rough microscopic picture
+explains them. Even polished surfaces are bumpy on a small scale and touch only at the tips of their
+bumps, so the true area of contact is a tiny fraction of the apparent one. Pressing harder flattens the
+tips and enlarges the true area roughly in proportion to $N$, which is why friction grows with $N$ and
+ignores the apparent area; a full theory lies beyond this book. What lies
+within it is a careful treatment of the angle of repose and of a genuine optimisation problem: finding
+the direction in which to pull so as to drag a body with the least possible force.
+
+\section{Static and Kinetic Friction}
+
+Friction comes in two regimes, according to whether the surfaces are sliding over each other or only tending
+to, and the two behave quite differently.
+
+\begin{defbox}{Friction and its two regimes}
+\textbf{Friction} is the component of the contact force between two surfaces that lies \emph{along} the
+surfaces; the normal force $N$ is the component perpendicular to them. \textbf{Static friction} acts when
+there is a \emph{tendency} to slide but no actual sliding. It points opposite to the sliding that would
+occur without it, and it is self-adjusting, from zero up to a maximum (the rising part of Figure~\ref{fig:friction}): $f_s\le(f_s)_{\max}=\mu_s N$.
+\textbf{Kinetic friction} acts during actual sliding. It points opposite to the velocity of one surface
+relative to the other, and has magnitude $f_k=\mu_k N$. The dimensionless numbers $\mu_s$ and $\mu_k$ are
+the coefficients of static and kinetic friction; they depend on the pair of surfaces, and usually
+$\mu_k<\mu_s$. The maximum $(f_s)_{\max}$ is called \textbf{limiting friction}, and a body on which
+static friction has reached it is \emph{on the verge} of sliding.
+\end{defbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{friction_graph}
+\figcaption{fig:friction}{Friction against the force you apply. On the rising part nothing moves and
+friction simply equals whatever you push with, so $\mu_s N$ is a \emph{ceiling}, reached only at the
+instant of breakaway. Past it, friction drops to $\mu_k N$ and no longer depends on $F$. That sudden drop
+is why a stuck object lurches when it finally goes.}
+\end{figure}
+
+\begin{keybox}{The empirical laws of friction}
+For dry surfaces, limiting and kinetic friction are proportional to $N$ and independent of the apparent
+area of contact; kinetic friction is nearly independent of speed over everyday speeds; and $\mu_k$ is
+usually somewhat smaller than $\mu_s$ for a given pair of surfaces. Rolling friction is much smaller than
+sliding friction, which is why wheels and ball bearings are used.
+\end{keybox}
+
+These rules are a model with limits. They fail for lubricated surfaces, for very clean metals (which can
+weld at the contact points), and for soft materials such as rubber, whose coefficient can exceed 1: there
+is no law that $\mu\le1$. That $\mu_k$ is smaller than $\mu_s$ also has a plausible picture: surfaces
+at rest have time to settle into each other and bond more firmly at the contact points than surfaces
+that are sliding past.
+
+These rules turn into the procedure promised at the start of the chapter, for deciding whether
+surfaces slide at all.
+
+\begin{methodbox}{Does it slide? The assume-and-check procedure}
+\textbf{1.} Assume the surfaces do not slide. \textbf{2.} Using the free-body diagram, find the friction
+$f_{\text{req}}$ needed to keep them at rest relative to each other, and the normal force $N$. If the
+direction of $f_{\text{req}}$ is not obvious, assume one; a negative answer means it points the other way.
+\textbf{3.} Compare: if $|f_{\text{req}}|\le\mu_s N$, the assumption holds and friction equals
+$f_{\text{req}}$, which is usually less than $\mu_s N$. \textbf{4.} If $|f_{\text{req}}|>\mu_s N$, the
+assumption fails: the surfaces slide, friction is $\mu_k N$ opposing the relative motion, and the
+acceleration follows from $\sum F=ma$.
+\end{methodbox}
+
+\begin{exbox}{A block on a rough incline}\label{ex:roughincline}
+A \SI{5}{kg} block rests on an incline of $30^\circ$ with $\mu_s=0.7$ and $\mu_k=0.5$ ($g=\SI{10}{m/s^2}$).
+(a) Find the friction on it. (b) A push of \SI{10}{N} is then applied down the slope, parallel to the
+surface. Does the block slide, and if so with what acceleration?
+
+\stepn{1} \textbf{Normal force.} Perpendicular to the incline nothing accelerates, so
+$N=mg\cos30^\circ\approx\SI{43.3}{N}$ and $(f_s)_{\max}=\mu_sN\approx\SI{30.3}{N}$.
+
+\stepn{2} \textbf{(a) Assume no sliding.} Along the slope, friction must balance the down-slope component of
+gravity: $f_{\text{req}}=mg\sin30^\circ=\SI{25}{N}$, up the slope. Since $\SI{25}{N}<\SI{30.3}{N}$, the
+block stays at rest and friction is \SI{25}{N}, \emph{not} $\mu_sN$.
+
+\stepn{3} \textbf{(b) Assume no sliding again.} Now $f_{\text{req}}=25+10=\SI{35}{N}>\SI{30.3}{N}$, so the
+block slides down the slope. Kinetic friction $\mu_kN\approx\SI{21.7}{N}$ acts up the slope, and
+$a=(25+10-21.7)/5\approx\SI{2.7}{m/s^2}$ down the slope.
+
+\stepn{4} \textbf{Check.} Taking $f=\mu_sN$ in (a) would give a net force \emph{up} the slope on a
+block at rest, which is absurd. \ans{\SI{25}{N}; slides at \SI{2.7}{m/s^2}}
+\end{exbox}
+
+The same procedure handles friction \emph{between} two bodies, the commonest setting in examination
+problems. There the friction on each body is a third-law pair: whatever the lower block exerts on the
+upper, the upper exerts equally and oppositely on the lower.
+
+\begin{exbox}{Two stacked blocks}\label{ex:stacked}
+A block of mass $m=\SI{2}{kg}$ rests on a block of mass $M=\SI{3}{kg}$, which lies on a smooth floor. Between the blocks
+$\mu_s=0.4$ and $\mu_k=0.3$ ($g=\SI{10}{m/s^2}$). A horizontal force $F$ pulls the \emph{lower} block.
+(a) Find the largest $F$ for which the blocks move together. (b) Find the acceleration of each block
+when $F=\SI{30}{N}$.
+
+\stepn{1} \textbf{Which force drives the upper block?} Only friction from the lower block acts on it
+horizontally, so friction is what accelerates it, and since the upper block moves off forwards with
+the lower one, that friction points forwards. Its normal force is
+$N=mg=\SI{20}{N}$, so $(f_s)_{\max}=\mu_sN=\SI{8}{N}$.
+
+\stepn{2} \textbf{(a) Assume they move together.} The pair, of total mass \SI{5}{kg}, has
+$a=F/5$. The upper block alone needs $f_{\text{req}}=ma=2(F/5)$. This is allowed while
+$f_{\text{req}}\le\SI{8}{N}$, that is while $a\le 8/2=\SI{4}{m/s^2}$ (which is $\mu_sg$), so
+$F_{\max}=(5)(4)=\SI{20}{N}$.
+
+\stepn{3} \textbf{(b) $F=\SI{30}{N}>F_{\max}$, so the blocks slip.} Kinetic friction
+$\mu_kmg=\SI{6}{N}$ now acts forwards on the upper block and, by the third law, backwards on the lower.
+Upper block: $a_1=6/2=\SI{3}{m/s^2}$. Lower block: $a_2=(30-6)/3=\SI{8}{m/s^2}$.
+
+\stepn{4} \textbf{Check.} $a_2>a_1$, so the lower block does slide forwards relative to the upper one,
+consistent with friction on the upper block pointing forwards. The upper block can never accelerate
+faster than $\mu_kg$ once slipping begins, however hard the lower block is pulled. On a rough floor, add
+the floor's friction, $\mu_{\text{floor}}(M+m)g$ with the normal force of \emph{both} blocks, to the
+lower block's equation.
+\ans{\SI{20}{N}; \SI{3}{m/s^2} and \SI{8}{m/s^2}}
+\end{exbox}
+
+\begin{trapbox}{friction opposes sliding, not motion}
+Friction opposes the \emph{relative} sliding (or tendency to slide) of the two surfaces in contact, and
+that is not the same as opposing the motion. In the example above, friction pushes the upper block
+\emph{forwards}, in the direction it moves. When you walk, static friction on your shoe points forwards
+and is the only horizontal force that accelerates you; a car speeds up for the same reason. Ask which
+way the surfaces would slip without friction, and friction points the other way.
+\end{trapbox}
+
+\section{The Angle of Friction and the Angle of Repose}
+
+So far friction and the normal force have been treated as two separate forces. They are really two
+components of one contact force, and looking at that single force shows that the coefficient of static
+friction can be expressed as an angle, with a direct physical meaning that can be measured with nothing
+more than a tilting board.
+
+\begin{defbox}{Angle of friction}
+When friction is limiting, the resultant of the normal force and friction (the total contact force)
+makes an angle $\lambda$ with the normal, where $\tan\lambda=\dfrac{(f_s)_{\max}}{N}=\mu_s$. Below the
+limit the contact force leans by less than $\lambda$: it can point anywhere inside a cone of half-angle
+$\lambda$ about the normal, and sliding begins when the forces demand that it lean further.
+\end{defbox}
+
+\begin{derivbox}{The angle of repose}
+Tilt a rough incline until a block is just on the verge of sliding; the angle of the incline at that
+moment is the \textbf{angle of repose}, $\theta_r$. Two conditions hold at that instant.
+\emph{Perpendicular} to the surface the block does not move, so the normal force balances the
+perpendicular part of gravity: $N=mg\cos\theta_r$. \emph{Along} the surface, ``on the verge'' means the
+down-slope pull of gravity has grown to exactly equal the maximum static friction:
+\[
+mg\sin\theta_r=\mu_s N=\mu_s\,mg\cos\theta_r.
+\]
+The $mg$ cancels, and dividing through by $\cos\theta_r$ leaves $\boxed{\tan\theta_r=\mu_s}$. So the
+angle of repose equals the angle of friction, $\theta_r=\lambda=\arctan\mu_s$, as Figure~\ref{fig:repose} shows geometrically. Because the mass dropped
+out, tilting a plank until an object slides \emph{measures} $\mu_s$ directly, with no need to weigh
+anything. The same angle governs a heap of sand or grain: grains on the surface slide until the slope
+falls to the angle of repose of grain on grain, which is why a pile of the same dry sand always has the same steepness, however large it grows.
+\end{derivbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{angle_repose}
+\figcaption{fig:repose}{At the angle of repose $\theta_r$ the block is on the verge of sliding, and friction has reached its ceiling $\mu_s N$. The total contact force $R$ (the resultant of $N$ and $\mu_s N$) must balance $mg$, so it is vertical, and it leans from the normal by the angle of friction $\lambda$. Since $N$ is tilted from the vertical by $\theta_r$, $\lambda=\theta_r$: the angle of repose and the angle of friction are the same angle, seen once on the slope and once in how far the contact force can lean.}
+\end{figure}
+
+\begin{trapbox}{repose uses static, sliding uses kinetic}
+$\tan\theta_r=\mu_s$ holds at the \emph{onset} of sliding. Once the block is actually moving, kinetic
+friction $\mu_k<\mu_s$ takes over, so the angle needed to keep it sliding at constant velocity is the
+\emph{smaller} $\arctan\mu_k$. Do not use $\mu_s$ for a body already in motion.
+\end{trapbox}
+
+\section{Optimising Against Friction}
+
+The angle of friction has one more use, in a question with a practical answer. Pulling a heavy box
+horizontally is not the easiest way to move it. Pulling upwards at a slight angle
+reduces the normal force from the floor, which reduces the friction, at the cost of a smaller forward
+component. Somewhere in between lies the best angle. The derivation below finds it for an incline, which
+contains the level floor as the special case $\theta=0$.
+
+\begin{derivbox}{Least force to pull a body up an incline}
+A body on an incline (angle $\theta$) is pulled by a force $F$ aimed at angle $\beta$ \emph{above the
+incline surface}, and is on the verge of sliding up (so friction $\mu N$ acts \emph{down}-slope,
+opposing the impending motion). Because the body is on the verge of sliding, $\mu$ here means
+$\mu_s$. We want the $\beta$ that makes $F$ smallest.
+\stepn{1} \textbf{Resolve into incline axes.} Split the pull into a part along the surface, $F\cos\beta$,
+and a part lifting off it, $F\sin\beta$. \emph{Along} the incline (up positive), the pull must overcome
+both the gravity component and friction:
+$F\cos\beta=mg\sin\theta+\mu N$. \emph{Perpendicular} to the incline, the surface balance is
+$N+F\sin\beta=mg\cos\theta$, so $N=mg\cos\theta-F\sin\beta$; note the lift $F\sin\beta$
+\emph{reduces} the normal force, which is the key to the whole result. This requires $N\ge0$, that is,
+$F\sin\beta\le mg\cos\theta$; otherwise the body lifts off the surface.
+\stepn{2} \textbf{Eliminate $N$ and solve for $F$.} Put the expression for $N$ into the along-incline
+equation:
+\[
+F\cos\beta=mg\sin\theta+\mu(mg\cos\theta-F\sin\beta).
+\]
+Gather the $F$ terms on the left: $F\cos\beta+\mu F\sin\beta=mg(\sin\theta+\mu\cos\theta)$, hence
+\[
+F=\frac{mg(\sin\theta+\mu\cos\theta)}{\cos\beta+\mu\sin\beta}.
+\]
+\stepn{3} \textbf{Minimise over $\beta$.} The numerator has no $\beta$ in it, so $F$ is smallest exactly
+when the denominator $\cos\beta+\mu\sin\beta$ is \emph{largest}. Differentiate with respect to $\beta$ and set to zero:
+$-\sin\beta+\mu\cos\beta=0\Rightarrow\tan\beta=\mu$. The second derivative, $-\cos\beta-\mu\sin\beta$,
+is negative there, so this is a maximum of the denominator. Since $\tan\lambda=\mu$ defines the angle of
+friction, the best pull direction is $\beta=\lambda$, the shortest of the pulls drawn to scale in
+Figure~\ref{fig:minforce}.
+\stepn{4} \textbf{Evaluate at $\beta=\lambda$.} With $\tan\beta=\mu$, a right triangle with legs $1$
+and $\mu$ has hypotenuse $\sqrt{1+\mu^2}$, so $\cos\beta=\tfrac{1}{\sqrt{1+\mu^2}}$ and
+$\sin\beta=\tfrac{\mu}{\sqrt{1+\mu^2}}$. Then
+$\cos\beta+\mu\sin\beta=\tfrac{1+\mu^2}{\sqrt{1+\mu^2}}=\sqrt{1+\mu^2}$, giving
+\[
+F_{\min}=\frac{mg(\sin\theta+\mu\cos\theta)}{\sqrt{1+\mu^2}}=mg\sin(\theta+\lambda),
+\]
+where the last form uses $\mu=\tan\lambda$ (so $1/\sqrt{1+\mu^2}=\cos\lambda$) and the sine-addition
+formula. The result assumes the body stays in contact at the optimum, $F_{\min}\sin\lambda\le
+mg\cos\theta$, which holds for all but very steep, very rough inclines.
+\end{derivbox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{min_force_incline}
+\figcaption{fig:minforce}{The pull needed to drag a block up a rough incline, drawn to scale for three directions $\beta$ above the slope. Their tips lie on one straight line, so the shortest pull is the one perpendicular to it, at $\beta=\lambda$, the angle of friction. Tilting the pull upwards reduces the normal force, and hence the friction, at the cost of a smaller component along the slope; $\beta=\lambda$ is the best compromise, and it beats a pull along the surface whenever $\mu>0$.}
+\end{figure}
+
+\begin{keybox}{Least force on level ground}
+On a \emph{horizontal} surface ($\theta=0$): $F_{\min}=mg\sin\lambda=\dfrac{\mu_s mg}{\sqrt{1+\mu_s^2}}$,
+applied at $\beta=\lambda$ above the horizontal. For any $\mu_s>0$ this is less than the force $\mu_s mg$
+needed for a horizontal pull, and much less than for a push directed down into the floor. For
+$\mu_s=0.75$, for instance, $\lambda\approx37^\circ$ and $F_{\min}=0.6\,mg$, against $0.75\,mg$ for a
+horizontal pull: a fifth less effort.
+\end{keybox}
+
+\section{Summary}\label{sec:summary9}
+Static friction is self-adjusting: it takes whatever value prevents sliding, up to a maximum $\mu_s N$.
+Once sliding begins it drops to the kinetic value $\mu_k N$, which is smaller. The safe procedure is always
+to assume no sliding, compute the friction required, and compare with the maximum. The angle of friction
+packages the coefficient as a geometric angle, and the same angle answers both the angle of repose and the
+optimal direction of pull.
+
+\begin{itemize}
+\item $f_s\le\mu_s N$ (a ceiling, not a value); $f_k=\mu_k N$; and usually $\mu_k<\mu_s$.
+\item Friction is proportional to the normal force and, to a good approximation, independent of the apparent
+      contact area. These are empirical rules for dry surfaces.
+\item Angle of friction: $\tan\lambda=\mu_s$. The angle of repose of an incline equals $\lambda$, so it
+      measures $\mu_s$ directly.
+\item Repose involves static friction; sliding down at constant speed involves kinetic friction.
+\item For stacked blocks, friction between them is a third-law pair; they move together only while the
+      friction the driven block must supply stays below $\mu_s N$.
+\item Decide whether a body slides by assuming it does not, finding the friction required, and comparing
+      with $\mu_s N$.
+\item On level ground, the least force to start a block moving is $mg\sin\lambda=\mu_s mg/\sqrt{1+\mu_s^2}$,
+      applied at
+      the friction angle above the horizontal. Pulling slightly upwards reduces the normal force, and with it
+      the friction.
+\end{itemize}
+
+\section{Problem Types}\label{sec:types9}
+Six types cover the friction questions that examinations set most often. The third of them, ``will it move?'', deserves
+particular attention, because it tests precisely the self-adjusting nature of static friction and is
+designed to catch the student who writes $f=\mu N$ before checking whether the body slides at all.
+
+\archq{Friction problems}
+{A body on a rough surface; find whether it slides, or the force needed.}
+{Compare the driving force with $(f_s)_{\max}=\mu_s N$. Below it, static friction equals the drive (no
+motion); above it, the body slides and $f=\mu_k N$. Remember $N$ is set by the perpendicular balance,
+and changes if the applied force has a vertical component.}
+{Using $\mu_s N$ as friction's actual value when the body is not on the verge of slipping: static
+friction is usually \emph{less} than its maximum.}
+{A \SI{5}{kg} block rests on a floor with $\mu_s=0.5$ ($g=\SI{10}{m/s^2}$). A horizontal push of
+\SI{20}{N} is applied. The friction force on the block is:}
+{\SI{25}{N}}{zero}{\SI{5}{N}}{\SI{20}{N}\archans{D}{$(f_s)_{\max}=\mu_s mg=0.5(5)(10)=\SI{25}{N}$ exceeds the
+push, so the block does not move and static friction equals the push, \SI{20}{N}. Option (A) is the
+trap above (taking $\mu_sN$ as the actual value), (B) assumes friction acts only on moving bodies, and
+(C) subtracts the push from the ceiling.}}
+
+\archq{Angle of repose and limiting friction}
+{``A block just begins to slide when the incline reaches $\theta_r$; find $\mu_s$,'' or ``find the
+force needed to just move a block on a rough floor.''}
+{At the point of sliding, friction is at its maximum $\mu_sN$. On an incline this gives
+$\tan\theta_r=\mu_s$ (mass cancels). On a horizontal floor the force needed is $F=\mu_s mg$.}
+{Using $\mu_k$ for the onset of sliding. The block starts from rest, so the threshold is set by
+$\mu_s$; $\mu_k$ matters only once it moves.}
+{A \SI{10}{kg} block rests on a rough floor with $\mu_s=0.5$ ($g=\SI{10}{m/s^2}$). The minimum horizontal force
+needed to just start it moving is:}
+{\SI{50}{N}}{\SI{5}{N}}{\SI{20}{N}}{\SI{100}{N}\archans{A}{$f_{\max}=\mu_s mg=0.5(10)(10)=\SI{50}{N}$.
+Any smaller force is matched by static friction and nothing moves. Option (D) is the block's weight,
+and (B) forgets $g$.}}
+
+\archq{Will it move? The self-adjusting check}
+{``A force $F$ is applied to a block on a rough floor; find the friction, or the acceleration.''}
+{\textbf{Always compare first.} Compute $f_{\max}=\mu_sN$. If $F\le f_{\max}$ the block stays put and
+friction equals $F$ exactly. Only if $F>f_{\max}$ does it slide, and then $f=\mu_kN$ and
+$a=\dfrac{F-\mu_kN}{m}$.}
+{Writing $f=\mu N$ straight away. Static friction is whatever is needed \emph{up to} that ceiling: for
+a block that is not moving, $f$ is usually less.}
+{A \SI{5}{kg} block on a floor with $\mu_s=0.3$ and $\mu_k=0.2$ is pushed horizontally with \SI{20}{N}
+($g=\SI{10}{m/s^2}$). Its acceleration is:}
+{zero}{\SI{1}{m/s^2}}{\SI{2}{m/s^2}}{\SI{4}{m/s^2}\archans{C}{$f_{\max}=\mu_s mg=0.3(5)(10)=\SI{15}{N}<\SI{20}{N}$,
+so it slides, with $f=\mu_k mg=\SI{10}{N}$: $a=\dfrac{20-10}{5}=\SI{2}{m/s^2}$. Option (B) wrongly uses
+$\mu_s$ for the sliding block, and (D) ignores friction.}}
+
+\archq{Sliding down a rough incline}
+{``A block slides down a rough incline; find its acceleration, or the friction needed to hold it.''}
+{Resolve: down-slope $mg\sin\theta$, normal $N=mg\cos\theta$, friction $\mu_k mg\cos\theta$ opposing.
+Hence $a=g(\sin\theta-\mu_k\cos\theta)$. The mass always cancels. If $\mu_s\ge\tan\theta$ a block at rest
+stays at rest; if $\mu_k>\tan\theta$ a block that is already sliding decelerates and stops.}
+{Using $N=mg$ on an incline. The normal force is reduced to $mg\cos\theta$, and so is the friction.}
+{A block slides down a $30^\circ$ incline with $\mu_k=0.5$ ($g=\SI{10}{m/s^2}$). Its acceleration is
+about:}
+{zero}{\SI{0.67}{m/s^2}}{\SI{5}{m/s^2}}{\SI{8.7}{m/s^2}\archans{B}{
+$a=g(\sin30^\circ-\mu_k\cos30^\circ)=10(0.5-0.5\times0.866)=10(0.067)\approx\SI{0.67}{m/s^2}$, barely
+sliding, since $\mu_k$ is close to $\tan30^\circ=0.577$. Option (C) ignores friction, and (D) is
+$g\cos30^\circ$, a confusion of components.}}
+
+\archq{Friction as the centripetal force on a level road}
+{``What is the maximum speed a car can round a flat curve without skidding?''}
+{Moving in a circle requires an inward acceleration $v^2/r$ (\chref{ch:circkin}); on a level road
+static friction alone supplies the inward force (circular dynamics is developed in \chref{ch:circdyn}).
+At the limit, $\mu_s mg=\dfrac{mv^2}{r}$, giving $\boxed{v_{\max}=\sqrt{\mu_s rg}}$, independent of the
+car's mass. Friction is static because the tyres roll without slipping sideways.}
+{Thinking a heavier car can corner faster. Both the required force and the available friction scale with
+$m$, so it cancels exactly.}
+{A car rounds a level curve of radius \SI{50}{m} with $\mu_s=0.4$ ($g=\SI{10}{m/s^2}$). Its maximum
+speed is:}
+{\SI{10}{m/s}}{\SI{14.1}{m/s}}{\SI{20}{m/s}}{\SI{200}{m/s}\archans{B}{
+$v_{\max}=\sqrt{\mu_s rg}=\sqrt{0.4(50)(10)}=\sqrt{200}\approx\SI{14.1}{m/s}$. Option (D) forgets the
+square root, and (C) is $\mu_s r$, which forgets $g$ and the root.}}
+
+\archq{The least force needed to drag a block}
+{``At what angle should a rope be pulled to move a block with the least force?''}
+{Pulling at angle $\beta$ above the horizontal reduces the normal force to $N=mg-F\sin\beta$, and hence
+reduces friction. Minimising gives $\beta=\lambda=\arctan\mu_s$ (the angle of friction), with
+$F_{\min}=\dfrac{\mu_s mg}{\sqrt{1+\mu_s^2}}$.}
+{Assuming a horizontal pull is best. Tilting the rope upwards reduces the normal force, and with it the
+friction, and up to the angle of friction the gain outweighs the loss of horizontal component.}
+{The least force to drag a block is obtained by pulling at an angle equal to:}
+{$0^\circ$}{$45^\circ$}{the angle of friction $\lambda$}{$90^\circ$\archans{C}{Minimising
+$F=\dfrac{\mu_s mg}{\cos\beta+\mu_s\sin\beta}$ gives $\tan\beta=\mu_s$, that is, $\beta=\lambda$.
+Option (B) is correct only in the special case $\mu_s=1$.}}

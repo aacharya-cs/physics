@@ -1,0 +1,30 @@
+% grav_shell: g against r for a uniform planet (Ch 16, fig:gravshell)
+% Units: r in R, g in g_surface.  Inside g = r (only the mass within r pulls);
+% outside g = 1/r^2 (the whole mass, as if at the centre).
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=10.4cm, height=5.6cm, scale only axis=false,
+    xmin=0, xmax=3.5, ymin=0, ymax=1.3,
+    xtick={1}, xticklabels={$R$},
+    ytick={1}, yticklabels={$g$},
+    xlabel={distance from the centre, $r$},
+    ylabel={field strength},
+    ylabel style={at={(axis description cs:-0.03,0.5)}},
+    xlabel style={at={(axis description cs:1,-0.02)},anchor=north east}]
+  % the surface
+  \draw[guide] (axis cs:1,0) -- (axis cs:1,1);
+  \draw[guide] (axis cs:0,1) -- (axis cs:1,1);
+  % inside and outside
+  \addplot[cPrim,domain=0:1,samples=2] {x};
+  \addplot[cPrim,domain=1:3.45] {1/x^2};
+  \node[point mass] at (axis cs:1,1) {};
+  \node[anchor=south] at (axis cs:1,1.04) {surface: the peak};
+  % labels
+  \node[cPrim,anchor=east] at (axis cs:0.45,0.55) {$g\propto r$};
+  \node[cPrim,anchor=south east,align=right,font=\footnotesize,inner sep=1pt] at (axis cs:0.97,0.02)
+    {only the\\ mass within\\ $r$ pulls};
+  \node[cPrim,anchor=west] at (axis cs:1.45,0.78) {$g\propto 1/r^2$};
+  \node[cPrim,anchor=west,align=left,font=\footnotesize] at (axis cs:2.15,0.5)
+    {outside: all the mass,\\ as if at the centre};
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,39 @@
+% lift_apparent: apparent weight in a lift, four cases (Ch 7, fig:lift)
+% Two forces act on the person (drawn as a block of mass m standing on a scale):
+% N from the scale (up) and mg (down), both drawn from the centre.  N = m(g + a) with
+% up positive.  Lengths to scale, mg = 0.9 cm, with |a| = 0.4 g in the middle cases:
+%   rest or constant v: N = mg (0.9);  up: N = 1.4 mg (1.26);  down: N = 0.6 mg (0.54);
+%   free fall (a = g down): N = 0.
+% The lift's acceleration is shown beside each cabin (indicative length).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\W{0.9}
+  \def\dx{3.75}
+  % #1 = column index, #2 = N/mg, #3 = acceleration arrow length (+ up, - down, 0 none),
+  % #4 = acceleration label, #5 = heading, #6 = result, #7 = what the scale does
+  \newcommand\liftcase[7]{%
+    \begin{scope}[shift={(#1*\dx,0)}]
+      \draw[thin line,cInk] (0,2.3) -- (0,2.65);
+      \draw[outline] (-1.0,0) rectangle (1.0,2.3);
+      \draw[outline,fill=cMoon] (-0.62,0) rectangle (0.62,0.16);
+      \draw[body] (-0.5,0.16) rectangle (0.5,0.96);
+      \node at (-0.27,0.74) {$m$};
+      \ifdim #2pt>0pt
+        \draw[force] (0,0.56) -- ++(0,#2*\W) node[anchor=south west,inner sep=1pt] {$N$};
+      \fi
+      \draw[force] (0,0.56) -- ++(0,-\W) node[anchor=west] {$mg$};
+      \ifdim #3pt=0pt\else
+        \draw[accel] (-1.3,{1.15-#3/2}) -- ++(0,#3) node[anchor=east,pos=0.5] {#4};
+      \fi
+      \node[align=center,anchor=south] at (0,2.75) {#5};
+      \node at (0,-0.75) {#6};
+      \node[font=\footnotesize,text=cSteel] at (0,-1.2) {#7};
+    \end{scope}}
+  \liftcase{0}{1}{0}{}{at rest or\\ constant velocity}{$N=mg$}{scale reads your weight}
+  \liftcase{1}{1.4}{0.8}{$a$}{accelerating\\ upward}{$N=m(g+a)$}{scale reads more}
+  \liftcase{2}{0.6}{-0.8}{$a$}{accelerating\\ downward}{$N=m(g-a)$}{scale reads less}
+  \liftcase{3}{0}{-1.2}{$a$}{free fall\\ ($a=g$ downward)}{$N=0$}{weightless}
+  % the scale, named once
+  \draw[leader] (-0.55,0.08) -- (-1.3,0.45) node[anchor=east,font=\footnotesize,inner sep=1pt] {scale};
+  % separators
+  \foreach \i in {1,2,3}{\draw[guide] ({(\i-0.5)*\dx-0.1},-1.4) -- ({(\i-0.5)*\dx-0.1},3.5);}
+\end{tikzpicture}

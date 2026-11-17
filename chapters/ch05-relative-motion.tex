@@ -1,0 +1,342 @@
+\ncertchapter{5}{Relative Motion}\label{ch:relative}
+
+Every velocity is measured relative to something. When we say a car moves at \SI{60}{km/h}, we mean
+relative to the road; a passenger walking down the aisle of a train has one speed relative to the train
+and another relative to the platform. The body (or the set of axes fixed to it) from which positions and
+velocities are measured is called a \textbf{frame of reference}. Usually the frame is so obvious that we
+never name it, but in a whole class of problems it is the entire point, and naming it carelessly
+produces nonsense.
+
+Fortunately, the rule connecting two frames is a single line of vector subtraction, and it does not
+change from problem to problem. A boat crossing a river, an aircraft flying in a crosswind, and a
+pedestrian tilting an umbrella against rain all reduce to the same triangle of velocities. Recognising
+that triangle, and drawing it correctly, is the whole skill.
+
+This chapter is short because the idea is simple. It is nonetheless worth slowing down for, because the
+river-crossing problem in particular has two distinct questions hidden inside it, \emph{minimum time} and
+\emph{minimum drift}, whose answers require different strategies. It ends with a question that is
+awkward in the ground frame and easy in the right one: how close two moving bodies come to each other.
+
+\section{The Rule}\label{sec:rule}
+
+The whole chapter rests on one vector equation connecting the velocities of the same body measured in two
+different frames.
+
+\begin{defbox}{Relative velocity}
+If $\vv_A$ and $\vv_B$ are the velocities of bodies $A$ and $B$, both measured in the same frame (usually
+the ground), the velocity of $A$ relative to $B$, the velocity an observer moving with $B$ would measure, is
+\[
+\vv_{AB}=\vv_A-\vv_B.
+\]
+Equivalently $\vv_A=\vv_B+\vv_{AB}$: if $B$ is a moving frame such as a train, a passenger's velocity
+relative to the ground is the train's velocity plus the passenger's velocity relative to the train.
+\end{defbox}
+
+Why subtraction? Think of positions first. If the position vectors $\vr_A$ and $\vr_B$ (in metres) are measured from a common ground origin, the
+position of $A$ as seen from $B$ is $\vr_{AB}=\vr_A-\vr_B$; differentiating with respect to time gives
+$\vv_{AB}=\vv_A-\vv_B$, and differentiating again gives $\va_{AB}=\va_A-\va_B$. The one assumption is that
+both observers agree on lengths and on the passage of time. That holds to high accuracy at everyday
+speeds; it fails as speeds approach that of light, where special relativity replaces this simple
+subtraction.
+
+\begin{trapbox}{the order of the subscripts matters}
+$\vv_{AB}$ is ``$A$ as seen from $B$''; the first subscript is the body observed, the second the
+observer. Reversing them reverses the vector: $\vv_{BA}=\vv_B-\vv_A=-\vv_{AB}$. If you see a car
+overtaking you at \SI{20}{km/h}, the driver sees you falling back at \SI{20}{km/h}. Equal speeds,
+opposite directions.
+\end{trapbox}
+
+The acceleration rule has a useful consequence. If two bodies have the \emph{same} acceleration,
+their relative acceleration is zero, so each sees the other move in a straight line at constant
+velocity. Two stones thrown at the same instant from the same point, with different velocities, both
+fall at $g$; relative to one another gravity cancels, and their separation simply grows as
+$|\vv_1-\vv_2|\,t$. The parabolas of \chref{ch:projectiles} become straight lines in the right frame.
+The same is true, more simply, of two bodies that both move at constant velocity (both accelerations
+zero); \S\ref{sec:closest} uses this to find how close they come.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{kin_relative}
+\figcaption{fig:relative}{Crossing a river: the boat's velocity relative to the ground is the vector sum of its velocity relative to the water (its heading) and the current. To cross straight, the boat must aim \emph{upstream}, so that the upstream component of its heading cancels the current.}
+\end{figure}
+
+\section{The Two Standard Problems}
+
+The rule matters most when a body moves through a medium that is itself moving, because then the
+body's own effort and the medium's drift add as vectors and the result points somewhere neither does
+alone. The river is the standard case. A boat crossing a flowing river can be asked to do two different things: to cross as quickly as possible, or
+to land directly opposite its starting point. The two goals require different headings, and the commonest
+error is to answer the one that was not asked. Both answers come from a single calculation.
+
+\begin{derivbox}{Crossing a river}
+A river of width $d$ flows at speed $v_{\text{current}}$, uniform across its width. A boat moves at
+$v_{\text{boat}}$ relative to the water and heads at angle $\theta$ \emph{upstream} of the
+straight-across direction.
+\stepn{1} \textbf{Ground velocity.} By the rule above, the boat's velocity relative to the ground is its
+velocity relative to the water plus the water's velocity, the vector triangle drawn in
+Figure~\ref{fig:relative}. Its components are $v_{\text{boat}}\cos\theta$
+across the river and $v_{\text{current}}-v_{\text{boat}}\sin\theta$ downstream.
+\stepn{2} \textbf{Time.} Only the cross-component carries the boat over, so the crossing time is
+$t=d/(v_{\text{boat}}\cos\theta)$. This is least when $\cos\theta=1$, that is $\theta=0$: head straight
+across, and $t_{\min}=d/v_{\text{boat}}$, whatever the current.
+\stepn{3} \textbf{Drift.} The downstream distance travelled in that time is
+\[
+x=\big(v_{\text{current}}-v_{\text{boat}}\sin\theta\big)\frac{d}{v_{\text{boat}}\cos\theta}.
+\]
+It vanishes when $\sin\theta=v_{\text{current}}/v_{\text{boat}}$, which requires
+$v_{\text{boat}}>v_{\text{current}}$. The cross-speed is then
+$v_{\text{boat}}\cos\theta=\sqrt{v_{\text{boat}}^2-v_{\text{current}}^2}$, smaller than $v_{\text{boat}}$,
+so the crossing takes longer than $t_{\min}$.
+\stepn{4} \textbf{When the current is faster.} If $v_{\text{current}}\ge v_{\text{boat}}$, zero drift is
+impossible, and we minimise $x$ instead. Writing $x=(d/v_{\text{boat}})\,f(\theta)$ with
+$f=(v_{\text{current}}-v_{\text{boat}}\sin\theta)/\cos\theta$ and differentiating by the quotient rule
+(the least drift is where $f'=0$, \chref{ch:toolkit}),
+\[
+f'(\theta)=\frac{-v_{\text{boat}}\cos^2\theta+(v_{\text{current}}-v_{\text{boat}}\sin\theta)\sin\theta}{\cos^2\theta}
+=\frac{v_{\text{current}}\sin\theta-v_{\text{boat}}}{\cos^2\theta},
+\]
+which is zero when $\sin\theta=v_{\text{boat}}/v_{\text{current}}$. Then
+$\cos\theta=\sqrt{v_{\text{current}}^2-v_{\text{boat}}^2}\big/v_{\text{current}}$ and the numerator of $f$ is
+$(v_{\text{current}}^2-v_{\text{boat}}^2)/v_{\text{current}}$, so $f=\sqrt{v_{\text{current}}^2-v_{\text{boat}}^2}$
+and the least possible drift is $x_{\min}=d\sqrt{v_{\text{current}}^2-v_{\text{boat}}^2}\big/v_{\text{boat}}$.
+\end{derivbox}
+
+\begin{keybox}{Minimum time and minimum drift}
+\textbf{Minimum time:} head straight across. The crossing time is $t=d/v_{\text{boat}}$, independent of the
+current, and the boat drifts $v_{\text{current}}\,d/v_{\text{boat}}$ downstream.
+
+\textbf{Zero drift} (land directly opposite, possible only if $v_{\text{boat}}>v_{\text{current}}$): head
+upstream at $\theta$ with $\sin\theta=v_{\text{current}}/v_{\text{boat}}$. The crossing speed is
+$\sqrt{v_{\text{boat}}^2-v_{\text{current}}^2}$, so the crossing takes longer. The two goals cannot both be met.
+
+\textbf{Minimum drift when $v_{\text{current}}\ge v_{\text{boat}}$:} head upstream at
+$\sin\theta=v_{\text{boat}}/v_{\text{current}}$; the drift is then
+$d\sqrt{v_{\text{current}}^2-v_{\text{boat}}^2}\big/v_{\text{boat}}$.
+\end{keybox}
+
+The same triangle governs anything that moves through a moving medium. An aircraft flies through air
+as a boat moves through water, and its speed relative to the air (the \emph{airspeed}) plays the part of
+$v_{\text{boat}}$.
+
+\begin{exbox}{An aircraft in a crosswind}
+An aircraft with airspeed \SI{200}{km/h} must fly due north while a wind blows at \SI{120}{km/h}
+towards the east. Find the heading and the speed over the ground.
+
+\stepn{1} \textbf{Write the rule.} $\vv_{\text{plane, ground}}=\vv_{\text{plane, air}}+\vv_{\text{air, ground}}$.
+The ground velocity must point north, so the plane's velocity relative to the air must have a westward
+component that cancels the wind.
+
+\stepn{2} \textbf{Heading.} Pointing at $\theta$ west of north, the westward component is
+$200\sin\theta=120$, so $\sin\theta=0.6$ and $\theta\approx37^\circ$ west of north.
+
+\stepn{3} \textbf{Ground speed.} The northward component is
+$200\cos\theta=\sqrt{200^2-120^2}=\SI{160}{km/h}$.
+
+The nose points $37^\circ$ west of north, yet the aircraft travels due north: the heading (velocity
+relative to the medium) and the path (velocity relative to the ground) are different arrows, and
+confusing them is the commonest error in these problems.
+\ans{$37^\circ$ west of north; \SI{160}{km/h}}
+\end{exbox}
+
+\section{Motion Along a Line, and Rain}
+
+The river crossing was two-dimensional, with the current at right angles to the intended path. Two
+further settings recur often enough to be worked out once, here: one in which every velocity lies along
+a single line, so the vector rule collapses to signed subtraction, and one (rain) in which the moving
+observer is a person rather than a boat.
+
+\textbf{Two bodies on a line.} Choose one direction as positive and give each velocity its sign. Then
+$v_{AB}=v_A-v_B$ is ordinary subtraction. Two trains approaching each other at \SI{60}{km/h} and
+\SI{40}{km/h} have $v_{AB}=60-(-40)=\SI{100}{km/h}$; moving the same way, $v_{AB}=60-40=\SI{20}{km/h}$.
+The time for one train to pass the other completely is the \emph{relative} distance (the sum of their
+lengths) divided by this relative speed.
+
+\textbf{Upstream and downstream.} A boat of still-water speed $v_{\text{boat}}$ moving along a river is the
+same problem: its ground speed is $v_{\text{boat}}+v_{\text{current}}$ downstream and
+$v_{\text{boat}}-v_{\text{current}}$ upstream. For a round trip of length $D$ each way, the total time is
+\[
+\frac{D}{v_{\text{boat}}+v_{\text{current}}}+\frac{D}{v_{\text{boat}}-v_{\text{current}}}
+=\frac{2Dv_{\text{boat}}}{v_{\text{boat}}^2-v_{\text{current}}^2},
+\]
+so the average speed for the round trip is $(v_{\text{boat}}^2-v_{\text{current}}^2)/v_{\text{boat}}$,
+less than $v_{\text{boat}}$. The current helps on one leg and hinders on the other, but the boat spends
+longer on the slow leg, so the net effect is a loss.
+
+\textbf{Rain and the umbrella.} Rain falls with velocity $\vv_{\text{rain}}$ relative to the ground; a person
+walks with velocity $\vv_{\text{walker}}$. Relative to the walker the rain moves with
+\[
+\vv_{\text{rain, walker}}=\vv_{\text{rain}}-\vv_{\text{walker}}.
+\]
+The term $-\vv_{\text{walker}}$ points backwards, so the rain seems to arrive from in front, slanting
+towards the walker. The umbrella should be held along this \emph{apparent} direction, tilted forward. If the
+rain falls vertically at $v_{\text{rain}}$, the two velocities are perpendicular: the tilt from the
+vertical is given by $\tan\theta=v_{\text{walker}}/v_{\text{rain}}$, and the apparent speed is
+$\sqrt{v_{\text{rain}}^2+v_{\text{walker}}^2}$. The faster the walk, the greater the tilt.
+
+\section{Closest Approach}\label{sec:closest}
+
+Two ships on crossing courses, or two particles moving along different lines at constant velocities:
+how close do they come, and when? In the ground frame both bodies move and their separation changes in
+a complicated way. In the frame of one of them the question becomes simple geometry, because, as
+\S\ref{sec:rule} showed, each body then sees the other move in a straight line at constant velocity.
+
+Sit on $B$. In this frame $B$ is at rest, and $A$ starts from the relative position
+$\vr_0=\vr_A-\vr_B$ at $t=0$ and moves with the constant relative velocity $\vv_{AB}=\vv_A-\vv_B$, so
+it travels along a straight line. ``How close does $A$ come to $B$?'' has become ``how close does a line
+pass to a point?'', and the answer is the perpendicular distance from $B$ to the line, reached when $A$
+is at the foot of that perpendicular (Figure~\ref{fig:closest}).
+
+\begin{keybox}{Minimum distance of approach}
+With axes chosen so that $\vr_0=(x_0,y_0)$ and $\vv_{AB}=(v_x,v_y)$, of magnitude $v_{AB}$, the least
+separation and the time at which it occurs are
+\[
+d_{\min}=\frac{|x_0v_y-y_0v_x|}{v_{AB}},\qquad t_{\min}=-\frac{x_0v_x+y_0v_y}{v_{AB}^2}.
+\]
+The numerator of $d_{\min}$ is $|\vr_0\ex\vv_{AB}|$ (only the $\khat$ term of the cross product of
+\chref{ch:vectors} survives for vectors in the $xy$-plane), the area of the parallelogram the two vectors span; dividing by the base $v_{AB}$ leaves its height, the perpendicular distance. The
+numerator of $t_{\min}$ is $-\vr_0\cdot\vv_{AB}$, so $t_{\min}$ is the distance $A$ must travel along its
+relative path to the foot of the perpendicular, divided by the relative speed. If $t_{\min}$ comes out
+negative, the bodies are already separating and the closest approach was at $t=0$.
+\end{keybox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{rel_closest}
+\figcaption{fig:closest}{Closest approach, seen from $B$'s frame and drawn to scale for the two ships of
+the example below. In this frame $B$ is at rest and $A$ moves in a straight line along $\vv_{AB}$, so the
+least separation is the perpendicular distance $d_{\min}$ from $B$ to that line, reached when $A$
+arrives at the foot of the perpendicular.}
+\end{figure}
+
+\begin{exbox}{Two ships on crossing courses}
+At noon ship $A$ sails due east at \SI{6}{km/h}, and ship $B$, \SI{10}{km} due north of $A$, sails due
+south at \SI{8}{km/h}. Find their least separation and when it occurs.
+
+\stepn{1} \textbf{Move to $B$'s frame}, since there one body is still and the other moves in a straight
+line. Take $x$ east and $y$ north. Then $\vr_0=(0,-10)$~\si{km} and
+$\vv_{AB}=(6,0)-(0,-8)=(6,8)$~\si{km/h}, of magnitude \SI{10}{km/h}.
+
+\stepn{2} \textbf{Least distance.} $d_{\min}=|0\times8-(-10)\times6|/10=\SI{6}{km}$.
+
+\stepn{3} \textbf{When.} $t_{\min}=-(0\times6+(-10)\times8)/10^2=\SI{0.8}{h}=48$ minutes, that is, at
+12:48.
+
+The geometry agrees: as seen from $B$, ship $A$ starts \SI{10}{km} to the south and heads at
+$\tan^{-1}(6/8)\approx37^\circ$ east of north, so it passes at $10\sin37^\circ=\SI{6}{km}$ after covering
+$10\cos37^\circ=\SI{8}{km}$ of relative path at \SI{10}{km/h}. Notice that the two courses cross at
+$A$'s starting point, yet the ships never collide: $B$ reaches that point only after \SI{1.25}{h}, when
+$A$ is long gone.
+\ans{\SI{6}{km}, at 12:48}
+\end{exbox}
+
+\section{Summary}\label{sec:summary5}
+The velocity of $A$ relative to $B$ is $\vv_{AB}=\vv_A-\vv_B$, and equivalently a velocity in the
+ground frame is the frame's velocity plus the velocity within it. Every relative-motion problem is a
+triangle of three velocities, and the work is in deciding which side is which. The rule assumes
+speeds far below that of light.
+
+\begin{itemize}
+\item To cross a river in \emph{minimum time}, head straight across: $t=d/v_{\text{boat}}$, unaffected by
+      the current, at the cost of drifting downstream by $v_{\text{current}}\,t$.
+\item To land \emph{directly opposite}, head upstream at $\sin\theta=v_{\text{current}}/v_{\text{boat}}$;
+      this is possible only if the boat is faster than the current. If it is not, the least drift is
+      $d\sqrt{v_{\text{current}}^2-v_{\text{boat}}^2}/v_{\text{boat}}$.
+\item Upstream and downstream speeds are $v_{\text{boat}}\mp v_{\text{current}}$; half their sum is
+      $v_{\text{boat}}$ and half their difference is $v_{\text{current}}$. The round-trip average speed,
+      $(v_{\text{boat}}^2-v_{\text{current}}^2)/v_{\text{boat}}$, is less than $v_{\text{boat}}$.
+\item Rain appears to fall with velocity $\vv_{\text{rain}}-\vv_{\text{walker}}$, so the umbrella is
+      tilted \emph{forward}, along the apparent rain rather than the true rain.
+\item Two bodies at constant velocities come closest when, in the frame of one, the other reaches the
+      foot of the perpendicular from it to the line of the relative velocity.
+\end{itemize}
+
+\section{Problem Types}\label{sec:types5}
+Relative-motion questions almost always involve a river, a pair of vehicles, rain, or two bodies on
+crossing courses. The six types below cover those settings; in them $v_b$ and $v_r$ abbreviate
+$v_{\text{boat}}$ and $v_{\text{current}}$ ($r$ for river). In each, draw the velocity triangle before writing any equation: an
+incorrectly labelled triangle cannot be rescued by correct algebra, and a correctly labelled one usually
+makes the algebra trivial.
+
+\archq{River crossing, minimum time or zero drift}
+{``A boat of speed $v_b$ (relative to the water) crosses a river of width $d$ flowing at $v_r$'', either
+``in the shortest time'' or ``to land directly opposite''.}
+{\textbf{Shortest time:} aim straight across; $t_{\min}=d/v_b$ and the drift is $v_rd/v_b$.
+\textbf{Zero drift:} aim upstream at $\theta$ with $\sin\theta=v_r/v_b$; the effective speed is
+$\sqrt{v_b^2-v_r^2}$ and $t=d/\sqrt{v_b^2-v_r^2}$, which is always the \emph{longer} time.}
+{Confusing the two cases. Also, landing directly opposite is impossible if $v_r\ge v_b$: cancelling the
+current would leave the boat no speed with which to cross.}
+{A river \SI{200}{m} wide flows at \SI{6}{m/s}; a boat moves at \SI{10}{m/s} in still water. The time
+taken to reach the point \emph{directly opposite} the start is:}
+{\SI{25}{s}}{\SI{20}{s}}{\SI{33}{s}}{impossible\archans{A}{To land opposite, the useful speed is
+$\sqrt{10^2-6^2}=\SI{8}{m/s}$, so $t=200/8=\SI{25}{s}$. Option (B), \SI{20}{s}, is the shortest-time
+route, which drifts \SI{120}{m} downstream; (C) is $200/6$, the current's speed used by mistake.}}
+
+\archq{Relative velocity of two vehicles}
+{``Two trains (or cars) move with given speeds; find their relative velocity, or the time to pass each
+other.''}
+{Always $\vv_{AB}=\vv_A-\vv_B$. In one dimension, \textbf{opposite} directions make the speeds
+\emph{add} and the \textbf{same} direction makes them \emph{subtract}. For passing, the relative distance
+is the sum of the two lengths.}
+{Adding when they move the same way. Put in the signs before subtracting and the arithmetic takes care
+of itself.}
+{Two trains move towards each other on parallel tracks at \SI{60}{km/h} and \SI{40}{km/h}. Their relative speed is:}
+{\SI{20}{km/h}}{\SI{50}{km/h}}{\SI{100}{km/h}}{\SI{72}{km/h}\archans{C}{Opposite directions:
+$v_{AB}=60-(-40)=\SI{100}{km/h}$. Option (A) is the same-direction answer; (D),
+$\sqrt{60^2+40^2}$, would apply only if the tracks were perpendicular.}}
+
+\archq{Rain and the tilted umbrella}
+{``Rain falls vertically at $v_{\text{rain}}$ while a man walks at $v_{\text{walker}}$; at what angle
+should he hold his umbrella, and what is the apparent speed?''}
+{The umbrella points along the \emph{apparent} rain, $\vv_{\text{rain}}-\vv_{\text{walker}}$. Since
+$-\vv_{\text{walker}}$ points backwards, the rain always appears to come from in front, so the umbrella
+is tilted \textbf{forward}, at $\tan\theta=v_{\text{walker}}/v_{\text{rain}}$ from the vertical; the
+apparent speed is $\sqrt{v_{\text{rain}}^2+v_{\text{walker}}^2}$.}
+{Tilting the umbrella backwards. Faster walking means \emph{more} forward tilt, not less.}
+{Rain falls vertically at \SI{4}{m/s}; a man walks at \SI{3}{m/s}. The apparent speed of the rain is:}
+{\SI{1}{m/s}}{\SI{7}{m/s}}{\SI{12}{m/s}}{\SI{5}{m/s}\archans{D}{The two are perpendicular, so
+the apparent speed is $\sqrt{4^2+3^2}=\SI{5}{m/s}$, at $\tan^{-1}(3/4)\approx37^\circ$ from the
+vertical. Options (A) and (B) treat the velocities as parallel.}}
+
+\archq{Boat upstream and downstream}
+{``A boat of still-water speed $v_b$ travels up and down a river flowing at $v_r$; find the times or
+the average speed.''}
+{Downstream speed $=v_b+v_r$; upstream $=v_b-v_r$. For a round trip of total length $2D$ the time is
+$D/(v_b+v_r)+D/(v_b-v_r)=2Dv_b/(v_b^2-v_r^2)$, so the average speed is $(v_b^2-v_r^2)/v_b$ (the
+\emph{harmonic} mean of the two speeds), always \textbf{less} than $v_b$: the current costs time
+overall even though it helps one way.}
+{Averaging the two speeds arithmetically. The boat spends longer on the slow leg, so the true average is
+lower.}
+{A boat moves at \SI{8}{km/h} in still water; the river flows at \SI{2}{km/h}. Its average speed for a
+trip downstream and back is:}
+{\SI{8}{km/h}}{\SI{7.5}{km/h}}{\SI{10}{km/h}}{\SI{6}{km/h}\archans{B}{The leg speeds are $8+2=10$ and
+$8-2=\SI{6}{km/h}$. Average speed $=(v_b^2-v_r^2)/v_b=(64-4)/8=\SI{7.5}{km/h}$. Option (A) is the
+arithmetic mean of 10 and 6, which ignores the longer time spent on the slow leg.}}
+
+\archq{River crossing when the current is faster than the boat}
+{``The river flows faster than the boat can move through the water; find the least possible drift, or
+the heading that gives it.''}
+{Zero drift is impossible when $v_r\ge v_b$. Head upstream at $\sin\theta=v_b/v_r$ (note: $v_b$ over
+$v_r$, the reverse of the zero-drift rule); the least drift is $d\sqrt{v_r^2-v_b^2}/v_b$.}
+{Heading straight across, which minimises the \emph{time}, not the drift; or applying
+$\sin\theta=v_r/v_b$, which has no solution when $v_r>v_b$.}
+{A river \SI{100}{m} wide flows at \SI{5}{m/s}; a boat moves at \SI{3}{m/s} relative to the water. The
+least possible drift downstream is:}
+{zero}{\SI{75}{m}}{\SI{133}{m}}{\SI{167}{m}\archans{C}{Head upstream at $\sin\theta=3/5$. Then
+$x_{\min}=d\sqrt{v_r^2-v_b^2}/v_b=100\times4/3\approx\SI{133}{m}$. Option (D) is the drift when heading
+straight across, $100\times5/3$; (A) would need $v_b>v_r$.}}
+
+\archq{Minimum distance between two moving bodies}
+{``Two bodies move with constant velocities along different lines; find their least separation, or
+when it occurs.''}
+{Work in the frame of one body, $B$. There $A$ moves in a straight line from $\vr_0$ with
+$\vv_{AB}=\vv_A-\vv_B$, and the least distance is the perpendicular distance from $B$ to that line:
+$d_{\min}=|x_0v_y-y_0v_x|/v_{AB}$, reached at $t_{\min}=-(x_0v_x+y_0v_y)/v_{AB}^2$.}
+{Assuming the bodies meet, or come closest, where their paths cross. They reach the crossing point at
+different times, so it says nothing about the least separation; only the relative motion does.}
+{Particle $A$ starts at the origin moving at \SI{3}{m/s} along $+x$; at the same instant particle $B$
+starts at $(\SI{40}{m},0)$ moving at \SI{4}{m/s} along $+y$. Their least separation is:}
+{zero}{\SI{40}{m}}{\SI{24}{m}}{\SI{32}{m}\archans{D}{In $B$'s frame, $\vr_0=(-40,0)$~\si{m} and
+$\vv_{AB}=(3,-4)$~\si{m/s}, of magnitude \SI{5}{m/s}, so $d_{\min}=|(-40)(-4)-0|/5=\SI{32}{m}$, at
+$t_{\min}=120/25=\SI{4.8}{s}$. (A) assumes they meet where the paths cross, at $(40,0)$, which $A$
+reaches only at \SI{13.3}{s}, long after $B$ has left; (B) is merely the starting separation; (C) is
+the distance along the relative path to the closest point, not the perpendicular distance.}}

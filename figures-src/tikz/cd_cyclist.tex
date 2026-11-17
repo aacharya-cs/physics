@@ -1,0 +1,78 @@
+% cd_cyclist: why a cyclist must lean into a bend (Ch 10, fig:cdcyc)
+% Seen from behind; the centre of the bend is to the LEFT in both panels.
+% Forces on bicycle + rider: weight mg at G, and at the tyre's contact the
+% normal reaction N (up) and friction f (inward, towards the centre).
+% Vertical: N = mg.  Radial: f = m v^2/r.  Both panels are at the same speed,
+% so N, f and mg have the same lengths in both.
+% Left: upright.  f acts at road level, a height h below G, so it has a moment
+% about G that turns the top of the machine outward: the rider falls outward.
+% Right: leaning at theta from the vertical with tan(theta) = f/N = v^2/(rg).
+% The resultant contact force F (dashed: it is N and f added, not a third
+% force) lies along the line from the contact to G, so its moment about G is
+% zero.  Drawn with theta = 30 degrees: f = N tan 30.
+% No gyroscopic effect is involved or implied.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\Nl{1.4}                          % length of N (and of mg)
+  \def\th{30}
+  \pgfmathsetmacro\fl{\Nl*tan(\th)}      % length of f
+  \def\gG{3.0}                           % distance of G from the contact
+  % bicycle + rider seen from behind, leaning by #1 degrees towards the left
+  \newcommand\cyclist[1]{%
+    \begin{scope}[rotate=#1]
+      \fill[cGrey!70,draw=cSteel,thin line,rounded corners=0.06cm] (-0.075,0) rectangle (0.075,2.15);   % wheel, edge on
+      \fill[cBlock!70,draw=cSteel,thin line,rounded corners=0.12cm] (-0.28,1.95) rectangle (0.28,4.05);   % rider
+      \fill[cBlock!70,draw=cSteel,thin line] (0,4.34) circle[radius=0.26];                                % head
+    \end{scope}}
+
+  % ========================================================= upright
+  \begin{scope}
+    \path[ground,draw=none] (-2.2,-0.16) rectangle (1.9,0);
+    \draw[outline] (-2.2,0) -- (1.9,0);
+    \node[anchor=north] at (-0.15,-0.25) {upright};
+    \cyclist{0}
+    \coordinate (C) at (0,0);
+    \coordinate (G) at (0,\gG);
+    % forces
+    \draw[force] (C) -- ++(0,\Nl) node[pos=0.55,anchor=west,inner sep=4pt] {$N$};
+    \draw[applied] (C) -- ++(-\fl,0) node[anchor=south east,inner sep=1pt] {$f$};
+    \draw[force] (G) -- ++(0,-\Nl) node[pos=0.55,anchor=west,inner sep=4pt] {$mg$};
+    \pic at (G) {cm};
+    \node[anchor=east,inner sep=4pt] at (G) {$G$};
+    % height of G above the road: the lever arm of f about G
+    \draw[dimtick] (0.3,\gG) -- (1.25,\gG);
+    \draw[dim] (1.1,0) -- node[anchor=west,cSteel] {$h$} (1.05,\gG);
+    % the resulting rotation: top of the machine goes outward
+    \draw[rotation] (96:4.85) arc[start angle=96,end angle=78,radius=4.85]
+      node[anchor=west,align=left,font=\footnotesize,inner sep=2pt] {falls\\ outward};
+  \end{scope}
+
+  % ========================================================== leaning
+  \begin{scope}[shift={(8.0,0)}]
+    \path[ground,draw=none] (-2.2,-0.16) rectangle (1.9,0);
+    \draw[outline] (-2.2,0) -- (1.9,0);
+    \node[anchor=north] at (-0.4,-0.25) {leaning};
+    \cyclist{\th}
+    \coordinate (C) at (0,0);
+    \coordinate (G) at (90+\th:\gG);
+    % the line through the contact and G (line of action of F)
+    \draw[guide] (C) -- (90+\th:4.95);
+    \draw[guide] (C) -- (0,2.0);
+    % components and the parallelogram that adds them
+    \draw[parallelogram] (-\fl,0) -- (-\fl,\Nl) -- (0,\Nl);
+    \draw[force] (C) -- (0,\Nl) node[anchor=west,inner sep=3pt] {$N$};
+    \draw[applied] (C) -- (-\fl,0) node[anchor=south east,inner sep=2.5pt] {$f$};
+    \draw[force,resultant] (C) -- (-\fl,\Nl);
+    \node[cCrim,anchor=east,inner sep=2pt] at (-\fl,\Nl) {$F$};
+    % weight at G
+    \draw[force] (G) -- ++(0,-\Nl) node[pos=0.6,anchor=east,inner sep=4pt] {$mg$};
+    \pic at (G) {cm};
+    \node[anchor=south east,inner sep=3pt] at (G) {$G$};
+    % lean angle
+    \draw[angle arc] (0,0.85) arc[start angle=90,end angle=90+\th,radius=0.85];
+    \node at (90+\th/2:1.08) {$\theta$};
+  \end{scope}
+
+  % direction of the centre of the bend, once for both panels
+  \draw[-smallhead,thin line,cSteel] (4.65,1.5) -- (3.35,1.5);
+  \node[anchor=south,font=\footnotesize,cSteel] at (4.0,1.55) {centre of bend};
+\end{tikzpicture}

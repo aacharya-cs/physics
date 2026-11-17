@@ -1,0 +1,33 @@
+% kin_displacement: displacement versus path length on a line (Ch 2, fig:displacement)
+% A particle starts at x = 1 m, moves out to x = 7 m, turns, and stops at x = 4 m.
+% Path length = 6 m + 3 m = 9 m; displacement = x_f - x_i = 4 m - 1 m = +3 m.
+% The route is drawn above the axis, its two legs offset vertically for clarity;
+% the particle itself stays on the line.  Scale: 1 m = 1.05 cm.
+\begin{tikzpicture}[x=1.05cm,y=1cm]
+  \def\xi{1}\def\xt{7}\def\xf{4}
+  \def\yo{1.15}\def\yb{0.6}       % heights of the outward and return legs
+  % the axis, with a tick every metre
+  \draw[thin line,cInk,-smallhead] (-0.3,0) -- (8.6,0) node[anchor=west] {$x$ (m)};
+  \foreach \k in {0,...,8}{
+    \draw[thin line,cInk] (\k,-0.08) -- (\k,0.08);
+    \node[anchor=north,inner sep=2pt] at (\k,-0.08) {$\k$};}
+  % the route: out to x = 7, turn, back to x = 4
+  \draw[guide] (\xi,0) -- (\xi,\yo);
+  \draw[guide] (\xf,0) -- (\xf,\yb);
+  \draw[construction,cAcc,-smallhead] (\xi,\yo) -- (\xt-0.27,\yo)
+     arc[start angle=90,end angle=-90,radius=0.275cm] -- (\xf,\yb);
+  \draw[guide] (\xt,0) -- (\xt,{(\yo+\yb)/2});
+  \draw[construction,cAcc,-smallhead] (\xi,\yo) -- ({(\xi+\xt)/2+0.1},\yo);
+  % start and end
+  \node[point mass,minimum size=4pt] at (\xi,0) {};
+  \node[point mass,minimum size=4pt] at (\xf,0) {};
+  \node[anchor=east] at (\xi-0.08,\yo) {start};
+  \node[anchor=east] at (\xf-0.03,0.3) {end};
+  % path length
+  \node[cAcc,anchor=south] at ({(\xi+\xt)/2},\yo+0.02) {path length $=6\,\mathrm{m}+3\,\mathrm{m}=9\,\mathrm{m}$};
+  % displacement
+  \draw[vector,cPrim] (\xi,-0.72) -- (\xf,-0.72);
+  \draw[dimtick] (\xi,-0.45) -- (\xi,-0.85);
+  \draw[dimtick] (\xf,-0.45) -- (\xf,-0.85);
+  \node[cPrim,anchor=north] at ({(\xi+\xf)/2},-0.8) {displacement $\Delta x=4\,\mathrm{m}-1\,\mathrm{m}=+3\,\mathrm{m}$};
+\end{tikzpicture}

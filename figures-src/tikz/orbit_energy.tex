@@ -1,0 +1,27 @@
+% orbit_energy: circular orbits, speed and energy against radius (Ch 17, fig:orbitenergy)
+% Units GM = 1, m = 1.  v = 1/sqrt(r);  K = 1/(2r);  U = -1/r;  E = K + U = -1/(2r).
+% So K = -E and U = 2E for every circular orbit: raising the orbit (E up)
+% must lower K, hence the speed.
+\begin{tikzpicture}
+\begin{groupplot}[bookplot,
+    group style={group size=1 by 2, vertical sep=7mm},
+    width=8.2cm, xmin=1, xmax=4.3, domain=1:4]
+  % speed
+  \nextgroupplot[height=3.6cm, ymin=0.35, ymax=1.12, ylabel={speed}]
+  \addplot[cFor] {1/sqrt(x)};
+  \node[cFor,anchor=south west] at (axis cs:2.2,0.7) {$v_o=\sqrt{GM/r}$ falls};
+  % energies
+  \nextgroupplot[height=5.0cm, ymin=-1.2, ymax=0.62, ylabel={energy},
+      axis x line=middle, xlabel={orbit radius $r$},
+      xlabel style={at={(axis description cs:1,0)},anchor=north east}]
+  \addplot[cAcc,thin line,dash pattern=on 4pt off 2pt] {1/(2*x)};
+  \addplot[cPlum,thin line,dash pattern=on 1.5pt off 1.5pt] {-1/x};
+  \addplot[cPlum] {-1/(2*x)};
+  \node[cAcc,anchor=west] at (axis cs:4.02,0.125) {$K$};
+  \node[cPlum,anchor=west] at (axis cs:4.02,-0.125) {$E$};
+  \node[cPlum,anchor=north] at (axis cs:3.7,-0.28) {$U$};
+  \node[cPlum,anchor=north west,align=left] at (axis cs:2.12,-0.52)
+    {$E=-\dfrac{GMm}{2r}$ rises towards $0$;\\[2pt]
+     always $K=-E$ and $U=2E$};
+\end{groupplot}
+\end{tikzpicture}

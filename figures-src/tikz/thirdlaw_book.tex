@@ -1,0 +1,39 @@
+% thirdlaw_book: weight and normal force are not a third-law pair (Ch 7, fig:thirdlaw)
+% Left: the two forces on the book.  Right: the two genuine pairs, each spanning two
+% bodies: contact (N on the book, N' on the table) and gravity (W on the book,
+% W' on the Earth).  All four have the same magnitude (book in equilibrium): 1.2 cm.
+% Colour marks the pair (a deliberate legend exception): green the contact pair, crimson the gravity pair.
+% Contact forces start at the contact surface, W at the book's mid-height; the two
+% lines of action are drawn 0.5 cm either side of the centre so they stay legible.
+% W' is drawn at the Earth's surface for the same reason (it acts on the Earth as
+% a whole).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\F{1.2}
+  \def\d{0.5}
+  % a book resting on a table top, centred on x = #1
+  \newcommand\booktable[1]{%
+    \draw[outline,fill=cRock!60] (#1-1.6,-0.22) rectangle (#1+1.6,0);
+    \draw[body] (#1-0.95,0) rectangle (#1+0.95,0.45);
+    \node[font=\footnotesize] at (#1,0.225) {book};}
+  % ---------------- left: both forces act on the book
+  \booktable{0}
+  \draw[vector,cFor] (\d,0) -- ++(0,\F) node[anchor=west] {$N$ on book};
+  \draw[force] (-\d,0.225) -- ++(0,-\F) node[anchor=east] {$W$ on book};
+  \node[align=center] at (0,2.05) {not a pair:\\ both act on the book};
+  \node[note,align=center] at (0,-2.2) {equal here only because\\ the book is in equilibrium};
+  % separator
+  \draw[guide] (2.75,2.55) -- (2.75,-3.8);
+  % ---------------- right: the two pairs
+  \begin{scope}[shift={(5.65,0)}]
+    \booktable{0}
+    \draw[outline] (-2.0,-3.4) arc[start angle=118,end angle=62,radius=4.26];
+    \node at (0,-3.62) {Earth};
+    % contact pair
+    \draw[vector,cFor] (\d,0) -- ++(0,\F) node[anchor=west] {$N$ on book};
+    \draw[vector,cFor] (\d,0) -- ++(0,-\F) node[anchor=west] {$N'$ on table};
+    % gravity pair
+    \draw[force] (-\d,0.225) -- ++(0,-\F) node[anchor=east] {$W$ on book};
+    \draw[force] (-\d,-2.91) -- ++(0,\F) node[anchor=east,pos=0.5] {$W'$ on Earth};
+    \node[align=center] at (0,2.05) {two pairs, each\\ spanning two bodies};
+  \end{scope}
+\end{tikzpicture}

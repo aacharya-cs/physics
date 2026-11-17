@@ -1,0 +1,48 @@
+% kin_relative: crossing a river straight across (Ch 5, fig:relative)
+% Velocity triangle v_ground = v_boat + v_current, drawn to scale with the heading
+% theta = 35 degrees upstream of straight across and sin(theta) = v_current/v_boat,
+% so the ground velocity points straight across with size v_boat cos(theta).
+% Scale: v_boat = 2.6 cm, v_current = 2.6 sin 35 = 1.49 cm, v_ground = 2.13 cm.
+% The current flows to the right; upstream is to the left.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\W{3.7}                            % river width on the page
+  \def\th{35}
+  \def\vb{2.6}
+  \pgfmathsetmacro\vcur{\vb*sin(\th)}
+  \pgfmathsetmacro\vg{\vb*cos(\th)}
+  \coordinate (O) at (5.0,0.4);
+  % water and banks
+  \fill[cEarth!45] (0,0) rectangle (9.4,\W);
+  \path[ground,draw=none] (0,-0.16) rectangle (9.4,0);
+  \path[ground,draw=none] (0,\W) rectangle (9.4,\W+0.16);
+  \draw[outline] (0,0) -- (9.4,0) (0,\W) -- (9.4,\W);
+  % the current, flowing to the right
+  \foreach \x/\y in {0.4/0.75, 0.4/2.75, 7.6/0.75, 7.6/2.75}
+    \draw[vector,cTeal!70] (\x,\y) -- ++(1.1,0);
+  \node[cTeal,font=\footnotesize] at (8.15,1.75) {current};
+  \node[cTeal,font=\footnotesize] at (0.95,1.75) {current};
+  % straight-across track to the point opposite
+  \draw[guide] (O) ++(0,\vg) -- (5.0,\W);
+  \node[point mass] at (5.0,\W) {};
+  \node[anchor=south,font=\footnotesize] at (5.0,\W+0.2) {point opposite};
+  % the boat
+  \begin{scope}[shift={(O)},rotate=\th]
+    \filldraw[body]
+      (0,0.4) .. controls (0.12,0.25) and (0.15,0.05) .. (0.14,-0.12)
+      -- (0.11,-0.28) -- (-0.11,-0.28) -- (-0.14,-0.12)
+      .. controls (-0.15,0.05) and (-0.12,0.25) .. (0,0.4) -- cycle;
+  \end{scope}
+  % the triangle
+  \draw[vector,cAcc] (O) -- ++(90+\th:\vb) coordinate (H);
+  \draw[vector,cTeal] (H) -- ++(\vcur,0);
+  \draw[velocity] (O) -- ++(0,\vg);
+  % heading angle
+  \draw[guide] ($(O)+(0,0.42)$) -- ++(0,0.5);
+  \draw[angle arc] ($(O)+(0,0.75)$) arc[start angle=90,end angle=90+\th,radius=0.75];
+  \node at ($(O)+(90+\th/2:1.0)$) {$\theta$};
+  % labels
+  \node[cAcc,anchor=east,align=right] at ($(O)!0.55!(H)+(-0.12,0)$)
+    {$\vv_{\text{boat}}$\\[-1pt] {\footnotesize heading,}\\[-2pt] {\footnotesize upstream}};
+  \node[cTeal,anchor=south] at ($(H)+(\vcur/2,0.05)$) {$\vv_{\text{current}}$};
+  \node[cFor,anchor=west] at ($(O)+(0.1,0.95)$) {$\vv_{\text{ground}}$};
+\end{tikzpicture}

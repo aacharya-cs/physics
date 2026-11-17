@@ -1,0 +1,49 @@
+% cmd_cone: slicing a solid cone into discs (Ch 13, fig:cmdcone)
+% Height h = 4.3 cm, base radius R = 1.75 cm, apex at the top; z measured DOWN
+% from the apex.  Ellipses are circles foreshortened by k = 0.26.  The slice at
+% z = 2.35 cm (thickness dz = 0.2 cm) has radius (R/h) z.  The centre of mass
+% is on the axis at 3h/4 below the apex, i.e. h/4 above the base.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\h{4.3}\def\R{1.75}\def\k{0.26}
+  \def\z{2.35}\def\dz{0.2}
+  \pgfmathsetmacro\ra{\R*\z/\h}
+  \pgfmathsetmacro\rb{\R*(\z+\dz)/\h}
+  \pgfmathsetmacro\ya{\h-\z}
+  \pgfmathsetmacro\yb{\h-\z-\dz}
+  % the cone: body and the visible front half of the base
+  \fill[cMoon] (0,\h) -- (-\R,0) arc[start angle=180,end angle=360,x radius=\R,y radius=\k*\R] -- cycle;
+  \draw[hidden,thin line,cInk] (\R,0) arc[start angle=0,end angle=180,x radius=\R,y radius=\k*\R];
+  % the slice: a short frustum, top face and front of its side
+  \fill[cAcc!40] (-\ra,\ya) -- (-\rb,\yb) arc[start angle=180,end angle=360,x radius=\rb,y radius=\k*\rb]
+     -- (\ra,\ya) arc[start angle=0,end angle=-180,x radius=\ra,y radius=\k*\ra] -- cycle;
+  \filldraw[fill=cAcc!25,draw=cAcc,thin line] (0,\ya) ellipse[x radius=\ra,y radius=\k*\ra];
+  \draw[cAcc,thin line] (-\rb,\yb) arc[start angle=180,end angle=360,x radius=\rb,y radius=\k*\rb];
+  % outline
+  \draw[outline] (-\R,0) -- (0,\h) -- (\R,0);
+  \draw[outline] (-\R,0) arc[start angle=180,end angle=360,x radius=\R,y radius=\k*\R];
+  % axis
+  \draw[guide] (0,-0.25-\k*\R) -- (0,\h+0.3);
+  % radius of the slice
+  \draw[cInk,thin line] (0,\ya) -- (\ra,\ya);
+  \fill[cInk] (0,\ya) circle[radius=0.03];
+  \draw[leader] (0.6*\ra,\ya+0.02) -- (\R+0.25,\ya+0.75);
+  \node[anchor=west,inner sep=1pt] at (\R+0.25,\ya+0.75) {$\tfrac{R}{h}z$};
+  \draw[leader,cAcc] (\rb-0.04,\yb+0.03) -- (\R+0.25,\yb+0.2);
+  \node[cAcc,anchor=west,inner sep=1pt] at (\R+0.25,\yb+0.2) {$dz$};
+  % base radius
+  \draw[cInk,thin line] (0,0) -- (\R,0);
+  \node[anchor=south,inner sep=1.5pt] at (0.62*\R,0) {$R$};
+  % z from the apex (left)
+  \draw[dimtick] (-0.1,\h) -- (-\R-0.65,\h);
+  \draw[dimtick] (-\ra-0.08,\ya) -- (-\R-0.65,\ya);
+  \draw[dim] (-\R-0.5,\h) -- node[left,cSteel] {$z$} (-\R-0.5,\ya);
+  % centre of mass, h/4 above the base (left, lower)
+  \pic at (0,\h/4) {cm};
+  \draw[dimtick] (-0.14,\h/4) -- (-\R-0.65,\h/4);
+  \draw[dimtick] (-\R-0.08,0) -- (-\R-0.65,0);
+  \draw[dim] (-\R-0.5,0) -- node[left,cSteel] {$h/4$} (-\R-0.5,\h/4);
+  % h (right)
+  \draw[dimtick] (0.1,\h) -- (\R+1.35,\h);
+  \draw[dimtick] (\R+0.08,0) -- (\R+1.35,0);
+  \draw[dim] (\R+1.2,0) -- node[right,cSteel] {$h$} (\R+1.2,\h);
+\end{tikzpicture}

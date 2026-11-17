@@ -1,0 +1,34 @@
+% cd_fighter: a fighter pulling out of a dive, at the lowest point (Ch 10, fig:fighter)
+% The plane follows a vertical circle of radius r; at the lowest point the centre
+% is directly above it, so "towards the centre" is up.  Two forces act: the
+% air's force F (up) and the weight mg (down), and F - mg = m v^2/r.
+% Worked example: m = 16000 kg, v = 250 m/s, r = 2000 m, g = 9.8 m/s^2, so
+% F = m(9.8 + 31.25) = 4.19 mg.  The two force arrows are drawn in that ratio
+% (mg = 0.65 cm, F = 2.72 cm, each from the plane's outline).  The circle itself is not to scale.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{3.9}
+  \coordinate (C) at (0,\R);
+  % the path: the lower part of the circle, flown left to right
+  \draw[orbitpath,cPrim] (C) ++(192:\R) arc[start angle=192,end angle=348,radius=\R];
+  \draw[cPrim,thin line,-smallhead] (C) ++(322:\R) arc[start angle=322,end angle=333,radius=\R];
+  % centre and radius
+  \node[point mass] at (C) {};
+  \node[anchor=west,inner sep=4pt] at (C) {centre};
+  \draw[dimtick] (-0.15,\R) -- (-1.75,\R);
+  \draw[dimtick] (-1.2,0) -- (-1.75,0);
+  \draw[dim] (-1.6,0) -- node[anchor=east,cSteel] {$r$} (-1.6,\R);
+  % the plane, side view, flying to the right
+  \begin{scope}[scale=1.25]
+    \filldraw[body,line join=round]
+      (0.80,0.00) .. controls (0.62,0.08) .. (0.42,0.10)
+      .. controls (0.30,0.20) and (0.08,0.20) .. (0.00,0.11)
+      -- (-0.52,0.08) -- (-0.70,0.38) -- (-0.84,0.38) -- (-0.80,0.06)
+      -- (-0.82,-0.04) -- (-0.55,-0.08) -- (0.50,-0.07)
+      .. controls (0.64,-0.06) .. (0.80,0.00) -- cycle;
+  \end{scope}
+  % forces, to scale with each other
+  \draw[force] (0,0.16) -- (0,2.88) node[pos=0.6,anchor=west,inner sep=3pt] {$F$};
+  \draw[force] (0,-0.1) -- (0,-0.75) node[anchor=north,inner sep=2pt] {$mg$};
+  % velocity along the tangent
+  \draw[velocity] (1.05,0) -- (2.2,0) node[anchor=south,inner sep=3pt] {$v$};
+\end{tikzpicture}

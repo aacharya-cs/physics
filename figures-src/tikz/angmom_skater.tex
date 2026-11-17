@@ -1,0 +1,50 @@
+% angmom_skater: a spinning skater pulls her arms in (Ch 14, fig:skater)
+% Stylised side view, spin axis vertical.  No external torque about the axis (gravity
+% acts along it at the CM, the ice is nearly frictionless), so L = I omega is fixed:
+% the two L arrows are drawn the same length.  Pulling the arms in lowers I, so omega
+% rises: the spin arrow is drawn longer.  Spin is anticlockwise seen from above, so the
+% front of each spin arc moves to the right and L points up (right-hand rule).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\k{0.24}   % squash of the spin ellipse
+  % ice, legs, torso, head: shared by both poses
+  \def\skater{%
+    \fill[ground strip] (-1.25,-0.16) rectangle (1.25,0);
+    \draw[outline] (-1.25,0) -- (1.25,0);
+    \draw[outline] (-0.32,0.05) -- (0.28,0.05);                         % blade
+    \draw[body,rounded corners=1pt] (-0.17,1.62) -- (-0.07,0.1) -- (0.07,0.1) -- (0.17,1.62) -- cycle;
+    \draw[body,rounded corners=2pt] (-0.21,1.58) -- (-0.3,2.62) -- (0.3,2.62) -- (0.21,1.58) -- cycle;
+    \draw[body] (0,2.9) circle[radius=0.2];}
+  % the spin axis and L, the same in both poses
+  \def\axisL{%
+    \draw[rotation axis] (0,0.05) -- (0,3.25);
+    \draw[momentum] (0,3.25) -- (0,4.25) node[anchor=west,inner sep=3pt] {$\vL$};}
+  % ------------------------------------------------------------- arms out
+  \begin{scope}
+    \skater
+    \axisL
+    \draw[body,rounded corners=1.5pt] (-0.26,2.5) -- (-1.62,2.53) -- (-1.62,2.4) -- (-0.26,2.36) -- cycle;
+    \draw[body,rounded corners=1.5pt] (0.26,2.5) -- (1.62,2.53) -- (1.62,2.4) -- (0.26,2.36) -- cycle;
+    \draw[body] (-1.7,2.465) circle[radius=0.1] (1.7,2.465) circle[radius=0.1];
+    % slow spin: a short arc
+    \draw[cFor,thin line,-bookhead] (0,1.0) ++(235:0.85 and {0.85*\k}) arc[start angle=235,end angle=305,x radius=0.85,y radius={0.85*\k}];
+    \node[cFor,anchor=west] at (0.55,0.62) {$\omega_1$};
+    \node[anchor=north,align=center] at (0,-0.3) {arms out:\\ large $I_1$, small $\omega_1$};
+  \end{scope}
+  % ------------------------------------------------------------- arms in
+  \begin{scope}[shift={(7.4,0)}]
+    \skater
+    \axisL
+    % arms held tight against the sides
+    \draw[body,rounded corners=1.5pt] (-0.29,2.6) -- (-0.43,1.8) -- (-0.31,1.79) -- (-0.21,2.4) -- cycle;
+    \draw[body,rounded corners=1.5pt] (0.29,2.6) -- (0.43,1.8) -- (0.31,1.79) -- (0.21,2.4) -- cycle;
+    \draw[body] (-0.38,1.72) circle[radius=0.1] (0.38,1.72) circle[radius=0.1];
+    % fast spin: a long arc
+    \draw[cFor,thin line,-bookhead] (0,1.0) ++(190:0.85 and {0.85*\k}) arc[start angle=190,end angle=372,x radius=0.85,y radius={0.85*\k}];
+    \node[cFor,anchor=west] at (0.9,0.85) {$\omega_2$};
+    \node[anchor=north,align=center] at (0,-0.3) {arms in:\\ small $I_2$, large $\omega_2$};
+  \end{scope}
+  % ------------------------------------------------------------- between
+  \draw[cSteel,thin line,-bookhead] (2.45,2.0) -- (4.95,2.0);
+  \node[anchor=south,font=\footnotesize] at (3.7,2.05) {pull the arms in};
+  \node[anchor=north,align=center] at (3.7,1.9) {no external torque:\\ same $\vL$};
+\end{tikzpicture}

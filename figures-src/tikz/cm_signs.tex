@@ -1,0 +1,47 @@
+% cm_signs: which dot products can be negative (Ch 6, fig:signs)
+% Each circle is seen from above (drawn on the page); the particle moves
+% anticlockwise, so omega points out of the page.
+% (a) omega (axial) . v (in the plane) = 0 always.
+% (b) v . a: a can make any angle with v in the plane: acute (+), 90 deg (0),
+%     obtuse (-).  Drawn at 45, 90 and 135 degrees from v.
+% (c) omega . alpha: both axial, so parallel (+, speeding up) or antiparallel
+%     (-, slowing down); zero only when alpha = 0.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{1.3}
+  \newcommand\particle[1]{\shade[ball color=cBlock] (#1) circle[radius=0.085];
+    \draw[cSteel,thin line] (#1) circle[radius=0.085];}
+  % ----------------------------------------------------------------- (a) ---
+  \begin{scope}
+    \draw[outline] (0,0) circle[radius=\R];
+    \pic at (0,0) {out of page};
+    \node[cFor,anchor=south] at (0,0.12) {$\vomega$};
+    \draw[velocity] (\R,0) -- ++(0,1.2) node[anchor=south,cFor] {$\vv$};
+    \particle{\R,0}
+    \node[anchor=north,align=center] at (0,-1.55)
+      {(a)\enspace $\vomega\cdot\vv=0$ always:\\ $\vomega\perp\vv$};
+  \end{scope}
+  % ----------------------------------------------------------------- (b) ---
+  \begin{scope}[shift={(5.2,0)}]
+    \draw[outline] (0,0) circle[radius=\R];
+    \coordinate (P) at (\R,0);
+    \draw[velocity] (P) -- ++(0,1.2) node[anchor=south,cFor] {$\vv$};
+    \foreach \ang/\lab/\anc in {135/$+$/south east, 180/$0$/east, 225/$-$/north east}
+      \draw[accel] (P) -- ++(\ang:1.0) node[anchor=\anc,cPrim,inner sep=1pt] {\lab};
+    \node[cPrim] at ($(P)+(158:0.72)$) {$\va$};
+    \particle{P}
+    \node[anchor=north,align=center] at (0,-1.55)
+      {(b)\enspace $\vv\cdot\va$: $+$, $0$ or $-$;\\ $\va$ at any angle in the plane};
+  \end{scope}
+  % ----------------------------------------------------------------- (c) ---
+  \begin{scope}[shift={(10.4,0)}]
+    \draw[outline] (0,0) circle[radius=\R];
+    \pic at (-0.3,0.42) {out of page}; \pic at (0.3,0.42) {out of page};
+    \pic at (-0.3,-0.42) {out of page}; \pic at (0.3,-0.42) {into page};
+    \node[cFor,anchor=east] at (-0.42,0.42) {$\vomega$};
+    \node[cPrim,anchor=west] at (0.42,0.42) {$\vc{\alpha}$};
+    \node[cFor,anchor=east] at (-0.42,-0.42) {$\vomega$};
+    \node[cPrim,anchor=west] at (0.42,-0.42) {$\vc{\alpha}$};
+    \node[anchor=north,align=center] at (0,-1.55)
+      {(c)\enspace $\vomega\cdot\vc{\alpha}$: $+$ or $-$;\\ $0$ only if $\vc{\alpha}=\vc{0}$};
+  \end{scope}
+\end{tikzpicture}

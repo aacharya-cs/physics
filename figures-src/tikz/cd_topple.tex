@@ -1,0 +1,42 @@
+% cd_topple: the toppling speed of a vehicle on a flat bend (Ch 10, fig:topple)
+% Seen from behind; the centre of the bend is to the LEFT, so the left wheel is
+% the inner one.  Wheels 2a apart, centre of gravity G at height h.
+% Forces: mg at G; normal reactions N_1 (outer wheel) and N_2 (inner wheel) at
+% the road; total friction f = m v^2/r at road level, inward.
+% Moments about G: N_1 a = N_2 a + f h.  Drawn to scale with a = 1.5, h = 2.6,
+% mg = 2.2, N_1 = 1.7, N_2 = 0.5, f = (N_1 - N_2) a / h = 0.692 (cm), i.e. a
+% vehicle well on its way to toppling (N_2 is under half of mg/2).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\a{1.5}
+  \def\h{2.6}
+  % road
+  \path[ground,draw=none] (-3.4,-0.16) rectangle (3.5,0);
+  \draw[outline] (-3.4,0) -- (3.5,0);
+  % the vehicle from behind: tyres, then the body
+  \foreach \s in {-1,1}{
+    \fill[cInk!75,rounded corners=0.05cm] (\s*\a-0.19,0) rectangle (\s*\a+0.19,0.7);}
+  \filldraw[body,fill=cBlock!60,rounded corners=0.06cm] (-1.95,0.56) rectangle (1.95,3.8);
+  % centre of gravity
+  \coordinate (G) at (0,\h);
+  % forces, to scale
+  \draw[force] (G) -- ++(0,-2.2) node[pos=0.5,anchor=west,inner sep=3pt] {$mg$};
+  \draw[force] (-\a,0) -- ++(0,0.5);
+  \node[cCrim,anchor=east,inner sep=0pt] at (-\a-0.3,0.33) {$N_2$};
+  \draw[force] (\a,0) -- ++(0,1.7);
+  \node[cCrim,anchor=east,inner sep=0pt] at (\a-0.12,1.35) {$N_1$};
+  \draw[applied] (0,0) -- (-0.692,0) node[anchor=south east,inner sep=1pt] {$f$};
+  \pic at (G) {cm};
+  \node[anchor=south east,inner sep=2pt] at (G) {$G$};
+  % h
+  \draw[dimtick] (0.15,\h) -- (2.8,\h);
+  \draw[dim] (2.65,0) -- node[anchor=west,cSteel] {$h$} (2.65,\h);
+  % 2a, below the road
+  \draw[dimtick] (-\a,-0.2) -- (-\a,-0.62);
+  \draw[dimtick] (\a,-0.2) -- (\a,-0.62);
+  \draw[dim] (-\a,-0.5) -- node[anchor=north,cSteel] {$2a$} (\a,-0.5);
+  % which wheel is which
+  \node[anchor=north,font=\footnotesize,cSteel] at (-\a,-0.75) {inner};
+  \node[anchor=north,font=\footnotesize,cSteel] at (\a,-0.75) {outer};
+  \draw[cSteel,thin line,-smallhead] (-2.15,2.2) -- (-3.35,2.2);
+  \node[anchor=south,font=\footnotesize,cSteel] at (-2.75,2.25) {centre of bend};
+\end{tikzpicture}

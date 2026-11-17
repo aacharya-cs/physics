@@ -1,0 +1,27 @@
+% Draw one native figure on its own, in the book's fonts, for quick iteration:
+%   make fig F=grav_shell        (writes figures-src/tikz/preview-grav_shell.pdf)
+% The figure is set at its printed size, so what you see is what the book prints.
+\documentclass[11pt]{standalone}
+\usepackage[fontsize=10.5pt]{fontsize}% match the book's body size
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo}
+\usepackage{amsmath,amssymb,bm,siunitx}
+\usepackage{tikz,pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.markings,%
+  decorations.pathreplacing,angles,quotes,patterns,patterns.meta,calc,positioning,%
+  shapes.geometric,shadings,fadings,backgrounds,shapes.misc,hobby,bending,3d,perspective}
+\usepgfplotslibrary{fillbetween}
+\input{bookstyle}
+% the book's vector macros (keep in step with preamble.tex)
+\newcommand{\vc}[1]{\vec{\bm{#1}}}
+\newcommand{\uhat}[1]{\hat{\bm{#1}}}
+\newcommand{\A}{\vc{A}}\newcommand{\B}{\vc{B}}\newcommand{\R}{\vc{R}}
+\newcommand{\ihat}{\uhat{\imath}}\newcommand{\jhat}{\uhat{\jmath}}\newcommand{\khat}{\uhat{k}}
+\newcommand{\vv}{\vc{v}}\newcommand{\va}{\vc{a}}\newcommand{\vF}{\vc{F}}\newcommand{\vp}{\vc{p}}
+\newcommand{\vr}{\vc{r}}\newcommand{\vL}{\vc{L}}\newcommand{\vtau}{\vc{\tau}}\newcommand{\vg}{\vc{g}}
+\newcommand{\vomega}{\vc{\omega}}\newcommand{\ex}{\times}
+\begin{document}
+\tikzset{every picture/.append style={bookfigure}}%
+\input{\figname}
+\end{document}

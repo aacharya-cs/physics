@@ -1,0 +1,56 @@
+% cd_vertcases: the three fates of a bob on a string in a vertical circle (Ch 10, fig:vertcases)
+% Units R = 1, g = 1.  Speed u at the lowest point, moving right, so the bob goes
+% anticlockwise; theta is measured from the lowest point (polar angle = theta - 90).
+% The dashed line through O marks the level of the centre (upper half / lower half).
+%  (1) u^2 = 6gR > 5gR: taut all the way round.
+%  (2) u^2 = 4gR: slack where h2 = (u^2 + gR)/3g = 5R/3, i.e. cos(theta) = -2/3,
+%      theta = 131.8 deg (upper half).  There v^2 = gR|cos theta| = 2gR/3, along the
+%      tangent.  After that it is a projectile: x = x0 + vx t, y = y0 + vy t - t^2/2,
+%      which stays inside the circle (string slack) until it meets the circle again at
+%      t = 2.4343 (found numerically), at (-0.580, -0.815), where the string jerks taut.
+%  (3) u^2 = 1.2gR: v = 0 where h1 = u^2/2g = 0.6R, cos(theta) = 0.4, theta = 66.4 deg
+%      (lower half), and it swings back and forth between +-66.4 deg.
+\begin{tikzpicture}[x=1.6cm,y=1.6cm]
+  % common furniture of a panel: centre, level of the centre, launch arrow
+  \newcommand\panelbase[1]{%
+    \draw[guide] (#1-1.25,0) -- (#1+1.25,0);
+    \node[dot] at (#1,0) {};
+    \node[anchor=south east,inner sep=1.5pt] at (#1,0) {$O$};
+    \draw[velocity] (#1,-1) -- ++(0.62,0) node[anchor=north,pos=0.55] {$u$};
+    \node[dot] at (#1,-1) {};}
+  % ---------------------------------------------------------------- completes
+  \draw[cPrim,curve] (0,0) circle[radius=1];
+  \panelbase{0}
+  \node[dot] at (0,1) {};
+  \node[anchor=south] at (0,1.04) {$T\ge0$ at the top};
+  \node[anchor=north,align=center] at (0,-1.32) {completes the circle\\[1pt] $u\ge\sqrt{5gR}$};
+  % ------------------------------------------------------------------- leaves
+  \def\xb{3.05}
+  \pgfmathsetmacro\ph{acos(-2/3)-90}                % polar angle of the slack point
+  \pgfmathsetmacro\vs{sqrt(2/3)}
+  \pgfmathsetmacro\xo{cos(\ph)}  \pgfmathsetmacro\yo{sin(\ph)}
+  \pgfmathsetmacro\vx{-\vs*sin(\ph)} \pgfmathsetmacro\vy{\vs*cos(\ph)}
+  \draw[orbitpath] (\xb,0) circle[radius=1];
+  \draw[cPrim,curve] (\xb,-1) arc[start angle=-90,end angle=\ph,radius=1];
+  \draw[cAcc,curve] plot[domain=0:2.4343,samples=60,variable=\t]
+    ({\xb+\xo+\vx*\t},{\yo+\vy*\t-\t*\t/2});
+  \draw[cInk,hair line,hidden] (\xb,0) -- (\xb+\xo,\yo);
+  \panelbase{\xb}
+  \node[dot] at (\xb+\xo,\yo) {};
+  \node[anchor=west,inner sep=4pt] at (\xb+\xo,\yo) {$T=0$};
+  \node[dot] at (\xb-0.5797,-0.8148) {};
+  \pgfmathsetmacro\xl{\xo+\vx*1.5} \pgfmathsetmacro\yl{\yo+\vy*1.5-1.125}
+  \draw[leader,cAcc] (\xb+\xl-0.03,\yl+0.02) -- (\xb-0.95,0.98);
+  \node[cAcc,anchor=south east,inner sep=1pt] at (\xb-0.95,0.98) {projectile};
+  \node[anchor=north,align=center] at (\xb,-1.32) {leaves the circle\\[1pt] $\sqrt{2gR}<u<\sqrt{5gR}$};
+  % --------------------------------------------------------------- oscillates
+  \def\xc{6.1}
+  \pgfmathsetmacro\am{acos(0.4)}                    % amplitude, from the lowest point
+  \draw[orbitpath] (\xc,0) circle[radius=1];
+  \draw[cPrim,curve] (\xc,0)++(-90-\am:1) arc[start angle=-90-\am,end angle=-90+\am,radius=1];
+  \panelbase{\xc}
+  \foreach \s/\a in {-1/east,1/west}{
+    \node[dot] at ($(\xc,0)+(-90+\s*\am:1)$) {};
+    \node[anchor=\a,inner sep=3pt] at ($(\xc,0)+(-90+\s*\am:1)$) {$v=0$};}
+  \node[anchor=north,align=center] at (\xc,-1.32) {oscillates\\[1pt] $0<u\le\sqrt{2gR}$};
+\end{tikzpicture}

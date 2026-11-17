@@ -1,0 +1,46 @@
+% spring_movable: a spring reached through a movable pulley (Ch 8, fig:springmovable)
+% A string is fixed to the ceiling at the left, runs down under a light movable
+% pulley and up to a spring of stiffness k hung from the ceiling.  The load hangs
+% from the pulley's axle.  If the load moves down x, both segments under it
+% lengthen by x, so the spring must stretch by 2x: the extra tension is k(2x),
+% and the two segments lift the load with 2(2kx) = 4kx, so k_e = 4k.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\r{0.32}                       % pulley radius
+  \def\cx{1.0}\def\cy{0.55}          % pulley centre
+  \def\ceil{3.4}                     % ceiling level
+  \def\js{1.85}                      % junction of string and spring
+  \pgfmathsetmacro\xl{\cx-\r}
+  \pgfmathsetmacro\xr{\cx+\r}
+  % ceiling
+  \path[ground,draw=none] (-0.2,\ceil) rectangle (2.4,\ceil+0.18);
+  \draw[outline] (-0.2,\ceil) -- (2.4,\ceil);
+  % left string segment, fixed to the ceiling
+  \draw[cInk,thin line] (\xl,\ceil) -- (\xl,\cy) arc[start angle=180,end angle=360,radius=\r] -- (\xr,\js);
+  \node[point mass] at (\xl,\ceil) {};
+  % the spring, from the ceiling down to the junction: 8 turns
+  \pgfmathsetmacro\p{(\ceil-\js-0.3)/8}
+  \draw[cInk,thin line] (\xr,\ceil) -- ++(0,-0.15)
+    plot[domain=0:16*pi,samples=320,smooth,variable=\t]
+      ({\xr+0.16*sin(\t r)},{\ceil-0.15-\p*\t/(2*pi)-0.09*(1-cos(\t r))})
+    -- (\xr,\js);
+  \node[point mass] at (\xr,\js) {};
+  \node[anchor=west] at (\xr+0.22,\ceil-0.55) {$k$};
+  % the movable pulley and its axle
+  \draw[outline,fill=cMoon] (\cx,\cy) circle[radius=\r];
+  \draw[cSteel,hair line] (\cx,\cy) circle[radius=\r-0.07];
+  \node[point mass] at (\cx,\cy) {};
+  \draw[cInk,thin line] (\cx,\cy) -- (\cx,\cy-0.62);
+  % the load
+  \draw[body] (\cx-0.36,\cy-1.22) rectangle (\cx+0.36,\cy-0.62);
+  \node at (\cx,\cy-0.92) {$m$};
+  % tensions on the two segments that hold the pulley
+  \draw[force] (\xl,\cy+0.15) -- ++(0,0.85) node[anchor=east,pos=0.6] {$T$};
+  \draw[force] (\xr,\cy+0.15) -- ++(0,0.85) node[anchor=west,pos=0.6] {$T$};
+  % displacements: the load moves x, the spring stretches 2x
+  \draw[-smallhead,thin line,cSteel] (\cx+0.62,\cy-0.62) -- ++(0,-0.5)
+    node[anchor=west,pos=0.5] {load moves $x$};
+  % the junction's position before the load was pulled down (dashed) and after
+  \draw[guide] (\xr+0.12,\js+0.5) -- (\xr+1.05,\js+0.5);
+  \draw[dimtick] (\xr+0.12,\js) -- (\xr+1.05,\js);
+  \draw[dim] (\xr+0.95,\js) -- node[anchor=west,cSteel,align=left] {spring stretches\\ a further $2x$} (\xr+0.95,\js+0.5);
+\end{tikzpicture}

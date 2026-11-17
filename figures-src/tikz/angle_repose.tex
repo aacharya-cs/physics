@@ -1,0 +1,44 @@
+% angle_repose: a block on the verge of sliding at the angle of repose (Ch 9, fig:repose)
+% Drawn with theta_r = 30 degrees (so mu_s = tan 30 = 0.577) and the forces to scale:
+%   mg = 2.4 cm,  N = mg cos(theta_r),  limiting friction mu_s N = mg sin(theta_r).
+% N and mu_s N act at the contact; their resultant R (the total contact force) is
+% vertical and equal to mg, so it leans from the normal by lambda = theta_r: the
+% angle of friction and the angle of repose are the same angle.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\th{30}
+  \def\Lb{8.6}                                  % base of the incline
+  \def\W{2.4}                                   % mg, in cm
+  \def\s{4.8}                                   % block's contact point, along the slope
+  \pgfmathsetmacro\Hh{\Lb*tan(\th)}
+  % incline and the floor
+  \path[ground,draw=none] (-0.35,-0.14) rectangle (\Lb+0.35,0);
+  \fill[cSlope] (0,0) -- (\Lb,0) -- (\Lb,\Hh) -- cycle;
+  \draw[outline] (-0.35,0) -- (\Lb+0.35,0);
+  \draw[outline] (0,0) -- (\Lb,\Hh) -- (\Lb,0);
+  % theta_r at the foot of the incline
+  \draw[angle arc] (1.15,0) arc[start angle=0,end angle=\th,radius=1.15];
+  \node at (\th/2:1.5) {$\theta_r$};
+  % the block, in the slope's own frame
+  \coordinate (P) at (\th:\s);                  % contact point (centre of the base)
+  \begin{scope}[shift={(P)},rotate=\th]
+    \draw[body] (-0.75,0) rectangle (0.75,0.95);
+    \coordinate (C) at (0,0.475);               % centre of mass
+  \end{scope}
+  % contact forces at P, to scale, and their resultant R (dashed: a resultant, not a
+  % separate force)
+  \pgfmathsetmacro\Nl{\W*cos(\th)}
+  \pgfmathsetmacro\fl{\W*sin(\th)}
+  \coordinate (Nt) at ($(P)+(90+\th:\Nl)$);
+  \coordinate (ft) at ($(P)+(\th:\fl)$);
+  \coordinate (Rt) at ($(P)+(0,\W)$);
+  \draw[parallelogram] (Nt) -- (Rt) -- (ft);
+  \draw[force,resultant] (P) -- (Rt) node[anchor=south] {$R$};
+  \draw[force] (P) -- (Nt) node[anchor=south east,inner sep=1pt] {$N$};
+  \draw[applied] (P) -- (ft) node[anchor=north west,inner sep=2pt] {$\mu_s N$};
+  % lambda: how far the contact force leans from the normal
+  \draw[angle arc] ($(P)+(90:1.5)$) arc[start angle=90,end angle=90+\th,radius=1.5];
+  \node at ($(P)+(90+\th/2:1.8)$) {$\lambda$};
+  % weight at the centre of mass
+  \draw[force] (C) -- ++(0,-\W) node[anchor=west,inner sep=2pt,pos=0.9] {$mg$};
+  \node[contact point] at (P) {};
+\end{tikzpicture}

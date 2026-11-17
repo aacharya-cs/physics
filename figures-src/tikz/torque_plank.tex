@@ -1,0 +1,33 @@
+% torque_plank: a uniform plank on two end supports with a person standing on it
+% (Ch 14, fig:plank).  Plank 4 m long drawn at 2 cm per metre; supports A (x=0)
+% and B (x=8 cm).  Person's weight 600 N at 1 m from A (x=2), plank's weight
+% 200 N at its centre (x=4).  Reactions from moments: N_A = 550 N, N_B = 250 N.
+% Arrow lengths are proportional to the forces, 0.0025 cm per newton.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\h{0.2}   % plank thickness
+  % supports and ground
+  \foreach \x in {0,8}{
+    \filldraw[fill=cRock,draw=cInk,thin line] (\x,0) -- (\x-0.3,-0.55) -- (\x+0.3,-0.55) -- cycle;
+    \draw[ground] (\x-0.6,-0.55) -- (\x+0.6,-0.55);}
+  \node[anchor=east,inner sep=2pt] at (-0.32,-0.3) {$A$};
+  \node[anchor=west,inner sep=2pt] at (8.32,-0.3) {$B$};
+  % the plank
+  \draw[body] (-0.25,0) rectangle (8.25,\h);
+  \pic at (4,0.5*\h) {cm};
+  % reactions, drawn up from the supports through the plank
+  \draw[force] (0,\h) -- ++(0,1.375) node[anchor=south,cCrim] {$N_A$};
+  \draw[force] (8,\h) -- ++(0,0.625) node[anchor=south,cCrim] {$N_B$};
+  % weights
+  \draw[force] (4,0.5*\h) -- ++(0,-0.5) node[anchor=west,inner sep=2pt,cCrim] {\SI{200}{N}};
+  \draw[force] (2,\h+1.5) -- (2,\h) ;
+  \node[anchor=south,cCrim] at (2,\h+1.5) {\SI{600}{N} (person)};
+  % distances from A
+  \def\yd{-1.25}
+  \draw[dimtick] (0,-0.6) -- (0,\yd-0.15);
+  \draw[dimtick] (2,-0.05) -- (2,\yd-0.15);
+  \draw[dimtick] (4,-0.62) -- (4,\yd-0.15);
+  \draw[dimtick] (8,-0.6) -- (8,\yd-0.15);
+  \draw[dim] (0,\yd) -- node[below,cSteel] {\SI{1}{m}} (2,\yd);
+  \draw[dim] (2,\yd) -- node[below,cSteel] {\SI{1}{m}} (4,\yd);
+  \draw[dim] (4,\yd) -- node[below,cSteel] {\SI{2}{m}} (8,\yd);
+\end{tikzpicture}

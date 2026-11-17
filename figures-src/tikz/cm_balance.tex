@@ -1,0 +1,33 @@
+% cm_balance: the centre of mass is the balance point (Ch 13, fig:cmbalance)
+% Masses m at x = 0 and 3m at x = L (L = 7 cm drawn).  x_cm = (m*0 + 3m*L)/(4m)
+% = 3L/4, so d1 = 3L/4 = 5.25 cm and d2 = L/4 = 1.75 cm: d1 = 3 d2, the pivot
+% sits closer to the heavier body in inverse proportion to the masses.
+% Ball radii go as the cube root of the mass (same density).
+% CM symbol: a circle with two opposite quarters filled.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\L{7}
+  \pgfmathsetmacro\xc{3*\L/4}
+  \def\ra{0.32}
+  \pgfmathsetmacro\rb{\ra*3^(1/3)}
+  % plank on its pivot
+  \filldraw[fill=cRock,draw=cInk,thin line] (\xc,0) -- (\xc-0.32,-0.62) -- (\xc+0.32,-0.62) -- cycle;
+  \draw[ground] (\xc-0.75,-0.62) -- (\xc+0.75,-0.62);
+  \filldraw[fill=cMoon,draw=cInk,thin line] (-0.7,0) rectangle (\L+0.7,0.16);
+  % the two masses
+  \draw[moon] (0,0.16+\ra) circle[radius=\ra];
+  \node at (0,0.16+\ra) {$m$};
+  \draw[moon] (\L,0.16+\rb) circle[radius=\rb];
+  \node at (\L,0.16+\rb) {$3m$};
+  % distances to the balance point
+  \def\yd{1.45}
+  \draw[dimtick] (0,0.16+2*\ra+0.08) -- (0,\yd+0.15);
+  \draw[dimtick] (\xc,0.24) -- (\xc,\yd+0.15);
+  \draw[dimtick] (\L,0.16+2*\rb+0.08) -- (\L,\yd+0.15);
+  \draw[dim] (0,\yd) -- node[above,cSteel] {$d_1$} (\xc,\yd);
+  \draw[dim] (\xc,\yd) -- node[above,cSteel] {$d_2$} (\L,\yd);
+  % the centre of mass at the pivot
+  \pic at (\xc,0.08) {cm};
+  \draw[leader] (\xc+0.12,-0.05) -- (\xc+0.8,-0.42);
+  \node[anchor=north west,align=left,inner sep=1pt] at (\xc+0.8,-0.27) {centre of mass,\\ the balance point};
+  \node[anchor=north west] at (-0.2,-0.14) {$m\,d_1=3m\,d_2$, so $d_1=3d_2$};
+\end{tikzpicture}

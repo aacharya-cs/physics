@@ -1,0 +1,38 @@
+% grav_well: the potential well U = -GMm/r and three total energies (Ch 16, fig:gravwell)
+% Units: r in arbitrary length, U in GMm/(that length), so U = -1/r.
+% The bound energy E = -0.45 has its turning point where U = E: r_t = 1/0.45 = 2.22.
+% Beyond r_t the line is dotted: there K = E - U would be negative, so the body
+% cannot be there.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=7.6cm, height=6.2cm,
+    xmin=0, xmax=4.2, ymin=-2.4, ymax=0.8,
+    axis x line=middle, axis y line=left,
+    xlabel={$r$}, ylabel={energy},
+    xlabel style={at={(axis cs:4.2,0)},anchor=south east,yshift=1pt},
+    ylabel style={at={(axis description cs:-0.04,0.5)}}]
+  \def\Eb{-0.45}
+  \pgfmathsetmacro\rt{-1/\Eb}
+  % the well
+  \addplot[cPlum,domain=0.42:4.1,samples=150] {-1/x};
+  \node[cPlum,anchor=west] at (axis cs:0.62,-1.95) {$U=-\dfrac{GMm}{r}$};
+  % E > 0: allowed everywhere
+  \addplot[cPlum,thin line,dash pattern=on 5pt off 3pt,domain=0.05:4.1,samples=2] {0.4};
+  % E < 0: allowed inside the turning point, forbidden beyond it
+  \addplot[cPlum,construction,domain=0.05:\rt,samples=2] {\Eb};
+  \addplot[cPlum,thin line,dotted,domain=\rt:4.1,samples=2] {\Eb};
+  \node[dot,cPlum] at (axis cs:\rt,\Eb) {};
+  \draw[leader,cPlum] (axis cs:\rt,\Eb) -- (axis cs:2.75,-1.0)
+    node[anchor=north,font=\footnotesize,align=center] {turning point\\ $K=0$};
+  % kinetic energy as the gap between E and U, at r = 1
+  \draw[dim,cAcc] (axis cs:1,-1) -- node[anchor=west,font=\footnotesize,fill=white,inner sep=1pt]
+    {$K=E-U$} (axis cs:1,\Eb);
+  % labels at the right, level with each line
+  \node[cPlum,anchor=west,align=left,font=\footnotesize] at (axis cs:4.25,0.4)
+    {$E>0$: escapes with\\ speed to spare};
+  \node[anchor=west,align=left,font=\footnotesize] at (axis cs:4.25,-0.02)
+    {$E=0$ (the axis): just escapes};
+  \node[cPlum,anchor=west,align=left,font=\footnotesize] at (axis cs:4.25,\Eb-0.05)
+    {$E<0$: bound; cannot\\ pass the turning point};
+\end{axis}
+\end{tikzpicture}

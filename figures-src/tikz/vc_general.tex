@@ -1,0 +1,46 @@
+% vc_general: the general position in a vertical circle (Ch 10, fig:vcgen)
+% String of length R, speed u at the lowest point, theta measured from the lowest
+% point, here theta = 50 degrees.  The bob moves anticlockwise (u points right at the
+% bottom).  Height risen h = R(1 - cos theta).  Forces on the bob: T inward along the
+% string, mg down; mg is resolved into mg cos(theta) along the OUTWARD radius and
+% mg sin(theta) along the tangent, opposing the motion (dashed: components, not
+% extra forces).  v is tangential.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{3.1}
+  \def\th{50}
+  \def\W{1.35}                                      % length of the mg arrow
+  \coordinate (O) at (0,0);
+  \coordinate (B) at (0,-\R);                       % lowest point
+  \coordinate (P) at (-90+\th:\R);                  % the bob
+  % the circle
+  \draw[orbitpath] (O) circle[radius=\R];
+  % vertical through O and the angle theta
+  \draw[guide] (O) -- (B);
+  \draw[angle arc] (0,-0.62) arc[start angle=-90,end angle=-90+\th,radius=0.62];
+  \node at (-90+\th/2:0.88) {$\theta$};
+  % the string
+  \draw[cInk,thin line] (O) -- node[pos=0.33,anchor=south west,inner sep=1.5pt] {$R$} (P);
+  \node[dot] at (O) {};
+  \node[anchor=south] at (0,0.05) {$O$};
+  % height risen
+  \draw[dimtick] (P) -- (-0.55,{-\R*cos(\th)});
+  \draw[dimtick] (B) -- (-0.55,-\R);
+  \draw[dim] (-0.4,-\R) -- node[anchor=east,cSteel] {$h$} (-0.4,{-\R*cos(\th)});
+  % launch speed at the bottom
+  \draw[velocity] (B) -- ++(1.05,0) node[anchor=north,pos=0.6] {$u$};
+  \node[dot] at (B) {};
+  % components of the weight (dashed)
+  \draw[component,cCrim]
+    (P) -- ++(-90+\th:{\W*cos(\th)}) coordinate (Wr);
+  \draw[component,cCrim]
+    (P) -- ++(180+\th:{\W*sin(\th)}) coordinate (Wt);
+  \draw[parallelogram] (Wr) -- ($(P)+(0,-\W)$) -- (Wt);
+  \node[cCrim,anchor=north west,inner sep=1pt] at (Wr) {$mg\cos\theta$};
+  \node[cCrim,anchor=south east,knockout] at (Wt) {$mg\sin\theta$};
+  % forces and velocity on the bob
+  \draw[force] (P) -- ++(0,-\W) node[anchor=north] {$mg$};
+  \draw[force] (P) -- ($(P)!0.42!(O)$) node[anchor=south west,inner sep=1.5pt] {$T$};
+  \draw[velocity] (P) -- ++(\th:1.0) node[anchor=south west,inner sep=1pt] {$v$};
+  \shade[ball color=cBlock] (P) circle[radius=0.12];
+  \draw[cSteel,thin line] (P) circle[radius=0.12];
+\end{tikzpicture}

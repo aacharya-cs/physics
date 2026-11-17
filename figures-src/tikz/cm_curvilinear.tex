@@ -1,0 +1,39 @@
+% cm_curvilinear: tangential and normal acceleration on any curved path (Ch 6, fig:curvi)
+% Path y = f(x) = 1.6 cos(0.7x) + 0.2x (units of 1.45 cm), travelled left to right.
+% At x0 = -0.6 the circle of curvature is exact:
+%   R = (1 + f'^2)^{3/2} / |f''|  (= 2.39 units),  centre = P + R n,
+% n the unit normal on the concave side.  The body is speeding up, so a has a
+% component a_t along v (1.1 cm) and a_n towards the centre (1.5 cm), drawn
+% head to tail so that a_t does not hide v.
+\begin{tikzpicture}[x=1.45cm,y=1.45cm]
+  \def\xo{-0.6}
+  \pgfmathsetmacro\yo{1.6*cos(0.7*\xo r)+0.2*\xo}
+  \pgfmathsetmacro\fp{-1.12*sin(0.7*\xo r)+0.2}
+  \pgfmathsetmacro\fpp{-0.784*cos(0.7*\xo r)}
+  \pgfmathsetmacro\Rc{(1+\fp*\fp)^1.5/abs(\fpp)}
+  \pgfmathsetmacro\ang{atan(\fp)}            % direction of v
+  \pgfmathsetmacro\nang{\ang-90}             % inward normal (curve is concave down)
+  \coordinate (P) at (\xo,\yo);
+  \coordinate (K) at ($(P)+(\nang:\Rc)$);
+  % circle of curvature and its radius
+  \draw[orbitpath] (K) circle[radius=\Rc];
+  \draw[guide] (P) -- (K);
+  \node[anchor=west,cSteel,inner sep=3pt] at ($(P)!0.82!(K)$) {$R$};
+  \node[point mass,fill=cSteel] at (K) {};
+  \node[anchor=north,cSteel,font=\footnotesize] at ($(K)+(0,-0.06)$) {centre of curvature};
+  % the path
+  \draw[cInk!75,curve] plot[domain=-3.3:3.6,samples=120] (\x,{1.6*cos(0.7*\x r)+0.2*\x});
+  % v, a and its components
+  \draw[velocity] (P) -- ++(\ang:2.1cm) node[anchor=south,cFor,inner sep=2pt] {$\vv$};
+  \coordinate (An) at ($(P)+(\nang:1.5cm)$);
+  \coordinate (A)  at ($(An)+(\ang:1.1cm)$);
+  \draw[component,cPrim] (P) -- (An);
+  \draw[component,cPrim] (An) -- (A);
+  \draw[accel] (P) -- (A) node[anchor=south west,cPrim,inner sep=1pt] {$\va$};
+  \node[dot] at (P) {};
+  % labels for the components
+  \node[cPrim,anchor=north east,align=right,inner sep=1pt] at ($(An)+(-0.06,-0.02)$)
+    {$a_n=v^2/R$\\[-1pt] {\footnotesize bends}\\[-2pt] {\footnotesize the path}};
+  \node[cPrim,anchor=north west,align=left,inner sep=1pt] at ($(An)!0.5!(A)+(0.12,-0.04)$)
+    {$a_t$\\[-1pt] {\footnotesize changes the speed}};
+\end{tikzpicture}

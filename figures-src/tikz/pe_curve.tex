@@ -1,0 +1,51 @@
+% pe_curve: force from the slope of U(x); stable and unstable equilibria (Ch 11, fig:pecurve)
+% U is chosen so that dU/dx = (x-1)(x-2.6)(x-4), i.e.
+%   U = x^4/4 - (7.6/3)x^3 + 8.5x^2 - 10.4x + 25.1/6     (so U(1) = 0).
+% Equilibria (dU/dx = 0): x = 1 (minimum, U = 0), x = 2.6 (maximum, U = 1.502),
+% x = 4 (minimum, U = 0.45).  U''(1) = 4.8 > 0, U''(2.6) = -2.24 < 0, U''(4) = 4.2 > 0.
+% The row of arrows shows the direction of F = -dU/dx at sample points: always
+% downhill, so towards each minimum and away from the maximum.
+% Dashed: the parabola U(1) + (1/2)U''(1)(x-1)^2 = 2.4(x-1)^2 that matches the
+% curve near the left minimum (the "spring" approximation, k = U''(1)).
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=11.3cm, height=6.6cm,
+    xmin=0, xmax=5.15, ymin=-1.0, ymax=2.9,
+    xlabel={position $x$}, ylabel={potential energy $U$},
+    ylabel style={at={(axis description cs:0,1)},anchor=south west,rotate=-90,
+      xshift=-4pt,yshift=1pt}]
+  % equilibria: guides down to the force row
+  \draw[guide] (axis cs:1,-0.62) -- (axis cs:1,0);
+  \draw[guide] (axis cs:2.6,-0.62) -- (axis cs:2.6,1.502);
+  \draw[guide] (axis cs:4,-0.62) -- (axis cs:4,0.45);
+  % the small-oscillation parabola at the left minimum
+  \addplot[cPlum,thin line,dash pattern=on 3pt off 2pt,domain=0.36:1.74,samples=40]
+    {2.4*(x-1)^2};
+  % the potential energy
+  \addplot[cPlum,domain=0.3:4.8,samples=160]
+    {x^4/4-(7.6/3)*x^3+8.5*x^2-10.4*x+25.1/6};
+  % equilibrium points: filled = stable, open = unstable
+  \node[stable point] at (axis cs:1,0) {};
+  \node[stable point] at (axis cs:4,0.45) {};
+  \node[unstable point] at (axis cs:2.6,1.502) {};
+  \node[anchor=south] at (axis cs:2.6,1.60) {unstable};
+  \node[anchor=north west,inner sep=1pt] at (axis cs:4.04,0.38) {stable};
+  \node[anchor=north east,inner sep=1pt] at (axis cs:0.96,-0.06) {stable};
+  \draw[leader,cPlum] (axis cs:1.66,1.07) -- (axis cs:1.52,2.12)
+    node[anchor=south,align=center,inner sep=1pt]
+      {near a minimum,\\ $U\approx\tfrac12kx^2$};
+  % the force row: direction of F = -dU/dx
+  \draw[force,-smallhead] (axis cs:0.34,-0.62) -- (axis cs:0.56,-0.62);
+  \draw[force,-smallhead] (axis cs:0.61,-0.62) -- (axis cs:0.83,-0.62);
+  \draw[force,-smallhead] (axis cs:1.39,-0.62) -- (axis cs:1.17,-0.62);
+  \draw[force,-smallhead] (axis cs:1.69,-0.62) -- (axis cs:1.47,-0.62);
+  \draw[force,-smallhead] (axis cs:2.01,-0.62) -- (axis cs:1.79,-0.62);
+  \draw[force,-smallhead] (axis cs:2.33,-0.62) -- (axis cs:2.11,-0.62);
+  \draw[force,-smallhead] (axis cs:2.87,-0.62) -- (axis cs:3.09,-0.62);
+  \draw[force,-smallhead] (axis cs:3.19,-0.62) -- (axis cs:3.41,-0.62);
+  \draw[force,-smallhead] (axis cs:3.51,-0.62) -- (axis cs:3.73,-0.62);
+  \draw[force,-smallhead] (axis cs:4.49,-0.62) -- (axis cs:4.27,-0.62);
+  \draw[force,-smallhead] (axis cs:4.77,-0.62) -- (axis cs:4.55,-0.62);
+  \node[cCrim,anchor=west] at (axis cs:4.84,-0.62) {$F$};
+\end{axis}
+\end{tikzpicture}

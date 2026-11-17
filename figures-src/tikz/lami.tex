@@ -1,0 +1,43 @@
+% lami: three concurrent forces in equilibrium and their closed triangle (Ch 7, fig:lami)
+% Directions: F1 at 90 deg, F2 at 215 deg, F3 at 330 deg.  The angles between them are
+%   alpha (F2,F3) = 115,  beta (F3,F1) = 120,  gamma (F1,F2) = 125 degrees.
+% Magnitudes that close the triangle, with F1 = 2.6 cm, follow from Lami's theorem:
+%   F2 = F1 sin(beta)/sin(alpha) = 0.956 F1,   F3 = F1 sin(gamma)/sin(alpha) = 0.904 F1
+% (equivalently from F1 + F2 + F3 = 0).  In the triangle the interior angle opposite
+% F1 is pi - alpha = 65 degrees.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\Fo{2.6}
+  \def\al{115}\def\be{120}\def\ga{125}
+  \pgfmathsetmacro\Ft{\Fo*sin(\be)/sin(\al)}
+  \pgfmathsetmacro\Fh{\Fo*sin(\ga)/sin(\al)}
+  % ---- left: the forces acting at one point
+  \coordinate (O) at (0,0);
+  \draw[angle arc] (215:0.5) arc[start angle=215,end angle=330,radius=0.5];
+  \draw[angle arc] (-30:0.62) arc[start angle=-30,end angle=90,radius=0.62];
+  \draw[angle arc] (90:0.62) arc[start angle=90,end angle=215,radius=0.62];
+  \node at (272.5:0.78) {$\alpha$};
+  \node at (30:0.9) {$\beta$};
+  \node at (152.5:0.9) {$\gamma$};
+  \draw[force] (O) -- (90:\Fo) node[anchor=south] {$\vF_1$};
+  \draw[vector,cAcc] (O) -- (215:\Ft) node[anchor=north east,inner sep=1pt] {$\vF_2$};
+  \draw[vector,cTeal] (O) -- (330:\Fh) node[anchor=north west,inner sep=1pt] {$\vF_3$};
+  \node[dot] at (O) {};
+  % ---- right: the same three, head to tail
+  \begin{scope}[shift={(5.9,-0.95)}]
+    \coordinate (P0) at (0,0);
+    \coordinate (P1) at ($(P0)+(90:\Fo)$);
+    \coordinate (P2) at ($(P1)+(215:\Ft)$);
+    % interior angle opposite F1
+    \draw[angle arc] ($(P2)+(-30:0.5)$) arc[start angle=-30,end angle=35,radius=0.5];
+    \node[anchor=west,inner sep=1pt] at ($(P2)+(2.5:0.58)$) {$\pi-\alpha$};
+    % small gaps at the joints so every head stays visible
+    \begin{scope}[shorten <=1.2pt,shorten >=1.2pt]
+    \draw[force] (P0) -- (P1);
+    \draw[vector,cAcc] (P1) -- (P2);
+    \draw[vector,cTeal] (P2) -- (P0);
+    \end{scope}
+    \node[cCrim,anchor=west] at ($(P0)!0.5!(P1)$) {$\vF_1$};
+    \node[cAcc,anchor=south east,inner sep=1pt] at ($(P1)!0.5!(P2)$) {$\vF_2$};
+    \node[cTeal,anchor=north east,inner sep=1pt] at ($(P2)!0.5!(P0)$) {$\vF_3$};
+  \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,38 @@
+% gr_curvature: the "rubber sheet" picture of curved geometry (Ch 16, fig:curv)
+% A square grid on the surface  z = -A / (1 + r^2/s^2),  A = 1.1, s = 0.75,
+% flat far from the mass, in oblique view: screen (X, Y) = (x, 0.62 y + z).
+% The sheet is drawn as
+% opaque cells from the back row to the front (painter's order), so the near
+% wall of the dip correctly hides what lies behind it.
+% Path of a passing body: in the (x, y) plane y = 1.08 - 0.40 (1 + x/sqrt(x^2 + 0.4)),
+% straight far away on either side and bent towards the mass as it passes,
+% then lifted onto the sheet.  The dashed line is the straight path it would
+% have followed with no mass present.  An analogy only: see the caption.
+\begin{tikzpicture}[x=19mm,y=19mm]
+  \def\P#1#2{{0.62*(#2)-1.1/(1+((#1)*(#1)+(#2)*(#2))/0.5625)}}
+  \def\cell#1#2{% #1 = column index, #2 = row index
+    \pgfmathsetmacro\xa{-3+0.375*#1}\pgfmathsetmacro\xb{\xa+0.375}%
+    \pgfmathsetmacro\ya{-1.8+0.36*#2}\pgfmathsetmacro\yb{\ya+0.36}%
+    \filldraw[fill=cSlope,draw=cSteel,hair line]
+      plot[domain=\xa:\xb,samples=5,variable=\t] ({\t},\P{\t}{\ya})
+      -- plot[domain=\ya:\yb,samples=5,variable=\t] ({\xb},\P{\xb}{\t})
+      -- plot[domain=\xb:\xa,samples=5,variable=\t] ({\t},\P{\t}{\yb})
+      -- plot[domain=\yb:\ya,samples=5,variable=\t] ({\xa},\P{\xa}{\t}) -- cycle;}
+  % back half of the sheet
+  \foreach \j in {9,...,5}{\foreach \i in {0,...,15}{\cell{\i}{\j}}}
+  % front half of the sheet
+  \foreach \j in {4,...,0}{\foreach \i in {0,...,15}{\cell{\i}{\j}}}
+  % the mass, at the bottom of the dip
+  \draw[planet,fill=cSun] (0,-1.1+0.22) circle[radius=0.22];
+  \node at (0,-1.1+0.22) {$M$};
+  % the straight path the body would take with no mass present
+  \draw[guide,cPrim] plot[domain=-3:3,samples=60,variable=\x] ({\x},\P{\x}{1.08});
+  % the actual path, bent towards the mass
+  \draw[cPrim,curve,-bookhead] plot[domain=-3:3,samples=100,variable=\x]
+    ({\x},\P{\x}{1.08-0.40*(1+\x/sqrt(\x*\x+0.4))});
+  % labels
+  \draw[leader,cPrim] (-2.3,{0.62*1.08-0.05}) -- (-2.1,1.22)
+    node[anchor=south,inner sep=1pt] {path of a passing body};
+  \node[cPrim,anchor=west,font=\footnotesize,align=left] at (3.06,0.55)
+    {straight path\\ with no mass};
+\end{tikzpicture}

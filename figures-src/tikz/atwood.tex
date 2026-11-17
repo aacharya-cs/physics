@@ -1,0 +1,38 @@
+% atwood: the Atwood machine (Ch 8, fig:atwood)
+% Two masses m1 > m2 on a light inextensible string over a light frictionless
+% pulley fixed to the ceiling.  m1 falls and m2 rises with the same |a|.
+% Force arrows are drawn to scale for m1 = 1.5 m2:
+%   m1 g = 1.5, m2 g = 1, T = 2 m1 m2 g/(m1 + m2) = 1.2   (units of m2 g)
+% so the figure shows T < m1 g (m1 accelerates down) and T > m2 g (m2 up).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\r{0.58}                         % pulley radius
+  \def\yc{-0.95}                       % pulley centre
+  \def\u{0.55}                         % cm per m2 g
+  \def\ytwo{-2.55}                     % top of m2
+  \def\yone{-3.25}                     % top of m1
+  % ceiling
+  \path[ground,draw=none] (-1.7,0) rectangle (1.7,0.16);
+  \draw[outline] (-1.7,0) -- (1.7,0);
+  % pulley, string over it
+  \draw[outline,fill=cMoon] (0,\yc) circle[radius=\r];
+  \draw[cSteel,hair line] (0,\yc) circle[radius=\r-0.09];
+  \draw[cInk,thin line] (-\r,\yone) -- (-\r,\yc) arc[start angle=180,end angle=0,radius=\r]
+    -- (\r,\ytwo);
+  % strap holding the axle (in front of the string)
+  \draw[cInk,thin line,fill=cRock] (-0.12,0) -- (0.12,0) -- (0.055,\yc) -- (-0.055,\yc) -- cycle;
+  \node[point mass] at (0,\yc) {};
+  % m1 (heavier, larger) on the left, m2 on the right
+  \draw[body] (-\r-0.42,\yone-0.66) rectangle (-\r+0.42,\yone);
+  \node at (-\r,\yone-0.33) {$m_1$};
+  \draw[body] (\r-0.34,\ytwo-0.54) rectangle (\r+0.34,\ytwo);
+  \node at (\r,\ytwo-0.27) {$m_2$};
+  % forces on m1
+  \draw[force] (-\r,\yone) -- ++(0,1.2*\u) node[anchor=east,pos=0.6,xshift=-1pt] {$T$};
+  \draw[force] (-\r,\yone-0.66) -- ++(0,-1.5*\u) node[anchor=north] {$m_1g$};
+  % forces on m2
+  \draw[force] (\r,\ytwo) -- ++(0,1.2*\u) node[anchor=west,pos=0.6,xshift=1pt] {$T$};
+  \draw[force] (\r,\ytwo-0.54) -- ++(0,-1.0*\u) node[anchor=north] {$m_2g$};
+  % accelerations, beside each block
+  \draw[accel] (-1.55,\yone-0.05) -- ++(0,-0.65) node[anchor=north,cPrim] {$a$};
+  \draw[accel] (1.55,\ytwo-0.6) -- ++(0,0.65) node[anchor=south,cPrim] {$a$};
+\end{tikzpicture}

@@ -1,0 +1,62 @@
+% cm_dthat: the two halves of Step 3 (Ch 6, fig:dthat)
+% d(theta) is exaggerated to 36 degrees so the geometry can be seen.
+% (a) Circle R = 2.2 cm; radii at -15 and 21 degrees; unit tangents (drawn 1.15 cm)
+%     at 90 degrees to each radius.  A copy of t(t) carried to the second point
+%     makes the angle dtheta with t(t+dt): the tangent turns as much as the radius.
+% (b) The two unit tangents placed tail to tail (unit = 2.7 cm), apex angle dtheta.
+%     The bisector meets the base at right angles and halves it, so
+%     |d t-hat| = 2 sin(dtheta/2), which tends to the arc length dtheta.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\dth{36}
+  % ------------------------------------------------------------------ (a) ---
+  \begin{scope}
+    \def\R{2.2}\def\ta{-15}
+    \pgfmathsetmacro\tb{\ta+\dth}
+    \coordinate (C) at (0,0);
+    \coordinate (P1) at (\ta:\R);
+    \coordinate (P2) at (\tb:\R);
+    \draw[outline] (-50:\R) arc[start angle=-50,end angle=46,radius=\R];
+    \draw[thin line,cInk] (C) -- (P1) (C) -- (P2);
+    \node[dot] at (C) {};
+    % angle turned by the radius
+    \draw[angle arc] (\ta:0.7) arc[start angle=\ta,end angle=\tb,radius=0.7];
+    \node at (\ta+\dth/2:0.98) {$d\theta$};
+    % right angles between radius and tangent
+    \foreach \p/\a in {P1/\ta, P2/\tb}
+      \draw[right angle] ($(\p)+(\a:-0.2)$) -- ++(\a+90:0.2) -- ++(\a:0.2);
+    % a copy of t(t) carried to P2, to compare directions
+    \draw[guide] (P2) -- ++(\ta+90:1.25);
+    \draw[angle arc] ($(P2)+(\ta+90:0.62)$) arc[start angle=\ta+90,end angle=\tb+90,radius=0.62];
+    \node at ($(P2)+(\ta+90+\dth/2:0.9)$) {$d\theta$};
+    % the unit tangents
+    \draw[velocity] (P1) -- ++(\ta+90:1.15) node[anchor=west,cFor,inner sep=2pt] {$\uhat{t}(t)$};
+    \draw[velocity,ghost] (P2) -- ++(\tb+90:1.15) coordinate (T2);
+    \node[anchor=south east,cFor,inner sep=1pt] at (T2) {$\uhat{t}(t+dt)$};
+    \node[anchor=north,align=center] at (0.6,-2.0)
+      {(a)\enspace the tangent is locked at $90^\circ$ to the radius,\\ so it turns through the same $d\theta$};
+  \end{scope}
+  % ------------------------------------------------------------------ (b) ---
+  \begin{scope}[shift={(6.6,-1.5)}]
+    \def\u{2.7}\def\ta{20}
+    \pgfmathsetmacro\tb{\ta+\dth}
+    \coordinate (O) at (0,0);
+    \coordinate (A) at (\ta:\u);
+    \coordinate (B) at (\tb:\u);
+    \coordinate (M) at ($(A)!0.5!(B)$);
+    \draw[guide] (\ta-3:\u) arc[start angle=\ta-3,end angle=\tb+3,radius=\u];
+    \draw[guide] (O) -- (M);
+    \draw[right angle] ($(M)!0.17!(O)$) -- ++(\ta+\dth/2+90:-0.17)
+      coordinate (q) -- ($(M)!0.17!(A)$);
+    \draw[velocity] (O) -- (A) node[anchor=west,cFor,inner sep=4pt] {$\uhat{t}(t)$};
+    \draw[velocity,ghost] (O) -- (B);
+    \node[anchor=south east,cFor,inner sep=3pt] at (B) {$\uhat{t}(t+dt)$};
+    \draw[accel] (A) -- (B);
+    \node[cPrim,anchor=west] at ($(M)+(\ta+\dth/2:0.3)$) {$d\uhat{t}$};
+    \node[anchor=north west,inner sep=1pt] at ($(O)!0.55!(A)$) {$1$};
+    \node[anchor=south east,inner sep=1pt] at ($(O)!0.55!(B)$) {$1$};
+    \draw[angle arc] (\ta:0.8) arc[start angle=\ta,end angle=\tb,radius=0.8];
+    \node at (\ta+\dth/2:1.1) {$d\theta$};
+    \node[anchor=north,align=center] at (1.6,-0.5)
+      {(b)\enspace tail to tail: two sides of length $1$,\\ apex angle $d\theta$, base $d\uhat{t}$};
+  \end{scope}
+\end{tikzpicture}

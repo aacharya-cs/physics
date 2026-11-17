@@ -1,0 +1,55 @@
+% torque_door: a door seen from above, hinge axis out of the page (Ch 14, fig:torque)
+% The door runs from the hinge O a distance r = 2.0 cm (drawn) to its free edge P.
+% (a) F perpendicular to the door at P: the moment arm r_perp = r, largest torque.
+% (b) F at P at theta = 40 deg to the door: the line of action, extended, passes the
+%     hinge at r_perp = r sin(theta); the foot of the perpendicular from O is
+%     P - r cos(theta) u, with u the unit vector along F.
+% (c) F along the door, or F applied at the hinge: the line of action passes through
+%     the axis, r_perp = 0, no torque.
+% The sense of turning in (a), (b) is anticlockwise seen from above (torque out of the page).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\r{2.0}   % door length
+  \def\t{0.09}  % half thickness of the door
+  % one door: wall, door leaf, hinge (axis out of the page), label O
+  \def\door{%
+    \draw[ground] (-0.62,-0.1) rectangle (-0.13,0.1);
+    \draw[body] (0,-\t) rectangle (\r,\t);
+    \pic at (0,0) {out of page};
+    \node[anchor=north,inner sep=2pt] at (0,-0.14) {$O$};}
+  % ------------------------------------------------------------ (a) best
+  \begin{scope}
+    \door
+    \draw[force] (\r,\t) -- (\r,1.3) node[anchor=south] {$\vF$};
+    \draw[dim] (0,-0.62) -- node[anchor=north,cSteel] {$r_\perp=r$} (\r,-0.62);
+    \draw[dimtick] (\r,-\t-0.05) -- (\r,-0.75);
+    \draw[rotation] (20:0.62) arc[start angle=20,end angle=95,radius=0.62];
+    \node[anchor=north,font=\footnotesize,align=center] at (1.0,-1.25) {at the edge, square on:\\ largest torque};
+  \end{scope}
+  % ------------------------------------------------------------ (b) at an angle
+  \begin{scope}[shift={(3.45,0)}]
+    \door
+    \def\th{40}
+    \pgfmathsetmacro\fx{\r*sin(\th)*sin(\th)}       % foot of the perpendicular from O
+    \pgfmathsetmacro\fy{-\r*sin(\th)*cos(\th)}
+    % the line of action, extended back past the hinge
+    \draw[guide] ({\fx-0.3*cos(\th)},{\fy-0.3*sin(\th)}) -- (\r,0);
+    \draw[guide] (\r,0) -- (\r+0.7,0);
+    % r_perp, perpendicular to the line of action, with its right angle
+    \draw[dim] (0,0) -- (\fx,\fy);
+    \node[cSteel,anchor=north east,inner sep=1pt] at (0.5*\fx,0.5*\fy) {$r_\perp$};
+    \draw[right angle] ($(\fx,\fy)+(180+\th:0.17)$) -- ++(90+\th:0.17) -- ++(\th:0.17);
+    % the force and its angle to the door
+    \draw[force] (\r,0) -- ++(\th:1.2) node[anchor=south west,inner sep=1pt] {$\vF$};
+    \draw[angle arc] (\r+0.5,0) arc[start angle=0,end angle=\th,radius=0.5];
+    \node at ($(\r,0)+(\th/2:0.72)$) {$\theta$};
+    \draw[rotation] (20:0.62) arc[start angle=20,end angle=95,radius=0.62];
+    \node[anchor=north,font=\footnotesize,align=center] at (1.0,-1.25) {at an angle:\\ $r_\perp=r\sin\theta$};
+  \end{scope}
+  % ------------------------------------------------------------ (c) none
+  \begin{scope}[shift={(7.25,0)}]
+    \door
+    \draw[force] (\r+1.15,0) -- (\r+0.04,0) node[pos=0.3,anchor=south,inner sep=3pt] {$\vF$};
+    \draw[force] (0,\t+0.08) -- (0,1.3) node[anchor=south] {$\vF$};
+    \node[anchor=north,font=\footnotesize,align=center] at (1.0,-1.25) {along the door or at the\\ hinge: no torque};
+  \end{scope}
+\end{tikzpicture}

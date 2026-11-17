@@ -1,0 +1,47 @@
+% kin_projectile: a projectile over level ground (Ch 4, fig:projectile)
+% Exact parabola y = x tan(theta) (1 - x/R), theta = 50 degrees, range R = 9.4 cm,
+% so the apex is at x = R/2 with height H = R tan(theta)/4.
+% Velocity arrows are drawn to one scale (v0 = 1.7 cm).  v_x = v0 cos(theta) is the
+% same at every point; v_y = v_x * slope = v_x tan(theta)(1 - 2x/R), so each arrow is
+% exactly tangent to the path.  Shown at launch, at the apex (v_y = 0) and on the way
+% down at x = 0.82 R, each with its horizontal and vertical components.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\th{50}
+  \def\R{9.4}
+  \def\vo{1.7}
+  \pgfmathsetmacro\tn{tan(\th)}
+  \pgfmathsetmacro\H{\R*\tn/4}
+  \pgfmathsetmacro\vx{\vo*cos(\th)}
+  \pgfmathsetmacro\vy{\vo*sin(\th)}
+  % ground
+  \path[ground,draw=none] (-0.4,-0.16) rectangle (\R+0.6,0);
+  \draw[outline] (-0.4,0) -- (\R+0.6,0);
+  % the path
+  \draw[cInk!70,curve] plot[domain=0:\R,samples=80] (\x,{\x*\tn*(1-\x/\R)});
+  % maximum height H
+  \draw[dim] (\R/2,0) -- node[knockout,text=cSteel] {$H$} (\R/2,\H-0.06);
+  % range R
+  \draw[dim] (0,-0.55) -- node[below,cSteel] {$R$} (\R,-0.55);
+  \draw[dimtick] (\R,0) -- (\R,-0.7);
+  \draw[dimtick] (0,-0.18) -- (0,-0.7);
+  % launch: v0 and its components
+  \draw[component,cFor] (0,0) -- (\vx,0) node[above right=0pt and 1pt,cFor] {$v_0\cos\theta$};
+  \draw[component,cFor] (0,0) -- (0,\vy) node[left=1pt,cFor] {$v_0\sin\theta$};
+  \draw[parallelogram] (\vx,0) -- (\vx,\vy) -- (0,\vy);
+  \draw[velocity] (0,0) -- (\vx,\vy) node[above left=-1pt,cFor] {$\vv_0$};
+  \draw[angle arc] (0.6,0) arc[start angle=0,end angle=\th,radius=0.6];
+  \node at (\th/2:0.82) {$\theta$};
+  % apex: only the horizontal component survives
+  \draw[velocity] (\R/2,\H) -- ++(\vx,0) node[right=1pt,cFor] {$v_0\cos\theta$};
+  \node[point mass] at (\R/2,\H) {};
+  \node[anchor=south,align=center] at (\R/2,\H+0.12) {apex: $v_y=0$};
+  % on the way down at x = 0.82 R
+  \pgfmathsetmacro\xd{0.82*\R}
+  \pgfmathsetmacro\yd{\xd*\tn*(1-\xd/\R)}
+  \pgfmathsetmacro\vyd{\vx*\tn*(1-2*\xd/\R)}
+  \draw[component,cFor] (\xd,\yd) -- ++(\vx,0) node[right=1pt,cFor] {$v_0\cos\theta$};
+  \draw[component,cFor] (\xd,\yd) -- ++(0,\vyd) node[left=1pt,cFor] {$v_y$};
+  \draw[parallelogram] (\xd+\vx,\yd) -- ++(0,\vyd) -- ++(-\vx,0);
+  \draw[velocity] (\xd,\yd) -- ++(\vx,\vyd) node[right=1pt,cFor] {$\vv$};
+  \node[point mass] at (\xd,\yd) {};
+\end{tikzpicture}

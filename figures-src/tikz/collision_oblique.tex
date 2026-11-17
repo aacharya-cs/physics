@@ -1,0 +1,43 @@
+% collision_oblique: a glancing collision of two smooth spheres (Ch 12, fig:colloblique)
+% Ball 1 (moving at u) strikes ball 2 (at rest) so that the line of centres makes
+% phi = 40 deg with u.  Left: at contact, u resolved along the line of centres
+% (u cos phi) and perpendicular to it (u sin phi).  The smooth contact force acts
+% only along the line of centres.  Right: equal masses, elastic.  Along the line of
+% centres it is a 1-D equal-mass elastic collision, so the components swap: ball 2
+% leaves along the line at u cos phi and ball 1 keeps only u sin phi, perpendicular
+% to it.  The two final velocities are therefore at 90 deg.
+% Scale: u = 1.5 cm, so u cos40 = 1.149 cm, u sin40 = 0.964 cm.  Radius 0.45 cm.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\r{0.45}
+  \def\u{1.5}
+  \def\ph{40}
+  % one panel's balls: ball 1 at (#1,0), ball 2 touching it along the line of centres
+  \def\pair#1{%
+    \draw[guide] ($(#1,0)+(\ph:-0.95)$) -- ($(#1,0)+(\ph:2.75)$);
+    \draw[body] (#1,0) circle[radius=\r];
+    \draw[body,fill=cMoon] ($(#1,0)+(\ph:2*\r)$) circle[radius=\r];
+    \node at ($(#1,0)+(-0.2,0.13)$) {1};
+    \node at ($(#1,0)+(\ph:2*\r)+(0.18,-0.12)$) {2};}
+  % ------------------------------------------------------------- at contact
+  \node[note] at (-0.8,2.05) {at contact};
+  \pair{0}
+  \node[font=\footnotesize,text=cSteel,anchor=south west] at ($(0,0)+(\ph:2.75)+(-0.55,0.02)$) {line of centres};
+  % incoming velocity, drawn arriving at ball 1, with its two components from the same tail
+  \coordinate (T) at (-2.4,0);
+  \draw[velocity] (T) -- ++(\u,0) node[pos=0.55,below=1pt,cFor] {$u$};
+  \draw[component,cFor] (T) -- ++(\ph:{\u*cos(\ph)})
+    node[pos=0.55,above left=0pt,cFor] {$u\cos\phi$};
+  \draw[component,cFor] (T) -- ++(\ph-90:{\u*sin(\ph)})
+    node[pos=0.7,below left=0pt,cFor] {$u\sin\phi$};
+  \draw[angle arc] ($(T)+(0.55,0)$) arc[start angle=0,end angle=\ph,radius=0.55];
+  \node at ($(T)+(17:0.74)$) {$\phi$};
+  % ------------------------------------------------------------------ after
+  \begin{scope}[xshift=5.6cm]
+    \node[note] at (0.6,2.05) {after (equal masses, elastic)};
+    \pair{0}
+    \draw[velocity] ($(0,0)+(\ph:2*\r)$) -- ++(\ph:{\u*cos(\ph)})
+      node[anchor=west,cFor] {$v_2=u\cos\phi$};
+    \draw[velocity] (0,0) -- ++(\ph-90:{\u*sin(\ph)})
+      node[anchor=north west,cFor,inner sep=1pt] {$v_1=u\sin\phi$};
+  \end{scope}
+\end{tikzpicture}

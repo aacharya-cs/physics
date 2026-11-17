@@ -1,0 +1,45 @@
+% cm_threetypes: uniform, accelerated and retarded circular motion (Ch 6, fig:threetypes)
+% Particle at the right of a circle (R = 1.45 cm) moving anticlockwise, so v points up.
+% a = a_r (towards the centre, 1.15 cm) + a_t (along +v, 0, or against v), with
+% |a_t| = 0.75 cm, drawn head to tail so a_t does not hide v.
+% phi = angle between a and v (book notation): 90 deg, atan(1.15/0.75) = 57 deg
+% (acute), and 180 - 57 = 123 deg (obtuse).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{1.45}\def\ar{1.15}
+  \foreach \cx/\at/\lab/\top/\bot in {
+      0/0/a/{uniform: $\phi=90^\circ$}/{$a_t=0$,\ $\alpha=0$},
+      5.4/0.75/b/{accelerated: $\phi$ acute}/{$\vc{\alpha}$ parallel to $\vomega$},
+      10.8/-0.75/c/{retarded: $\phi$ obtuse}/{$\vc{\alpha}$ antiparallel to $\vomega$}}{
+    \begin{scope}[shift={(\cx,0)}]
+      \coordinate (P) at (\R,0);
+      \draw[outline] (0,0) circle[radius=\R];
+      \node[dot] at (0,0) {};
+      % velocity
+      \draw[velocity] (P) -- ++(0,1.4) node[anchor=south,cFor] {$\vv$};
+      % components, head to tail, and the total
+      \pgfmathsetmacro\phidir{180-atan(\at/\ar)}
+      \ifdim\at pt=0pt
+        \draw[accel] (P) -- ++(-\ar,0) node[pos=0.6,anchor=south,cPrim] {$\va$};
+        \draw[right angle] ($(P)+(-0.2,0)$) |- ($(P)+(0,0.2)$);
+      \else
+        \draw[component,cPrim] (P) -- ++(-\ar,0) coordinate (Q);
+        \draw[component,cPrim] (Q) -- ++(0,\at) coordinate (A);
+        \draw[accel] (P) -- (A);
+        \ifdim\at pt>0pt
+          \node[cPrim,anchor=north] at ($(P)!0.5!(Q)$) {$a_r$};
+          \node[cPrim,anchor=south west,inner sep=1pt] at ($(P)!0.75!(A)$) {$\va$};
+        \else
+          \node[cPrim,anchor=south] at ($(P)!0.85!(Q)$) {$a_r$};
+          \node[cPrim,anchor=north west,inner sep=1pt] at ($(P)!0.75!(A)$) {$\va$};
+        \fi
+        \node[cPrim,anchor=east] at ($(Q)!0.5!(A)$) {$a_t$};
+        % phi between a and v
+        \draw[angle arc] ($(P)+(0,0.36)$) arc[start angle=90,end angle=\phidir,radius=0.36];
+        \node at ($(P)+({(90+\phidir)/2}:0.58)$) {$\phi$};
+      \fi
+      \shade[ball color=cBlock] (P) circle[radius=0.085];
+      \draw[cSteel,thin line] (P) circle[radius=0.085];
+      \node[anchor=north,align=center] at (0.4,-1.75) {(\lab)\enspace\top\\ \bot};
+    \end{scope}
+  }
+\end{tikzpicture}

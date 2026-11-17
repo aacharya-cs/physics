@@ -1,0 +1,49 @@
+% cd_offsetarm: a conical pendulum hung from an offset arm (Ch 10, fig:offsetarm)
+% A vertical shaft turns at omega and carries a horizontal arm of length a; a cord
+% of length \ell hangs from the arm's tip and makes theta with the vertical.  The
+% bob's circle has radius r = a + \ell sin(theta), not \ell sin(theta): the
+% dimension lines above show the two pieces and their sum.  Forces on the bob:
+% tension T along the cord, weight mg (T cos theta = mg, T sin theta = m r omega^2).
+% Drawn with theta = 45 degrees (as in the worked example); a and \ell not to scale.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\a{1.6}
+  \def\l{3.4}
+  \def\th{45}
+  \def\Y{3.9}                                    % height of the arm
+  \pgfmathsetmacro\bx{\a+\l*sin(\th)}
+  \pgfmathsetmacro\by{\Y-\l*cos(\th)}
+  \coordinate (P) at (\a,\Y);
+  \coordinate (B) at (\bx,\by);
+  % base, shaft and axis
+  \path[ground,draw=none] (-0.9,-0.16) rectangle (0.9,0);
+  \draw[outline] (-0.9,0) -- (0.9,0);
+  \fill[cRock] (-0.35,0) rectangle (0.35,0.25);
+  \draw[outline] (-0.35,0) rectangle (0.35,0.25);
+  \draw[guide] (0,0.25) -- (0,\Y+1.25);
+  \fill[cRock] (-0.07,0.25) rectangle (0.07,\Y+0.07);
+  \draw[cInk,thin line] (-0.07,0.25) rectangle (0.07,\Y+0.07);
+  % the arm
+  \fill[cRock] (0,\Y-0.07) rectangle (\a,\Y+0.07);
+  \draw[cInk,thin line] (0.07,\Y-0.07) -- (\a,\Y-0.07) -- (\a,\Y+0.07) -- (0.07,\Y+0.07);
+  % rotation of the whole apparatus
+  \draw[rotation] (205:0.5cm and \persp*0.5cm) ++(0,1.4) arc[start angle=205,end angle=335,x radius=0.5,y radius=\persp*0.5]
+    node[anchor=west,inner sep=2pt] {$\omega$};
+  % cord and angle
+  \draw[guide] (P) -- (\a,\by-0.1);
+  \draw[cInk,thin line] (P) -- (B);
+  \node[anchor=south west,inner sep=2pt] at ($(P)!0.32!(B)$) {$\ell$};
+  \draw[angle arc] (\a,\Y-0.85) arc[start angle=-90,end angle=-90+\th,radius=0.85];
+  \node at ($(P)+(-90+\th/2:1.1)$) {$\theta$};
+  % forces on the bob
+  \draw[force] (B) -- ($(B)!1.2cm!(P)$) node[anchor=north east,inner sep=1.5pt] {$T$};
+  \draw[force] (B) -- ++(0,-1.15) node[anchor=north,inner sep=2pt] {$mg$};
+  \shade[ball color=cBlock] (B) circle[radius=0.14];
+  \draw[cSteel,thin line] (B) circle[radius=0.14];
+  \node[anchor=west,inner sep=3pt] at ($(B)+(0.14,0)$) {$m$};
+  % the radius, in two pieces and in total (above the arm, clear of the forces)
+  \draw[dimtick] (\a,\Y+0.15) -- (\a,\Y+0.6);
+  \draw[dimtick] (\bx,\by+0.2) -- (\bx,\Y+1.25);
+  \draw[dim] (0,\Y+0.45) -- node[anchor=south,cSteel,inner sep=2pt] {$a$} (\a,\Y+0.45);
+  \draw[dim] (\a,\Y+0.45) -- node[anchor=south,cSteel,inner sep=2pt] {$\ell\sin\theta$} (\bx,\Y+0.45);
+  \draw[dim] (0,\Y+1.1) -- node[anchor=south,cSteel,inner sep=2pt] {$r=a+\ell\sin\theta$} (\bx,\Y+1.1);
+\end{tikzpicture}

@@ -1,0 +1,46 @@
+% nif_centriwork: the centrifugal force is conservative (Ch 10, fig:nifwork; Irodov 1.128)
+% Drawn in the ROTATING frame.  The pseudo-force m omega^2 r points radially outward and
+% depends only on r, so its work from r1 to r2 is m omega^2 (r2^2 - r1^2)/2 on any path.
+% r1 : r2 = 3 : 5, as in the example (30 cm, 50 cm): r1 = 1.4 cm, r2 = 2.333 cm.
+% Two paths from the same start A on r1 to the circle r2:
+%   radial:    straight out along the radius at 200 deg;
+%   wandering: phi(s) = 200 + 115 s (deg),  r(s) = r1 + (r2 - r1) s + 0.45 sin(360 s),
+%              0 <= s <= 1 (it goes out, comes back in, then out again).
+% Force arrows (dashed: a pseudo-force) have length 0.28 r, i.e. proportional to r.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\ra{1.4} \def\rb{2.3333} \def\Rd{3.0}
+  \def\pa{200}
+  \def\kf{0.28}
+  \newcommand\rpath[1]{\ra+(\rb-\ra)*(#1)+0.45*sin(360*(#1))}
+  % the platform, seen in its own (rotating) frame
+  \draw[outline,fill=cSlope] (0,0) circle[radius=\Rd];
+  \draw[rotation] (70:\Rd+0.28) arc[start angle=70,end angle=110,radius=\Rd+0.28];
+  \node[anchor=south] at (90:\Rd+0.33) {$\omega$};
+  % the two radii
+  \draw[guide] (0,0) circle[radius=\ra];
+  \draw[guide] (0,0) circle[radius=\rb];
+  \node[dot] at (0,0) {};
+  \node[anchor=east,inner sep=3pt] at (0,0) {$O$};
+  \draw[dim] (0,0) -- node[anchor=south east,cSteel,inner sep=1pt] {$r_1$} (115:\ra);
+  \draw[dim] (0,0) -- node[pos=0.8,anchor=south east,cSteel,inner sep=1pt] {$r_2$} (60:\rb);
+  % the radial path
+  \draw[cPrim,curve] (\pa:\ra) -- (\pa:\rb);
+  % a wandering path
+  \draw[cAcc,curve] plot[domain=0:1,samples=90,variable=\s] ({\pa+115*\s}:{\rpath{\s}});
+  % centrifugal pseudo-force at points along the paths, length proportional to r
+  \foreach \s in {0.25,0.7,1}{
+    \pgfmathsetmacro\ang{\pa+115*\s}
+    \pgfmathsetmacro\rr{\rpath{\s}}
+    \draw[force,resultant] (\ang:\rr) -- (\ang:{\rr*(1+\kf)});}
+  \draw[force,resultant] (\pa:\rb) -- (\pa:{\rb*(1+\kf)});
+  % end points
+  \node[dot] at (\pa:\ra) {};
+  \node[anchor=west,inner sep=3pt] at (\pa:\ra) {$A$};
+  \node[dot] at (\pa:\rb) {};
+  \node[dot] at (\pa+115:\rb) {};
+  % labels
+  \node[cPrim,anchor=south,rotate=\pa-180,inner sep=4pt] at (\pa:{(\ra+\rb)/2}) {radial};
+  \node[cAcc] at (-0.1,-0.95) {any path};
+  \pgfmathsetmacro\rq{\rpath{0.7}}
+  \node[cCrim,anchor=west,inner sep=3pt] at (\pa+115*0.7:{\rq*(1+\kf/2)}) {$m\omega^2 r$};
+\end{tikzpicture}

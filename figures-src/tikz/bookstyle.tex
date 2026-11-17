@@ -1,0 +1,171 @@
+% =============================================================================
+%  bookstyle.tex: the one visual vocabulary shared by every figure in the book
+% =============================================================================
+%  Loaded by preamble.tex (and by preview.tex for drawing a figure on its own).
+%  Every TikZ/PGFPlots figure in figures-src/tikz/ draws with these names only:
+%  no raw HTML colours, no ad hoc line widths, no font sizes set by hand.
+%
+%  Rules of thumb
+%   * Draw at the printed size: never scale a figure with width= or scale=
+%     after the fact, so text stays at the sizes set here.  Labels are \small
+%     (9.6pt with the 10.5pt body), which puts their subscripts at 6.7pt, above the
+%     book's 6.5pt floor;
+%     \footnotesize is the floor for plain text and must not carry subscripts.
+%   * Colour encodes meaning, and the meaning is the same in every chapter
+%     (the book-wide legend; a figure may depart from it only to pair or
+%     distinguish several vectors of one kind, e.g. third-law pairs or Lami's
+%     three forces, and then the caption says so):
+%       crimson  every force: weight, normal reaction, tension, gravity, F
+%       accent   friction and applied pushes/pulls, where they must be told
+%                apart from the contact forces; kinetic-energy bars (K)
+%       forest   velocity v and angular velocity omega
+%       primary  acceleration a and angular acceleration alpha; main plot curve
+%       teal     momentum p and angular momentum L; components and legs
+%       plum     potential energy U, total energy E, potentials
+%       steel    dimensions, construction lines, secondary labels
+%       grey     guides, paths not taken, ghost positions
+%   * Labels sit beside what they name, in the colour of what they name.
+% -----------------------------------------------------------------------------
+
+% ---------------------------------------------------------------- palette ---
+% Prefixed with c so they never collide with the text greys in preamble.tex
+% (where `ink' is pure black for the prose).
+\definecolor{cInk}{HTML}{102A43}     % outlines, axes, neutral labels
+\definecolor{cPrim}{HTML}{1F6FEB}    % blue
+\definecolor{cTeal}{HTML}{0E7C7B}
+\definecolor{cAcc}{HTML}{E85D04}     % orange
+\definecolor{cCrim}{HTML}{C1121F}    % red
+\definecolor{cFor}{HTML}{2D6A4F}     % green
+\definecolor{cSteel}{HTML}{486581}
+\definecolor{cPlum}{HTML}{7B2CBF}
+\definecolor{cAmber}{HTML}{F4A261}
+\definecolor{cGrey}{HTML}{9FB3C8}
+% fills (pale, so outlines and arrows read on top of them)
+\definecolor{cEarth}{HTML}{BFD3E6}   % planets
+\definecolor{cMoon}{HTML}{D9E2EC}    % small bodies, light blocks
+\definecolor{cBlock}{HTML}{93C5C6}   % blocks, bodies under study
+\definecolor{cSlope}{HTML}{E1E7EF}   % inclines, ground fill
+\definecolor{cRock}{HTML}{9AA8B6}    % mountains, walls, fixed supports
+\definecolor{cSun}{HTML}{F4A261}
+
+% ------------------------------------------------------------------ lines ---
+\tikzset{
+  % line weights, used everywhere instead of numbers
+  outline/.style={line width=0.8pt,draw=cInk},
+  thin line/.style={line width=0.5pt},
+  hair line/.style={line width=0.35pt},
+  curve/.style={line width=1.3pt},
+  % ------------------------------------------------------------- arrows -----
+  % one arrow head for the whole book; size scales with the line it ends
+  bookhead/.tip={Stealth[length=2.4mm,width=1.7mm]},
+  smallhead/.tip={Stealth[length=1.8mm,width=1.3mm]},
+  vector/.style={-bookhead,line width=1.1pt,line cap=round},
+  force/.style={vector,cCrim},
+  applied/.style={vector,cAcc},
+  velocity/.style={vector,cFor},
+  accel/.style={vector,cPrim},
+  momentum/.style={vector,cTeal},
+  % dimension lines and leaders
+  dim/.style={{smallhead}-{smallhead},thin line,cSteel},
+  dimtick/.style={thin line,cSteel,densely dashed},
+  leader/.style={hair line},
+  guide/.style={thin line,cGrey,dash pattern=on 3pt off 2pt},
+  orbitpath/.style={thin line,cGrey,dash pattern=on 4pt off 3pt},
+  % --------------------------------------------------------------- bodies ---
+  body/.style={fill=cBlock,draw=cSteel,line width=0.6pt},
+  planet/.style={fill=cEarth,draw=cInk,line width=0.9pt},
+  moon/.style={fill=cMoon,draw=cInk,line width=0.7pt},
+  point mass/.style={circle,fill=cInk,inner sep=0pt,minimum size=3.2pt},
+  % `ground' hatches a CLOSED region (a thin rectangle under the surface);
+  % on a bare line it draws only the line.  For the usual pale strip under a
+  % surface use `ground strip' on a rectangle, then draw the surface with `outline'.
+  ground/.style={line width=0.8pt,draw=cInk,
+    postaction={draw=none,pattern={Lines[angle=45,distance=2.2pt,line width=0.35pt]},
+      pattern color=cInk}},
+  ground strip/.style={fill=cSlope,draw=none},
+  % a thin curved arrow for omega, alpha and other senses of rotation
+  rotation/.style={-smallhead,thin line,cInk},
+  % a small square marking a right angle; use as  \draw[right angle] (corner) ++(...)
+  right angle/.style={hair line,cInk},
+  % a medium-weight construction line in any colour: [construction,cFor]
+  construction/.style={line width=0.8pt},
+  % a dot in any colour: \node[dot,cCrim] at (P) {};
+  dot/.style={circle,fill,inner sep=0pt,minimum size=3.2pt},
+  % angle arcs: \draw[angle arc] (A) arc[...];  label it with a plain node
+  angle arc/.style={thin line,cInk},
+  % Riemann strips and shaded areas: pale fill, darker hairline edge
+  strip/.style={fill=cPrim!14,draw=cPrim!60,hair line},
+  area fill/.style={fill=cPrim!12,draw=none},
+  % components of a vector (dashed, same colour as the vector, lighter head)
+  component/.style={-smallhead,thin line,dash pattern=on 3pt off 1.5pt},
+  % a resultant built by parallelogram: dashed, full weight
+  resultant/.style={dash pattern=on 4pt off 2pt},
+  parallelogram/.style={hair line,cGrey,dash pattern=on 2pt off 1.5pt},
+  % rotation axes and hidden (back) edges of solids
+  rotation axis/.style={thin line,cInk,dash pattern=on 6pt off 2pt on 1pt off 2pt},
+  hidden/.style={dash pattern=on 2pt off 1.5pt},
+  % the slice in a derivation figure (strip, ring, disc, shell)
+  slice/.style={fill=cAcc!40,draw=cAcc,thin line},
+  % a ghost: an earlier or later position of the same body.  Opacity also fades
+  % any node placed on the same path, so put a ghost's label in a separate node.
+  ghost/.style={opacity=0.35},
+  % a particle or bob: shaded ball with a steel rim;  \pic at (P) {particle};
+  particle/.pic={\shade[ball color=cBlock] (0,0) circle[radius=0.11];
+                 \draw[cSteel,thin line] (0,0) circle[radius=0.11];},
+  % stable and unstable equilibrium points on a U(x) curve
+  stable point/.style={circle,fill=cInk,inner sep=0pt,minimum size=4pt},
+  unstable point/.style={circle,draw=cInk,fill=white,thin line,inner sep=0pt,minimum size=4pt},
+  % energy bars
+  U bar/.style={fill=cPlum!55,draw=cPlum,thin line},
+  K bar/.style={fill=cAcc!55,draw=cAcc,thin line},
+  % horizontal circles drawn in perspective use this y-squash for the ellipse
+  % (x radius r, y radius \persp*r)
+  % the centre-of-mass marker: \pic at (G) {cm};
+  cm/.pic={\fill[white] (0,0) circle[radius=0.09];
+           \fill[cInk] (0,0) -- (0.09,0) arc[start angle=0,end angle=90,radius=0.09] -- cycle;
+           \fill[cInk] (0,0) -- (-0.09,0) arc[start angle=180,end angle=270,radius=0.09] -- cycle;
+           \draw[cInk,hair line] (0,0) circle[radius=0.09];},
+  % out of / into the page
+  out of page/.pic={\draw[cInk,thin line,fill=white] (0,0) circle[radius=0.09];
+                    \fill[cInk] (0,0) circle[radius=0.025];},
+  into page/.pic={\draw[cInk,thin line,fill=white] (0,0) circle[radius=0.09];
+                  \draw[cInk,thin line] (-0.064,-0.064) -- (0.064,0.064) (-0.064,0.064) -- (0.064,-0.064);},
+  % caution: `knockout' fills with the CURRENT colour if a bare colour name is
+  % given alongside it; colour knocked-out text with text=<colour>.
+  % the contact point of a rolling body
+  contact point/.style={circle,fill=cInk,inner sep=0pt,minimum size=2.6pt},
+  % ---------------------------------------------------------------- text ----
+  % every figure starts from \small (9.6pt; subscripts 6.7pt); \footnotesize (8.75pt)
+  % is the floor, for plain words only
+  figure text/.style={font=\small,text=cInk},
+  small label/.style={font=\footnotesize},
+  note/.style={font=\small\itshape,text=cInk},
+  % a label that must sit over a line: white knock-out behind the text
+  knockout/.style={fill=white,inner sep=1.2pt},
+  % applied to every figure by \tikzfig
+  % default drawing colour is ink, so plain `dot', `fill' and `draw' match the palette
+  bookfigure/.style={figure text,color=cInk,line join=round,>=bookhead},
+}
+
+\def\persp{0.25}
+% ----------------------------------------------------------------- plots ----
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{
+  % the default look of every plot: two axis lines with arrow tips, no box,
+  % no grid; ticks only where the text refers to a value
+  bookplot/.style={
+    axis lines=left,
+    axis line style={line width=0.7pt,draw=cInk,-{Stealth[length=2mm,width=1.5mm]}},
+    every tick/.style={line width=0.5pt,draw=cInk},
+    tick label style={font=\small,text=cInk},
+    label style={font=\small,text=cInk},
+    every axis plot/.append style={curve},
+    xtick=\empty, ytick=\empty,
+    clip=false,
+    samples=120,
+    enlargelimits=false,
+    axis on top=false,
+  },
+  % a zero line drawn inside a plot (energy plots)
+  zero line/.style={thin line,cInk},
+}

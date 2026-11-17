@@ -1,0 +1,51 @@
+% orbit_ellipse: the vocabulary of an elliptical orbit (Ch 17, fig:orbitellipse)
+% Semi-major axis a = 2.3, eccentricity e = 0.6, so b = a sqrt(1-e^2) = 1.84 and
+% the foci sit at x = +-ae = +-1.38.  The Sun is at the right focus, so the
+% perihelion (x = a) is at distance a(1-e) and the aphelion at a(1+e).
+% The point Q at parameter angle 120 deg shows r1 + r2 = 2a.
+\begin{tikzpicture}
+  \pgfmathsetmacro\a{2.3}
+  \pgfmathsetmacro\e{0.6}
+  \pgfmathsetmacro\b{\a*sqrt(1-\e*\e)}
+  \pgfmathsetmacro\c{\a*\e}
+  \coordinate (C) at (0,0);
+  \coordinate (S) at (\c,0);
+  \coordinate (F) at (-\c,0);
+  \coordinate (Q) at ({\a*cos(115)},{\b*sin(115)});
+  % major axis
+  \draw[guide] (-\a-0.3,0) -- (\a+0.3,0);
+  % the two focal distances to a point Q on the orbit
+  \draw[cTeal,thin line] (F) -- (Q) node[pos=0.5,anchor=east,inner sep=2pt] {$r_2$};
+  \draw[cTeal,thin line] (S) -- (Q) node[pos=0.6,anchor=south west,inner sep=1pt] {$r_1$};
+  \node[cTeal,anchor=south east,inner sep=2pt] at (Q) {$r_1+r_2=2a$};
+  % the orbit
+  \draw[cPrim,curve] (C) ellipse[x radius=\a,y radius=\b];
+  \node[point mass] at (Q) {};
+  % semi-minor axis
+  \draw[cSteel,thin line] (C) -- (0,-\b) node[pos=0.5,anchor=west,inner sep=1.5pt] {$b$};
+  % centre to focus
+  \draw[dim] (0,0.32) -- (\c,0.32) node[midway,anchor=north,inner sep=1.5pt] {$ae$};
+  \draw[dimtick] (\c,0) -- (\c,0.45);
+  % semi-major axis, above the orbit
+  \draw[dim] (0,\b+0.35) -- (\a,\b+0.35) node[midway,anchor=south,inner sep=1pt] {$a$};
+  \draw[dimtick] (0,\b) -- (0,\b+0.45);
+  \draw[dimtick] (\a,0) -- (\a,\b+0.45);
+  % perihelion and aphelion distances, below the orbit
+  \draw[dimtick] (\c,0) -- (\c,-\b-0.45);
+  \draw[dimtick] (\a,0) -- (\a,-\b-0.45);
+  \draw[dimtick] (-\a,0) -- (-\a,-\b-0.45);
+  \draw[dim] (\c,-\b-0.35) -- (\a,-\b-0.35);
+  \draw[dim] (-\a,-\b-0.35) -- (\c,-\b-0.35);
+  \node[cSteel,anchor=north,inner sep=1pt] at ({(\c+\a)/2},-\b-0.5) {$r_p=a(1-e)$};
+  \node[cSteel,anchor=north,inner sep=1pt] at ({(\c-\a)/2},-\b-0.5) {$r_a=a(1+e)$};
+  % foci and centre
+  \node[point mass] at (C) {};
+  \node[anchor=north,inner sep=2pt] at (C) {centre};
+  \filldraw[fill=cSun,draw=cAcc,thin line] (S) circle[radius=0.1];
+  \node[anchor=north,inner sep=3pt] at (S) {Sun};
+  \node[point mass,fill=cGrey] at (F) {};
+  \node[anchor=north,inner sep=3pt,align=center,text=cSteel] at (F) {empty\\ focus};
+  % apsides
+  \node[anchor=west,inner sep=4pt] at (\a,0.25) {perihelion};
+  \node[anchor=east,inner sep=3pt] at (-\a,0.25) {aphelion};
+\end{tikzpicture}

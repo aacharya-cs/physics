@@ -1,0 +1,40 @@
+% vector_types: four of the named kinds of vector (Ch 3, fig:vectypes)
+% Equal: same length and direction, drawn at different places.  Negative: same
+% length, exactly reversed.  Collinear: all along ONE line (like or unlike).
+% Coplanar: all lying in one plane (the plane drawn in oblique view).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\gap{3.72}
+  % name and description under each panel
+  \newcommand\panellabel[3]{%
+    \node[anchor=north] at (#1,-0.2) {#2};
+    \node[anchor=north,cSteel,font=\footnotesize,align=center] at (#1,-0.66) {#3};}
+  % ------------------------------------------------------------- equal
+  \begin{scope}
+    \draw[vector,cPrim] (0,0.25) -- ++(20:1.7) node[anchor=south east,inner sep=1pt,pos=0.55] {$\vc{a}$};
+    \draw[vector,cPrim] (1.0,0.9) -- ++(20:1.7) node[anchor=south east,inner sep=1pt,pos=0.55] {$\vc{a}$};
+    \panellabel{1.3}{equal}{same length and direction,\\ drawn anywhere}
+  \end{scope}
+  % ------------------------------------------------------------- negative
+  \begin{scope}[xshift=\gap cm]
+    \draw[vector,cPrim] (0.25,1.35) -- (2.35,1.35) node[midway,anchor=south] {$\vc{a}$};
+    \draw[vector,cAcc] (2.35,0.35) -- (0.25,0.35) node[midway,anchor=south] {$-\vc{a}$};
+    \panellabel{1.3}{negative}{same length,\\ direction reversed}
+  \end{scope}
+  % ------------------------------------------------------------- collinear
+  \begin{scope}[xshift=2*\gap cm]
+    \draw[guide] (-0.2,0.85) -- (2.8,0.85);
+    \draw[vector,cPrim] (-0.05,0.85) -- (0.95,0.85) node[midway,anchor=south] {$\vc{a}$};
+    \draw[vector,cTeal] (1.15,0.85) -- (1.85,0.85) node[midway,anchor=south] {$\vc{b}$};
+    \draw[vector,cAcc] (2.65,0.85) -- (2.0,0.85) node[midway,anchor=north] {$\vc{c}$};
+    \panellabel{1.3}{collinear}{all along one line,\\ like or unlike}
+  \end{scope}
+  % ------------------------------------------------------------- coplanar
+  \begin{scope}[xshift=3*\gap cm]
+    \filldraw[fill=cSlope,draw=cSteel,thin line] (-0.3,0) -- (2.4,0) -- (2.95,1.75) -- (0.25,1.75) -- cycle;
+    \coordinate (O) at (1.05,0.35);
+    \draw[vector,cPrim] (O) -- ++(1.2,0.22) node[anchor=south,inner sep=2pt,pos=0.7] {$\vc{a}$};
+    \draw[vector,cTeal] (O) -- ++(0.45,0.95) node[anchor=west,inner sep=2pt] {$\vc{b}$};
+    \draw[vector,cAcc] (O) -- ++(-0.8,0.45) node[anchor=south,inner sep=2pt] {$\vc{c}$};
+    \panellabel{1.35}{coplanar}{all lying in\\ one plane}
+  \end{scope}
+\end{tikzpicture}

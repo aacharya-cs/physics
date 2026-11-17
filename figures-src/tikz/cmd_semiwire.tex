@@ -1,0 +1,38 @@
+% cmd_semiwire: slicing a semicircular wire into short arcs (Ch 13, fig:cmdwire)
+% Radius R = 2.5 cm, diameter on the x-axis, centre O.  The element at angle
+% theta = 50 deg (from the x-axis) subtends d(theta) = 12 deg (exaggerated), has
+% length dl = R d(theta), and sits at height y = R sin(theta).
+% The wire's centre of mass is on the symmetry axis at 2R/pi = 0.637 R.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{2.5}
+  \def\th{50}\def\dth{12}
+  % axes
+  \draw[thin line,cInk] (-\R-0.45,0) -- (\R+0.45,0);
+  \draw[guide] (0,-0.15) -- (0,\R+0.3);
+  % the wire
+  \draw[cInk,curve] (\R,0) arc[start angle=0,end angle=180,radius=\R];
+  % the element and the angle it subtends
+  \draw[guide] (0,0) -- (\th:\R);
+  \draw[guide] (0,0) -- (\th+\dth:\R);
+  \fill[cAcc] (\th:\R-0.06) arc[start angle=\th,end angle=\th+\dth,radius=\R-0.06]
+     -- (\th+\dth:\R+0.06) arc[start angle=\th+\dth,end angle=\th,radius=\R+0.06] -- cycle;
+  \draw[leader,cAcc] (\th+\dth/2:\R+0.1) -- (1.85,2.42);
+  \node[cAcc,anchor=west,inner sep=2pt] at (1.85,2.42) {$d\ell=R\,d\theta$};
+  % theta from the x-axis
+  \draw[angle arc] (0.6,0) arc[start angle=0,end angle=\th,radius=0.6];
+  \node at (\th/2:0.85) {$\theta$};
+  % R along the lower edge of the wedge
+  \node[cInk,anchor=north west,inner sep=1pt] at (\th:1.55) {$R$};
+  % height of the element
+  \coordinate (E) at (\th+\dth/2:\R);
+  \draw[dimtick] (E) -- (\R+0.55,0|-E);
+  \draw[dim] (\R+0.4,0) -- node[right,cSteel] {$y=R\sin\theta$} (\R+0.4,0|-E);
+  % the wire's centre of mass
+  \pgfmathsetmacro\yc{2*\R/pi}
+  \pic at (0,\yc) {cm};
+  \draw[dimtick] (-0.14,\yc) -- (-1.1,\yc);
+  \draw[dim] (-0.95,0) -- node[left,cSteel] {$2R/\pi$} (-0.95,\yc);
+  % origin
+  \fill[cInk] (0,0) circle[radius=0.04];
+  \node[anchor=north] at (0,-0.08) {$O$};
+\end{tikzpicture}

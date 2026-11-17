@@ -1,0 +1,36 @@
+% collision_asymmetry: why momentum survives a collision and kinetic energy need not (Ch 12, fig:collasym)
+% Left: the third-law pair during contact.  Body 1 pushes body 2 with F_12 (drawn on
+% body 2, to the right); body 2 pushes back on body 1 with F_21 = -F_12 (drawn on
+% body 1, to the left).  Equal lengths: the pair cancels in dP/dt.
+% Right: the same pair squashed at the contact; the strokes mark the kinetic energy
+% that leaves as heat, sound and permanent deformation.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\r{0.5}
+  % ---------------------------------------------------------------- momentum
+  \begin{scope}
+    \node[note,text=cTeal] at (2.6,1.25) {momentum is conserved};
+    \draw[body] (2.1,0) circle[radius=\r];
+    \draw[body,fill=cMoon] (3.1,0) circle[radius=\r];
+    \node at (2.1,0.22) {1};
+    \node at (3.1,0.22) {2};
+    \draw[force] (2.1,-0.12) -- ++(-1.25,0) node[anchor=east] {$\vF_{21}$};
+    \draw[force] (3.1,-0.12) -- ++(1.25,0) node[anchor=west] {$\vF_{12}$};
+    \node[font=\footnotesize,align=center] at (2.6,-1.15)
+      {equal and opposite at every instant,\\ so the total momentum cannot change};
+  \end{scope}
+  % ---------------------------------------------------------- kinetic energy
+  \begin{scope}[xshift=6.7cm]
+    \node[note,text=cAcc] at (2.6,1.25) {kinetic energy may be lost};
+    % two balls flattened where they press: centres 0.86 apart, flat at the midpoint
+    \pgfmathsetmacro\ang{acos(0.43/\r)}
+    \draw[body] (2.6,{\r*sin(\ang)}) arc[start angle=\ang,end angle=360-\ang,radius=\r] -- cycle;
+    \draw[body,fill=cMoon] (2.6,{-\r*sin(\ang)}) arc[start angle=180+\ang,end angle=540-\ang,radius=\r] -- cycle;
+    \node at (2.17,0.22) {1};
+    \node at (3.03,0.22) {2};
+    % the bang: strokes radiating from the contact
+    \foreach \t in {65,90,115,245,270,295}
+      \draw[cAcc,thin line,line cap=round] (2.6,0) ++(\t:0.6) -- ++(\t:0.3);
+    \node[cAcc,font=\footnotesize] at (2.6,-1.13) {heat, sound, deformation};
+    \node[font=\footnotesize] at (2.6,-1.5) {only an elastic collision keeps it all};
+  \end{scope}
+\end{tikzpicture}

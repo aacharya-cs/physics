@@ -1,0 +1,734 @@
+\ncertchapter{12}{Collisions}\label{ch:collisions}
+
+A collision is a brief and violent interaction: two bodies meet, exert enormous forces on each other for a
+very short time, and separate, or stick together, with altered velocities. The forces during the impact are
+almost never known in detail and are not needed. What is needed is a way to connect the velocities before
+the collision to the velocities after it without knowing what happened in between, and the conservation laws
+provide exactly that.
+
+The entire subtlety of the chapter lies in knowing which conservation law always holds and which does
+not. Momentum is conserved in every collision between free bodies; kinetic energy only in the special
+case of an elastic collision, and assuming otherwise is the most common error in this part of the
+syllabus. The chapter first proves the momentum claim, then works through the possible fates of the
+kinetic energy: fully kept (elastic), most lost (the bodies stick), and everything in between, measured
+by a coefficient of restitution. It closes with glancing collisions in two dimensions.
+
+\section{Why Momentum Is Always Conserved}
+
+The claim that momentum is conserved in every collision between free bodies, whatever the materials and
+however violent the impact, needs only two ingredients: the third law, and the brevity of the collision.
+(\chref{ch:newton} met the same argument; here we see exactly where each ingredient enters.)
+
+\begin{derivbox}{Momentum conservation in a collision}
+Two bodies collide. Body~1 has momentum $\vp_1=m_1\vv_1$ and body~2 has $\vp_2=m_2\vv_2$ (momentum, a
+vector in \si{kg.m/s}, from \chref{ch:newton}). During contact, body~1 pushes on body~2 with a force
+$\vF_{12}$, and body~2 pushes back on body~1 with $\vF_{21}$.
+
+\stepn{1} \textbf{Second law for each body, third law between them.} Force is the rate of change of
+momentum, so $d\vp_1/dt=\vF_{21}$ and $d\vp_2/dt=\vF_{12}$, while the third law makes
+$\vF_{21}=-\vF_{12}$ at every instant.
+
+\stepn{2} \textbf{Add.} The total momentum $\vc{P}=\vp_1+\vp_2$ changes at the rate
+\[
+\frac{d\vc{P}}{dt}=\vF_{21}+\vF_{12}=\vc0,
+\]
+however large, brief, or complicated the contact forces are. With subscripts $i$ and $f$ meaning just
+before and just after the collision,
+\[
+\boxed{\;\vp_{1i}+\vp_{2i}=\vp_{1f}+\vp_{2f}\;}
+\]
+You never need to know anything about the messy forces during contact.
+\end{derivbox}
+
+The derivation assumed that no external force acts, and the brevity of the collision is what makes that
+nearly true. Recall from \chref{ch:newton} that a force acting for a time $\Delta t$ changes momentum by its
+impulse, $\vc{J}=\int\vF\,dt$ (a vector, in \si{N.s}), about $\vF_{\text{avg}}\,\Delta t$ where
+$\vF_{\text{avg}}$ is the average force. A \SI{0.16}{kg} cricket ball meeting a bat at
+\SI{30}{m/s} and leaving at \SI{30}{m/s} the other way changes its momentum by about \SI{9.6}{N.s} in a
+contact of about \SI{1}{ms}; in that millisecond gravity supplies an impulse of only
+$mg\,\Delta t\approx\SI{0.0016}{N.s}$, less than a five-thousandth as much. Any external force of
+ordinary size (gravity, friction) is negligible during a collision in this way. Forces that are
+themselves \textbf{impulsive}, huge and brief like the contact force, are not: the normal force of a
+floor, or the force at a hinge, can deliver an impulse as large as the collision's own. So the
+momentum of the colliding bodies alone is conserved only when neither is held by such a support.
+
+\section{Classifying Collisions}
+
+Momentum conservation is one equation, but a head-on collision with known masses and initial velocities
+has two unknowns, the two final velocities. A second piece of information is needed, and what it can be
+depends on what happens to the kinetic energy. That is why collisions are classified by their kinetic
+energy, and not by their momentum, which is conserved in all of them (Figure~\ref{fig:collasym}).
+
+\begin{keybox}{What is conserved, and when}
+\textbf{The total momentum of the colliding bodies is conserved in every collision in which external
+impulses are negligible}; this fails when one body is fixed or pivoted (a wall, a floor, a hinged door).
+\textbf{Kinetic energy is conserved
+only in an \emph{elastic} collision.} In an \emph{inelastic} one, some kinetic energy becomes heat,
+sound, and permanent deformation; in a \emph{perfectly inelastic} collision the bodies stick together
+and the kinetic-energy loss is the greatest that momentum conservation allows. The ``lost'' kinetic
+energy is not destroyed; it becomes internal energy, so \emph{total} energy is conserved in every case.
+(If stored energy is released at contact, as by a compressed spring or an explosive cap, kinetic energy
+can even \emph{increase}: a superelastic collision.)
+\end{keybox}
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{collision_asymmetry}
+\figcaption{fig:collasym}{The asymmetry at the heart of the chapter. Momentum is protected because the internal forces act in equal and opposite pairs (left). Kinetic energy has no such protection (right): some of it may go into deformation, heat and sound, and the sound of the impact is a sign of that loss.}
+\end{figure}
+
+Between the two extremes the second equation is supplied by one measured number, which also labels the
+kinds of collision.
+
+\begin{defbox}{Coefficient of restitution}
+The \textbf{line of impact} is the line along which the contact force acts: the common normal to the two
+surfaces at the point of contact, which for two spheres is the line joining their centres. Let $u_1,u_2$
+be the velocity components of the two bodies along this line just before impact and $v_1,v_2$ just after,
+all \emph{signed}, with the positive direction pointing from body~1 towards body~2 (so before impact
+$u_1>u_2$: body~1 is catching up). The
+coefficient of restitution $e$ (a pure number) measures the ``bounciness'':
+\[
+e=\frac{\text{speed of separation}}{\text{speed of approach}}=\frac{v_2-v_1}{u_1-u_2}.
+\]
+$e=1$ is
+perfectly elastic; $e=0$ is perfectly inelastic (they move together); $0<e<1$ is the real, partially
+elastic case. The value of $e$ is an empirical property of the pair of surfaces (Newton's experimental
+law): roughly constant, though in practice it depends somewhat on the impact speed.
+\end{defbox}
+
+\begin{trapbox}{put signs into $e$}
+Use signed velocities, not speeds. A ball at \SI{4}{m/s} hitting a block at rest and bouncing back at
+\SI{1}{m/s} while the block moves off at \SI{2}{m/s} has $v_1=-1$, so $e=[2-(-1)]/(4-0)=0.75$, not
+$(2-1)/4=0.25$.
+\end{trapbox}
+
+\begin{remarkbox}{What happens during the impact}
+Why does $e$ lie between 0 and 1? A collision has two phases.
+ In the \emph{compression} phase the
+bodies squash until, for an instant, they move with a common velocity $c$; in the \emph{restitution}
+phase the deformation partly springs back and pushes them apart. Let the contact force deliver an
+impulse $J_C$ (a signed component along the line of impact, in \si{N.s}) to body~2 during compression and
+$J_R$ during restitution; body~1 receives the opposite impulses. Impulse equals change of momentum, so for
+compression $m_2(c-u_2)=J_C$ and $m_1(c-u_1)=-J_C$. Dividing each by its mass and subtracting eliminates
+$c$: $u_1-u_2=J_C\big(\tfrac1{m_1}+\tfrac1{m_2}\big)$. The same steps for restitution give
+$v_2-v_1=J_R\big(\tfrac1{m_1}+\tfrac1{m_2}\big)$, so
+$e=J_R/J_C$. A perfectly elastic pair springs back fully ($J_R=J_C$); putty does not spring back at all
+($J_R=0$). This is why $e$ belongs to the pair of materials and lies between 0 and 1.
+\end{remarkbox}
+
+\section{Elastic Collisions in One Dimension}
+
+Begin with the case in which kinetic energy itself supplies the second equation. In a \textbf{head-on}
+(one-dimensional) collision all velocities lie along the line of impact, so we can drop the vector arrows
+and work with the signed scalars $u_1,u_2,v_1,v_2$ defined above. (Momentum is still a vector law; in 1-D
+it just becomes a statement about these signed numbers.)
+
+\begin{derivbox}{One-dimensional elastic collision}
+Masses $m_1,m_2$ with initial velocities $u_1,u_2$ collide head-on and elastically, leaving with
+velocities $v_1,v_2$. ``Elastic'' gives us two conservation laws to work with:
+\[
+\underbrace{m_1u_1+m_2u_2=m_1v_1+m_2v_2}_{\text{momentum}},\qquad
+\underbrace{\tfrac12m_1u_1^2+\tfrac12m_2u_2^2=\tfrac12m_1v_1^2+\tfrac12m_2v_2^2}_{\text{kinetic energy}}.
+\]
+\stepn{1} \textbf{Collect each mass on its own side.} Move the $m_1$ terms left and the $m_2$ terms right.
+Momentum becomes $m_1(u_1-v_1)=m_2(v_2-u_2)$; energy (after cancelling the $\tfrac12$) becomes
+$m_1(u_1^2-v_1^2)=m_2(v_2^2-u_2^2)$.
+\stepn{2} \textbf{Factor the energy equation.} Each squared bracket is a difference of two squares:
+$u_1^2-v_1^2=(u_1-v_1)(u_1+v_1)$, and likewise on the right. So the energy equation reads
+\[
+m_1(u_1-v_1)(u_1+v_1)=m_2(v_2-u_2)(v_2+u_2).
+\]
+\stepn{3} \textbf{Divide the energy equation by the momentum equation} (allowed because $u_1\ne v_1$: if
+they were equal, no collision would have occurred). The factors
+$m_1(u_1-v_1)$ and $m_2(v_2-u_2)$ are \emph{equal} (that is the momentum equation), so they cancel,
+leaving just the ``sum'' factors:
+\[
+u_1+v_1=u_2+v_2\quad\Longrightarrow\quad \boxed{u_1-u_2=-(v_1-v_2)}.
+\]
+In words: the \emph{relative} velocity is unchanged in size but reversed in direction: the bodies
+separate exactly as fast as they approached. (This is the meaning of $e=1$.)
+\stepn{4} \textbf{Solve the two simple equations.} Step 3 gives $v_2=u_1+v_1-u_2$, which is linear.
+Substituting it into momentum, $m_1u_1+m_2u_2=m_1v_1+m_2(u_1+v_1-u_2)$, so
+$(m_1+m_2)v_1=(m_1-m_2)u_1+2m_2u_2$; then $v_2$ follows from Step 3:
+\[
+v_1=\frac{m_1-m_2}{m_1+m_2}\,u_1+\frac{2m_2}{m_1+m_2}\,u_2,\qquad
+v_2=\frac{m_2-m_1}{m_1+m_2}\,u_2+\frac{2m_1}{m_1+m_2}\,u_1.
+\]
+Notice the symmetry: swapping the labels $1\leftrightarrow2$ turns one formula into the other, as it must.
+\end{derivbox}
+
+The formulas are easiest to remember, and to check, in their limiting cases (Figure~\ref{fig:collcases}).
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{collision_cases}
+\figcaption{fig:collcases}{Three elastic head-on collisions with the target initially at rest, velocity arrows to scale. \emph{Equal masses:} the velocities swap (Newton's cradle, the billiard stop-shot). \emph{Heavy hits light} (here $m_1=4m_2$): the heavy body continues, only partly slowed, and knocks the light one ahead faster than it came. \emph{Light hits heavy} (here $m_2=4m_1$): the light body bounces back and the heavy one barely moves.}
+\end{figure}
+
+\begin{keybox}{The three limiting cases (target at rest, $u_2=0$)}
+Put $u_2=0$ in the formulas above.
+\textbf{Equal masses} ($m_1=m_2$): $v_1=0,\ v_2=u_1$, a complete transfer. \textbf{Heavy hits light}
+($m_1\gg m_2$): $v_1\approx u_1,\ v_2\approx 2u_1$. \textbf{Light hits heavy} ($m_1\ll m_2$):
+$v_1\approx-u_1,\ v_2\approx0$, the light body rebounds. The equal-mass transfer is why water, rich in
+hydrogen, slows the fast neutrons in a nuclear reactor: a neutron has almost a proton's mass, so a
+head-on hit on a hydrogen nucleus can stop it dead.
+\end{keybox}
+
+The general formulas still hide a simpler pattern, which makes them quicker to use. Let
+$V=\dfrac{m_1u_1+m_2u_2}{m_1+m_2}$, the total momentum divided by the total mass; it is the velocity of
+the pair's centre of mass (\chref{ch:com}), and since momentum is conserved it is the same after the
+collision as before. The elastic formulas can be rewritten as
+\[
+v_1=2V-u_1,\qquad v_2=2V-u_2
+\]
+(check: $2V-u_1$ expands to the expression for $v_1$ above). Rearranged, $v_1-V=-(u_1-V)$: seen from a
+frame moving with $V$, each body simply reverses its velocity.
+
+\begin{exbox}{An elastic collision by the shortcut}
+A \SI{2}{kg} ball at \SI{6}{m/s} strikes a \SI{1}{kg} ball at rest, head-on and elastically. Find both
+final velocities.
+\stepn{1} \textbf{Centre-of-mass velocity.} $V=\dfrac{2\times6+1\times0}{3}=\SI{4}{m/s}$.
+\stepn{2} \textbf{Reverse in that frame.} $v_1=2(4)-6=\SI{2}{m/s}$ and $v_2=2(4)-0=\SI{8}{m/s}$.
+\stepn{3} \textbf{Check.} Momentum: $2(2)+1(8)=12=2(6)$. Kinetic energy: $\tfrac12(2)(2^2)+\tfrac12(1)(8^2)
+=4+32=\SI{36}{J}=\tfrac12(2)(6^2)$.\ \checkmark
+\ans{$v_1=\SI{2}{m/s}$, $v_2=\SI{8}{m/s}$}
+\end{exbox}
+
+\begin{trapbox}{never assume kinetic energy is conserved}
+Use kinetic-energy conservation only when the problem says elastic. Otherwise use momentum, and then
+\emph{compute} the energy lost; do not set it to zero.
+\end{trapbox}
+
+\section{Perfectly Inelastic Collisions}\label{sec:inelastic12}
+
+At the opposite extreme from the elastic case, the colliding bodies stick together ($e=0$). Now the
+second equation is simply $v_1=v_2$, so the outcome is fixed by momentum alone. The questions are how
+much kinetic energy is lost, and why this case loses the most.
+
+\begin{derivbox}{Common velocity and energy lost}
+Two bodies stick and move off together at a common velocity $v$.
+\stepn{1} \textbf{Momentum (the only conservation law available).}
+\[
+m_1u_1+m_2u_2=(m_1+m_2)v\quad\Longrightarrow\quad
+\boxed{\,v=\dfrac{m_1u_1+m_2u_2}{m_1+m_2}\,}.
+\]
+\stepn{2} \textbf{Kinetic energy lost.} Let $K_{\text{lost}}=K_i-K_f$, the initial minus the final
+kinetic energy (positive when energy is lost). Take $u_2=0$ to keep the algebra short; then
+$v=m_1u_1/(m_1+m_2)$, and $\tfrac12(m_1+m_2)v^2=\tfrac12 m_1u_1^2\cdot\dfrac{m_1}{m_1+m_2}$, so
+\[
+K_{\text{lost}}=\tfrac12 m_1u_1^2\Big(1-\frac{m_1}{m_1+m_2}\Big)
+=\tfrac12\,\frac{m_1 m_2}{m_1+m_2}\,u_1^2.
+\]
+The lost fraction is $\dfrac{K_{\text{lost}}}{K_i}=\dfrac{m_2}{m_1+m_2}$.
+\stepn{3} \textbf{Read the limits.} If a light body hits a massive one ($m_2\gg m_1$), nearly \emph{all}
+the kinetic energy is lost (a bullet into a massive block). If a massive body hits a light one
+($m_1\gg m_2$), almost none is lost; the heavy body barely notices. The combination
+$m_1m_2/(m_1+m_2)$ is the \textbf{reduced mass} (a mass, in \si{kg}, smaller than either); it appears
+whenever the motion of two interacting bodies is split into a centre-of-mass (CM) part and a relative
+part, as in the next step.
+\stepn{4} \textbf{Why sticking loses the most.} At any instant, before or after the collision, let the
+bodies have velocities $v_1,v_2$. Write each as the CM velocity $V=\dfrac{m_1v_1+m_2v_2}{m_1+m_2}$ plus a
+share of the relative velocity $w=v_1-v_2$ (a signed scalar, in \si{m/s}):
+$v_1=V+\dfrac{m_2}{m_1+m_2}\,w$ and $v_2=V-\dfrac{m_1}{m_1+m_2}\,w$. Substituting into
+$\tfrac12m_1v_1^2+\tfrac12m_2v_2^2$, the cross terms, $\pm m_1m_2Vw/(m_1+m_2)$, cancel and
+\[
+K=\tfrac12(m_1+m_2)V^2+\tfrac12\,\frac{m_1m_2}{m_1+m_2}\,w^2.
+\]
+Momentum fixes $V$, so the first term is the same before and after any collision. The loss is therefore
+greatest when the relative velocity afterwards is zero, that is, when the bodies stick, and it then equals
+$\tfrac12\dfrac{m_1m_2}{m_1+m_2}(u_1-u_2)^2$ for any initial velocities (with $u_2=0$ this is Step 2).
+\end{derivbox}
+
+\begin{trapbox}{sticking does not lose all the kinetic energy}
+Only the kinetic energy of \emph{relative} motion can be lost; the centre-of-mass term survives every
+collision. All of it disappears only when $V=0$, as when two equal lumps of putty meet head-on at equal
+speeds.
+\end{trapbox}
+
+
+\begin{exbox}{Railway coupling}
+A \SI{4000}{kg} wagon moving at \SI{3}{m/s} couples onto a stationary \SI{2000}{kg} wagon. Find the
+common speed and the fraction of kinetic energy lost.
+\stepn{1} \textbf{Momentum.} $v=\dfrac{4000\times3+0}{4000+2000}=\dfrac{12000}{6000}=\SI{2}{m/s}$.
+\stepn{2} \textbf{Fraction lost.} $\dfrac{K_{\text{lost}}}{K_i}=\dfrac{m_2}{m_1+m_2}=\dfrac{2000}{6000}
+=\tfrac13\approx\SI{33}{\percent}$.
+\stepn{3} \textbf{Check directly.} $K_i=\tfrac12(4000)(3^2)=\SI{18000}{J}$;
+$K_f=\tfrac12(6000)(2^2)=\SI{12000}{J}$; lost $=\SI{6000}{J}$, which is indeed $\tfrac13$ of $K_i$.
+\ans{\SI{2}{m/s}; $\tfrac13$ lost}
+\end{exbox}
+
+\section{Partially Elastic Collisions}\label{sec:partial12}
+
+Real collisions lie between the two extremes. Kinetic energy is no longer conserved, so the coefficient
+of restitution supplies the second equation instead, and the kinetic-energy split just derived gives the
+loss.
+
+\begin{derivbox}{Final velocities and energy lost for a given $e$}
+Masses $m_1,m_2$ with velocities $u_1,u_2$ collide head-on with coefficient of restitution $e$.
+
+\stepn{1} \textbf{Two equations.} Momentum and the restitution law give
+\[
+m_1u_1+m_2u_2=m_1v_1+m_2v_2,\qquad v_2-v_1=e\,(u_1-u_2).
+\]
+\stepn{2} \textbf{Solve.} Substituting $v_2=v_1+e(u_1-u_2)$ into the momentum equation and collecting
+terms,
+\[
+v_1=\frac{(m_1-em_2)\,u_1+(1+e)\,m_2u_2}{m_1+m_2},\qquad
+v_2=\frac{(m_2-em_1)\,u_2+(1+e)\,m_1u_1}{m_1+m_2}.
+\]
+Setting $e=1$ recovers the elastic formulas; setting $e=0$ makes $v_1=v_2$, the common velocity of
+\S\ref{sec:inelastic12}.
+\stepn{3} \textbf{Energy lost.} In the split of the kinetic energy derived in \S\ref{sec:inelastic12}, the
+centre-of-mass term $\tfrac12(m_1+m_2)V^2$ does not change, while the relative velocity $w$ goes from $u_1-u_2$ to $-e(u_1-u_2)$. Hence
+\[
+\boxed{\;K_{\text{lost}}=\tfrac12\,\frac{m_1m_2}{m_1+m_2}\,(1-e^2)\,(u_1-u_2)^2\;}
+\]
+This is zero for $e=1$ and greatest for $e=0$: a fraction $1-e^2$ of the kinetic energy of
+\emph{relative} motion is lost.
+\end{derivbox}
+
+\textbf{Collision with a fixed surface.} An important special case is a ball hitting the floor. When
+body~2 is a floor or wall attached to the Earth, it does not move measurably, and the restitution law
+alone gives the rebound: with $u_2=v_2=0$, $v_1=-e\,u_1$. (The ball's momentum is \emph{not} conserved;
+the floor supplies the impulse that reverses it. The momentum of ball plus Earth is conserved, but with
+$K=p^2/2M$ and the Earth's mass $M$ enormous, the Earth's share of kinetic energy is negligible.) A ball
+dropped from height $h$ reaches the floor at $\sqrt{2gh}$ (from $mgh=\tfrac12mv^2$) and leaves at
+$e\sqrt{2gh}$, so it rises to $e^2h$; after $n$ bounces the height is $e^{2n}h$. Measuring the first
+rebound height is therefore the simplest way to find $e$: $e=\sqrt{h_1/h}$.
+
+\section{Collisions in Two Dimensions}
+
+Most real collisions are glancing, not head-on: the velocities are not along the line of impact, so the
+bodies fly off in new directions. Momentum is still conserved, but now as a \emph{vector} equation, so
+\emph{component by component}. Counting shows what else is needed: in a plane the two final velocities
+have four components; momentum gives two equations and, for an elastic collision, energy a third. One
+more datum, usually a measured angle, must be supplied, which is why such problems always state one.
+
+\begin{figure}[htbp]
+\centering
+\tikzfig{collision_oblique}
+\figcaption{fig:colloblique}{A glancing collision of two smooth spheres. Resolve the incoming velocity along the line of centres ($u\cos\phi$) and perpendicular to it ($u\sin\phi$). The smooth contact force acts only along the line of centres, so only that component takes part in the collision; for equal masses colliding elastically it is handed over entirely, and the two balls leave at right angles.}
+\end{figure}
+
+\begin{methodbox}{Oblique collisions: conserve each component}
+Choose axes (usually along and perpendicular to the initial motion), and write $u_{1x}$ for the
+$x$-component of body~1's initial velocity, and so on. Momentum conservation gives one equation per axis:
+\[
+m_1u_{1x}+m_2u_{2x}=m_1v_{1x}+m_2v_{2x},\qquad m_1u_{1y}+m_2u_{2y}=m_1v_{1y}+m_2v_{2y}.
+\]
+If the collision is also elastic, add $\tfrac12 m_1u_1^2+\tfrac12 m_2u_2^2=\tfrac12 m_1v_1^2+\tfrac12
+m_2v_2^2$, where now $u_1$, $v_1$, \dots\ are speeds (one scalar equation). If instead the collision has a coefficient of restitution $e<1$ and the bodies are smooth
+spheres, apply $e$ only to the velocity components along the line of centres; the components perpendicular
+to it are unchanged, because a smooth contact force has no perpendicular component. A common special case: when equal masses collide elastically and one is initially at rest,
+they fly apart at \textbf{$90^\circ$} to each other (Figure~\ref{fig:colloblique}; unless the hit is head-on, when the mover stops).
+Proof: with $\vc{u}$ the incoming velocity and the mass cancelled, momentum gives $\vc{u}=\vv_1+\vv_2$ and
+energy gives $u^2=v_1^2+v_2^2$.
+Squaring the first, $u^2=v_1^2+v_2^2+2\,\vv_1\cdot\vv_2$, and subtracting the second leaves
+$\vv_1\cdot\vv_2=0$.
+\end{methodbox}
+
+\begin{exbox}{A glancing hit}
+A ball moving at \SI{5}{m/s} along $x$ strikes an identical stationary ball. After the elastic collision
+the incoming ball moves at $30^\circ$ above the $x$-axis. Show the second ball moves at $60^\circ$ below,
+and find both speeds.
+\stepn{1} \textbf{Equal-mass elastic $\Rightarrow$ $90^\circ$ apart} (the special case in the box). So the
+second ball moves at $90^\circ$ to the first, on the other side of the $x$-axis (its $y$-momentum must
+cancel the first ball's): $30^\circ-90^\circ=-60^\circ$, that is, $60^\circ$ below the $x$-axis.
+\stepn{2} \textbf{Conserve momentum per axis} to get the two speeds $v_1$, $v_2$ (mass cancels):
+\[
+x:\ 5=v_1\cos30^\circ+v_2\cos60^\circ,\qquad
+y:\ 0=v_1\sin30^\circ-v_2\sin60^\circ.
+\]
+\stepn{3} \textbf{Solve.} From $y$: $v_1(0.5)=v_2(0.866)$, so $v_1=1.732\,v_2$. Substitute into $x$:
+$5=1.732v_2(0.866)+v_2(0.5)=2.0\,v_2$, giving $v_2=\SI{2.5}{m/s}$ and $v_1=\SI{4.33}{m/s}$.
+\stepn{4} \textbf{Check energy.} $v_1^2+v_2^2=18.75+6.25=25=5^2$ \checkmark, kinetic energy is
+conserved, as it must be for an elastic collision. \ans{$v_1=\SI{4.33}{m/s}$, $v_2=\SI{2.5}{m/s}$, at $90^\circ$}
+\end{exbox}
+
+\section{Summary}\label{sec:summary12}
+Momentum is conserved in every collision between free bodies, along each axis separately; kinetic energy
+only in an elastic one, and the coefficient of restitution measures where a collision sits in between.
+
+\begin{itemize}
+\item $e=\dfrac{v_2-v_1}{u_1-u_2}$: $e=1$ elastic, $e=0$ perfectly inelastic, $0<e<1$ the real case.
+\item General head-on collision: momentum plus $v_2-v_1=e(u_1-u_2)$; the kinetic energy lost is
+      $\tfrac12\dfrac{m_1m_2}{m_1+m_2}(1-e^2)(u_1-u_2)^2$.
+\item Elastic, target at rest: equal masses exchange velocities; a heavy body hitting a light one sends it off
+      at about $2u_1$; a light body hitting a heavy one rebounds at about $-u_1$.
+\item Perfectly inelastic: common velocity $v=\dfrac{m_1u_1+m_2u_2}{m_1+m_2}$, and this case loses the most
+      kinetic energy consistent with momentum conservation.
+\item A ball dropped from height $h$ onto a fixed floor with restitution $e$ rebounds to $e^2h$; the ball's
+      momentum is not conserved, because the floor supplies an external impulse.
+\end{itemize}
+
+\section{Problem Types}\label{sec:types12}
+Five types cover nearly all collision questions, and every one begins with the same question:
+\emph{which quantity is conserved here}? Answer that first and the rest is algebra.
+
+\archq{Perfectly inelastic: find the common velocity}
+{``Two bodies collide and stick (or a bullet embeds), find the final velocity, or the energy lost.''}
+{Momentum only: $v=\dfrac{m_1u_1+m_2u_2}{m_1+m_2}$; then compute the energy lost,
+$\tfrac12\dfrac{m_1m_2}{m_1+m_2}(u_1-u_2)^2$.}
+{Using kinetic-energy conservation: the sticking \emph{is} the energy loss.}
+{A \SI{20}{g} bullet at \SI{400}{m/s} embeds in a \SI{1.98}{kg} block at rest. Their common speed is:}
+{\SI{4}{m/s}}
+{\SI{2}{m/s}}
+{\SI{8}{m/s}}
+{\SI{40}{m/s}\archans{A}{$v=\dfrac{0.02\times400}{0.02+1.98}=\dfrac{8}{2}=\SI{4}{m/s}$. Option (C) is
+the momentum, \SI{8}{kg.m/s}, not yet divided by the total mass.}}
+
+\archq{Elastic, equal masses: the velocity swap}
+{``An elastic head-on collision between equal masses, find the final velocities.''}
+{Equal masses in 1-D elastic collision simply \emph{exchange} velocities: $v_1=u_2$, $v_2=u_1$.
+If the target was at rest, the incoming body stops dead.}
+{This exact swap holds \emph{only} for equal masses and an elastic collision; do not apply it
+otherwise.}
+{A ball moving at \SI{6}{m/s} elastically strikes an identical ball at rest head-on. Afterwards:}
+{both move at \SI{3}{m/s}}
+{first stops, second moves at \SI{6}{m/s}}
+{first rebounds at \SI{6}{m/s}}
+{both move at \SI{6}{m/s}\archans{B}{Equal-mass elastic collision swaps velocities: the first stops
+($v_1=0$) and the second leaves with \SI{6}{m/s}. Option (A) conserves momentum but is the sticking
+(perfectly inelastic) result, which loses half the kinetic energy.}}
+
+\archq{Coefficient of restitution: the bouncing ball}
+{``A ball dropped from $h_0$ rebounds to $h_1$, find $e$,'' or ``find the height after $n$ bounces,''
+or ``find the total distance or time.''}
+{Speeds relate to heights by $v=\sqrt{2gh}$, so
+$\boxed{e=\sqrt{h_1/h_0}}$ and after $n$ bounces $h_n=h_0e^{2n}$. Total distance
+$=h_0\dfrac{1+e^2}{1-e^2}$; total time $=\sqrt{\dfrac{2h_0}{g}}\cdot\dfrac{1+e}{1-e}$.}
+{Writing $e=h_1/h_0$. The coefficient of restitution is a ratio of \emph{speeds}, and heights go as the
+\emph{square} of speed, hence the square root.}
+{A ball dropped from \SI{10}{m} rebounds to \SI{2.5}{m}. Its coefficient of restitution is:}
+{$1$}{$0.75$}{$0.5$}{$0.25$\archans{C}{$e=\sqrt{h_1/h_0}=\sqrt{2.5/10}=\sqrt{0.25}=0.5$. Option
+(D) is the trap of taking the ratio of heights directly.}}
+
+\archq{Fraction of energy lost in a perfectly inelastic collision}
+{``Two bodies stick together, what fraction of the kinetic energy is lost?''}
+{Momentum gives $v=\dfrac{m_1u_1}{m_1+m_2}$ (target at rest), and the lost fraction is
+$\boxed{\dfrac{K_{\text{lost}}}{K_i}=\dfrac{m_2}{m_1+m_2}}$. So a light body hitting a heavy one loses nearly
+everything; a heavy hitting a light one loses almost nothing.}
+{Assuming half the energy is always lost, or using the striker's mass on top. The fraction depends on
+the mass ratio, with the \emph{target's} mass in the numerator.}
+{A \SI{2}{kg} body at \SI{3}{m/s} strikes a stationary \SI{4}{kg} body and they stick. The fraction of
+kinetic energy lost is:}
+{$\tfrac13$}{$\tfrac12$}{$\tfrac23$}{$\tfrac34$\archans{C}{Fraction lost
+$=\dfrac{m_2}{m_1+m_2}=\dfrac46=\dfrac23$. (Check: $K_i=\SI{9}{J}$, $v=\SI{1}{m/s}$,
+$K_f=\SI{3}{J}$.) Option (A) puts the striker's mass on top; (B) is the ``always half'' guess.}}
+
+\archq{Partially elastic collision using $e$}
+{``Two bodies collide with coefficient of restitution $e$, find the final velocities.''}
+{Use momentum conservation \emph{together with} the restitution equation
+$e=\dfrac{v_2-v_1}{u_1-u_2}$ (\S\ref{sec:partial12}). For equal masses with the target at rest this gives
+$v_1=\dfrac{(1-e)u}{2}$ and $v_2=\dfrac{(1+e)u}{2}$. Setting $e=1$ recovers the velocity swap;
+$e=0$ gives the common velocity $u/2$.}
+{Using energy conservation when $e<1$. Energy is \emph{not} conserved; the restitution equation
+replaces it.}
+{Two identical balls collide head-on, one at $u$ and one at rest, with $e=0.5$. Their final velocities
+are:}
+{$0$ and $u$}{$3u/4$ and $u/4$}{$u/2$ and $u/2$}{$u/4$ and $3u/4$\archans{D}{
+$v_1=\dfrac{(1-0.5)u}{2}=\dfrac u4$ and $v_2=\dfrac{(1+0.5)u}{2}=\dfrac{3u}{4}$. Momentum checks:
+$\tfrac u4+\tfrac{3u}4=u$.\ \checkmark\ Option (B) swaps them, which would have the striker pass
+through the ball ahead of it.}}
+
+
+\section{Practice Problems}\label{sec:practice12}
+
+The twenty problems below cover the whole of Part C, \chsref{ch:energy}{ch:collisions}. Each chains at
+least two ideas, as NEET and JEE questions usually do; the numbers come out clean if the physics is
+right. Take $g=\SI{10}{m/s^2}$ throughout, and attempt each fully before reading the worked answers.
+
+\begin{enumerate}[label=\textbf{\arabic*.},itemsep=4pt]
+\item \textbf{[Vector work $+$ work--energy theorem]} A force $\vF=(4\uhat{\imath}+3\uhat{\jmath})\,\si{N}$ acts
+on a \SI{2}{kg} body as it moves through displacement $\vc{d}=(4\uhat{\imath}-3\uhat{\jmath})\,\si{m}$; friction
+simultaneously does $\SI{-10}{J}$ of work. If the body started at \SI{2}{m/s}, find its final speed.
+
+\item \textbf{[Variable force]} A force $F(x)=(12x-3x^2)\,\si{N}$ ($x$ in metres) acts along $x$ on a
+\SI{4}{kg} body, which passes $x=0$ moving at \SI{3}{m/s} in the $+x$ direction. Find its speed at
+$x=\SI{4}{m}$.
+
+\item \textbf{[Average power, two energy sinks]} A pump raises \SI{200}{kg} of water per minute through
+\SI{10}{m} and ejects it at \SI{5}{m/s}. Find the power delivered to the water.
+
+\item \textbf{[Power--speed trade-off]} A \SI{1000}{kg} car has maximum engine power \SI{60}{kW} against a
+constant total resistance of \SI{1500}{N}. Find (a) its top speed, and (b) its acceleration at
+\SI{20}{m/s} with the engine at full power.
+
+\item \textbf{[Potential-energy landscape]} A particle moves in $U(x)=x^3-6x^2+9x$ (joules, $x$ in
+metres). Locate the equilibria, classify their stability, and find the force at $x=0$.
+
+\item \textbf{[Energy $+$ circular dynamics]} A block released from height $h$ on a smooth track must
+complete a vertical loop of radius $R$. Find the minimum $h$, and the normal force on the block at the
+\emph{bottom} of the loop when released from $h=3R$.
+
+\item \textbf{[Gravity feeding a spring]} A \SI{2}{kg} block slides from rest \SI{2.0}{m} down a smooth
+$30^\circ$ incline into a spring of stiffness \SI{200}{N/m} aligned with the incline. Find the maximum
+compression.
+
+\item \textbf{[Round trip on a rough incline]} A block projected up a $45^\circ$ rough incline returns to
+its start with exactly half its launch speed. Find $\mu$.
+
+\item \textbf{[System energy with friction]} A \SI{2}{kg} block on a table ($\mu=0.5$) is connected by a
+light inextensible string over a smooth light pulley to a hanging \SI{3}{kg} mass. Released from rest, find the common speed after the hanging
+mass falls \SI{1}{m}.
+
+\item \textbf{[Instantaneous power from kinematics]} A \SI{1}{kg} particle moves as $x(t)=t^3/3$ (SI).
+Find the power delivered to it at $t=\SI{2}{s}$.
+
+\item \textbf{[Elastic collision, unknown mass]} A ball of mass $m$ moving at speed $u$ strikes a
+stationary mass $M$ head-on and elastically, rebounding at $u/3$. Find $M$ and the fraction of the
+initial kinetic energy transferred to $M$.
+
+\item \textbf{[Perfectly inelastic in 2-D]} A \SI{2}{kg} body moving east at \SI{6}{m/s} collides and
+sticks with a \SI{4}{kg} body moving north at \SI{3}{m/s}. Find the final velocity (magnitude and
+direction) and the kinetic energy lost.
+
+\item \textbf{[Ballistic block on a rough floor]} A \SI{20}{g} bullet at \SI{500}{m/s} embeds in a
+\SI{1.98}{kg} block resting on a floor with $\mu=0.4$. How far does the block slide?
+
+\item \textbf{[Restitution: heights and total time]} A ball is dropped from \SI{1.25}{m} onto a floor
+with $e=0.8$. Find the rebound height after the \emph{second} bounce, and the total time until bouncing
+ceases.
+
+\item \textbf{[A chain of different collisions]} Ball A ($m$, speed $u$) strikes identical ball B (at
+rest) elastically; B then strikes C (mass $2m$, at rest) and sticks. What fraction of the original
+kinetic energy survives at the end?
+
+\item \textbf{[Symmetric partial restitution]} Two identical balls approach head-on, each at speed $u$,
+and collide with $e=0.5$. Find their final velocities and the fraction of kinetic energy lost.
+
+\item \textbf{[Pendulum--collision--friction, three stages]} A \SI{1}{kg} bob on a string of length
+$\ell=\SI{1}{m}$ is
+released from rest with the string horizontal. At the lowest point it strikes a \SI{1}{kg} block head-on
+and elastically; the block then
+slides on a floor with $\mu=0.5$. How far does the block slide, and what does the bob do afterwards?
+
+\item \textbf{[Spring pushing two masses apart]} A compressed spring storing \SI{12}{J} is released
+between a \SI{1}{kg} and a \SI{3}{kg} block on a smooth floor. Find both final speeds and each block's
+kinetic energy. Which block gets more, and why?
+
+\item \textbf{[Impulse at a wall]} A \SI{0.2}{kg} ball hits a wall normally at \SI{25}{m/s} and rebounds
+with $e=0.8$. If contact lasts \SI{10}{ms}, find the impulse on the wall and the average force.
+
+\item \textbf{[Scaling with $P\propto v^3$]} At top speed an engine's power is spent entirely against
+aerodynamic drag, which grows as the square of the speed ($F=cv^2$, with $c$ a constant). If the engine
+power is doubled, by what percentage does the top speed rise?
+\end{enumerate}
+
+\subsection*{Answers}
+\begin{enumerate}[label=\textbf{\arabic*.},itemsep=5pt]
+\item Two forces do work, so add their works to get the net work: $W_{\vF}=\vF\cdot\vc{d}=(4)(4)+(3)(-3)=\SI{7}{J}$;
+$W_{\text{net}}=7-10=\SI{-3}{J}$.
+$K_i=\tfrac12(2)(2^2)=\SI{4}{J}$, so $K_f=\SI{1}{J}$ and $v_f=\sqrt{2K_f/m}=\SI{1}{m/s}$. \ans{\SI{1}{m/s}}
+
+\item The force varies, so integrate for the work, then apply the work--energy theorem:
+$W=\int_0^4(12x-3x^2)\,dx=\big[6x^2-x^3\big]_0^4=96-64=\SI{32}{J}$. Then
+$\tfrac12(4)v^2=\tfrac12(4)(3^2)+32=\SI{50}{J}$, so $v=\SI{5}{m/s}$. (The body must be moving at $x=0$:
+there $F=0$, and a body at rest at $x=0$ would stay there.) \ans{\SI{5}{m/s}}
+
+\item Each kilogram of water gains $gh$ of potential and $\tfrac12v^2$ of kinetic energy; the mass pumped
+per second is $\dot m=200/60\,$kg/s. So $P=\dot m\big(gh+\tfrac12v^2\big)=\tfrac{200}{60}(100+12.5)
+=\SI{375}{W}$. \ans{\SI{375}{W}}
+
+\item (a) At top speed, drive force $=$ resistance: $v_{\max}=P/F=60000/1500=\SI{40}{m/s}$.
+(b) At \SI{20}{m/s} the engine supplies $F=P/v=\SI{3000}{N}$; net $=\SI{1500}{N}$;
+$a=\SI{1.5}{m/s^2}$. \ans{\SI{40}{m/s}; \SI{1.5}{m/s^2}}
+
+\item $F=-\dfrac{dU}{dx}=-(3x^2-12x+9)=-3(x-1)(x-3)$. Equilibria $x=1,3$. Writing $U''$ for
+$d^2U/dx^2$, $U''=6x-12$: at $x=1$,
+$U''<0$ (maximum, \emph{unstable}); at $x=3$, $U''>0$ (minimum, \emph{stable}). At $x=0$:
+$F=\SI{-9}{N}$ (towards $-x$). \ans{$x=1$ unstable, $x=3$ stable; $F(0)=\SI{-9}{N}$}
+
+\item At the top the normal force can only push down, so the centripetal force must be at least $mg$:
+$v_{\text{top}}^2\ge gR$ (\chref{ch:circdyn}). Energy from $h$ to the top, divided by $m$:
+$g h=\tfrac12 v_{\text{top}}^2+g(2R)\Rightarrow h_{\min}=\tfrac52 R$. For $h=3R$: at the bottom
+$v^2=2g(3R)=6gR$, and Newton's law on the circle gives $N-mg=\dfrac{mv^2}{R}=6mg$, so $N=7mg$.
+\ans{$h_{\min}=2.5R$; $N=7mg$}
+
+\item The spring force varies, so use energy. At maximum compression $x$ the block is momentarily at rest,
+having descended $d+x$ along the incline ($d=\SI{2.0}{m}$), so gravitational energy lost equals spring
+energy stored:
+$mg\sin30^\circ\,(d+x)=\tfrac12kx^2$. With numbers: $2(10)(0.5)(2.0+x)=100x^2\Rightarrow
+10x^2-x-2=0$, so $x=\dfrac{1+\sqrt{1+80}}{20}=\dfrac{1+9}{20}=\SI{0.5}{m}$ (the other root,
+$-0.4$, is unphysical). Check: $10(2.5)=25=100(0.5)^2$.\ \checkmark \ans{\SI{0.5}{m}}
+
+\item Let $u$ be the launch speed, $v=u/2$ the return speed, $s$ the distance up the slope and
+$\theta=45^\circ$. Friction $\mu mg\cos\theta$ opposes the motion both ways. Energy per unit mass, up:
+$\tfrac12u^2=gs(\sin\theta+\mu\cos\theta)$; down: $\tfrac12v^2=gs(\sin\theta-\mu\cos\theta)$. Dividing
+removes the unknown $s$.
+Given $v=u/2$: $\dfrac{\sin\theta-\mu\cos\theta}{\sin\theta+\mu\cos\theta}=\dfrac14\Rightarrow
+\mu=\tfrac35\tan\theta=\tfrac35$ at $45^\circ$. \ans{$\mu=0.6$}
+
+\item Treat block ($m_1=\SI{2}{kg}$) and hanging mass ($m_2=\SI{3}{kg}$) as one system, so the tension
+does no net work. As $m_2$ falls $h=\SI{1}{m}$, gravity supplies $m_2gh=\SI{30}{J}$ and friction over the
+block's equal slide costs $\mu m_1gh=\SI{10}{J}$; the rest is kinetic:
+$\tfrac12(m_1+m_2)v^2=20\Rightarrow v^2=8$, $v=2\sqrt2\approx\SI{2.83}{m/s}$.
+\ans{$2\sqrt{2}\approx\SI{2.83}{m/s}$}
+
+\item $P=Fv$ needs both force and velocity, so differentiate: $v=dx/dt=t^2$, $a=dv/dt=2t$, $F=ma=2t$,
+so $P=Fv=2t^3$. At $t=2$: $P=\SI{16}{W}$. \ans{\SI{16}{W}}
+
+\item Use the elastic formula for a target at rest, with the rebound velocity $-u/3$ (negative: it
+reverses): $v_1=\dfrac{m-M}{m+M}u=-\dfrac{u}{3}\Rightarrow 3(M-m)=m+M\Rightarrow M=2m$. Then
+$v_2=\dfrac{2m}{m+M}u=\dfrac{2u}{3}$ and the transferred fraction is
+$\dfrac{\tfrac12(2m)(2u/3)^2}{\tfrac12mu^2}=\dfrac89$. \ans{$M=2m$; $8/9$}
+
+\item Sticking means momentum only, as a vector. With $\uhat{\imath}$ east and $\uhat{\jmath}$ north,
+the total momentum is $\vc P=(12\,\uhat{\imath}+12\,\uhat{\jmath})\,\si{kg.m/s}$; $v=\dfrac{|\vc P|}{6}=
+\dfrac{12\sqrt2}{6}=2\sqrt2\approx\SI{2.83}{m/s}$ at $45^\circ$ north of east.
+$K_i=36+18=\SI{54}{J}$, $K_f=\tfrac12(6)(8)=\SI{24}{J}$: lost \SI{30}{J}. \emph{Momentum is conserved
+per component; energy is not.} \ans{$2\sqrt2\,\si{m/s}$ at $45^\circ$ north of east; \SI{30}{J} lost}
+
+\item Stage 1 (collision, momentum only): $v=\dfrac{0.02\times500}{2.0}=\SI{5}{m/s}$. Stage 2 (sliding,
+work--energy): friction $\mu Mg$ on the combined mass $M=\SI{2.0}{kg}$ removes $\tfrac12Mv^2$, so
+$d=\dfrac{v^2}{2\mu g}=\dfrac{25}{8}=\SI{3.125}{m}$. \ans{\SI{3.125}{m}}
+
+\item Heights scale by $e^2$ per bounce: after two, $h_2=h_0e^4=1.25(0.8)^4=\SI{0.512}{m}$. Total time:
+first fall $t_0=\sqrt{2h_0/g}=\SI{0.5}{s}$; each later up-and-down trip lasts $e$ times the one before,
+so the times form a geometric series summing to $T=t_0\dfrac{1+e}{1-e}=0.5\times9=\SI{4.5}{s}$ (the
+bouncing-ball problem type). \emph{Infinitely many bounces, finite time.}
+\ans{\SI{0.512}{m}; \SI{4.5}{s}}
+
+\item A--B elastic, equal masses: swap, so A stops and B moves at $u$. B--C sticky:
+$v=\dfrac{mu}{3m}=\dfrac u3$. Surviving fraction $=\dfrac{\tfrac12(3m)(u/3)^2}{\tfrac12mu^2}=\dfrac13$.
+\ans{$\tfrac13$}
+
+\item The total momentum is zero ($mu-mu$), so they leave with equal and opposite velocities, of size
+$v$. Separation
+$=e\times$approach: $2v=0.5(2u)\Rightarrow v=u/2$ each, reversed. Energy lost
+$=1-e^2=\SI{75}{\percent}$ (all the kinetic energy here is relative motion, since the centre of mass is
+at rest). \ans{$u/2$ each, reversed; \SI{75}{\percent}}
+
+\item Stage 1 (energy): the bob falls through $\ell$, so $v=\sqrt{2g\ell}=\sqrt{20}=2\sqrt5\,\si{m/s}$ at
+the bottom. Stage 2 (equal-mass
+elastic): velocities swap, the bob \emph{stops dead}, the block leaves at $2\sqrt5$. Stage 3
+(work--energy): $d=\dfrac{v^2}{2\mu g}=\dfrac{20}{10}=\SI{2}{m}$. \ans{\SI{2}{m}; the bob hangs at rest}
+
+\item The spring is internal, so momentum stays zero: $(1)v_1=(3)v_2$, that is, $v_1=3v_2$ (in opposite
+directions). All the stored energy becomes kinetic: $\tfrac12(1)v_1^2+\tfrac12(3)v_2^2=12\Rightarrow6v_2^2=12$, so
+$v_2=\sqrt2\,\si{m/s}$, $v_1=3\sqrt2\,\si{m/s}$; $K_1=\SI{9}{J}$, $K_2=\SI{3}{J}$. The \emph{lighter} block gets more:
+equal momenta mean $K=p^2/2m$, inversely proportional to mass. \ans{$3\sqrt2$ and $\sqrt2\,\si{m/s}$; \SI{9}{J} and \SI{3}{J}}
+
+\item Fixed wall, so the rebound speed is $eu=\SI{20}{m/s}$. Impulse is change of momentum, and the
+velocity reverses, so the speeds add: $J=0.2(25+20)=\SI{9}{N.s}$ (the wall receives the same, by the third
+law). Average force $\bar F=J/\Delta t=9/0.01=\SI{900}{N}$.
+\ans{\SI{9}{N.s}; \SI{900}{N}}
+
+\item At top speed $P=Fv=(cv^2)v=cv^3$, so $v\propto P^{1/3}$. Doubling $P$ multiplies $v$ by
+$2^{1/3}\approx1.26$: about a \SI{26}{\percent} rise. \emph{Eight times the power for double the
+speed, read backwards.} \ans{$\approx\SI{26}{\percent}$}
+\end{enumerate}
+
+\section{Challenge Problems}\label{sec:challenge12}
+The three problems below join the methods of \chsref{ch:energy}{ch:collisions}, as harder examinations
+do: a collision governed by momentum next to a motion governed by energy, or an energy argument with a
+hidden subtlety. Finding the boundary between the stages is most of the work. Take
+$g=\SI{9.8}{m/s^2}$.
+
+\begin{challengebox}{Spring, slide, and stop (builds on energy methods)}
+A spring of stiffness $k=\SI{200}{N/m}$ is compressed by $x_0=\SI{0.10}{m}$ and released, launching a
+\SI{0.50}{kg} block (not attached to the spring) along a rough horizontal floor with $\mu=0.3$. (a) How far
+does the block travel, from its release point, before stopping? (b) Where is the block moving fastest,
+and at what speed?
+\challengeans{(a) The spring force varies and the block ends at rest, so energy accounting from start to
+finish avoids the motion in between: all the spring's stored energy is eventually removed by friction,
+which acts from the moment of release with $f=\mu mg=0.3\times0.5\times9.8=\SI{1.47}{N}$.
+\[
+\tfrac12 k x_0^2=f\,d\ \Rightarrow\ d=\frac{\tfrac12(200)(0.10)^2}{1.47}
+=\frac{1.0}{1.47}\approx\SI{0.68}{m}.
+\]
+The block does start and does leave the spring: the initial spring force, \SI{20}{N}, exceeds $f$, and
+at the natural length the block still has $1.0-1.47\times0.10\approx\SI{0.85}{J}$ of kinetic energy.
+
+(b) The tempting answer, ``at the moment it leaves the spring,'' is wrong. The block speeds up only while
+the spring force exceeds friction, $kx>f$, so the maximum speed occurs at compression
+$x_1=f/k=1.47/200=\SI{7.35}{mm}$, slightly \emph{before} the natural length. Between release and $x_1$,
+\[
+\tfrac12mv_{\max}^2=\tfrac12k\big(x_0^2-x_1^2\big)-f\,(x_0-x_1)\approx0.9946-0.1362=\SI{0.858}{J},
+\]
+so $v_{\max}\approx\SI{1.853}{m/s}$, against \SI{1.847}{m/s} at the natural length. The difference is
+small here, but the principle (maximum speed where the net force vanishes) is what examiners test.}
+\end{challengebox}
+
+\begin{challengebox}{A bullet through a pendulum bob (builds on collisions, energy and circular motion)}
+A bullet of mass $m=\SI{20}{g}$ travelling horizontally at $u=\SI{350}{m/s}$ passes straight through a
+block of mass $M=\SI{1.0}{kg}$ hanging at rest on a light string of length $\ell=\SI{0.70}{m}$, and
+emerges at $u'=\SI{105}{m/s}$. Treat the block as a particle and neglect the mass the bullet loses. (a)
+Find the block's speed $v_B$ just after the bullet leaves. (b) Does the block complete a vertical circle?
+If not, find the angle at which the string goes slack. (c) What fraction of the bullet's kinetic energy
+is dissipated in the block?
+\challengeans{\textbf{(a) Collision: momentum only.} The bullet passes through in a very short time, so
+the block barely moves, the string stays vertical and exerts no horizontal impulse; horizontal momentum is
+conserved. Kinetic energy is not, because the bullet tears its way through.
+\[
+mu=mu'+Mv_B\ \Rightarrow\ v_B=\frac{m(u-u')}{M}=\frac{0.020\times(350-105)}{1.0}=\SI{4.9}{m/s}.
+\]
+\textbf{(b) Swing: energy plus the radial equation.} A particle on a string completes the circle only if
+$v_B^2\ge5g\ell$ (\chref{ch:circdyn}), and rises above the pivot's level only if $v_B^2>2g\ell$. Here
+$v_B^2=\SI{24.01}{m^2/s^2}$, while $5g\ell=\SI{34.3}{m^2/s^2}$ and $2g\ell=\SI{13.72}{m^2/s^2}$. Since
+$2g\ell<v_B^2<5g\ell$, the block rises above the level of the pivot but the string goes slack before the
+top. Let $\theta$ be the angle of the string from the downward vertical, $v$ the block's speed there and
+$T$ the tension. Energy gives $v^2=v_B^2-2g\ell(1-\cos\theta)$, and the radial equation (tension plus the
+inward component of gravity, $-Mg\cos\theta$, supply $Mv^2/\ell$) gives
+$T=\dfrac{Mv^2}{\ell}+Mg\cos\theta$. The string goes slack when $T=0$, that is when
+$v^2=-g\ell\cos\theta$. Eliminating $v^2$,
+\[
+\cos\theta=\frac{2g\ell-v_B^2}{3g\ell}=\frac{13.72-24.01}{20.58}=-\frac12\ \Rightarrow\ \theta=120^\circ,
+\]
+which is $30^\circ$ above the horizontal through the pivot, at a height $\ell(1-\cos\theta)=1.5\,\ell=\SI{1.05}{m}$
+above the lowest point. There the speed is $v=\sqrt{g\ell/2}\approx\SI{1.85}{m/s}$, and the block leaves the
+circle as a projectile.
+
+\textbf{(c) Energy dissipated.} Before the collision there is $\tfrac12(0.020)(350)^2=\SI{1225}{J}$; just
+after it, the bullet keeps $\tfrac12(0.020)(105)^2=\SI{110.25}{J}$ and the block has
+$\tfrac12(1.0)(4.9)^2\approx\SI{12.0}{J}$. The difference, about \SI{1103}{J}, is a fraction
+$1102.7/1225\approx\SI{90}{\percent}$, which goes into heat and deformation. Only about \SI{1}{\percent}
+of the bullet's energy reaches the block as kinetic energy, so the energy method could not have been
+used through the collision.}
+\end{challengebox}
+
+\begin{challengebox}{Two stacked balls (builds on elastic collisions in a moving frame)}
+A small ball of mass $m$ rests on top of a large ball of mass $M=3m$, with a tiny gap between them, and
+the pair is dropped from height $h$ onto a hard floor. All collisions are elastic and the balls' sizes
+are negligible compared with $h$. How high does the small ball rise, and what does the large ball do?
+\challengeans{The trick is to split the event into two separate collisions. Both balls reach the floor
+region at speed $v=\sqrt{2gh}$. Because of the gap, the large
+ball bounces off the floor first and is moving \emph{up} at $v$ (elastic, fixed floor: rebound with
+$e=1$) while the small ball is still moving \emph{down} at $v$. Now apply the two-body elastic formulas,
+with the small ball as body~1, upward positive,
+
+$u_{\text{small}}=-v$ and $u_{\text{large}}=+v$:
+\[
+v_{\text{small}}=\frac{m-M}{m+M}(-v)+\frac{2M}{m+M}(+v)=\frac{3M-m}{M+m}\,v=2v,
+\]
+\[
+v_{\text{large}}=\frac{M-m}{M+m}(+v)+\frac{2m}{M+m}(-v)=\frac{M-3m}{M+m}\,v=0.
+\]
+The large ball is left at rest on the floor, and the small ball leaves at $2v$, so it rises to
+$(2v)^2/2g=4h$. Check: the total energy $(m+3m)gh=4mgh$ has all gone into the small ball,
+$mg(4h)=4mgh$. For $M\gg m$ the same formulas give $3v$ and a height of $9h$, which is why a tennis
+ball dropped on a basketball shoots so high.}
+\end{challengebox}
+
+
+\section*{Looking Back on Part C}
+\addcontentsline{toc}{section}{Looking Back on Part C}
+
+\textbf{Part C introduced the conserved quantities.}
+\begin{itemize}
+\item \textbf{Work and energy (\chref{ch:energy}).} Work is $\vF\cdot\vc{d}$: only the component along the motion
+counts, so a perpendicular force does none. The work--energy theorem $W_{\text{net}}=\Delta K$ holds for
+\emph{any} force and trades the whole history of a motion for its endpoints; power $P=\vF\cdot\vv$ is the
+rate of that work. For conservative forces we define a potential energy with $F=-dU/dx$, so a minimum of $U$
+is a stable equilibrium and a maximum an unstable one. When only conservative forces do work, $K+U$ is
+conserved; in general $\Delta(K+U)=W_{\text{nc}}$, and friction from a fixed surface drains mechanical energy
+to heat.
+\item \textbf{Collisions (\chref{ch:collisions}).} One asymmetry: \emph{momentum is conserved in every
+collision between free bodies} (the internal third-law forces cancel), but \emph{kinetic energy only in
+an elastic one}. The coefficient of restitution $e$ supplies the second equation for any head-on
+collision; a fraction $1-e^2$ of the kinetic energy of relative motion is lost, the most when the bodies
+stick.
+\end{itemize}
+\textbf{The thread into Part D:} energy and momentum were built for particles. Now we give bodies size and
+spin: momentum gains a rotational twin, angular momentum, conserved when there is no external torque, and
+kinetic energy gains a rotational part.

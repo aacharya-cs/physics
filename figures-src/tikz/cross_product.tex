@@ -1,0 +1,45 @@
+% cross_product: magnitude and direction of A x B (Ch 14, fig:cross)
+% Left (in the page): A = 3.4 along x, B = 2.2 at theta = 60 deg.  The parallelogram they
+%   span has base A and height B sin(theta), so its area is AB sin(theta) = |A x B|.
+% Right (oblique 3D, right-handed: x towards the reader, y to the right, z up): A along
+%   +y, B in the xy-plane at theta = 70 deg from A, turned towards -x, so that
+%   A x B = AB sin(theta) (y-hat x (-x-hat)) = +AB sin(theta) z-hat: up, perpendicular to
+%   the plane of A and B.  Fingers curl from A to B, thumb gives A x B.  B x A = -A x B
+%   points down.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % ------------------------------------------------------- left: the magnitude
+  \def\la{3.4} \def\lb{2.2} \def\th{60}
+  \pgfmathsetmacro\bx{\lb*cos(\th)} \pgfmathsetmacro\by{\lb*sin(\th)}
+  \fill[cPlum!14] (0,0) -- (\la,0) -- (\la+\bx,\by) -- (\bx,\by) -- cycle;
+  \draw[cPlum,hair line] (\la,0) -- (\la+\bx,\by) -- (\bx,\by);
+  % height B sin(theta), with its right angle
+  \draw[right angle] (\bx+0.18,0) |- (\bx,0.18);
+  \draw[dim] (\bx,0) -- (\bx,\by);
+  \node[anchor=west,cSteel] at (\bx+0.06,0.62) {$B\sin\theta$};
+  \node[cPlum,anchor=west] at (\bx+0.75,1.38) {area $=|\A\ex\B|$};
+  % theta
+  \draw[angle arc] (0.55,0) arc[start angle=0,end angle=\th,radius=0.55];
+  \node at ({\th/2}:0.78) {$\theta$};
+  % the vectors
+  \draw[vector,cPrim] (0,0) -- (\la,0) node[pos=0.5,anchor=north,inner sep=3pt] {$\A$};
+  \draw[vector,cFor] (0,0) -- (\bx,\by) node[pos=0.55,anchor=south east,inner sep=1.5pt] {$\B$};
+  % ------------------------------------------------------ right: the direction
+  % oblique axes: x towards the reader, y to the right, z up (right-handed)
+  \begin{scope}[shift={(6.6,0.15)},x={(-0.45cm,-0.55cm)},y={(1cm,0cm)},z={(0cm,1cm)}]
+    \def\a{2.1} \def\b{1.8} \def\t{70}
+    % the plane of A and B, shown by their parallelogram
+    \fill[cPlum!14] (0,0,0) -- (0,\a,0) -- ({-\b*sin(\t)},{\a+\b*cos(\t)},0) -- ({-\b*sin(\t)},{\b*cos(\t)},0) -- cycle;
+    \draw[cPlum,hair line] (0,\a,0) -- ({-\b*sin(\t)},{\a+\b*cos(\t)},0) -- ({-\b*sin(\t)},{\b*cos(\t)},0);
+    % B x A, downward (behind the plane, so dashed)
+    \draw[vector,hidden,cSteel] (0,0,0) -- (0,0,-1.3)
+        node[anchor=west,inner sep=2pt] {$\B\ex\A$};
+    % the curl of the fingers from A to B
+    \draw[cAcc,thin line,-smallhead] plot[domain=8:{\t-6},samples=30,variable=\p]
+        ({-1.35*sin(\p)},{1.35*cos(\p)},0);
+    \node[cAcc,anchor=west,inner sep=2pt,font=\footnotesize] at ({-1.35*sin(25)},{1.35*cos(25)},0) {curl};
+    % the vectors
+    \draw[vector,cPrim] (0,0,0) -- (0,\a,0) node[anchor=north,inner sep=3pt] {$\A$};
+    \draw[vector,cFor] (0,0,0) -- ({-\b*sin(\t)},{\b*cos(\t)},0) node[anchor=south east,inner sep=1pt] {$\B$};
+    \draw[vector,cPlum] (0,0,0) -- (0,0,2.0) node[anchor=south] {$\A\ex\B$};
+  \end{scope}
+\end{tikzpicture}

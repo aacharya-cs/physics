@@ -1,0 +1,52 @@
+% energy_pendulum: a pendulum trades U for K and back (Ch 11, fig:energycons)
+% String length L = 34 mm, amplitude 50 degrees, swinging left to right.
+% Height of the extremes above the lowest point: h = L(1 - cos 50) = 12.1 mm.
+% Half height (U = K): 1 - cos(t) = (1 - cos 50)/2  ->  t = 34.8 degrees.
+% Speeds: v = sqrt(2g(h - y)), so v(half height) = v_max/sqrt 2; the arrows
+% are 12 mm and 8.5 mm long.  U is measured from the lowest point, so the bars
+% show U = mgh, K = 0 at the extremes; U = K = mgh/2 at half height; U = 0,
+% K = mgh at the bottom.  The total is the same in every bar.
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \def\L{34}\def\A{50}\def\Th{34.8}\def\r{2.4}
+  \pgfmathsetmacro\h{\L*(1-cos(\A))}
+  % support and pivot
+  \path[ground,draw=none] (-11,0) rectangle (11,1.8);
+  \draw[ground] (-11,0) -- (11,0);
+  \fill[cInk] (0,0) circle[radius=0.7];
+  % swept arc
+  \draw[orbitpath] (-90-\A:\L) arc[start angle=-90-\A,end angle=-90+\A,radius=\L];
+  % height h, measured from the lowest point
+  \draw[dimtick] (-90-\A:\L) ++(-\r-0.8,0) -- (-40,{-\L+\h});
+  \draw[dimtick] (-\r-0.8,-\L) -- (-40,-\L);
+  \draw[dim] (-38,-\L) -- (-38,{-\L+\h}) node[midway,left=0.5mm,cSteel] {$h$};
+  % strings and bobs: extremes, half height (faint), bottom
+  \foreach \a in {-\A,\A,0}{
+    \draw[thin line,cSteel] (0,0) -- (-90+\a:\L);
+    \draw[body] (-90+\a:\L) circle[radius=\r];
+  }
+  \draw[hair line,cGrey] (0,0) -- (-90-\Th:\L);
+  \draw[body,ghost] (-90-\Th:\L) circle[radius=\r];
+  % velocities: tangent to the arc, length proportional to speed
+  \draw[velocity] (0,-\L) ++(\r+0.6,0) -- ++(12,0)
+    node[anchor=north west,inner sep=1pt] {$v_{\max}$};
+  \draw[velocity] (-90-\Th:\L) ++(-\Th:\r+0.6) -- ++(-\Th:8.5);
+  % labels
+  \node[anchor=south east,align=right] at ($(-90-\A:\L)+(-2,1.6)$)
+    {at rest\\ $K=0$};
+  \node[anchor=south west,align=left] at ($(-90+\A:\L)+(2,1.6)$)
+    {at rest\\ $K=0$};
+  \node[anchor=east,inner sep=1pt] at ($(-90-\Th:\L)+(-\r-0.6,0)$) {$U=K$};
+  \node[anchor=north,align=center] at (0,{-\L-\r-1.2})
+    {lowest point: $U=0$,\\ $K=\tfrac12mv_{\max}^2=mgh$};
+  % energy bars
+  \def\bh{30}\def\by{-36}\def\bw{10}
+  \foreach \x/\u/\lab in {49/1/extreme, 65/0.5/half height, 81/0/bottom}{
+    \draw[U bar] (\x,\by) rectangle (\x+\bw,\by+\u*\bh);
+    \draw[K bar] (\x,\by+\u*\bh) rectangle (\x+\bw,\by+\bh);
+    \draw[outline] (\x,\by) rectangle (\x+\bw,\by+\bh);
+    \node[anchor=north,font=\footnotesize] at (\x+\bw/2,\by-1) {\lab};
+  }
+  \node[cPlum,anchor=east] at (48,\by+0.5*\bh) {$U$};
+  \node[cAcc,anchor=west] at (92,\by+0.5*\bh) {$K$};
+  \node[anchor=south] at (70,\by+\bh+1) {$K+U=mgh$ throughout};
+\end{tikzpicture}

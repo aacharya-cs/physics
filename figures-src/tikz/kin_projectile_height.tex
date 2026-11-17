@@ -1,0 +1,40 @@
+% kin_projectile_height: a projectile launched upward from a height (Ch 4, fig:projheight)
+% Drawn with the numbers of the chapter's worked example: v0 = 20 m/s at 30 degrees
+% from a 15 m tower, g = 10 m/s^2.  Then v_x = 17.32 m/s, v_y0 = 10 m/s, the apex is
+% reached at t = 1 s (5 m above the launch point, 17.3 m out) and the ground at t = 3 s
+% (52.0 m out).  Path: y = H0 + x tan(theta) - g x^2 / (2 v0^2 cos^2 theta), exact.
+% Scale 0.17 cm per metre.  Because x = v_x t grows uniformly, the horizontal spans
+% of the ascent (1 s) and the descent (2 s) are in the ratio of their times.
+\begin{tikzpicture}[x=0.17cm,y=0.17cm]
+  \def\Ho{15}
+  \pgfmathsetmacro\vx{20*cos(30)}
+  \pgfmathsetmacro\xa{\vx*1}          % apex, t = 1 s
+  \pgfmathsetmacro\xl{\vx*2}          % back at launch level, t = 2 s
+  \pgfmathsetmacro\xg{\vx*3}          % ground, t = 3 s
+  % tower and ground
+  \path[ground,draw=none] (-9,-0.95) rectangle (\xg+5,0);
+  \draw[outline] (-9,0) -- (\xg+5,0);
+  \filldraw[fill=cSlope,draw=cInk,thin line] (-6,0) rectangle (0,\Ho);
+  \draw[dim] (-7.5,0) -- node[left,cSteel] {$H_0$} (-7.5,\Ho);
+  % launch level
+  \draw[guide] (0,\Ho) -- (\xl+6,\Ho);
+  \node[cSteel,anchor=west,font=\footnotesize] at (\xl+6.3,\Ho) {launch level};
+  % the path: ascent and descent in two colours
+  \draw[cAcc,curve] plot[domain=0:\xa,samples=30]
+    (\x,{\Ho+\x*tan(30)-\x*\x/(80*cos(30)^2)});
+  \draw[cPrim,curve] plot[domain=\xa:\xg,samples=70]
+    (\x,{\Ho+\x*tan(30)-\x*\x/(80*cos(30)^2)});
+  \node[point mass] at (\xa,\Ho+5) {};
+  \node[anchor=south] at (\xa,\Ho+5.5) {apex};
+  \node[point mass,fill=cSteel] at (\xl,\Ho) {};
+  % launch velocity and angle
+  \draw[velocity] (0,\Ho) -- ++(30:11) node[above left=-1pt,cFor] {$\vv_0$};
+  \draw[angle arc] (4,\Ho) arc[start angle=0,end angle=30,radius=4];
+  \node at ($(0,\Ho)+(15:5.4)$) {$\theta$};
+  % horizontal spans: x grows uniformly with t, so these lengths are the times
+  \draw[dimtick] (\xa,\Ho+5) -- (\xa,-6.6);
+  \draw[dimtick] (0,0) -- (0,-6.6);
+  \draw[dimtick] (\xg,0) -- (\xg,-6.6);
+  \draw[dim,cAcc] (0,-5.2) -- node[below,text=cAcc] {ascent} (\xa,-5.2);
+  \draw[dim,cPrim] (\xa,-5.2) -- node[below,text=cPrim] {descent} (\xg,-5.2);
+\end{tikzpicture}

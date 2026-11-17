@@ -1,0 +1,47 @@
+% grav_cannon: Newton's cannon (Ch 16, fig:cannon)
+% Every path is an exact Kepler conic, not a numerical integration.
+% Units: Earth radius R = 1, GM = 1, launch radius h (an exaggerated mountain).
+% A horizontal launch at speed v = k v_c, with v_c = sqrt(GM/h), gives a conic
+% with semi-latus rectum p = h k^2 and the launch point at an apsis:
+%   k < 1: launch point is the APOAPSIS,  r = p/(1 - e cos phi), e = 1 - k^2
+%   k > 1: launch point is the PERIAPSIS, r = p/(1 + e cos phi), e = k^2 - 1
+% (phi measured from the launch point, in the direction of motion).
+% A "too slow" path hits the ground where r = R:  cos phi = (1 - p/R)/e.
+% Its periapsis p/(1+e) is below R, so it necessarily lands: the physics check.
+\begin{tikzpicture}[x=1.15cm,y=1.15cm]
+  \def\h{1.32}
+  % Earth and the mountain
+  \draw[planet] (0,0) circle[radius=1];
+  \node at (0,-0.12) {Earth};
+  \filldraw[fill=cRock,draw=cInk,thin line] (-0.2,0.98) -- (0,\h) -- (0.2,0.98) -- cycle;
+  \fill[cInk] (-0.03,\h-0.01) rectangle (0.13,\h+0.045);
+  % circular orbit, k = 1
+  \draw[cPrim,curve,dash pattern=on 5pt off 3pt] (0,0) circle[radius=\h];
+  % two shots that are too slow, k = 0.55 and 0.80 (launch point = apoapsis)
+  \foreach \k/\col in {0.55/cAcc, 0.80/cAcc}{
+    \pgfmathsetmacro\p{\h*\k*\k}
+    \pgfmathsetmacro\e{1-\k*\k}
+    \pgfmathsetmacro\phiend{acos((1-\p)/\e)}
+    \draw[\col,curve] plot[domain=0:\phiend,samples=60,variable=\t]
+      ({90-\t}:{\p/(1-\e*cos(\t))});
+  }
+  % faster than circular: a larger ellipse, k = 1.12 (launch point = periapsis)
+  \pgfmathsetmacro\p{\h*1.12*1.12}
+  \pgfmathsetmacro\e{1.12*1.12-1}
+  \draw[cTeal,curve] plot[domain=0:360,samples=150,variable=\t]
+      ({90-\t}:{\p/(1+\e*cos(\t))});
+  % escape: a parabola, k = sqrt 2, e = 1, p = 2h
+  \begin{scope}
+    \clip (-2.9,-2.9) rectangle (3.4,2.55);
+    \draw[cFor,curve] plot[domain=0:118,samples=80,variable=\t]
+      ({90-\t}:{2*\h/(1+cos(\t))});
+  \end{scope}
+  % labels
+  \draw[leader,cAcc] (0.86,0.55) -- (1.42,1.42);
+  \node[cAcc,anchor=south west,align=left,inner sep=1pt] at (1.42,1.42) {too slow:\\ falls back};
+  \draw[leader,cPrim] (-0.96,-0.91) -- (-1.4,-1.25);
+  \node[cPrim,anchor=north east,align=right] at (-1.4,-1.25) {$v_o=\sqrt{GM/r}$:\\ circular orbit};
+  \node[cTeal,anchor=east,align=right] at (-1.6,1.1) {faster:\\ a bigger\\ ellipse};
+  \node[cFor,anchor=south west] at (1.25,2.2) {$v_e=\sqrt{2GM/r}$: escapes};
+  \node[note,anchor=north] at (0.25,-2.3) {an orbit is a fall that never lands};
+\end{tikzpicture}

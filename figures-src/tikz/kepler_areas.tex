@@ -1,0 +1,44 @@
+% kepler_areas: equal areas in equal times (Ch 17, fig:kepler...)
+% Ellipse a = 1.8, e = 0.62, b = a sqrt(1-e^2), Sun at the focus (c,0), c = ae.
+% A point at eccentric anomaly E is (a cos E, b sin E).  The area swept from the
+% focus between E1 and E2 is (ab/2)[M(E2) - M(E1)] with M = E - e sin E (Kepler's
+% equation), so two sectors with equal Delta M have equal areas and are crossed
+% in equal times.  Both sectors here span Delta M = 0.55 rad, centred on
+% perihelion (M = 0) and aphelion (M = pi).  E is found from M by Newton's method.
+% Velocity arrows: v_p / v_a = (1+e)/(1-e) = 4.26 (from conservation of L).
+\begin{tikzpicture}[x=1.2cm,y=1.2cm]
+  \pgfmathsetmacro\a{1.8}
+  \pgfmathsetmacro\e{0.62}
+  \pgfmathsetmacro\b{\a*sqrt(1-\e*\e)}
+  \pgfmathsetmacro\c{\a*\e}
+  \def\dM{0.55}
+  % solve E - e sin E = M by Newton's method (radians)
+  \newcommand\keplerE[2]{% #1 = M, result in macro #2
+    \pgfmathsetmacro#2{#1}%
+    \foreach \i in {1,...,8}{%
+      \pgfmathsetmacro\tmp{#2-(#2-\e*sin(#2 r)-#1)/(1-\e*cos(#2 r))}%
+      \global\let#2\tmp}}
+  \keplerE{\dM/2}{\Ep}              % perihelion sector: E from -Ep to +Ep
+  \keplerE{pi-\dM/2}{\Ea}           % aphelion sector:   E from Ea to 2pi - Ea
+  % the two sectors
+  \filldraw[strip] (\c,0) -- plot[domain=-\Ep:\Ep,samples=40,variable=\t]
+      ({\a*cos(\t r)},{\b*sin(\t r)}) -- cycle;
+  \filldraw[strip] (\c,0) -- plot[domain=\Ea:{2*pi-\Ea},samples=40,variable=\t]
+      ({\a*cos(\t r)},{\b*sin(\t r)}) -- cycle;
+  % the orbit
+  \draw[cPrim,curve] (0,0) ellipse[x radius=\a,y radius=\b];
+  % the Sun
+  \filldraw[fill=cSun,draw=cAcc,thin line] (\c,0) circle[radius=0.1];
+  \node[anchor=north] at (\c,-0.12) {Sun};
+  % speeds at the apsides, in the true ratio (1+e)/(1-e)
+  \pgfmathsetmacro\va{0.3}
+  \pgfmathsetmacro\vp{\va*(1+\e)/(1-\e)}
+  \draw[velocity] (\a,0) -- (\a,\vp) node[anchor=west] {$v_p$};
+  \draw[velocity] (-\a,0) -- (-\a,-\va) node[anchor=north east,inner sep=1pt] {$v_a$};
+  \fill[cInk] (\a,0) circle[radius=0.045] (-\a,0) circle[radius=0.045];
+  % labels
+  \node[anchor=east,align=right] at (-\a-0.12,0.75) {aphelion:\\ slow, long sweep};
+  \node[anchor=west,align=left] at (\a+0.12,-0.35) {perihelion:\\ fast, short arc};
+  \node[anchor=north] at (0,-\b-0.15)
+    {equal areas in equal times $\Longleftrightarrow$ angular momentum is conserved};
+\end{tikzpicture}

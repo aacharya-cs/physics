@@ -1,0 +1,45 @@
+% tk_derivative: average rate (secant) versus instantaneous rate (tangent) (Ch 0, fig:tkderiv)
+% s(t) = 0.09 t^2 + 0.9 sqrt(t) + 1, the same curve as the old mk9.py figure.
+% Fixed point t1 = 3; secants to t2 = 8.6, 6.8, 5.0, fading as t2 is older (wider);
+% the tangent at t1 has slope s'(3) = 0.18*3 + 0.45/sqrt(3) = 0.80.
+% For t > 1 the curve is convex, so every secant from t1 lies above the tangent.
+\begin{tikzpicture}
+\begin{axis}[bookplot,
+    width=8.4cm, height=5.4cm, scale only axis,
+    xmin=0, xmax=10.4, ymin=0, ymax=13.5,
+    xlabel={time $t$}, ylabel={position $s$},
+    xlabel style={at={(axis description cs:1,0)},anchor=north east},
+    ylabel style={at={(axis description cs:0,1)},anchor=south east,rotate=-90}]
+  \pgfmathdeclarefunction{sf}{1}{\pgfmathparse{0.09*#1^2+0.9*sqrt(#1)+1}}
+  \def\ta{3}
+  \pgfmathsetmacro\sa{sf(\ta)}
+  \pgfmathsetmacro\mt{0.18*\ta+0.45/sqrt(\ta)}
+  % Delta construction for the widest secant (drawn first, underneath)
+  \def\tb{8.6}
+  \pgfmathsetmacro\sb{sf(\tb)}
+  \draw[dimtick] (axis cs:\ta,\sa) -- (axis cs:\tb,\sa) -- (axis cs:\tb,\sb);
+  \node[cSteel,anchor=north] at (axis cs:{(\ta+\tb)/2},\sa) {$\Delta t$};
+  \node[cSteel,anchor=west] at (axis cs:\tb,{(\sa+\sb)/2}) {$\Delta s$};
+  % the curve
+  \addplot[cPrim,domain=0:10,samples=150] {sf(x)};
+  % secants, shrinking towards the tangent
+  \foreach \t/\op in {8.6/0.35,6.8/0.6,5.0/1}{
+    \pgfmathsetmacro\st{sf(\t)}
+    \pgfmathsetmacro\m{(\st-\sa)/(\t-\ta)}
+    \edef\tmp{\noexpand\addplot[construction,cFor,opacity=\op,domain={\ta-1.2}:{\t+0.5},samples=2]
+      {\sa+\m*(x-\ta)};
+      \noexpand\node[dot,cFor,opacity=\op]
+      at (axis cs:\t,\st) {};}
+    \tmp
+  }
+  % the tangent
+  \addplot[curve,cCrim,domain={\ta-2.2}:{\ta+3.2},samples=2] {\sa+\mt*(x-\ta)};
+  \node[stable point,fill=cCrim] at (axis cs:\ta,\sa) {};
+  % labels
+  \pgfmathsetmacro\mw{(\sb-\sa)/(\tb-\ta)}
+  \draw[leader,cFor] (axis cs:6.1,{\sa+\mw*3.1+0.15}) -- (axis cs:4.4,10.3)
+    node[anchor=south,inner sep=2pt] {secant: average rate $\Delta s/\Delta t$};
+  \node[cCrim,anchor=west] at (axis cs:0.9,0.85)
+    {tangent: instantaneous rate $ds/dt$};
+\end{axis}
+\end{tikzpicture}

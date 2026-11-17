@@ -1,0 +1,52 @@
+% movable_pulley: a load on a movable pulley (Ch 8, fig:movable)
+% One ideal string runs from a ceiling anchor, down and under the movable pulley,
+% up and over a fixed pulley, and down to the free end carrying m1.  The load m2
+% hangs from the movable pulley's axle.  If the movable pulley moves by d, each of
+% its two segments changes by d, so the free end moves 2d: a1 = 2 a2.
+% Arrows are to scale for m2 = 1.5 m1 (units of m1 g), with 2 m1 > m2 so m1 falls:
+%   a2 = (2m1 - m2) g/(4m1 + m2) = g/11 (up), a1 = 2 a2 = 2g/11 (down),
+%   T = m1 (g - a1) = 9/11 = 0.82,  m1 g = 1,  m2 g = 1.5.
+% The two T arrows on the movable pulley give the 2T that holds up the load.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\r{0.42}                         % both pulleys
+  \def\ym{-2.2}                        % movable pulley centre
+  \def\yf{-0.78}                       % fixed pulley centre
+  \pgfmathsetmacro\xf{2*\r}            % fixed pulley centre, x
+  \pgfmathsetmacro\xe{3*\r}            % the free end
+  \def\u{0.8}                          % cm per m1 g
+  \def\yone{-2.75}                     % top of m1
+  \def\ytwo{-3.05}                     % top of m2
+  % ceiling
+  \path[ground,draw=none] (-1.3,0) rectangle (2.3,0.16);
+  \draw[outline] (-1.3,0) -- (2.3,0);
+  % pulleys
+  \draw[outline,fill=cMoon] (0,\ym) circle[radius=\r];
+  \draw[cSteel,hair line] (0,\ym) circle[radius=\r-0.08];
+  \draw[outline,fill=cMoon] (\xf,\yf) circle[radius=\r];
+  \draw[cSteel,hair line] (\xf,\yf) circle[radius=\r-0.08];
+  % the string: anchor, under the movable pulley, over the fixed one, to m1
+  \draw[cInk,thin line] (-\r,0) -- (-\r,\ym) arc[start angle=180,end angle=360,radius=\r]
+    -- (\r,\yf) arc[start angle=180,end angle=0,radius=\r] -- (\xe,\yone);
+  \node[point mass] at (-\r,0) {};
+  % strap of the fixed pulley; hanger of the movable pulley
+  \draw[cInk,thin line,fill=cRock] (\xf-0.11,0) -- (\xf+0.11,0) -- (\xf+0.05,\yf) -- (\xf-0.05,\yf) -- cycle;
+  \node[point mass] at (\xf,\yf) {};
+  \draw[cInk,thin line,fill=cRock] (-0.05,\ym) -- (0.05,\ym) -- (0.09,\ym-\r-0.18) -- (-0.09,\ym-\r-0.18) -- cycle;
+  \draw[cInk,thin line] (0,\ym-\r-0.18) -- (0,\ytwo);
+  \node[point mass] at (0,\ym) {};
+  % m2, the load
+  \draw[body] (-0.45,\ytwo-0.62) rectangle (0.45,\ytwo);
+  \node at (0,\ytwo-0.31) {$m_2$};
+  \draw[force] (0,\ytwo-0.62) -- ++(0,-1.5*\u) node[anchor=north] {$m_2g$};
+  % the two tensions holding up the movable pulley
+  \draw[force] (-\r,\ym) -- ++(0,0.82*\u) node[anchor=east,pos=0.6,xshift=-1pt] {$T$};
+  \draw[force] (\r,\ym) -- ++(0,0.82*\u) node[anchor=west,pos=0.6,xshift=1pt] {$T$};
+  % m1, the free end
+  \draw[body] (\xe-0.3,\yone-0.5) rectangle (\xe+0.3,\yone);
+  \node at (\xe,\yone-0.25) {$m_1$};
+  \draw[force] (\xe,\yone) -- ++(0,0.82*\u) node[anchor=west,pos=0.6,xshift=1pt] {$T$};
+  \draw[force] (\xe,\yone-0.5) -- ++(0,-1.0*\u) node[anchor=north] {$m_1g$};
+  % accelerations: the free end twice the load's
+  \draw[accel] (\xe+0.7,\yone) -- ++(0,-1.0) node[anchor=north,cPrim] {$a_1$};
+  \draw[accel] (-0.95,\ytwo-0.62) -- ++(0,0.5) node[anchor=south,cPrim] {$a_2$};
+\end{tikzpicture}

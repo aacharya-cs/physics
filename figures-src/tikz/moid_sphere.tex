@@ -1,0 +1,51 @@
+% moid_sphere: slicing a solid sphere into discs (Ch 14, fig:moidsphere)
+% Orthographic view from slightly above (elevation e with sin e = 0.22): a horizontal
+% circle of radius a at height z appears as an ellipse centred at (0, z cos e) with
+% radii a and a sin e.  The slice is a disc at height z = 0.47 R, thickness dz
+% (exaggerated), radius a = sqrt(R^2 - z^2), mass dm = rho pi a^2 dz.  Its own moment of
+% inertia about the (shared) axis is (1/2) a^2 dm; stacking discs from -R to R gives
+% (2/5) M R^2.  The right triangle z, a, R lies in the plane of the page.
+% Shared look of the moid_* family: see moid_rod.tex.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{2.0}
+  \def\s{0.22}                          % sin e
+  \pgfmathsetmacro\c{sqrt(1-\s*\s)}     % cos e
+  \pgfmathsetmacro\z{0.47*\R}           % height of the slice
+  \pgfmathsetmacro\a{sqrt(\R*\R-\z*\z)} % its radius
+  \def\dz{0.17}                         % its thickness (exaggerated)
+  \pgfmathsetmacro\ym{\z*\c}            % screen height of its mid-plane
+  \pgfmathsetmacro\yt{\ym+\dz/2}
+  \pgfmathsetmacro\yb{\ym-\dz/2}
+  % the sphere, its equator, and the axis
+  \draw[body,fill=cBlock!20] (0,0) circle[radius=\R];
+  \draw[hidden,hair line,cSteel] (\R,0) arc[start angle=0,end angle=180,x radius=\R,y radius=\s*\R];
+  \draw[cSteel,hair line] (\R,0) arc[start angle=0,end angle=-180,x radius=\R,y radius=\s*\R];
+  \draw[rotation axis] (0,-\R-0.35) -- (0,\R+0.45) node[anchor=south] {axis};
+  % the slice: side band, then the top face
+  \fill[cAcc!40] (-\a,\yb) arc[start angle=180,end angle=360,x radius=\a,y radius=\s*\a]
+     -- (\a,\yt) arc[start angle=0,end angle=180,x radius=\a,y radius=\s*\a] -- cycle;
+  \draw[cAcc,thin line] (-\a,\yt) -- (-\a,\yb) arc[start angle=180,end angle=360,x radius=\a,y radius=\s*\a] -- (\a,\yt);
+  \draw[slice,fill=cAcc!25] (0,\yt) ellipse[x radius=\a,y radius=\s*\a];
+  \draw[rotation axis] (0,\yt) -- (0,\yt+\s*\a);
+  % a: the slice's radius, on its top face
+  \draw[dim] (0,\yt) -- (\a,\yt);
+  \node[cSteel,anchor=south,inner sep=1.5pt] at (0.5*\a,\yt) {$a$};
+  % R: from the centre to the slice's rim, closing the right triangle with z and a
+  \draw[cInk,thin line] (0,0) -- (\a,\ym);
+  \node[anchor=north west,inner sep=1pt] at (0.55*\a,0.55*\ym) {$R$};
+  \fill[cInk] (0,0) circle[radius=0.045];
+  \node[anchor=north east,inner sep=1.5pt] at (0,0) {$O$};
+  % z: height of the slice above the centre, outside on the left
+  \draw[dimtick] (-\R-0.06,0) -- (-\R-0.5,0);
+  \draw[dimtick] (-\a-0.06,\ym) -- (-\R-0.5,\ym);
+  \draw[dim] (-\R-0.38,0) -- node[anchor=east,cSteel] {$z$} (-\R-0.38,\ym);
+  % dz: the slice's thickness, outside on the right
+  \draw[dimtick] (\a+0.06,\yt) -- (\R+0.5,\yt);
+  \draw[dimtick] (\a+0.06,\yb) -- (\R+0.5,\yb);
+  \draw[{smallhead}-,thin line,cAcc] (\R+0.38,\yt) -- ++(0,0.35);
+  \draw[{smallhead}-,thin line,cAcc] (\R+0.38,\yb) -- ++(0,-0.35);
+  \node[cAcc,anchor=west] at (\R+0.48,\ym) {$dz$};
+  % dm, with a leader to the front of the slice
+  \draw[leader,cAcc] (-0.35*\a,{\yb-\s*\a*sqrt(1-0.35*0.35)+0.02}) -- (-1.75,-1.55)
+     node[anchor=north east,inner sep=1.5pt] {$dm=\rho\,\pi a^2\,dz$};
+\end{tikzpicture}

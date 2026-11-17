@@ -1,0 +1,43 @@
+% moid_hollowsphere: slicing a thin spherical shell into rings (Ch 14, fig:moidhollow)
+% Same orthographic view as moid_sphere (sin e = 0.22).  The slice is the band between
+% polar angles theta = 45 deg and theta + d theta (d theta = 10 deg, exaggerated),
+% measured from the axis.  It is a ring of radius r = R sin theta (its distance from
+% the axis) and slant width R d theta, mass dm = sigma (2 pi r)(R d theta), and
+% contributes r^2 dm; integrating over theta gives (2/3) M R^2.
+% Shared look of the moid_* family: see moid_rod.tex.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{2.2}
+  \def\s{0.22}
+  \pgfmathsetmacro\c{sqrt(1-\s*\s)}
+  \def\th{45}  \def\dth{10}
+  \pgfmathsetmacro\ra{\R*sin(\th)}        \pgfmathsetmacro\ya{\R*cos(\th)*\c}
+  \pgfmathsetmacro\rb{\R*sin(\th+\dth)}   \pgfmathsetmacro\yb{\R*cos(\th+\dth)*\c}
+  % the shell, its equator, and the axis
+  \draw[body,fill=cBlock!12] (0,0) circle[radius=\R];
+  \draw[hidden,hair line,cSteel] (\R,0) arc[start angle=0,end angle=180,x radius=\R,y radius=\s*\R];
+  \draw[cSteel,hair line] (\R,0) arc[start angle=0,end angle=-180,x radius=\R,y radius=\s*\R];
+  \draw[rotation axis] (0,-\R-0.35) -- (0,\R+0.45) node[anchor=south] {axis};
+  % the ring slice: back edges dashed, front band filled
+  \draw[hidden,thin line,cAcc]
+      (\ra,\ya) arc[start angle=0,end angle=180,x radius=\ra,y radius=\s*\ra]
+      (\rb,\yb) arc[start angle=0,end angle=180,x radius=\rb,y radius=\s*\rb];
+  \draw[slice] (-\ra,\ya) arc[start angle=180,end angle=360,x radius=\ra,y radius=\s*\ra]
+     -- (\rb,\yb) arc[start angle=360,end angle=180,x radius=\rb,y radius=\s*\rb] -- cycle;
+  % radii to the two edges of the ring, and the polar angle
+  \draw[cInk,thin line] (0,0) -- (\ra,\ya);
+  \draw[cInk,hair line] (0,0) -- (\rb,\yb);
+  \draw[angle arc] (0,0.5) arc[start angle=90,end angle={90-\th},radius=0.5];
+  \node at ({90-\th/2}:0.72) {$\theta$};
+  \node[anchor=north west,inner sep=1pt] at ({0.42*\rb},{0.42*\yb}) {$R$};
+  \fill[cInk] (0,0) circle[radius=0.045];
+  \node[anchor=north east,inner sep=1.5pt] at (0,0) {$O$};
+  % r = R sin(theta): distance of the ring from the axis
+  \draw[dim] (0,\ya) -- node[pos=0.45,knockout,text=cSteel] {$r$} (\ra,\ya);
+  % R d theta: the ring's slant width, outside on the right
+  \pgfmathsetmacro\mid{\th+\dth/2}
+  \draw[leader,cAcc] ({1.04*\R*sin(\mid)},{1.04*\R*cos(\mid)*\c}) -- ({\R+0.3},{\R*cos(\mid)*\c+0.25})
+      node[anchor=west,inner sep=1.5pt] {$R\,d\theta$};
+  % dm, with a leader to the front of the band
+  \draw[leader,cAcc] (-0.4*\rb,{\yb-\s*\rb*sqrt(1-0.16)+0.05}) -- (-1.9,-1.75)
+     node[anchor=north east,inner sep=1.5pt] {$dm=\sigma\,(2\pi r)(R\,d\theta)$};
+\end{tikzpicture}

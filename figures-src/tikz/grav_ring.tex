@@ -1,0 +1,47 @@
+% grav_ring: slicing a thin shell into rings about the line OP (Ch 16, fig:gravring)
+% Shell radius R = 1.7, P outside at r = 4.0 on the axis.  The ring at polar
+% angle theta = 55 deg (measured at O from OP) has radius R sin(theta), lies at
+% x = R cos(theta), and is drawn edge-on as a squashed ellipse (\persp).
+% Every point of the ring is the same distance s from P.
+\begin{tikzpicture}
+  \def\R{1.7}
+  \def\rP{4.0}
+  \def\th{55}
+  \def\dth{9}
+  \pgfmathsetmacro\xr{\R*cos(\th)}
+  \pgfmathsetmacro\yr{\R*sin(\th)}
+  \pgfmathsetmacro\xrr{\R*cos(\th+\dth)}
+  \pgfmathsetmacro\yrr{\R*sin(\th+\dth)}
+  \coordinate (O) at (0,0);
+  \coordinate (P) at (\rP,0);
+  \coordinate (A) at (\xr,\yr);
+  \coordinate (B) at (\xr,-\yr);
+  % the shell
+  \draw[outline] (O) circle[radius=\R];
+  % the ring: a band between theta and theta + dtheta, edge-on
+  \fill[cAcc!40] (\xr,0) ellipse[x radius=\persp*\yr,y radius=\yr];
+  \fill[white] (\xr,0) ellipse[x radius=\persp*\yr-0.07,y radius=\yr-0.09];
+  \draw[cAcc,thin line] (\xr,0) ellipse[x radius=\persp*\yr,y radius=\yr];
+  % the axis OP
+  \draw[guide] (-\R-0.3,0) -- (\rP+0.3,0);
+  \node[point mass] at (O) {};
+  \node[anchor=north east,inner sep=2pt] at (O) {$O$};
+  \node[point mass] at (P) {};
+  \node[anchor=north,inner sep=3pt] at (P) {$P$};
+  % R from O to the ring, and the angle theta
+  \draw[cSteel,thin line] (O) -- (A) node[pos=0.55,anchor=south east,inner sep=1pt] {$R$};
+  \draw[angle arc] (0.55,0) arc[start angle=0,end angle=\th,radius=0.55];
+  \node at ({0.8*cos(\th/2)},{0.8*sin(\th/2)}) {$\theta$};
+  % ring radius R sin(theta)
+  \draw[dim] (\xr,0) -- (A);
+  \node[cSteel,anchor=west,inner sep=1pt] at (\xr+\persp*\yr+0.16,0.4*\yr) {$R\sin\theta$};
+  % distance s from P to the ring (top and bottom)
+  \draw[cPrim,thin line] (A) -- (P) node[pos=0.45,anchor=south west,inner sep=1pt] {$s$};
+  \draw[cPrim,thin line] (B) -- (P) node[pos=0.45,anchor=north west,inner sep=1pt] {$s$};
+  % width of the ring
+  \draw[cAcc,thin line] ({\xr-\persp*\yr*0.5},{\yr*0.866}) -- (-1.1,2.1);
+  \node[cAcc,anchor=south,align=center,inner sep=1pt] at (-1.1,2.1)
+    {ring of width $R\,d\theta$};
+  % r
+  \draw[dim] (0,-\R-0.35) -- (\rP,-\R-0.35) node[midway,fill=white,inner sep=1.5pt] {$r$};
+\end{tikzpicture}

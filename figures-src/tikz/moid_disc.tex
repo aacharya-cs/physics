@@ -1,0 +1,38 @@
+% moid_disc: slicing a disc into thin rings (Ch 14, fig:moiddisc)
+% Disc of radius R seen obliquely (circles drawn as ellipses, y-radius = 0.32 x-radius),
+% axis vertical through the centre.  The slice is a thin ring of radius r and width dr,
+% mass dm = sigma 2 pi r dr; every point of it is at distance r from the axis, so it
+% contributes r^2 dm.  Summing from 0 to R gives (1/2) M R^2.
+% Radii are measured along the horizontal (the direction drawn without foreshortening).
+% Shared look of the moid_* family: see moid_rod.tex.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\k{0.32}     % ellipse squash
+  \def\R{2.5}      % disc radius
+  \def\h{0.2}      % disc thickness
+  \def\r{1.45}     % slice radius
+  \def\dr{0.3}     % slice width (exaggerated)
+  % axis below the disc (the part behind the disc is hidden)
+  \draw[rotation axis] (0,-\h-\k*\R) -- (0,-\h-\k*\R-0.75);
+  % the disc: rim band, then the top face
+  \draw[body,fill=cBlock!35] (-\R,0) -- (-\R,-\h) arc[start angle=180,end angle=360,x radius=\R,y radius=\k*\R]
+     -- (\R,0) arc[start angle=0,end angle=-180,x radius=\R,y radius=\k*\R] -- cycle;
+  \draw[body,fill=cBlock!20] (0,0) ellipse[x radius=\R,y radius=\k*\R];
+  % the ring slice
+  \filldraw[slice,even odd rule] (0,0) ellipse[x radius=\r+\dr,y radius=\k*(\r+\dr)]
+                                 (0,0) ellipse[x radius=\r,y radius=\k*\r];
+  % axis above the disc
+  \draw[rotation axis] (0,0) -- (0,1.55) node[anchor=south] {axis};
+  \fill[cInk] (0,0) circle[radius=0.04];
+  % r: from the axis to the ring, along the left
+  \draw[dim] (0,0) -- node[anchor=south,cSteel,inner sep=2pt] {$r$} (-\r,0);
+  % dr: the ring's width, on the right
+  \draw[{smallhead}-,thin line,cAcc] (\r,0) -- ++(-0.4,0);
+  \draw[{smallhead}-,thin line,cAcc] (\r+\dr,0) -- (\R+0.25,0)
+      node[anchor=west,inner sep=1.5pt] {$dr$};
+  % dm, with a leader to the front of the ring
+  \draw[leader,cAcc] (-40:{\r+\dr/2} and {\k*(\r+\dr/2)}) -- (2.6,-0.85)
+      node[anchor=west,inner sep=1.5pt] {$dm=\sigma\,2\pi r\,dr$};
+  % R: below the disc, on the left (the right is kept for dm)
+  \draw[dimtick] (-\R,-\h-0.06) -- (-\R,-\h-\k*\R-0.6);
+  \draw[dim] (-\R,-\h-\k*\R-0.48) -- node[anchor=north,cSteel] {$R$} (0,-\h-\k*\R-0.48);
+\end{tikzpicture}

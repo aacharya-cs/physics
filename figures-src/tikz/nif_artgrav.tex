@@ -1,0 +1,72 @@
+% nif_artgrav: artificial gravity in a rotating habitat (Ch 10, fig:artgrav)
+% Left: the mechanism, in the ground (inertial) frame.  The only real force on the
+% astronaut is the floor's push N = m omega^2 r, directed INWARD (towards the hub).
+% Near the hub r ~ 0 and there is no floor to stand on: the crew float.
+% Right: the radius needed for g_eff = omega^2 r = g = 9.8 m/s^2 at spin rate n (rpm),
+%   r = g / (2 pi n / 60)^2:  n = 2 -> 223 m,  n = 3 -> 99 m,  n = 5.5 -> 29.5 m.
+% The Endurance (Interstellar) ring, r = 32 m at 5.5 rpm, gives 1.08 g, so its point sits
+% just above the 1 g curve.  Comfort bands as usually quoted: below 2 rpm comfortable,
+% 2 to 6 rpm tolerable with adaptation, above 6 rpm too fast.  The curve starts at
+% 0.55 rpm, where r = 2955 m.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % ================================================================= habitat
+  \begin{scope}
+    \def\Ro{2.25} \def\Ri{1.85} \def\Rh{0.36}
+    \draw[outline,fill=cMoon,even odd rule] (0,0) circle[radius=\Ro] circle[radius=\Ri];
+    \foreach \a in {22.5,67.5,...,337.5}
+      \draw[cGrey,thin line] (\a:\Rh) -- (\a:\Ri);
+    % radius from the axis to the floor (starts at the centre, under the hub)
+    \draw[thin line,cSteel,-smallhead] (0,0) -- node[pos=0.6,anchor=south west,cSteel,inner sep=1pt] {$r$} (-30:\Ri);
+    \draw[outline,fill=cMoon] (0,0) circle[radius=\Rh];
+    \node[font=\footnotesize] at (0,0) {hub};
+    % spin
+    \draw[rotation] (60:\Ro+0.3) arc[start angle=60,end angle=120,radius=\Ro+0.3];
+    \node[anchor=south] at (90:\Ro+0.35) {$\omega$};
+    % astronaut standing on the floor of the rim, head towards the hub
+    \begin{scope}[shift={(0,-\Ri)}]
+      \draw[body,rounded corners=1.5pt] (-0.09,0.02) rectangle (0.09,0.52);
+      \draw[body] (0,0.64) circle[radius=0.11];
+    \end{scope}
+    \draw[force] (-0.22,-\Ri) -- ++(0,0.9) node[anchor=south,inner sep=2pt] {$N$};
+    % a crew member floating near the hub
+    \begin{scope}[shift={(-0.95,0.05)},rotate=-60]
+      \draw[body,rounded corners=1.5pt] (-0.07,-0.2) rectangle (0.07,0.2);
+      \draw[body] (0,0.3) circle[radius=0.085];
+    \end{scope}
+    \draw[leader] (-1.15,0.2) -- (-2.5,1.25);
+    \node[anchor=east,font=\footnotesize,align=right,inner sep=1pt] at (-2.5,1.25) {floats\\ near the\\ hub};
+    \draw[leader] (-0.3,-1.35) -- (-2.5,-1.35);
+    \node[anchor=east,font=\footnotesize,align=right,inner sep=1pt] at (-2.5,-1.35) {floor\\ pushes\\ inward};
+  \end{scope}
+  % ================================================================= design plot
+  \begin{axis}[bookplot,
+      at={(4.1cm,-2.0cm)}, anchor=origin,
+      width=8.2cm, height=5.0cm, scale only axis=false,
+      ymode=log, log basis y=10,
+      xmin=0, xmax=7.5, ymin=8, ymax=3000,
+      xtick={0,1,...,7}, ytick={10,100,1000},
+      yticklabels={$10$,$100$,$1000$},
+      xlabel={spin rate (rpm)},
+      ylabel={radius for $1\,g$ (m)},
+      domain=0.55:7.5]
+    % comfort bands
+    \fill[cFor!10]   (axis cs:0,8) rectangle (axis cs:2,3000);
+    \fill[cAmber!22] (axis cs:2,8) rectangle (axis cs:6,3000);
+    \fill[cCrim!10]  (axis cs:6,8) rectangle (axis cs:7.5,3000);
+    \node[cFor,font=\footnotesize,anchor=south] at (axis cs:1,9.5) {comfortable};
+    \node[font=\footnotesize,anchor=south] at (axis cs:4,9.5) {tolerable with adaptation};
+    \node[cCrim,font=\footnotesize,anchor=north] at (axis cs:6.75,2700) {too fast};
+    % r = g / omega^2
+    \addplot[cPrim] {9.8/(2*pi*x/60)^2};
+    \foreach \n in {2,3}{
+      \pgfmathsetmacro\rr{9.8/(2*pi*\n/60)^2}
+      \edef\temp{\noexpand\node[point mass,fill=cPrim] at (axis cs:\n,\rr) {};}\temp}
+    \node[cPrim,anchor=south west,inner sep=2pt] at (axis cs:2,223.4) {$223$ m};
+    \node[cPrim,anchor=south west,inner sep=2pt] at (axis cs:3,99.3) {$99$ m};
+    % the Endurance
+    \node[dot,cCrim] at (axis cs:5.5,32) {};
+    \draw[leader,cCrim] (axis cs:5.45,36) -- (axis cs:4.9,230);
+    \node[cCrim,anchor=south,align=center,inner sep=2pt] at (axis cs:4.9,230)
+      {\emph{Endurance}:\\ $32$ m, $5.5$ rpm};
+  \end{axis}
+\end{tikzpicture}

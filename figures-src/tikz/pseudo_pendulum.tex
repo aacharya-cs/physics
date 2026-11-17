@@ -1,0 +1,37 @@
+% pseudo_pendulum: a bob hanging in a car that accelerates at a0 (Ch 10, fig:pseudo)
+% Drawn in the CAR'S frame (non-inertial): the bob is at rest under T, mg and the
+% pseudo-force m a0, which points opposite to the car's acceleration (backwards).
+% Drawn with a0/g = 0.5, so tan(theta) = a0/g gives theta = 26.6 deg, and the three
+% forces are to scale and close: mg = 1.5 cm, m a0 = 0.75 cm, T = sqrt(1.5^2+0.75^2)
+% = 1.677 cm along the string.  The pseudo-force is dashed: it has no source body.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \pgfmathsetmacro\th{atan(0.5)}
+  \def\W{1.5}                                       % mg, to scale
+  % ground and the car
+  \draw[ground] (-0.4,-0.5) -- (7.2,-0.5);
+  \draw[outline,fill=cSlope!40] (0,0) rectangle (6.8,4.1);
+  \foreach \x in {1.2,5.6}{
+    \draw[outline,fill=cRock] (\x,-0.12) circle[radius=0.38];
+    \fill[cInk] (\x,-0.12) circle[radius=0.06];}
+  % the car's acceleration (a property of the frame, drawn outside it)
+  \draw[accel] (5.0,4.55) -- ++(1.4,0) node[anchor=west] {$a_0$};
+  % suspension point and string
+  \coordinate (Q) at (4.6,4.1);
+  \coordinate (B) at ($(Q)+(-90-\th:2.6)$);
+  \fill[cInk] ($(Q)+(-0.28,0)$) rectangle ($(Q)+(0.28,-0.08)$);
+  \draw[guide] (Q) -- ++(0,-2.9);
+  \draw[cInk,thin line] (Q) -- (B);
+  \draw[angle arc] ($(Q)+(0,-0.8)$) arc[start angle=-90,end angle=-90-\th,radius=0.8];
+  \node at ($(Q)+(-90-\th/2:1.05)$) {$\theta$};
+  % forces on the bob, in the car's frame
+  \draw[force] (B) -- ++(0,-\W) node[anchor=south west,inner sep=2pt] {$mg$};
+  \draw[force,resultant] (B) -- ++({-0.5*\W},0)
+    node[anchor=east,inner sep=2pt] {$ma_0$};
+  \draw[force] (B) -- ($(B)!{sqrt(1+0.25)*\W/2.6}!(Q)$)
+    node[anchor=south east,inner sep=1pt] {$T$};
+  \shade[ball color=cBlock] (B) circle[radius=0.13];
+  \draw[cSteel,thin line] (B) circle[radius=0.13];
+  % what kind of force each is
+  \node[cCrim,anchor=north east,font=\footnotesize,inner sep=2pt] at ($(B)+({-0.5*\W},-0.2)$) {pseudo-force};
+  \node[note,anchor=north west] at (0.2,3.95) {in the car's frame};
+\end{tikzpicture}

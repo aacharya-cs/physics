@@ -1,0 +1,41 @@
+% tk_integral: an integral as the limit of a sum of thin strips (Ch 0, fig:tkint)
+% f(x) = 0.6 + 2.4 exp(-(x-7)^2/10) on 0.5 <= x <= 9.5, the same smooth rise and
+% gentle fall in both panels.  Left: 6 strips of width 1.5, height f at each
+% strip's midpoint (sum f(x) Delta x).  Right: 36 strips of width 0.25, which
+% already follow the curve closely (the integral is their limit).
+% Units: x 0.62 cm, y 1.15 cm per unit.
+\begin{tikzpicture}[x=0.62cm,y=1.15cm]
+  \pgfmathdeclarefunction{fx}{1}{\pgfmathparse{0.6+2.4*exp(-(#1-7)^2/10)}}
+  \def\xa{0.5}\def\xb{9.5}
+  % #1 = number of strips, #2 = strip to highlight (0 for none)
+  \newcommand\strippanel[2]{%
+    \pgfmathsetmacro\dx{(\xb-\xa)/#1}%
+    \foreach \i in {1,...,#1}{%
+      \pgfmathsetmacro\xl{\xa+(\i-1)*\dx}%
+      \pgfmathsetmacro\h{fx(\xl+\dx/2)}%
+      \ifnum\i=#2\relax
+        \filldraw[strip,fill=cPrim!32] (\xl,0) rectangle ++(\dx,\h);
+      \else
+        \filldraw[strip] (\xl,0) rectangle ++(\dx,\h);
+      \fi}%
+    \draw[cPrim,curve] plot[domain=\xa:\xb,samples=100,smooth] (\x,{fx(\x)});
+    \draw[thin line,cInk,-smallhead] (0,0) -- (10.4,0) node[anchor=north east,inner sep=2pt,yshift=-2pt] {$x$};
+    \draw[thin line,cInk,-smallhead] (0,0) -- (0,3.55);}
+  % ------------------------------------------------ left: a few coarse strips
+  \begin{scope}
+    \strippanel{6}{3}
+    % the highlighted strip: width Delta x, height f(x)
+    \pgfmathsetmacro\xl{\xa+2*1.5}
+    \pgfmathsetmacro\h{fx(\xl+0.75)}
+    \draw[dim] (\xl,-0.22) -- node[anchor=north,cSteel,inner sep=2pt] {$\Delta x$} ++(1.5,0);
+    \draw[dim] (\xl+0.75,0) -- node[knockout,fill=cPrim!32,text=cInk] {$f(x)$} ++(0,\h);
+    \node[anchor=west] at (0.4,2.9) {$\displaystyle\sum f(x)\,\Delta x$};
+  \end{scope}
+  % ------------------------------------------------ right: many fine strips
+  \begin{scope}[xshift=7.6cm]
+    \strippanel{36}{11}
+    \pgfmathsetmacro\xl{\xa+10*0.25}
+    \draw[leader,cSteel] (\xl+0.125,-0.08) -- ++(0.35,-0.32) node[anchor=west,inner sep=1pt] {$dx$};
+    \node[anchor=west] at (0.4,2.9) {$\displaystyle\int f(x)\,dx$};
+  \end{scope}
+\end{tikzpicture}

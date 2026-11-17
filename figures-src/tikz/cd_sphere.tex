@@ -1,0 +1,54 @@
+% cd_sphere: a ball sliding off a smooth sphere (Ch 10, fig:sphere; sub:sphere)
+% Units R = 1, g = 1.  theta is measured from the top.  Starting from rest at the top,
+% v^2 = 2gR(1 - cos theta); N = mg(3 cos theta - 2), so N = 0 at cos theta = 2/3
+% (theta = 48.19 deg), after a drop h = R/3.  A general position (theta = 24 deg)
+% shows the two forces: N radially OUTWARD, mg down, drawn to scale:
+% there N = mg(3 cos 24 - 2) = 0.74 mg.
+% After leaving, the ball is a projectile from (sin t0, cos t0) with speed sqrt(2/3)
+% along the tangent (cos t0, -sin t0):
+%   x = sin t0 + v cos t0 t,  y = cos t0 - v sin t0 t - t^2/2,
+% which reaches the ground y = 0 at t = 0.6967, x = 1.1246 R, clear of the sphere.
+% The ball is drawn with a visible radius, so its CENTRE moves on a circle of radius
+% rho = 1.04 R; the whole path is scaled by rho (same angles, same landing time).
+\begin{tikzpicture}[x=3.3cm,y=3.3cm]
+  \pgfmathsetmacro\tz{acos(2/3)}                    % leaving angle from the top
+  \pgfmathsetmacro\vs{sqrt(2/3)}
+  \pgfmathsetmacro\xo{sin(\tz)} \pgfmathsetmacro\yo{cos(\tz)}
+  % ground and the dome
+  \fill[cSlope] (-1,0) arc[start angle=180,end angle=0,radius=1] -- cycle;
+  \draw[outline] (-1,0) arc[start angle=180,end angle=0,radius=1];
+  \draw[ground] (-1.2,0) -- (1.4,0);
+  % centre, vertical, radius to the leaving point, angle theta
+  \coordinate (O) at (0,0);
+  \node[dot] at (O) {};
+  \node[anchor=north,knockout,inner sep=3pt] at (O) {$O$};
+  \draw[guide] (O) -- (0,1);
+  \draw[cInk,thin line] (O) -- node[pos=0.5,anchor=north west,inner sep=1pt] {$R$} (\xo,\yo);
+  \draw[angle arc] (0,0.24) arc[start angle=90,end angle=90-\tz,radius=0.24];
+  \node at (90-\tz/2:0.32) {$\theta$};
+  % drop to the leaving point, h = R/3
+  \def\rh{1.04}                                      % path of the ball's centre
+  \draw[dimtick] (0,\rh) -- (1.3,\rh);
+  \draw[dimtick] (\rh*\xo,\rh*\yo) -- (1.3,\rh*\yo);
+  \draw[dim] (1.2,\rh*\yo) -- node[anchor=east,cSteel] {$h$} (1.2,\rh);
+  % the flight after contact is lost
+  \draw[cAcc,curve] plot[domain=0:0.6967,samples=40,variable=\t]
+    ({\rh*(\xo+\vs*cos(\tz)*\t)},{\rh*(\yo-\vs*sin(\tz)*\t-\t*\t/2)});
+  \node[cAcc,anchor=south west,inner sep=2pt] at (1.18,0.08) {projectile};
+  % start: at rest at the top
+  \shade[ball color=cBlock] (0,\rh) circle[radius=0.04];
+  \draw[cSteel,thin line] (0,\rh) circle[radius=0.04];
+  \node[anchor=south east,inner sep=2pt] at (-0.03,\rh+0.02) {starts from rest};
+  % a general position: N outward, mg down
+  \def\tg{24}
+  \coordinate (G) at (90-\tg:\rh);
+  \draw[force] (G) -- ++(90-\tg:0.28) node[anchor=south,inner sep=2pt] {$N$};
+  \draw[force] (G) -- ++(0,-0.38) node[anchor=north,inner sep=2pt] {$mg$};
+  \shade[ball color=cBlock] (G) circle[radius=0.04];
+  \draw[cSteel,thin line] (G) circle[radius=0.04];
+  % the leaving point: N = 0 (the flight path leaves along the tangent)
+  \coordinate (L) at (90-\tz:\rh);
+  \shade[ball color=cBlock] (L) circle[radius=0.04];
+  \draw[cSteel,thin line] (L) circle[radius=0.04];
+  \node[anchor=west] at (1.3,\rh*\yo) {leaves: $N=0$};
+\end{tikzpicture}

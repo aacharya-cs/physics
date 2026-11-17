@@ -1,0 +1,493 @@
+\ncertchapter{1}{Measurement, Units and Uncertainty}\label{ch:measurement}
+
+Every number in physics is a measurement, and every measurement carries two things that a bare number
+hides: a \emph{unit}, which says what was counted, and an \emph{uncertainty}, which says how well. A
+student who loses track of either will eventually produce an answer that is wrong by a factor of a
+thousand, or one that is quoted to six figures when the data justified two. Both errors are common,
+both are avoidable, and both are habits rather than pieces of knowledge.
+
+This chapter builds three such habits. The first is dimensional bookkeeping: writing every quantity in
+terms of mass, length and time, so that a formula can be checked before it is trusted and, sometimes,
+derived before it is understood. The second is estimation, the ability to know roughly what an answer
+should be before calculating it, which is the cheapest error check there is. The third is honest
+uncertainty: knowing how errors in the inputs combine into an error in the result, and therefore which
+measurement is worth improving.
+
+None of this is glamorous. It is placed first in the physics because every
+later calculation leans on it, and because the examinations reward it reliably: dimensional analysis
+and error propagation are among the most predictable sources of marks in the entire syllabus.
+
+\section{Units and Dimensions}
+
+Physics is quantitative, and every quantity is a \emph{number} times a \emph{unit}: ``\SI{5}{m}''
+means five times an agreed standard length. The SI fixes seven \textbf{base units} (kilogram, metre,
+second, ampere, kelvin, mole and candela), chosen so that each is independent of the others; every
+other unit is a \textbf{derived unit} built from them, as the newton is $\si{kg.m/s^2}$. Three base units
+suffice for all of mechanics: mass (kilogram, kg), length (metre, m), and time (second, s).
+
+\begin{defbox}{Dimensions}
+The \textbf{dimension} of a quantity records how it is built from mass $\mathsf{M}$, length
+$\mathsf{L}$, and time $\mathsf{T}$. We write $[Q]$ for the dimension of $Q$. For example,
+$[\text{velocity}]=\mathsf{L}\mathsf{T}^{-1}$, $[\text{force}]=\mathsf{M}\mathsf{L}\mathsf{T}^{-2}$,
+$[\text{energy}]=\mathsf{M}\mathsf{L}^2\mathsf{T}^{-2}$.
+\end{defbox}
+
+\subsection{Dimensional analysis: the free consistency check}
+
+Dimensions must balance across any valid equation; you cannot add a length to a time any more than
+you can add apples to hours. This gives two tools at no cost.
+
+\begin{methodbox}{The two uses of dimensions}
+\textbf{To check a formula:} confirm every term has the same dimension. A single mismatch \emph{kills}
+the formula. \\[3pt]
+\textbf{To find a dependence:} assume $Q=k\,x^a y^b z^c$, match each of $\mathsf{M},\mathsf{L},\mathsf{T}$
+separately, and solve for $a,b,c$. You recover the \emph{shape} of the law; never the dimensionless
+constant $k$.
+\end{methodbox}
+
+\begin{trapbox}{function arguments must be dimensionless; constants usually are not}
+Arguments of $\sin$, $\exp$, and $\log$ must be dimensionless. In $\sin(ct)$, with $t$ a time, this forces
+$[c]=\mathsf{T}^{-1}$, often the fastest way to find a constant's dimensions. And constants of nature, such as
+the gravitational constant $G$, are \emph{not} dimensionless: read their dimensions off an equation you
+trust, as is done for $G$ and others in \S\ref{sec:dimformulae}.
+\end{trapbox}
+
+\begin{exbox}{The period of a pendulum, without solving anything}
+Guess that a pendulum's period $T$ (the time for one full swing, so its dimension is $\mathsf{T}$)
+depends on its length $\ell$, its mass $m$, and the acceleration due to gravity $g$ (in \si{m/s^2}, so
+$[g]=\mathsf{LT^{-2}}$). Write $T=k\,\ell^a m^b g^c$, with $k$ a pure number, and match dimensions:
+\[
+\mathsf{T}=\mathsf{L}^a\,\mathsf{M}^b\,(\mathsf{L}\mathsf{T}^{-2})^c
+=\mathsf{M}^b\,\mathsf{L}^{a+c}\,\mathsf{T}^{-2c}.
+\]
+Matching: $\mathsf{M}: b=0$; $\mathsf{T}: -2c=1\Rightarrow c=-\tfrac12$; $\mathsf{L}: a+c=0\Rightarrow
+a=\tfrac12$. So $T=k\sqrt{\ell/g}$, the mass drops out, and the length enters as a square root, both
+famous facts, obtained without touching a differential equation. \ans{$T\propto\sqrt{\ell/g}$}
+
+\smallskip
+Notice three things. We got a testable prediction for free, $T\propto\sqrt\ell$. The mass drops out
+because nothing else on the list contains $\mathsf{M}$ for it to pair with; but the conclusion is only as
+good as the list, since the amplitude $\theta_0$ (an angle, so dimensionless) could enter as any function
+$f(\theta_0)$ unseen, which is why experiment is still needed. And $k$ is out of reach: its true value,
+$2\pi$, comes from the full theory.
+\end{exbox}
+
+\subsection{The dimensional formulae worth deriving once}\label{sec:dimformulae}
+
+Exam questions ask for the dimensions of specific constants over and over. Do not memorise the list;
+memorise the \emph{method}: write a defining equation, replace each symbol by its dimensions, simplify.
+Below, that method is applied to the ten quantities that recur most. Most belong to later chapters or
+to other branches of physics; all you need now is the defining equation quoted for each, not its
+meaning.
+
+\begin{derivbox}{Ten dimensional formulae, from defining equations}
+\stepn{1} \textbf{Force.} Newton's second law, force $=$ mass $\times$ acceleration: $F=ma \Rightarrow [F]=\mathsf{M}\cdot\mathsf{LT^{-2}}
+=\boxed{\mathsf{M\,L\,T^{-2}}}$ \;(newton).
+
+\stepn{2} \textbf{Work / energy.} $W=Fd\cos\theta$ (force times distance $d$ moved, with $\theta$ the angle between them), and $\cos\theta$ is a pure number, so
+$[W]=\boxed{\mathsf{M\,L^{2}\,T^{-2}}}$ \;(joule).
+
+\stepn{3} \textbf{Torque} (turning effect of a force $F$ applied at distance $r$ from a pivot). $\tau=rF\sin\theta \Rightarrow [\tau]=\boxed{\mathsf{M\,L^{2}\,T^{-2}}}$.
+\emph{Identical to work}, yet torque has a direction (it is a vector, \chref{ch:vectors}) and work does not. Dimensions cannot always tell
+quantities apart.
+
+\stepn{4} \textbf{Gravitational constant.} From $F=\dfrac{Gm_1m_2}{r^{2}}$, $G=\dfrac{Fr^{2}}{m_1m_2}$:
+\[
+[G]=\frac{\mathsf{M\,L\,T^{-2}}\cdot\mathsf{L^{2}}}{\mathsf{M^{2}}}
+=\boxed{\mathsf{M^{-1}\,L^{3}\,T^{-2}}}.
+\]
+
+\stepn{5} \textbf{Coefficient of viscosity.} Newton's law of viscous flow is $F=\eta A\dfrac{dv}{dy}$, and
+the velocity gradient has dimensions $\mathsf{LT^{-1}/L}=\mathsf{T^{-1}}$, so
+\[
+[\eta]=\frac{\mathsf{M\,L\,T^{-2}}}{\mathsf{L^{2}}\cdot\mathsf{T^{-1}}}
+=\boxed{\mathsf{M\,L^{-1}\,T^{-1}}}\quad(\si{Pa.s}).
+\]
+
+\stepn{6} \textbf{Moment of inertia} (a sum over the masses $m$ of a body, each at distance $r$ from an axis). $I=\sum mr^{2}\Rightarrow[I]=\boxed{\mathsf{M\,L^{2}}}$, no time
+appears at all.
+
+\stepn{7} \textbf{Planck constant.} $E=h\nu$, the energy $E$ of a quantum of light of frequency $\nu$
+(oscillations per second, so $[\nu]=\mathsf{T^{-1}}$):
+\[
+[h]=\frac{\mathsf{M\,L^{2}\,T^{-2}}}{\mathsf{T^{-1}}}=\boxed{\mathsf{M\,L^{2}\,T^{-1}}}.
+\]
+These are the dimensions of \emph{action} (energy $\times$ time), which is why $h$ is called the quantum
+of action. They are also the dimensions of angular momentum (\chref{ch:rotation}), and that is no
+coincidence: in quantum physics angular momentum comes in units of $h/2\pi$.
+
+\stepn{8} \textbf{Universal gas constant.} Temperature and amount of substance are base quantities in
+their own right, and SI writes their dimensions as $\Theta$ and $\mathsf{N}$. From the ideal-gas law
+$PV=nRT$ (pressure $P$, volume $V$, amount $n$ in moles, absolute temperature $T$), and noting
+$PV$ is an energy,
+\[
+[R]=\frac{\mathsf{M\,L^{2}\,T^{-2}}}{\mathsf{N}\,\Theta}
+=\boxed{\mathsf{M\,L^{2}\,T^{-2}}\,\Theta^{-1}\,\mathsf{N}^{-1}}.
+\]
+
+\stepn{9} \textbf{Boltzmann constant.} $k_B=R/N_A$, the gas constant \emph{per molecule}, where the Avogadro constant $N_A$ is
+the number of molecules in a mole. Dropping the
+mole leaves $[k_B]=\boxed{\mathsf{M\,L^{2}\,T^{-2}}\,\Theta^{-1}}$.
+
+\stepn{10} \textbf{Stefan constant.} Stefan--Boltzmann law $\dfrac{P}{A}=\sigma T^{4}$ (power $P$ radiated per area $A$ by a
+black body at absolute temperature $T$), with power
+$[P]=\mathsf{M L^{2}T^{-3}}$:
+\[
+[\sigma]=\frac{\mathsf{M\,L^{2}\,T^{-3}}}{\mathsf{L^{2}}\cdot\Theta^{4}}
+=\boxed{\mathsf{M\,T^{-3}}\,\Theta^{-4}}.
+\]
+\end{derivbox}
+
+\begin{tablebox}{Reference table: check your derivation against this, do not memorise it}
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Quantity & Defining relation & Dimensional formula & SI unit\\
+\midrule
+Force $F$              & $ma$                  & $\mathsf{M\,L\,T^{-2}}$                          & \si{N}\\
+Work / energy $W$      & $Fd\cos\theta$        & $\mathsf{M\,L^{2}\,T^{-2}}$                      & \si{J}\\
+Torque $\tau$          & $rF\sin\theta$        & $\mathsf{M\,L^{2}\,T^{-2}}$                      & \si{N.m}\\
+Grav.\ constant $G$    & $Fr^{2}/m_1m_2$       & $\mathsf{M^{-1}\,L^{3}\,T^{-2}}$                 & \si{N.m^2/kg^2}\\
+Viscosity $\eta$       & $F/[A(dv/dy)]$        & $\mathsf{M\,L^{-1}\,T^{-1}}$                     & \si{Pa.s}\\
+Moment of inertia $I$  & $\sum mr^{2}$         & $\mathsf{M\,L^{2}}$                              & \si{kg.m^2}\\
+Planck constant $h$    & $E/\nu$               & $\mathsf{M\,L^{2}\,T^{-1}}$                      & \si{J.s}\\
+Gas constant $R$       & $PV/nT$               & $\mathsf{M\,L^{2}\,T^{-2}}\,\Theta^{-1}\mathsf{N}^{-1}$ & \si{J/(mol.K)}\\
+Boltzmann $k_B$        & $R/N_A$               & $\mathsf{M\,L^{2}\,T^{-2}}\,\Theta^{-1}$          & \si{J/K}\\
+Stefan $\sigma$        & $P/(AT^{4})$          & $\mathsf{M\,T^{-3}}\,\Theta^{-4}$                 & \si{W/(m^2.K^4)}\\
+\bottomrule
+\end{tabular}
+\end{center}
+\end{tablebox}
+
+\begin{defbox}{The principle of homogeneity of dimensions}
+The rule underlying everything above deserves its name:
+\begin{center}
+\emph{Every term that is added, subtracted or equated in a physical equation must have the same
+dimensions.}
+\end{center}
+It is really a statement that our choice of units is arbitrary: an equation must stay true when we
+switch from metres to feet, and only a dimensionally homogeneous equation survives that switch. Its four
+uses are checking an equation, deriving the \emph{form} of a law, converting between unit systems, and
+deducing an unknown constant's dimensions.
+\end{defbox}
+
+\begin{methodbox}{Converting units with dimensions}
+A physical quantity does not change when the unit changes; only the number does. If the quantity has
+dimensions $\mathsf{M}^a\mathsf{L}^b\mathsf{T}^c$, its value $n_1$ in one system and $n_2$ in another
+satisfy $n_1u_1=n_2u_2$, where $u_1$ and $u_2$ are the two units, so
+\[
+n_2=n_1\Big(\frac{M_1}{M_2}\Big)^{a}\Big(\frac{L_1}{L_2}\Big)^{b}\Big(\frac{T_1}{T_2}\Big)^{c},
+\]
+where $M_1/M_2$ is how many of the new mass units make one old one, and so on. A bigger unit gives a
+smaller number. For example, energy ($a=1$, $b=2$, $c=-2$) goes from SI to CGS with
+$M_1/M_2=\SI{1}{kg}/\SI{1}{g}=10^{3}$ and $L_1/L_2=\SI{1}{m}/\SI{1}{cm}=10^{2}$, so
+$\SI{1}{J}=1\times10^{3}\times(10^{2})^{2}=10^{7}$ erg. The everyday case is the same rule:
+$\SI{72}{km/h}=72\times\frac{1000}{3600}\,\si{m/s}=\SI{20}{m/s}$.
+\end{methodbox}
+
+\subsection{What dimensional analysis cannot do}
+
+The method is a filter, not an oracle, and knowing exactly where its power stops is what makes it usable.
+It fails in four specific ways:
+
+\begin{trapbox}{the four blind spots}
+\textbf{1. It cannot find dimensionless factors.} $T=2\pi\sqrt{\ell/g}$ and $T=\sqrt{\ell/g}$ are
+dimensionally identical; the $2\pi$ must come from real physics. You get the \emph{shape}, never the
+number in front.\\[3pt]
+\textbf{2. It cannot handle sums.} In $s=ut+\tfrac12at^2$ both terms have dimension $\mathsf L$; nothing
+in the method tells you both are needed, or that the coefficient is $\tfrac12$.\\[3pt]
+\textbf{3. It is blind to dimensionless variables.} An angle, a mass ratio, or the Reynolds number can
+appear raised to \emph{any} power without disturbing the dimensions, so the method cannot see it.\\[3pt]
+\textbf{4. It cannot distinguish quantities with the same dimensions.} Work and torque are both
+$\mathsf M\mathsf L^2\mathsf T^{-2}$, yet one is a scalar and one a vector, and adding them is nonsense.
+\end{trapbox}
+
+But what it \emph{can} do, it does absolutely: a dimensionally wrong equation is not approximately wrong,
+not wrong in some regime; it is not physics. So check every answer you derive. It costs five seconds
+and catches algebra slips that re-reading often misses.
+
+\why{Dimensional analysis is the physicist's first line of defence. In an exam it catches a wrong
+formula in seconds; in research it has repeatedly given the form of a law before the detailed theory was worked out. The
+best-known case is G.~I.~Taylor's estimate of the energy released by the first atomic explosion, made
+from published photographs of the growing fireball while the official figure was still secret.}
+
+\section{Estimation and Significant Figures}
+
+Dimensions tell us whether an answer has the right \emph{form}; they say nothing about whether its
+\emph{size} is sensible, or how many of its digits deserve belief. Those are the two questions of this
+section.
+
+\subsection{Order-of-magnitude thinking}
+
+Physicists estimate constantly, and it is a trained skill, not a talent. The claim: you can land within a
+factor of ten of almost anything by decomposing it into pieces you can guess, because independent errors
+tend to cancel: overestimate one factor, underestimate the next, and the product lands close.
+
+\begin{tablebox}{Anchors worth memorising}
+\centering
+\begin{tabular}{@{}ll@{\hspace{2.2em}}ll@{}}
+\toprule
+Adult height & \SI{1.7}{m} & Density of water & \SI{1000}{kg/m^3}\\
+Earth's radius & \SI{6400}{km} & Atomic size & \SI{e-10}{m}\\
+$g$ & $\SI{9.8}{m/s^2}\approx10$ & Avogadro $N_A$ & \SI{6e23}{mol^{-1}}\\
+Atmospheric pressure & \SI{e5}{Pa} & Speed of sound (air) & \SI{340}{m/s}\\
+\bottomrule
+\end{tabular}
+\end{tablebox}
+
+The value of an estimate is not the number; it is the \emph{veto}. An estimate tells you instantly when
+an answer is absurd: a car of mass \SI{3}{kg}, or an electron at \SI{e12}{m/s}, is a slip you catch
+without rechecking the algebra.
+
+\begin{exbox}{How many breaths in a lifetime}
+Decompose into guessable pieces: breaths/min $\approx15$, minutes/year $\approx5\times10^5$, lifetime
+$\approx75$ years. Then
+\[
+N\approx 15\times(5\times10^5)\times75\approx5.6\times10^8\approx10^9.
+\]
+About a billion. How much to trust it? Each input might be off by 50\%, but the three are independent,
+and independent errors combine \emph{in quadrature} (as the square root of the sum of squares, a rule
+met again in \S\ref{sec:propagation}), not by adding: $\sqrt3\times50\%\approx90\%$,
+roughly a factor of two, rather than the worst case $1.5^{3}\approx3.4$ in which all three err the same
+way. Good to an order of magnitude, exactly as claimed. \ans{$\sim10^9$}
+\end{exbox}
+
+\subsection{Significant figures}
+
+Your calculator will hand you $9.813725490196078$. Writing that down is not precision; it is a lie about
+your apparatus. Significant figures are a crude way of tracking how much of your answer is knowledge and
+how much is arithmetic noise. A reading written as $2.5$ claims that the last digit is roughly
+right and nothing beyond it is known; $2.50$ claims ten times more. The significant figures are the
+digits that carry such a claim. Counting them follows from that meaning: every non-zero digit counts,
+and so does a zero between them ($2.05$ has three); leading zeros only place the decimal point and never
+count ($0.0052$ has two); trailing zeros after a decimal point do count ($2.50$ has three). A trailing
+zero in a whole number is ambiguous ($1200$), so write $1.20\times10^{3}$ to claim three. Two rules for
+arithmetic, and two habits, cover most remaining cases:
+
+\begin{itemize}
+\item In \textbf{multiplication/division}, the result carries as many significant figures as the
+\emph{least precise} input. $(2.3)(4.5678)=11$ (or $1.1\times10^{1}$): the least precise input has two significant figures, so
+the answer has two; not $10.50594$, and not $10.5$.
+\item In \textbf{addition/subtraction}, match the least precise \emph{decimal place}, not the figure
+count: $12.11+0.3=12.4$.
+\item Keep \textbf{guard digits} through intermediate steps and round only at the end, or rounding errors
+compound.
+\item Exact numbers (a factor of 2, a count of 5 objects) have infinite significant figures and
+never limit anything.
+\end{itemize}
+
+\section{Uncertainty and Its Propagation}
+
+Significant figures only hint at how well a number is known. To say it properly we attach an explicit
+uncertainty to each measurement and work out how it carries through a calculation. Every measurement
+is wrong to some degree, and a number without an uncertainty is not a
+measurement; it is a rumour.
+
+\subsection{The two kinds of error}
+
+Errors come in two kinds that demand \emph{opposite} cures, and telling them apart decides whether
+repeating a measurement will help.
+
+\begin{defbox}{Systematic and random errors}
+A \textbf{systematic} error biases every reading the same way (a mis-zeroed scale, a bent ruler, an
+uncalibrated instrument). A \textbf{random} error scatters readings both ways (a shaky hand, thermal
+noise, judgement calls).
+\end{defbox}
+
+The crucial fact, constantly missed: \textbf{random errors average away, systematic errors do not.}
+Measure a length twenty times with a shaky hand and the mean beats any single reading, because the
+scatter is as often positive as negative and cancels. Statistics shows that the uncertainty of the
+mean falls as $1/\sqrt N$ for $N$ readings, so a hundred readings pin the mean down ten times better than one
+reading does. But if your ruler's zero is worn so every reading runs
+\SI{1}{mm} long, then a \emph{million} readings give an exquisitely precise answer that is still
+\SI{1}{mm} too long. The scatter shrinks; the bias never moves.
+
+\begin{defbox}{Accuracy and precision: two different words}
+\textbf{Accurate} means close to the true value (small \emph{systematic} error).
+\textbf{Precise} means that repeated readings are tightly clustered (small \emph{random} error).
+They are independent. You can be \emph{precisely wrong}, the most dangerous state in experimental
+science, because tight agreement \emph{feels} like success.
+\end{defbox}
+
+\why{In 2011 the OPERA experiment reported neutrinos apparently travelling faster than light, with
+excellent statistics: the random errors were tiny. A loose fibre-optic connector
+was delaying the timing signal by about \SI{73}{ns}, so that every neutrino seemed to arrive early. No amount of data would ever have found it, and none did: someone
+eventually checked the cable. Precise, and precisely wrong.}
+
+\subsection{Measuring the uncertainty itself}
+
+Before uncertainties can be combined, each measured quantity needs one. Two sources supply it.
+
+\begin{defbox}{Absolute, relative and percentage error}
+Repeat a measurement $n$ times, getting $a_1,a_2,\ldots,a_n$. The best estimate of the true value is the
+\textbf{mean} $\bar a=(a_1+\cdots+a_n)/n$. Each reading's \textbf{absolute error} is its departure from
+the mean, $\Delta a_i=a_i-\bar a$ (same units as $a$, either sign). Their typical size is the
+\textbf{mean absolute error},
+\[
+\Delta\bar a=\frac{|\Delta a_1|+|\Delta a_2|+\cdots+|\Delta a_n|}{n},
+\]
+and the result is reported as $\bar a\pm\Delta\bar a$. The \textbf{relative error} $\Delta\bar a/\bar a$ is a
+pure number, and multiplied by $100\%$ it is the \textbf{percentage error}; these are what let a length
+and a time be compared. A single reading still has an uncertainty: no instrument can resolve less than
+its \textbf{least count}, the smallest division it can read (\SI{1}{mm} on a metre rule), so a single
+reading is quoted to $\pm$ one least count.
+\end{defbox}
+
+Five timings of a pendulum give $1.52$, $1.48$, $1.55$, $1.50$ and \SI{1.45}{s}. The mean is
+\SI{1.50}{s}; the absolute errors are $+0.02$, $-0.02$, $+0.05$, $0$ and $-0.05$, whose magnitudes average
+to \SI{0.028}{s}. So $T=\SI{1.50 \pm 0.03}{s}$, a relative error of $0.03/1.50=2\%$. Averaging the
+magnitudes matters: the signed errors always sum to zero about the mean, which would claim a perfect
+measurement.
+
+\subsection{Propagating uncertainty}\label{sec:propagation}
+
+A result computed from several measured quantities inherits their uncertainties. The rules for combining them
+are short, and they follow in one line from the logarithmic differentiation of \chref{ch:toolkit}.
+
+\begin{methodbox}{Combining uncertainties}
+For a \emph{sum or difference} $Q=x\pm y$, the \emph{absolute} uncertainties add:
+$\Delta Q=\Delta x+\Delta y$.
+For a \emph{product or quotient} $Q=xy$ or $x/y$, the \emph{relative} uncertainties add:
+$\dfrac{\Delta Q}{Q}=\dfrac{\Delta x}{x}+\dfrac{\Delta y}{y}$.
+For a power $Q=x^n$, the relative uncertainty multiplies by $|n|$: $\dfrac{\Delta Q}{Q}=|n|\dfrac{\Delta x}{x}$
+(the sign of $n$ does not matter: a $1/r^2$ law is as unforgiving as an $r^2$ one).
+\end{methodbox}
+
+Even for a difference the absolute errors \emph{add}, since $\Delta x$ and $\Delta y$ may have opposite
+signs. This makes the difference of two nearly equal quantities treacherous: with $x=\SI{20.0 \pm 0.1}{cm}$
+and $y=\SI{19.0 \pm 0.1}{cm}$, each known to $0.5\%$, $x-y=\SI{1.0 \pm 0.2}{cm}$ is uncertain by $20\%$.
+
+\begin{derivbox}{Where the rule for products comes from}
+Take $Q=xy$ and perturb: $Q+\Delta Q=(x+\Delta x)(y+\Delta y)=xy+x\,\Delta y+y\,\Delta x+\Delta x\,\Delta y$.
+The last term is a product of two small quantities, negligible. Subtract $Q=xy$ and divide by it:
+\[
+\frac{\Delta Q}{Q}=\frac{\Delta x}{x}+\frac{\Delta y}{y}.
+\]
+Equivalently $\ln Q=\ln x+\ln y$, and differentiating gives the rule in one line, which also explains
+why powers multiply by $|n|$, since $\ln x^n=n\ln x$. For $Q=x/y$, $\ln Q=\ln x-\ln y$ gives
+$dQ/Q=dx/x-dy/y$; since $\Delta y$ may have either sign, the worst case again adds the magnitudes.
+\end{derivbox}
+
+\inwords{The syllabus rules \emph{add} the errors, which assumes the worst case: that every error
+conspires in the same direction. Truly independent errors combine in \emph{quadrature}
+($\Delta Q/Q=\sqrt{(\Delta x/x)^2+(\Delta y/y)^2}$), giving a smaller, more realistic figure: two 3\%
+errors give 4.2\%, not 6\%. This is the same quadrature that made the estimation trick work. Use the
+adding version for exams, but know it is a deliberately pessimistic bound.}
+
+\begin{trapbox}{powers amplify uncertainty}
+Because a power multiplies the relative error by $|n|$, a quantity you cube (like a volume from a
+measured length) has \emph{three times} the relative uncertainty of that length. So the quantity that
+enters at the highest power is the one to measure carefully.
+\end{trapbox}
+
+\begin{exbox}{Which measurement should you improve?}
+A sphere's density comes from mass $m=\SI{250 \pm 1}{g}$ and diameter $d=\SI{5.0 \pm 0.1}{cm}$ via
+$\rho=m/V$ with $V=\tfrac43\pi(d/2)^3=\pi d^3/6$, so $\rho=6m/\pi d^3$. The relative uncertainties: $\Delta m/m=0.4\%$, but $\Delta d/d=2\%$ enters
+\emph{cubed}, contributing $3\times2\%=6\%$. So $\Delta\rho/\rho=0.4\%+6\%=6.4\%$, and
+$\rho=\SI{3.8 \pm 0.2}{g/cm^3}$. The lesson: the diameter is \emph{fifteen times} more damaging than the
+mass, not because it was measured badly, but because it is cubed. Buying a better balance is pointless;
+a calliper twice as precise cuts the total from $6.4\%$ to $3.4\%$. \ans{$\SI{3.8 \pm 0.2}{g/cm^3}$}
+\end{exbox}
+
+\section{Summary}\label{sec:summary1}
+A dimension records how a quantity is built from mass, length and time, and the principle of
+homogeneity says that every term added, subtracted or equated in a physical law must share the same
+dimensions. Its two most important uses are these: it can \emph{kill} a wrong formula instantly, and it can
+\emph{find} the shape of an unknown law by matching powers of $\mathsf{M}$, $\mathsf{L}$ and $\mathsf{T}$.
+What it cannot do is equally important: it never supplies a dimensionless constant, it cannot tell
+which terms of a sum are present, it is blind to dimensionless variables such as angles, and it cannot
+distinguish quantities that share dimensions (work and torque).
+
+\begin{itemize}
+\item $[F]=\mathsf{MLT^{-2}}$, $[E]=\mathsf{ML^2T^{-2}}$, $[G]=\mathsf{M^{-1}L^3T^{-2}}$: derive these from
+      defining equations rather than memorising them.
+\item Accuracy is closeness to the truth (small systematic error); precision is the tightness of repeated
+      readings (small random error). They are independent, and ``precisely wrong'' is the dangerous case.
+\item For a sum or difference, \emph{absolute} uncertainties add. For a product or quotient,
+      \emph{relative} uncertainties add. A power multiplies the relative uncertainty by $|n|$, so the highest power dominates.
+\item Estimate first. An order-of-magnitude answer obtained in ten seconds catches the gross blunders
+      (a misplaced power of ten, a wrong unit) made in the following ten minutes.
+\end{itemize}
+
+\section{Problem Types}\label{sec:types1}
+Measurement questions are among the most predictable in the syllabus, and the six problem types below
+cover most of them. Each gives the \emph{tell} that identifies the type from the wording of a
+question, the \emph{method} that solves it, and the \emph{trap} that the type is designed to spring.
+
+\archq{Order-of-magnitude estimate}
+{``Estimate the number of \ldots'' or ``the order of magnitude of \ldots'', with options a factor of ten
+or more apart.}
+{Decompose the quantity into factors you can guess to within a factor of two or so, keep one significant
+figure throughout, and multiply. Report a power of ten.}
+{Over-precision, and slips in the unit conversions (minutes to years) that the estimate is meant to
+catch. Write each conversion factor out explicitly.}
+{The number of times a human heart beats in a 70-year life is of the order of:}
+{$10^{7}$}{$10^{9}$}{$10^{11}$}{$10^{13}$\archans{B}{About $70$ beats per minute, $5\times10^{5}$
+minutes per year and $70$ years give $70\times(5\times10^{5})\times70\approx2.5\times10^{9}$, of order
+$10^{9}$. Option (A) is what results from counting per hour rather than per minute.}}
+
+\archq{Find the dimensional formula of an unfamiliar constant}
+{``Find the dimensions of $a$ (or $b$) in a given equation,'' e.g.\ van der Waals' $\left(P+\frac{a}{V^2}\right)(V-b)=RT$.}
+{Use the \textbf{principle of homogeneity}: a quantity added to another must share its dimensions, and
+the argument of $\sin$, $\log$ or $e^x$ must be dimensionless. Isolate the unknown and substitute the
+dimensions of everything else.}
+{Trying to recall the constant. You never need to: the equation itself tells you, because whatever is
+added to $P$ must \emph{be} a pressure.}
+{In the equation $x=a+bt^2$ ($x$ a distance, $t$ a time), the dimensions of $a/b$ are:}
+{$\mathsf{T}$}{$\mathsf{L T^{-2}}$}{dimensionless}{$\mathsf{T^2}$\archans{D}{$a$ is added to $x$, so
+$[a]=\mathsf L$. And $bt^2$ must also be a length, so $[b]=\mathsf{LT^{-2}}$. Hence
+$[a/b]=\mathsf{L}/\mathsf{LT^{-2}}=\mathsf{T^2}$.}}
+
+\archq{Percentage error in a computed quantity}
+{``The percentage errors in $A,B,C$ are given, find the error in $Z=\dfrac{A^pB^q}{C^r}$.''}
+{Relative errors \emph{add}, weighted by the powers:
+$\dfrac{\Delta Z}{Z}=p\dfrac{\Delta A}{A}+q\dfrac{\Delta B}{B}+r\dfrac{\Delta C}{C}$. The power multiplies
+the error whether it is in the numerator or the denominator.}
+{Subtracting the denominator's error. Errors accumulate in the \emph{worst case}, so every term carries a
+$+$ sign.}
+{The percentage errors in $A$, $B$ and $C$ are $1\%$, $2\%$ and $3\%$. The percentage error in
+$Z=\dfrac{A^2B^3}{C^4}$ is:}
+{$4\%$}{$6\%$}{$20\%$}{$24\%$\archans{C}{$2(1)+3(2)+4(3)=2+6+12=20\%$. Option (A) subtracts the
+denominator's term ($2+6-12=-4$) and drops the sign; option (B) ignores the powers. Note $C$ dominates despite its
+error being only $3\%$, because of the fourth power.}}
+
+\archq{Error propagated into a derived constant}
+{``$g$ is found from a pendulum, or $Y$ from an extension, given the errors in the measured quantities,
+find the error in the result.''}
+{Rearrange for the wanted quantity \emph{first}, then apply the powers rule. For
+$T=2\pi\sqrt{\ell/g}$, invert to $g=\dfrac{4\pi^2\ell}{T^2}$, giving
+$\dfrac{\Delta g}{g}=\dfrac{\Delta\ell}{\ell}+2\dfrac{\Delta T}{T}$.}
+{Applying the rule to the formula as printed. In $T=2\pi\sqrt{\ell/g}$ the power of $g$ is
+$-\tfrac12$, so a careless reading gives half the error instead of twice it.}
+{In a pendulum experiment $\ell$ is measured to $2\%$ and $T$ to $3\%$. The percentage error in the
+computed $g$ is:}
+{$8\%$}{$5\%$}{$11\%$}{$3.5\%$\archans{A}{$g=4\pi^2\ell/T^2$, so
+$\dfrac{\Delta g}{g}=\dfrac{\Delta \ell}{\ell}+2\dfrac{\Delta T}{T}=2\%+2(3\%)=8\%$. The period matters
+twice as much as the length, which is why it is timed over many oscillations. Option (D),
+$2\%+\tfrac12(3\%)$, reads the power of $T$ off the formula as printed, so the period counts half
+instead of twice.}}
+
+\archq{Significant figures in a calculation}
+{``Give the result of a multiplication/addition to the correct number of significant figures.''}
+{Two \emph{different} rules. \textbf{Multiplication/division:} the answer keeps the \emph{fewest
+significant figures} among the inputs. \textbf{Addition/subtraction:} the answer keeps the \emph{fewest
+decimal places}. Leading zeros never count; trailing zeros after a decimal point do.}
+{Applying the multiplication rule to a sum. $12.34+5.6$ is limited by \emph{decimal places} (one), giving
+$17.9$, not by significant figures.}
+{The product $2.5\times1.24$, to the correct number of significant figures, is:}
+{$3$}{$3.1$}{$3.10$}{$3.100$\archans{B}{The arithmetic gives $3.100$, but $2.5$ carries only two
+significant figures, so the answer must too: $3.1$.}}
+
+\archq{Checking or deriving a formula by dimensions}
+{``Check whether an equation is dimensionally correct,'' or ``deduce how a quantity depends on the
+others.''}
+{For a \emph{check}, evaluate every term separately and compare. To \emph{derive}, write
+$y=C\,a^{p}b^{q}c^{r}$, match the powers of $\mathsf{M}$, $\mathsf{L}$ and $\mathsf{T}$, and solve.
+With only three base dimensions in mechanics, at most three unknown exponents can be found, and the
+dimensionless constant $C$ never can.}
+{Concluding that a dimensionally correct equation is \emph{proved}. The method is blind to pure numbers,
+so it can disprove but never fully prove.}
+{Which of these is dimensionally \emph{incorrect}? ($v$ speed, $s$ distance, $t$ time, $a$ acceleration)}
+{$v^2=u^2+2as$}{$s=ut+\tfrac12at^2$}{$v=u+at^2$}{$s=\tfrac12(u+v)t$\archans{C}{In (C), $at^2$ has
+dimensions $\mathsf{LT^{-2}}\cdot\mathsf{T^2}=\mathsf L$, a length, which cannot be added to a
+velocity. The correct form is $v=u+at$.}}

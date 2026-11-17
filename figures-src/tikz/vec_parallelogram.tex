@@ -1,0 +1,50 @@
+% vec_parallelogram: the construction behind R = sqrt(A^2 + B^2 + 2AB cos theta) (Ch 3, fig:vecpara)
+% A = 6.2 cm along the baseline, B = 4.0 cm at theta = 50 deg, from the common tail O.
+% C is the far corner of the parallelogram; the side from A's head to C is a copy of B,
+% so it also makes theta with the produced baseline.  N is the foot of the perpendicular
+% from C: CN = B sin(theta), and the run ON = A + B cos(theta).
+% phi = atan(B sin / (A + B cos)) = 19.3 deg is the direction of R above A.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\A{6.2}\def\B{4.0}\def\th{50}
+  \pgfmathsetmacro\Bx{\B*cos(\th)}
+  \pgfmathsetmacro\By{\B*sin(\th)}
+  \pgfmathsetmacro\ph{atan(\By/(\A+\Bx))}
+  \coordinate (O) at (0,0);
+  \coordinate (P) at (\A,0);              % head of A
+  \coordinate (C) at (\A+\Bx,\By);
+  \coordinate (N) at (\A+\Bx,0);
+  % parallelogram
+  \fill[cSlope] (O) -- (P) -- (C) -- (\Bx,\By) -- cycle;
+  \draw[parallelogram] (P) -- (C) -- (\Bx,\By);
+  % the right triangle P N C: baseline produced, and the perpendicular
+  \draw[cTeal,thin line] (P) -- (N);
+  \draw[cTeal,thin line] (N) -- (C);
+  \draw[right angle] ($(N)+(-0.22,0)$) -- ++(0,0.22) -- ++(0.22,0);
+  % theta at the head of A (between the produced baseline and the copy of B)
+  \draw[angle arc] ($(P)+(0.6,0)$) arc[start angle=0,end angle=\th,radius=0.6];
+  \node at ($(P)+(\th/2:0.85)$) {$\theta$};
+  % angles at O: theta (A to B) and phi (A to R)
+  \draw[angle arc] (0.9,0) arc[start angle=0,end angle=\th,radius=0.9];
+  \node at ({(\th+\ph)/2}:1.15) {$\theta$};
+  \draw[angle arc] (1.9,0) arc[start angle=0,end angle=\ph,radius=1.9];
+  \node at (\ph/2:2.15) {$\phi$};
+  % the vectors
+  \draw[vector,cInk] (O) -- (C);
+  \draw[vector,cPrim] (O) -- (P);
+  \draw[vector,cAcc] (O) -- (\Bx,\By);
+  % vector labels
+  \node[cPrim,anchor=north] at (\A/2,-0.05) {$\vc{A}$};
+  \node[cAcc,anchor=south east,inner sep=1pt] at ($(O)!0.55!(\Bx,\By)$) {$\vc{B}$};
+  \node[cInk,anchor=south east,inner sep=1pt] at ($(O)!0.6!(C)$) {$\vc{R}$};
+  % the legs of the right triangle
+  \node[cTeal,anchor=north] at ($(P)!0.5!(N)$) {$B\cos\theta$};
+  \node[cTeal,anchor=west] at ($(N)!0.5!(C)$) {$B\sin\theta$};
+  % the run
+  \draw[dimtick] (O) -- (0,-0.95);
+  \draw[dimtick] (N) -- ($(N)+(0,-0.95)$);
+  \draw[dim] (0,-0.8) -- node[anchor=north,cSteel,inner sep=2pt] {$A+B\cos\theta$} ($(N)+(0,-0.8)$);
+  % points
+  \node[anchor=east] at (-0.06,0) {$O$};
+  \node[anchor=south west,inner sep=1pt] at (C) {$C$};
+  \node[anchor=north west,inner sep=2pt] at (N) {$N$};
+\end{tikzpicture}

@@ -1,0 +1,40 @@
+% cmd_semidisc: a semicircular lamina built from nested semicircular arcs (Ch 13, fig:cmddisc)
+% Radius R = 3.3 cm.  One highlighted arc of radius r = 0.88 R and width dr: it is a
+% semicircular wire, with its own centre of mass on the axis at 2r/pi = 0.560 R.
+% The lamina's centre of mass is at 4R/(3 pi) = 0.424 R.  r is chosen so the two
+% points are clearly apart.  Thin arcs at 0.2R ... 0.8R suggest the nesting.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{3.3}
+  \pgfmathsetmacro\r{0.88*\R}
+  \def\dr{0.16}
+  % the lamina
+  \fill[cMoon] (\R,0) arc[start angle=0,end angle=180,radius=\R] -- cycle;
+  \foreach \f in {0.2,0.4,0.6}
+    \draw[cSteel,hair line] (\f*\R,0) arc[start angle=0,end angle=180,radius=\f*\R];
+  % the highlighted arc, radius r, width dr
+  \fill[cAcc!40] (\r+\dr/2,0) arc[start angle=0,end angle=180,radius=\r+\dr/2]
+     -- (-\r+\dr/2,0) arc[start angle=180,end angle=0,radius=\r-\dr/2] -- cycle;
+  \draw[cAcc,thin line] (\r+\dr/2,0) arc[start angle=0,end angle=180,radius=\r+\dr/2];
+  \draw[cAcc,thin line] (\r-\dr/2,0) arc[start angle=0,end angle=180,radius=\r-\dr/2];
+  % outline and diameter
+  \draw[outline] (\R,0) arc[start angle=0,end angle=180,radius=\R] -- cycle;
+  \draw[guide] (0,0) -- (0,\R+0.3);
+  % radius r of the arc
+  \draw[cInk,thin line,-smallhead] (0,0) -- (18:\r);
+  \node[anchor=south east,inner sep=1.5pt] at (18:0.8*\r) {$r$};
+  % dr, by a leader to the right of the arc
+  \draw[leader,cAcc] (35:\r+\dr/2) -- (35:\R+0.35);
+  \node[cAcc,anchor=south west,inner sep=1pt] at (35:\R+0.35) {$dr$};
+  % the arc's own centre of mass, and the lamina's
+  \pgfmathsetmacro\ya{2*\r/pi}
+  \pgfmathsetmacro\yc{4*\R/(3*pi)}
+  \filldraw[fill=white,draw=cAcc,thin line] (0,\ya) circle[radius=0.07];
+  \pic at (0,\yc) {cm};
+  % heights, on opposite sides of the axis
+  \draw[dim,cAcc] (0.6,0) -- (0.6,\ya);
+  \draw[dimtick,cAcc] (0.1,\ya) -- (0.72,\ya);
+  \node[knockout,fill=cMoon,text=cAcc,anchor=west] at (0.64,0.6*\ya) {$2r/\pi$};
+  \draw[dim] (-0.6,0) -- (-0.6,\yc);
+  \draw[dimtick] (-0.14,\yc) -- (-0.72,\yc);
+  \node[knockout,fill=cMoon,text=cSteel,anchor=east] at (-0.64,0.5*\yc) {$4R/3\pi$};
+\end{tikzpicture}

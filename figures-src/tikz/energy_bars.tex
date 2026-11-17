@@ -1,0 +1,37 @@
+% energy_bars: energy bookkeeping in free fall (Ch 11, fig:energybars)
+% A ball dropped from rest at height H.  At height h:  U = mgh,  K = mg(H - h),
+% v = sqrt(2g(H - h)), and K + U = mgH (h measured to the ball's centre).  Stages: h = H (v = 0), h = H/2
+% (v = sqrt(gH)), h = 0 (v = sqrt(2gH)).  Bars are drawn on the same vertical
+% scale as the drop, with U stacked at the bottom, so the U/K boundary in each
+% bar sits level with the ball (dashed guides).  Velocity arrows scale as v:
+% lengths 0, 0.707 and 1 times the longest.
+\begin{tikzpicture}[x=1mm,y=1mm]
+  \def\H{36}\def\r{2.2}\def\bw{12}
+  % guides from each ball centre to its bar (drawn behind the bars)
+  \draw[guide] (12,\H) -- (110,\H);
+  \draw[guide] (12,\H/2) -- (80,\H/2);
+  \draw[guide] (12,0) -- (54,0);
+  % the drop: heights are measured to the ball's centre
+  \path[ground,draw=none] (0,-\r-1.8) rectangle (30,-\r);
+  \draw[ground] (0,-\r) -- (30,-\r);
+  \foreach \y in {\H,\H/2,0}{\draw[body] (12,\y) circle[radius=\r];}
+  \draw[dim] (4,0) -- (4,\H) node[midway,left=0.5mm,cSteel] {$H$};
+  % velocities (beside the ball, tip level with its lowest point; length as v)
+  \node[cFor,anchor=west,knockout] at (16.5,\H) {$v=0$};
+  \draw[velocity] (18,\H/2-\r+8.5) -- (18,\H/2-\r)
+    node[pos=0.4,right=0.5mm] {$v=\sqrt{gH}$};
+  \draw[velocity] (18,-\r+12) -- (18,-\r) node[pos=0.4,right=0.5mm] {$v=\sqrt{2gH}$};
+  % the bars: U (bottom) and K (top), all of total height H
+  \foreach \x/\h/\lab in {54/1/top, 74/0.5/halfway, 94/0/ground}{
+    \draw[U bar] (\x,0) rectangle (\x+\bw,\h*\H);
+    \draw[K bar] (\x,\h*\H) rectangle (\x+\bw,\H);
+    \draw[outline] (\x,0) rectangle (\x+\bw,\H);
+    \node[anchor=north] at (\x+\bw/2,-1.4) {\lab};
+  }
+  % legend, level with the parts it names
+  \node[cPlum,anchor=south] at (60,\H+1) {$U=mgh$};
+  \node[cAcc,anchor=south] at (100,\H+1) {$K=\tfrac12mv^2$};
+  % the total
+  \draw[dim,cInk] (111,0) -- (111,\H)
+    node[midway,right=0.8mm,align=left] {$K+U=mgH$\\[1pt] \footnotesize at every stage};
+\end{tikzpicture}

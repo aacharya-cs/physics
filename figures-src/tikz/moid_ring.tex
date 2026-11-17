@@ -1,0 +1,46 @@
+% moid_ring: the ring two ways (Ch 14, fig:moidring)
+% A thin ring of radius R seen obliquely (circle -> ellipse with y-radius 0.32 x-radius),
+% the same view as moid_disc.  Point at azimuth phi: (R cos phi, 0.32 R sin phi).
+% Left: the central axis (vertical); four elements dm, each at the same distance R,
+%   so I = M R^2 with no integral.
+% Right: the same ring with the in-plane diameters x (azimuth -25 deg) and y
+%   (azimuth 65 deg) and the perpendicular axis z.  By symmetry I_x = I_y, and the
+%   perpendicular-axis theorem I_z = I_x + I_y gives I_diameter = (1/2) M R^2.
+% Shared look of the moid_* family: see moid_rod.tex.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\k{0.32}
+  \def\R{2.0}
+  \def\w{0.07}     % half width of the wire
+  % the ring as a pale band between two ellipses, centred at #1
+  \def\ring#1{%
+    \fill[cBlock!60,even odd rule,shift={(#1,0)}]
+       (0,0) ellipse[x radius=\R+\w,y radius=\k*(\R+\w)]
+       (0,0) ellipse[x radius=\R-\w,y radius=\k*(\R-\w)];
+    \draw[cSteel,hair line,shift={(#1,0)}]
+       (0,0) ellipse[x radius=\R+\w,y radius=\k*(\R+\w)]
+       (0,0) ellipse[x radius=\R-\w,y radius=\k*(\R-\w)];}
+  % ---------------------------------------------------------- left: central axis
+  \ring{0}
+  \foreach \p in {110,200,295}{%
+    \draw[guide] (0,0) -- ({\R*cos(\p)},{\k*\R*sin(\p)});}
+  \draw[dim] (0,0) -- node[anchor=south,cSteel] {$R$} (\R-\w,0);
+  \foreach \p in {0,110,200,295}{%
+    \fill[cAcc] ({\R*cos(\p)},{\k*\R*sin(\p)}) circle[radius=0.085];}
+  \draw[leader,cAcc] ({\R*cos(295)+0.06},{\k*\R*sin(295)-0.06}) -- (1.55,-1.2)
+      node[anchor=west,inner sep=1.5pt] {$dm$};
+  \draw[rotation axis] (0,-1.55) -- (0,1.5) node[anchor=south] {central axis};
+  \fill[cInk] (0,0) circle[radius=0.045];
+  \node[anchor=north,font=\footnotesize,text=cSteel] at (0,-1.75) {every element at the same distance $R$};
+  % ---------------------------------------------------------- right: diameters
+  \begin{scope}[shift={(6.6,0)}]
+    \ring{0}
+    \def\ext{2.55}
+    \draw[rotation axis] ({-\ext*cos(-25)},{-\k*\ext*sin(-25)}) -- ({\ext*cos(-25)},{\k*\ext*sin(-25)})
+        node[anchor=west,inner sep=2pt] {$x$};
+    \draw[rotation axis] ({-1.12*\ext*cos(65)},{-1.12*\k*\ext*sin(65)}) -- ({1.12*\ext*cos(65)},{1.12*\k*\ext*sin(65)})
+        node[anchor=south west,inner sep=1pt] {$y$};
+    \draw[rotation axis] (0,-1.55) -- (0,1.5) node[anchor=south] {$z$};
+    \fill[cInk] (0,0) circle[radius=0.045];
+    \node[anchor=north,font=\footnotesize,text=cSteel] at (0,-1.75) {two equal diameters, $x$ and $y$};
+  \end{scope}
+\end{tikzpicture}

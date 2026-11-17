@@ -1,0 +1,38 @@
+% moid_rod: slicing a thin rod for its moment of inertia (Ch 14, fig:moidrod)
+% Uniform rod, length ell, axis perpendicular to it through the centre (x = 0).
+% The slice is an element dx at signed distance x from the axis, mass dm = lambda dx,
+% contributing x^2 dm; integrating from -ell/2 to ell/2 gives (1/12) M ell^2.
+% A faint guide marks the alternative axis at the left end (limits 0 to ell, 1/3 M ell^2).
+% Shared look of the moid_* family: dash-dot ink rotation axis, pale cBlock body,
+% orange (cAcc) slice labelled dm, steel dimension for the slice's distance from
+% the axis, orange label for the slice's thickness.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\hl{3.6}     % half length ell/2
+  \def\t{0.15}     % half thickness of the rod
+  \def\xs{2.1}     % position of the slice
+  \def\dx{0.32}    % its (exaggerated) width
+  % the rod and the slice
+  \draw[body,fill=cBlock!35] (-\hl,-\t) rectangle (\hl,\t);
+  \draw[slice] (\xs-\dx/2,-\t) rectangle (\xs+\dx/2,\t);
+  % the axis through the centre, and the alternative axis at one end
+  \draw[rotation axis] (0,-1.15) -- (0,1.35) node[anchor=south] {axis};
+  \draw[guide] (-\hl,\t) -- (-\hl,1.0) node[anchor=south,cSteel,font=\footnotesize] {end axis};
+  % x: signed distance from the axis to the slice
+  \draw[dimtick] (\xs,\t+0.06) -- (\xs,0.82);
+  \draw[dim] (0,0.68) -- node[anchor=south,cSteel] {$x$} (\xs,0.68);
+  % dx: the slice's width
+  \draw[dimtick] (\xs-\dx/2,-\t-0.06) -- (\xs-\dx/2,-0.52);
+  \draw[dimtick] (\xs+\dx/2,-\t-0.06) -- (\xs+\dx/2,-0.52);
+  \draw[{smallhead}-,thin line,cAcc] (\xs-\dx/2,-0.42) -- ++(-0.38,0);
+  \draw[{smallhead}-,thin line,cAcc] (\xs+\dx/2,-0.42) -- ++(0.38,0)
+      node[anchor=west,inner sep=1.5pt] {$dx$};
+  % dm, with a leader to the slice
+  \draw[leader,cAcc] (\xs+0.08,\t) -- (\xs+0.55,0.62) node[anchor=south west,inner sep=1pt] {$dm=\lambda\,dx$};
+  % the ends: the limits of integration
+  \node[anchor=east] at (-\hl-0.06,0) {$-\ell/2$};
+  \node[anchor=west] at (\hl+0.06,0) {$\ell/2$};
+  % the whole length
+  \draw[dimtick] (-\hl,-\t-0.06) -- (-\hl,-1.1);
+  \draw[dimtick] (\hl,-\t-0.06) -- (\hl,-1.1);
+  \draw[dim] (-\hl,-0.98) -- node[pos=0.62,knockout,text=cSteel] {$\ell$} (\hl,-0.98);
+\end{tikzpicture}

@@ -1,0 +1,43 @@
+% rolling_race: a solid sphere, a disc and a ring released together down one ramp (Ch 15, fig:rollrace)
+% Snapshot at one instant after release.  From rest with a = g sin(theta)/(1+c), the
+% distance covered in a given time is s = a t^2/2, proportional to 1/(1+c):
+%   sphere c = 2/5: 1/1.4 = 0.714,  disc c = 1/2: 1/1.5 = 0.667,  ring c = 1: 1/2 = 0.500.
+% Drawn with the sphere 8.4 cm from the start line, so disc 7.84 cm and ring 6.00 cm.
+% The radii differ on purpose (marble 0.18, disc 0.26, hoop 0.34 cm): the order does
+% not depend on size, only on c.  Ramp theta = 12 degrees; rolling down to the right.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\th{12}
+  \def\Lx{9.4}
+  \def\sz{0.45}                                 % start line, along the slope
+  \def\D{8.4}                                   % distance covered by the sphere
+  \pgfmathsetmacro\H{\Lx*tan(\th)}
+  % ground and ramp
+  \fill[ground strip] (-0.3,0) rectangle (\Lx+0.5,-0.18);
+  \draw[outline] (-0.3,0) -- (\Lx+0.5,0);
+  \filldraw[fill=cSlope,outline] (0,0) -- (0,\H) -- (\Lx,0) -- cycle;
+  \begin{scope}[shift={(0,\H)},rotate=-\th]
+    % start line
+    \draw[cSteel,thin line] (\sz,0) -- (\sz,0.45);
+    \node[cSteel,font=\footnotesize,anchor=south west,inner sep=1pt] at (\sz,0.45) {start};
+    % positions at the same instant: s = sz + D (1.4)/(1+c)
+    \pgfmathsetmacro\sS{\sz+\D*1.4/1.4}
+    \pgfmathsetmacro\sD{\sz+\D*1.4/1.5}
+    \pgfmathsetmacro\sR{\sz+\D*1.4/2}
+    % solid sphere (shaded), disc (flat face with axle), ring (annulus)
+    \shade[ball color=cBlock] (\sS,0.18) circle[radius=0.18];
+    \draw[cSteel,thin line] (\sS,0.18) circle[radius=0.18];
+    \coordinate (S) at (\sS,0.18+0.18);
+    \draw[body,fill=cBlock!45] (\sD,0.26) circle[radius=0.26];
+    \node[point mass] at (\sD,0.26) {};
+    \coordinate (Dk) at (\sD,0.26+0.26);
+    \filldraw[body,even odd rule] (\sR,0.34) circle[radius=0.34] circle[radius=0.25];
+    \coordinate (Rg) at (\sR,0.34+0.34);
+  \end{scope}
+  % labels
+  \foreach \p/\x/\name/\cc in {S/9.05/sphere/{c=\tfrac25},Dk/7.45/disc/{c=\tfrac12},Rg/5.7/ring/{c=1}}{
+    \node[anchor=south,align=center,inner sep=1pt] (L) at (\x,1.95) {\name\\[1pt]$\cc$};
+    \draw[leader,cInk] ($(\p)+(0,0.06)$) -- (L.south);
+  }
+  % finish
+  \node[cSteel,font=\footnotesize,anchor=north] at (\Lx,-0.2) {finish};
+\end{tikzpicture}

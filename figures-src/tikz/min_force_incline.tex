@@ -1,0 +1,46 @@
+% min_force_incline: the direction of least pull up a rough incline (Ch 9, fig:minforce)
+% Incline theta = 25 degrees, mu = 0.5, so the angle of friction lambda = atan(0.5) = 26.6 deg.
+% A pull at beta above the slope must be F = mg(sin theta + mu cos theta)/(cos beta + mu sin beta).
+% Arrows are drawn to that scale (F at beta = 0 is 2.5 cm) for beta = 0, lambda, 60 deg.
+% In the slope's frame the tip of each arrow is (F cos beta, F sin beta), and
+% F(cos beta + mu sin beta) = constant, so every tip lies on ONE straight line,
+% x + mu y = k.  The shortest arrow is the one perpendicular to that line, whose
+% direction (1, mu) makes tan(beta) = mu: beta = lambda.
+% Check N >= 0 at beta = 60: F = 0.939 mg, F sin 60 = 0.81 mg < mg cos 25 = 0.91 mg.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\th{25}
+  \def\muf{0.5}
+  \def\Fz{2.5}                                  % F at beta = 0, in cm
+  \def\Lb{9.6}
+  \def\s{3.3}
+  \pgfmathsetmacro\lam{atan(\muf)}
+  \pgfmathsetmacro\Hh{\Lb*tan(\th)}
+  % incline and floor
+  \path[ground,draw=none] (-0.35,-0.14) rectangle (\Lb+0.35,0);
+  \fill[cSlope] (0,0) -- (\Lb,0) -- (\Lb,\Hh) -- cycle;
+  \draw[outline] (-0.35,0) -- (\Lb+0.35,0);
+  \draw[outline] (0,0) -- (\Lb,\Hh) -- (\Lb,0);
+  \draw[angle arc] (1.3,0) arc[start angle=0,end angle=\th,radius=1.3];
+  \node at (\th/2:1.65) {$\theta$};
+  % everything else in the slope's frame, origin at the front face of the block
+  \begin{scope}[shift={(\th:\s)},rotate=\th]
+    \draw[body] (-1.3,0) rectangle (0,0.8);
+    \coordinate (Q) at (0,0.4);
+    % the line on which every tip lies: x + mu y = k (relative to Q)
+    \draw[guide] ($(Q)+(\Fz,0)$) -- ($(Q)+({\Fz-3.1*\muf},3.1)$)
+      node[note,anchor=south,inner sep=2pt] {tips of the pull needed};
+    % beta = 0 and beta = 60 deg
+    \pgfmathsetmacro\Fa{\Fz/(cos(60)+\muf*sin(60))}
+    \draw[applied] (Q) -- ++(0:\Fz) node[anchor=west,inner sep=3pt] {$\beta=0$};
+    \draw[applied] (Q) -- ++(60:\Fa) node[pos=0.72,anchor=east,inner sep=3pt] {steeper};
+    % beta = lambda: the least force, perpendicular to the line of tips
+    \pgfmathsetmacro\Fm{\Fz*cos(\lam)}
+    \coordinate (M) at ($(Q)+(\lam:\Fm)$);
+    \draw[right angle,cAcc] ($(M)+(\lam+180:0.22)$) -- ++(\lam-90:0.22) -- ++(\lam:0.22);
+    \draw[applied] (Q) -- (M);
+    \node[cAcc,anchor=south west,inner sep=3pt] at (M) {$\beta=\lambda$: least force};
+    % the angle beta
+    \draw[angle arc] ($(Q)+(0:1.15)$) arc[start angle=0,end angle=\lam,radius=1.15];
+    \node at ($(Q)+(\lam/2:1.42)$) {$\beta$};
+  \end{scope}
+\end{tikzpicture}

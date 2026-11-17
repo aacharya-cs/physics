@@ -1,0 +1,40 @@
+% cd_threeparticles: three equal masses rotating as a rigid equilateral triangle
+% (Ch 10, fig:threepart).  Side a; each mass orbits the centroid on a circle of
+% radius r = a/sqrt(3).  On the mass at the lower left the two gravitational
+% pulls F = G m^2/a^2 (towards the other two masses, 60 degrees apart) add to
+% 2F cos 30 = sqrt(3) F, directed exactly at the centroid: the centre of its
+% circle.  The parallelogram is drawn to scale; the resultant is dashed
+% (bookstyle `resultant').  Velocities are tangent to the
+% circle (counter-clockwise rotation), all of the same size v = sqrt(Gm/a).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\a{5.0}
+  \pgfmathsetmacro\R{\a/sqrt(3)}
+  \coordinate (A) at (0,0);
+  \coordinate (B) at (\a,0);
+  \coordinate (C) at (\a/2,{\a*sqrt(3)/2});
+  \coordinate (G) at (\a/2,{\a*sqrt(3)/6});
+  % the common circle and the triangle
+  \draw[cPrim,thin line] (G) circle[radius=\R];
+  \draw[guide] (A) -- (B) -- (C) -- cycle;
+  % radius, to the top mass
+  \draw[cSteel,thin line] (G) -- (C) node[pos=0.5,anchor=east,inner sep=2pt,cSteel] {$r$};
+  \node[point mass] at (G) {};
+  \node[anchor=west,inner sep=3pt,font=\footnotesize] at (G) {centroid};
+  % side a
+  \node[anchor=north,inner sep=3pt] at ($(A)!0.68!(B)$) {$a$};
+  % forces on the mass at A, to scale: F = 1.25 cm
+  \def\F{1.25}
+  \draw[parallelogram] (\F,0) -- (30:{\F*sqrt(3)}) -- (60:\F);
+  \draw[force] (A) -- (\F,0) node[anchor=north,inner sep=3pt] {$F$};
+  \draw[force] (A) -- (60:\F) node[anchor=south east,inner sep=1pt] {$F$};
+  \draw[force,resultant] (A) -- (30:{\F*sqrt(3)}) node[anchor=north west,inner sep=2pt] {$\sqrt{3}\,F$};
+  % velocities, tangent to the circle
+  \draw[velocity] (A) -- ++(-60:0.95) node[anchor=west,inner sep=2pt] {$v$};
+  \draw[velocity] (B) -- ++(60:0.95) node[anchor=west,inner sep=2pt] {$v$};
+  \draw[velocity] (C) -- ++(180:0.95) node[anchor=south,inner sep=3pt] {$v$};
+  % the three masses
+  \foreach \P in {A,B,C}{\filldraw[moon] (\P) circle[radius=0.12];}
+  \node[anchor=north east,inner sep=3pt] at (A) {$m$};
+  \node[anchor=north west,inner sep=3pt] at (B) {$m$};
+  \node[anchor=south west,inner sep=3pt] at (C) {$m$};
+\end{tikzpicture}

@@ -1,0 +1,61 @@
+% rolling_addition: rolling = translation + rotation, added point by point (Ch 15, fig:rolladd)
+% Wheel of radius R rolling to the right (clockwise), v_cm = omega R.
+%   translation: every point moves at v_cm, to the right
+%   rotation about the centre: rim points move at omega R = v_cm along the rim
+%   rolling (the sum): top 2 v_cm, centre v_cm, front (v_cm, -v_cm), back (v_cm, v_cm),
+%   contact point P at rest.  Every velocity is perpendicular to the line from P
+%   (dashed) and proportional to its length: |v| = omega * |PQ|.
+% All arrows to scale, v_cm = 0.8 cm with R = 1.2 cm (so omega = 2/3 per unit length).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{1.2}
+  \def\v{0.8}
+  \def\wheel{\draw[body,fill=cBlock!45] (0,0) circle[radius=\R];
+             \node[point mass] at (0,0) {};}
+  % --------------------------------------------------------------- translation
+  \begin{scope}
+    \wheel
+    \node[font=\footnotesize] at (0.3,2.0) {translation};
+    \foreach \p in {(0,\R),(\R,0),(-\R,0),(0,-\R),(0,0)}
+      \draw[velocity] \p -- ++(\v,0);
+    \node[cFor,anchor=south] at (\v/2,\R+0.04) {$v_{\text{cm}}$};
+  \end{scope}
+  \node at (2.55,0) {$+$};
+  % ------------------------------------------------------------------ rotation
+  \begin{scope}[xshift=4.1cm]
+    \wheel
+    \node[font=\footnotesize] at (0,2.0) {rotation about the centre};
+    \draw[velocity] (0,\R)  -- ++(\v,0);
+    \draw[velocity] (\R,0)  -- ++(0,-\v);
+    \draw[velocity] (0,-\R) -- ++(-\v,0);
+    \draw[velocity] (-\R,0) -- ++(0,\v);
+    \node[cFor,anchor=south] at (\v/2,\R+0.04) {$\omega R$};
+    % sense of rotation
+    \draw[rotation] (130:0.5) arc[start angle=130,end angle=-130,radius=0.5];
+    \node at (0,0.8) {$\omega$};
+  \end{scope}
+  \node at (6.0,0) {$=$};
+  % ------------------------------------------------------------------- rolling
+  \begin{scope}[xshift=9.2cm]
+    \fill[ground strip] (-1.9,-\R) rectangle (2.6,-\R-0.18);
+    \draw[outline] (-1.9,-\R) -- (2.6,-\R);
+    \wheel
+    \node[font=\footnotesize] at (0.3,2.0) {rolling};
+    \coordinate (P) at (0,-\R);
+    % lines from the contact point
+    \draw[guide] (P) -- (0,\R);
+    \draw[guide] (P) -- (\R,0);
+    \draw[guide] (P) -- (-\R,0);
+    % velocities: omega times the distance from P, perpendicular to it
+    \draw[velocity] (0,\R) -- ++(2*\v,0) node[anchor=south east,cFor,xshift=-2pt] {$2v_{\text{cm}}$};
+    \draw[velocity] (0,0)  -- ++(\v,0) node[anchor=south,cFor,pos=0.6] {$v_{\text{cm}}$};
+    \draw[velocity] (\R,0) -- ++(\v,-\v) node[anchor=west,cFor] {$\sqrt2\,v_{\text{cm}}$};
+    \draw[velocity] (-\R,0) -- ++(\v,\v);
+    \node[cFor,anchor=east] at (-\R-0.06,0.12) {$\sqrt2\,v_{\text{cm}}$};
+    % right angles where the dashed lines meet the velocities
+    \foreach \q/\a in {{(\R,0)}/{-45},{(-\R,0)}/{45}}
+      \draw[right angle] \q ++(\a-90:0.16) -- ++(\a:0.16) -- ++(\a+90:0.16);
+    % contact point
+    \node[contact point] at (P) {};
+    \node[anchor=north] at (0,-\R-0.2) {$P$ at rest};
+  \end{scope}
+\end{tikzpicture}

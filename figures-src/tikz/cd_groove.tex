@@ -1,0 +1,44 @@
+% cd_groove: a block sliding round a horizontal circular groove (Ch 10, fig:groove)
+% Left, top view: the block moves at uniform speed v on a circle of radius r
+% (25 cm in the worked example).  The only horizontal force on it is the push N
+% of the groove's outer side wall, towards the centre: N = m v^2/r.
+% Right, a vertical section through the groove at the block: the floor's push
+% N' is vertical and balances mg, so neither can help with the turning.
+% Not to scale.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % ------------------------------------------------------------- top view
+  \def\R{1.5}     % radius of the block's path
+  \def\w{0.2}     % half-width of the groove
+  \fill[cSlope,even odd rule] (0,0) circle[radius=\R+\w] (0,0) circle[radius=\R-\w];
+  \draw[outline] (0,0) circle[radius=\R+\w];
+  \draw[outline] (0,0) circle[radius=\R-\w];
+  \draw[orbitpath,cPrim] (0,0) circle[radius=\R];
+  \node[point mass] at (0,0) {};
+  % radius
+  \draw[dim] (0,-0.32) -- node[below,cSteel] {$r$} (\R,-0.32);
+  \draw[dimtick] (0,-0.12) -- (0,-0.48);
+  % the block, against the outer wall
+  \fill[body] (\R+\w-0.3,-0.17) rectangle (\R+\w,0.17);
+  \draw[force] (\R+\w-0.3,0) -- ++(-1.0,0) node[anchor=south,inner sep=2pt,pos=0.6] {$N$};
+  \draw[velocity] (\R+0.05,0.17) -- ++(0,0.95) node[anchor=west,inner sep=2pt] {$v$};
+  % --------------------------------------------- section through the groove
+  \begin{scope}[shift={(2.85,-0.75)}]
+    \def\gw{2.0}   % groove width
+    \def\gd{1.05}  % groove depth
+    % ground on either side of the channel, cut by the section
+    \fill[cSlope] (-0.35,-0.75) rectangle (\gw+0.35,\gd);
+    \fill[white] (0,0) rectangle (\gw,\gd+0.01);
+    \draw[outline] (-0.35,\gd) -- (0,\gd) -- (0,0) -- (\gw,0) -- (\gw,\gd) -- (\gw+0.35,\gd);
+    % the block on the floor, pressed against the outer wall (right)
+    \fill[body] (\gw-0.8,0) rectangle (\gw,0.6);
+    \draw[force] (\gw-0.8,0.32) -- ++(-0.95,0) node[anchor=south,inner sep=2pt,pos=0.55] {$N$};
+    \draw[force] (\gw-0.22,0.6) -- ++(0,0.9) node[anchor=west,inner sep=2pt] {$N'$};
+    \draw[force] (\gw-0.55,0.3) -- ++(0,-0.9) node[anchor=east,inner sep=2pt] {$mg$};
+    % which way the centre lies
+    \draw[cSteel,thin line,-smallhead] (0.7,\gd+0.3) -- (-0.3,\gd+0.3);
+    \node[anchor=south,font=\footnotesize,cSteel] at (0.2,\gd+0.33) {to centre};
+  \end{scope}
+  % panel names, on one baseline
+  \node[anchor=base,font=\footnotesize,cSteel] at (0,-2.15) {top view};
+  \node[anchor=base,font=\footnotesize,cSteel] at (3.85,-2.15) {section through the groove};
+\end{tikzpicture}

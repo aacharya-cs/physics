@@ -1,0 +1,81 @@
+% cmd_hemisphere: slicing a hemisphere (Ch 13, fig:cmdhemi)
+% Left: SOLID hemisphere, radius R = 1.5 cm, flat face down, z up the axis.
+%   Disc slice at z = 0.88 cm (0.59 R), thickness dz = 0.13 cm, radius sqrt(R^2 - z^2).
+%   CM on the axis at 3R/8 = 0.375 R above the flat face.
+% Right: hemispherical SHELL, same R.  Ring slice at polar angle theta = 35 deg
+%   from the axis, angular width d(theta) = 8 deg (exaggerated): height R cos(theta),
+%   radius R sin(theta), slant width R d(theta).  CM at R/2 above the flat face.
+% Horizontal circles are foreshortened by k = 0.18; the outline is the sphere's
+% silhouette (a true semicircle).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{1.5}\def\k{0.18}
+  % ================================================= solid hemisphere
+  \def\z{0.88}\def\dz{0.13}
+  \pgfmathsetmacro\ra{sqrt(\R*\R-(\z+\dz)*(\z+\dz))}
+  \pgfmathsetmacro\rb{sqrt(\R*\R-\z*\z)}
+  \fill[cMoon] (-\R,0) arc[start angle=180,end angle=0,radius=\R]
+     arc[start angle=0,end angle=-180,x radius=\R,y radius=\k*\R] -- cycle;
+  \draw[hidden,thin line,cInk] (\R,0) arc[start angle=0,end angle=180,x radius=\R,y radius=\k*\R];
+  % the disc: side band and top face
+  \fill[cAcc!40] (-\ra,\z+\dz) -- (-\rb,\z) arc[start angle=180,end angle=360,x radius=\rb,y radius=\k*\rb]
+     -- (\ra,\z+\dz) arc[start angle=0,end angle=-180,x radius=\ra,y radius=\k*\ra] -- cycle;
+  \filldraw[fill=cAcc!25,draw=cAcc,thin line] (0,\z+\dz) ellipse[x radius=\ra,y radius=\k*\ra];
+  \draw[cAcc,thin line] (-\rb,\z) arc[start angle=180,end angle=360,x radius=\rb,y radius=\k*\rb];
+  \draw[outline] (-\R,0) arc[start angle=180,end angle=0,radius=\R];
+  \draw[outline] (-\R,0) arc[start angle=180,end angle=360,x radius=\R,y radius=\k*\R];
+  \draw[guide] (0,-0.2-\k*\R) -- (0,\R+0.3);
+  % radius of the disc, and R
+  \draw[cInk,thin line] (0,\z+\dz) -- (\ra,\z+\dz);
+  \fill[cInk] (0,\z+\dz) circle[radius=0.03];
+  \fill[cInk] (0,0) circle[radius=0.03];
+  \draw[cInk,thin line] (0,0) -- (162:\R);
+  \node[anchor=north,inner sep=2pt] at (162:0.55*\R) {$R$};
+  % labels for the disc
+  \draw[leader] (0.55*\ra,\z+\dz+0.02) -- (0.45,\R+0.3);
+  \node[anchor=south west,inner sep=1pt] at (0.45,\R+0.3) {$\sqrt{R^2-z^2}$};
+  \draw[leader,cAcc] (\rb+0.02,\z+0.04) -- (\R+0.25,\z+0.3);
+  \node[cAcc,anchor=west,inner sep=1pt] at (\R+0.25,\z+0.3) {$dz$};
+  % z (left)
+  \draw[dimtick] (-\rb-0.08,\z) -- (-\R-0.6,\z);
+  \draw[dimtick] (-\R-0.08,0) -- (-\R-0.6,0);
+  \draw[dim] (-\R-0.45,0) -- node[left,cSteel] {$z$} (-\R-0.45,\z);
+  % centre of mass, 3R/8 (right)
+  \pic at (0,3*\R/8) {cm};
+  \draw[dimtick] (0.14,3*\R/8) -- (\R+0.6,3*\R/8);
+  \draw[dimtick] (\R+0.08,0) -- (\R+0.6,0);
+  \draw[dim] (\R+0.45,0) -- node[right,cSteel] {$3R/8$} (\R+0.45,3*\R/8);
+  \node[anchor=north] at (0,-\k*\R-0.25) {solid};
+  % ================================================= hemispherical shell
+  \begin{scope}[xshift=4.95cm]
+    \def\th{35}\def\dth{8}
+    \pgfmathsetmacro\za{\R*cos(\th)}       \pgfmathsetmacro\sa{\R*sin(\th)}
+    \pgfmathsetmacro\zb{\R*cos(\th+\dth)}  \pgfmathsetmacro\sb{\R*sin(\th+\dth)}
+    % a thin shell: pale fill
+    \fill[cMoon!45] (-\R,0) arc[start angle=180,end angle=0,radius=\R]
+       arc[start angle=0,end angle=-180,x radius=\R,y radius=\k*\R] -- cycle;
+    \draw[hidden,thin line,cInk] (\R,0) arc[start angle=0,end angle=180,x radius=\R,y radius=\k*\R];
+    % the ring: front half of the band between theta and theta + dtheta
+    \fill[cAcc!40] (-\sb,\zb) arc[start angle=180,end angle=360,x radius=\sb,y radius=\k*\sb]
+       -- (\sa,\za) arc[start angle=0,end angle=-180,x radius=\sa,y radius=\k*\sa] -- cycle;
+    \draw[cAcc,thin line] (-\sb,\zb) arc[start angle=180,end angle=360,x radius=\sb,y radius=\k*\sb];
+    \draw[cAcc,thin line] (-\sa,\za) arc[start angle=180,end angle=360,x radius=\sa,y radius=\k*\sa];
+    \draw[hidden,thin line,cAcc] (\sa,\za) arc[start angle=0,end angle=180,x radius=\sa,y radius=\k*\sa];
+    \draw[outline] (-\R,0) arc[start angle=180,end angle=0,radius=\R];
+    \draw[outline] (-\R,0) arc[start angle=180,end angle=360,x radius=\R,y radius=\k*\R];
+    \draw[guide] (0,-0.2-\k*\R) -- (0,\R+0.3);
+    % polar angle from the axis, to the ring's left edge in the plane of the page
+    \fill[cInk] (0,0) circle[radius=0.03];
+    \draw[cInk,thin line] (0,0) -- (90+\th+\dth/2:\R);
+    \draw[angle arc] (0,0.34) arc[start angle=90,end angle=90+\th+\dth/2,radius=0.34];
+    \node[inner sep=0pt] at (90+\th/2:0.5) {$\theta$};
+    \node[anchor=north east,inner sep=1pt] at (90+\th+\dth/2:0.55*\R) {$R$};
+    \draw[leader,cAcc] (90-\th-\dth/2:\R+0.02) -- (\R+0.2,\R*0.95);
+    \node[cAcc,anchor=west,inner sep=1pt] at (\R+0.2,\R*0.95) {$R\,d\theta$};
+    % centre of mass at R/2 (right)
+    \pic at (0,\R/2) {cm};
+    \draw[dimtick] (0.14,\R/2) -- (\R+0.6,\R/2);
+    \draw[dimtick] (\R+0.08,0) -- (\R+0.6,0);
+    \draw[dim] (\R+0.45,0) -- node[right,cSteel] {$R/2$} (\R+0.45,\R/2);
+    \node[anchor=north] at (0,-\k*\R-0.25) {shell};
+  \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,37 @@
+% kin_vectoradd: triangle and parallelogram additions give the same resultant (Ch 3, fig:vectoradd)
+% The same A (3.8 cm, along the baseline) and B (2.9 cm, at theta = 55 deg to A) in both
+% panels, so R = A + B is the same arrow.  theta is the angle BETWEEN the vectors:
+% between the tails in the parallelogram, and between A produced and B in the
+% triangle (the exterior angle), which is why the law of cosines carries +2AB cos(theta).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\A{3.8}\def\B{2.9}\def\th{55}
+  \pgfmathsetmacro\Bx{\B*cos(\th)}
+  \pgfmathsetmacro\By{\B*sin(\th)}
+  % ---------------------------------------------------------- triangle
+  \begin{scope}
+    \draw[guide] (\A,0) -- (\A+1.1,0);
+    \draw[angle arc] (\A+0.6,0) arc[start angle=0,end angle=\th,radius=0.6];
+    \node at ($(\A,0)+(\th/2:0.85)$) {$\theta$};
+    \draw[vector,cInk] (0,0) -- (\A+\Bx,\By);
+    \draw[vector,cPrim] (0,0) -- (\A,0);
+    \draw[vector,cAcc] (\A,0) -- (\A+\Bx,\By);
+    \node[cPrim,anchor=north] at (\A/2,-0.05) {$\vc{A}$};
+    \node[cAcc,anchor=west,inner sep=3pt] at ($(\A,0)!0.6!(\A+\Bx,\By)$) {$\vc{B}$};
+    \node[cInk,anchor=south east,inner sep=2pt] at ($(0,0)!0.5!(\A+\Bx,\By)$) {$\vc{R}$};
+    \node[anchor=north,cSteel,font=\footnotesize] at ({(\A+\Bx)/2},-0.6) {triangle: head to tail};
+  \end{scope}
+  % ---------------------------------------------------------- parallelogram
+  \begin{scope}[xshift=7.3cm]
+    \fill[cSlope] (0,0) -- (\A,0) -- (\A+\Bx,\By) -- (\Bx,\By) -- cycle;
+    \draw[parallelogram] (\A,0) -- (\A+\Bx,\By) -- (\Bx,\By);
+    \draw[angle arc] (0.75,0) arc[start angle=0,end angle=\th,radius=0.75];
+    \node at (41:1.0) {$\theta$};
+    \draw[vector,cInk] (0,0) -- (\A+\Bx,\By);
+    \draw[vector,cPrim] (0,0) -- (\A,0);
+    \draw[vector,cAcc] (0,0) -- (\Bx,\By);
+    \node[cPrim,anchor=north] at (\A/2,-0.05) {$\vc{A}$};
+    \node[cAcc,anchor=east,inner sep=2pt] at ($(0,0)!0.55!(\Bx,\By)$) {$\vc{B}$};
+    \node[cInk,anchor=south east,inner sep=1pt] at ($(0,0)!0.66!(\A+\Bx,\By)$) {$\vc{R}$};
+    \node[anchor=north,cSteel,font=\footnotesize] at ({(\A+\Bx)/2},-0.6) {parallelogram: common tail};
+  \end{scope}
+\end{tikzpicture}

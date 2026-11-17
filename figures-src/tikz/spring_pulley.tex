@@ -1,0 +1,51 @@
+% spring_pulley: a spring reached through a fixed pulley (Ch 8, fig:springpulley)
+% A spring (stiffness k) lies on a smooth table, fixed to a post at the left.  A
+% light string runs from its free end, over a light frictionless pulley at the
+% table's edge, to a hanging mass m.  In equilibrium the string tension is the
+% same throughout, so T = kx at the junction and T = mg at the mass: x = mg/k,
+% exactly as if m hung from the spring directly.  The fixed pulley only turns the
+% string through 90 degrees.  Natural length 2.0 cm, stretch x = 0.6 cm; T and mg
+% are drawn equal (0.9 cm).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\r{0.32}                         % pulley radius
+  \def\h{0.36}                         % height of spring and string above the table
+  \def\E{5.0}                          % table edge
+  \def\Ln{2.0}\def\x{0.6}              % natural length and stretch
+  \pgfmathsetmacro\L{\Ln+\x}
+  \pgfmathsetmacro\cx{\E+0.42}
+  \pgfmathsetmacro\cy{\h-\r}
+  \pgfmathsetmacro\xs{\cx+\r}
+  \def\ytop{-1.4}                      % top of m
+  \def\F{0.9}                          % length of T and of mg
+  % table and post
+  \fill[cSlope] (-0.3,-0.36) rectangle (\E,0);
+  \draw[ground] (-0.3,0) -- (\E,0);
+  \draw[outline] (\E,0) -- (\E,-0.36);
+  \draw[cInk,thin line,fill=cRock] (-0.3,0) rectangle (0,0.9);
+  % bracket and pulley
+  \draw[cInk,thin line,fill=cRock] (\E,-0.02) -- (\cx,\cy+0.06) -- (\cx,\cy-0.06) -- (\E,-0.30) -- cycle;
+  \draw[outline,fill=cMoon] (\cx,\cy) circle[radius=\r];
+  \draw[cSteel,hair line] (\cx,\cy) circle[radius=\r-0.07];
+  \node[point mass] at (\cx,\cy) {};
+  % the spring: leads of 0.15 cm, 9 turns
+  \pgfmathsetmacro\p{(\L-0.3)/9}
+  \draw[cInk,thin line] (0,\h) -- ++(0.15,0)
+    plot[domain=0:18*pi,samples=360,smooth,variable=\t]
+      ({0.15+\p*\t/(2*pi)+0.09*(1-cos(\t r))},{\h+0.16*sin(\t r)})
+    -- (\L,\h);
+  \node[anchor=south] at (0.9,\h+0.2) {$k$};
+  % the string, from the junction over the pulley to m
+  \draw[cInk,thin line] (\L,\h) -- (\cx,\h) arc[start angle=90,end angle=0,radius=\r] -- (\xs,\ytop);
+  \node[point mass] at (\L,\h) {};
+  % stretch, from the natural-length position
+  \draw[guide] (\Ln,0.05) -- (\Ln,1.0);
+  \draw[dimtick] (\L,\h+0.12) -- (\L,1.0);
+  \draw[dim] (\Ln,0.88) -- node[anchor=south,cSteel] {$x$} (\L,0.88);
+  % the string's pull on the spring
+  \draw[force] (\L,\h) -- ++(\F,0) node[anchor=south west,pos=0.2,inner sep=2pt,yshift=1pt] {$T=kx$};
+  % the hanging mass
+  \draw[body] (\xs-0.32,\ytop-0.58) rectangle (\xs+0.32,\ytop);
+  \node at (\xs,\ytop-0.29) {$m$};
+  \draw[force] (\xs,\ytop) -- ++(0,\F) node[anchor=west,pos=0.45,xshift=1pt] {$T$};
+  \draw[force] (\xs,\ytop-0.58) -- ++(0,-\F) node[anchor=north] {$mg$};
+\end{tikzpicture}

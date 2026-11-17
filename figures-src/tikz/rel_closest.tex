@@ -1,0 +1,28 @@
+% rel_closest: closest approach seen from B's frame (Ch 5, fig:closest)
+% The worked example "Two ships on crossing courses": in B's frame A starts at
+% r0 = (0,-10) km and moves with v_AB = (6,8) km/h along a straight line.
+% Foot of the perpendicular from B: r0 + 0.8 h * v_AB = (4.8,-3.6) km, at
+% distance 6 km from B, reached at t = 0.8 h.  Scale 0.42 cm per km.
+\begin{tikzpicture}[x=0.42cm,y=0.42cm]
+  \coordinate (B) at (0,0);
+  \coordinate (A) at (0,-10);
+  \coordinate (F) at (4.8,-3.6);
+  % the straight relative path of A, extended a little past the foot
+  \draw[guide] (A) -- ($(A)!1.55!(F)$);
+  \draw[cPrim,construction] (A) -- ($(A)!1.35!(F)$);
+  % relative velocity at the start
+  \draw[velocity] (A) -- ++(1.8,2.4) node[anchor=north west,inner sep=1pt,xshift=2pt] {$\vv_{AB}$};
+  % initial relative position, from B to A
+  \draw[vector,cTeal] (B) -- (A) node[pos=0.5,anchor=east] {$\vr_0$};
+  % the perpendicular: the least distance
+  \draw[dim] (B) -- node[pos=0.42,anchor=south west,cSteel,inner sep=2pt] {$d_{\min}$} (F);
+  % right-angle mark at the foot: sides along F->B, (-0.8,0.6), and along the path, (0.6,0.8)
+  \draw[right angle] (4.24,-3.18) -- (4.66,-2.62) -- (5.22,-3.04);
+  % the bodies
+  \node[point mass,minimum size=4.5pt] at (B) {};
+  \node[anchor=south] at ($(B)+(0,0.3)$) {$B$ (at rest in this frame)};
+  \node[point mass,minimum size=4.5pt] at (A) {};
+  \node[anchor=north] at ($(A)+(0,-0.3)$) {$A$ at $t=0$};
+  \node[dot,cPrim] at (F) {};
+  \node[cPrim,anchor=west,align=left] at ($(F)+(0.5,-0.4)$) {closest, at $t_{\min}$};
+\end{tikzpicture}

@@ -1,0 +1,44 @@
+% cm_hole: a disc with a hole as a whole disc minus a plug (Ch 13, fig:cmhole)
+% Disc radius R, hole radius R/2 centred at x = -R/2 (its edge touches the centre).
+% Masses go as area: whole disc M, plug M/4, what remains 3M/4.
+% x_cm = [M(0) - (M/4)(-R/2)] / (3M/4) = +R/6, away from the hole.
+% R = 1.0 cm drawn; every panel shares the same x-axis (dashed guide).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{1.0}
+  \def\dx{2.85}
+  % ---- the body we want: disc with a hole
+  \fill[cBlock,even odd rule] (0,0) circle[radius=\R] (-\R/2,0) circle[radius=\R/2];
+  \draw[outline] (0,0) circle[radius=\R] (-\R/2,0) circle[radius=\R/2];
+  \draw[guide] (-\R-0.1,0) -- (-\R,0) (0,0) -- (\R+0.1,0);
+  \fill[cInk] (0,0) circle[radius=0.03];
+  \pic at (\R/6,0) {cm};
+  \node[anchor=south] at (0,\R+0.08) {disc with hole};
+  \node[anchor=north] at (0,-\R-0.08) {$\tfrac34 M$};
+  % ---- equals
+  \node at (\dx/2,0) {$=$};
+  % ---- the whole disc
+  \begin{scope}[xshift=\dx cm]
+    \draw[outline,fill=cBlock] (0,0) circle[radius=\R];
+    \draw[guide] (-\R-0.1,0) -- (\R+0.1,0);
+    \pic at (0,0) {cm};
+    \node[anchor=south] at (0,\R+0.08) {whole disc};
+    \node[anchor=north] at (0,-\R-0.08) {$M$};
+  \end{scope}
+  % ---- minus
+  \node at (1.5*\dx,0) {$-$};
+  % ---- the plug, drawn in its place inside a ghost of the whole disc
+  \begin{scope}[xshift=2*\dx cm]
+    \draw[guide] (0,0) circle[radius=\R];
+    \draw[outline,fill=cBlock] (-\R/2,0) circle[radius=\R/2];
+    \draw[guide] (-\R-0.1,0) -- (\R+0.1,0);
+    \fill[cInk] (0,0) circle[radius=0.03];
+    \pic at (-\R/2,0) {cm};
+    \node[anchor=south] at (0,\R+0.08) {plug};
+    \node[anchor=north] at (0,-\R-0.08) {$\tfrac14 M$};
+  \end{scope}
+  % ---- where each centre of mass sits, measured from the big disc's centre
+  \def\yl{-2.0}
+  \node[anchor=base] at (0,\yl) {$x_{\text{cm}}=+R/6$};
+  \node[anchor=base] at (\dx,\yl) {$x_{\text{cm}}=0$};
+  \node[anchor=base] at (2*\dx,\yl) {$x_{\text{cm}}=-R/2$};
+\end{tikzpicture}

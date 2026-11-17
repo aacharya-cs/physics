@@ -1,0 +1,71 @@
+# Build the book on every push and pull request; deploy main to GitHub Pages.
+# Recreated 2026-11-16 (the original was missing from this copy); not yet run in CI.
+name: build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile with latexmk (shell-escape for cached TikZ figures)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          latexmk_shell_escape: true
+          pre_compile: mkdir -p figures-cache
+
+      - name: Check the log
+        run: |
+          ! grep -q '^!' main.log
+          ! grep -q 'undefined' main.log
+          if grep -q 'Overfull' main.log; then grep 'Overfull' main.log; fi
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Compress the release PDF
+        run: |
+          python3 -m pip install --quiet pymupdf
+          mkdir -p site
+          python3 tools/compress_pdf.py main.pdf site/Mechanics_Vol1_Class11.pdf
+          cp tools/index.html site/index.html
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Mechanics_Vol1_Class11
+          path: site/Mechanics_Vol1_Class11.pdf
+
+      - if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.DEPLOY_PAGES == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  # Pages deploy is off until the repository variable DEPLOY_PAGES is set to true
+  # (Settings > Secrets and variables > Actions > Variables). A private repo needs a
+  # paid plan for Pages; until then the PDF is still available as the build artifact.
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.DEPLOY_PAGES == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,45 @@
+% collision_cases: three elastic head-on collisions with the target at rest (Ch 12, fig:collcases)
+% Final velocities from the 1-D elastic formulas with u2 = 0:
+%   v1 = (m1 - m2)/(m1 + m2) u,   v2 = 2 m1/(m1 + m2) u.
+%   equal masses        m1 = m2   : v1 = 0,      v2 = u
+%   heavy hits light    m1 = 4 m2 : v1 = 0.6 u,  v2 = 1.6 u
+%   light hits heavy    m2 = 4 m1 : v1 = -0.6 u, v2 = 0.4 u
+% Every velocity arrow is to scale (u = 1.5 cm), drawn above the ball it belongs
+% to and starting over its centre.  Radii go as the cube root of the mass
+% (same material): m -> 0.24 cm, 4m -> 0.38 cm; the equal pair is drawn at 0.30 cm.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\u{1.5}
+  % column positions: before (ball 1, ball 2), after (ball 1, ball 2)
+  \def\bA{3.15}\def\bB{5.45}\def\aA{7.75}\def\aB{9.35}
+  % one ball: #1 x, #2 y, #3 radius, #4 fill, #5 number
+  \def\ball#1#2#3#4#5{%
+    \draw[body,fill=#4] (#1,#2) circle[radius=#3];
+    \node[inner sep=0pt] at (#1,#2) {#5};}
+  % column headings and divider
+  \node[note] at ({(\bA+\bB)/2},1.45) {before};
+  \node[note] at (9.3,1.45) {after};
+  \draw[guide] (6.3,1.4) -- (6.3,-4.3);
+  % rows: label, y, r1, r2, v1/u, v2/u, labels for v1 and v2
+  \foreach \lab/\y/\ra/\rb/\va/\vb/\la/\lb in {%
+      {equal masses}/0/0.30/0.30/0/1/{}/{$v_2=u$},
+      {heavy hits light\\[1pt]$m_1=4m_2$}/-1.95/0.38/0.24/0.6/1.6/{$v_1=0.6u$}/{$v_2=1.6u$},
+      {light hits heavy\\[1pt]$m_2=4m_1$}/-3.9/0.24/0.38/-0.6/0.4/{$v_1=-0.6u$}/{$v_2=0.4u$}}{
+    \pgfmathsetmacro\ya{\y+0.64}           % height of the arrows in this row
+    \node[anchor=west,align=left] at (0,\y+0.12) {\lab};
+    % before: ball 1 moving at u, ball 2 at rest
+    \ball{\bA}{\y}{\ra}{cBlock}{1}
+    \ball{\bB}{\y}{\rb}{cMoon}{2}
+    \draw[velocity] (\bA,\ya) -- node[above=1pt,cFor] {$u$} ++(\u,0);
+    \node[cSteel,font=\footnotesize,anchor=north] at (\bB,\y-\rb-0.03) {at rest};
+    % after
+    \ball{\aA}{\y}{\ra}{cBlock}{1}
+    \ball{\aB}{\y}{\rb}{cMoon}{2}
+    \draw[velocity] (\aB,\ya) -- node[above=1pt,cFor] {\lb} ++(\vb*\u,0);
+    \pgfmathparse{\va==0 ? 1 : 0}
+    \ifnum\pgfmathresult=1
+      \node[cSteel,font=\footnotesize,anchor=north] at (\aA,\y-\ra-0.03) {at rest};
+    \else
+      \draw[velocity] (\aA,\ya) -- node[above=1pt,cFor] {\la} ++(\va*\u,0);
+    \fi
+  }
+\end{tikzpicture}

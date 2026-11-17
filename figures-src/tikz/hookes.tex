@@ -1,0 +1,71 @@
+% hookes: Hooke's law, F = -kx, always restoring (Ch 8, fig:hookes)
+% Left: a block on a smooth floor tied to a wall by a spring, at natural length,
+% stretched (x = +0.7 cm) and compressed (x = -0.6 cm).  The dashed guide marks
+% the natural-length position of the block's face; x is measured from it.  The
+% spring force on the block (crimson) points back towards that guide in both cases,
+% with length proportional to |x| (1.2 cm per cm of deformation).
+% Right: the graph of F = -kx; the two marked points are the two deformed states.
+% Every spring has the same number of turns (8), so a stretched spring has wider
+% turns and a compressed one closer turns.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  % a coil spring from (#1,#2) to (#3,#2): straight leads of 0.15 cm, then N = 8 turns
+  % drawn as the side view of a helix, x = p t/2pi + q(1 - cos t), y = A sin t
+  \def\spring(#1,#2,#3){%
+    \pgfmathsetmacro\p{((#3)-(#1)-0.3)/8}%
+    \draw[cInk,thin line] (#1,#2) -- ++(0.15,0)
+      plot[domain=0:16*pi,samples=320,smooth,variable=\t]
+        ({#1+0.15+\p*\t/(2*pi)+0.09*(1-cos(\t r))},{#2+0.16*sin(\t r)})
+      -- (#3,#2);}
+  \def\Ln{2.2}                % natural length
+  \def\bw{0.65}\def\bh{0.75}  % block
+  \def\ys{0.25}               % height of the spring
+  \def\yf{0.58}               % height of the force arrow
+  % three rows: label / deformation x / vertical position
+  \foreach \lab/\x/\y in {{natural length, $F=0$}/0/0, {stretched, $x>0$}/0.7/-1.45, {compressed, $x<0$}/-0.6/-2.9}{
+    \begin{scope}[yshift=\y cm]
+      \pgfmathsetmacro\L{\Ln+\x}
+      % wall and floor
+      \path[ground,draw=none] (-0.16,0) rectangle (0,1.05);
+      \draw[outline] (0,0) -- (0,1.05);
+      \path[ground,draw=none] (0,-0.14) rectangle (3.9,0);
+      \draw[outline] (0,0) -- (3.9,0);
+      % spring and block
+      \spring(0,\ys,\L)
+      \draw[body] (\L,0) rectangle (\L+\bw,\bh);
+      \node[anchor=west,font=\footnotesize,text=cSteel] at (4.0,0.38) {\lab};
+      % force and deformation
+      \ifdim\x pt>0pt
+        \draw[force] (\L,\yf) -- ++(-1.2*\x,0) node[anchor=south,pos=0.3,inner sep=2pt] {$F$};
+        \draw[dim] (\Ln,-0.36) -- node[below=-1pt,cSteel] {$x$} (\L,-0.36);
+      \fi
+      \ifdim\x pt<0pt
+        \draw[force] (\L+\bw,\yf) -- ++(-1.2*\x,0) node[anchor=west,inner sep=2pt] {$F$};
+        \draw[dim] (\L,-0.36) -- node[below=-1pt,cSteel] {$|x|$} (\Ln,-0.36);
+      \fi
+    \end{scope}
+  }
+  % the natural-length position, common to all three rows
+  \draw[guide] (\Ln,1.35) -- (\Ln,-3.45);
+  \node[anchor=south,font=\footnotesize,text=cSteel] at (\Ln,1.35) {$x=0$};
+  % the graph
+  \begin{scope}[xshift=9.3cm,yshift=-1.35cm]
+  \begin{axis}[bookplot, anchor=center, at={(0,0)},
+      width=5.0cm, height=4.6cm, scale only axis,
+      axis lines=middle, xmin=-1.15, xmax=1.15, ymin=-1.15, ymax=1.15,
+      xlabel={$x$}, ylabel={$F$},
+      xlabel style={anchor=north east}, ylabel style={anchor=north west,xshift=1pt}]
+    \addplot[cCrim,domain=-1:1,samples=2] {-x};
+    \node[cCrim,anchor=south west,inner sep=1pt] at (axis cs:-0.98,1.0) {$F=-kx$};
+    \node[cSteel,anchor=north east] at (axis cs:-0.12,-0.16) {slope $-k$};
+    % the two deformed states
+    \draw[guide] (axis cs:0.7,0) -- (axis cs:0.7,-0.7) -- (axis cs:0,-0.7);
+    \draw[guide] (axis cs:-0.6,0) -- (axis cs:-0.6,0.6) -- (axis cs:0,0.6);
+    \node[point mass] at (axis cs:0.7,-0.7) {};
+    \node[point mass] at (axis cs:-0.6,0.6) {};
+    \node[anchor=south west,font=\footnotesize,text=cSteel,align=left] at (axis cs:0.74,-0.66)
+      {stretched:\\ $F<0$};
+    \node[anchor=north east,font=\footnotesize,text=cSteel,align=right] at (axis cs:-0.64,0.56)
+      {compressed:\\ $F>0$};
+  \end{axis}
+  \end{scope}
+\end{tikzpicture}

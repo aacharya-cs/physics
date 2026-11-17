@@ -1,0 +1,355 @@
+% Preamble for Mechanics Vol 1 (loaded by main.tex)
+
+% ============================================================================
+%  MECHANICS — Volume I
+%  Formal book design.  Monochrome text, rule-based structure, colour
+%  reserved entirely for the illustrations.
+% ============================================================================
+
+\usepackage[fontsize=10.5pt]{fontsize}  % body 10.5pt: a formal A4 textbook page
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{mathpazo}                 % Palatino text + matching mathematics
+\usepackage[scaled=0.88]{helvet}      % sans, used only where unavoidable
+\linespread{1.0}
+
+\usepackage[a4paper,twoside,inner=25mm,outer=22mm,top=22mm,bottom=25mm,
+            headsep=6mm,footskip=12mm]{geometry}
+
+\usepackage{amsmath,amssymb,bm}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,decorations.pathmorphing,decorations.markings,%
+  decorations.pathreplacing,angles,quotes,patterns,patterns.meta,calc,positioning,%
+  shapes.geometric,shadings,fadings,backgrounds,shapes.misc,hobby,bending,3d,perspective}
+\usepgfplotslibrary{fillbetween}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{cancel}
+\usepackage[explicit]{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{needspace}
+\usepackage{flafter}
+\usepackage[section]{placeins}
+\usepackage{emptypage}
+\usepackage[expansion=false]{microtype}
+\usepackage{hyperref}
+\graphicspath{{figs/}}
+
+% ------------------------------------------------------- native figures ---
+% Figures drawn in TikZ/PGFPlots live one per file in figures-src/tikz/ and
+% share the palette and styles of bookstyle.tex.  Include one with
+%   \tikzfig{grav_shell}
+% inside a figure float.  With shell-escape (latexmk does this via .latexmkrc)
+% each picture is compiled once and cached in figures-cache/; without it the
+% pictures are simply drawn inline, so the book always builds.
+\input{figures-src/tikz/bookstyle}
+\usetikzlibrary{external}
+\newif\iffigcache
+\ifdefined\pdfshellescape\ifnum\pdfshellescape=1 \figcachetrue\fi\fi
+\iffigcache
+  \tikzexternalize[prefix=figures-cache/]
+  % cache only \tikzfig pictures, never the tcolorbox frames or inline marks
+  \AtBeginDocument{\tikzexternaldisable}
+\fi
+\newcommand{\tikzfig}[1]{%
+  \begingroup
+  \iffigcache\tikzexternalenable\tikzsetnextfilename{#1}\fi
+  \tikzset{every picture/.append style={bookfigure}}%
+  \input{figures-src/tikz/#1}\endgroup}
+
+% ---------------------------------------------------------------- palette ---
+% Text is black.  These two greys are for rules and secondary marks only;
+% every saturated colour in this book lives inside an illustration.
+\definecolor{ink}{gray}{0.00}
+\definecolor{rulegrey}{gray}{0.35}
+\definecolor{lightrule}{gray}{0.72}
+\definecolor{captiongrey}{gray}{0.25}
+
+% legacy colour names kept so that existing figure/TikZ code still compiles;
+% all are mapped onto the monochrome scheme for anything that sets type.
+\definecolor{inkblue}{gray}{0.00}
+\definecolor{primary}{gray}{0.00}
+\definecolor{accent}{gray}{0.00}
+\definecolor{teal}{gray}{0.00}
+\definecolor{plum}{gray}{0.00}
+\definecolor{crimson}{gray}{0.00}
+\definecolor{forest}{gray}{0.00}
+\definecolor{amber}{gray}{0.45}
+\definecolor{softgrey}{gray}{1.00}
+\definecolor{rule1}{gray}{0.72}
+
+\hypersetup{colorlinks=true,linkcolor=black,urlcolor=black,citecolor=black,
+            bookmarksnumbered=true,pdfborder={0 0 0},
+            pdftitle={Mechanics: A Reasoning-First Companion (Volume I)},
+            pdfsubject={Class 11 mechanics for JEE and NEET},
+            pdfkeywords={mechanics, physics, JEE, NEET, Class 11}}
+
+\tikzset{
+  lbl/.style={fill=white,draw=none,inner sep=2pt,rounded corners=1.5pt,font=\footnotesize},
+  lblbox/.style={fill=white,draw=lightrule,line width=0.4pt,inner sep=2.5pt,rounded corners=1.5pt,font=\footnotesize},
+  meas/.style={rulegrey,line width=0.7pt},
+  dimchip/.style={fill=white,draw=lightrule,line width=0.4pt,inner sep=2.2pt,rounded corners=1.5pt,font=\footnotesize\bfseries},
+  vec/.style={-{Stealth[length=3mm,width=2.2mm]},line width=1.1pt},
+  thinvec/.style={-{Stealth[length=2.4mm]},line width=0.8pt},
+  dashline/.style={dashed,line width=0.6pt,gray},
+  axis line/.style={-{Stealth[length=2.5mm]},line width=0.8pt,black!70}
+}
+\newcommand{\circled}[1]{\tikz[baseline=(c.base)]{\node[shape=circle,draw=black,
+  line width=0.5pt,inner sep=1pt,minimum size=1.4ex,font=\scriptsize\bfseries](c){#1};}}
+
+\raggedbottom
+% no single lines stranded at the top or bottom of a page, and no page
+% that ends on a hyphen
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\brokenpenalty=10000
+\setlength{\textfloatsep}{10pt plus 3pt minus 2pt}
+\setlength{\floatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.6}
+\renewcommand{\textfraction}{0.12}
+\renewcommand{\floatpagefraction}{0.72}
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{1.2em}
+\setlist[itemize]{leftmargin=1.4em,topsep=4pt,itemsep=2.5pt,parsep=0pt}
+\setlist[enumerate]{leftmargin=1.6em,topsep=4pt,itemsep=3.5pt,parsep=0pt}
+
+% ======================================================= sectional units ====
+\renewcommand{\thepart}{\Alph{part}}
+
+\titleformat{\chapter}[display]
+  {\normalfont\filright}
+  {\vspace*{6pt}\normalsize\scshape\lowercase{chapter} \Huge\bfseries\thechapter}
+  {6pt}
+  {\vspace{2pt}{\color{rulegrey}\titlerule[1.1pt]}\vspace{10pt}%
+   \parbox{\textwidth}{\raggedright\huge\bfseries\linespread{1.0}\selectfont#1}\vspace{6pt}%
+   {\color{rulegrey}\titlerule[0.5pt]}}
+\titlespacing*{\chapter}{0pt}{-12pt}{26pt}
+
+\titleformat{\section}{\normalfont\Large\bfseries}{\thesection}{0.8em}{#1}
+\titlespacing*{\section}{0pt}{14pt plus 3pt minus 2pt}{6pt}
+
+\titleformat{\subsection}{\normalfont\large\bfseries}{\thesubsection}{0.7em}{#1}
+\titlespacing*{\subsection}{0pt}{10pt plus 2pt minus 2pt}{4pt}
+
+\titleformat{\subsubsection}{\normalfont\normalsize\bfseries\itshape}{}{0pt}{#1}
+\titlespacing*{\subsubsection}{0pt}{11pt plus 2pt}{3pt}
+
+% running heads
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyhead[LE]{\small\scshape\nouppercase{\leftmark}}
+\fancyhead[RO]{\small\scshape\nouppercase{\rightmark}}
+\fancyhead[RE,LO]{\small\thepage}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ \ #1}}
+\fancypagestyle{plain}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}%
+  \fancyfoot[C]{\small\thepage}}
+
+% ----------------------------------------------------------------- TOC ------
+\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{3}
+\titlecontents{part}[0pt]
+  {\addvspace{14pt}\large\bfseries}{}{}{}[\addvspace{4pt}]
+\titlecontents{chapter}[1.6em]
+  {\addvspace{6pt}\bfseries}
+  {\contentslabel{1.6em}}{}
+  {\titlerule*[0.6pc]{.}\contentspage}[\addvspace{2pt}]
+\titlecontents{section}[4.2em]
+  {\small}
+  {\contentslabel{2.9em}}{}
+  {\titlerule*[0.5pc]{.}\contentspage}
+
+% =========================================================== environments ===
+% One visual grammar for the whole book:
+%   * a statement that must be remembered       -> rules above and below
+%   * a derivation                              -> hairline rule at the left
+%   * an example, a caution, an aside           -> small type, hairline rule
+% Nothing is filled with colour; weight and white space carry the hierarchy.
+
+\newcounter{bxcount}[chapter]
+\renewcommand{\thebxcount}{\thechapter.\arabic{bxcount}}
+
+% --- rules above and below: definitions and key results ---------------------
+\newtcolorbox{statementbox}[2]{enhanced,breakable,colback=white,colframe=white,
+  boxrule=0pt,sharp corners,left=0pt,right=0pt,top=7pt,bottom=7pt,
+  before skip=13pt,after skip=7pt,
+  borderline north={0.9pt}{0pt}{ink},
+  borderline south={0.9pt}{0pt}{ink},
+  overlay unbroken and first={%
+    \node[anchor=north west,inner sep=0pt,font=\footnotesize\scshape,
+          fill=white,inner xsep=3pt]
+      at ([xshift=-3pt,yshift=5.5pt]frame.north west) {#1\ \ \textnormal{\textbf{#2}}};}}
+
+\newenvironment{defbox}[1]
+  {\refstepcounter{bxcount}%
+   \begin{statementbox}{Definition \thebxcount}{#1}}
+  {\end{statementbox}}
+
+\newenvironment{keybox}[1]
+  {\refstepcounter{bxcount}%
+   \begin{statementbox}{Result \thebxcount}{#1}}
+  {\end{statementbox}}
+
+% --- hairline at the left: derivations --------------------------------------
+\newtcolorbox{sidebox}[2]{enhanced,breakable,colback=white,colframe=white,
+  boxrule=0pt,sharp corners,left=11pt,right=0pt,top=4pt,bottom=4pt,
+  before skip=6.5pt,after skip=6.5pt,
+  borderline west={0.8pt}{3pt}{ink},
+  % The label is real text, not an overlay: an overlay's clearance (a \vspace)
+  % is discarded when the box starts at the top of a page, and the body then
+  % printed over the label.
+  before upper={{\noindent\footnotesize\scshape #1\ \ \textnormal{\textbf{#2}}\par}%
+    \nobreak\vspace{4pt}\nobreak}}
+
+\newenvironment{derivbox}[1]
+  {\refstepcounter{bxcount}%
+   \begin{sidebox}{Derivation \thebxcount}{#1}}
+  {\end{sidebox}}
+
+\newenvironment{exbox}[1]
+  {\refstepcounter{bxcount}%
+   \begin{sidebox}{Example \thebxcount}{#1}\small}
+  {\hfill$\square$\end{sidebox}}
+
+\newenvironment{archbox}[1]
+  {\refstepcounter{bxcount}%
+   \begin{sidebox}{Problem type \thebxcount}{#1}\small}
+  {\end{sidebox}}
+
+\newenvironment{challengebox}[1]
+  {\refstepcounter{bxcount}%
+   \begin{sidebox}{Challenge \thebxcount}{#1}\small}
+  {\end{sidebox}}
+
+\newenvironment{methodbox}[1]
+  {\refstepcounter{bxcount}%
+   \begin{statementbox}{Method \thebxcount}{#1}}
+  {\end{statementbox}}
+
+\newenvironment{tablebox}[1]
+  {\refstepcounter{bxcount}%
+   \begin{statementbox}{Table \thebxcount}{#1}\small}
+  {\end{statementbox}}
+
+\newenvironment{remarkbox}[1]
+  {\refstepcounter{bxcount}%
+   \begin{sidebox}{Remark \thebxcount}{#1}\small}
+  {\end{sidebox}}
+
+% --- small type, light hairline: cautions, asides, motivation ---------------
+\newtcolorbox{notebox}[1]{enhanced,breakable,colback=white,colframe=white,
+  boxrule=0pt,sharp corners,left=10pt,right=0pt,top=2pt,bottom=2pt,
+  before skip=6pt,after skip=6pt,
+  borderline west={0.5pt}{3pt}{rulegrey},
+  before upper={\small\textit{#1}\ \ignorespaces}}
+
+\newenvironment{trapbox}[1]{\begin{notebox}{Caution: #1.}}{\end{notebox}}
+\newenvironment{motivbox}[1]{\begin{notebox}{#1.}}{\end{notebox}}
+\newenvironment{summarybox}{\begin{notebox}{What to carry forward.}}{\end{notebox}}
+
+\newcommand{\why}[1]{\begin{notebox}{Why this matters.}#1\end{notebox}}
+\newcommand{\inwords}[1]{\begin{notebox}{In words.}#1\end{notebox}}
+\newcommand{\scopebox}[1]{\begin{notebox}{Syllabus note.}#1\end{notebox}}
+
+% --- figures ----------------------------------------------------------------
+% Inline, unframed, centred.  The caption carries the number.
+\newenvironment{figbox}
+  {\par\addvspace{12pt}\begingroup\centering}
+  {\par\endgroup\addvspace{3pt}}
+
+\newcounter{figc}[chapter]
+\renewcommand{\thefigc}{\thechapter.\arabic{figc}}
+\newcommand{\figcaption}[2]{%
+  \refstepcounter{figc}\label{#1}%
+  \par\vspace{3pt}%
+  {\centering\begin{minipage}{0.93\textwidth}%
+   \footnotesize\color{captiongrey}\textbf{Figure~\thefigc.}\ #2\par
+   \end{minipage}\par}%
+  \vspace{7pt}}
+\newcommand{\figcap}[1]{\figcaption{autofig\thefigc}{#1}}
+
+% --- run-in marks -----------------------------------------------------------
+\newcommand{\stepn}[1]{\par\medskip\noindent\textbf{Step #1.}\ \ignorespaces}
+% \ans{...}: the answer sits flush right on the last line if it fits there,
+% otherwise flush right on a line of its own (TeXbook, p. 106)
+\newcommand{\ans}[1]{\ifvmode\par\noindent\fi\unskip\nobreak\hfil\penalty50
+  \hskip1.5em\hbox{}\nobreak\hfill\textbf{[#1]}{\parfillskip=0pt\finalhyphendemerits=0\par}}
+\newcommand{\archans}[2]{\gdef\archanswerstore{\par\smallskip\noindent\textbf{Answer: #1.}\ #2}}
+\let\archanswerstore\relax
+\newcommand{\challengeans}[1]{\par\medskip\noindent\textbf{Answer.}\ #1}
+
+\newcommand{\arch}[6]{\begin{archbox}{#1}%
+\textbf{Tell.}\ #2\par\textbf{Method.}\ #3\par\textbf{Trap.}\ #4\par
+\textbf{Try it.}\ #5 \ans{#6}\end{archbox}}
+
+\newcommand{\archq}[9]{\begin{archbox}{#1}%
+\textbf{Tell.}\ #2\par\textbf{Method.}\ #3\par\textbf{Trap.}\ #4\par
+\smallskip\textbf{Exam-style, single correct.}\ #5\par\smallskip
+\begin{tabular}{@{}p{0.45\linewidth}@{\hspace{8pt}}p{0.45\linewidth}@{}}
+(A)~#6 & (B)~#7\\[1pt](C)~#8 & (D)~#9
+\end{tabular}\archanswerstore\global\let\archanswerstore\relax\end{archbox}}
+
+\newcommand{\wex}[1]{\begin{exbox}{#1}}
+\newcommand{\wexend}{\end{exbox}}
+
+% --- chapter and part openers ----------------------------------------------
+% \ncertchapter{n}{Title} keeps the numbering the manuscript already uses.
+\newcommand{\ncertchapter}[2]{%
+  \setcounter{chapter}{\numexpr#1-1\relax}%
+  \chapter{#2}}
+
+% \partdivider{Letter}{Title}{thesis}{chapter list}
+\newcommand{\partdivider}[4]{%
+  \cleardoublepage
+  \refstepcounter{part}%
+  \thispagestyle{empty}%
+  \vspace*{5.5cm}
+  \begin{center}
+    {\normalsize\scshape Part \thepart}\\[5mm]
+    {\color{rulegrey}\rule{0.42\textwidth}{0.9pt}}\\[7mm]
+    {\huge\bfseries #2}\\[9mm]
+    {\color{rulegrey}\rule{0.42\textwidth}{0.4pt}}\\[8mm]
+    \begin{minipage}{0.76\textwidth}\centering\itshape #3\end{minipage}\\[11mm]
+    \begin{minipage}{0.80\textwidth}\centering\small #4\end{minipage}
+  \end{center}
+  \addcontentsline{toc}{part}{\texorpdfstring{Part \thepart\quad #2}{Part \thepart: #2}}%
+  \cleardoublepage}
+
+% ---------------------------------------------------------------- macros ----
+% cross-references to chapters: never type a chapter number (labels ch:toolkit,
+% ch:measurement, ch:straightline, ch:vectors, ch:projectiles, ch:relative,
+% ch:circkin, ch:newton, ch:connected, ch:friction, ch:circdyn, ch:energy,
+% ch:collisions, ch:com, ch:rotation, ch:rolling, ch:gravitation, ch:kepler)
+\newcommand{\chref}[1]{Chapter~\ref{#1}}
+\newcommand{\chsref}[2]{Chapters~\ref{#1} and~\ref{#2}}
+\newcommand{\vc}[1]{\vec{\bm{#1}}}
+\newcommand{\uhat}[1]{\hat{\bm{#1}}}
+\newcommand{\A}{\vc{A}}
+\newcommand{\B}{\vc{B}}
+\newcommand{\R}{\vc{R}}
+\newcommand{\ihat}{\uhat{\imath}}
+\newcommand{\jhat}{\uhat{\jmath}}
+\newcommand{\khat}{\uhat{k}}
+\newcommand{\vv}{\vc{v}}
+\newcommand{\va}{\vc{a}}
+\newcommand{\vF}{\vc{F}}
+\newcommand{\vp}{\vc{p}}
+\newcommand{\vr}{\vc{r}}
+\newcommand{\vL}{\vc{L}}
+\newcommand{\vtau}{\vc{\tau}}
+\newcommand{\vg}{\vc{g}}
+\newcommand{\vomega}{\vc{\omega}}
+\newcommand{\ex}{\times}
+\newcommand{\faExclam}{}

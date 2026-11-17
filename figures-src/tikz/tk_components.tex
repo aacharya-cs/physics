@@ -1,0 +1,30 @@
+% tk_components: resolving a vector into perpendicular components (Ch 0, fig:tkcomp)
+% The vector is the hypotenuse of a right triangle and the components are its legs:
+% A_x = A cos(theta) is the leg ADJACENT to theta, A_y = A sin(theta) the leg
+% OPPOSITE it.  Drawn with A = 6.6 cm, theta = 32 degrees.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\A{6.6}
+  \def\th{32}
+  \pgfmathsetmacro\Ax{\A*cos(\th)}
+  \pgfmathsetmacro\Ay{\A*sin(\th)}
+  % axes
+  \draw[thin line,cInk,-smallhead] (0,0) -- (\Ax+1.1,0) node[anchor=west] {$x$};
+  \draw[thin line,cInk,-smallhead] (0,0) -- (0,\Ay+0.7) node[anchor=south] {$y$};
+  % projection guide onto the y-axis
+  \draw[guide] (0,\Ay) -- (\Ax,\Ay);
+  % right-angle mark
+  \draw[right angle] (\Ax-0.22,0) -- (\Ax-0.22,0.22) -- (\Ax,0.22);
+  % the components (the two legs) and the vector (the hypotenuse)
+  \draw[vector,cTeal] (0,0) -- (\Ax,0);
+  \draw[vector,cTeal] (\Ax,0) -- (\Ax,\Ay);
+  \draw[vector,cPrim] (0,0) -- (\Ax,\Ay);
+  % angle
+  \draw[angle arc] (1.0,0) arc[start angle=0,end angle=\th,radius=1.0];
+  \node at (\th/2:1.3) {$\theta$};
+  % labels
+  \node[cPrim,anchor=south east] at ($(0,0)!0.55!(\Ax,\Ay)$) {$\vc{A}$};
+  \node[cTeal,anchor=north] at (\Ax/2,-0.1) {$A_x=A\cos\theta$};
+  \node[cSteel,anchor=north,font=\footnotesize] at (\Ax/2,-0.58) {adjacent to $\theta$};
+  \node[cTeal,anchor=west] at (\Ax+0.12,\Ay/2+0.22) {$A_y=A\sin\theta$};
+  \node[cSteel,anchor=west,font=\footnotesize] at (\Ax+0.12,\Ay/2-0.24) {opposite $\theta$};
+\end{tikzpicture}

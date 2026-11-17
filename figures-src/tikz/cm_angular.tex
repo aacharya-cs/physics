@@ -1,0 +1,46 @@
+% cm_angular: the three angular quantities and their linear partners (Ch 6, fig:cmang)
+% Circle of radius r = 2.5 cm; the particle at theta = 50 degrees, moving anticlockwise
+% and speeding up, so omega and alpha have the same sense and a_t points along v.
+% Colours pair each angular quantity with its linear partner:
+%   theta and s (accent), omega and v (forest), alpha and a_t (primary).
+% Right: the three bridges, each the one above differentiated once (r constant).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\r{2.5}
+  \def\th{50}
+  \coordinate (C) at (0,0);
+  \coordinate (P) at (\th:\r);
+  % circle, reference line, radius
+  \draw[outline] (C) circle[radius=\r];
+  \draw[guide] (C) -- (\r+0.55,0);
+  \draw[thin line,cInk] (C) -- (P);
+  \node[anchor=south east,inner sep=1.5pt] at ($(C)!0.6!(P)$) {$r$};
+  \node[dot] at (C) {};
+  % arc length s
+  \draw[cAcc,curve] (\r,0) arc[start angle=0,end angle=\th,radius=\r];
+  \node[cAcc] at (\th/2:\r+0.32) {$s$};
+  % angle theta
+  \draw[angle arc,cAcc] (0.6,0) arc[start angle=0,end angle=\th,radius=0.6];
+  \node[cAcc] at (\th/2:0.85) {$\theta$};
+  % omega and alpha: senses of turning and of speeding up
+  \draw[rotation,cFor] (68:1.05) arc[start angle=68,end angle=140,radius=1.05];
+  \node[cFor] at (104:1.32) {$\omega$};
+  \draw[rotation,cPrim] (75:1.75) arc[start angle=75,end angle=125,radius=1.75];
+  \node[cPrim] at (100:2.02) {$\alpha$};
+  % v and a_t along the tangent at the particle
+  \draw[velocity] (P) -- ++(90+\th:1.5) node[anchor=south east,inner sep=1pt,cFor] {$\vv$};
+  \draw[accel] ($(P)+(\th:0.32)$) -- ++(90+\th:0.85)
+    node[anchor=south,inner sep=2pt,cPrim] {$a_t$};
+  \shade[ball color=cBlock] (P) circle[radius=0.085];
+  \draw[cSteel,thin line] (P) circle[radius=0.085];
+  % the three bridges
+  \begin{scope}[shift={(7.6,0)}]
+    \node[cAcc]  (b1) at (0,1.5)  {$s=r\theta$};
+    \node[cFor]  (b2) at (0,0)    {$v=r\omega$};
+    \node[cPrim] (b3) at (0,-1.5) {$a_t=r\alpha$};
+    \foreach \a/\b in {b1/b2, b2/b3}
+      \draw[thin line,cInk,-smallhead] ($(\a.south)+(0,-0.06)$) --
+        node[right=2pt] {$d/dt$} ($(\b.north)+(0,0.06)$);
+    \foreach \y/\t in {1.5/position, 0/velocity, -1.5/tangential acceleration}
+      \node[anchor=east,font=\footnotesize,cSteel] at (-1.0,\y) {\t};
+  \end{scope}
+\end{tikzpicture}

@@ -1,0 +1,45 @@
+% cd_frictiondir: friction on a banked road, below and above the design speed
+% (Ch 10, fig:fricdir; the worked example "Friction on a banked turn").
+% The numbers are the example's: r = 20 m, m = 200 kg, v0 = 10 m/s, so tan(theta) = 1/2;
+% (a) v = 5 m/s, (b) v = 15 m/s, g = 10 m/s^2.  The centre of the turn is to the LEFT
+% (the low side of the bank).  Forces are drawn to one scale, 1.4 cm per 2000 N:
+%   mg = 2000 N in both panels;
+%   (a) f = 300 sqrt5 = 671 N up the slope,   N = mg cos + (mv^2/r) sin = 1901 N;
+%   (b) f = 500 sqrt5 = 1118 N down the slope, N = 1789 + 2250 sin = 2795 N.
+% The acceleration v^2/r points horizontally to the centre (drawn at a fixed length,
+% since its two values, 1.25 and 11.25 m/s^2, differ ninefold).
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \pgfmathsetmacro\th{atan(0.5)}          % 26.57 degrees
+  \def\L{5.4}                             % base of the bank
+  \def\s{3.8}                            % contact point, distance up the slope
+  \def\k{0.0007}                          % cm per newton (1.4 cm per 2000 N)
+  % one panel: #1 = x shift, #2 = N (newtons), #3 = signed f (+ up slope), #4 = label,
+  % #5 = anchor of the f label
+  \newcommand\bankpanel[5]{%
+  \begin{scope}[xshift=#1cm]
+    \coordinate (P) at ({\s*cos(\th)},{\s*sin(\th)});       % middle of the contact face
+    \coordinate (C) at ($(P)+(90+\th:0.27)$);              % centre of the block
+    % the bank
+    \fill[cSlope] (0,0) -- (\L,0) -- (\L,{\L*tan(\th)}) -- cycle;
+    \draw[outline] (0,0) -- (\L,{\L*tan(\th)}) -- (\L,0);
+    \draw[ground] (-0.2,0) -- (\L+0.2,0);
+    % bank angle
+    \draw[angle arc] (0.95,0) arc[start angle=0,end angle=\th,radius=0.95];
+    \node at ({\th/2}:1.25) {$\theta$};
+    % the vehicle
+    \draw[body,rotate around={\th:(C)}] ($(C)+(-0.5,-0.27)$) rectangle ($(C)+(0.5,0.27)$);
+    % forces, to scale
+    \draw[force] (C) -- ++(0,-1.4) node[anchor=north] {$mg$};
+    \draw[force] (C) -- ++(90+\th:{#2*\k}) node[anchor=south] {$N$};
+    \pgfmathsetmacro\fl{#3*\k}
+    \pgfmathsetmacro\fs{(#3>0) ? 0.5 : -0.5}               % start at the leading face
+    \draw[applied] ($(P)+(\th:\fs)+(90+\th:0.07)$) -- ++(\th:\fl)
+      node[anchor=#5,inner sep=1.5pt] {$f$};
+    % acceleration: horizontal, towards the centre of the turn
+    \draw[accel] (C) -- ++(-1.0,0) node[anchor=east,cPrim] {$a$ (to the centre)};
+    % what the case is
+    \node[anchor=north,align=center] at (\L/2,-0.35) {#4};
+  \end{scope}}
+  \bankpanel{0}{1901}{671}{(a) $v<v_0$: it would slide down,\\ so $f$ acts up the slope}{south east}
+  \bankpanel{7.3}{2795}{-1118}{(b) $v>v_0$: it would slide up,\\ so $f$ acts down the slope}{north west}
+\end{tikzpicture}

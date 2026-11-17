@@ -1,0 +1,60 @@
+% cd_rotor: the death well and the rotor (Ch 10, fig:rotor, sub:rotor)
+% Each panel is a cut-away vertical cylinder of radius r with a rider (block)
+% pressed against the inside of the right-hand wall, moving on the horizontal
+% circle drawn dashed.  The wall is vertical, so the normal force N is
+% horizontal (towards the axis: it does the turning, N = m v^2/r) and friction f
+% is vertical (upward: it holds the rider up, f = mg).  The same three forces
+% act in both rides; only what turns differs: in the death well the wall is
+% fixed and the rider drives round, in the rotor the cylinder spins (omega) and
+% carries the rider, with the floor lowered away.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\R{1.9}      % cylinder radius
+  \def\H{4.2}      % cylinder height
+  \pgfmathsetmacro\e{\persp*\R}     % ellipse half-height (perspective)
+  \def\yr{2.15}    % height of the rider's circle
+  % one panel: #1 = x shift, #2 = 1 for the rotor
+  \newcommand\cylpanel[2]{%
+    \begin{scope}[shift={(#1,0)}]
+      % axis
+      \draw[guide] (0,-0.25) -- (0,\H+0.55);
+      % walls and rim
+      \draw[outline] (-\R,0) -- (-\R,\H) (\R,0) -- (\R,\H);
+      \draw[outline] (0,\H) ellipse[x radius=\R,y radius=\e];
+      \ifnum#2=0
+        % the floor, at the foot of the wall
+        \draw[outline] (-\R,0) arc[start angle=180,end angle=360,x radius=\R,y radius=\e];
+        \draw[outline,hidden] (\R,0) arc[start angle=0,end angle=180,x radius=\R,y radius=\e];
+      \else
+        % the bottom edge of the wall, and the floor lowered away below it
+        \draw[outline] (-\R,0) arc[start angle=180,end angle=360,x radius=\R,y radius=\e];
+        \draw[outline,hidden] (\R,0) arc[start angle=0,end angle=180,x radius=\R,y radius=\e];
+        \draw[thin line,cSteel,hidden] (0,-0.75) ellipse[x radius=\R-0.12,y radius=\e-0.03];
+      \fi
+      % the rider's circle (back half dashed)
+      \draw[cPrim,thin line,hidden] (\R,\yr) arc[start angle=0,end angle=180,x radius=\R,y radius=\e];
+      \draw[cPrim,thin line] (-\R,\yr) arc[start angle=180,end angle=360,x radius=\R,y radius=\e];
+      % the rider, pressed against the inside of the right-hand wall
+      \fill[body] (\R-0.4,\yr-0.32) rectangle (\R,\yr+0.32);
+      % forces: N horizontal (inward), f vertical (up, along the wall), mg down
+      \draw[force] (\R-0.4,\yr) -- ++(-1.15,0) node[anchor=east,inner sep=2pt] {$N$};
+      \draw[applied] (\R-0.1,\yr+0.32) -- ++(0,1.0) node[anchor=east,inner sep=2pt] {$f$};
+      \draw[force] (\R-0.28,\yr-0.32) -- ++(0,-1.0) node[anchor=east,inner sep=2pt] {$mg$};
+    \end{scope}}
+  % ------------------------------------------------------------ death well
+  \cylpanel{0}{0}
+  % the rider's motion round the front of the wall
+  \draw[rotation,cFor] (-150:\R cm and \e cm) ++(0,\yr-0.24) arc[start angle=-150,end angle=-100,x radius=\R,y radius=\e];
+  \node[anchor=north,cFor,font=\footnotesize] at (-0.95,\yr-0.62) {rider moves};
+  \node[anchor=south] at (0,\H+0.6) {death well};
+  \node[anchor=north,align=center,font=\footnotesize,cSteel] at (0,-1.2) {wall fixed, rider drives round};
+  % ----------------------------------------------------------------- rotor
+  \cylpanel{6.6}{1}
+  % the cylinder's spin about its axis
+  \begin{scope}[shift={(6.6,0)}]
+    \draw[rotation] (210:0.5cm and 0.14cm) ++(0,\H-0.75) arc[start angle=210,end angle=340,x radius=0.5,y radius=0.14]
+      node[anchor=west,inner sep=2pt] {$\omega$};
+    \node[anchor=south] at (0,\H+0.6) {rotor};
+    \node[anchor=west,font=\footnotesize,cSteel] at (\R+0.1,-0.75) {floor lowered};
+    \node[anchor=north,align=center,font=\footnotesize,cSteel] at (0,-1.2) {wall spins and carries the rider};
+  \end{scope}
+\end{tikzpicture}

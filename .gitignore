@@ -1,0 +1,12 @@
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+main.pdf
+figures-cache/
+figures-src/tikz/preview-*
+*.auxlock
+.DS_Store

@@ -1,0 +1,76 @@
+% cd_roadcases: three ways a road supplies the inward force (Ch 10, fig:roadcases)
+% A car seen from behind, the centre of the bend to the LEFT in every panel, and
+% treated as a particle: N and mg are drawn from its centre, friction f along
+% the road surface where it acts.  Lengths are to scale within each panel.
+% Weight mg = 1.3 cm in every panel; bank angle theta = 25 degrees.
+% (a) flat road: N = mg up, friction f inward (1.0 cm, an arbitrary speed).
+% (b) smooth bank: N perpendicular to the road, N cos(theta) = mg, so
+%     N = 1.434 cm; its horizontal part N sin(theta) does the turning.
+% (c) bank with friction, drawn for a speed above the design speed, so f acts
+%     down the slope (f = 0.9 cm); vertical balance N cos(theta) - f sin(theta)
+%     = mg gives N = 1.854 cm.  Below the design speed f would point up the slope.
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \def\mg{1.3}
+  \def\th{25}
+  % the car seen from behind, centred on the origin of the current frame,
+  % sitting on the line y = -0.38 of that frame
+  \newcommand\car{%
+    \fill[cInk!75,rounded corners=0.03cm] (-0.50,-0.38) rectangle (-0.30,-0.14)
+                                          (0.30,-0.38) rectangle (0.50,-0.14);
+    \filldraw[body,fill=cBlock!60,rounded corners=0.06cm] (-0.58,-0.24) rectangle (0.58,0.12);
+    \filldraw[body,fill=cBlock!35,rounded corners=0.05cm] (-0.42,0.12) -- (-0.30,0.38) -- (0.30,0.38) -- (0.42,0.12) -- cycle;
+    \node[point mass] at (0,0) {};}
+  % ------------------------------------------------------------- (a) flat
+  \begin{scope}
+    \path[ground,draw=none] (-2.0,-0.16) rectangle (2.0,0);
+    \draw[outline] (-2.0,0) -- (2.0,0);
+    \begin{scope}[shift={(0.25,0.38)}]
+      \car
+      \draw[force] (0,0) -- (0,\mg) node[anchor=west,inner sep=3pt] {$N$};
+      \draw[force] (0,0) -- (0,-\mg) node[pos=0.85,anchor=west,inner sep=3pt] {$mg$};
+    \end{scope}
+    \begin{scope}[shift={(0.25,0)}]
+      \draw[applied] (0,0) -- (-1.0,0) node[anchor=south east,inner sep=1pt] {$f$};
+    \end{scope}
+    % centre of the bend
+    \draw[cSteel,thin line,-smallhead] (-0.9,2.0) -- (-1.9,2.0);
+    \node[anchor=south,font=\footnotesize,cSteel] at (-1.4,2.05) {centre of bend};
+    \node[anchor=north] at (0,-1.05) {(a) friction only};
+    \node[anchor=north,font=\footnotesize,cSteel] at (0,-1.55) {fails when the road is wet};
+  \end{scope}
+  % ---------------------------------------------------------- (b) banking
+  \begin{scope}[shift={(5.1,0)}]
+    \pgfmathsetmacro\H{4*tan(\th)}
+    \fill[cSlope] (-2,0) -- (2,0) -- (2,\H) -- cycle;
+    \draw[outline] (-2,0) -- (2,0) -- (2,\H) -- cycle;
+    \draw[angle arc] (-1.25,0) arc[start angle=0,end angle=\th,radius=0.75];
+    \node at ($(-2,0)+(\th/2:1.0)$) {$\theta$};
+    \coordinate (S) at ($(-2,0)+(\th:2.35)$);
+    \begin{scope}[shift={(S)},rotate=\th,shift={(0,0.38)}]
+      \car
+    \end{scope}
+    \coordinate (G) at ($(S)+(90+\th:0.38)$);
+    \draw[force] (G) -- ++(90+\th:1.434) node[anchor=south east,inner sep=1pt] {$N$};
+    \draw[force] (G) -- ++(0,-\mg) node[pos=0.85,anchor=west,inner sep=3pt] {$mg$};
+    \node[anchor=north] at (0,-1.05) {(b) banking only};
+    \node[anchor=north,font=\footnotesize,cSteel] at (0,-1.55) {works at one speed only};
+  \end{scope}
+  % ------------------------------------------------- (c) banking + friction
+  \begin{scope}[shift={(10.2,0)}]
+    \pgfmathsetmacro\H{4*tan(\th)}
+    \fill[cSlope] (-2,0) -- (2,0) -- (2,\H) -- cycle;
+    \draw[outline] (-2,0) -- (2,0) -- (2,\H) -- cycle;
+    \draw[angle arc] (-1.25,0) arc[start angle=0,end angle=\th,radius=0.75];
+    \node at ($(-2,0)+(\th/2:1.0)$) {$\theta$};
+    \coordinate (S) at ($(-2,0)+(\th:2.35)$);
+    \begin{scope}[shift={(S)},rotate=\th,shift={(0,0.38)}]
+      \car
+    \end{scope}
+    \coordinate (G) at ($(S)+(90+\th:0.38)$);
+    \draw[force] (G) -- ++(90+\th:1.854) node[anchor=south east,inner sep=1pt] {$N$};
+    \draw[force] (G) -- ++(0,-\mg) node[pos=0.85,anchor=west,inner sep=3pt] {$mg$};
+    \draw[applied] (S) -- ++(180+\th:0.9) node[anchor=north,inner sep=3pt] {$f$};
+    \node[anchor=north] at (0,-1.05) {(c) banking and friction};
+    \node[anchor=north,font=\footnotesize,cSteel] at (0,-1.55) {a band of safe speeds};
+  \end{scope}
+\end{tikzpicture}
