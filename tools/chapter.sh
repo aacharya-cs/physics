@@ -25,8 +25,9 @@ TEX
 for i in 1 2; do
   pdflatex -shell-escape -interaction=nonstopmode "$job.tex" > /dev/null 2>&1 || true
 done
-mv -f "$job.pdf" build/ 2>/dev/null || true
-log="$job.log"
+mv -f "$job.pdf" "$job.log" build/ 2>/dev/null || true
+rm -f "$job".{tex,aux,auxlock,out,toc}   # keep the root clean; the log is in build/
+log="build/$job.log"
 echo "errors:    $(grep -c '^!' "$log")"
 grep -A3 '^!' "$log" | head -20
 echo "overfull:  $(grep -c 'Overfull' "$log")"; grep 'Overfull' "$log" | head

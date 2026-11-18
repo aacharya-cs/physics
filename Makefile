@@ -1,17 +1,15 @@
 BOOK = Physics.pdf
 
-.PHONY: pdf figures fig release clean
+.PHONY: pdf fig release clean
 
 pdf:
 	latexmk -pdf main.tex
 
-# Regenerate the 39 scripted figures. Order matters: mk_grav must run after mk9.
-figures:
-	cd figures-src/python && for s in mk5 mk4 mk9 mk5b mk8 mk_grav; do python3 $$s.py || exit 1; done
-
 # Draw one native figure on its own at printed size: make fig F=grav_shell
+# (finds figures/*/grav_shell.tex; writes figures/preview-grav_shell.pdf)
 fig:
-	cd figures-src/tikz && pdflatex -interaction=nonstopmode -jobname=preview-$(F) "\\def\\figname{$(F)}\\input{preview}" >/dev/null && echo figures-src/tikz/preview-$(F).pdf
+	@cd figures && P=$$(ls */$(F).tex 2>/dev/null | head -1) && [ -n "$$P" ] || { echo "no figures/*/$(F).tex"; exit 1; }; \
+	pdflatex -interaction=nonstopmode -jobname=preview-$(F) "\\def\\figname{$${P%.tex}}\\input{preview}" >/dev/null && echo figures/preview-$(F).pdf
 
 release: pdf
 	python3 tools/compress_pdf.py main.pdf $(BOOK)
@@ -19,4 +17,4 @@ release: pdf
 clean:
 	latexmk -C main.tex
 	rm -f $(BOOK)
-	rm -rf figures-cache figures-src/tikz/preview-*
+	rm -rf figures-cache figures/preview-*

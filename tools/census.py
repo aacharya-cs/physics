@@ -36,7 +36,7 @@ def census(root):
         r['wex'] = len(re.findall(r'\\wex\b', s))
         r['figure'] = len(re.findall(r'\\begin\{figure\*?\}', s))
         r['incgfx'] = len(re.findall(r'\\includegraphics', s))
-        r['tikz'] = len(re.findall(r'\\(?:input|figinput)\{figures-src/tikz|\\tikzfig\{', s))
+        r['tikz'] = len(re.findall(r'\\(?:input|figinput)\{figures/|\\tikzfig\{', s))
         r['equation'] = len(re.findall(r'\\begin\{(?:equation|align|gather)\*?\}', s))
         words = re.sub(r'\\[A-Za-z@]+', ' ', s)
         words = re.sub(r'[{}\[\]$&^_\\]', ' ', words)

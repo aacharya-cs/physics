@@ -25,11 +25,11 @@ latexmk -pdf main.tex        # or: make pdf
 make release                 # also writes the compressed Physics.pdf
 ```
 
-All figures are drawn in TikZ/PGFPlots from `figures-src/tikz/` with the shared style
+All figures are drawn in TikZ/PGFPlots from `figures/` with the shared style
 `bookstyle.tex`; no Python is needed to build the book. To work on one figure at its printed size:
 
 ```bash
-make fig F=grav_shell        # writes figures-src/tikz/preview-grav_shell.pdf
+make fig F=grav_shell        # writes figures/preview-grav_shell.pdf
 ```
 
 The release step (`make release`) needs Python 3.10+ with `pymupdf` for PDF compression.
@@ -37,22 +37,22 @@ The release step (`make release`) needs Python 3.10+ with `pymupdf` for PDF comp
 ## Repository layout
 
 ```
-main.tex                  document skeleton: \input's the preamble, front matter and chapters
+main.tex                  document skeleton: \input's the preamble and every chapter, in order
 preamble.tex              packages, page layout, box environments, macros
-frontmatter.tex           title page, preface, how to use the book, contents
+chapters/frontmatter.tex  title page, how to use the book, contents
 chapters/foundations.tex  the mathematical toolkit (numbered F)
 chapters/volN/            volume.tex (divider), opening.tex (Vols II, III), chNN-*.tex one per chapter;
                           a Part divider sits at the top of its first chapter
-figs/*.pdf                superseded PDF versions of the figures (no longer used by the book)
-figures-src/python/       superseded matplotlib scripts (no longer used)
-figures-src/tikz/         native figures: bookstyle.tex (shared palette and styles), one .tex per
-                          figure, preview.tex (make fig F=name); cached in figures-cache/
-tools/compress_pdf.py     font subsetting and stream compression for the release PDF
-tools/census.py           content census (boxes, figures, words per chapter) and diff of two copies
+figures/                  bookstyle.tex (shared palette and styles), preview.tex (make fig F=name),
+                          foundations/ vol1/ vol2/ vol3/: one .tex per figure; cached in figures-cache/
 tools/chapter.sh          build one chapter on its own: tools/chapter.sh vol2/ch01-solids
 tools/stylecheck.py       house-style checks (em dashes, spelling, hard-coded numbers, duplicate labels)
+tools/census.py           content census (boxes, figures, words per chapter) and diff of two copies
+tools/compress_pdf.py     font subsetting and stream compression for the release PDF
 tools/index.html          landing page for the GitHub Pages site (redirects to the PDF)
-.github/workflows/        CI: compile, compress, upload artifact, deploy to Pages
+archive/                  superseded matplotlib figures and scripts (not used by the book)
+build/                    single-chapter PDFs and logs (not tracked)
+.github/workflows/        CI: compile, compress, upload artifact, optional Pages deploy
 CLAUDE.md                 conventions and working notes for anyone (human or AI) editing the book
 ```
 

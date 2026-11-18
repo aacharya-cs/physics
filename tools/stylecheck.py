@@ -45,7 +45,7 @@ def strip_comment(line):
 
 
 def files(args):
-    paths = [ROOT / a for a in args] or [ROOT / 'chapters', ROOT / 'frontmatter.tex']
+    paths = [ROOT / a for a in args] or [ROOT / 'chapters']
     out = []
     for p in paths:
         out += sorted(p.rglob('*.tex')) if p.is_dir() else [p]

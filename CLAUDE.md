@@ -36,7 +36,10 @@ duplicate labels); it should report 0 issues. Mark a deliberate exception with `
 
 - `main.tex` only `\input`s files; do not put content in it.
 - `preamble.tex` holds every package, environment and macro. Add new macros there, never in a chapter.
-- Files: `chapters/foundations.tex`, then `chapters/volN/volume.tex` (the `\volumedivider`),
+- Layout: `main.tex` and `preamble.tex` in the root; `chapters/` (front matter, Foundations, `vol1`-`vol3`);
+  `figures/` (`bookstyle.tex`, `preview.tex`, one folder per part); `tools/`; `archive/` (superseded,
+  unused); `build/` (single-chapter PDFs and logs, ignored by git).
+- Files: `chapters/frontmatter.tex`, `chapters/foundations.tex`, then `chapters/volN/volume.tex` (the `\volumedivider`),
   `chapters/volN/opening.tex` (Volumes II and III: an unnumbered `\volumeopening{About This Volume}`
   with the volume's purpose, map and notation table; no numbered boxes or figures in it), then
   `chapters/volN/chNN-slug.tex`. `tools/chapter.sh volN/chNN-slug` builds one chapter on its own
@@ -131,28 +134,29 @@ All boxes share one counter (`bxcount`, numbered chapter.N). Use the box whose m
   native size). Thirteen figures failed this once and were redrawn.
 - After any figure change, render the page and look at it. Check for overlapping labels, clipped
   arrows, and that the physics drawn matches the text.
-- **All figures are native TikZ/PGFPlots** (see the next section). `figs/*.pdf`, `figures-src/python/`
-  and `make figures` are the superseded matplotlib/recovered versions, kept only for reference; nothing
+- **All figures are native TikZ/PGFPlots** (see the next section). `archive/` holds the superseded
+  matplotlib PDFs and scripts and one unused figure, kept only for reference; nothing
   in the book uses them, and they can be deleted once the owner is satisfied with the new figures.
 
 ## Native-LaTeX figures
 
 The owner wants the book as close to native LaTeX as practical. Status and rules:
 
-- **Shared style:** `figures-src/tikz/bookstyle.tex` (loaded by `preamble.tex`) holds the palette as
+- **Shared style:** `figures/bookstyle.tex` (loaded by `preamble.tex`) holds the palette as
   `cInk cPrim cTeal cAcc cCrim cFor cSteel cPlum cAmber cGrey` plus fills (`cEarth cMoon cBlock cSlope
   cRock cSun`), and the named styles every figure must use: `force applied velocity accel momentum`
   (arrows), `dim dimtick leader guide orbitpath`, `body planet moon point mass ground`, `curve thin line`,
   and the PGFPlots style `bookplot`. Colours carry the same meaning in every chapter (see the file's
   header). No raw HTML colours or hand-set line widths in figure files. (The prefix `c` avoids the text
   greys in `preamble.tex`, where `ink` is pure black.)
-- **One file per figure** in `figures-src/tikz/NAME.tex`, containing only the `tikzpicture`. Include it
+- **One file per figure** in `figures/<part>/NAME.tex` (part = `foundations`, `vol1`, `vol2`, `vol3`:
+  the part whose chapter uses it), containing only the `tikzpicture`. `\tikzfig{NAME}` finds the folder. Include it
   with `\tikzfig{NAME}` inside the usual `figure` float, keeping the existing `\figcaption` label.
 - **Draw at printed size.** Never scale with `width=`/`scale=` afterwards. Figure text is `\small`
   (subscripts 7pt); `\footnotesize` is the floor and only for plain words.
 - **Compute, don't import.** Curves come from closed forms in pgfmath (conics for orbits, Newton's
   method for Kepler's equation), with the physics written in the file's header comment.
-- **Preview one figure:** `make fig F=NAME` writes `figures-src/tikz/preview-NAME.pdf` at printed size.
+- **Preview one figure:** `make fig F=NAME` writes `figures/preview-NAME.pdf` at printed size.
 - **Caching:** `.latexmkrc` enables shell-escape, and `\tikzfig` pictures are cached in
   `figures-cache/` (other TikZ, such as tcolorbox frames, is never externalised). Without shell-escape
   the figures are drawn inline, so the book still builds. The cache keys on the picture's own code

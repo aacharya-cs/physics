@@ -46,16 +46,16 @@
 \usepackage{emptypage}
 \usepackage[expansion=false]{microtype}
 \usepackage{hyperref}
-\graphicspath{{figs/}}
 
 % ------------------------------------------------------- native figures ---
-% Figures drawn in TikZ/PGFPlots live one per file in figures-src/tikz/ and
-% share the palette and styles of bookstyle.tex.  Include one with
+% Figures drawn in TikZ/PGFPlots live one per file in figures/<part>/ (part =
+% foundations, vol1, vol2, vol3) and share the palette and styles of
+% figures/bookstyle.tex.  Include one by name alone (\tikzfig finds the folder):
 %   \tikzfig{grav_shell}
 % inside a figure float.  With shell-escape (latexmk does this via .latexmkrc)
 % each picture is compiled once and cached in figures-cache/; without it the
 % pictures are simply drawn inline, so the book always builds.
-\input{figures-src/tikz/bookstyle}
+\input{figures/bookstyle}
 \usetikzlibrary{external}
 \newif\iffigcache
 \ifdefined\pdfshellescape\ifnum\pdfshellescape=1 \figcachetrue\fi\fi
@@ -68,7 +68,13 @@
   \begingroup
   \iffigcache\tikzexternalenable\tikzsetnextfilename{#1}\fi
   \tikzset{every picture/.append style={bookfigure}}%
-  \input{figures-src/tikz/#1}\endgroup}
+  \figfile{#1}\input{\thefigfile}\endgroup}
+% the folder of a figure: the first of figures/{foundations,vol1,vol2,vol3}/ holding NAME.tex
+\makeatletter
+\newcommand{\figfile}[1]{\def\thefigfile{figures/#1}%
+  \@for\figdir:=foundations,vol1,vol2,vol3\do{%
+    \IfFileExists{figures/\figdir/#1.tex}{\edef\thefigfile{figures/\figdir/#1}}{}}}
+\makeatother
 
 % ---------------------------------------------------------------- palette ---
 % Text is black.  These two greys are for rules and secondary marks only;
