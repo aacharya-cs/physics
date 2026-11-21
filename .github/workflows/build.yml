@@ -4,6 +4,7 @@ name: build
 
 on:
   push:
+    branches: ['**']   # branches only: the latest-build tag must not start a run
   pull_request:
   workflow_dispatch:
 
