@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write   # to publish the PDF to the "Latest build" release
   pages: write
   id-token: write
 
@@ -50,6 +50,24 @@ jobs:
         with:
           name: Physics
           path: site/Physics.pdf
+
+      # Every push to main moves the tag latest-build to this commit and replaces the
+      # PDF on its release, so the download link below never changes:
+      # https://github.com/<owner>/<repo>/releases/latest/download/Physics.pdf
+      - name: Publish the PDF to the "Latest build" release
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git tag -f latest-build
+          git push -f origin refs/tags/latest-build
+          notes="Built automatically from commit ${GITHUB_SHA::7} on $(date -u +%Y-%m-%d)."
+          if gh release view latest-build >/dev/null 2>&1; then
+            gh release edit latest-build --title "Latest build" --notes "$notes" --latest
+          else
+            gh release create latest-build --title "Latest build" --notes "$notes" --latest
+          fi
+          gh release upload latest-build site/Physics.pdf --clobber
 
       - if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.DEPLOY_PAGES == 'true'
         uses: actions/upload-pages-artifact@v3
