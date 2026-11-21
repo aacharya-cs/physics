@@ -29,7 +29,7 @@ line spread 1.0, A4 margins inner 25 / outer 22 / top 22 / bottom 25 mm. Ruled b
 CI: `.github/workflows/build.yml` builds every push (latexmk with shell-escape), fails on errors or
 undefined references, attaches `Physics.pdf` as the run's artifact, and on `main` replaces the PDF on the
 "Latest build" release (tag `latest-build`; link `releases/latest/download/Physics.pdf`). Deploying `main` to GitHub
-Pages is off until the repository variable `DEPLOY_PAGES` is `true`. The first run passed (2026-11-16).
+Pages (https://aacharya-cs.github.io/physics/Physics.pdf, opens in the browser) is on: the repository variable `DEPLOY_PAGES` is `true`. The first run passed (2026-11-16).
 `python3 tools/stylecheck.py [path]` checks the house style (em dashes, spelling, hard-coded numbers,
 duplicate labels); it should report 0 issues. Mark a deliberate exception with `% stylecheck: ok`.
 

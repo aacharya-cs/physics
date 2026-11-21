@@ -13,11 +13,12 @@ A LaTeX physics textbook for JEE and NEET preparation, published as one PDF in v
 Chapter numbers restart in each volume. All 171 figures are drawn natively in TikZ/PGFPlots; every
 chapter ends with exam-style Problem Types (single-correct MCQs with the method and the trap).
 
-**Download the PDF:** https://github.com/aacharya-cs/physics/releases/latest/download/Physics.pdf
+**Read online:** https://aacharya-cs.github.io/physics/Physics.pdf (opens in the browser)<br>
+**Download:** https://github.com/aacharya-cs/physics/releases/latest/download/Physics.pdf
 
 Every push to `main` is built by CI, and the new PDF replaces the one on the **Latest build**
-release, so that link always serves the current book. Each run also keeps the PDF as the workflow
-artifact `Physics`. Deployment to GitHub Pages is optional (see *Publishing* below).
+release and on the GitHub Pages site, so both links always serve the current book. Each run also
+keeps the PDF as the workflow artifact `Physics`.
 
 ## Building locally
 
